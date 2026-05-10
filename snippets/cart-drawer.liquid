@@ -94,6 +94,8 @@
           {%- render 'free-shipping-bar', class: class -%}
         {%- endif -%}
 
+        {% render 'cart-chew-personalization', context: 'cart_drawer' %}
+
         <form
           action="{{ routes.cart_url }}"
           id="CartDrawer-Form"

@@ -1,0 +1,196 @@
+<section class="chew-size-compare" data-chew-size-compare>
+  <div class="chew-size-compare__inner page-width">
+    <div class="chew-size-compare__head">
+      <p>{{ section.settings.eyebrow }}</p>
+      <h2>{{ section.settings.title }}</h2>
+      <a href="/pages/how-long-will-this-last-for-my-dog">Find My Dog's Chew</a>
+    </div>
+
+    <div class="chew-size-compare__grid" role="list">
+      <article class="chew-size-compare__card" role="listitem" data-size-card="Small">
+        <span>Small</span>
+        <h3>Under 15 lbs</h3>
+        <p>Best for puppies, toy breeds, and gentle small dogs learning a calm chewing routine.</p>
+        <small>Gentle to moderate chewers</small>
+      </article>
+      <article class="chew-size-compare__card" role="listitem" data-size-card="Medium">
+        <span>Medium</span>
+        <h3>15-35 lbs</h3>
+        <p>A balanced everyday chew for small-to-mid-size dogs that need a slower enrichment session.</p>
+        <small>Moderate chewers</small>
+      </article>
+      <article class="chew-size-compare__card" role="listitem" data-size-card="Large">
+        <span>Large</span>
+        <h3>35-55 lbs</h3>
+        <p>For dogs that finish soft treats quickly and need more lasting occupation.</p>
+        <small>Moderate to strong chewers</small>
+      </article>
+      <article class="chew-size-compare__card" role="listitem" data-size-card="Extra Large">
+        <span>XL</span>
+        <h3>55-85 lbs</h3>
+        <p>For bigger dogs, intense chewing styles, and longer supervised calm-time blocks.</p>
+        <small>Strong chewers</small>
+      </article>
+      <article class="chew-size-compare__card" role="listitem" data-size-card="Jumbo">
+        <span>Jumbo</span>
+        <h3>85+ lbs</h3>
+        <p>Built for giant breeds and households that want the most durable chew option.</p>
+        <small>Power chewers</small>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .chew-size-compare {
+    background: #fffaf3;
+    color: #24130d;
+    padding: clamp(42px, 6vw, 78px) 0;
+  }
+
+  .chew-size-compare__inner {
+    display: grid;
+    gap: 26px;
+  }
+
+  .chew-size-compare__head {
+    align-items: end;
+    display: grid;
+    gap: 12px;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .chew-size-compare__head p {
+    color: #d2632e;
+    font-size: 12px;
+    font-weight: 850;
+    grid-column: 1 / -1;
+    letter-spacing: 0.12em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .chew-size-compare__head h2 {
+    font-size: clamp(30px, 4vw, 48px);
+    line-height: 1.05;
+    margin: 0;
+  }
+
+  .chew-size-compare__head a {
+    background: #2b1408;
+    border-radius: 999px;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 850;
+    padding: 12px 18px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .chew-size-compare__grid {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .chew-size-compare__card {
+    background: #ffffff;
+    border: 1px solid #eadfce;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+  }
+
+  .chew-size-compare__card.is-recommended {
+    border-color: #d2632e;
+    box-shadow: 0 18px 48px rgba(210, 99, 46, 0.16);
+    transform: translateY(-3px);
+  }
+
+  .chew-size-compare__card span {
+    color: #d2632e;
+    font-size: 13px;
+    font-weight: 900;
+  }
+
+  .chew-size-compare__card h3 {
+    font-size: 20px;
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  .chew-size-compare__card p {
+    color: #6f5a50;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .chew-size-compare__card small {
+    color: #2b1408;
+    font-weight: 850;
+    margin-top: auto;
+  }
+
+  @media (max-width: 989px) {
+    .chew-size-compare__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .chew-size-compare__head {
+      align-items: start;
+      grid-template-columns: 1fr;
+    }
+
+    .chew-size-compare__head a {
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+    }
+
+    .chew-size-compare__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    var section = document.querySelector('[data-chew-size-compare]');
+    if (!section || !window.PrimeDogProfile || typeof window.PrimeDogProfile.getRecommendation !== 'function') return;
+    var recommendation = window.PrimeDogProfile.getRecommendation();
+    if (!recommendation || !recommendation.variantTitle) return;
+    var card = section.querySelector('[data-size-card="' + recommendation.variantTitle + '"]');
+    if (card) card.classList.add('is-recommended');
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Chew product comparison",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Compare by dog"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Choose by size, chewing style, and calm-time goal"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Chew product comparison"
+    }
+  ]
+}
+{% endschema %}

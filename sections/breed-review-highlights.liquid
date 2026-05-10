@@ -1,0 +1,239 @@
+<section class="breed-proof color-{{ section.settings.color_scheme }} gradient" data-breed-proof>
+  <div class="breed-proof__inner page-width">
+    <div class="breed-proof__header">
+      {% if section.settings.eyebrow != blank %}
+        <p class="breed-proof__eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      <h2>{{ section.settings.title }}</h2>
+      {% if section.settings.subtitle != blank %}
+        <p>{{ section.settings.subtitle }}</p>
+      {% endif %}
+    </div>
+
+    <div class="breed-proof__personal" data-breed-proof-personal hidden>
+      <span data-breed-proof-badge>Breed matched</span>
+      <strong data-breed-proof-headline></strong>
+      <p data-breed-proof-copy></p>
+      <a href="/pages/how-long-will-this-last-for-my-dog">Update dog profile</a>
+    </div>
+
+    <div class="breed-proof__grid">
+      <article class="breed-proof__card">
+        <span>Labradors</span>
+        <h3>High food motivation, steady chewing</h3>
+        <p>Usually best with Large or XL yak chews, especially when the goal is a longer wind-down after walks or evening activity.</p>
+        <small>Typical fit: Large to XL</small>
+      </article>
+
+      <article class="breed-proof__card">
+        <span>French Bulldogs</span>
+        <h3>Shorter sessions, strong interest</h3>
+        <p>Many do better with a Small or Medium chew and shorter supervised sessions that prevent overexcitement.</p>
+        <small>Typical fit: Small to Medium</small>
+      </article>
+
+      <article class="breed-proof__card">
+        <span>German Shepherds</span>
+        <h3>Focused, determined chewers</h3>
+        <p>Dense chews can help redirect working-breed energy into a structured calm-time ritual.</p>
+        <small>Typical fit: Large to XL</small>
+      </article>
+
+      <article class="breed-proof__card">
+        <span>Golden Retrievers</span>
+        <h3>Gentle but persistent gnawing</h3>
+        <p>A breed-aware size match helps keep the chew satisfying without being too small for their mouth and chewing rhythm.</p>
+        <small>Typical fit: Large</small>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .breed-proof {
+    background: #f6f1e9;
+    color: #24130d;
+    padding: clamp(48px, 7vw, 86px) 0;
+  }
+
+  .breed-proof__inner {
+    display: grid;
+    gap: 24px;
+  }
+
+  .breed-proof__header {
+    max-width: 760px;
+  }
+
+  .breed-proof__eyebrow {
+    color: #d2632e;
+    font-size: 12px;
+    font-weight: 850;
+    letter-spacing: 0.12em;
+    margin: 0 0 10px;
+    text-transform: uppercase;
+  }
+
+  .breed-proof__header h2 {
+    font-size: clamp(30px, 4vw, 50px);
+    line-height: 1.05;
+    margin: 0 0 14px;
+  }
+
+  .breed-proof__header p {
+    color: #6f5a50;
+    font-size: clamp(15px, 1.5vw, 18px);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .breed-proof__personal {
+    align-items: center;
+    background: #2b1408;
+    border-radius: 18px;
+    color: #fff8ef;
+    display: grid;
+    gap: 10px;
+    padding: 20px;
+  }
+
+  .breed-proof__personal span {
+    color: #f3b27d;
+    font-size: 11px;
+    font-weight: 850;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .breed-proof__personal strong {
+    font-size: clamp(20px, 2.4vw, 28px);
+    line-height: 1.08;
+  }
+
+  .breed-proof__personal p {
+    color: rgba(255, 248, 239, 0.76);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .breed-proof__personal a {
+    color: #fff8ef;
+    font-weight: 850;
+  }
+
+  .breed-proof__grid {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .breed-proof__card {
+    background: #ffffff;
+    border: 1px solid #eadfce;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 100%;
+    padding: 22px;
+  }
+
+  .breed-proof__card span {
+    color: #d2632e;
+    font-size: 12px;
+    font-weight: 850;
+  }
+
+  .breed-proof__card h3 {
+    font-size: 19px;
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  .breed-proof__card p {
+    color: #6f5a50;
+    font-size: 14px;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .breed-proof__card small {
+    color: #2b1408;
+    font-weight: 850;
+    margin-top: auto;
+  }
+
+  @media (max-width: 989px) {
+    .breed-proof__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .breed-proof__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    var section = document.querySelector('[data-breed-proof]');
+    if (!section) return;
+
+    function hydrate() {
+      if (!window.PrimeDogProfile || typeof window.PrimeDogProfile.getBreedMessage !== 'function') return;
+      var message = window.PrimeDogProfile.getBreedMessage();
+      var recommendation = window.PrimeDogProfile.getRecommendation && window.PrimeDogProfile.getRecommendation();
+      var panel = section.querySelector('[data-breed-proof-personal]');
+      if (!message || !panel) return;
+
+      section.querySelector('[data-breed-proof-badge]').textContent = message.badge || 'Breed matched';
+      section.querySelector('[data-breed-proof-headline]').textContent = message.headline || 'Your dog has a chew profile';
+      section.querySelector('[data-breed-proof-copy]').textContent = recommendation
+        ? message.subtext + ' Estimated chew time: ' + recommendation.durationRange + '.'
+        : message.subtext;
+      panel.hidden = false;
+    }
+
+    hydrate();
+    window.addEventListener('prime:profile:updated', hydrate);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Breed review highlights",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Breed-aware confidence"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "What dogs like yours usually need"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Breed, weight, age, and chewing style change how long a chew feels useful. Use these patterns as a starting point, then run the estimator for your dog."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Breed review highlights"
+    }
+  ]
+}
+{% endschema %}

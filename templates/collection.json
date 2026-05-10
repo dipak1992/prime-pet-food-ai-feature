@@ -246,11 +246,28 @@
         "show_time_evening": true,
         "show_time_night": true
       }
+    },
+    "collection_chew_finder": {
+      "type": "collection-chew-finder",
+      "settings": {
+        "eyebrow": "Shop by dog need",
+        "title": "Start with your dog's chewing problem",
+        "subtitle": "The fastest path to the right chew is not flavor. It is dog size, chewing intensity, and the calm-time job you need the chew to do."
+      }
+    },
+    "chew_product_comparison": {
+      "type": "chew-product-comparison",
+      "settings": {
+        "eyebrow": "Size guidance",
+        "title": "Compare yak chew sizes before you add to cart"
+      }
     }
   },
   "order": [
     "breadcrumbs",
     "banner-split",
+    "collection_chew_finder",
+    "chew_product_comparison",
     "product-grid",
     "banner",
     "scrolling_text_section_qHMNQd"

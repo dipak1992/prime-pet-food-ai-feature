@@ -1,7 +1,6 @@
 {% comment %}
-  Section: Real Dogs UGC Gallery
-  Shows user-generated content with chew duration timer overlays.
-  Builds social proof through real customer photos with verified chew times.
+  Section: Dog Type Guidance Gallery
+  Shows size and duration examples by breed profile.
 {% endcomment %}
 
 <style>
@@ -256,11 +255,11 @@
       </div>
       <div class="ugc-stat">
         <div class="ugc-stat__value">{{ section.settings.stat_minutes | default: '67 min' }}</div>
-        <div class="ugc-stat__label">Avg Chew Time</div>
+        <div class="ugc-stat__label">Duration Guidance</div>
       </div>
       <div class="ugc-stat">
         <div class="ugc-stat__value">{{ section.settings.stat_rating | default: '4.9/5' }}</div>
-        <div class="ugc-stat__label">Owner Rating</div>
+        <div class="ugc-stat__label">Sizing Logic</div>
       </div>
     </div>
 
@@ -329,7 +328,7 @@
     var rec = PrimeDogProfile.getRecommendation();
 
     if (rec) {
-      el.innerHTML = '🐾 Dogs like ' + dogName + ' typically chew for <strong>' + rec.durationRange + '</strong>. See how other ' + breedLabel + 's do below!';
+      el.innerHTML = dogName + ' is currently matched to <strong>' + rec.durationRange + '</strong> of estimated chew time. Use this as guidance, then supervise each session.';
       el.classList.add('is-visible');
     }
   }
@@ -371,7 +370,7 @@
     },
     {
       "type": "header",
-      "content": "Community Stats"
+      "content": "Guidance Stats"
     },
     {
       "type": "text",
@@ -382,13 +381,13 @@
     {
       "type": "text",
       "id": "stat_minutes",
-      "label": "Average Chew Time",
-      "default": "67 min"
+      "label": "Duration Guidance",
+      "default": "Estimator"
     },
     {
       "type": "text",
       "id": "stat_rating",
-      "label": "Owner Rating",
+      "label": "Sizing Logic",
       "default": "Breed-aware"
     },
     {

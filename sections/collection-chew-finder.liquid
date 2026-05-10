@@ -1,0 +1,123 @@
+<section class="collection-chew-finder">
+  <div class="collection-chew-finder__inner page-width">
+    <div class="collection-chew-finder__copy">
+      <p>{{ section.settings.eyebrow }}</p>
+      <h2>{{ section.settings.title }}</h2>
+      <span>{{ section.settings.subtitle }}</span>
+    </div>
+
+    <div class="collection-chew-finder__routes" aria-label="Shop by dog need">
+      <a href="/pages/how-long-will-this-last-for-my-dog?intent=aggressive-chewer">Aggressive chewer</a>
+      <a href="/pages/how-long-will-this-last-for-my-dog?intent=bored-dog">Bored dog</a>
+      <a href="/pages/how-long-will-this-last-for-my-dog?intent=crate-training">Crate calming</a>
+      <a href="/blogs/dog-behavior/best-rawhide-alternative">Rawhide alternative</a>
+      <a href="/blogs/dog-behavior/how-long-do-yak-chews-last">How long will it last?</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .collection-chew-finder {
+    background: #2b1408;
+    color: #fff8ef;
+    padding: 30px 0;
+  }
+
+  .collection-chew-finder__inner {
+    align-items: center;
+    display: grid;
+    gap: 24px;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  }
+
+  .collection-chew-finder__copy p {
+    color: #f3b27d;
+    font-size: 11px;
+    font-weight: 850;
+    letter-spacing: 0.12em;
+    margin: 0 0 8px;
+    text-transform: uppercase;
+  }
+
+  .collection-chew-finder__copy h2 {
+    font-size: clamp(24px, 3vw, 38px);
+    line-height: 1.05;
+    margin: 0 0 10px;
+  }
+
+  .collection-chew-finder__copy span {
+    color: rgba(255, 248, 239, 0.72);
+    display: block;
+    line-height: 1.55;
+    max-width: 560px;
+  }
+
+  .collection-chew-finder__routes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+
+  .collection-chew-finder__routes a {
+    background: rgba(255, 248, 239, 0.1);
+    border: 1px solid rgba(255, 248, 239, 0.18);
+    border-radius: 999px;
+    color: #fff8ef;
+    font-size: 13px;
+    font-weight: 800;
+    padding: 11px 14px;
+    text-decoration: none;
+  }
+
+  .collection-chew-finder__routes a:first-child {
+    background: #d2632e;
+    border-color: #d2632e;
+  }
+
+  @media (max-width: 749px) {
+    .collection-chew-finder__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .collection-chew-finder__routes {
+      justify-content: flex-start;
+    }
+
+    .collection-chew-finder__routes a {
+      flex: 1 1 calc(50% - 10px);
+      text-align: center;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Collection chew finder",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Shop by dog need"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Start with your dog's chewing problem"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "The fastest path to the right chew is not flavor. It is dog size, chewing intensity, and the calm-time job you need the chew to do."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection chew finder"
+    }
+  ]
+}
+{% endschema %}

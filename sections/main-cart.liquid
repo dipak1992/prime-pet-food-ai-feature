@@ -35,6 +35,8 @@
             </a>
           </div>
 
+          {% render 'cart-chew-personalization', context: 'cart_page' %}
+
           <div class="cart__warnings">
             <h2 class="cart__empty-text ypc-cart__title ypc-cart__title--empty">{{ 'sections.cart.empty' | t }}</h2>
             <p class="ypc-cart__subtitle">{{ section.settings.empty_subtitle }}</p>

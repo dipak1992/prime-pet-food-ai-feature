@@ -1,0 +1,130 @@
+<section class="product-trust-stack">
+  <div class="product-trust-stack__inner page-width">
+    <div class="product-trust-stack__intro">
+      <p>{{ section.settings.eyebrow }}</p>
+      <h2>{{ section.settings.title }}</h2>
+    </div>
+
+    <div class="product-trust-stack__grid">
+      <article>
+        <span>01</span>
+        <h3>Will it actually last?</h3>
+        <p>Dense Himalayan cheese texture gives dogs a longer supervised chewing job than soft treats or quick snacks.</p>
+      </article>
+      <article>
+        <span>02</span>
+        <h3>Is the size right?</h3>
+        <p>The chew estimator matches by breed, weight, age, and chewing style so customers are not guessing at checkout.</p>
+      </article>
+      <article>
+        <span>03</span>
+        <h3>Is it safer than rawhide?</h3>
+        <p>Prime yak chews are rawhide-free and made with simple ingredients. Always supervise and remove small end pieces.</p>
+      </article>
+      <article>
+        <span>04</span>
+        <h3>What happens at the nub?</h3>
+        <p>When the chew gets small, remove it and puff it in the microwave after soaking to create a crunchy second treat.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .product-trust-stack {
+    background: #ffffff;
+    color: #24130d;
+    padding: clamp(46px, 6vw, 78px) 0;
+  }
+
+  .product-trust-stack__inner {
+    display: grid;
+    gap: 28px;
+  }
+
+  .product-trust-stack__intro p {
+    color: #d2632e;
+    font-size: 12px;
+    font-weight: 850;
+    letter-spacing: 0.12em;
+    margin: 0 0 10px;
+    text-transform: uppercase;
+  }
+
+  .product-trust-stack__intro h2 {
+    font-size: clamp(30px, 4vw, 48px);
+    line-height: 1.05;
+    margin: 0;
+    max-width: 780px;
+  }
+
+  .product-trust-stack__grid {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .product-trust-stack__grid article {
+    background: #f6f1e9;
+    border: 1px solid #eadfce;
+    border-radius: 16px;
+    padding: 22px;
+  }
+
+  .product-trust-stack__grid span {
+    color: #d2632e;
+    display: inline-block;
+    font-weight: 900;
+    margin-bottom: 28px;
+  }
+
+  .product-trust-stack__grid h3 {
+    font-size: 20px;
+    line-height: 1.12;
+    margin: 0 0 10px;
+  }
+
+  .product-trust-stack__grid p {
+    color: #6f5a50;
+    font-size: 14px;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  @media (max-width: 989px) {
+    .product-trust-stack__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .product-trust-stack__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Product trust stack",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Buying confidence"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "The questions every dog parent asks before buying"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product trust stack"
+    }
+  ]
+}
+{% endschema %}

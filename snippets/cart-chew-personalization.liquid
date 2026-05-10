@@ -1,0 +1,271 @@
+{% comment %}
+  Prime Pet Food cart personalization.
+  Reuses the local dog profile / analyzer recommendation in cart and cart drawer.
+{% endcomment %}
+
+<div class="cart-chew-plan cart-chew-plan--{{ context | default: 'cart' }}" data-cart-chew-plan>
+  <div class="cart-chew-plan__content">
+    <p class="cart-chew-plan__eyebrow">Dog-matched cart</p>
+    <h3 class="cart-chew-plan__title" data-cart-chew-title>Your calm-time plan is ready</h3>
+    <p class="cart-chew-plan__copy" data-cart-chew-copy>
+      Use your dog profile to choose the right yak chew size before checkout.
+    </p>
+  </div>
+
+  <div class="cart-chew-plan__facts" data-cart-chew-facts hidden>
+    <span data-cart-chew-size></span>
+    <span data-cart-chew-duration></span>
+    <span data-cart-chew-style></span>
+  </div>
+
+  <div class="cart-chew-plan__actions">
+    <a class="cart-chew-plan__link" href="/pages/how-long-will-this-last-for-my-dog" data-cart-chew-analyze>
+      Find My Dog's Chew
+    </a>
+    <button class="cart-chew-plan__button" type="button" data-cart-chew-add hidden>
+      Add recommended chew
+    </button>
+  </div>
+</div>
+
+<style>
+  .cart-chew-plan {
+    background: #fff8ef;
+    border: 1px solid rgba(210, 99, 46, 0.22);
+    border-radius: 18px;
+    box-shadow: 0 16px 44px rgba(54, 31, 18, 0.08);
+    color: #2b1408;
+    display: grid;
+    gap: 14px;
+    margin: 0 0 18px;
+    padding: 18px;
+  }
+
+  .cart-chew-plan--cart_drawer {
+    border-radius: 14px;
+    box-shadow: none;
+    margin-bottom: 14px;
+    padding: 14px;
+  }
+
+  .cart-chew-plan__eyebrow {
+    color: #d2632e;
+    font-size: 11px;
+    font-weight: 850;
+    letter-spacing: 0.08em;
+    margin: 0 0 5px;
+    text-transform: uppercase;
+  }
+
+  .cart-chew-plan__title {
+    font-size: clamp(18px, 2vw, 24px);
+    line-height: 1.08;
+    margin: 0 0 7px;
+  }
+
+  .cart-chew-plan--cart_drawer .cart-chew-plan__title {
+    font-size: 17px;
+  }
+
+  .cart-chew-plan__copy {
+    color: #6b5548;
+    font-size: 14px;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .cart-chew-plan__facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .cart-chew-plan__facts span {
+    background: #ffffff;
+    border: 1px solid rgba(210, 99, 46, 0.16);
+    border-radius: 999px;
+    color: #4b2a1a;
+    font-size: 12px;
+    font-weight: 750;
+    padding: 7px 10px;
+  }
+
+  .cart-chew-plan__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .cart-chew-plan__link,
+  .cart-chew-plan__button {
+    align-items: center;
+    border-radius: 999px;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 12px;
+    font-weight: 850;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0 16px;
+    text-decoration: none;
+    transition: transform 0.18s ease, background 0.18s ease;
+  }
+
+  .cart-chew-plan__link {
+    background: #2b1408;
+    color: #ffffff;
+  }
+
+  .cart-chew-plan__button {
+    background: #d2632e;
+    border: 0;
+    color: #ffffff;
+    font-family: inherit;
+  }
+
+  .cart-chew-plan__link:hover,
+  .cart-chew-plan__button:hover {
+    transform: translateY(-1px);
+  }
+
+  .cart-chew-plan__button[disabled] {
+    cursor: wait;
+    opacity: 0.7;
+    transform: none;
+  }
+
+  @media (min-width: 750px) {
+    .cart-chew-plan:not(.cart-chew-plan--cart_drawer) {
+      align-items: center;
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .cart-chew-plan:not(.cart-chew-plan--cart_drawer) .cart-chew-plan__facts {
+      grid-column: 1 / -1;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    var roots = document.querySelectorAll('[data-cart-chew-plan]');
+    if (!roots.length) return;
+
+    var variantByTitle = {
+      'small': '51744916701504',
+      'medium': '51744918962496',
+      'large': '51744918995264',
+      'extra large': '51744919028032',
+      'jumbo': '51744919060800'
+    };
+
+    function readProfile() {
+      if (window.PrimeDogProfile && typeof window.PrimeDogProfile.get === 'function') {
+        return window.PrimeDogProfile.get();
+      }
+
+      try {
+        return JSON.parse(window.localStorage.getItem('prime_dog_profile'));
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function getRecommendation(profile) {
+      if (window.PrimeDogProfile && typeof window.PrimeDogProfile.getRecommendation === 'function') {
+        return window.PrimeDogProfile.getRecommendation();
+      }
+      return profile && profile.recommendation ? profile.recommendation : null;
+    }
+
+    function formatBreed(breed) {
+      if (!breed) return 'your dog';
+      return breed.replace(/[_-]/g, ' ').replace(/\b\w/g, function (letter) {
+        return letter.toUpperCase();
+      });
+    }
+
+    function track(eventName, properties) {
+      properties = properties || {};
+      if (window.posthog && typeof window.posthog.capture === 'function') {
+        window.posthog.capture(eventName, properties);
+      }
+      if (window.gtag) {
+        window.gtag('event', eventName, properties);
+      }
+      window.Shopify = window.Shopify || {};
+      window.Shopify.analytics = window.Shopify.analytics || {};
+      if (typeof window.Shopify.analytics.publish === 'function') {
+        window.Shopify.analytics.publish(eventName, properties);
+      }
+    }
+
+    function hydrate() {
+      var profile = readProfile();
+      var recommendation = getRecommendation(profile);
+      var variantTitle = recommendation && recommendation.variantTitle ? recommendation.variantTitle.toLowerCase() : '';
+      var variantId = profile && profile.recommendedVariantId ? profile.recommendedVariantId : variantByTitle[variantTitle];
+
+      roots.forEach(function (root) {
+        var title = root.querySelector('[data-cart-chew-title]');
+        var copy = root.querySelector('[data-cart-chew-copy]');
+        var facts = root.querySelector('[data-cart-chew-facts]');
+        var size = root.querySelector('[data-cart-chew-size]');
+        var duration = root.querySelector('[data-cart-chew-duration]');
+        var style = root.querySelector('[data-cart-chew-style]');
+        var addButton = root.querySelector('[data-cart-chew-add]');
+
+        if (profile && recommendation) {
+          var dogName = profile.dogName || formatBreed(profile.breed);
+          title.textContent = dogName + "'s chew match";
+          copy.textContent = 'Recommended before checkout: ' + recommendation.size + ' for a supervised calm-time routine.';
+          size.textContent = recommendation.variantTitle + ' size';
+          duration.textContent = recommendation.durationRange || recommendation.duration + ' minutes';
+          style.textContent = (profile.chewStyle || 'moderate') + ' chewer';
+          facts.hidden = false;
+
+          if (variantId && addButton) {
+            addButton.hidden = false;
+            addButton.onclick = function () {
+              addButton.disabled = true;
+              addButton.textContent = 'Adding...';
+              track('cart_recommended_chew_add_clicked', {
+                variant_id: variantId,
+                breed: profile.breed,
+                chew_style: profile.chewStyle,
+                placement: root.className
+              });
+
+              fetch('/cart/add.js', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  id: Number(variantId),
+                  quantity: 1,
+                  properties: {
+                    'Dog match': formatBreed(profile.breed),
+                    'Recommended size': recommendation.variantTitle,
+                    'Estimated chew time': recommendation.durationRange || ''
+                  }
+                })
+              }).then(function () {
+                window.location.reload();
+              }).catch(function () {
+                addButton.disabled = false;
+                addButton.textContent = 'Add recommended chew';
+              });
+            };
+          }
+        } else {
+          title.textContent = 'Match the chew before checkout';
+          copy.textContent = 'Answer four questions to estimate chew duration, size fit, and calm-time usefulness for your dog.';
+          facts.hidden = true;
+          if (addButton) addButton.hidden = true;
+        }
+      });
+    }
+
+    hydrate();
+    window.addEventListener('prime:profile:updated', hydrate);
+  })();
+</script>
