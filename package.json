@@ -6,7 +6,9 @@
     "blog:check": "node scripts/blog-sync.mjs --check",
     "blog:dry-run": "node scripts/blog-sync.mjs --dry-run",
     "blog:push": "node scripts/blog-sync.mjs",
-    "blog:push:one": "node scripts/blog-sync.mjs --only"
+    "blog:push:one": "node scripts/blog-sync.mjs --only",
+    "pages:check": "node scripts/page-sync.mjs --check",
+    "pages:dry-run": "node scripts/page-sync.mjs --dry-run",
+    "pages:push": "node scripts/page-sync.mjs"
   }
 }
-

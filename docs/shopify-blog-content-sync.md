@@ -12,6 +12,7 @@ This repo now has a code-managed content layer for Shopify Admin blogs and artic
 - Supports safe validation and dry runs before publishing.
 
 The implementation uses Shopify GraphQL Admin API. Shopify's current docs list `articleCreate`, `articleUpdate`, and `blogCreate` under GraphQL Admin, while REST Admin is legacy for new public apps.
+Programmatic Shopify pages are managed with the same Admin API approach through `pageCreate` and `pageUpdate`.
 
 Required Shopify custom app scopes:
 
@@ -29,6 +30,7 @@ SHOPIFY_STORE_DOMAIN=theprimepetfood.myshopify.com
 SHOPIFY_ADMIN_ACCESS_TOKEN=shpat_replace_me
 SHOPIFY_API_VERSION=2026-04
 SHOPIFY_CONTENT_DIR=content/blogs
+SHOPIFY_PAGES_FILE=content/pages/seo-pages.json
 ```
 
 Do not commit `.env.local`.
@@ -63,6 +65,14 @@ Disable automatic blog creation:
 
 ```bash
 node scripts/blog-sync.mjs --no-create-blogs
+```
+
+Validate and sync SEO pages:
+
+```bash
+npm run pages:check
+npm run pages:dry-run
+npm run pages:push
 ```
 
 ## Article Format

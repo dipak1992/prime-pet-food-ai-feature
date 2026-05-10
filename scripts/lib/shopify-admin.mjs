@@ -136,6 +136,66 @@ export class ShopifyAdmin {
     assertNoUserErrors(data.articleUpdate.userErrors, 'articleUpdate');
     return data.articleUpdate.article;
   }
+
+  async findPageByHandle(handle) {
+    const data = await this.graphql(
+      `query FindPage($query: String!) {
+        pages(first: 1, query: $query) {
+          nodes {
+            id
+            title
+            handle
+          }
+        }
+      }`,
+      { query: `handle:${handle}` },
+    );
+    return data.pages.nodes[0] ?? null;
+  }
+
+  async createPage(page) {
+    const data = await this.graphql(
+      `mutation CreatePage($page: PageCreateInput!) {
+        pageCreate(page: $page) {
+          page {
+            id
+            title
+            handle
+          }
+          userErrors {
+            code
+            field
+            message
+          }
+        }
+      }`,
+      { page },
+    );
+    assertNoUserErrors(data.pageCreate.userErrors, 'pageCreate');
+    return data.pageCreate.page;
+  }
+
+  async updatePage(id, page) {
+    const data = await this.graphql(
+      `mutation UpdatePage($id: ID!, $page: PageUpdateInput!) {
+        pageUpdate(id: $id, page: $page) {
+          page {
+            id
+            title
+            handle
+          }
+          userErrors {
+            code
+            field
+            message
+          }
+        }
+      }`,
+      { id, page },
+    );
+    assertNoUserErrors(data.pageUpdate.userErrors, 'pageUpdate');
+    return data.pageUpdate.page;
+  }
 }
 
 export function buildArticleInput(article, blogId) {
@@ -159,6 +219,17 @@ export function buildArticleInput(article, blogId) {
   });
 }
 
+export function buildPageInput(page) {
+  return cleanObject({
+    title: page.title,
+    handle: page.handle,
+    body: page.body,
+    isPublished: page.published,
+    publishDate: page.publishDate,
+    templateSuffix: page.templateSuffix,
+  });
+}
+
 function normalizeStoreDomain(value) {
   return value.replace(/^https?:\/\//, '').replace(/\/+$/, '');
 }
@@ -175,4 +246,3 @@ function cleanObject(input) {
     Object.entries(input).filter(([, value]) => value !== undefined && value !== null && value !== ''),
   );
 }
-
