@@ -81,7 +81,7 @@ function analyze(breed,weight,chewStyle,age){
 }
 
 window.ChewAnalyzer=function(container,opts){
-  this.el=container;this.opts=opts||{};this.step=0;this.answers={};this.isOpen=false;this._init();
+  this.el=container;this.opts=opts||{};this.step=0;this.answers={};this.isOpen=false;this.openedAt=0;this._init();
 };
 var CA=window.ChewAnalyzer.prototype;
 
@@ -181,6 +181,7 @@ CA._bind=function(){
 
 CA.open=function(){
   this.isOpen=true;
+  this.openedAt=Date.now();
   this.el.querySelector('.ca-widget').classList.add('ca-widget--open');
   this.el.querySelector('.ca-panel').setAttribute('aria-hidden','false');
   this._goTo(1);
@@ -188,6 +189,7 @@ CA.open=function(){
 };
 
 CA.close=function(){
+  if(this.openedAt)this._track('engagement_time',{seconds:Math.round((Date.now()-this.openedAt)/1000),step:this.step});
   this.isOpen=false;
   this.el.querySelector('.ca-widget').classList.remove('ca-widget--open');
   this.el.querySelector('.ca-panel').setAttribute('aria-hidden','true');
@@ -279,6 +281,14 @@ CA._showResults=function(){
       '<h4 class="ca-result__rec-title">Recommended for your dog:</h4>'+
       '<div class="ca-result__rec-product"><span class="ca-result__rec-size">'+r.product.size+' Yak Chew</span><span class="ca-result__rec-bundle">'+r.product.bundle+' ('+r.product.count+')</span></div>'+
     '</div>'+
+    '<form class="ca-result__email" data-action="email-capture" method="post" action="/contact#contact_form">'+
+      '<input type="hidden" name="form_type" value="customer">'+
+      '<input type="hidden" name="utf8" value="✓">'+
+      '<input type="hidden" name="contact[tags]" value="chew-analyzer,chew-recommendation">'+
+      '<label class="ca-result__email-label">Get this recommendation by email</label>'+
+      '<div class="ca-result__email-row"><input type="email" name="contact[email]" placeholder="Email address" required><button type="submit">Send</button></div>'+
+      '<p class="ca-result__email-note">Chew tips, size guidance, and Prime Pet Food offers. No spam.</p>'+
+    '</form>'+
     '<div class="ca-result__actions">'+
       '<button class="ca-result__btn ca-result__btn--primary" data-action="add-to-cart">Add Recommended Pack</button>'+
       '<button class="ca-result__btn ca-result__btn--secondary" data-action="subscribe">Subscribe & Save 15%</button>'+
@@ -287,6 +297,7 @@ CA._showResults=function(){
   this._goTo('results');
   this._animateResults();
   this._bindResultActions();
+  this._track('completed',{breed:a.breed,weight:a.weight,chewStyle:a.chewStyle,age:a.age,durationMin:r.duration.min,durationMax:r.duration.max,enrichment:r.enrichment,aggressiveChewer:a.chewStyle==='aggressive'});
   this._track('results_shown',{breed:a.breed,weight:a.weight,chewStyle:a.chewStyle,age:a.age,durationMin:r.duration.min,durationMax:r.duration.max,enrichment:r.enrichment});
 };
 
@@ -308,13 +319,24 @@ CA._bindResultActions=function(){
   var addBtn=this.el.querySelector('[data-action="add-to-cart"]');
   var subBtn=this.el.querySelector('[data-action="subscribe"]');
   var restart=this.el.querySelector('[data-action="restart"]');
+  var emailForm=this.el.querySelector('[data-action="email-capture"]');
+  var productUrl=this.el.dataset.productUrl||'/products/himalayan-yak-chews-for-dogs';
   if(addBtn)addBtn.addEventListener('click',function(){
     self._track('add_to_cart_clicked',self.answers);
-    window.location.href='/collections/all';
+    window.location.href=productUrl;
   });
   if(subBtn)subBtn.addEventListener('click',function(){
     self._track('subscribe_clicked',self.answers);
-    window.location.href='/collections/all';
+    window.location.href=productUrl+'?selling_plan=true';
+  });
+  if(emailForm)emailForm.addEventListener('submit',function(e){
+    e.preventDefault();
+    var email=emailForm.querySelector('input[type="email"]').value;
+    if(!email)return;
+    self._track('email_capture_submitted',Object.assign({},self.answers,{emailDomain:(email.split('@')[1]||'').toLowerCase()}));
+    fetch(emailForm.action,{method:'POST',body:new FormData(emailForm),credentials:'same-origin'})
+      .then(function(){emailForm.innerHTML='<p class="ca-result__email-success">Recommendation saved. Check your inbox for Prime Pet Food chew tips.</p>';})
+      .catch(function(){emailForm.submit();});
   });
   if(restart)restart.addEventListener('click',function(){
     self.answers={};
@@ -327,8 +349,14 @@ CA._bindResultActions=function(){
 
 CA._track=function(event,data){
   data=data||{};data.feature='chew_analyzer';
+  data.placement=this.el.dataset.placement||'unknown';
+  data.productId=this.el.dataset.productId||'';
+  data.productTitle=this.el.dataset.productTitle||'';
   if(window.gtag)window.gtag('event','chew_analyzer_'+event,data);
   if(window.posthog)window.posthog.capture('chew_analyzer_'+event,data);
+  if(window.Shopify&&window.Shopify.analytics&&typeof window.Shopify.analytics.publish==='function'){
+    try{window.Shopify.analytics.publish('chew_analyzer_'+event,data);}catch(e){}
+  }
   try{document.dispatchEvent(new CustomEvent('chew-analyzer:'+event,{detail:data}));}catch(e){}
 };
 
@@ -354,6 +382,17 @@ window.ChewAnalyzerStickyCTA=function(){
 function initAll(){
   document.querySelectorAll('.ca-widget-container').forEach(function(el){
     if(!el._chewAnalyzer)el._chewAnalyzer=new window.ChewAnalyzer(el);
+  });
+  document.querySelectorAll('[data-ca-open-target]').forEach(function(link){
+    if(link._caBound)return;
+    link._caBound=true;
+    link.addEventListener('click',function(e){
+      var target=document.querySelector(link.getAttribute('data-ca-open-target'));
+      if(!target)return;
+      e.preventDefault();
+      target.scrollIntoView({behavior:'smooth',block:'center'});
+      setTimeout(function(){if(target._chewAnalyzer&&!target._chewAnalyzer.isOpen)target._chewAnalyzer.open();},450);
+    });
   });
   if(window.innerWidth<=768&&!window._caStickyCTA)window._caStickyCTA=new window.ChewAnalyzerStickyCTA();
 }

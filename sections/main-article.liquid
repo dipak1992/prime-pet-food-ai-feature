@@ -180,6 +180,7 @@
             {{ block.shopify_attributes }}
           >
             {{ article.content }}
+            {% render 'seo-topic-links' %}
           </div>
 
         {%- when 'share' -%}

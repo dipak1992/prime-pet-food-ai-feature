@@ -1,0 +1,324 @@
+{% comment %}
+  Programmatic SEO template for yak chew breed, problem, comparison, and duration-intent pages.
+  Pages should be created in Shopify Admin and assigned to page.seo-chew or page.chew-duration-tool.
+{% endcomment %}
+
+{{ 'seo-chew-pages.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign page_handle = page.handle | default: request.path | split: '/' | last
+  assign mode = section.settings.page_mode
+  if mode == 'auto'
+    if page_handle contains 'for-' or page_handle contains 'golden' or page_handle contains 'labrador' or page_handle contains 'husky' or page_handle contains 'german-shepherd' or page_handle contains 'french-bulldog'
+      assign mode = 'breed'
+    elsif page_handle contains 'how-long' or page_handle contains 'last' or page_handle contains 'vs-'
+      assign mode = 'duration'
+    else
+      assign mode = 'problem'
+    endif
+  endif
+
+  assign dog_label = 'your dog'
+  assign chew_intensity = 'moderate to strong'
+  assign boredom_tendency = 'needs regular chewing outlets and structured enrichment'
+  assign size_rec = 'Medium or Large'
+  assign duration_estimate = '45-90 minutes per session, often across multiple supervised sessions'
+  assign page_topic = 'yak chews'
+  assign title = page.title
+  assign lede = 'Prime Pet Food Himalayan yak cheese chews are dense, natural chews for dog owners who want longer enrichment time, cleaner ingredients, and a safer rawhide alternative.'
+  assign guidance = 'Choose a chew larger than your dog can swallow, supervise every session, and remove the chew once it becomes small enough to pose a choking risk. The leftover nub can be puffed in the microwave after soaking.'
+  assign faq_1_q = 'Are yak chews good for this dog?'
+  assign faq_1_a = 'Yak chews can be a strong fit when the chew is correctly sized and your dog is supervised. They are especially useful for dogs that need a longer-lasting chewing outlet.'
+  assign faq_2_q = 'How long will one yak chew last?'
+  assign faq_2_a = 'Chew duration depends on size, weight, chewing style, and how long each session lasts. Power chewers finish chews faster than gentle chewers.'
+  assign faq_3_q = 'What size should I choose?'
+  assign faq_3_a = 'Start with the largest practical chew size for your dog. Larger dogs and aggressive chewers should use larger, denser chews.'
+
+  case page_handle
+    when 'yak-chews-for-golden-retrievers'
+      assign dog_label = 'Golden Retriever'
+      assign chew_intensity = 'moderate, food-motivated, and persistent'
+      assign boredom_tendency = 'often needs mouth-focused enrichment after walks, training, or crate time'
+      assign size_rec = 'Large'
+      assign duration_estimate = '35-75 minutes for active chewers; longer for moderate chewers'
+      assign page_topic = 'yak chews for Golden Retrievers'
+      assign lede = 'Golden Retrievers are social, food-motivated dogs that often benefit from a durable chew after exercise or during quiet indoor time.'
+    when 'yak-chews-for-labradors', 'yak-chews-for-labs'
+      assign dog_label = 'Labrador Retriever'
+      assign chew_intensity = 'strong, enthusiastic, and food-driven'
+      assign boredom_tendency = 'can become mouthy or destructive when under-enriched'
+      assign size_rec = 'Large or Extra Large'
+      assign duration_estimate = '30-70 minutes for most Labs; shorter for aggressive chewers'
+      assign page_topic = 'yak chews for Labs'
+      assign lede = 'Labradors are enthusiastic chewers, so the best chew is dense, properly sized, and satisfying enough to slow them down.'
+    when 'yak-chews-for-huskies', 'yak-chews-for-siberian-huskies'
+      assign dog_label = 'Siberian Husky'
+      assign chew_intensity = 'strong, independent, and boredom-prone'
+      assign boredom_tendency = 'needs enrichment that holds attention when physical exercise is not enough'
+      assign size_rec = 'Large'
+      assign duration_estimate = '30-75 minutes depending on chewing style'
+      assign page_topic = 'yak chews for Huskies'
+      assign lede = 'Huskies need more than physical exercise. A long-lasting yak chew can give them a focused, calming outlet between activities.'
+    when 'yak-chews-for-german-shepherds'
+      assign dog_label = 'German Shepherd'
+      assign chew_intensity = 'strong, focused, and high-drive'
+      assign boredom_tendency = 'often needs structured outlets for mental energy and chewing pressure'
+      assign size_rec = 'Large or Extra Large'
+      assign duration_estimate = '30-65 minutes for power chewers; longer for moderate chewers'
+      assign page_topic = 'yak chews for German Shepherds'
+      assign lede = 'German Shepherds often need serious enrichment. Dense yak chews help redirect chewing into a predictable, supervised routine.'
+    when 'yak-chews-for-french-bulldogs'
+      assign dog_label = 'French Bulldog'
+      assign chew_intensity = 'moderate, compact, and persistent'
+      assign boredom_tendency = 'benefits from short enrichment windows and indoor calming routines'
+      assign size_rec = 'Small or Medium'
+      assign duration_estimate = '50-110 minutes for many French Bulldogs'
+      assign page_topic = 'yak chews for French Bulldogs'
+      assign lede = 'French Bulldogs need correctly sized chews that are satisfying without being oversized for their compact build.'
+    when 'best-long-lasting-chew-for-aggressive-chewers'
+      assign page_topic = 'long-lasting chews for aggressive chewers'
+      assign dog_label = 'aggressive chewers'
+      assign chew_intensity = 'very strong and persistent'
+      assign boredom_tendency = 'often destroys softer toys and needs a tougher chewing outlet'
+      assign size_rec = 'Large, Extra Large, or Jumbo'
+      assign duration_estimate = '20-60 minutes per session, depending on weight and jaw strength'
+      assign lede = 'For aggressive chewers, the right chew must be dense, correctly sized, low mess, and satisfying enough to redirect destructive chewing.'
+      assign faq_1_q = 'Are yak chews good for aggressive chewers?'
+      assign faq_1_a = 'Yes, many aggressive chewers do well with yak chews because they are dense and long-lasting. Always size up and supervise.'
+    when 'dog-chews-for-bored-dogs'
+      assign page_topic = 'dog chews for bored dogs'
+      assign dog_label = 'bored dogs'
+      assign chew_intensity = 'varies by dog, but boredom often increases chewing urgency'
+      assign boredom_tendency = 'needs a predictable enrichment routine, not just random treats'
+      assign size_rec = 'Medium to Large, based on weight'
+      assign duration_estimate = '30-90 minutes of focused enrichment'
+      assign lede = 'Bored dogs need more than a quick snack. A long-lasting chew can create a calm, repeatable routine that gives chewing a job.'
+    when 'best-rawhide-alternative'
+      assign page_topic = 'rawhide alternatives'
+      assign dog_label = 'dogs that need a rawhide alternative'
+      assign chew_intensity = 'moderate to aggressive'
+      assign boredom_tendency = 'often needs a chew that lasts without the mess or concern of rawhide'
+      assign size_rec = 'One size larger than the minimum weight recommendation'
+      assign duration_estimate = 'typically longer-lasting than many softer treats'
+      assign lede = 'If you are moving away from rawhide, Himalayan yak chews offer a cleaner, dense, digestible chewing option with simple ingredients.'
+      assign faq_1_q = 'Why choose yak chews instead of rawhide?'
+      assign faq_1_a = 'Yak chews use simple ingredients, are dense and long-lasting, and avoid the heavily processed profile many owners dislike about rawhide.'
+    when 'dog-chews-for-separation-anxiety'
+      assign page_topic = 'dog chews for separation anxiety routines'
+      assign dog_label = 'dogs that struggle when left alone'
+      assign chew_intensity = 'often stress-driven and urgent'
+      assign boredom_tendency = 'needs calm, predictable routines before departures'
+      assign size_rec = 'Medium to Large, based on weight and supervision plan'
+      assign duration_estimate = 'use as supervised pre-departure or decompression enrichment'
+      assign lede = 'Chews do not cure separation anxiety, but they can support a calmer routine when used thoughtfully with training and supervision.'
+    when 'best-chews-for-crate-training'
+      assign page_topic = 'crate training chews'
+      assign dog_label = 'crate-training dogs'
+      assign chew_intensity = 'gentle to moderate for many dogs, stronger when stressed'
+      assign boredom_tendency = 'benefits from positive crate associations and calm enrichment'
+      assign size_rec = 'Size up and use only with appropriate supervision'
+      assign duration_estimate = 'short supervised crate practice sessions'
+      assign lede = 'The best crate training chew helps the crate feel calmer and more rewarding without creating a swallow risk.'
+    when 'how-long-do-yak-chews-last'
+      assign page_topic = 'how long yak chews last'
+      assign dog_label = 'your dog'
+      assign chew_intensity = 'the main driver of duration'
+      assign boredom_tendency = 'longer sessions happen when the dog is relaxed and focused'
+      assign size_rec = 'Match by weight, then size up for power chewers'
+      assign duration_estimate = '20 minutes to several days of intermittent chewing'
+      assign lede = 'Yak chew duration depends on breed, weight, jaw strength, chew size, and whether your dog chews in short sessions or tries to finish it at once.'
+      assign faq_1_q = 'Can one yak chew last for days?'
+      assign faq_1_a = 'Yes. Gentle and moderate chewers may use the same chew across several sessions. Aggressive chewers may finish one much faster.'
+    when 'longest-lasting-dog-chews'
+      assign page_topic = 'longest-lasting dog chews'
+      assign dog_label = 'dogs that need longer chew time'
+      assign chew_intensity = 'moderate to very strong'
+      assign boredom_tendency = 'needs a chew that resists fast consumption'
+      assign size_rec = 'Dense chews sized generously'
+      assign duration_estimate = 'yak chews are built for extended chewing sessions'
+      assign lede = 'The longest-lasting chews tend to be dense, low-moisture, and correctly sized for the dog. Yak chews fit that intent well.'
+    when 'yak-chews-vs-bully-sticks'
+      assign page_topic = 'yak chews vs bully sticks'
+      assign dog_label = 'dogs comparing chew options'
+      assign chew_intensity = 'varies, but bully sticks are usually consumed faster'
+      assign boredom_tendency = 'longer-lasting enrichment usually favors denser chews'
+      assign size_rec = 'Choose yak chews for longer sessions; bully sticks for softer chewing'
+      assign duration_estimate = 'yak chews usually last longer than bully sticks for comparable dogs'
+      assign lede = 'Yak chews and bully sticks both satisfy chewing, but they serve different jobs. Yak chews are typically denser, lower odor, and longer-lasting.'
+  endcase
+-%}
+
+<article class="seo-chew" data-seo-mode="{{ mode }}" data-page-handle="{{ page_handle | escape }}">
+  <header class="seo-chew__hero">
+    <div class="page-width seo-chew__grid">
+      <div>
+        <p class="seo-chew__eyebrow">{{ section.settings.eyebrow | default: 'Prime Pet Food Chew Guide' }}</p>
+        <h1>{{ title | escape }}</h1>
+        <p class="seo-chew__lede">{{ lede }}</p>
+        <div class="seo-chew__actions">
+          <a class="seo-chew__button" href="{{ section.settings.product_url | default: '/products/himalayan-yak-chews-for-dogs' }}">Shop Yak Chews</a>
+          <a class="seo-chew__button seo-chew__button--secondary" href="{{ section.settings.tool_url | default: '/pages/how-long-will-this-last-for-my-dog' }}">Estimate Your Dog's Chew Time</a>
+        </div>
+      </div>
+      <aside class="seo-chew__summary" aria-label="Quick recommendation">
+        <dl>
+          <div><dt>Best For</dt><dd>{{ dog_label | capitalize }}</dd></div>
+          <div><dt>Chewing Pattern</dt><dd>{{ chew_intensity }}</dd></div>
+          <div><dt>Recommended Size</dt><dd>{{ size_rec }}</dd></div>
+          <div><dt>Expected Duration</dt><dd>{{ duration_estimate }}</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </header>
+
+  <section class="seo-chew__section">
+    <div class="page-width seo-chew__content">
+      <h2>Why {{ page_topic }} need a specific chew strategy</h2>
+      <p>{{ dog_label | capitalize }} should not be matched to a chew by flavor alone. The better decision is based on jaw pressure, chewing urgency, weight, boredom triggers, and how safely the chew can be used during a supervised routine.</p>
+      <p>{{ guidance }}</p>
+      <div class="seo-chew__cards">
+        <div class="seo-chew__card"><h3>Chew Intensity</h3><p>{{ chew_intensity | capitalize }} chewing means size and density matter more than novelty.</p></div>
+        <div class="seo-chew__card"><h3>Boredom Control</h3><p>{{ boredom_tendency | capitalize }}. Pair chews with walks, crate practice, or evening decompression.</p></div>
+        <div class="seo-chew__card"><h3>Product Fit</h3><p>Prime Pet Food yak chews are dense, simple-ingredient chews designed for longer, cleaner chewing sessions.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seo-chew__section seo-chew__section--soft">
+    <div class="page-width">
+      <h2>Recommended yak chew size and duration</h2>
+      <p class="seo-chew__content">Use this as a starting point, then adjust for your dog's real chewing style. If your dog destroys softer chews quickly, size up.</p>
+      <div class="seo-chew__table-wrap">
+        <table class="seo-chew__table">
+          <thead><tr><th>Dog Weight</th><th>Typical Size</th><th>Expected Use</th><th>Best Routine</th></tr></thead>
+          <tbody>
+            <tr><td>Under 15 lbs</td><td>Small</td><td>Longer sessions for gentle chewers</td><td>Short enrichment windows</td></tr>
+            <tr><td>15-35 lbs</td><td>Medium</td><td>Moderate duration for everyday chewing</td><td>Afternoon boredom reset</td></tr>
+            <tr><td>35-60 lbs</td><td>Large</td><td>Better for stronger jaws and active dogs</td><td>Post-walk decompression</td></tr>
+            <tr><td>60+ lbs</td><td>Extra Large or Jumbo</td><td>Best for power chewers and large breeds</td><td>Supervised calm-time routine</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="seo-chew__section">
+    <div class="page-width seo-chew__grid">
+      <div>
+        <h2>Find your dog's exact estimate</h2>
+        <p>The fastest way to choose the right chew is to estimate duration by breed, weight, age, and chewing style. The Prime Pet Food analyzer uses a rules engine built around common breed behavior and chew intensity.</p>
+        <p>It is not a medical tool and it does not replace supervision, but it gives dog owners a practical buying recommendation before they add to cart.</p>
+      </div>
+      {% render 'chew-analyzer-widget' %}
+    </div>
+  </section>
+
+  <section class="seo-chew__section seo-chew__section--soft">
+    <div class="page-width seo-chew__grid">
+      <div>
+        <h2>Related chew guides</h2>
+        <p>These pages build the yak chew topic cluster around breed fit, chew duration, rawhide alternatives, enrichment, and buyer hesitation.</p>
+        <ul class="seo-chew__links">
+          <li><a href="/pages/how-long-do-yak-chews-last">How Long Do Yak Chews Last?</a></li>
+          <li><a href="/pages/best-long-lasting-chew-for-aggressive-chewers">Best Long Lasting Chew for Aggressive Chewers</a></li>
+          <li><a href="/pages/best-rawhide-alternative">Best Rawhide Alternative</a></li>
+          <li><a href="/pages/yak-chews-vs-bully-sticks">Yak Chews vs Bully Sticks</a></li>
+          <li><a href="/pages/dog-chews-for-bored-dogs">Dog Chews for Bored Dogs</a></li>
+          <li><a href="/pages/yak-chews-for-labradors">Yak Chews for Labradors</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Related articles</h2>
+        <ul class="seo-chew__links">
+          {%- liquid
+            assign linked_articles = blank
+            if blogs['dog-behavior'] != blank
+              assign linked_articles = blogs['dog-behavior'].articles
+            elsif blog != blank
+              assign linked_articles = blog.articles
+            endif
+          -%}
+          {%- for related_article in linked_articles limit: 6 -%}
+            <li><a href="{{ related_article.url }}">{{ related_article.title | escape }}</a></li>
+          {%- else -%}
+            <li><a href="/blogs/dog-behavior">Dog Behavior Tips</a></li>
+            <li><a href="/products/himalayan-yak-chews-for-dogs">Shop Himalayan Yak Chews</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="seo-chew__section">
+    <div class="page-width seo-chew__content">
+      <h2>FAQ</h2>
+      <div class="seo-chew__faq">
+        <details><summary>{{ faq_1_q }}</summary><p>{{ faq_1_a }}</p></details>
+        <details><summary>{{ faq_2_q }}</summary><p>{{ faq_2_a }}</p></details>
+        <details><summary>{{ faq_3_q }}</summary><p>{{ faq_3_a }}</p></details>
+      </div>
+    </div>
+  </section>
+</article>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":{{ faq_1_q | json }},"acceptedAnswer":{"@type":"Answer","text":{{ faq_1_a | strip_html | json }}}},
+    {"@type":"Question","name":{{ faq_2_q | json }},"acceptedAnswer":{"@type":"Answer","text":{{ faq_2_a | strip_html | json }}}},
+    {"@type":"Question","name":{{ faq_3_q | json }},"acceptedAnswer":{"@type":"Answer","text":{{ faq_3_a | strip_html | json }}}}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": {{ page.title | json }},
+  "description": {{ page_description | default: lede | strip_html | json }},
+  "url": {{ canonical_url | json }},
+  "about": {{ page_topic | json }},
+  "isPartOf": {"@type":"WebSite","name":{{ shop.name | json }},"url":{{ shop.url | json }}}
+}
+</script>
+
+{% schema %}
+{
+  "name": "SEO chew page",
+  "settings": [
+    {
+      "type": "select",
+      "id": "page_mode",
+      "label": "Page mode",
+      "options": [
+        { "value": "auto", "label": "Auto by handle" },
+        { "value": "breed", "label": "Breed" },
+        { "value": "problem", "label": "Problem" },
+        { "value": "duration", "label": "Duration / comparison" }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Prime Pet Food Chew Guide"
+    },
+    {
+      "type": "url",
+      "id": "product_url",
+      "label": "Primary product URL"
+    },
+    {
+      "type": "url",
+      "id": "tool_url",
+      "label": "Analyzer landing page URL"
+    }
+  ],
+  "presets": [
+    { "name": "SEO chew page" }
+  ]
+}
+{% endschema %}

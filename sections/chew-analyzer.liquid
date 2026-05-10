@@ -16,7 +16,12 @@
       <p class="ca-hero-hook__subtitle">
         {{ section.settings.subtitle | default: 'Get a personalized chew duration estimate based on your dog breed, size, and chewing style.' }}
       </p>
-      <a href="{{ section.settings.cta_link | default: '/products' }}" class="ca-hero-hook__btn">
+      {%- assign analyzer_target = 'chew-analyzer-homepage-' | append: section.id -%}
+      <a
+        href="{% if section.settings.cta_link != blank %}{{ section.settings.cta_link }}{% else %}#{{ analyzer_target }}{% endif %}"
+        class="ca-hero-hook__btn"
+        {% if section.settings.cta_link == blank %}data-ca-open-target="#{{ analyzer_target }}"{% endif %}
+      >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
           <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2"/>
           <path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -37,6 +42,11 @@
           <span class="ca-hero-hook__stat-label">Happy Dogs</span>
         </div>
       </div>
+      <div class="ca-hero-hook__widget" id="{{ analyzer_target }}">
+        <div class="ca-widget-container" data-section-id="{{ section.id }}" data-placement="homepage_hero">
+          <!-- Widget renders via JavaScript -->
+        </div>
+      </div>
     </div>
   </div>
 
@@ -49,7 +59,7 @@
         <p class="ca-section__subtitle">{{ section.settings.subtitle | default: 'Get a personalized chew duration estimate in 30 seconds' }}</p>
       </div>
     {% endif %}
-    <div class="ca-widget-container" id="chew-analyzer-section" data-section-id="{{ section.id }}">
+    <div class="ca-widget-container" id="chew-analyzer-section" data-section-id="{{ section.id }}" data-placement="section">
       <!-- Widget renders via JavaScript -->
     </div>
   </div>

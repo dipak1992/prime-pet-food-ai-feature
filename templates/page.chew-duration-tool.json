@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "chew_analyzer_landing": {
+      "type": "chew-analyzer-landing",
+      "settings": {
+        "eyebrow": "Interactive chew estimator",
+        "heading": "How Long Will This Last For MY Dog?",
+        "subheading": "Answer four quick questions and get a personalized yak chew duration estimate, enrichment score, calming fit, and recommended Prime Pet Food chew size.",
+        "product_url": "shopify://products/himalayan-yak-chews-for-dogs"
+      }
+    }
+  },
+  "order": [
+    "chew_analyzer_landing"
+  ]
+}

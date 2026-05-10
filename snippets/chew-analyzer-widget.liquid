@@ -4,7 +4,14 @@
   Usage: {% render 'chew-analyzer-widget' %}
 {% endcomment %}
 
-<div class="ca-widget-container" id="chew-analyzer-widget" data-product-id="{{ product.id }}" data-product-title="{{ product.title | escape }}">
+<div
+  class="ca-widget-container"
+  id="chew-analyzer-widget"
+  data-product-id="{{ product.id }}"
+  data-product-title="{{ product.title | escape }}"
+  data-product-url="{% if product %}{{ product.url }}{% else %}/products/himalayan-yak-chews-for-dogs{% endif %}"
+  data-placement="{% if product %}product_page{% else %}content_page{% endif %}"
+>
   <!-- Widget renders via JavaScript -->
 </div>
 

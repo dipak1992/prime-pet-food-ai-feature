@@ -1,0 +1,110 @@
+{{ 'seo-chew-pages.css' | asset_url | stylesheet_tag }}
+{{ 'chew-analyzer.css' | asset_url | stylesheet_tag }}
+
+<main class="seo-chew ca-landing">
+  <section class="seo-chew__hero">
+    <div class="page-width seo-chew__grid">
+      <div>
+        <p class="seo-chew__eyebrow">{{ section.settings.eyebrow }}</p>
+        <h1>{{ section.settings.heading }}</h1>
+        <p class="seo-chew__lede">{{ section.settings.subheading }}</p>
+        <div class="seo-chew__actions">
+          <a class="seo-chew__button" href="#chew-analyzer-tool">Start Estimate</a>
+          <a class="seo-chew__button seo-chew__button--secondary" href="{{ section.settings.product_url | default: '/products/himalayan-yak-chews-for-dogs' }}">Shop Yak Chews</a>
+        </div>
+      </div>
+      <div id="chew-analyzer-tool">
+        {% render 'chew-analyzer-widget' %}
+      </div>
+    </div>
+  </section>
+
+  <section class="seo-chew__section">
+    <div class="page-width seo-chew__content">
+      <h2>Why chew duration is different for every dog</h2>
+      <p>A yak chew can last minutes, hours, or several supervised sessions depending on breed, weight, age, jaw strength, and chewing style. A Labrador that destroys toys will use a chew differently than a French Bulldog that nibbles slowly.</p>
+      <p>This estimator uses a rules-based scoring model to give you a practical starting point before you buy. It also recommends a safer size range and the best enrichment use case for your dog.</p>
+    </div>
+  </section>
+
+  <section class="seo-chew__section seo-chew__section--soft">
+    <div class="page-width">
+      <h2>What affects yak chew duration?</h2>
+      <div class="seo-chew__cards">
+        <div class="seo-chew__card"><h3>Breed and jaw shape</h3><p>Power breeds and working dogs often finish chews faster than gentle companion breeds.</p></div>
+        <div class="seo-chew__card"><h3>Chewing style</h3><p>A dog that destroys toys needs a larger, denser chew than a dog that calmly gnaws.</p></div>
+        <div class="seo-chew__card"><h3>Session routine</h3><p>Short supervised sessions usually make a chew last longer and keep the experience safer.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seo-chew__section">
+    <div class="page-width seo-chew__content">
+      <h2>Get Prime Pet Food chew tips</h2>
+      <p>Join the email list for size guidance, enrichment ideas, and Prime Pet Food offers.</p>
+      {% form 'customer', class: 'ca-email-form' %}
+        <input type="hidden" name="contact[tags]" value="chew-analyzer,seo-landing">
+        <label class="visually-hidden" for="CaLandingEmail">Email</label>
+        <input id="CaLandingEmail" type="email" name="contact[email]" placeholder="Email address" required>
+        <button type="submit">Send My Chew Tips</button>
+      {% endform %}
+    </div>
+  </section>
+</main>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "How Long Will This Last For MY Dog?",
+  "applicationCategory": "LifestyleApplication",
+  "operatingSystem": "Web",
+  "description": "A Prime Pet Food chew duration estimator for Himalayan yak cheese dog chews.",
+  "url": {{ canonical_url | json }}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"How long do yak chews last?","acceptedAnswer":{"@type":"Answer","text":"Yak chew duration depends on breed, weight, age, chewing style, and chew size. Some dogs use one across several supervised sessions, while aggressive chewers may finish one faster."}},
+    {"@type":"Question","name":"Can this tool choose the right yak chew size?","acceptedAnswer":{"@type":"Answer","text":"The tool gives a practical size recommendation based on weight and chewing style. Always supervise chewing and size up for strong chewers."}},
+    {"@type":"Question","name":"Does this use an expensive AI API?","acceptedAnswer":{"@type":"Answer","text":"No. The first version uses a fast rules engine and behavior mapping so it loads quickly on Shopify storefront pages."}}
+  ]
+}
+</script>
+
+{% schema %}
+{
+  "name": "Chew analyzer landing",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Interactive chew estimator"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "How Long Will This Last For MY Dog?"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Answer four quick questions and get a personalized yak chew duration estimate, enrichment score, calming fit, and recommended Prime Pet Food chew size."
+    },
+    {
+      "type": "url",
+      "id": "product_url",
+      "label": "Product URL"
+    }
+  ],
+  "presets": [
+    { "name": "Chew analyzer landing" }
+  ]
+}
+{% endschema %}

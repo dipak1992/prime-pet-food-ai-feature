@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "seo_chew_page": {
+      "type": "seo-chew-page",
+      "settings": {
+        "page_mode": "auto",
+        "eyebrow": "Prime Pet Food Chew Guide",
+        "product_url": "shopify://products/himalayan-yak-chews-for-dogs",
+        "tool_url": "shopify://pages/how-long-will-this-last-for-my-dog"
+      }
+    }
+  },
+  "order": [
+    "seo_chew_page"
+  ]
+}

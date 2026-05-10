@@ -1,0 +1,12 @@
+{
+  "name": "prime-pet-food-theme",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "blog:check": "node scripts/blog-sync.mjs --check",
+    "blog:dry-run": "node scripts/blog-sync.mjs --dry-run",
+    "blog:push": "node scripts/blog-sync.mjs",
+    "blog:push:one": "node scripts/blog-sync.mjs --only"
+  }
+}
+
