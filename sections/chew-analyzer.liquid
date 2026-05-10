@@ -11,10 +11,10 @@
   <div class="ca-section ca-section--hero page-width {{ section.settings.top_padding }} {{ section.settings.bottom_padding }}">
     <div class="ca-hero-hook">
       <h2 class="ca-hero-hook__title">
-        {{ section.settings.heading | default: 'How Long Will This Last For <em>YOUR</em> Dog?' }}
+        {{ section.settings.heading | default: 'How Long Will This Last For YOUR Dog?' }}
       </h2>
       <p class="ca-hero-hook__subtitle">
-        {{ section.settings.subtitle | default: 'Our AI analyzes your dog\'s breed, size, and chewing style to estimate exactly how long our premium Himalayan yak chews will keep them happily occupied.' }}
+        {{ section.settings.subtitle | default: 'Get a personalized chew duration estimate based on your dog breed, size, and chewing style.' }}
       </p>
       <a href="{{ section.settings.cta_link | default: '/products' }}" class="ca-hero-hook__btn">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -154,8 +154,7 @@
   ],
   "presets": [
     {
-      "name": "Chew Analyzer",
-      "category": "Interactive"
+      "name": "Chew Analyzer"
     }
   ]
 }
