@@ -1,0 +1,12 @@
+{% comment %}
+  Prime Pet Food - Chew Analyzer Widget
+  Place this snippet on product pages to show the "How Long Will This Last" analyzer.
+  Usage: {% render 'chew-analyzer-widget' %}
+{% endcomment %}
+
+<div class="ca-widget-container" id="chew-analyzer-widget" data-product-id="{{ product.id }}" data-product-title="{{ product.title | escape }}">
+  <!-- Widget renders via JavaScript -->
+</div>
+
+{{ 'chew-analyzer.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'chew-analyzer.js' | asset_url }}" defer></script>

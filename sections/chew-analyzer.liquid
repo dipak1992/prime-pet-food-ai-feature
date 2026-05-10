@@ -1,0 +1,162 @@
+{% comment %}
+  Prime Pet Food - Chew Analyzer Section
+  Can be used on homepage as engagement hook OR as full analyzer on any page.
+  Supports two modes: 'hero' (teaser) and 'full' (complete widget)
+{% endcomment %}
+
+{{ 'chew-analyzer.css' | asset_url | stylesheet_tag }}
+
+{% if section.settings.display_mode == 'hero' %}
+  {%- comment -%} HOMEPAGE HERO HOOK MODE {%- endcomment -%}
+  <div class="ca-section ca-section--hero page-width {{ section.settings.top_padding }} {{ section.settings.bottom_padding }}">
+    <div class="ca-hero-hook">
+      <h2 class="ca-hero-hook__title">
+        {{ section.settings.heading | default: 'How Long Will This Last For <em>YOUR</em> Dog?' }}
+      </h2>
+      <p class="ca-hero-hook__subtitle">
+        {{ section.settings.subtitle | default: 'Our AI analyzes your dog\'s breed, size, and chewing style to estimate exactly how long our premium Himalayan yak chews will keep them happily occupied.' }}
+      </p>
+      <a href="{{ section.settings.cta_link | default: '/products' }}" class="ca-hero-hook__btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2"/>
+          <path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        {{ section.settings.cta_text | default: 'Analyze Your Dog' }}
+      </a>
+      <div class="ca-hero-hook__stats">
+        <div class="ca-hero-hook__stat">
+          <span class="ca-hero-hook__stat-value">45-90</span>
+          <span class="ca-hero-hook__stat-label">Min Avg Duration</span>
+        </div>
+        <div class="ca-hero-hook__stat">
+          <span class="ca-hero-hook__stat-value">9.2/10</span>
+          <span class="ca-hero-hook__stat-label">Enrichment Score</span>
+        </div>
+        <div class="ca-hero-hook__stat">
+          <span class="ca-hero-hook__stat-value">50k+</span>
+          <span class="ca-hero-hook__stat-label">Happy Dogs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% else %}
+  {%- comment -%} FULL WIDGET MODE {%- endcomment -%}
+  <div class="ca-section ca-section--full page-width {{ section.settings.top_padding }} {{ section.settings.bottom_padding }}">
+    {% if section.settings.show_section_heading %}
+      <div class="ca-section__header">
+        <h2 class="ca-section__title">{{ section.settings.heading | default: 'How Long Will This Last For YOUR Dog?' }}</h2>
+        <p class="ca-section__subtitle">{{ section.settings.subtitle | default: 'Get a personalized chew duration estimate in 30 seconds' }}</p>
+      </div>
+    {% endif %}
+    <div class="ca-widget-container" id="chew-analyzer-section" data-section-id="{{ section.id }}">
+      <!-- Widget renders via JavaScript -->
+    </div>
+  </div>
+{% endif %}
+
+<script src="{{ 'chew-analyzer.js' | asset_url }}" defer></script>
+
+<style>
+  .ca-section {
+    margin: 0 auto;
+    max-width: 680px;
+  }
+  .ca-section__header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .ca-section__title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin: 0 0 8px;
+  }
+  .ca-section__subtitle {
+    font-size: 16px;
+    color: #6b7280;
+    margin: 0;
+  }
+  @media (max-width: 768px) {
+    .ca-section__title { font-size: 24px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Chew Analyzer",
+  "tag": "section",
+  "class": "section-chew-analyzer",
+  "settings": [
+    {
+      "type": "select",
+      "id": "display_mode",
+      "label": "Display Mode",
+      "options": [
+        { "value": "hero", "label": "Hero Hook (teaser)" },
+        { "value": "full", "label": "Full Widget" }
+      ],
+      "default": "full"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_section_heading",
+      "label": "Show section heading",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "How Long Will This Last For YOUR Dog?"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Our AI analyzes your dog's breed, size, and chewing style to estimate exactly how long our premium Himalayan yak chews will keep them happily occupied."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Button Text",
+      "default": "Analyze Your Dog"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Link (hero mode)"
+    },
+    {
+      "type": "select",
+      "id": "top_padding",
+      "label": "Top Padding",
+      "options": [
+        { "value": "", "label": "None" },
+        { "value": "pt-small", "label": "Small" },
+        { "value": "pt-medium", "label": "Medium" },
+        { "value": "pt-large", "label": "Large" }
+      ],
+      "default": "pt-medium"
+    },
+    {
+      "type": "select",
+      "id": "bottom_padding",
+      "label": "Bottom Padding",
+      "options": [
+        { "value": "", "label": "None" },
+        { "value": "pb-small", "label": "Small" },
+        { "value": "pb-medium", "label": "Medium" },
+        { "value": "pb-large", "label": "Large" }
+      ],
+      "default": "pb-medium"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Chew Analyzer",
+      "category": "Interactive"
+    }
+  ]
+}
+{% endschema %}
