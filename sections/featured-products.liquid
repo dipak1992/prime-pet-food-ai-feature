@@ -1,0 +1,767 @@
+{% assign product_handle = section.settings.product -%}
+{%- assign selected_product = all_products[product_handle] %}
+
+<style>
+  #vb-section-{{ section.id }} {
+    background: {{ section.settings.section_bg }};
+    padding: {{ section.settings.padding_top }}px 20px {{ section.settings.padding_bottom }}px;
+    border-radius: {{ section.settings.section_radius }}px;
+  }
+  #vb-section-{{ section.id }} .vb-wrap {
+    max-width: {{ section.settings.page_width }}px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  #vb-section-{{ section.id }} .vb-header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  #vb-section-{{ section.id }} .vb-label {
+    color: {{ section.settings.label_color }};
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  #vb-section-{{ section.id }} .vb-heading {
+    color: {{ section.settings.heading_color }};
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: 800;
+    line-height: 1.15;
+    margin: 0 0 14px;
+  }
+  #vb-section-{{ section.id }} .vb-description {
+    color: {{ section.settings.description_color }};
+    font-size: {{ section.settings.description_size }}px;
+    max-width: 640px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+  #vb-section-{{ section.id }} .vb-view-all-btn {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 10px 22px;
+    background: {{ section.settings.view_all_bg }};
+    color: {{ section.settings.view_all_text }};
+    border-radius: {{ section.settings.button_radius }}px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: filter 0.2s ease;
+  }
+  #vb-section-{{ section.id }} .vb-view-all-btn:hover { filter: brightness(0.92); }
+
+  /* Carousel */
+  #vb-section-{{ section.id }} .vb-carousel {
+    position: relative;
+    padding: 0 50px;
+  }
+  #vb-section-{{ section.id }} .vb-track-viewport {
+    overflow: hidden;
+  }
+  #vb-section-{{ section.id }} .vb-track {
+    display: flex;
+    gap: {{ section.settings.grid_gap }}px;
+    will-change: transform;
+  }
+  #vb-section-{{ section.id }} .vb-track.is-animating {
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Card */
+  #vb-section-{{ section.id }} .vb-card {
+    flex: 0 0 calc((100% - ({{ section.settings.grid_gap }}px * 3)) / 4);
+    background: {{ section.settings.card_body_bg }};
+    border-radius: {{ section.settings.card_radius }}px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  #vb-section-{{ section.id }} .vb-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  }
+
+  #vb-section-{{ section.id }} .vb-card-top-link {
+    display: block;
+    text-decoration: none;
+  }
+  #vb-section-{{ section.id }} .vb-card-media {
+    position: relative;
+    height: {{ section.settings.media_height }}px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #vb-section-{{ section.id }} .vb-variant-image-wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #vb-section-{{ section.id }} .vb-variant-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  #vb-section-{{ section.id }} .vb-media-title {
+    color: {{ section.settings.media_text_color }};
+    font-size: {{ section.settings.media_text_size }}px;
+    font-weight: 700;
+    text-align: center;
+    padding: 0 16px;
+  }
+  #vb-section-{{ section.id }} .vb-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 5px 11px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    z-index: 2;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  }
+
+  /* Card body — LEFT ALIGNED */
+  #vb-section-{{ section.id }} .vb-card-body {
+    padding: 16px 16px 18px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  #vb-section-{{ section.id }} .vb-meta {
+    color: {{ section.settings.meta_color }};
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  #vb-section-{{ section.id }} .vb-card-title {
+    margin: 0 0 6px;
+    font-size: {{ section.settings.card_title_size }}px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: 0.3px;
+  }
+  #vb-section-{{ section.id }} .vb-card-title a {
+    color: {{ section.settings.card_title_color }};
+    text-decoration: none;
+  }
+  #vb-section-{{ section.id }} .vb-card-description {
+    color: {{ section.settings.card_description_color }};
+    font-size: {{ section.settings.card_description_size }}px;
+    line-height: 1.45;
+    margin-bottom: 8px;
+  }
+  #vb-section-{{ section.id }} .vb-reviews {
+    color: {{ section.settings.reviews_color }};
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+  #vb-section-{{ section.id }} .vb-divider {
+    height: 1px;
+    background: {{ section.settings.divider_color }};
+    margin: 4px 0 12px;
+  }
+
+  /* Footer (price + cart) — LEFT ALIGNED */
+  #vb-section-{{ section.id }} .vb-footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  #vb-section-{{ section.id }} .vb-price-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  #vb-section-{{ section.id }} .vb-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  #vb-section-{{ section.id }} .vb-price-sale {
+    font-size: {{ section.settings.price_size }}px;
+    font-weight: 700;
+    color: {{ section.settings.price_color }};
+  }
+  #vb-section-{{ section.id }} .vb-price-compare {
+    font-size: 14px;
+    color: {{ section.settings.compare_price_color }};
+    text-decoration: line-through;
+  }
+  #vb-section-{{ section.id }} .vb-discount {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    color: {{ section.settings.discount_color }};
+    background: rgba(196, 85, 34, 0.1);
+    padding: 3px 10px;
+    border-radius: 999px;
+    letter-spacing: 0.3px;
+  }
+
+  #vb-section-{{ section.id }} .vb-cart-form {
+    margin: 0;
+    width: 100%;
+  }
+  #vb-section-{{ section.id }} .vb-cart-btn {
+    width: 100%;
+    padding: 11px 16px;
+    background: {{ section.settings.cart_btn_bg }};
+    color: {{ section.settings.cart_btn_text }};
+    border: none;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    transition: filter 0.2s ease, transform 0.15s ease;
+  }
+  #vb-section-{{ section.id }} .vb-cart-btn:hover {
+    filter: brightness(0.92);
+  }
+  #vb-section-{{ section.id }} .vb-cart-btn:active {
+    transform: scale(0.98);
+  }
+
+  /* Arrows */
+  #vb-section-{{ section.id }} .vb-arrow {
+    position: absolute;
+    top: 38%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid {{ section.settings.divider_color }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 5;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  #vb-section-{{ section.id }} .vb-arrow:hover {
+    background: #f8f3eb;
+    transform: translateY(-50%) scale(1.05);
+  }
+  #vb-section-{{ section.id }} .vb-arrow.prev { left: 0; }
+  #vb-section-{{ section.id }} .vb-arrow.next { right: 0; }
+  #vb-section-{{ section.id }} .vb-arrow svg {
+    width: 14px;
+    height: 14px;
+    stroke: {{ section.settings.heading_color }};
+  }
+
+  /* Dots */
+  #vb-section-{{ section.id }} .vb-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 28px;
+  }
+  #vb-section-{{ section.id }} .vb-dot {
+    width: 28px;
+    height: 4px;
+    border-radius: 2px;
+    background: #d6c9b6;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.25s ease, width 0.25s ease;
+  }
+  #vb-section-{{ section.id }} .vb-dot.active {
+    background: {{ section.settings.heading_color }};
+    width: 36px;
+  }
+
+  #vb-section-{{ section.id }} .vb-empty {
+    text-align: center;
+    padding: 40px;
+    color: {{ section.settings.description_color }};
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    #vb-section-{{ section.id }} .vb-card {
+      flex: 0 0 calc((100% - ({{ section.settings.grid_gap }}px * 2)) / 3);
+    }
+    #vb-section-{{ section.id }} .vb-heading { font-size: 42px; }
+  }
+  @media (max-width: 768px) {
+    #vb-section-{{ section.id }} .vb-card {
+      flex: 0 0 calc((100% - {{ section.settings.grid_gap }}px) / 2);
+    }
+    #vb-section-{{ section.id }} .vb-carousel { padding: 0 40px; }
+    #vb-section-{{ section.id }} .vb-arrow { width: 36px; height: 36px; }
+    #vb-section-{{ section.id }} .vb-heading { font-size: 30px; }
+    #vb-section-{{ section.id }} .vb-card-body { padding: 14px 12px 16px; }
+  }
+  @media (max-width: 520px) {
+    #vb-section-{{ section.id }} .vb-card {
+      flex: 0 0 calc(100% - 8px);
+    }
+    #vb-section-{{ section.id }} .vb-carousel { padding: 0 30px; }
+    #vb-section-{{ section.id }} .vb-heading { font-size: 26px; }
+  }
+</style>
+
+<div id="vb-section-{{ section.id }}">
+  <div class="vb-wrap">
+    <div class="vb-header">
+      {% if section.settings.section_label != blank %}
+        <div class="vb-label">{{ section.settings.section_label }}</div>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="vb-heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+
+      {% if section.settings.description != blank %}
+        <div class="vb-description">{{ section.settings.description }}</div>
+      {% endif %}
+
+      {% if section.settings.button_text != blank and section.settings.button_link != blank %}
+        <a href="{{ section.settings.button_link }}" class="vb-view-all-btn">
+          {{ section.settings.button_text }}
+        </a>
+      {% endif %}
+    </div>
+
+    {% if selected_product != blank %}
+      <div class="vb-carousel" data-vb-carousel>
+        <button class="vb-arrow prev" data-vb-prev aria-label="Previous">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+
+        <div class="vb-track-viewport">
+          <div class="vb-track" data-vb-track>
+            {% for block in section.blocks %}
+              {% if block.type == 'variant_card' %}
+                {% assign chosen_variant = null %}
+                {% assign block_variant_id_string = block.settings.variant_id | strip %}
+
+                {% for variant in selected_product.variants %}
+                  {% assign variant_id_string = variant.id | append: '' %}
+                  {% if variant_id_string == block_variant_id_string %}
+                    {% assign chosen_variant = variant %}
+                    {% break %}
+                  {% endif %}
+                {% endfor %}
+
+                {% if chosen_variant != null %}
+                  {% assign card_badge = block.settings.badge_text %}
+                  {% assign card_title = block.settings.custom_title %}
+                  {% assign card_subtitle = block.settings.custom_subtitle %}
+                  {% assign card_description = block.settings.custom_description %}
+                  {% assign card_reviews = block.settings.custom_reviews %}
+                  {% assign card_bg = block.settings.card_gradient %}
+                  {% assign badge_bg = block.settings.badge_bg %}
+                  {% assign badge_text_color = block.settings.badge_text_color %}
+
+                  {% if card_bg == blank %}
+                    {% assign card_bg = section.settings.default_card_gradient %}
+                  {% endif %}
+
+                  {% if card_reviews == blank %}
+                    {% assign card_reviews = section.settings.default_review_text %}
+                  {% endif %}
+
+                  <div class="vb-card" {{ block.shopify_attributes }}>
+                    <a href="{{ selected_product.url }}?variant={{ chosen_variant.id }}" class="vb-card-top-link">
+                      <div class="vb-card-media" style="background: {{ card_bg }};">
+                        {% if card_badge != blank %}
+                          <div class="vb-badge" style="background: {{ badge_bg }}; color: {{ badge_text_color }};">
+                            {{ card_badge }}
+                          </div>
+                        {% endif %}
+
+                        {% if chosen_variant.image %}
+                          <div class="vb-variant-image-wrap">
+                            {{
+                              chosen_variant.image
+                              | image_url: width: 900
+                              | image_tag: class: 'vb-variant-image', loading: 'lazy', alt: card_title
+                            }}
+                          </div>
+                        {% elsif selected_product.featured_image %}
+                          <div class="vb-variant-image-wrap">
+                            {{
+                              selected_product.featured_image
+                              | image_url: width: 900
+                              | image_tag: class: 'vb-variant-image', loading: 'lazy', alt: card_title
+                            }}
+                          </div>
+                        {% else %}
+                          <div class="vb-media-title">
+                            {% if card_subtitle != blank %}
+                              {{ card_subtitle }}
+                            {% else %}
+                              {{ chosen_variant.title }}
+                            {% endif %}
+                          </div>
+                        {% endif %}
+                      </div>
+                    </a>
+
+                    <div class="vb-card-body">
+                      {% if card_subtitle != blank %}
+                        <div class="vb-meta">{{ card_subtitle }}</div>
+                      {% else %}
+                        <div class="vb-meta">{{ chosen_variant.title }}</div>
+                      {% endif %}
+
+                      <h3 class="vb-card-title">
+                        <a href="{{ selected_product.url }}?variant={{ chosen_variant.id }}">
+                          {% if card_title != blank %}
+                            {{ card_title }}
+                          {% else %}
+                            {{ selected_product.title }}
+                          {% endif %}
+                        </a>
+                      </h3>
+
+                      {% if card_description != blank %}
+                        <div class="vb-card-description">{{ card_description }}</div>
+                      {% endif %}
+
+                      {% if card_reviews != blank %}
+                        <div class="vb-reviews">{{ card_reviews }}</div>
+                      {% endif %}
+
+                      <div class="vb-divider"></div>
+
+                      <div class="vb-footer">
+                        <div class="vb-price-wrap">
+                          {% if chosen_variant.compare_at_price > chosen_variant.price %}
+                            <div class="vb-price-row">
+                              <span class="vb-price-sale">{{ chosen_variant.price | money }}</span>
+                              <span class="vb-price-compare">{{ chosen_variant.compare_at_price | money }}</span>
+                            </div>
+                            <div class="vb-discount">
+                              Save {{ chosen_variant.compare_at_price | minus: chosen_variant.price | money }}
+                            </div>
+                          {% else %}
+                            <div class="vb-price-row">
+                              <span class="vb-price-sale">{{ chosen_variant.price | money }}</span>
+                            </div>
+                          {% endif %}
+                        </div>
+
+                        <form method="post" action="/cart/add" class="vb-cart-form">
+                          <input type="hidden" name="id" value="{{ chosen_variant.id }}">
+                          <button type="submit" class="vb-cart-btn">
+                            {{ section.settings.cart_button_text }}
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        <button class="vb-arrow next" data-vb-next aria-label="Next">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+
+        <div class="vb-dots" data-vb-dots></div>
+      </div>
+    {% else %}
+      <div class="vb-empty">Please select a product in this section.</div>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+  (function() {
+    var root = document.getElementById('vb-section-{{ section.id }}');
+    if (!root) return;
+    var carousel = root.querySelector('[data-vb-carousel]');
+    if (!carousel) return;
+
+    var track = carousel.querySelector('[data-vb-track]');
+    var originalCards = Array.prototype.slice.call(track.querySelectorAll('.vb-card'));
+    var prevBtn = carousel.querySelector('[data-vb-prev]');
+    var nextBtn = carousel.querySelector('[data-vb-next]');
+    var dotsWrap = carousel.querySelector('[data-vb-dots]');
+
+    if (originalCards.length === 0) return;
+
+    var originalCount = originalCards.length;
+    var current = 0;       // logical index, 0..originalCount-1
+    var isTransitioning = false;
+    var clonesAdded = false;
+
+    function getPerView() {
+      var w = window.innerWidth;
+      if (w <= 520) return 1;
+      if (w <= 768) return 2;
+      if (w <= 1024) return 3;
+      return 4;
+    }
+
+    // Clone first `perView` cards and append to end so loop appears seamless
+    function setupClones() {
+      // Remove any existing clones
+      track.querySelectorAll('.vb-card.is-clone').forEach(function(c) { c.remove(); });
+      var perView = getPerView();
+      // Need at least `perView` clones to keep viewport filled during the loop jump
+      for (var i = 0; i < perView; i++) {
+        var clone = originalCards[i % originalCount].cloneNode(true);
+        clone.classList.add('is-clone');
+        track.appendChild(clone);
+      }
+      clonesAdded = true;
+    }
+
+    function getStep() {
+      var card = track.querySelector('.vb-card');
+      if (!card) return 0;
+      var cardWidth = card.getBoundingClientRect().width;
+      var gap = parseFloat(getComputedStyle(track).gap) || 0;
+      return cardWidth + gap;
+    }
+
+    function applyTransform(animate) {
+      var step = getStep();
+      var offset = current * step;
+      if (animate) {
+        track.classList.add('is-animating');
+      } else {
+        track.classList.remove('is-animating');
+      }
+      track.style.transform = 'translateX(-' + offset + 'px)';
+    }
+
+    function updateDots() {
+      var pages = totalPages();
+      var dots = dotsWrap.querySelectorAll('.vb-dot');
+      var perView = getPerView();
+      var activePage = Math.floor(current / perView) % pages;
+      dots.forEach(function(d, i) {
+        d.classList.toggle('active', i === activePage);
+      });
+    }
+
+    function totalPages() {
+      var perView = getPerView();
+      return Math.max(1, Math.ceil(originalCount / perView));
+    }
+
+    function renderDots() {
+      dotsWrap.innerHTML = '';
+      var pages = totalPages();
+      if (pages <= 1) {
+        dotsWrap.style.display = 'none';
+        return;
+      }
+      dotsWrap.style.display = 'flex';
+      for (var i = 0; i < pages; i++) {
+        var b = document.createElement('button');
+        b.className = 'vb-dot' + (i === 0 ? ' active' : '');
+        b.setAttribute('data-index', i);
+        b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        b.addEventListener('click', function(e) {
+          if (isTransitioning) return;
+          var pageIndex = parseInt(e.currentTarget.getAttribute('data-index'), 10);
+          var perView = getPerView();
+          current = pageIndex * perView;
+          if (current > originalCount - 1) current = originalCount - 1;
+          isTransitioning = true;
+          applyTransform(true);
+          updateDots();
+        });
+        dotsWrap.appendChild(b);
+      }
+    }
+
+    function next() {
+      if (isTransitioning) return;
+      isTransitioning = true;
+      current++;
+      applyTransform(true);
+      updateDots();
+    }
+
+    function prev() {
+      if (isTransitioning) return;
+      isTransitioning = true;
+      if (current === 0) {
+        // Jump (without animation) to a virtual position past the end, then animate back
+        // Strategy: temporarily place track at originalCount * step, then animate to (originalCount - 1)
+        current = originalCount;
+        applyTransform(false);
+        // Force reflow so the next transform animates
+        void track.offsetWidth;
+        current = originalCount - 1;
+        applyTransform(true);
+      } else {
+        current--;
+        applyTransform(true);
+      }
+      updateDots();
+    }
+
+    track.addEventListener('transitionend', function(e) {
+      if (e.propertyName !== 'transform') return;
+      isTransitioning = false;
+      // If we passed the end, jump back to start without animation
+      if (current >= originalCount) {
+        current = 0;
+        applyTransform(false);
+        updateDots();
+      }
+    });
+
+    nextBtn.addEventListener('click', next);
+    prevBtn.addEventListener('click', prev);
+
+    // Touch / swipe support
+    var startX = 0;
+    var deltaX = 0;
+    var dragging = false;
+    track.addEventListener('touchstart', function(e) {
+      startX = e.touches[0].clientX;
+      dragging = true;
+    }, { passive: true });
+    track.addEventListener('touchmove', function(e) {
+      if (!dragging) return;
+      deltaX = e.touches[0].clientX - startX;
+    }, { passive: true });
+    track.addEventListener('touchend', function() {
+      if (!dragging) return;
+      dragging = false;
+      if (Math.abs(deltaX) > 50) {
+        if (deltaX < 0) next();
+        else prev();
+      }
+      deltaX = 0;
+    });
+
+    // Auto-play (continuous)
+    var autoplayDelay = 4500;
+    var autoplayTimer = null;
+    function startAutoplay() {
+      stopAutoplay();
+      autoplayTimer = setInterval(next, autoplayDelay);
+    }
+    function stopAutoplay() {
+      if (autoplayTimer) clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+    carousel.addEventListener('mouseenter', stopAutoplay);
+    carousel.addEventListener('mouseleave', startAutoplay);
+
+    var resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+        setupClones();
+        renderDots();
+        // clamp current
+        if (current > originalCount - 1) current = 0;
+        applyTransform(false);
+        updateDots();
+      }, 150);
+    });
+
+    // Init
+    setupClones();
+    renderDots();
+    applyTransform(false);
+    startAutoplay();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Variant bestsellers",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Select product" },
+    { "type": "text", "id": "section_label", "label": "Section label", "default": "BESTSELLERS" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Find Your Dog's Perfect Chew" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "From small pups to aggressive chewers — we've got the perfect match." },
+    { "type": "text", "id": "button_text", "label": "Top right button text", "default": "View All Products" },
+    { "type": "url", "id": "button_link", "label": "Top right button link" },
+    { "type": "text", "id": "cart_button_text", "label": "Cart button text", "default": "Add to Cart" },
+    { "type": "text", "id": "default_review_text", "label": "Default review text", "default": "★★★★★ 4.9 (120 reviews)" },
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "page_width", "label": "Section width", "min": 1000, "max": 1800, "step": 20, "default": 1600 },
+    { "type": "range", "id": "grid_gap", "label": "Grid gap", "min": 8, "max": 40, "step": 2, "default": 20 },
+    { "type": "range", "id": "media_height", "label": "Card media height", "min": 180, "max": 420, "step": 10, "default": 240 },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "default": 40 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "default": 40 },
+    { "type": "range", "id": "section_radius", "label": "Section radius", "min": 0, "max": 40, "step": 2, "default": 20 },
+    { "type": "range", "id": "card_radius", "label": "Card radius", "min": 0, "max": 40, "step": 2, "default": 16 },
+    { "type": "range", "id": "button_radius", "label": "Button radius", "min": 0, "max": 30, "step": 2, "default": 10 },
+    { "type": "header", "content": "Typography" },
+    { "type": "range", "id": "heading_size", "label": "Heading size", "min": 28, "max": 82, "step": 2, "default": 48 },
+    { "type": "range", "id": "description_size", "label": "Description size", "min": 14, "max": 28, "step": 1, "default": 16 },
+    { "type": "range", "id": "card_title_size", "label": "Card title size", "min": 14, "max": 40, "step": 1, "default": 17 },
+    { "type": "range", "id": "card_description_size", "label": "Card description size", "min": 12, "max": 22, "step": 1, "default": 13 },
+    { "type": "range", "id": "price_size", "label": "Price size", "min": 14, "max": 44, "step": 1, "default": 20 },
+    { "type": "range", "id": "media_text_size", "label": "Media text size", "min": 18, "max": 36, "step": 1, "default": 20 },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "section_bg", "label": "Section background", "default": "#f4eee3" },
+    { "type": "color", "id": "label_color", "label": "Section label color", "default": "#d2632e" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#2b1408" },
+    { "type": "color", "id": "description_color", "label": "Description color", "default": "#5e4738" },
+    { "type": "color", "id": "card_bg", "label": "Card outer background", "default": "#f8f3eb" },
+    { "type": "color", "id": "card_body_bg", "label": "Card body background", "default": "#fbf8f3" },
+    { "type": "color", "id": "meta_color", "label": "Meta text color", "default": "#d2632e" },
+    { "type": "color", "id": "card_title_color", "label": "Card title color", "default": "#2b1408" },
+    { "type": "color", "id": "card_description_color", "label": "Card description color", "default": "#5e4738" },
+    { "type": "color", "id": "reviews_color", "label": "Reviews text color", "default": "#8b5d33" },
+    { "type": "color", "id": "price_color", "label": "Sale price color", "default": "#7a340d" },
+    { "type": "color", "id": "compare_price_color", "label": "Compare price color", "default": "#9d8f83" },
+    { "type": "color", "id": "discount_color", "label": "Discount text color", "default": "#c45522" },
+    { "type": "color", "id": "divider_color", "label": "Divider color", "default": "#ece2d6" },
+    { "type": "color", "id": "view_all_bg", "label": "Top right button background", "default": "#d2632e" },
+    { "type": "color", "id": "view_all_text", "label": "Top right button text", "default": "#ffffff" },
+    { "type": "color", "id": "cart_btn_bg", "label": "Cart button background", "default": "#2b1408" },
+    { "type": "color", "id": "cart_btn_text", "label": "Cart button text", "default": "#ffffff" },
+    { "type": "color", "id": "badge_bg", "label": "Default badge background", "default": "#d2632e" },
+    { "type": "color", "id": "badge_text_color", "label": "Default badge text color", "default": "#ffffff" },
+    { "type": "color", "id": "media_text_color", "label": "Media title text color", "default": "#fff3e5" },
+    { "type": "text", "id": "default_card_gradient", "label": "Default card gradient/background", "default": "linear-gradient(135deg,#eadbc7 0%,#e1a86d 65%,#7f4214 100%)" }
+  ],
+  "blocks": [
+    {
+      "type": "variant_card",
+      "name": "Variant card settings",
+      "settings": [
+        { "type": "text", "id": "variant_id", "label": "Variant ID", "info": "Paste the Shopify variant ID for this card" },
+        { "type": "text", "id": "badge_text", "label": "Badge text", "default": "BEST SELLER" },
+        { "type": "text", "id": "custom_subtitle", "label": "Custom subtitle", "default": "SMALL • 1–15 LBS" },
+        { "type": "text", "id": "custom_title", "label": "Custom title", "default": "Puppy Starter Chew" },
+        { "type": "textarea", "id": "custom_description", "label": "Custom description", "default": "Perfect for small breeds and pups. Softer texture, full flavour." },
+        { "type": "text", "id": "custom_reviews", "label": "Custom reviews text", "default": "★★★★★ 4.9 (312 reviews)" },
+        { "type": "text", "id": "card_gradient", "label": "Card media gradient/background", "default": "linear-gradient(135deg,#eadcc8 0%,#ddaa71 68%,#6d350f 100%)" },
+        { "type": "color", "id": "badge_bg", "label": "Badge background", "default": "#d2632e" },
+        { "type": "color", "id": "badge_text_color", "label": "Badge text color", "default": "#ffffff" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Variant bestsellers" }]
+}
+{% endschema %}

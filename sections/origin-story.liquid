@@ -1,0 +1,352 @@
+{% comment %}
+  Section: Origin Story
+  File: sections/origin-story.liquid
+  Description: Two-column layout — image left, story content right with stats
+{% endcomment %}
+
+<style>
+  :root {
+    --forest: #2D5016;
+    --forest-deep: #1A3409;
+    --sage: #7A8B6A;
+    --sage-light: #A3B18A;
+    --cream: #FEFAE0;
+    --ember: #D4770B;
+    --text-primary: #1A1A1A;
+    --radius-xl: 28px;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  }
+
+  /* ===== STORY SECTION ===== */
+  .pp-story-section {
+    background: var(--forest-deep);
+    color: var(--cream);
+    position: relative;
+    overflow: hidden;
+    padding: {{ section.settings.padding_top }}px 24px {{ section.settings.padding_bottom }}px;
+  }
+
+  .pp-story-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(163,177,138,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .pp-story-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .pp-story-grid {
+    display: grid;
+    grid-template-columns: {% if section.settings.image_position == 'right' %}1fr 1fr{% else %}1fr 1fr{% endif %};
+    gap: 80px;
+    align-items: center;
+  }
+
+  /* Image */
+  .pp-story-img {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    {% if section.settings.image_position == 'right' %}order: 2;{% endif %}
+  }
+
+  .pp-story-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .pp-story-img-placeholder {
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    min-height: 320px;
+  }
+
+  /* Content */
+  .pp-story-content {
+    {% if section.settings.image_position == 'right' %}order: 1;{% endif %}
+  }
+
+  .pp-story-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sage-light);
+    margin-bottom: 12px;
+    font-family: var(--font-body);
+  }
+
+  .pp-story-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.5vw, 42px);
+    color: var(--cream);
+    line-height: 1.15;
+    margin-bottom: 24px;
+  }
+
+  .pp-story-content p {
+    color: rgba(254,250,224,0.8);
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 16px;
+    font-family: var(--font-body);
+  }
+
+  /* Stats */
+  .pp-story-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+  }
+
+  .pp-stat-number {
+    font-family: var(--font-display);
+    font-size: 38px;
+    color: var(--ember);
+    display: block;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .pp-stat-label {
+    font-size: 13px;
+    color: rgba(254,250,224,0.6);
+    font-weight: 500;
+    font-family: var(--font-body);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .pp-story-section { padding: 56px 16px; }
+    .pp-story-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .pp-story-img { order: -1 !important; }
+    .pp-story-content { order: 2 !important; }
+    .pp-story-stats { gap: 24px; }
+    .pp-stat-number { font-size: 30px; }
+  }
+</style>
+
+<!-- ===== ORIGIN STORY SECTION ===== -->
+<section class="pp-story-section" id="pp-story-{{ section.id }}">
+  <div class="pp-story-inner">
+    <div class="pp-story-grid">
+
+      <!-- Image -->
+      <div class="pp-story-img">
+        {% if section.settings.story_image != blank %}
+          {{ section.settings.story_image | image_url: width: 800 | image_tag:
+            loading: 'lazy',
+            alt: section.settings.story_image_alt | default: 'Our origin story'
+          }}
+        {% else %}
+          <div class="pp-story-img-placeholder">🏔️</div>
+        {% endif %}
+      </div>
+
+      <!-- Content -->
+      <div class="pp-story-content">
+
+        {% if section.settings.section_label != blank %}
+          <div class="pp-story-label">{{ section.settings.section_label }}</div>
+        {% endif %}
+
+        {% if section.settings.title != blank %}
+          <h2 class="pp-story-title">{{ section.settings.title }}</h2>
+        {% endif %}
+
+        {% if section.settings.paragraph_1 != blank %}
+          <p>{{ section.settings.paragraph_1 }}</p>
+        {% endif %}
+
+        {% if section.settings.paragraph_2 != blank %}
+          <p>{{ section.settings.paragraph_2 }}</p>
+        {% endif %}
+
+        {% if section.settings.paragraph_3 != blank %}
+          <p>{{ section.settings.paragraph_3 }}</p>
+        {% endif %}
+
+        <!-- Stats (blocks) -->
+        {% assign stat_blocks = section.blocks | where: "type", "stat" %}
+        {% if stat_blocks.size > 0 %}
+          <div class="pp-story-stats">
+            {% for block in stat_blocks %}
+              <div {{ block.shopify_attributes }}>
+                <span class="pp-stat-number">{{ block.settings.stat_number }}</span>
+                <span class="pp-stat-label">{{ block.settings.stat_label }}</span>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Origin Story",
+  "tag": "div",
+  "class": "origin-story-wrapper",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Labels"
+    },
+    {
+      "type": "text",
+      "id": "section_label",
+      "label": "Small Label (top)",
+      "default": "Our Origin Story"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Handcrafted With Love by Nepalese Farmers"
+    },
+    {
+      "type": "header",
+      "content": "Story Paragraphs"
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_1",
+      "label": "Paragraph 1",
+      "default": "High in the Himalayas, where the air is pure and the pastures are untouched, local farming families have been making these traditional cheese chews for centuries."
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_2",
+      "label": "Paragraph 2",
+      "default": "We partner directly with these artisan communities, paying fair wages and supporting sustainable practices — so every chew your dog enjoys also supports the families who craft them."
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_3",
+      "label": "Paragraph 3 (optional)"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "story_image",
+      "label": "Story Image"
+    },
+    {
+      "type": "text",
+      "id": "story_image_alt",
+      "label": "Image Alt Text",
+      "default": "Nepalese farmers handcrafting yak cheese chews"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image Position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "stat_number",
+          "label": "Stat Number",
+          "default": "20K+"
+        },
+        {
+          "type": "text",
+          "id": "stat_label",
+          "label": "Stat Label",
+          "default": "Happy Customers"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Origin Story",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "stat_number": "20K+",
+            "stat_label": "Happy Customers"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "stat_number": "100%",
+            "stat_label": "Natural Ingredients"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "stat_number": "4.9★",
+            "stat_label": "Average Rating"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

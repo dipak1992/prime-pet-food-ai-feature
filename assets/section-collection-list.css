@@ -1,0 +1,120 @@
+.collection-list {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.section-collection-list .collection-list.section__inner {
+  position: relative;
+}
+
+.section-collection-list .collection-list__title {
+  margin-bottom: clamp(2.4rem, 4vw, 4rem);
+}
+
+.section-collection-list .collection-list__title .inline-block {
+  max-width: min(72rem, 100%);
+  padding: clamp(2rem, 3vw, 3rem);
+  border: 0.1rem solid rgba(var(--color-foreground), 0.08);
+  border-radius: 2.4rem;
+  background:
+    radial-gradient(circle at top left, rgba(var(--color-foreground), 0.05), transparent 38%),
+    linear-gradient(180deg, rgba(var(--color-background), 0.96), rgba(var(--color-background), 1));
+  box-shadow: 0 1.8rem 4rem rgba(var(--color-foreground), 0.08);
+}
+
+.collection-list-title {
+  margin: 0;
+}
+
+.section-collection-list .collection-list__description {
+  max-width: 58rem;
+  margin-top: 1.2rem;
+  color: rgba(var(--color-foreground), 0.72);
+  line-height: 1.6;
+}
+
+.section-collection-list .collection_list__collections {
+  row-gap: clamp(2rem, 3vw, 3rem);
+}
+
+.section-collection-list .collection-list__item .collection-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.section-collection-list .collection-list__item .card__inner {
+  border-radius: 2.4rem;
+  overflow: hidden;
+}
+
+.section-collection-list .collection-list__item .card__content {
+  padding-top: 1.4rem;
+}
+
+.section-collection-list .collection-list__item .card__heading {
+  letter-spacing: -0.02em;
+}
+
+@media screen and (min-width: 990px) {
+  .section-collection-list .collection-list__item:hover .collection-card {
+    transform: translateY(-0.6rem);
+    box-shadow: 0 1.8rem 4rem rgba(var(--color-foreground), 0.12);
+  }
+}
+
+@media screen and (max-width: 749.98px) {
+  .collection-list:not(.slider) {
+    padding-inline-start: 0;
+    padding-inline-end: 0;
+  }
+
+  .section-collection-list .page-width {
+    padding-inline-start: 0;
+    padding-inline-end: 0;
+  }
+
+  .section-collection-list .collection-list:not(.slider) {
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 1.5rem;
+  }
+
+  .section-collection-list .collection-list__title .inline-block {
+    padding: 1.8rem;
+    border-radius: 2rem;
+  }
+}
+
+.collection-list__item:only-child {
+  max-width: 100%;
+  width: 100%;
+}
+
+@media screen and (max-width: 749.98px) {
+  .slider.collection-list--1-items {
+    padding-bottom: 0;
+  }
+}
+
+@media screen and (min-width: 750px) and (max-width: 989.98px) {
+  .slider.collection-list--1-items,
+  .slider.collection-list--2-items,
+  .slider.collection-list--3-items,
+  .slider.collection-list--4-items {
+    padding-bottom: 0;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .collection-list__item a:hover {
+    box-shadow: none;
+  }
+}
+
+@media screen and (max-width: 989.98px) {
+  .collection-list.slider .collection-list__item {
+    max-width: 100%;
+  }
+}
+
+.collection-list-view-all {
+  margin-top: 2rem;
+}

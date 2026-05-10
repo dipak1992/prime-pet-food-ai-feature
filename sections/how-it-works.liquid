@@ -1,0 +1,416 @@
+{% comment %}
+  Section: how-it-works.liquid
+  Name: How It Works — "From the Himalayas to Your Door"
+  Shopify Admin: Customize > Add Section > How It Works
+{% endcomment %}
+
+{%- liquid
+  assign section_bg       = section.settings.background_color
+  assign eyebrow_text     = section.settings.eyebrow
+  assign heading          = section.settings.heading
+  assign eyebrow_color    = section.settings.eyebrow_text_color
+  assign eyebrow_bg       = section.settings.eyebrow_bg_color
+  assign heading_color    = section.settings.heading_color
+  assign num_bg           = section.settings.number_bg_color
+  assign num_text         = section.settings.number_text_color
+  assign connector_color  = section.settings.connector_color
+  assign icon_size        = section.settings.icon_size
+  assign step_title_color = section.settings.step_title_color
+  assign step_desc_color  = section.settings.step_desc_color
+-%}
+
+<section
+  class="ppf-how"
+  id="section-{{ section.id }}"
+  style="background-color: {{ section_bg }};"
+>
+  <div class="ppf-how__inner">
+
+    {%- comment %} ── HEADER ─────────────────────────────── {%- endcomment %}
+    <div class="ppf-how__header">
+      {%- if eyebrow_text != blank -%}
+        <p
+          class="ppf-how__eyebrow"
+          style="color: {{ eyebrow_color }}; background-color: {{ eyebrow_bg }};"
+        >{{ eyebrow_text }}</p>
+      {%- endif -%}
+      {%- if heading != blank -%}
+        <h2
+          class="ppf-how__heading"
+          style="color: {{ heading_color }};"
+        >{{ heading }}</h2>
+      {%- endif -%}
+    </div>
+
+    {%- comment %} ── STEPS GRID ─────────────────────────── {%- endcomment %}
+    <div class="ppf-how__steps" style="--step-count: {{ section.blocks.size }};">
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'step' -%}
+          <div
+            class="ppf-how__step ppf-how__step--{{ forloop.index }}"
+            {{ block.shopify_attributes }}
+          >
+            {%- comment %} Number bubble {%- endcomment %}
+            <div
+              class="ppf-how__num"
+              aria-hidden="true"
+              style="background-color: {{ num_bg }}; color: {{ num_text }};"
+            >{{ forloop.index }}</div>
+
+            {%- comment %} Connector line (hidden on last) {%- endcomment %}
+            {%- unless forloop.last -%}
+              <div
+                class="ppf-how__connector"
+                aria-hidden="true"
+                style="border-color: {{ connector_color }};"
+              ></div>
+            {%- endunless -%}
+
+            {%- comment %} Icon {%- endcomment %}
+            {%- if block.settings.icon != blank -%}
+              <span
+                class="ppf-how__icon"
+                role="img"
+                aria-label="{{ block.settings.title }}"
+                style="font-size: {{ icon_size }}px;"
+              >{{ block.settings.icon }}</span>
+            {%- endif -%}
+
+            {%- comment %} Text {%- endcomment %}
+            <h3
+              class="ppf-how__step-title"
+              style="color: {{ step_title_color }};"
+            >{{ block.settings.title }}</h3>
+            <p
+              class="ppf-how__step-desc"
+              style="color: {{ step_desc_color }};"
+            >{{ block.settings.description }}</p>
+          </div>
+        {%- endif -%}
+      {%- else -%}
+        <p class="ppf-how__empty">Add steps using the Shopify Customizer →</p>
+      {%- endfor -%}
+
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+/* ── LAYOUT ──────────────────────────────────────────── */
+.ppf-how {
+  padding: 88px 40px;
+  font-family: 'DM Sans', sans-serif;
+}
+.ppf-how__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ── HEADER ──────────────────────────────────────────── */
+.ppf-how__header {
+  text-align: center;
+  margin-bottom: 52px;
+}
+.ppf-how__eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 4px;
+  margin-bottom: 18px;
+}
+.ppf-how__heading {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(26px, 3.5vw, 40px);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+}
+
+/* ── STEPS GRID ──────────────────────────────────────── */
+.ppf-how__steps {
+  display: grid;
+  grid-template-columns: repeat(var(--step-count, 3), 1fr);
+  gap: 0 48px;
+  position: relative;
+  align-items: start;
+  text-align: center;
+}
+
+/* ── SINGLE STEP ─────────────────────────────────────── */
+.ppf-how__step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── NUMBER BUBBLE ───────────────────────────────────── */
+.ppf-how__num {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  font-size: 24px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.15);
+}
+
+/* ── DASHED CONNECTOR LINE ───────────────────────────── */
+.ppf-how__connector {
+  position: absolute;
+  top: 34px;
+  left: calc(50% + 34px);
+  right: calc(-50% + 34px);
+  height: 2px;
+  background: none;
+  border-top: 2px dashed;
+  z-index: 1;
+}
+
+/* ── ICON ────────────────────────────────────────────── */
+.ppf-how__icon {
+  display: block;
+  margin-bottom: 14px;
+  line-height: 1;
+}
+
+/* ── STEP TEXT ───────────────────────────────────────── */
+.ppf-how__step-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 10px;
+  line-height: 1.3;
+}
+.ppf-how__step-desc {
+  font-size: 14px;
+  line-height: 1.65;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+/* ── EMPTY STATE ─────────────────────────────────────── */
+.ppf-how__empty {
+  font-size: 14px;
+  text-align: center;
+  padding: 40px;
+  grid-column: 1 / -1;
+  color: #8C7A6A;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────── */
+@media (max-width: 900px) {
+  .ppf-how__steps {
+    grid-template-columns: 1fr;
+    gap: 40px 0;
+  }
+  .ppf-how__connector {
+    top: calc(100% + 0px);
+    left: 50%;
+    right: auto;
+    width: 2px;
+    height: 40px;
+    border-top: none;
+    border-left: 2px dashed;
+    transform: translateX(-50%);
+  }
+  .ppf-how__step-desc {
+    max-width: 400px;
+  }
+}
+@media (max-width: 600px) {
+  .ppf-how {
+    padding: 60px 20px;
+  }
+  .ppf-how__num {
+    width: 54px;
+    height: 54px;
+    font-size: 20px;
+  }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "How It Works",
+  "tag": "section",
+  "class": "how-it-works-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Label",
+      "default": "Simple Process"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "From the Himalayas to Your Door"
+    },
+    {
+      "type": "header",
+      "content": "🎨 Colors — Background"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "🎨 Colors — Eyebrow"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_text_color",
+      "label": "Eyebrow Text Color",
+      "default": "#8C7A6A"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_bg_color",
+      "label": "Eyebrow Background Color",
+      "default": "#E8DDD0"
+    },
+    {
+      "type": "header",
+      "content": "🎨 Colors — Heading"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#1A1410"
+    },
+    {
+      "type": "header",
+      "content": "🎨 Colors — Step Numbers"
+    },
+    {
+      "type": "color",
+      "id": "number_bg_color",
+      "label": "Number Bubble Background",
+      "default": "#2D4A30"
+    },
+    {
+      "type": "color",
+      "id": "number_text_color",
+      "label": "Number Bubble Text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "🎨 Colors — Connector Line"
+    },
+    {
+      "type": "color",
+      "id": "connector_color",
+      "label": "Dashed Connector Line Color",
+      "default": "#C4B8AA"
+    },
+    {
+      "type": "header",
+      "content": "🎨 Colors — Step Cards"
+    },
+    {
+      "type": "color",
+      "id": "step_title_color",
+      "label": "Step Title Color",
+      "default": "#1A1410"
+    },
+    {
+      "type": "color",
+      "id": "step_desc_color",
+      "label": "Step Description Color",
+      "default": "#8C7A6A"
+    },
+    {
+      "type": "header",
+      "content": "⚙️ Icon Size"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon Size (px)",
+      "min": 24,
+      "max": 72,
+      "step": 4,
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Step Icon (Emoji)",
+          "default": "🏔️",
+          "info": "Paste any emoji e.g. 🏔️ 🤲 🐶"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step Title",
+          "default": "Sourced at 15,000 ft"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Step Description",
+          "default": "Pure yak and cow milk collected from free-range Himalayan animals at high altitude, where the air is clean and the animals graze naturally."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "How It Works",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "icon": "🏔️",
+            "title": "Sourced at 15,000 ft",
+            "description": "Pure yak and cow milk collected from free-range Himalayan animals at high altitude, where the air is clean and the animals graze naturally."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "🤲",
+            "title": "Handcrafted by Artisans",
+            "description": "Local Nepalese families use an ancient Churpi cheese recipe — boiling, pressing and sun-drying for weeks to create the perfect hard chew."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "🐶",
+            "title": "Delivered to Your Dog",
+            "description": "Quality-tested and shipped directly to your door in the USA. No additives, no preservatives — just pure Himalayan goodness."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

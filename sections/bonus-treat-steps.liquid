@@ -1,0 +1,494 @@
+<section
+  id="shopify-section-{{ section.id }}"
+  class="bonus-treat-light"
+  style="
+    --btl-bg: {{ section.settings.bg_color }};
+    --btl-surface: {{ section.settings.surface_color }};
+    --btl-border: {{ section.settings.border_color }};
+    --btl-heading: {{ section.settings.heading_color }};
+    --btl-text: {{ section.settings.text_color }};
+    --btl-muted: {{ section.settings.muted_color }};
+    --btl-accent: {{ section.settings.accent_color }};
+    --btl-button-text: {{ section.settings.button_text_color }};
+    --btl-max-width: {{ section.settings.max_width }}px;
+    --btl-padding-top: {{ section.settings.padding_top }}px;
+    --btl-padding-bottom: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="bonus-treat-light__container">
+    <div class="bonus-treat-light__grid">
+      <div class="bonus-treat-light__content">
+        {% if section.settings.eyebrow != blank %}
+          <p class="bonus-treat-light__eyebrow">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h2 class="bonus-treat-light__heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        {% if section.settings.description != blank %}
+          <div class="bonus-treat-light__description rte">
+            {{ section.settings.description }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.badge_text != blank %}
+          <div class="bonus-treat-light__badge">
+            {{ section.settings.badge_text }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+          <a href="{{ section.settings.button_link }}" class="bonus-treat-light__button">
+            {{ section.settings.button_label }}
+          </a>
+        {% endif %}
+      </div>
+
+      <div class="bonus-treat-light__steps" role="list">
+        {% for block in section.blocks %}
+          <div class="bonus-treat-light__step-wrap" {{ block.shopify_attributes }}>
+            <div class="bonus-treat-light__step-card" role="listitem">
+              <div class="bonus-treat-light__step-number">
+                {% if block.settings.step_number != blank %}
+                  {{ block.settings.step_number }}
+                {% else %}
+                  {{ forloop.index }}
+                {% endif %}
+              </div>
+
+              <div class="bonus-treat-light__step-text">
+                {{ block.settings.text }}
+              </div>
+            </div>
+
+            {% unless forloop.last %}
+              <div class="bonus-treat-light__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 4V20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M5 13L12 20L19 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            {% endunless %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .bonus-treat-light {
+      background: var(--btl-bg);
+      padding-top: var(--btl-padding-top);
+      padding-bottom: var(--btl-padding-bottom);
+    }
+
+    .bonus-treat-light .bonus-treat-light__container {
+      width: min(calc(100% - 40px), var(--btl-max-width));
+      margin: 0 auto;
+    }
+
+    .bonus-treat-light .bonus-treat-light__grid {
+      display: grid;
+      grid-template-columns: minmax(340px, 0.9fr) minmax(440px, 1fr);
+      gap: 64px;
+      align-items: center;
+    }
+
+    .bonus-treat-light .bonus-treat-light__content {
+      max-width: 620px;
+    }
+
+    .bonus-treat-light .bonus-treat-light__eyebrow {
+      margin: 0 0 12px;
+      color: var(--btl-accent);
+      font-size: 13px;
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .bonus-treat-light .bonus-treat-light__heading {
+      margin: 0;
+      color: var(--btl-heading);
+      font-size: clamp(34px, 4.8vw, 64px);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      font-weight: 800;
+      max-width: 520px;
+    }
+
+    .bonus-treat-light .bonus-treat-light__description {
+      margin-top: 20px;
+      color: var(--btl-text);
+      font-size: clamp(16px, 1.45vw, 20px);
+      line-height: 1.8;
+      max-width: 600px;
+    }
+
+    .bonus-treat-light .bonus-treat-light__description p {
+      margin: 0;
+    }
+
+    .bonus-treat-light .bonus-treat-light__badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      margin-top: 22px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(210, 99, 46, 0.08);
+      color: var(--btl-accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .bonus-treat-light .bonus-treat-light__button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 56px;
+      padding: 16px 28px;
+      margin-top: 28px;
+      border-radius: 999px;
+      background: var(--btl-accent);
+      color: var(--btl-button-text);
+      text-decoration: none;
+      font-size: 16px;
+      line-height: 1;
+      font-weight: 700;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, opacity 0.22s ease;
+      box-shadow: 0 12px 24px rgba(210, 99, 46, 0.16);
+    }
+
+    .bonus-treat-light .bonus-treat-light__button:hover {
+      transform: translateY(-2px);
+      opacity: 0.96;
+      box-shadow: 0 16px 30px rgba(210, 99, 46, 0.22);
+    }
+
+    .bonus-treat-light .bonus-treat-light__steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .bonus-treat-light .bonus-treat-light__step-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .bonus-treat-light .bonus-treat-light__step-card {
+      min-height: 96px;
+      display: grid;
+      grid-template-columns: 60px minmax(0, 1fr);
+      gap: 18px;
+      align-items: center;
+      padding: 20px 24px;
+      border-radius: 24px;
+      background: var(--btl-surface);
+      border: 1px solid var(--btl-border);
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+
+    .bonus-treat-light .bonus-treat-light__step-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(210, 99, 46, 0.28);
+      box-shadow: 0 14px 28px rgba(36, 19, 13, 0.08);
+    }
+
+    .bonus-treat-light .bonus-treat-light__step-number {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--btl-accent);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      line-height: 1;
+      font-weight: 800;
+      box-shadow: 0 10px 18px rgba(210, 99, 46, 0.16);
+    }
+
+    .bonus-treat-light .bonus-treat-light__step-text {
+      color: var(--btl-text);
+      font-size: clamp(17px, 1.35vw, 20px);
+      line-height: 1.55;
+      font-weight: 500;
+    }
+
+    .bonus-treat-light .bonus-treat-light__step-text strong {
+      color: var(--btl-heading);
+      font-weight: 800;
+    }
+
+    .bonus-treat-light .bonus-treat-light__step-text em {
+      color: var(--btl-heading);
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    .bonus-treat-light .bonus-treat-light__arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 28px;
+      color: var(--btl-accent);
+    }
+
+    .bonus-treat-light .bonus-treat-light__arrow svg {
+      width: 22px;
+      height: 22px;
+      display: block;
+    }
+
+    @media screen and (max-width: 1100px) {
+      .bonus-treat-light .bonus-treat-light__grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .bonus-treat-light .bonus-treat-light__content {
+        max-width: 100%;
+      }
+
+      .bonus-treat-light .bonus-treat-light__heading {
+        max-width: 100%;
+      }
+    }
+
+    @media screen and (max-width: 749px) {
+      .bonus-treat-light .bonus-treat-light__container {
+        width: min(calc(100% - 24px), var(--btl-max-width));
+      }
+
+      .bonus-treat-light .bonus-treat-light__grid {
+        gap: 28px;
+      }
+
+      .bonus-treat-light .bonus-treat-light__heading {
+        font-size: clamp(30px, 9vw, 46px);
+        line-height: 1.04;
+      }
+
+      .bonus-treat-light .bonus-treat-light__description {
+        font-size: 16px;
+        line-height: 1.72;
+      }
+
+      .bonus-treat-light .bonus-treat-light__badge {
+        margin-top: 18px;
+      }
+
+      .bonus-treat-light .bonus-treat-light__button {
+        width: 100%;
+        min-height: 54px;
+        margin-top: 24px;
+      }
+
+      .bonus-treat-light .bonus-treat-light__step-card {
+        min-height: 88px;
+        grid-template-columns: 50px minmax(0, 1fr);
+        gap: 14px;
+        padding: 16px 16px;
+        border-radius: 20px;
+      }
+
+      .bonus-treat-light .bonus-treat-light__step-number {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+      }
+
+      .bonus-treat-light .bonus-treat-light__step-text {
+        font-size: 15px;
+        line-height: 1.5;
+      }
+
+      .bonus-treat-light .bonus-treat-light__arrow {
+        height: 22px;
+      }
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "Bonus treat light",
+  "tag": "section",
+  "class": "section-bonus-treat-light",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Bonus treat"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "2 Treats in 1"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>When the chew gets small, do not throw it away. Microwave the leftover nub for 60 seconds and watch it puff into a light, crunchy treat your dog will love.</p>"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Simple • Useful • Zero waste"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Try It Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Section max width",
+      "min": 1000,
+      "max": 1800,
+      "step": 20,
+      "default": 1560
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 20,
+      "max": 180,
+      "step": 4,
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 20,
+      "max": 180,
+      "step": 4,
+      "default": 88
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "surface_color",
+      "label": "Step card color",
+      "default": "#f8f5f1"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#ede5dd"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#24130d"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#3d2a22"
+    },
+    {
+      "type": "color",
+      "id": "muted_color",
+      "label": "Muted color",
+      "default": "#7b675e"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#d2632e"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "step_number",
+          "label": "Step number",
+          "default": "1"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Step text",
+          "default": "<p>Your dog chews down to a <strong>small nub</strong> (about thumb-sized)</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bonus treat light",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "step_number": "1",
+            "text": "<p>Your dog chews down to a <strong>small nub</strong> (about thumb-sized)</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "step_number": "2",
+            "text": "<p>Place nub on a <strong>microwave-safe plate</strong> for 60 seconds</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "step_number": "3",
+            "text": "<p>Watch it <strong>puff up 3-4x in size</strong> into a light, airy treat</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "step_number": "4",
+            "text": "<p>Cool for 2 minutes, then <strong>give to your dog</strong> for pure joy</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

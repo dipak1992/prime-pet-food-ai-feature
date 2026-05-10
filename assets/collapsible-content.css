@@ -1,0 +1,227 @@
+.accordion-container .accordion:first-child,
+.accordion-container .first-accordion {
+  border-top: 0;
+}
+
+.accordion-container .accordion:last-child {
+  border-bottom: 0;
+}
+
+.accordion-container--borderless .accordion {
+  border: 0;
+}
+
+.accordion-container .accordion__content {
+  padding: 0 0 2rem;
+}
+
+.accordion-container custom-accordion {
+  --open-duration: var(--duration-longish);
+}
+
+.collapsible-content .accordion-container {
+  padding: 2.5rem 3rem;
+}
+
+.section-image-with-collapsible-content {
+  --collapsible-card-gap: 1.6rem;
+  --collapsible-card-radius: 2.4rem;
+  --collapsible-card-border: rgba(var(--color-foreground), 0.08);
+  --collapsible-card-border-active: rgba(var(--color-foreground), 0.14);
+  --collapsible-card-bg: #ffffff;
+  --collapsible-card-bg-active: rgb(var(--color-background));
+  --collapsible-card-bg-hover: #f4f1e7;
+  --collapsible-card-shadow: 0 8px 24px rgba(24, 39, 32, 0.05);
+  --collapsible-card-shadow-active: 0 20px 48px rgba(24, 39, 32, 0.12);
+}
+
+.section-image-with-collapsible-content .image-with-text__container {
+  gap: clamp(2.4rem, 4vw, 5.6rem);
+  align-items: stretch;
+}
+
+.section-image-with-collapsible-content .image-with-text__media {
+  border-radius: 3.2rem;
+  overflow: hidden;
+}
+
+.section-image-with-collapsible-content .image-with-text__content {
+  background: transparent;
+}
+
+.section-image-with-collapsible-content .accordion-container {
+  display: grid;
+  gap: var(--collapsible-card-gap);
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.section-image-with-collapsible-content .accordion-container .accordion {
+  margin: 0;
+  border: 1px solid var(--collapsible-card-border);
+  border-radius: var(--collapsible-card-radius);
+  background: var(--collapsible-card-bg);
+  box-shadow: var(--collapsible-card-shadow);
+  backdrop-filter: blur(10px);
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 260ms ease,
+    transform 260ms ease;
+}
+
+.section-image-with-collapsible-content .accordion-container .accordion:hover {
+  border-color: rgba(var(--color-foreground), 0.12);
+  background: var(--collapsible-card-bg-hover);
+  box-shadow: 0 14px 34px rgba(24, 39, 32, 0.08);
+  transform: translateY(-1px);
+}
+
+.section-image-with-collapsible-content .accordion-container .accordion details[open] {
+  background: #ffffff;
+}
+
+.section-image-with-collapsible-content .accordion-container .accordion:has(details[open]) {
+  border-color: var(--collapsible-card-border-active);
+  background: #ffffff;
+  box-shadow: var(--collapsible-card-shadow-active);
+}
+
+.section-image-with-collapsible-content .accordion-container .accordion:has(details[open]) .accordion__image,
+.section-image-with-collapsible-content .accordion-container .accordion:has(details[open]) .icon-caret {
+  background: rgba(var(--color-foreground), 0.09);
+}
+
+.section-image-with-collapsible-content .accordion-container .accordion summary {
+  gap: 1.4rem;
+  padding: 2.4rem 3.2rem 2.4rem 2.8rem;
+  transition: background-color 220ms ease;
+}
+
+.section-image-with-collapsible-content .accordion-container .accordion__image {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  margin-inline-end: 0.3rem;
+  padding: 0.45rem;
+  border-radius: 999px;
+  background: rgba(var(--color-foreground), 0.05);
+  align-self: flex-start;
+  margin-top: 0.15rem;
+}
+
+.section-image-with-collapsible-content .accordion-container .icon-accordion {
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.section-image-with-collapsible-content .accordion-container .accordion__title {
+  max-width: none;
+}
+
+.section-image-with-collapsible-content .accordion-container .icon-caret {
+  width: 2rem;
+  height: 2rem;
+  padding: 0.35rem;
+  margin-inline-start: 1.8rem;
+  margin-inline-end: 0.4rem;
+  border-radius: 999px;
+  background: rgba(var(--color-foreground), 0.05);
+  flex-shrink: 0;
+}
+
+.section-image-with-collapsible-content .accordion-container .accordion__content {
+  padding: 0 2.8rem 2.8rem;
+  color: rgba(var(--color-foreground), 0.78);
+}
+
+.section-image-with-collapsible-content .accordion-container .accordion__content .rte {
+  max-width: 58rem;
+}
+
+.section-image-with-collapsible-content .accordion-container .accordion__content--spacer:last-child {
+  display: none !important;
+}
+
+.collapsible-content .accordion-container .icon-accordion {
+  position: relative;
+  top: 2px;
+}
+
+.collapsible-content .image-with-text__media.min-h-0 .banner__box {
+  position: static;
+}
+
+@media screen and (min-width: 990px) {
+  .collapsible-content .image-with-text__content {
+    padding: 6rem 7rem;
+  }
+
+  .section-image-with-collapsible-content .image-with-text__content {
+    padding: 0;
+  }
+}
+
+.collapsible-content .image-with-text__text-item .title-wrapper {
+  padding: 0;
+}
+
+.collapsible-content .image-with-text__media-item .collapsible-content__title {
+  display: flex !important;
+}
+
+.collapsible-content__heading:not(:first-child) {
+  margin-top: 4rem;
+}
+
+.collapsible-content__heading + .accordion {
+  margin-top: 0;
+}
+
+.section.interacted-with .revealed-image {
+  transition: opacity var(--duration-longish) var(--duration-longish), visibility var(--duration-longish) var(--duration-longish) !important;
+}
+
+.revealed-image {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.section.interacted-with .revealed-image.reveal {
+  transition-delay: 0s !important;
+}
+
+.revealed-image.reveal {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
+}
+
+.collapsible-content-row__buttons {
+  justify-content: flex-start !important;
+  margin-inline-start: calc(var(--buttons-border-width) + 1px);
+}
+
+@media screen and (max-width: 989px) {
+  .section-image-with-collapsible-content .image-with-text__container {
+    gap: 2.4rem;
+  }
+
+  .section-image-with-collapsible-content .accordion-container {
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .section-image-with-collapsible-content .accordion-container .accordion summary {
+    padding: 2rem 2.4rem 1.8rem 2rem;
+  }
+
+  .section-image-with-collapsible-content .accordion-container .accordion__content {
+    padding: 0 2rem 2.2rem;
+  }
+}

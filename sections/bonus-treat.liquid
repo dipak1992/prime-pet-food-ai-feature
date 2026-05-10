@@ -1,0 +1,529 @@
+{% liquid
+  assign section_id = 'bonus-treat-' | append: section.id
+%}
+
+<section id="{{ section_id }}" class="bonus-treat-section">
+  <div class="bonus-treat__bg"></div>
+
+  <div class="page-width">
+    <div class="bonus-treat__wrap">
+      <div class="bonus-treat__content">
+        {% if section.settings.eyebrow != blank %}
+          <p class="bonus-treat__eyebrow">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h2 class="bonus-treat__heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        {% if section.settings.description != blank %}
+          <div class="bonus-treat__desc rte">
+            {{ section.settings.description }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.button_label != blank %}
+          <div class="bonus-treat__actions">
+            <a
+              {% if section.settings.button_link != blank %}
+                href="{{ section.settings.button_link }}"
+              {% else %}
+                role="link" aria-disabled="true"
+              {% endif %}
+              class="bonus-treat__button"
+            >
+              {{ section.settings.button_label }}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="bonus-treat__steps">
+        {% for block in section.blocks %}
+          {% if block.type == 'step' %}
+            <div class="bonus-treat__step-group" {{ block.shopify_attributes }}>
+              <div class="bonus-treat__step-card">
+                <div class="bonus-treat__step-number">
+                  <span>{{ forloop.index }}</span>
+                </div>
+
+                <div class="bonus-treat__step-text">
+                  {% if block.settings.text != blank %}
+                    {{ block.settings.text }}
+                  {% endif %}
+                </div>
+              </div>
+
+              {% unless forloop.last %}
+                <div class="bonus-treat__connector" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M12 4V20M12 20L6.75 14.75M12 20L17.25 14.75" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              {% endunless %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <style>
+    #{{ section_id }} {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 85% 18%, rgba(210, 99, 46, 0.16), transparent 28%),
+        linear-gradient(135deg, {{ section.settings.bg_color }} 0%, {{ section.settings.bg_color }} 62%, {{ section.settings.bg_color_2 }} 100%);
+      padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    }
+
+    #{{ section_id }} .bonus-treat__bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0) 30%, rgba(210, 99, 46, 0.04) 100%);
+      z-index: 0;
+    }
+
+    #{{ section_id }} .page-width {
+      position: relative;
+      z-index: 1;
+    }
+
+    #{{ section_id }} .bonus-treat__wrap {
+      display: grid;
+      grid-template-columns: minmax(320px, 0.95fr) minmax(420px, 1.1fr);
+      gap: 56px;
+      align-items: center;
+    }
+
+    #{{ section_id }} .bonus-treat__content {
+      max-width: 620px;
+    }
+
+    #{{ section_id }} .bonus-treat__eyebrow {
+      margin: 0 0 18px;
+      font-size: 14px;
+      line-height: 1;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: {{ section.settings.accent_color }};
+      font-weight: 700;
+    }
+
+    #{{ section_id }} .bonus-treat__heading {
+      margin: 0 0 18px;
+      color: {{ section.settings.heading_color }};
+      font-size: clamp(38px, 5vw, 72px);
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      font-weight: 700;
+      max-width: 560px;
+    }
+
+    #{{ section_id }} .bonus-treat__desc {
+      margin: 0;
+      color: {{ section.settings.text_color }};
+      font-size: 20px;
+      line-height: 1.8;
+      max-width: 720px;
+      opacity: 0.96;
+    }
+
+    #{{ section_id }} .bonus-treat__desc p {
+      margin: 0;
+    }
+
+    #{{ section_id }} .bonus-treat__actions {
+      margin-top: 34px;
+    }
+
+    #{{ section_id }} .bonus-treat__button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 58px;
+      padding: 0 28px;
+      border-radius: 18px;
+      background: {{ section.settings.button_bg }};
+      color: {{ section.settings.button_text }};
+      text-decoration: none;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    #{{ section_id }} .bonus-treat__button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
+      background: {{ section.settings.button_bg_hover }};
+    }
+
+    #{{ section_id }} .bonus-treat__steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      width: 100%;
+    }
+
+    #{{ section_id }} .bonus-treat__step-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #{{ section_id }} .bonus-treat__step-card {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      align-items: center;
+      gap: 18px;
+      min-height: 114px;
+      padding: 22px 28px;
+      border-radius: 24px;
+      background: {{ section.settings.card_bg }};
+      border: 1px solid {{ section.settings.card_border }};
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+
+    #{{ section_id }} .bonus-treat__step-number {
+      width: 52px;
+      height: 52px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: {{ section.settings.accent_color }};
+      color: {{ section.settings.step_number_color }};
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1;
+      box-shadow: 0 8px 18px rgba(210, 99, 46, 0.22);
+      flex-shrink: 0;
+    }
+
+    #{{ section_id }} .bonus-treat__step-text {
+      color: {{ section.settings.step_text_color }};
+      font-size: 19px;
+      line-height: 1.55;
+      font-weight: 500;
+    }
+
+    #{{ section_id }} .bonus-treat__step-text strong {
+      color: {{ section.settings.heading_color }};
+      font-weight: 700;
+    }
+
+    #{{ section_id }} .bonus-treat__connector {
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: {{ section.settings.accent_color }};
+    }
+
+    #{{ section_id }} .bonus-treat__connector svg {
+      width: 28px;
+      height: 28px;
+      display: block;
+    }
+
+    @media screen and (max-width: 1200px) {
+      #{{ section_id }} .bonus-treat__wrap {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      #{{ section_id }} .bonus-treat__content {
+        max-width: 100%;
+      }
+
+      #{{ section_id }} .bonus-treat__heading {
+        max-width: 100%;
+      }
+
+      #{{ section_id }} .bonus-treat__desc {
+        max-width: 100%;
+      }
+    }
+
+    @media screen and (max-width: 749px) {
+      #{{ section_id }} {
+        padding: {{ section.settings.mobile_padding_top }}px 0 {{ section.settings.mobile_padding_bottom }}px;
+      }
+
+      #{{ section_id }} .bonus-treat__wrap {
+        gap: 28px;
+      }
+
+      #{{ section_id }} .bonus-treat__eyebrow {
+        margin-bottom: 14px;
+        font-size: 12px;
+      }
+
+      #{{ section_id }} .bonus-treat__heading {
+        margin-bottom: 14px;
+        font-size: clamp(30px, 9vw, 48px);
+        line-height: 0.98;
+      }
+
+      #{{ section_id }} .bonus-treat__desc {
+        font-size: 17px;
+        line-height: 1.7;
+      }
+
+      #{{ section_id }} .bonus-treat__actions {
+        margin-top: 24px;
+      }
+
+      #{{ section_id }} .bonus-treat__button {
+        width: 100%;
+        min-height: 54px;
+        padding: 0 22px;
+        font-size: 20px;
+        border-radius: 16px;
+      }
+
+      #{{ section_id }} .bonus-treat__step-card {
+        grid-template-columns: 52px 1fr;
+        gap: 14px;
+        min-height: auto;
+        padding: 18px 18px;
+        border-radius: 18px;
+      }
+
+      #{{ section_id }} .bonus-treat__step-number {
+        width: 42px;
+        height: 42px;
+        font-size: 22px;
+      }
+
+      #{{ section_id }} .bonus-treat__step-text {
+        font-size: 16px;
+        line-height: 1.5;
+      }
+
+      #{{ section_id }} .bonus-treat__connector {
+        height: 30px;
+      }
+
+      #{{ section_id }} .bonus-treat__connector svg {
+        width: 22px;
+        height: 22px;
+      }
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "Bonus Treat Steps",
+  "tag": "section",
+  "class": "section section-bonus-treat",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "BONUS TREAT"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "2 Treats in 1"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>When the chew gets small, don't throw it away. Microwave the leftover nub for 60 seconds and watch it puff up into a light, crunchy treat your dog will go absolutely wild for.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Try It Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color 1",
+      "default": "#2b0f08"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_2",
+      "label": "Background color 2",
+      "default": "#4a1608"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#f3c573"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Body text color",
+      "default": "#d2c0b3"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#d2632e"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Step card background",
+      "default": "rgba(255,255,255,0.04)"
+    },
+    {
+      "type": "color",
+      "id": "card_border",
+      "label": "Step card border",
+      "default": "rgba(255,255,255,0.08)"
+    },
+    {
+      "type": "color",
+      "id": "step_text_color",
+      "label": "Step text color",
+      "default": "#f2e7db"
+    },
+    {
+      "type": "color",
+      "id": "step_number_color",
+      "label": "Step number color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background",
+      "default": "#d2632e"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_hover",
+      "label": "Button hover background",
+      "default": "#bc5728"
+    },
+    {
+      "type": "color",
+      "id": "button_text",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 20,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop top padding",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 20,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop bottom padding",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "min": 16,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile top padding",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "min": 16,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile bottom padding",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Step text",
+          "default": "<p>Your dog chews down to a <strong>small nub</strong> (about thumb-sized)</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bonus Treat Steps",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "text": "<p>Your dog chews down to a <strong>small nub</strong> (about thumb-sized)</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "text": "<p>Place nub on a <strong>microwave-safe plate</strong> for 60 seconds</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "text": "<p>Watch it <strong>puff up 3–4x in size</strong> into a light, airy treat</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "text": "<p>Cool for 2 minutes, then <strong>give to your dog</strong> — pure joy</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

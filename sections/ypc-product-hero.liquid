@@ -1,0 +1,1466 @@
+{% assign current_variant = product.selected_or_first_available_variant %}
+{% assign featured_media = current_variant.featured_media | default: product.featured_media %}
+
+{% liquid
+  assign product_title_downcase = product.title | downcase
+
+  assign hero_lead = ''
+  assign hero_rating_text = ''
+  assign hero_benefit_1 = ''
+  assign hero_benefit_2 = ''
+  assign hero_benefit_3 = ''
+  assign hero_benefit_4 = ''
+  assign hero_benefit_5 = ''
+  assign hero_benefit_6 = ''
+
+  if product.metafields.custom.hero_lead.value != blank
+    assign hero_lead = product.metafields.custom.hero_lead.value
+  endif
+
+  if product.metafields.custom.hero_rating_text.value != blank
+    assign hero_rating_text = product.metafields.custom.hero_rating_text.value
+  endif
+
+  if product.metafields.custom.hero_benefit_1.value != blank
+    assign hero_benefit_1 = product.metafields.custom.hero_benefit_1.value
+  endif
+  if product.metafields.custom.hero_benefit_2.value != blank
+    assign hero_benefit_2 = product.metafields.custom.hero_benefit_2.value
+  endif
+  if product.metafields.custom.hero_benefit_3.value != blank
+    assign hero_benefit_3 = product.metafields.custom.hero_benefit_3.value
+  endif
+  if product.metafields.custom.hero_benefit_4.value != blank
+    assign hero_benefit_4 = product.metafields.custom.hero_benefit_4.value
+  endif
+  if product.metafields.custom.hero_benefit_5.value != blank
+    assign hero_benefit_5 = product.metafields.custom.hero_benefit_5.value
+  endif
+  if product.metafields.custom.hero_benefit_6.value != blank
+    assign hero_benefit_6 = product.metafields.custom.hero_benefit_6.value
+  endif
+
+  if hero_lead == blank
+    assign hero_lead = section.settings.hero_lead
+  endif
+  if hero_rating_text == blank
+    assign hero_rating_text = section.settings.hero_rating_text
+  endif
+  if hero_benefit_1 == blank
+    assign hero_benefit_1 = section.settings.hero_benefit_1
+  endif
+  if hero_benefit_2 == blank
+    assign hero_benefit_2 = section.settings.hero_benefit_2
+  endif
+  if hero_benefit_3 == blank
+    assign hero_benefit_3 = section.settings.hero_benefit_3
+  endif
+  if hero_benefit_4 == blank
+    assign hero_benefit_4 = section.settings.hero_benefit_4
+  endif
+  if hero_benefit_5 == blank
+    assign hero_benefit_5 = section.settings.hero_benefit_5
+  endif
+  if hero_benefit_6 == blank
+    assign hero_benefit_6 = section.settings.hero_benefit_6
+  endif
+%}
+
+<section class="ypc-product-hero">
+  <div class="ypc-product-hero__inner">
+    <div class="ypc-product-hero__media">
+      {% if featured_media %}
+        <div class="ypc-product-hero__main-image-wrap">
+          <img
+            id="ypc-main-image"
+            src="{{ featured_media | image_url: width: 900 }}"
+            alt="{{ featured_media.alt | default: product.title | escape }}"
+            width="{{ featured_media.width }}"
+            height="{{ featured_media.height }}"
+            loading="eager"
+            class="ypc-product-hero__main-image"
+          >
+        </div>
+      {% endif %}
+
+      {% if product.images.size > 0 %}
+        <div class="ypc-product-hero__thumb-row" id="ypc-thumb-row">
+          {% for image in product.images %}
+            <button
+              type="button"
+              class="ypc-product-hero__thumb {% if image.id == featured_media.id %}is-active{% endif %}"
+              data-image-id="{{ image.id }}"
+              data-image-url="{{ image | image_url: width: 900 }}"
+              data-image-alt="{{ image.alt | default: product.title | escape }}"
+              aria-label="View image {{ forloop.index }}"
+            >
+              <img
+                src="{{ image | image_url: width: 140, height: 140 }}"
+                alt="{{ image.alt | default: product.title | escape }}"
+                width="140"
+                height="140"
+                loading="lazy"
+              >
+            </button>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="ypc-product-hero__content">
+      {% if section.settings.show_vet_badge %}
+        <div class="ypc-vet-badge">✦ {{ section.settings.vet_badge_text }}</div>
+      {% endif %}
+
+      <h1 class="ypc-product-hero__title">{{ product.title }}</h1>
+
+      {% if section.settings.show_reviews %}
+        <div class="ypc-review-row">
+          <span class="ypc-review-stars">{{ section.settings.review_stars }}</span>
+          <span class="ypc-review-text">{{ section.settings.review_text }}</span>
+        </div>
+      {% endif %}
+
+      <div class="ypc-hero-summary">
+        {% if hero_lead != blank %}
+          <p class="ypc-hero-summary__lead">{{ hero_lead }}</p>
+        {% endif %}
+
+        <ul class="ypc-hero-summary__list">
+          {% if hero_benefit_1 != blank %}<li>{{ hero_benefit_1 }}</li>{% endif %}
+          {% if hero_benefit_2 != blank %}<li>{{ hero_benefit_2 }}</li>{% endif %}
+          {% if hero_benefit_3 != blank %}<li>{{ hero_benefit_3 }}</li>{% endif %}
+          {% if hero_benefit_4 != blank %}<li>{{ hero_benefit_4 }}</li>{% endif %}
+          {% if hero_benefit_5 != blank %}<li>{{ hero_benefit_5 }}</li>{% endif %}
+          {% if hero_benefit_6 != blank %}<li>{{ hero_benefit_6 }}</li>{% endif %}
+        </ul>
+      </div>
+
+      {% form 'product', product, id: 'ypc-product-form', class: 'ypc-product-hero__form' %}
+        {% unless product.has_only_default_variant %}
+          {% for option in product.options_with_values %}
+            {% assign option_name_downcase = option.name | downcase %}
+
+            <div class="ypc-product-hero__option">
+              <div class="ypc-product-hero__option-header">
+                <div class="ypc-product-hero__option-label">Select {{ option.name }}</div>
+
+                {% if option_name_downcase contains 'size' and section.settings.size_guide_image != blank %}
+                  <button type="button" class="ypc-size-guide-trigger" id="ypc-size-guide-open">
+                    {{ section.settings.size_guide_label }}
+                  </button>
+                {% endif %}
+              </div>
+
+              <div class="ypc-product-hero__options" data-option-position="{{ option.position }}">
+                {% for value in option.values %}
+                  <button
+                    type="button"
+                    class="ypc-product-hero__option-btn {% if option.selected_value == value %}is-active{% endif %}"
+                    data-value="{{ value | escape }}"
+                  >
+                    {{ value }}
+                  </button>
+                {% endfor %}
+              </div>
+            </div>
+          {% endfor %}
+        {% endunless %}
+
+        <input type="hidden" name="id" id="ypc-variant-id" value="{{ current_variant.id }}">
+
+        <div class="ypc-product-hero__price-wrap">
+          <div class="ypc-product-hero__price-row">
+            <div class="ypc-product-hero__price" id="ypc-price">
+              {{ current_variant.price | money }}
+            </div>
+
+            {% if current_variant.compare_at_price > current_variant.price %}
+              <div class="ypc-product-hero__compare-price" id="ypc-compare-price">
+                {{ current_variant.compare_at_price | money }}
+              </div>
+
+              {% assign save_pct = current_variant.compare_at_price
+                | minus: current_variant.price
+                | times: 100
+                | divided_by: current_variant.compare_at_price
+              %}
+              <div class="ypc-product-hero__save-badge" id="ypc-save-badge">SAVE {{ save_pct }}%</div>
+            {% else %}
+              <div class="ypc-product-hero__compare-price" id="ypc-compare-price" style="display:none;"></div>
+              <div class="ypc-product-hero__save-badge" id="ypc-save-badge" style="display:none;"></div>
+            {% endif %}
+          </div>
+        </div>
+
+        {% if section.settings.show_info_line %}
+          <div class="ypc-info-line">
+            <span id="ypc-per-chew">{{ section.settings.per_chew_prefix }}</span>
+            <span class="ypc-dot">•</span>
+            <span>{{ section.settings.shipping_text }}</span>
+          </div>
+        {% endif %}
+
+        {% if product.selling_plan_groups.size > 0 %}
+          <div class="ypc-subscription">
+            <div class="ypc-sub-toggle">
+              <label class="ypc-radio" id="ypc-one-time-card">
+                <input type="radio" name="purchase_type" value="one_time" checked>
+                <span class="ypc-radio__label">One-time purchase</span>
+                <span class="ypc-price-inline" id="ypc-one-time-price">{{ current_variant.price | money }}</span>
+              </label>
+
+              <label class="ypc-radio highlight" id="ypc-subscribe-card">
+                <input type="radio" name="purchase_type" value="subscription">
+                <span class="ypc-radio__label">{{ section.settings.subscribe_label }}</span>
+                <span class="ypc-badge" id="ypc-sub-badge">SAVE 15%</span>
+                <span class="ypc-price-inline" id="ypc-sub-price"></span>
+              </label>
+            </div>
+
+            <div class="ypc-frequency" id="ypc-frequency" style="display:none;">
+              <select name="selling_plan" id="ypc-selling-plan">
+                {% for group in product.selling_plan_groups %}
+                  {% for plan in group.selling_plans %}
+                    <option
+                      value="{{ plan.id }}"
+                      data-adjustment-value="{{ plan.price_adjustments[0].value }}"
+                      data-adjustment-type="{{ plan.price_adjustments[0].value_type }}"
+                    >
+                      {{ plan.name }}
+                    </option>
+                  {% endfor %}
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+        {% endif %}
+
+        <div class="ypc-cart-row">
+          <div class="ypc-quantity" aria-label="Quantity selector">
+            <button type="button" class="ypc-quantity__btn" id="ypc-qty-minus" aria-label="Decrease quantity">−</button>
+            <input
+              type="number"
+              name="quantity"
+              id="ypc-quantity-input"
+              class="ypc-quantity__input"
+              value="1"
+              min="1"
+              inputmode="numeric"
+            >
+            <button type="button" class="ypc-quantity__btn" id="ypc-qty-plus" aria-label="Increase quantity">+</button>
+          </div>
+
+          <button type="submit" class="ypc-product-hero__cta" id="ypc-add-to-cart-btn">
+            <span class="ypc-cta__text">{{ section.settings.cta_text }}</span>
+            <span class="ypc-cta__divider">-</span>
+            <span class="ypc-cta__price" id="ypc-cta-price">{{ current_variant.price | money }}</span>
+            <span class="ypc-cta__compare" id="ypc-cta-compare" style="display:none;"></span>
+          </button>
+        </div>
+      {% endform %}
+
+      {% if section.settings.show_review_cards %}
+        <div class="ypc-review-cards">
+          <div class="ypc-review-card">
+            <div class="ypc-review-card__stars">★★★★★</div>
+            <p>{{ section.settings.review_card_1 }}</p>
+          </div>
+
+          <div class="ypc-review-card">
+            <div class="ypc-review-card__stars">★★★★★</div>
+            <p>{{ section.settings.review_card_2 }}</p>
+          </div>
+
+          <div class="ypc-review-card">
+            <div class="ypc-review-card__stars">★★★★★</div>
+            <p>{{ section.settings.review_card_3 }}</p>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if section.settings.size_guide_image != blank %}
+    <div class="ypc-size-guide-modal" id="ypc-size-guide-modal" aria-hidden="true">
+      <div class="ypc-size-guide-modal__overlay" id="ypc-size-guide-close"></div>
+
+      <div class="ypc-size-guide-modal__box">
+        <button type="button" class="ypc-size-guide-modal__x" id="ypc-size-guide-x" aria-label="Close size guide">
+          ×
+        </button>
+
+        <img
+          src="{{ section.settings.size_guide_image | image_url: width: 1400 }}"
+          alt="Size guide"
+          width="{{ section.settings.size_guide_image.width }}"
+          height="{{ section.settings.size_guide_image.height }}"
+          class="ypc-size-guide-modal__image"
+          loading="lazy"
+        >
+      </div>
+    </div>
+  {% endif %}
+</section>
+
+<script>
+  (function() {
+    const variants = {{ product.variants | json }};
+    const mainImage = document.getElementById('ypc-main-image');
+    const variantIdInput = document.getElementById('ypc-variant-id');
+    const priceEl = document.getElementById('ypc-price');
+    const comparePriceEl = document.getElementById('ypc-compare-price');
+    const saveBadgeEl = document.getElementById('ypc-save-badge');
+    const thumbs = document.querySelectorAll('.ypc-product-hero__thumb');
+
+    const purchaseTypeRadios = document.querySelectorAll("input[name='purchase_type']");
+    const frequencyWrap = document.getElementById('ypc-frequency');
+    const sellingPlanSelect = document.getElementById('ypc-selling-plan');
+    const subPriceEl = document.getElementById('ypc-sub-price');
+    const subBadgeEl = document.getElementById('ypc-sub-badge');
+    const oneTimePriceEl = document.getElementById('ypc-one-time-price');
+
+    const ctaPriceEl = document.getElementById('ypc-cta-price');
+    const ctaCompareEl = document.getElementById('ypc-cta-compare');
+    const perChewEl = document.getElementById('ypc-per-chew');
+
+    const qtyInput = document.getElementById('ypc-quantity-input');
+    const qtyMinus = document.getElementById('ypc-qty-minus');
+    const qtyPlus = document.getElementById('ypc-qty-plus');
+
+    const sizeGuideOpen = document.getElementById('ypc-size-guide-open');
+    const sizeGuideModal = document.getElementById('ypc-size-guide-modal');
+    const sizeGuideClose = document.getElementById('ypc-size-guide-close');
+    const sizeGuideX = document.getElementById('ypc-size-guide-x');
+
+    function getSelectedOptions() {
+      const selected = [];
+      document.querySelectorAll('.ypc-product-hero__options').forEach((group) => {
+        const activeBtn = group.querySelector('.ypc-product-hero__option-btn.is-active');
+        selected.push(activeBtn ? activeBtn.dataset.value : null);
+      });
+      return selected;
+    }
+
+    function findVariant(selectedOptions) {
+      return variants.find((variant) => {
+        return variant.options.every((opt, index) => opt === selectedOptions[index]);
+      });
+    }
+
+    function getCurrentVariant() {
+      return findVariant(getSelectedOptions()) || variants[0];
+    }
+
+    function getCurrentPurchaseType() {
+      const checked = document.querySelector("input[name='purchase_type']:checked");
+      return checked ? checked.value : 'one_time';
+    }
+
+    function getSelectedSellingPlanOption() {
+      if (!sellingPlanSelect) return null;
+      return sellingPlanSelect.options[sellingPlanSelect.selectedIndex] || null;
+    }
+
+    function formatMoney(cents) {
+      return '$' + (cents / 100).toFixed(2);
+    }
+
+    function activateThumb(thumb) {
+      thumbs.forEach((t) => t.classList.remove('is-active'));
+      if (thumb) {
+        thumb.classList.add('is-active');
+        thumb.scrollIntoView({
+          behavior: 'smooth',
+          inline: 'center',
+          block: 'nearest'
+        });
+      }
+    }
+
+    function setActiveThumbByVariant(variant) {
+      if (!variant || !variant.featured_image) return;
+
+      const variantImageId = String(variant.featured_image.id);
+      let matchedThumb = null;
+
+      thumbs.forEach((thumb) => {
+        thumb.classList.remove('is-active');
+        if (thumb.dataset.imageId === variantImageId) {
+          matchedThumb = thumb;
+        }
+      });
+
+      if (matchedThumb) activateThumb(matchedThumb);
+    }
+
+    function slideMainImage(newUrl, newAlt) {
+      if (!mainImage || !newUrl) return;
+      if (mainImage.src === newUrl) return;
+
+      mainImage.classList.add('is-sliding-out');
+
+      setTimeout(() => {
+        mainImage.src = newUrl;
+        mainImage.alt = newAlt || '{{ product.title | escape }}';
+        mainImage.classList.remove('is-sliding-out');
+        mainImage.classList.add('is-sliding-in');
+      }, 180);
+
+      setTimeout(() => {
+        mainImage.classList.remove('is-sliding-in');
+      }, 380);
+    }
+
+    function calculateSubscriptionPrice(basePrice, selectedPlanOption) {
+      if (!selectedPlanOption) return basePrice;
+
+      const adjustmentValue = parseFloat(selectedPlanOption.dataset.adjustmentValue || 0);
+      const adjustmentType = selectedPlanOption.dataset.adjustmentType || 'percentage';
+
+      if (adjustmentType === 'percentage') {
+        return Math.round(basePrice * (1 - adjustmentValue / 100));
+      }
+
+      if (adjustmentType === 'fixed_amount') {
+        return Math.max(0, basePrice - adjustmentValue);
+      }
+
+      return basePrice;
+    }
+
+    function updateSubscriptionDisplay(variant) {
+      if (!variant) return;
+
+      if (oneTimePriceEl) {
+        oneTimePriceEl.textContent = formatMoney(variant.price);
+      }
+
+      const selectedPlanOption = getSelectedSellingPlanOption();
+      const subPrice = calculateSubscriptionPrice(variant.price, selectedPlanOption);
+
+      if (subPriceEl) {
+        subPriceEl.textContent = formatMoney(subPrice);
+      }
+
+      if (subBadgeEl && selectedPlanOption) {
+        const adjustmentValue = parseFloat(selectedPlanOption.dataset.adjustmentValue || 0);
+        subBadgeEl.textContent = 'SAVE ' + adjustmentValue + '%';
+      }
+    }
+
+    function updateMainPriceArea(activePrice, activeComparePrice) {
+      if (priceEl) priceEl.textContent = formatMoney(activePrice);
+
+      if (comparePriceEl && saveBadgeEl) {
+        if (activeComparePrice && activeComparePrice > activePrice) {
+          comparePriceEl.style.display = 'block';
+          comparePriceEl.textContent = formatMoney(activeComparePrice);
+
+          const savePct = Math.round(((activeComparePrice - activePrice) * 100) / activeComparePrice);
+          saveBadgeEl.style.display = 'block';
+          saveBadgeEl.textContent = 'SAVE ' + savePct + '%';
+        } else {
+          comparePriceEl.style.display = 'none';
+          comparePriceEl.textContent = '';
+          saveBadgeEl.style.display = 'none';
+          saveBadgeEl.textContent = '';
+        }
+      }
+    }
+
+    function updateAddToCartButton(activePrice, activeComparePrice) {
+      if (!ctaPriceEl || !ctaCompareEl) return;
+
+      ctaPriceEl.textContent = formatMoney(activePrice);
+
+      if (activeComparePrice && activeComparePrice > activePrice) {
+        ctaCompareEl.style.display = 'inline';
+        ctaCompareEl.textContent = formatMoney(activeComparePrice);
+      } else {
+        ctaCompareEl.style.display = 'none';
+        ctaCompareEl.textContent = '';
+      }
+    }
+
+    function updatePerChew(variant, activePrice) {
+      if (!perChewEl || !variant) return;
+
+      const piecesOption = variant.options.find(opt => /pc|count|piece|lb/i.test(opt));
+      const qty = piecesOption ? parseInt(piecesOption, 10) : 1;
+
+      if (qty && qty > 0) {
+        const perChew = activePrice / qty;
+        perChewEl.textContent = '$' + (perChew / 100).toFixed(2) + ' per chew';
+      } else {
+        perChewEl.textContent = '{{ section.settings.per_chew_prefix }}';
+      }
+    }
+
+    function updateVariantUI(variant) {
+      if (!variant) return;
+
+      if (variantIdInput) variantIdInput.value = variant.id;
+
+      const purchaseType = getCurrentPurchaseType();
+      const selectedPlanOption = getSelectedSellingPlanOption();
+
+      let activePrice = variant.price;
+      let activeComparePrice = variant.compare_at_price;
+
+      if (purchaseType === 'subscription' && selectedPlanOption) {
+        activePrice = calculateSubscriptionPrice(variant.price, selectedPlanOption);
+        activeComparePrice = variant.price;
+      }
+
+      updateSubscriptionDisplay(variant);
+      updateMainPriceArea(activePrice, activeComparePrice);
+      updateAddToCartButton(activePrice, activeComparePrice);
+      updatePerChew(variant, activePrice);
+
+      if (variant.featured_image && mainImage) {
+        const newUrl = variant.featured_image.src + '&width=900';
+        slideMainImage(newUrl, variant.featured_image.alt || '{{ product.title | escape }}');
+        setActiveThumbByVariant(variant);
+      }
+    }
+
+    document.querySelectorAll('.ypc-product-hero__option-btn').forEach((button) => {
+      button.addEventListener('click', function() {
+        const parent = this.closest('.ypc-product-hero__options');
+        parent.querySelectorAll('.ypc-product-hero__option-btn').forEach((btn) => btn.classList.remove('is-active'));
+        this.classList.add('is-active');
+        updateVariantUI(getCurrentVariant());
+      });
+    });
+
+    thumbs.forEach((thumb) => {
+      thumb.addEventListener('click', function() {
+        activateThumb(this);
+
+        const imageUrl = this.dataset.imageUrl;
+        const imageAlt = this.dataset.imageAlt;
+
+        if (mainImage && imageUrl) {
+          slideMainImage(imageUrl, imageAlt || '{{ product.title | escape }}');
+        }
+      });
+    });
+
+    if (purchaseTypeRadios.length) {
+      purchaseTypeRadios.forEach((radio) => {
+        radio.addEventListener('change', function() {
+          if (this.value === 'subscription') {
+            if (frequencyWrap) frequencyWrap.style.display = 'block';
+          } else {
+            if (frequencyWrap) frequencyWrap.style.display = 'none';
+            if (sellingPlanSelect) sellingPlanSelect.value = sellingPlanSelect.options[0]?.value || '';
+          }
+
+          updateVariantUI(getCurrentVariant());
+        });
+      });
+    }
+
+    if (sellingPlanSelect) {
+      sellingPlanSelect.addEventListener('change', function() {
+        updateVariantUI(getCurrentVariant());
+      });
+    }
+
+    if (qtyMinus && qtyInput) {
+      qtyMinus.addEventListener('click', function() {
+        const currentQty = parseInt(qtyInput.value || '1', 10);
+        qtyInput.value = Math.max(1, currentQty - 1);
+      });
+    }
+
+    if (qtyPlus && qtyInput) {
+      qtyPlus.addEventListener('click', function() {
+        const currentQty = parseInt(qtyInput.value || '1', 10);
+        qtyInput.value = currentQty + 1;
+      });
+    }
+
+    if (qtyInput) {
+      qtyInput.addEventListener('change', function() {
+        const currentQty = parseInt(qtyInput.value || '1', 10);
+        qtyInput.value = Math.max(1, currentQty);
+      });
+    }
+
+    function openSizeGuide() {
+      if (!sizeGuideModal) return;
+      sizeGuideModal.classList.add('is-open');
+      sizeGuideModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSizeGuide() {
+      if (!sizeGuideModal) return;
+      sizeGuideModal.classList.remove('is-open');
+      sizeGuideModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    if (sizeGuideOpen) sizeGuideOpen.addEventListener('click', openSizeGuide);
+    if (sizeGuideClose) sizeGuideClose.addEventListener('click', closeSizeGuide);
+    if (sizeGuideX) sizeGuideX.addEventListener('click', closeSizeGuide);
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') closeSizeGuide();
+    });
+
+    updateVariantUI(getCurrentVariant());
+  })();
+</script>
+
+<style>
+  .ypc-product-hero,
+  .ypc-product-hero * {
+    box-sizing: border-box;
+  }
+
+  .ypc-product-hero {
+    padding: 24px 20px 34px;
+    background: #f6f1e9;
+    overflow: visible;
+  }
+
+  .ypc-product-hero__inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(320px, 0.95fr) minmax(500px, 1.05fr);
+    gap: 26px;
+    align-items: start;
+  }
+
+  .ypc-product-hero__media,
+  .ypc-product-hero__content {
+    min-width: 0;
+  }
+
+  .ypc-product-hero__media {
+    position: sticky;
+    top: 100px;
+    align-self: start;
+  }
+
+  .ypc-product-hero__content {
+    width: 100%;
+    max-width: 700px;
+  }
+
+  .ypc-product-hero__main-image-wrap {
+    background: #ffffff;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    height: min(50vh, 560px);
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .ypc-product-hero__main-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 14px;
+    transform: translateX(0);
+    opacity: 1;
+    transition: transform 0.18s ease, opacity 0.18s ease;
+    will-change: transform, opacity;
+  }
+
+  .ypc-product-hero__main-image.is-sliding-out {
+    transform: translateX(-40px);
+    opacity: 0;
+  }
+
+  .ypc-product-hero__main-image.is-sliding-in {
+    transform: translateX(40px);
+    opacity: 0;
+    animation: ypcSlideIn 0.2s ease forwards;
+  }
+
+  @keyframes ypcSlideIn {
+    from {
+      transform: translateX(40px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .ypc-product-hero__thumb-row {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 3px 2px 6px;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ypc-product-hero__thumb {
+    flex: 0 0 auto;
+    width: 72px;
+    height: 72px;
+    padding: 0;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    background: #fff;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .ypc-product-hero__thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ypc-product-hero__thumb:hover {
+    border-color: #2b1408;
+  }
+
+  .ypc-product-hero__thumb.is-active {
+    border-color: #d2622e;
+    box-shadow: inset 0 0 0 1px #d2622e;
+    transform: translateY(-1px);
+  }
+
+  .ypc-vet-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: #fff7ef;
+    color: #d2622e;
+    border: 1px solid rgba(210, 98, 46, 0.22);
+    padding: 9px 12px;
+    border-radius: 999px;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .ypc-product-hero__title {
+    margin: 0 0 8px;
+    font-size: 30px;
+    line-height: 1.08;
+    font-weight: 800;
+    color: #2b1408;
+    letter-spacing: -0.02em;
+  }
+
+  .ypc-review-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 12px;
+    font-size: 13px;
+    flex-wrap: wrap;
+  }
+
+  .ypc-review-stars {
+    color: #d2622e;
+    font-size: 15px;
+    letter-spacing: 2px;
+  }
+
+  .ypc-review-text {
+    color: #2b1408;
+    font-weight: 600;
+  }
+
+  .ypc-hero-summary {
+    margin: 0 0 14px;
+    backdrop-filter: blur(4px);
+  }
+
+  .ypc-hero-summary__lead {
+    margin: 0 0 14px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #4a3325;
+  }
+
+  .ypc-hero-summary__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid rgba(49, 18, 2, 0.12);
+    border-left: 1px solid rgba(49, 18, 2, 0.12);
+  }
+
+  .ypc-hero-summary__list li {
+    position: relative;
+    padding: 16px 12px 16px 40px;
+    color: #2b1408;
+    font-size: 11px;
+    line-height: 1.2;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-right: 1px solid rgba(49, 18, 2, 0.12);
+    border-bottom: 1px solid rgba(49, 18, 2, 0.12);
+    background: rgba(255,255,255,0.45);
+  }
+
+  .ypc-hero-summary__list li::before {
+    content: "✓";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #d2622e;
+    font-size: 16px;
+    font-weight: 900;
+  }
+
+  .ypc-product-hero__option {
+    margin-bottom: 12px;
+  }
+
+  .ypc-product-hero__option-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 7px;
+  }
+
+  .ypc-product-hero__option-label {
+    font-size: 12px;
+    font-weight: 800;
+    color: #2b1408;
+  }
+
+  .ypc-size-guide-trigger {
+    appearance: none;
+    border: none;
+    background: transparent;
+    padding: 0;
+    color: #2b1408;
+    font-size: 13px;
+    font-weight: 750;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+
+  .ypc-size-guide-trigger:hover {
+    color: #d2622e;
+  }
+
+  .ypc-product-hero__options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .ypc-product-hero__option-btn {
+    appearance: none;
+    border: 2px solid #d9d2cb;
+    background: #fff;
+    color: #2b1408;
+    border-radius: 9px;
+    padding: 9px 12px;
+    font-size: 12px;
+    line-height: 1.2;
+    font-weight: 650;
+    cursor: pointer;
+    min-width: 68px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .ypc-product-hero__option-btn:hover {
+    border-color: #2b1408;
+  }
+
+  .ypc-product-hero__option-btn.is-active {
+    background: #d2622e;
+    border-color: #d2622e;
+    color: #fff;
+  }
+
+  .ypc-product-hero__price-wrap {
+    margin: 14px 0 10px;
+  }
+
+  .ypc-product-hero__price-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .ypc-product-hero__price {
+    font-size: 38px;
+    line-height: 1;
+    font-weight: 850;
+    color: #2b1408;
+    letter-spacing: -1px;
+  }
+
+  .ypc-product-hero__compare-price {
+    font-size: 21px;
+    line-height: 1;
+    font-weight: 750;
+    color: #5c4637;
+    text-decoration: line-through;
+    opacity: 0.75;
+  }
+
+  .ypc-product-hero__save-badge {
+    background: #d2622e;
+    color: #fff;
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 13px;
+    line-height: 1;
+    font-weight: 850;
+    white-space: nowrap;
+  }
+
+  .ypc-info-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #6f5a4b;
+    font-size: 13px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+
+  .ypc-dot {
+    opacity: 0.65;
+  }
+
+  .sealsubs-target-element,
+  .sealsubs-container,
+  .sls-purchase-options-label,
+  .sls-purchase-options-container,
+  .sls-more-info-container,
+  .sls-more-info-text,
+  .sls-subscription-details-label,
+  .sls-more-info-popup,
+  .sls-option-container,
+  .sls-selling-plan-group-options,
+  .sls-selling-plan-description-content {
+    display: none !important;
+  }
+
+  .ypc-subscription {
+    border: 1px solid rgba(43, 20, 8, 0.16);
+    border-radius: 14px;
+    padding: 12px;
+    margin: 12px 0 14px;
+    background: #fffaf3;
+  }
+
+  .ypc-sub-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ypc-radio {
+    display: grid;
+    grid-template-columns: 20px 1fr auto auto;
+    align-items: center;
+    gap: 10px;
+    border: 2px solid #e4d9cf;
+    border-radius: 12px;
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #fff;
+  }
+
+  .ypc-radio.highlight {
+    border-color: #d2622e;
+  }
+
+  .ypc-radio input {
+    margin: 0;
+    accent-color: #d2622e;
+  }
+
+  .ypc-radio__label {
+    font-size: 14px;
+    font-weight: 700;
+    color: #2b1408;
+  }
+
+  .ypc-badge {
+    background: #d2622e;
+    color: #fff;
+    padding: 7px 10px;
+    border-radius: 9px;
+    font-size: 12px;
+    font-weight: 850;
+    white-space: nowrap;
+  }
+
+  .ypc-price-inline {
+    font-weight: 850;
+    color: #2b1408;
+    white-space: nowrap;
+    font-size: 14px;
+  }
+
+  .ypc-frequency {
+    margin-top: 10px;
+  }
+
+  .ypc-frequency select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid #e4d9cf;
+    border-radius: 10px;
+    background: #fff;
+    font-size: 14px;
+    color: #2b1408;
+  }
+
+  .ypc-cart-row {
+    display: grid;
+    grid-template-columns: 135px 1fr;
+    gap: 12px;
+    align-items: stretch;
+    margin-top: 14px;
+  }
+
+  .ypc-quantity {
+    display: grid;
+    grid-template-columns: 38px 1fr 38px;
+    align-items: center;
+    border: 2px solid #2b1408;
+    border-radius: 11px;
+    background: #fffaf3;
+    min-height: 56px;
+    overflow: hidden;
+  }
+
+  .ypc-quantity__btn {
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: #2b1408;
+    font-size: 24px;
+    font-weight: 750;
+    cursor: pointer;
+    height: 100%;
+  }
+
+  .ypc-quantity__btn:hover {
+    background: rgba(210, 98, 46, 0.08);
+  }
+
+  .ypc-quantity__input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: #2b1408;
+    font-size: 18px;
+    font-weight: 750;
+    text-align: center;
+    outline: none;
+    appearance: textfield;
+  }
+
+  .ypc-quantity__input::-webkit-outer-spin-button,
+  .ypc-quantity__input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .ypc-product-hero__cta {
+    appearance: none;
+    width: 100%;
+    border: none;
+    border-radius: 11px;
+    background: #ff6a00;
+    color: #fff;
+    padding: 16px 18px;
+    font-size: 14px;
+    line-height: 1.2;
+    font-weight: 850;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-transform: uppercase;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  }
+
+  .ypc-product-hero__cta:hover {
+    background: #d2622e;
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 12px 28px rgba(210, 98, 46, 0.25);
+  }
+
+  .ypc-cta__text {
+    font-weight: 900;
+    letter-spacing: 0.4px;
+  }
+
+  .ypc-cta__divider {
+    opacity: 0.85;
+    font-weight: 900;
+  }
+
+  .ypc-cta__price,
+  .ypc-cta__compare {
+    font-size: 16px;
+  }
+
+  .ypc-cta__compare {
+    font-weight: 750;
+    text-decoration: line-through;
+    opacity: 0.65;
+  }
+
+  .ypc-review-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .ypc-review-card {
+    background: #fffaf3;
+    border: 1px solid rgba(43, 20, 8, 0.08);
+    border-radius: 12px;
+    padding: 16px;
+    min-height: 130px;
+  }
+
+  .ypc-review-card__stars {
+    color: #2b1408;
+    font-size: 17px;
+    letter-spacing: 2px;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .ypc-review-card p {
+    margin: 0;
+    color: #2b1408;
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+
+  .ypc-size-guide-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .ypc-size-guide-modal.is-open {
+    display: flex;
+  }
+
+  .ypc-size-guide-modal__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(43, 20, 8, 0.58);
+  }
+
+  .ypc-size-guide-modal__box {
+    position: relative;
+    z-index: 2;
+    max-width: 820px;
+    width: 100%;
+    background: #fffaf3;
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
+  }
+
+  .ypc-size-guide-modal__x {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    border: none;
+    background: #d2622e;
+    color: #fff;
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 3;
+  }
+
+  .ypc-size-guide-modal__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+  }
+
+  @media (max-width: 990px) {
+    .ypc-product-hero__inner {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .ypc-product-hero__media {
+      position: static;
+      top: auto;
+    }
+
+    .ypc-product-hero__content {
+      max-width: 100%;
+    }
+
+    .ypc-product-hero__main-image-wrap {
+      height: min(52vh, 520px);
+      min-height: 300px;
+    }
+
+    .ypc-review-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .ypc-product-hero {
+      padding: 20px 16px 30px;
+    }
+
+    .ypc-product-hero__title {
+      font-size: 27px;
+    }
+
+    .ypc-product-hero__main-image-wrap {
+      height: min(44vh, 400px);
+      min-height: 250px;
+    }
+
+    .ypc-hero-summary {
+      padding: 12px;
+      border-radius: 12px;
+    }
+
+    .ypc-hero-summary__lead {
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .ypc-hero-summary__list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .ypc-hero-summary__list li {
+      padding: 14px 10px 14px 36px;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+    }
+
+    .ypc-hero-summary__list li::before {
+      left: 12px;
+      font-size: 14px;
+    }
+
+    .ypc-product-hero__price {
+      font-size: 36px;
+    }
+
+    .ypc-cart-row {
+      grid-template-columns: 1fr;
+    }
+
+    .ypc-quantity {
+      max-width: 170px;
+    }
+
+    .ypc-radio {
+      grid-template-columns: 20px 1fr auto;
+    }
+
+    .ypc-badge {
+      display: none;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "YPC Product Hero",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "hero_lead",
+      "label": "Hero lead text",
+      "default": "The all-natural, long-lasting chew your dog deserves. Handcrafted in the Himalayas with simple ingredients for a clean, durable, and satisfying chewing experience."
+    },
+    {
+      "type": "text",
+      "id": "hero_rating_text",
+      "label": "Hero rating text",
+      "default": "4.9 — Loved by thousands of happy dogs"
+    },
+    {
+      "type": "text",
+      "id": "hero_benefit_1",
+      "label": "Hero benefit 1",
+      "default": "100% Natural"
+    },
+    {
+      "type": "text",
+      "id": "hero_benefit_2",
+      "label": "Hero benefit 2",
+      "default": "Long-Lasting"
+    },
+    {
+      "type": "text",
+      "id": "hero_benefit_3",
+      "label": "Hero benefit 3",
+      "default": "High Protein"
+    },
+    {
+      "type": "text",
+      "id": "hero_benefit_4",
+      "label": "Hero benefit 4",
+      "default": "Low Odor"
+    },
+    {
+      "type": "text",
+      "id": "hero_benefit_5",
+      "label": "Hero benefit 5",
+      "default": "Dental Care"
+    },
+    {
+      "type": "text",
+      "id": "hero_benefit_6",
+      "label": "Hero benefit 6",
+      "default": "No Rawhide"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vet_badge",
+      "label": "Show vet badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "vet_badge_text",
+      "label": "Vet badge text",
+      "default": "VET RECOMMENDED"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reviews",
+      "label": "Show review row",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "review_stars",
+      "label": "Review stars text",
+      "default": "★★★★★"
+    },
+    {
+      "type": "text",
+      "id": "review_text",
+      "label": "Review text",
+      "default": "4.7/5.0 Based on 10,000+ reviews"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_info_line",
+      "label": "Show per-chew and shipping line",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "per_chew_prefix",
+      "label": "Fallback per-chew text",
+      "default": "$10.00 per chew"
+    },
+    {
+      "type": "text",
+      "id": "shipping_text",
+      "label": "Shipping text",
+      "default": "Free shipping over $49"
+    },
+    {
+      "type": "text",
+      "id": "subscribe_label",
+      "label": "Subscribe label",
+      "default": "Subscribe & save"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "ADD TO CART"
+    },
+    {
+      "type": "image_picker",
+      "id": "size_guide_image",
+      "label": "Size guide popup image"
+    },
+    {
+      "type": "text",
+      "id": "size_guide_label",
+      "label": "Size guide link label",
+      "default": "Size Guide"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_review_cards",
+      "label": "Show review cards under cart",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "review_card_1",
+      "label": "Review card 1",
+      "default": "“My dog’s obsessed — he won’t let go of his yak chew for hours on end!”"
+    },
+    {
+      "type": "textarea",
+      "id": "review_card_2",
+      "label": "Review card 2",
+      "default": "“Super long-lasting and no mess. My pup stays busy and happy chewing every single day.”"
+    },
+    {
+      "type": "textarea",
+      "id": "review_card_3",
+      "label": "Review card 3",
+      "default": "“Natural, durable, and totally addictive for my dog. He gets excited every time I open the bag!”"
+    }
+  ],
+  "presets": [
+    {
+      "name": "YPC Product Hero"
+    }
+  ]
+}
+{% endschema %}

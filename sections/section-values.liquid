@@ -1,0 +1,259 @@
+{{ 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap' | stylesheet_tag }}
+
+{%- liquid
+  case section.settings.font_size_scale
+    when 'small'
+      assign base_size = '13px'
+    when 'large'
+      assign base_size = '18px'
+    when 'xlarge'
+      assign base_size = '20px'
+    else
+      assign base_size = '16px'
+  endcase
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    font-size: {{ base_size }};
+    --forest:     {{ section.settings.color_forest }};
+    --gold:       {{ section.settings.color_gold }};
+    --gold-light: {{ section.settings.color_gold_light }};
+    --warm-white: {{ section.settings.color_warm_white }};
+    --cream:      {{ section.settings.color_cream }};
+  }
+
+  .ppf-values-{{ section.id }} {
+    background: var(--forest);
+    padding: {{ section.settings.section_padding_top }}px 5% {{ section.settings.section_padding_bottom }}px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ppf-values-{{ section.id }}::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 0;
+    width: 100%; height: 120px;
+    background: var(--warm-white);
+    clip-path: ellipse(55% 100% at 50% 0%);
+  }
+
+  .ppf-values-{{ section.id }}::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 0;
+    width: 100%; height: 120px;
+    background: var(--cream);
+    clip-path: ellipse(55% 100% at 50% 100%);
+    z-index: 1;
+  }
+
+  .ppf-values-inner-{{ section.id }} {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .ppf-section-header-{{ section.id }} {
+    text-align: center;
+    margin-bottom: 70px;
+  }
+
+  .ppf-section-tag-{{ section.id }} {
+    display: inline-block;
+    font-size: 0.68em;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 1.2rem;
+  }
+
+  .ppf-section-title-{{ section.id }} {
+    font-family: '{{ section.settings.heading_font }}', serif;
+    font-size: clamp(2.2em, 4.5vw, 3.8em);
+    font-weight: 300;
+    line-height: 1.15;
+    color: #fff;
+  }
+
+  .ppf-section-title-{{ section.id }} em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .ppf-values-grid-{{ section.id }} {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .ppf-value-card-{{ section.id }} {
+    padding: {{ section.settings.card_padding }}px 40px;
+    border: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s ease;
+    cursor: default;
+  }
+
+  .ppf-value-card-{{ section.id }}::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--gold);
+    transition: height 0.4s ease;
+  }
+
+  .ppf-value-card-{{ section.id }}:hover { background: rgba(255,255,255,0.04); }
+  .ppf-value-card-{{ section.id }}:hover::before { height: 100%; }
+
+  .ppf-value-icon-{{ section.id }} {
+    font-size: {{ section.settings.icon_size }}em;
+    margin-bottom: 1.4rem;
+    display: block;
+  }
+
+  .ppf-value-title-{{ section.id }} {
+    font-family: '{{ section.settings.heading_font }}', serif;
+    font-size: {{ section.settings.card_title_size }}em;
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .ppf-value-desc-{{ section.id }} {
+    font-size: {{ section.settings.card_desc_size }}em;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.55);
+    font-weight: 300;
+  }
+
+  .ppf-reveal-{{ section.id }} {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .ppf-reveal-{{ section.id }}.ppf-visible { opacity: 1; transform: translateY(0); }
+  .ppf-d1-{{ section.id }} { transition-delay: 0.1s; }
+  .ppf-d2-{{ section.id }} { transition-delay: 0.2s; }
+  .ppf-d3-{{ section.id }} { transition-delay: 0.3s; }
+</style>
+
+<section class="ppf-values-{{ section.id }}">
+  <div class="ppf-values-inner-{{ section.id }}">
+    <div class="ppf-section-header-{{ section.id }} ppf-reveal-{{ section.id }}">
+      {%- if section.settings.values_tag != blank -%}
+        <span class="ppf-section-tag-{{ section.id }}">{{ section.settings.values_tag }}</span>
+      {%- endif -%}
+      <h2 class="ppf-section-title-{{ section.id }}">
+        {{ section.settings.values_title }}
+        {%- if section.settings.values_title_italic != blank -%}
+          <em>{{ section.settings.values_title_italic }}</em>
+        {%- endif -%}
+      </h2>
+    </div>
+
+    <div class="ppf-values-grid-{{ section.id }}">
+      {%- for block in section.blocks -%}
+        <div class="ppf-value-card-{{ section.id }} ppf-reveal-{{ section.id }}" {{ block.shopify_attributes }}>
+          {%- if block.settings.icon != blank -%}
+            <span class="ppf-value-icon-{{ section.id }}">{{ block.settings.icon }}</span>
+          {%- endif -%}
+          <h3 class="ppf-value-title-{{ section.id }}">{{ block.settings.title }}</h3>
+          <p class="ppf-value-desc-{{ section.id }}">{{ block.settings.description }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var sec = document.getElementById('shopify-section-{{ section.id }}');
+  if (!sec) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('ppf-visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  sec.querySelectorAll('.ppf-reveal-{{ section.id }}').forEach(function(el){ obs.observe(el); });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Values Grid",
+  "tag": "div",
+  "settings": [
+    { "type": "header", "content": "🎨 Colors" },
+    { "type": "color", "id": "color_forest",     "label": "Section Background",  "default": "#2C4A2E" },
+    { "type": "color", "id": "color_gold",        "label": "Accent / Hover Line", "default": "#C4923A" },
+    { "type": "color", "id": "color_gold_light",  "label": "Tag & Italic Color",  "default": "#E8C47A" },
+    { "type": "color", "id": "color_warm_white",  "label": "Top Wave Color",      "default": "#FDFAF5" },
+    { "type": "color", "id": "color_cream",       "label": "Bottom Wave Color",   "default": "#F8F3EB" },
+
+    { "type": "header", "content": "🔠 Typography" },
+    {
+      "type": "select", "id": "font_size_scale", "label": "Base Font Size",
+      "options": [
+        { "value": "small",  "label": "Small (13px)" },
+        { "value": "medium", "label": "Medium (16px)" },
+        { "value": "large",  "label": "Large (18px)" },
+        { "value": "xlarge", "label": "X-Large (20px)" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "select", "id": "heading_font", "label": "Heading Font",
+      "options": [
+        { "value": "Cormorant Garamond", "label": "Cormorant Garamond" },
+        { "value": "Georgia",            "label": "Georgia" },
+        { "value": "Playfair Display",   "label": "Playfair Display" },
+        { "value": "Times New Roman",    "label": "Times New Roman" }
+      ],
+      "default": "Cormorant Garamond"
+    },
+    { "type": "range", "id": "card_title_size", "label": "Card Title Size", "min": 1.0, "max": 2.5, "step": 0.1, "default": 1.5 },
+    { "type": "range", "id": "card_desc_size",  "label": "Card Desc Size",  "min": 0.7, "max": 1.2, "step": 0.1,"default": 0.9 },
+    { "type": "range", "id": "icon_size",       "label": "Icon Size",       "min": 1.0, "max": 4.0, "step": 0.1, "default": 2.0 },
+
+    { "type": "header", "content": "📐 Spacing" },
+    { "type": "range", "id": "section_padding_top",    "label": "Section Padding Top",    "min": 40, "max": 200, "step": 10, "default": 100, "unit": "px" },
+    { "type": "range", "id": "section_padding_bottom", "label": "Section Padding Bottom", "min": 40, "max": 200, "step": 10, "default": 100, "unit": "px" },
+    { "type": "range", "id": "card_padding",           "label": "Card Vertical Padding",  "min": 20, "max": 80,  "step": 5,  "default": 50,  "unit": "px" },
+
+    { "type": "header", "content": "✏️ Section Header" },
+    { "type": "text", "id": "values_tag",          "label": "Small Tag",          "default": "What Drives Us" },
+    { "type": "text", "id": "values_title",        "label": "Title (Normal)",     "default": "Our Core" },
+    { "type": "text", "id": "values_title_italic", "label": "Title (Italic)",     "default": "Values" }
+  ],
+
+  "blocks": [
+    {
+      "type": "value_card",
+      "name": "Value Card",
+      "limit": 6,
+      "settings": [
+        { "type": "text",     "id": "icon",        "label": "Emoji Icon",    "default": "🌿" },
+        { "type": "text",     "id": "title",       "label": "Card Title",    "default": "100% Natural & Organic" },
+        { "type": "textarea", "id": "description", "label": "Description",   "default": "Our treats and chews are crafted from nature's finest — no artificial additives, no fillers. Only wholesome, organic ingredients your dog's body was built to enjoy." }
+      ]
+    }
+  ],
+
+  "presets": [
+    {
+      "name": "Values Grid",
+      "blocks": [
+        { "type": "value_card", "settings": { "icon": "🌿", "title": "100% Natural & Organic",     "description": "Our treats and chews are crafted from nature's finest — no artificial additives, no fillers. Only wholesome, organic ingredients your dog's body was built to enjoy." } },
+        { "type": "value_card", "settings": { "icon": "🏡", "title": "USA-Based, Family-Operated",  "description": "Our roots are in American soil. As a family business, we hold dear the values of trust, integrity, and the kind of care you simply can't factory-scale." } },
+        { "type": "value_card", "settings": { "icon": "🩺", "title": "Vet-Approved Quality",        "description": "Every product is meticulously sourced and tested. When you choose Prime Pet Food, you're choosing a standard that veterinary professionals stand behind." } },
+        { "type": "value_card", "settings": { "icon": "🤝", "title": "Ethical Sourcing",            "description": "From the high Himalayas to your doorstep, we trace every ingredient to ensure ethical, sustainable practices at every step of the supply chain." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

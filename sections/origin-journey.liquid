@@ -1,0 +1,463 @@
+{% comment %}
+  Section: Origin Journey — "An Ancient Tradition, Reimagined"
+  File: sections/origin-journey.liquid
+  Dynamic: All text, colors, icons editable from Shopify Theme Editor
+{% endcomment %}
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --oj-bg-top: {{ section.settings.bg_color_top }};
+    --oj-bg-bottom: {{ section.settings.bg_color_bottom }};
+    --oj-eyebrow-color: {{ section.settings.eyebrow_color }};
+    --oj-heading-color: {{ section.settings.heading_color }};
+    --oj-subtext-color: {{ section.settings.subtext_color }};
+    --oj-icon-bg-from: {{ section.settings.icon_bg_from }};
+    --oj-icon-bg-to: {{ section.settings.icon_bg_to }};
+    --oj-step-label-color: {{ section.settings.step_label_color }};
+    --oj-step-title-color: {{ section.settings.step_title_color }};
+    --oj-step-desc-color: {{ section.settings.step_desc_color }};
+    --oj-connector-color: {{ section.settings.connector_color }};
+  }
+
+  #shopify-section-{{ section.id }} .oj-section {
+    padding: {{ section.settings.section_padding_top }}px 20px {{ section.settings.section_padding_bottom }}px;
+    background: linear-gradient(180deg, var(--oj-bg-top) 0%, var(--oj-bg-bottom) 100%);
+    overflow: hidden;
+  }
+
+  /* ── Section Title ── */
+  #shopify-section-{{ section.id }} .oj-title-wrap {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  #shopify-section-{{ section.id }} .oj-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--oj-eyebrow-color);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  #shopify-section-{{ section.id }} .oj-eyebrow::before,
+  #shopify-section-{{ section.id }} .oj-eyebrow::after {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--oj-eyebrow-color);
+    display: inline-block;
+    opacity: 0.6;
+  }
+  #shopify-section-{{ section.id }} .oj-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 700;
+    color: var(--oj-heading-color);
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  #shopify-section-{{ section.id }} .oj-subtext {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--oj-subtext-color);
+    margin: 0;
+  }
+
+  /* ── Journey Steps ── */
+  #shopify-section-{{ section.id }} .oj-steps {
+    max-width: 1100px;
+    margin: 52px auto 0;
+    display: flex;
+    gap: 0;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .oj-step-wrapper {
+    display: flex;
+    align-items: flex-start;
+    flex: 1;
+    min-width: 160px;
+    max-width: 200px;
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .oj-step {
+    text-align: center;
+    flex: 1;
+    padding: 0 12px;
+    opacity: 0;
+    transform: translateY(24px);
+    animation: ojFadeUp 0.5s ease forwards;
+  }
+
+  /* Staggered animation delays */
+  {% for block in section.blocks %}
+    #shopify-section-{{ section.id }} .oj-step-wrapper:nth-child({{ forloop.index }} ) .oj-step {
+      animation-delay: {{ forloop.index0 | times: 0.12 }}s;
+    }
+  {% endfor %}
+
+  @keyframes ojFadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Connector line between steps */
+  #shopify-section-{{ section.id }} .oj-connector {
+    width: 32px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 36px;
+  }
+  #shopify-section-{{ section.id }} .oj-connector::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--oj-connector-color);
+    opacity: 0.25;
+    border-radius: 2px;
+  }
+
+  #shopify-section-{{ section.id }} .oj-icon {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--oj-icon-bg-from) 0%, var(--oj-icon-bg-to) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 34px;
+    box-shadow: 0 8px 28px rgba(45, 74, 62, 0.2);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+  #shopify-section-{{ section.id }} .oj-step:hover .oj-icon {
+    transform: translateY(-4px) scale(1.06);
+    box-shadow: 0 14px 36px rgba(45, 74, 62, 0.28);
+  }
+
+  #shopify-section-{{ section.id }} .oj-step-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--oj-step-label-color);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  #shopify-section-{{ section.id }} .oj-step-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--oj-step-title-color);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  #shopify-section-{{ section.id }} .oj-step-desc {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--oj-step-desc-color);
+    line-height: 1.65;
+    max-width: 160px;
+    margin: 0 auto;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .oj-steps {
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      margin-top: 40px;
+    }
+    #shopify-section-{{ section.id }} .oj-step-wrapper {
+      flex-direction: column;
+      align-items: center;
+      max-width: 280px;
+      width: 100%;
+    }
+    #shopify-section-{{ section.id }} .oj-connector {
+      display: none;
+    }
+    #shopify-section-{{ section.id }} .oj-step-desc {
+      max-width: 240px;
+    }
+  }
+</style>
+
+<section class="oj-section" id="origin-journey">
+  <!-- Section Title -->
+  <div class="oj-title-wrap">
+    {% if section.settings.eyebrow != blank %}
+      <div class="oj-eyebrow">{{ section.settings.eyebrow }}</div>
+    {% endif %}
+    {% if section.settings.heading != blank %}
+      <h2 class="oj-heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+    {% if section.settings.subtext != blank %}
+      <p class="oj-subtext">{{ section.settings.subtext }}</p>
+    {% endif %}
+  </div>
+
+  <!-- Steps -->
+  <div class="oj-steps">
+    {% for block in section.blocks %}
+      {% if block.type == 'step' %}
+        <div class="oj-step-wrapper" {{ block.shopify_attributes }}>
+          <div class="oj-step">
+            {% if block.settings.icon != blank %}
+              <div class="oj-icon">{{ block.settings.icon }}</div>
+            {% endif %}
+            {% if block.settings.step_label != blank %}
+              <div class="oj-step-label">{{ block.settings.step_label }}</div>
+            {% endif %}
+            {% if block.settings.title != blank %}
+              <h4 class="oj-step-title">{{ block.settings.title }}</h4>
+            {% endif %}
+            {% if block.settings.description != blank %}
+              <p class="oj-step-desc">{{ block.settings.description }}</p>
+            {% endif %}
+          </div>
+          {% unless forloop.last %}
+            <div class="oj-connector"></div>
+          {% endunless %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Origin Journey",
+  "tag": "section",
+  "class": "origin-journey-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text (small top label)",
+      "default": "From the Himalayas to Your Home"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Main Heading",
+      "default": "An Ancient Tradition, Reimagined"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Description Text",
+      "default": "Our chews are based on Churpi — a centuries-old Himalayan snack made by mountain communities in Nepal. We've perfected the recipe for your best friend."
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Padding Top (px)",
+      "min": 20,
+      "max": 140,
+      "step": 4,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Padding Bottom (px)",
+      "min": 20,
+      "max": 140,
+      "step": 4,
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Background Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_top",
+      "label": "Background - Top",
+      "default": "#FEFCF9"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_bottom",
+      "label": "Background - Bottom",
+      "default": "#EDE5D8"
+    },
+    {
+      "type": "header",
+      "content": "Text Colors"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Color",
+      "default": "#C8943E"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#1B3028"
+    },
+    {
+      "type": "color",
+      "id": "subtext_color",
+      "label": "Description Text Color",
+      "default": "#8B7D6B"
+    },
+    {
+      "type": "header",
+      "content": "Step Icon Colors"
+    },
+    {
+      "type": "color",
+      "id": "icon_bg_from",
+      "label": "Icon Background - Start",
+      "default": "#7A9B8A"
+    },
+    {
+      "type": "color",
+      "id": "icon_bg_to",
+      "label": "Icon Background - End",
+      "default": "#2D4A3E"
+    },
+    {
+      "type": "header",
+      "content": "Step Text Colors"
+    },
+    {
+      "type": "color",
+      "id": "step_label_color",
+      "label": "Step Label Color (STEP 1, 2...)",
+      "default": "#C8943E"
+    },
+    {
+      "type": "color",
+      "id": "step_title_color",
+      "label": "Step Title Color",
+      "default": "#1B3028"
+    },
+    {
+      "type": "color",
+      "id": "step_desc_color",
+      "label": "Step Description Color",
+      "default": "#8B7D6B"
+    },
+    {
+      "type": "color",
+      "id": "connector_color",
+      "label": "Connector Line Color",
+      "default": "#2D4A3E"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Journey Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Emoji Icon",
+          "default": "🏔️",
+          "info": "Paste any emoji here, e.g. 🏔️ 🧀 ☀️ ✅ 📦"
+        },
+        {
+          "type": "text",
+          "id": "step_label",
+          "label": "Step Label (e.g. STEP 1)",
+          "default": "STEP 1"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step Title",
+          "default": "Himalayan Farms"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Step Description",
+          "default": "Fresh yak & cow milk sourced from small mountain farms at high altitude"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Origin Journey",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "icon": "🏔️",
+            "step_label": "STEP 1",
+            "title": "Himalayan Farms",
+            "description": "Fresh yak & cow milk sourced from small mountain farms at high altitude"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "🧀",
+            "step_label": "STEP 2",
+            "title": "Traditional Recipe",
+            "description": "Milk is boiled, churned, and mixed with just lime juice and a pinch of salt"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "☀️",
+            "step_label": "STEP 3",
+            "title": "Sun-Dried & Smoked",
+            "description": "Chews are sun-dried for weeks and naturally smoked for rich flavor and texture"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "✅",
+            "step_label": "STEP 4",
+            "title": "Quality Tested",
+            "description": "Every batch is inspected and tested before being packed for your pup"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "📦",
+            "step_label": "STEP 5",
+            "title": "Delivered to You",
+            "description": "Ships fast from the US with free shipping on orders over $30"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

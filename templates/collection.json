@@ -1,0 +1,258 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "settings": {
+        "spacing": 0,
+        "color_scheme": "scheme-2",
+        "line_separator": "",
+        "visibility": ""
+      }
+    },
+    "banner-split": {
+      "type": "main-collection-split-banner",
+      "settings": {
+        "show_collection_title": true,
+        "heading_size": "h1",
+        "show_collection_title_count": true,
+        "show_collection_description": true,
+        "text_size": "t2",
+        "show_collection_image": true,
+        "show_product_image": false,
+        "collection_image_ratio": "landscape",
+        "stick_collection_info": true,
+        "image_position_desktop": "right",
+        "content_max_width": "xs",
+        "desktop_heading_alignment": "left",
+        "mobile_heading_alignment": "left",
+        "color_scheme": "scheme-2",
+        "top_padding": "pt-s05",
+        "bottom_padding": "pb-s",
+        "heading_tag": "h1"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "blocks": {
+        "inline_promo_AtRrpT": {
+          "type": "inline_promo",
+          "settings": {
+            "position": 3,
+            "promo_image": "shopify://shop_images/67d79f7446f7bb9163a28c22.png",
+            "promo_image_overlay_opacity": 50,
+            "promo_text": "<h4>Promotion</h4><p>While stocks last.</p>",
+            "promo_url": "",
+            "promo_text_size": "h6-size",
+            "promo_text_position": "justify-center items-center",
+            "promo_text_alignment": "center",
+            "promo_text_padding": 1,
+            "promo_text_color": "#ffffff",
+            "visibility": "",
+            "show_at_specific_time_of_day": false,
+            "show_time_morning": true,
+            "show_time_afternoon": true,
+            "show_time_evening": true,
+            "show_time_night": true
+          }
+        },
+        "top_promo_qw3d4n": {
+          "type": "top_promo",
+          "disabled": true,
+          "settings": {
+            "promo_image_min_height": 140,
+            "promo_image": "shopify://shop_images/67d79f6e46f7bb9163a28bda.png",
+            "promo_image_overlay_opacity": 50,
+            "promo_text": "",
+            "promo_url": "",
+            "promo_text_size": "h4-size",
+            "promo_text_position": "justify-center items-center",
+            "promo_text_alignment": "center",
+            "promo_text_padding": 1,
+            "promo_text_color": "#ffffff",
+            "visibility": "",
+            "show_at_specific_time_of_day": false,
+            "show_time_morning": true,
+            "show_time_afternoon": true,
+            "show_time_evening": true,
+            "show_time_night": true
+          }
+        }
+      },
+      "block_order": [
+        "inline_promo_AtRrpT",
+        "top_promo_qw3d4n"
+      ],
+      "settings": {
+        "full_width": false,
+        "products_per_page": 15,
+        "columns_desktop": "5",
+        "columns_mobile": "2",
+        "filter_type": "vertical",
+        "enable_filtering": true,
+        "enable_sorting": true,
+        "show_filter_count": true,
+        "uppercase_filter_titles": true,
+        "open_all_accordions": true,
+        "show_more_number": 12,
+        "filter_text_size": "1.4",
+        "box_filters": "",
+        "box_filter_active": "border",
+        "show_image_box_filter_border": true,
+        "show_image_box_filter_labels": true,
+        "image_box_filter_cols": 2,
+        "image_box_filter_active": "border",
+        "swatch_size": 1.8,
+        "show_swatch_filter_labels": true,
+        "color_scheme": "",
+        "color_scheme_drawer": "",
+        "color_scheme_filter": "",
+        "color_scheme_filter_bar": "",
+        "card_shadow": true,
+        "top_padding": "pt-s",
+        "bottom_padding": "pb-s"
+      }
+    },
+    "banner": {
+      "type": "main-collection-banner",
+      "blocks": {
+        "collection_heading_PrBhyC": {
+          "type": "collection_heading",
+          "settings": {
+            "show_collection_title_count": true,
+            "heading_size": "h2",
+            "heading_tag": "h1"
+          }
+        },
+        "collection_description_NzG3Qj": {
+          "type": "collection_description",
+          "settings": {
+            "max_height": 0,
+            "text_size": "t2"
+          }
+        },
+        "spacer_imp6yn": {
+          "type": "spacer",
+          "settings": {
+            "show_line_separator": true,
+            "spacing_top": 2.4,
+            "spacing_bottom": 2.4,
+            "spacer_visibility": "both",
+            "line_color": ""
+          }
+        },
+        "countdown_McWWj8": {
+          "type": "countdown",
+          "settings": {
+            "end_date": "",
+            "end_time": "",
+            "end_action": "hide",
+            "end_message": "You just missed it!",
+            "abbreviate_units": false,
+            "countdown_size": 26,
+            "separator": ":",
+            "countdown_font_weight": "bold",
+            "text_alignment": "center",
+            "countdown_container": "none",
+            "countdown_color": "",
+            "countdown_background_color": "#ededed",
+            "countdown_background_gradient": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_heading_PrBhyC",
+        "collection_description_NzG3Qj",
+        "spacer_imp6yn",
+        "countdown_McWWj8"
+      ],
+      "disabled": true,
+      "settings": {
+        "show_collection_image": true,
+        "show_product_image": false,
+        "image_overlay_opacity": 50,
+        "fix_image": true,
+        "image_ratio": "custom",
+        "desktop_section_height": 410,
+        "mobile_section_height": 100,
+        "full_width": true,
+        "full_width_animate": true,
+        "desktop_content_position": "md:justify-start md:items-center",
+        "mobile_content_position": "justify-start items-center",
+        "content_max_width": "s",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "show_text_box": "off",
+        "color_scheme": "scheme-1",
+        "container_color_scheme": "scheme-6",
+        "line_separator": "",
+        "top_padding": "pt-s",
+        "bottom_padding": "pb-s"
+      }
+    },
+    "scrolling_text_section_qHMNQd": {
+      "type": "scrolling-text-section",
+      "blocks": {
+        "heading_NJKjbY": {
+          "type": "heading",
+          "settings": {
+            "heading": "🌿  100% Organic ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎  🍃 Natural Ingredients ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎  🚫 No Additives ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎  🦴 Long-Lasting Chew ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎  🩺 Vet Approved ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎  🌾❌Grain Free ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ 🛠 Hand Crafted‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ 🤝 Ethical Sourcing ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ⭐ Premium Quality Guaranteed ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ 👃 Low Odor ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ 🌱🚫 Soy Free",
+            "heading_italic_convert": "",
+            "heading_size": "h3",
+            "heading_size_custom": 2.4,
+            "heading_line_height_custom": 1.2,
+            "heading_tag": "h2"
+          }
+        }
+      },
+      "block_order": [
+        "heading_NJKjbY"
+      ],
+      "name": "Scrolling Text Section",
+      "settings": {
+        "full_width": true,
+        "spacing": 2.4,
+        "gap": 3,
+        "speed": 1,
+        "direction": "normal",
+        "pause_on_hover": false,
+        "content_max_width": "m",
+        "desktop_heading_alignment": "left",
+        "mobile_heading_alignment": "left",
+        "title": "",
+        "italic_convert": "",
+        "heading_size": "h2",
+        "text": "",
+        "text_size": "t3",
+        "view_all_link": "",
+        "view_all_text": "",
+        "view_all_text_size": "t3",
+        "color_scheme": "scheme-7",
+        "top_padding": "pt-0",
+        "bottom_padding": "pb-0",
+        "visibility": "",
+        "hide_when_empty": false,
+        "show_at_specific_time_of_day": false,
+        "show_time_morning": true,
+        "show_time_afternoon": true,
+        "show_time_evening": true,
+        "show_time_night": true
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "banner-split",
+    "product-grid",
+    "banner",
+    "scrolling_text_section_qHMNQd"
+  ]
+}

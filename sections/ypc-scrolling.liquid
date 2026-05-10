@@ -1,0 +1,214 @@
+<div id="ypc-marquee-{{ section.id }}" class="ypc-marquee">
+  <div class="ypc-marquee__track">
+
+    {%- comment -%} First list {%- endcomment -%}
+    <ul class="ypc-marquee__list">
+      {% for block in section.blocks %}
+        <li class="ypc-marquee__item" {{ block.shopify_attributes }}>
+          {%- if block.settings.icon != blank -%}
+            <span class="ypc-marquee__icon-wrap">
+              {%- assign icon_url = block.settings.icon | image_url: width: 48 -%}
+              <img src="{{ icon_url }}" class="ypc-marquee__icon-img" alt="{{ block.settings.label | escape }}" width="24" height="24" loading="lazy">
+            </span>
+          {%- endif -%}
+          <span class="ypc-marquee__label">{{ block.settings.label }}</span>
+          <span class="ypc-marquee__sep" aria-hidden="true">•</span>
+        </li>
+      {% endfor %}
+    </ul>
+
+    {%- comment -%} Cloned list for seamless loop {%- endcomment -%}
+    <ul class="ypc-marquee__list" aria-hidden="true">
+      {% for block in section.blocks %}
+        <li class="ypc-marquee__item">
+          {%- if block.settings.icon != blank -%}
+            <span class="ypc-marquee__icon-wrap">
+              {%- assign icon_url = block.settings.icon | image_url: width: 48 -%}
+              <img src="{{ icon_url }}" class="ypc-marquee__icon-img" alt="" width="24" height="24" loading="lazy">
+            </span>
+          {%- endif -%}
+          <span class="ypc-marquee__label">{{ block.settings.label }}</span>
+          <span class="ypc-marquee__sep" aria-hidden="true">•</span>
+        </li>
+      {% endfor %}
+    </ul>
+
+  </div>
+</div>
+
+<style>
+  #ypc-marquee-{{ section.id }} {
+    background: {{ section.settings.bg_color }};
+    overflow: hidden;
+    padding: {{ section.settings.padding_y }}px 0;
+    position: relative;
+    /* No mask-image — edges are clean/hard */
+  }
+
+  #ypc-marquee-{{ section.id }} .ypc-marquee__track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    animation: ypc-marquee-scroll-{{ section.id }} {{ section.settings.speed }}s linear infinite;
+    {% if section.settings.direction == 'right' %}
+      animation-direction: reverse;
+    {% endif %}
+  }
+
+  #ypc-marquee-{{ section.id }}:hover .ypc-marquee__track {
+    animation-play-state: paused;
+  }
+
+  @keyframes ypc-marquee-scroll-{{ section.id }} {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  #ypc-marquee-{{ section.id }} .ypc-marquee__list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
+  }
+
+  #ypc-marquee-{{ section.id }} .ypc-marquee__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 24px;
+    white-space: nowrap;
+  }
+
+  #ypc-marquee-{{ section.id }} .ypc-marquee__icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  #ypc-marquee-{{ section.id }} .ypc-marquee__icon-img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    display: block;
+  }
+
+  #ypc-marquee-{{ section.id }} .ypc-marquee__label {
+    font-size: {{ section.settings.font_size }}px;
+    font-weight: 700;
+    color: {{ section.settings.text_color }};
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  #ypc-marquee-{{ section.id }} .ypc-marquee__sep {
+    color: {{ section.settings.text_color }};
+    opacity: 0.40;
+    font-size: 16px;
+    margin-left: 24px;
+    font-weight: 300;
+    line-height: 1;
+  }
+
+  #ypc-marquee-{{ section.id }} .ypc-marquee__item:last-child .ypc-marquee__sep {
+    display: none;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "YPC Marquee Ticker",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#d4711e"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Scroll speed (seconds — lower = faster)",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "default": 30
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "Scroll direction",
+      "options": [
+        { "value": "left",  "label": "Left (default)" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "padding_y",
+      "label": "Top / bottom padding (px)",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font size (px)",
+      "min": 11,
+      "max": 18,
+      "step": 1,
+      "default": 13
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Ticker Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon image (SVG or PNG recommended)"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label text",
+          "default": "All Natural"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "YPC Marquee Ticker",
+      "blocks": [
+        { "type": "item", "settings": { "label": "Easily Digestible" } },
+        { "type": "item", "settings": { "label": "All Natural" } },
+        { "type": "item", "settings": { "label": "No Salt Added" } },
+        { "type": "item", "settings": { "label": "No Odor" } },
+        { "type": "item", "settings": { "label": "Long Lasting" } },
+        { "type": "item", "settings": { "label": "Himalayan Source" } },
+        { "type": "item", "settings": { "label": "Vet Approved" } },
+        { "type": "item", "settings": { "label": "4 Ingredients Only" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

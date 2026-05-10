@@ -1,0 +1,108 @@
+.accordion {
+  margin-top: 1rem;
+  margin-bottom: 0;
+  border: 1px solid rgba(var(--color-foreground), 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  background-color: rgb(var(--color-background));
+}
+
+.accordion:hover {
+  border-color: rgba(var(--color-foreground), 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.accordion summary {
+  display: flex;
+  align-items: center;
+  position: relative;
+  line-height: 1;
+  padding: 1.6rem 2rem;
+  cursor: pointer;
+}
+
+.accordion .summary__title {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  font-weight: 600;
+  font-size: 1.6rem;
+}
+
+.accordion__title {
+  color: rgb(var(--color-foreground));
+}
+
+.accordion .icon-caret {
+  width: 1.2rem;
+  height: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.accordion details[open] > summary .icon-caret {
+  transform: rotate(180deg);
+}
+
+.accordion__content {
+  padding: 0 2rem 2rem;
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color: rgba(var(--color-foreground), 0.8);
+}
+
+.accordion[aria-hidden="true"] {
+  display: none;
+}
+
+.accordion--no-lines {
+  border-top: 0;
+  border-bottom: 0;
+}
+
+.accordion__title {
+  display: inline-flex;
+  align-items: center;
+  max-width: calc(100% - 6rem);
+  min-height: 2rem;
+  margin: 0;
+  word-break: break-word;
+  line-height: 1.5em;
+}
+
+.accordion .icon-accordion {
+  fill: rgb(var(--color-foreground));
+  height: 1.3em;
+  width: 1.3em;
+  overflow: visible;
+}
+
+.accordion details[open] > summary .icon-caret,
+footer-accordion details[open] > summary .icon-caret {
+  transform: rotate(180deg);
+}
+
+.accordion__image {
+  align-self: flex-start;
+  padding: 0.6rem 0;
+  margin-inline-end: 0.7em;
+}
+
+.accordion__content {
+  word-break: break-word;
+  padding: 0 0.6rem 0.6rem;
+}
+
+.accordion__content img {
+  max-width: 100%;
+}
+
+.tab-active .accordion__content .button:focus-visible {
+  outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
+  box-shadow: none;
+  outline-offset: -0.4rem;
+}
+
+.first-accordion {
+  margin-top: 0;
+}

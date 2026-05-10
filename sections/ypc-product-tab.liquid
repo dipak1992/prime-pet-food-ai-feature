@@ -1,0 +1,655 @@
+<section
+  id="ypc-tabs-recos-{{ section.id }}"
+  class="ypc-tabs-recos"
+  style="
+    --ypc-bg: {{ section.settings.bg_color }};
+    --ypc-text: {{ section.settings.text_color }};
+    --ypc-muted: {{ section.settings.muted_color }};
+    --ypc-accent: {{ section.settings.accent_color }};
+    --ypc-heading-size: {{ section.settings.heading_size }}px;
+    --ypc-body-size: {{ section.settings.body_size }}px;
+    --ypc-tab-size: {{ section.settings.tab_size }}px;
+    --ypc-reco-heading-size: {{ section.settings.reco_heading_size }}px;
+    --ypc-product-title-size: {{ section.settings.product_title_size }}px;
+    --ypc-product-price-size: {{ section.settings.product_price_size }}px;
+  "
+>
+  <div class="ypc-tabs-recos__inner">
+    <div class="ypc-tabs-recos__left">
+      <div class="ypc-tabs-recos__nav" role="tablist">
+        <button class="ypc-tabs-recos__tab is-active" type="button" data-tab="description">
+          {{ section.settings.tab_1_label }}
+        </button>
+
+        <button class="ypc-tabs-recos__tab" type="button" data-tab="change">
+          {{ section.settings.tab_2_label }}
+        </button>
+
+        <button class="ypc-tabs-recos__tab" type="button" data-tab="sizing">
+          {{ section.settings.tab_3_label }}
+        </button>
+
+        <button class="ypc-tabs-recos__tab" type="button" data-tab="ingredients">
+          {{ section.settings.tab_4_label }}
+        </button>
+      </div>
+
+      <div class="ypc-tabs-recos__content">
+        <div class="ypc-tabs-recos__panel is-active" data-panel="description">
+          <h2>{{ section.settings.description_heading }}</h2>
+          <div class="rte">
+            {% if product.description != blank %}
+              {{ product.description }}
+            {% else %}
+              {{ section.settings.description_fallback }}
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="ypc-tabs-recos__panel" data-panel="change">
+          <h2>{{ section.settings.change_heading }}</h2>
+          <div class="rte">
+            {% if product.metafields.custom.chews_for_change != blank %}
+              {{ product.metafields.custom.chews_for_change | metafield_tag }}
+            {% else %}
+              {{ section.settings.change_fallback }}
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="ypc-tabs-recos__panel" data-panel="sizing">
+          <h2>{{ section.settings.sizing_heading }}</h2>
+          <div class="rte">
+            {% if product.metafields.custom.sizing != blank %}
+              {{ product.metafields.custom.sizing | metafield_tag }}
+            {% else %}
+              {{ section.settings.sizing_fallback }}
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="ypc-tabs-recos__panel" data-panel="ingredients">
+          <h2>{{ section.settings.ingredients_heading }}</h2>
+          <div class="rte">
+            {% if product.metafields.custom.ingredients != blank %}
+              {{ product.metafields.custom.ingredients | metafield_tag }}
+            {% else %}
+              {{ section.settings.ingredients_fallback }}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="ypc-tabs-recos__right">
+      <h3 class="ypc-tabs-recos__reco-heading">
+        {{ section.settings.reco_heading }}
+      </h3>
+
+      <div class="ypc-tabs-recos__products">
+        {% for block in section.blocks %}
+          {% assign rec_product = block.settings.product %}
+
+          {% if rec_product != blank %}
+            <div class="ypc-rec-product" {{ block.shopify_attributes }}>
+              <a href="{{ rec_product.url }}" class="ypc-rec-product__image-link">
+                {% if rec_product.featured_image %}
+                  <img
+                    src="{{ rec_product.featured_image | image_url: width: 700 }}"
+                    alt="{{ rec_product.featured_image.alt | default: rec_product.title | escape }}"
+                    width="{{ rec_product.featured_image.width }}"
+                    height="{{ rec_product.featured_image.height }}"
+                    loading="lazy"
+                    class="ypc-rec-product__image"
+                  >
+                {% endif %}
+              </a>
+
+              <h4 class="ypc-rec-product__title">
+                <a href="{{ rec_product.url }}">{{ rec_product.title }}</a>
+              </h4>
+
+              <div class="ypc-rec-product__price">
+                <span class="ypc-rec-product__price-current">
+                  {{ rec_product.price | money }}
+                </span>
+
+                {% if rec_product.compare_at_price > rec_product.price %}
+                  <span class="ypc-rec-product__price-compare">
+                    {{ rec_product.compare_at_price | money }}
+                  </span>
+                {% endif %}
+              </div>
+
+              <a href="{{ rec_product.url }}" class="ypc-rec-product__quick">
+                {{ section.settings.product_link_label }}
+              </a>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </aside>
+  </div>
+</section>
+
+<script>
+  (function() {
+    const section = document.getElementById('ypc-tabs-recos-{{ section.id }}');
+    if (!section) return;
+
+    const tabs = section.querySelectorAll('.ypc-tabs-recos__tab');
+    const panels = section.querySelectorAll('.ypc-tabs-recos__panel');
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', function(event) {
+        event.preventDefault();
+
+        const selectedTab = this.getAttribute('data-tab');
+
+        tabs.forEach((item) => {
+          item.classList.remove('is-active');
+        });
+
+        panels.forEach((panel) => {
+          panel.classList.remove('is-active');
+        });
+
+        this.classList.add('is-active');
+
+        const activePanel = section.querySelector('[data-panel="' + selectedTab + '"]');
+        if (activePanel) {
+          activePanel.classList.add('is-active');
+        }
+      });
+    });
+  })();
+</script>
+
+<style>
+  .ypc-tabs-recos,
+  .ypc-tabs-recos * {
+    box-sizing: border-box;
+  }
+
+  .ypc-tabs-recos {
+    background: var(--ypc-bg);
+    padding: 52px 20px 70px;
+  }
+
+  .ypc-tabs-recos__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+    gap: 42px;
+    align-items: start;
+  }
+
+  .ypc-tabs-recos__left,
+  .ypc-tabs-recos__right {
+    min-width: 0;
+  }
+
+  .ypc-tabs-recos__nav {
+    display: flex;
+    align-items: flex-end;
+    gap: 34px;
+    border-bottom: 1px solid rgba(43, 20, 8, 0.16);
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ypc-tabs-recos__nav::-webkit-scrollbar {
+    height: 5px;
+  }
+
+  .ypc-tabs-recos__nav::-webkit-scrollbar-thumb {
+    background: rgba(43, 20, 8, 0.24);
+    border-radius: 999px;
+  }
+
+  .ypc-tabs-recos__tab {
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: var(--ypc-muted);
+    padding: 0 0 22px;
+    font-size: var(--ypc-tab-size);
+    line-height: 1.15;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-align: left;
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  .ypc-tabs-recos__tab:hover,
+  .ypc-tabs-recos__tab.is-active {
+    color: var(--ypc-text);
+  }
+
+  .ypc-tabs-recos__tab.is-active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 3px;
+    background: var(--ypc-text);
+    border-radius: 999px;
+  }
+
+  .ypc-tabs-recos__content {
+    padding-top: 42px;
+  }
+
+  .ypc-tabs-recos__panel {
+    display: none;
+  }
+
+  .ypc-tabs-recos__panel.is-active {
+    display: block;
+  }
+
+  .ypc-tabs-recos__panel h2 {
+    margin: 0 0 34px;
+    color: var(--ypc-text);
+    font-size: var(--ypc-heading-size);
+    line-height: 1.05;
+    font-weight: 950;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+
+  .ypc-tabs-recos .rte {
+    color: var(--ypc-text);
+    font-size: var(--ypc-body-size);
+    line-height: 1.62;
+    font-weight: 500;
+    max-width: 1000px;
+  }
+
+  .ypc-tabs-recos .rte p {
+    margin: 0 0 28px;
+  }
+
+  .ypc-tabs-recos .rte p:last-child {
+    margin-bottom: 0;
+  }
+
+  .ypc-tabs-recos .rte strong {
+    color: var(--ypc-text);
+    font-weight: 900;
+  }
+
+  .ypc-tabs-recos .rte ul {
+    list-style: square;
+    padding-left: 26px;
+    margin: 32px 0;
+  }
+
+  .ypc-tabs-recos .rte li {
+    margin-bottom: 18px;
+    padding-left: 8px;
+  }
+
+  .ypc-tabs-recos__reco-heading {
+    margin: 0 0 36px;
+    color: var(--ypc-text);
+    font-size: var(--ypc-reco-heading-size);
+    line-height: 1;
+    font-weight: 900;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+.ypc-tabs-recos__products {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.ypc-rec-product {
+  text-align: center;
+  background: #fffaf3;
+  border: 1px solid rgba(43, 20, 8, 0.12);
+  border-radius: 18px;
+  padding: 14px;
+  box-shadow: 0 10px 28px rgba(43, 20, 8, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ypc-rec-product:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(43, 20, 8, 0.1);
+}
+
+.ypc-rec-product__image-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 210px;
+  background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.ypc-rec-product__image {
+  display: block;
+  width: 100%;
+  max-width: 190px;
+  height: 190px;
+  object-fit: contain;
+}
+
+.ypc-rec-product__title {
+  margin: 0 0 8px;
+  font-size: var(--ypc-product-title-size);
+  line-height: 1.28;
+  font-weight: 800;
+  color: var(--ypc-text);
+  min-height: 44px;
+}
+
+.ypc-rec-product__title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.ypc-rec-product__price {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: var(--ypc-product-price-size);
+  font-weight: 850;
+}
+
+.ypc-rec-product__price-current {
+  color: var(--ypc-accent);
+}
+
+.ypc-rec-product__price-compare {
+  color: var(--ypc-muted);
+  text-decoration: line-through;
+}
+
+.ypc-rec-product__quick {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: var(--ypc-accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.ypc-rec-product__quick:hover {
+  opacity: 0.9;
+}
+  @media (max-width: 1100px) {
+    .ypc-tabs-recos__inner {
+      grid-template-columns: 1fr;
+      gap: 52px;
+    }
+
+    .ypc-tabs-recos__right {
+      max-width: 760px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .ypc-tabs-recos {
+      padding: 34px 16px 50px;
+    }
+
+    .ypc-tabs-recos__nav {
+      gap: 30px;
+    }
+
+    .ypc-tabs-recos__tab {
+      padding-bottom: 20px;
+    }
+
+    .ypc-tabs-recos__content {
+      padding-top: 34px;
+    }
+
+    .ypc-tabs-recos__products {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "YPC Tabs + Products",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Tab labels"
+    },
+    {
+      "type": "text",
+      "id": "tab_1_label",
+      "label": "Tab 1 label",
+      "default": "Description"
+    },
+    {
+      "type": "text",
+      "id": "tab_2_label",
+      "label": "Tab 2 label",
+      "default": "Chews for Change"
+    },
+    {
+      "type": "text",
+      "id": "tab_3_label",
+      "label": "Tab 3 label",
+      "default": "Sizing"
+    },
+    {
+      "type": "text",
+      "id": "tab_4_label",
+      "label": "Tab 4 label",
+      "default": "Ingredients"
+    },
+    {
+      "type": "header",
+      "content": "Tab headings"
+    },
+    {
+      "type": "text",
+      "id": "description_heading",
+      "label": "Description heading",
+      "default": "The Chew That Calms and Cleans"
+    },
+    {
+      "type": "text",
+      "id": "change_heading",
+      "label": "Chews for Change heading",
+      "default": "Chews for Change"
+    },
+    {
+      "type": "text",
+      "id": "sizing_heading",
+      "label": "Sizing heading",
+      "default": "Find the Right Size"
+    },
+    {
+      "type": "text",
+      "id": "ingredients_heading",
+      "label": "Ingredients heading",
+      "default": "Simple Ingredients"
+    },
+    {
+      "type": "header",
+      "content": "Fallback content"
+    },
+    {
+      "type": "richtext",
+      "id": "description_fallback",
+      "label": "Description fallback",
+      "default": "<p>Add your product description here.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "change_fallback",
+      "label": "Chews for Change fallback",
+      "default": "<p>Every chew supports natural, responsible sourcing and helps bring premium Himalayan chews from local makers to happy dogs.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "sizing_fallback",
+      "label": "Sizing fallback",
+      "default": "<p>Choose the chew size based on your dog’s weight, chewing style, and chewing strength.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "ingredients_fallback",
+      "label": "Ingredients fallback",
+      "default": "<p>Yak milk, cow milk, lime juice, and salt.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Recommended products"
+    },
+    {
+      "type": "text",
+      "id": "reco_heading",
+      "label": "Recommendation heading",
+      "default": "You may also like..."
+    },
+    {
+      "type": "text",
+      "id": "product_link_label",
+      "label": "Product link label",
+      "default": "Quick view"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#f6f1e9"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Main text color",
+      "default": "#26313a"
+    },
+    {
+      "type": "color",
+      "id": "muted_color",
+      "label": "Muted text color",
+      "default": "#6d7478"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent / price color",
+      "default": "#d2622e"
+    },
+    {
+      "type": "header",
+      "content": "Text sizes"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Main content heading size",
+      "min": 20,
+      "max": 70,
+      "step": 1,
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Body text size",
+      "min": 12,
+      "max": 30,
+      "step": 1,
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "tab_size",
+      "label": "Tab text size",
+      "min": 10,
+      "max": 28,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "reco_heading_size",
+      "label": "Recommendation heading size",
+      "min": 10,
+      "max": 32,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "product_title_size",
+      "label": "Recommended product title size",
+      "min": 10,
+      "max": 28,
+      "step": 1,
+      "default": 17
+    },
+    {
+      "type": "range",
+      "id": "product_price_size",
+      "label": "Recommended product price/link size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "default": 16
+    }
+  ],
+  "blocks": [
+    {
+      "type": "recommended_product",
+      "name": "Recommended product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Choose product"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "YPC Tabs + Products",
+      "blocks": [
+        {
+          "type": "recommended_product"
+        },
+        {
+          "type": "recommended_product"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

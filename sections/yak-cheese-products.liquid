@@ -1,0 +1,715 @@
+{% comment %} {% comment %} {% comment %}
+  Prime Pet Food — Premium Yak Cheese Chews Products Section
+  File: sections/yak-cheese-products.liquid
+  Upload to: Shopify Admin → Online Store → Themes → Edit Code → sections/
+{% endcomment %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ── All colors driven by Theme Editor pickers ── */
+#ycp-{{ section.id }} {
+  --ycp-forest:       {{ section.settings.color_forest }};
+  --ycp-forest-dark:  {{ section.settings.color_forest_dark }};
+  --ycp-amber:        {{ section.settings.color_amber }};
+  --ycp-cream:        {{ section.settings.color_section_bg }};
+  --ycp-cream-dark:   {{ section.settings.color_image_bg_end }};
+  --ycp-stone:        {{ section.settings.color_stone }};
+  --ycp-stone-light:  {{ section.settings.color_stone_light }};
+  --ycp-card-bg:      {{ section.settings.color_card_bg }};
+  --ycp-eyebrow:      {{ section.settings.color_eyebrow }};
+  --ycp-title:        {{ section.settings.color_title }};
+  --ycp-subtitle:     {{ section.settings.color_subtitle }};
+}
+
+/* ── Section Wrapper ── */
+#ycp-{{ section.id }} .ycp-section {
+  padding: {{ section.settings.padding_top }}px 20px {{ section.settings.padding_bottom }}px;
+  background: var(--ycp-cream);
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ── Section Header ── */
+#ycp-{{ section.id }} .ycp-section-title {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+#ycp-{{ section.id }} .ycp-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ycp-eyebrow);
+  margin-bottom: 12px;
+}
+#ycp-{{ section.id }} .ycp-section-title h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 700;
+  color: var(--ycp-title);
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+#ycp-{{ section.id }} .ycp-section-title p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ycp-subtitle);
+  margin: 0;
+}
+
+/* ── Product Grid ── */
+#ycp-{{ section.id }} .ycp-product-grid {
+  max-width: 1100px;
+  margin: 40px auto 0;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 260px));
+  justify-content: center; /* 🔥 THIS IS THE KEY FIX */
+  gap: 24px;
+}
+
+/* ── Product Card ── */
+#ycp-{{ section.id }} .ycp-product-card {
+  background: var(--ycp-card-bg);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  cursor: pointer;
+  position: relative;
+}
+#ycp-{{ section.id }} .ycp-product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(45,74,62,0.12), 0 4px 12px rgba(0,0,0,0.06);
+}
+
+/* ── Product Image Area ── */
+#ycp-{{ section.id }} .ycp-product-image {
+  position: relative;
+  padding-top: 100%;
+  background: linear-gradient(135deg, var(--ycp-cream-dark) 0%, var(--ycp-cream) 100%);
+  overflow: hidden;
+}
+/* Real product image */
+#ycp-{{ section.id }} .ycp-product-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+#ycp-{{ section.id }} .ycp-product-card:hover .ycp-product-image img {
+  transform: scale(1.05);
+}
+/* Fallback emoji circle (no image) */
+#ycp-{{ section.id }} .ycp-product-image-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#ycp-{{ section.id }} .ycp-product-circle {
+  width: 60%;
+  height: 60%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #D4A853, #B8893A);
+  box-shadow: 0 8px 32px rgba(180,130,50,0.3), inset 0 -4px 12px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  transition: transform 0.4s ease;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+}
+#ycp-{{ section.id }} .ycp-product-card:hover .ycp-product-circle {
+  transform: scale(1.05);
+}
+
+/* ── Badges ── */
+#ycp-{{ section.id }} .ycp-product-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--ycp-forest);
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  z-index: 2;
+}
+#ycp-{{ section.id }} .ycp-product-save {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--ycp-amber);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  z-index: 2;
+}
+#ycp-{{ section.id }} .ycp-product-vet {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(8px);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--ycp-forest);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 2;
+}
+
+/* ── Product Info ── */
+#ycp-{{ section.id }} .ycp-product-info {
+  padding: 16px 18px 20px;
+}
+#ycp-{{ section.id }} .ycp-stars {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-bottom: 6px;
+}
+#ycp-{{ section.id }} .ycp-star {
+  color: var(--ycp-amber);
+  font-size: 13px;
+}
+#ycp-{{ section.id }} .ycp-review-count {
+  font-size: 12px;
+  color: var(--ycp-stone);
+  font-weight: 500;
+  margin-left: 4px;
+}
+#ycp-{{ section.id }} .ycp-product-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ycp-title);
+  margin-bottom: 4px;
+  line-height: 1.3;
+  text-decoration: none;
+  display: block;
+}
+#ycp-{{ section.id }} .ycp-product-name:hover {
+  color: var(--ycp-forest);
+}
+#ycp-{{ section.id }} .ycp-product-size {
+  font-size: 12px;
+  color: var(--ycp-stone-light);
+  margin-bottom: 12px;
+}
+#ycp-{{ section.id }} .ycp-product-pricing {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+#ycp-{{ section.id }} .ycp-product-price {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ycp-forest-dark);
+}
+#ycp-{{ section.id }} .ycp-product-original {
+  font-size: 13px;
+  color: var(--ycp-stone-light);
+  text-decoration: line-through;
+}
+
+/* ── Add to Cart / View Button ── */
+#ycp-{{ section.id }} .ycp-product-btn {
+  width: 100%;
+  margin-top: 14px;
+  padding: 11px 0;
+  background: transparent;
+  color: var(--ycp-forest);
+  border: 1.5px solid var(--ycp-forest);
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  text-align: center;
+  display: block;
+  text-decoration: none;
+}
+#ycp-{{ section.id }} .ycp-product-card:hover .ycp-product-btn,
+#ycp-{{ section.id }} .ycp-product-btn:hover {
+  background: var(--ycp-forest);
+  color: #fff;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  #ycp-{{ section.id }} .ycp-section {
+    padding: 48px 16px;
+  }
+  #ycp-{{ section.id }} .ycp-product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+}
+@media (max-width: 420px) {
+  #ycp-{{ section.id }} .ycp-product-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<div id="ycp-{{ section.id }}">
+  <section class="ycp-section" id="yak-cheese-products">
+    <div class="ycp-section-title">
+      {% if section.settings.eyebrow != blank %}
+        <div class="ycp-eyebrow">{{ section.settings.eyebrow }}</div>
+      {% endif %}
+      {% if section.settings.title != blank %}
+        <h2>{{ section.settings.title }}</h2>
+      {% endif %}
+      {% if section.settings.subtitle != blank %}
+        <p>{{ section.settings.subtitle }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Products Grid -->
+    <div class="ycp-product-grid">
+
+      {% for block in section.blocks %}
+        {% if block.type == 'product_card' %}
+          {% assign the_product = block.settings.product %}
+
+          <div class="ycp-product-card" {{ block.shopify_attributes }}>
+
+            <!-- Image Area -->
+            <div class="ycp-product-image">
+
+              {% if the_product != blank and the_product.featured_image %}
+                <img
+                  src="{{ the_product.featured_image | image_url: width: 600 }}"
+                  alt="{{ the_product.featured_image.alt | default: the_product.title }}"
+                  loading="lazy"
+                  width="600"
+                  height="600"
+                >
+              {% else %}
+                <!-- Fallback emoji circle -->
+                <div class="ycp-product-image-inner">
+                  <div class="ycp-product-circle">
+                    {{ block.settings.fallback_emoji }}
+                  </div>
+                </div>
+              {% endif %}
+
+              <!-- Left Badge (e.g. Best Seller) -->
+              {% if block.settings.badge_text != blank %}
+                <div class="ycp-product-badge">{{ block.settings.badge_text }}</div>
+              {% endif %}
+
+              <!-- Right Save Badge -->
+              {% if block.settings.save_text != blank %}
+                <div class="ycp-product-save">{{ block.settings.save_text }}</div>
+              {% endif %}
+
+              <!-- Vet Approved -->
+              {% if block.settings.show_vet %}
+                <div class="ycp-product-vet">🩺 Vet Approved</div>
+              {% endif %}
+
+            </div>
+
+            <!-- Product Info -->
+            <div class="ycp-product-info">
+
+              <!-- Stars -->
+              {% if block.settings.show_rating %}
+                <div class="ycp-stars">
+                  ★★★★★
+                  <span class="ycp-review-count">
+                    ({% if the_product != blank and the_product.metafields.reviews.rating_count != blank %}
+                      {{ the_product.metafields.reviews.rating_count.value }}
+                    {% else %}
+                      {{ block.settings.review_count }}
+                    {% endif %})
+                  </span>
+                </div>
+              {% endif %}
+
+              <!-- Product Name -->
+              {% if the_product != blank %}
+                <a href="{{ the_product.url }}" class="ycp-product-name">
+                  {{ the_product.title }}
+                </a>
+              {% else %}
+                <span class="ycp-product-name">{{ block.settings.fallback_name }}</span>
+              {% endif %}
+
+              <!-- Size / Subtitle -->
+              {% if block.settings.size_text != blank %}
+                <div class="ycp-product-size">{{ block.settings.size_text }}</div>
+              {% endif %}
+
+              <!-- Pricing -->
+              <div class="ycp-product-pricing">
+                {% if the_product != blank %}
+                  <span class="ycp-product-price">{{ the_product.price | money }}</span>
+                  {% if the_product.compare_at_price > the_product.price %}
+                    <span class="ycp-product-original">{{ the_product.compare_at_price | money }}</span>
+                  {% endif %}
+                {% else %}
+                  <span class="ycp-product-price">{{ block.settings.fallback_price }}</span>
+                  {% if block.settings.fallback_original != blank %}
+                    <span class="ycp-product-original">{{ block.settings.fallback_original }}</span>
+                  {% endif %}
+                {% endif %}
+              </div>
+
+              <!-- Button -->
+              {% if the_product != blank %}
+                <a href="{{ the_product.url }}" class="ycp-product-btn">
+                  {{ block.settings.btn_label | default: 'VIEW OPTIONS' }}
+                </a>
+              {% else %}
+                <button class="ycp-product-btn">
+                  {{ block.settings.btn_label | default: 'VIEW OPTIONS' }}
+                </button>
+              {% endif %}
+
+            </div>
+          </div>
+
+        {% endif %}
+      {% endfor %}
+
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "YAK — Products Grid",
+  "tag": "section",
+  "class": "yak-cheese-products",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Label",
+      "default": "Our Collection"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Premium Yak Cheese Chews"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "default": "Every chew is handcrafted from authentic Himalayan yak milk — high in protein, low in fat, and irresistible to dogs"
+    },
+    {
+      "type": "header",
+      "content": "🎨 Colors — Section"
+    },
+    {
+      "type": "color",
+      "id": "color_section_bg",
+      "label": "Section Background",
+      "default": "#FAF5ED"
+    },
+    {
+      "type": "color",
+      "id": "color_card_bg",
+      "label": "Card Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "color_image_bg_end",
+      "label": "Product Image BG Color",
+      "default": "#EDE5D8"
+    },
+    {
+      "type": "header",
+      "content": "🎨 Colors — Text"
+    },
+    {
+      "type": "color",
+      "id": "color_eyebrow",
+      "label": "Eyebrow Text Color",
+      "default": "#C8943E"
+    },
+    {
+      "type": "color",
+      "id": "color_title",
+      "label": "Title & Product Name Color",
+      "default": "#2C2C2C"
+    },
+    {
+      "type": "color",
+      "id": "color_subtitle",
+      "label": "Subtitle Color",
+      "default": "#8B7D6B"
+    },
+    {
+      "type": "color",
+      "id": "color_stone",
+      "label": "Review Count Color",
+      "default": "#8B7D6B"
+    },
+    {
+      "type": "color",
+      "id": "color_stone_light",
+      "label": "Size Text & Strikethrough Color",
+      "default": "#A89B8A"
+    },
+    {
+      "type": "header",
+      "content": "🎨 Colors — Badges & Buttons"
+    },
+    {
+      "type": "color",
+      "id": "color_forest",
+      "label": "Forest Green (Badge & Button)",
+      "default": "#2D4A3E"
+    },
+    {
+      "type": "color",
+      "id": "color_forest_dark",
+      "label": "Dark Forest (Price & Button Hover)",
+      "default": "#1B3028"
+    },
+    {
+      "type": "color",
+      "id": "color_amber",
+      "label": "Amber (Stars & Save Badge)",
+      "default": "#C8943E"
+    },
+    {
+      "type": "header",
+      "content": "⚙️ Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_card",
+      "name": "Product Card",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Shopify Product"
+        },
+        {
+          "type": "header",
+          "content": "Badges"
+        },
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Left Badge (e.g. Best Seller)",
+          "default": "Best Seller",
+          "info": "Leave blank to hide"
+        },
+        {
+          "type": "text",
+          "id": "save_text",
+          "label": "Right Save Badge (e.g. Save 19%)",
+          
+          "info": "Leave blank to hide"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_vet",
+          "label": "Show Vet Approved Badge",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Rating"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_rating",
+          "label": "Show Star Rating",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "review_count",
+          "label": "Review Count (fallback)",
+          "default": "90"
+        },
+        {
+          "type": "header",
+          "content": "Card Details"
+        },
+        {
+          "type": "text",
+          "id": "size_text",
+          "label": "Size / Subtitle Text",
+          "default": "For dogs up to 15 lbs"
+        },
+        {
+          "type": "text",
+          "id": "btn_label",
+          "label": "Button Label",
+          "default": "VIEW OPTIONS"
+        },
+        {
+          "type": "header",
+          "content": "Fallback (if no product linked)"
+        },
+        {
+          "type": "text",
+          "id": "fallback_emoji",
+          "label": "Fallback Emoji",
+          "default": "🦴"
+        },
+        {
+          "type": "text",
+          "id": "fallback_name",
+          "label": "Fallback Product Name",
+          "default": "Small Yak Chews"
+        },
+        {
+          "type": "text",
+          "id": "fallback_price",
+          "label": "Fallback Price",
+          "default": "From $16.99"
+        },
+        {
+          "type": "text",
+          "id": "fallback_original",
+          "label": "Fallback Original Price",
+          "default": "$20.99",
+          "info": "Leave blank to hide strikethrough"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "YAK — Products Grid",
+      "blocks": [
+        {
+          "type": "product_card",
+          "settings": {
+            "badge_text": "Puppy Favorite",
+            "save_text": "Save 19%",
+            "show_vet": true,
+            "show_rating": true,
+            "review_count": "90",
+            "size_text": "For dogs up to 15 lbs",
+            "btn_label": "VIEW OPTIONS",
+            "fallback_emoji": "🦴",
+            "fallback_name": "Small Yak Chews",
+            "fallback_price": "From $16.99",
+            "fallback_original": "$20.99"
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "badge_text": "",
+            "save_text": "Save 16%",
+            "show_vet": true,
+            "show_rating": true,
+            "review_count": "32",
+            "size_text": "For dogs up to 35 lbs",
+            "btn_label": "VIEW OPTIONS",
+            "fallback_emoji": "🦴",
+            "fallback_name": "Medium Yak Chews",
+            "fallback_price": "From $16.14",
+            "fallback_original": "$18.99"
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "badge_text": "Best Seller",
+            "save_text": "",
+            "show_vet": true,
+            "show_rating": true,
+            "review_count": "87",
+            "size_text": "For dogs up to 55 lbs",
+            "btn_label": "VIEW OPTIONS",
+            "fallback_emoji": "🦴",
+            "fallback_name": "Large Yak Chews",
+            "fallback_price": "From $15.99",
+            "fallback_original": ""
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "badge_text": "Most Popular",
+            "save_text": "",
+            "show_vet": true,
+            "show_rating": true,
+            "review_count": "305",
+            "size_text": "For dogs up to 75 lbs",
+            "btn_label": "VIEW OPTIONS",
+            "fallback_emoji": "🦴",
+            "fallback_name": "Extra Large Yak Chews",
+            "fallback_price": "From $17.99",
+            "fallback_original": ""
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "badge_text": "Heavy Chewers",
+            "save_text": "Save 11%",
+            "show_vet": true,
+            "show_rating": true,
+            "review_count": "107",
+            "size_text": "For dogs 75+ lbs",
+            "btn_label": "VIEW OPTIONS",
+            "fallback_emoji": "🦴",
+            "fallback_name": "Jumbo Yak Chews",
+            "fallback_price": "From $16.99",
+            "fallback_original": "$18.99"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %} {% endcomment %} {% endcomment %}

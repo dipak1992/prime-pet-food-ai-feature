@@ -1,0 +1,53 @@
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "settings": {}
+    },
+    "header": {
+      "type": "page-header",
+      "settings": {
+        "content_max_width": "m",
+        "desktop_heading_alignment": "left",
+        "mobile_heading_alignment": "left",
+        "custom_page_header": false,
+        "title": "Blogs",
+        "italic_convert": "",
+        "heading_size": "h1",
+        "custom_page_text": false,
+        "text": "<p>Browse all of our latest blog posts in one place.</p>",
+        "text_size": "t2",
+        "show_view_all_link": false,
+        "view_all_link": "",
+        "view_all_text": "Learn more",
+        "view_all_text_size": "t3",
+        "color_scheme": "scheme-1",
+        "enable_top_padding": true,
+        "enable_bottom_padding": true,
+        "heading_tag": "h1"
+      }
+    },
+    "main": {
+      "type": "main-blogs-page",
+      "settings": {
+        "blog_menu": "",
+        "intro": "<p>Browse all of our latest blog posts in one place.</p>",
+        "items_to_show": 24,
+        "columns_desktop": "4",
+        "show_image": true,
+        "show_date": true,
+        "show_author": false,
+        "show_reading_estimate": true,
+        "show_first_tag": true,
+        "excerpt_mode": "short",
+        "top_padding": "pt-0",
+        "bottom_padding": "pb-s"
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "header",
+    "main"
+  ]
+}

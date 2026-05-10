@@ -1,0 +1,539 @@
+{% comment %}
+  File:    layout/popup.liquid  (ya snippets/popup.liquid)
+  Usage:   theme.liquid ke andar </body> se pehle include karo:
+           {% render 'popup' %}
+  Note:    Agar layout/ folder use karna ho toh
+           theme.liquid mein yeh line add karo body closing tag se pehle:
+           {% section 'popup' %}
+           Lekin best practice: snippets/popup.liquid rakho aur render karo.
+{% endcomment %}
+
+{%- liquid
+  assign show_popup      = section.settings.enable_popup
+  assign delay_seconds   = section.settings.trigger_delay
+  assign cookie_days     = section.settings.cookie_days
+  assign badge_text      = section.settings.badge_text
+  assign emoji           = section.settings.emoji
+  assign popup_title     = section.settings.popup_title
+  assign popup_subtitle  = section.settings.popup_subtitle
+  assign coupon_code     = section.settings.coupon_code
+  assign cta_text        = section.settings.cta_text
+  assign cta_link        = section.settings.cta_link
+  assign skip_text       = section.settings.skip_text
+  assign note_text       = section.settings.note_text
+  assign bg_color        = section.settings.popup_bg
+  assign accent_color    = section.settings.accent_color
+-%}
+
+{%- if show_popup -%}
+
+<!-- ===== EXIT POPUP ===== -->
+<div
+  class="ppf-popup-overlay"
+  id="ppfExitPopup"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="ppfPopupTitle"
+  aria-hidden="true"
+>
+  <div class="ppf-popup" style="background:{{ bg_color }};">
+
+    {%- comment %} Close Button {%- endcomment %}
+    <button
+      class="ppf-popup__close"
+      id="ppfPopupClose"
+      aria-label="Close popup"
+    >✕</button>
+
+    {%- comment %} Badge {%- endcomment %}
+    {%- if badge_text != blank -%}
+      <div class="ppf-popup__badge">{{ badge_text }}</div>
+    {%- endif -%}
+
+    {%- comment %} Emoji {%- endcomment %}
+    {%- if emoji != blank -%}
+      <span class="ppf-popup__emoji" aria-hidden="true">{{ emoji }}</span>
+    {%- endif -%}
+
+    {%- comment %} Heading {%- endcomment %}
+    {%- if popup_title != blank -%}
+      <h3 class="ppf-popup__title" id="ppfPopupTitle">{{ popup_title }}</h3>
+    {%- endif -%}
+
+    {%- comment %} Subtitle {%- endcomment %}
+    {%- if popup_subtitle != blank -%}
+      <p class="ppf-popup__sub">{{ popup_subtitle }}</p>
+    {%- endif -%}
+
+    {%- comment %} Coupon Code Box {%- endcomment %}
+    {%- if coupon_code != blank -%}
+      <div class="ppf-popup__code-box">
+        <span class="ppf-popup__code" id="ppfCouponCode">{{ coupon_code }}</span>
+        <button
+          class="ppf-popup__copy-btn"
+          id="ppfCopyBtn"
+          aria-label="Copy coupon code"
+          data-code="{{ coupon_code }}"
+        >Copy</button>
+      </div>
+    {%- endif -%}
+
+    {%- comment %} Note below code {%- endcomment %}
+    {%- if note_text != blank -%}
+      <p class="ppf-popup__sub ppf-popup__sub--small">{{ note_text }}</p>
+    {%- endif -%}
+
+    {%- comment %} CTA Button {%- endcomment %}
+    {%- if cta_text != blank -%}
+      <a
+        href="{{ cta_link | default: '#' }}"
+        class="ppf-popup__cta"
+        id="ppfPopupCta"
+        style="background:{{ accent_color }};"
+      >{{ cta_text }}</a>
+    {%- endif -%}
+
+    {%- comment %} Skip Link {%- endcomment %}
+    {%- if skip_text != blank -%}
+      <p class="ppf-popup__skip" id="ppfPopupSkip">{{ skip_text }}</p>
+    {%- endif -%}
+
+  </div>
+</div>
+
+<style>
+/* ── TOKENS ─────────────────────────────────────────── */
+.ppf-popup-overlay {
+  --forest:     #2D4A30;
+  --leaf:       #4A7A4E;
+  --amber:      #E8883A;
+  --amber-dk:   #C06818;
+  --amber-lt:   #FAE8D5;
+  --ivory:      #F4EFE6;
+  --sand:       #E8DDD0;
+  --text-dark:  #1A1410;
+  --text-lite:  #8C7A6A;
+  --transition: .3s cubic-bezier(.4,0,.2,1);
+}
+
+/* ── OVERLAY ─────────────────────────────────────────── */
+.ppf-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .52);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition);
+}
+.ppf-popup-overlay.ppf-is-open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ── POPUP CARD ──────────────────────────────────────── */
+.ppf-popup {
+  border-radius: 24px;
+  padding: 48px 40px 36px;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, .28);
+  transform: scale(.88) translateY(24px);
+  transition: transform var(--transition);
+}
+.ppf-popup-overlay.ppf-is-open .ppf-popup {
+  transform: scale(1) translateY(0);
+}
+
+/* ── CLOSE BUTTON ────────────────────────────────────── */
+.ppf-popup__close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--ivory);
+  border: none;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-lite);
+  transition: background var(--transition), color var(--transition);
+  line-height: 1;
+}
+.ppf-popup__close:hover {
+  background: var(--sand);
+  color: var(--text-dark);
+}
+
+/* ── BADGE ───────────────────────────────────────────── */
+.ppf-popup__badge {
+  display: inline-block;
+  background: var(--amber-lt);
+  color: var(--amber-dk);
+  padding: 5px 16px;
+  border-radius: 32px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+/* ── EMOJI ───────────────────────────────────────────── */
+.ppf-popup__emoji {
+  font-size: 52px;
+  display: block;
+  margin-bottom: 10px;
+  line-height: 1;
+}
+
+/* ── TITLE ───────────────────────────────────────────── */
+.ppf-popup__title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 10px;
+  line-height: 1.25;
+}
+
+/* ── SUBTITLE ────────────────────────────────────────── */
+.ppf-popup__sub {
+  font-size: 13px;
+  color: var(--text-lite);
+  margin: 0 0 16px;
+  line-height: 1.6;
+}
+.ppf-popup__sub--small {
+  font-size: 12px;
+}
+
+/* ── COUPON CODE BOX ─────────────────────────────────── */
+.ppf-popup__code-box {
+  background: var(--ivory);
+  border: 2px dashed var(--sand);
+  border-radius: 12px;
+  padding: 12px 18px;
+  margin: 0 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.ppf-popup__code {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--forest);
+  letter-spacing: .1em;
+}
+.ppf-popup__copy-btn {
+  background: var(--forest);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition);
+  white-space: nowrap;
+  font-family: inherit;
+}
+.ppf-popup__copy-btn:hover      { background: var(--leaf); }
+.ppf-popup__copy-btn.ppf-copied { background: var(--leaf); }
+
+/* ── CTA BUTTON ──────────────────────────────────────── */
+.ppf-popup__cta {
+  display: block;
+  width: 100%;
+  padding: 15px 32px;
+  border-radius: 32px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 4px 18px rgba(232, 136, 58, .38);
+  transition: filter var(--transition), transform var(--transition), box-shadow var(--transition);
+  margin-bottom: 12px;
+}
+.ppf-popup__cta:hover {
+  filter: brightness(.9);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(232, 136, 58, .48);
+}
+
+/* ── SKIP LINK ───────────────────────────────────────── */
+.ppf-popup__skip {
+  font-size: 12px;
+  color: var(--text-lite);
+  cursor: pointer;
+  transition: color var(--transition);
+  margin: 0;
+}
+.ppf-popup__skip:hover { color: var(--text-dark); }
+
+/* ── RESPONSIVE ──────────────────────────────────────── */
+@media (max-width: 480px) {
+  .ppf-popup {
+    padding: 40px 24px 28px;
+  }
+  .ppf-popup__title  { font-size: 22px; }
+  .ppf-popup__code   { font-size: 18px; }
+}
+</style>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── CONFIG from Liquid ──────────────────────────── */
+  var DELAY_MS    = {{ delay_seconds | times: 1000 | default: 45000 }};
+  var COOKIE_DAYS = {{ cookie_days | default: 7 }};
+  var COOKIE_NAME = 'ppf_popup_shown';
+
+  /* ── ELEMENTS ────────────────────────────────────── */
+  var overlay  = document.getElementById('ppfExitPopup');
+  var closeBtn = document.getElementById('ppfPopupClose');
+  var skipBtn  = document.getElementById('ppfPopupSkip');
+  var ctaBtn   = document.getElementById('ppfPopupCta');
+  var copyBtn  = document.getElementById('ppfCopyBtn');
+
+  if (!overlay) return;
+
+  /* ── COOKIE HELPERS ──────────────────────────────── */
+  function getCookie(name) {
+    var match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+    return match ? decodeURIComponent(match[1]) : null;
+  }
+  function setCookie(name, value, days) {
+    var expires = new Date(Date.now() + days * 864e5).toUTCString();
+    document.cookie = name + '=' + encodeURIComponent(value)
+      + '; expires=' + expires + '; path=/; SameSite=Lax';
+  }
+
+  /* ── SHOW / HIDE ─────────────────────────────────── */
+  var popupShown = false;
+
+  function showPopup() {
+    if (popupShown || getCookie(COOKIE_NAME)) return;
+    popupShown = true;
+    overlay.classList.add('ppf-is-open');
+    overlay.setAttribute('aria-hidden', 'false');
+    setCookie(COOKIE_NAME, '1', COOKIE_DAYS);
+    /* Focus trap — focus first focusable element */
+    var firstFocusable = overlay.querySelector('button, [href], input');
+    if (firstFocusable) setTimeout(function(){ firstFocusable.focus(); }, 300);
+  }
+
+  function closePopup() {
+    overlay.classList.remove('ppf-is-open');
+    overlay.setAttribute('aria-hidden', 'true');
+  }
+
+  /* ── TRIGGERS ────────────────────────────────────── */
+  /* 1. Exit intent — mouse leaves viewport top */
+  document.addEventListener('mouseleave', function (e) {
+    if (e.clientY < 10) {
+      setTimeout(showPopup, 300);
+    }
+  });
+
+  /* 2. Time delay fallback */
+  setTimeout(function () {
+    if (!popupShown) showPopup();
+  }, DELAY_MS);
+
+  /* 3. Mobile: scroll back up fast (scroll up > 300px) */
+  var lastScrollY = 0;
+  var scrollThreshold = 300;
+  window.addEventListener('scroll', function () {
+    var currentY = window.scrollY;
+    if (lastScrollY - currentY > scrollThreshold && currentY > 200) {
+      showPopup();
+    }
+    lastScrollY = currentY;
+  }, { passive: true });
+
+  /* ── CLOSE EVENTS ────────────────────────────────── */
+  if (closeBtn) closeBtn.addEventListener('click', closePopup);
+  if (skipBtn)  skipBtn.addEventListener('click',  closePopup);
+  if (ctaBtn)   ctaBtn.addEventListener('click',   closePopup);
+
+  /* Click outside popup card */
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closePopup();
+  });
+
+  /* ESC key */
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closePopup();
+  });
+
+  /* ── COPY COUPON ─────────────────────────────────── */
+  if (copyBtn) {
+    copyBtn.addEventListener('click', function () {
+      var code = copyBtn.getAttribute('data-code') || '';
+      if (!code) return;
+
+      /* Modern clipboard API */
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(code).then(onCopied).catch(fallbackCopy);
+      } else {
+        fallbackCopy();
+      }
+
+      function fallbackCopy() {
+        var ta = document.createElement('textarea');
+        ta.value = code;
+        ta.style.cssText = 'position:fixed;opacity:0;';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch(e) {}
+        document.body.removeChild(ta);
+        onCopied();
+      }
+
+      function onCopied() {
+        copyBtn.textContent = '✓ Copied!';
+        copyBtn.classList.add('ppf-copied');
+        copyBtn.setAttribute('aria-label', 'Coupon code copied');
+        setTimeout(function () {
+          copyBtn.textContent = 'Copy';
+          copyBtn.classList.remove('ppf-copied');
+          copyBtn.setAttribute('aria-label', 'Copy coupon code');
+        }, 2500);
+      }
+    });
+  }
+
+})();
+</script>
+
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Exit Popup",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Popup Control"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_popup",
+      "label": "Enable Exit Popup",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "trigger_delay",
+      "label": "Auto-show Delay (seconds)",
+      "min": 5,
+      "max": 120,
+      "step": 5,
+      "default": 45,
+      "info": "Kitne seconds baad popup show ho — agar user exit nahi karta"
+    },
+    {
+      "type": "range",
+      "id": "cookie_days",
+      "label": "Cookie Duration (days)",
+      "min": 1,
+      "max": 30,
+      "step": 1,
+      "default": 7,
+      "info": "Ek baar close karne ke baad kitne din tak popup na dikhe"
+    },
+    {
+      "type": "header",
+      "content": "Popup Content"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "default": "Wait! Special Offer"
+    },
+    {
+      "type": "text",
+      "id": "emoji",
+      "label": "Emoji",
+      "default": "🎁"
+    },
+    {
+      "type": "text",
+      "id": "popup_title",
+      "label": "Popup Heading",
+      "default": "Get 10% OFF Your First Order!"
+    },
+    {
+      "type": "textarea",
+      "id": "popup_subtitle",
+      "label": "Subtitle",
+      "default": "Use this exclusive code at checkout. One-time use, valid for 24 hours."
+    },
+    {
+      "type": "text",
+      "id": "coupon_code",
+      "label": "Coupon Code",
+      "default": "WELCOME10",
+      "info": "Yeh automatically copy hoga jab user 'Copy' click kare"
+    },
+    {
+      "type": "text",
+      "id": "note_text",
+      "label": "Note Below Code",
+      "default": "Free shipping on orders over $30 · 30-day money-back guarantee"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Button Text",
+      "default": "Shop Now & Save 10% →"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Button Link"
+    },
+    {
+      "type": "text",
+      "id": "skip_text",
+      "label": "Skip / Dismiss Text",
+      "default": "No thanks, I'll pay full price"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "popup_bg",
+      "label": "Popup Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "CTA Button Color",
+      "default": "#E8883A"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Exit Popup"
+    }
+  ]
+}
+{% endschema %}

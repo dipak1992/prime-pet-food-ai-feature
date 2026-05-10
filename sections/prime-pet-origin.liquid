@@ -1,0 +1,469 @@
+{% comment %}
+  Prime Pet Food — Origin Story Section
+  Section: "Handcrafted by Nepalese Farmers"
+  Upload to: sections/prime-pet-origin.liquid
+{% endcomment %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  .ppo-section {
+    background: #FAF7F2;
+    padding: 88px 40px;
+    font-family: 'DM Sans', sans-serif;
+    color: #1A1410;
+  }
+
+  .ppo-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* ---- Two-column grid ---- */
+  .ppo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: center;
+  }
+
+  /* ---- Left: Image column ---- */
+  .ppo-image-wrap {
+    position: relative;
+  }
+
+  .ppo-image-main {
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 16px 48px rgba(92,64,48,.16);
+    background: linear-gradient(135deg, #4A7A4E, #2D4A30);
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* When a real image is present */
+  .ppo-image-main img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Fallback emoji display (no image) */
+  .ppo-image-fallback {
+    font-size: 120px;
+    filter: drop-shadow(0 8px 24px rgba(0,0,0,.3));
+    text-align: center;
+    padding: 48px;
+  }
+
+  /* Subtle pattern overlay */
+  .ppo-image-main::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M0 0h40v40H0V0zm40 40h40v40H40V40z'/%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Caption overlay */
+  .ppo-image-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 2;
+  }
+
+  .ppo-image-caption p:first-child {
+    color: rgba(255,255,255,.8);
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .ppo-image-caption p:last-child {
+    color: rgba(255,255,255,.45);
+    font-size: 11px;
+    margin-top: 2px;
+  }
+
+  /* Floating stat card */
+  .ppo-stat-card {
+    position: absolute;
+    bottom: -16px;
+    right: -20px;
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 16px 20px;
+    box-shadow: 0 16px 48px rgba(92,64,48,.16);
+    border: 1px solid #E8DDD0;
+    z-index: 3;
+  }
+
+  .ppo-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #d4770b;
+    line-height: 1;
+  }
+
+  .ppo-stat-text {
+    font-size: 12px;
+    color: #8C7A6A;
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  /* ---- Right: Content column ---- */
+  .ppo-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #E8883A;
+    margin-bottom: 12px;
+  }
+
+  .ppo-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 3.5vw, 42px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: #d4770b;
+    margin-bottom: 20px;
+  }
+
+  .ppo-quote {
+    font-style: italic;
+    color: #8C7A6A;
+    border-left: 3px solid #7A9E7E;
+    padding-left: 20px;
+    margin: 0 0 28px;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ---- Fact items ---- */
+  .ppo-facts {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .ppo-fact {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .ppo-fact-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: #D4E6D5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .ppo-fact-text {
+    font-size: 14px;
+    color: #4A3C30;
+    line-height: 1.6;
+  }
+
+  .ppo-fact-text strong {
+    color: #1A1410;
+  }
+
+  /* ---- CTA Button ---- */
+  .ppo-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #d4770b;
+    color: #FFFFFF;
+    padding: 16px 32px;
+    border-radius: 32px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(232,136,58,.4);
+    transition: all .25s cubic-bezier(.4,0,.2,1);
+  }
+
+  .ppo-btn:hover {
+    background: #C06818;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(232,136,58,.5);
+  }
+
+  /* ---- Responsive ---- */
+  @media(max-width: 1024px) {
+    .ppo-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .ppo-image-wrap {
+      display: none; /* hide image on tablet, show text only */
+    }
+  }
+
+  @media(max-width: 768px) {
+    .ppo-section { padding: 60px 20px; }
+    .ppo-stat-card { right: 0; }
+  }
+</style>
+
+<section class="ppo-section" id="origin">
+  <div class="ppo-inner">
+    <div class="ppo-grid">
+
+      <!-- Left: Image -->
+      <div class="ppo-image-wrap">
+        <div class="ppo-image-main">
+          {% if section.settings.image != blank %}
+            <img
+              src="{{ section.settings.image | image_url: width: 800 }}"
+              alt="{{ section.settings.image.alt | default: 'Himalayan farmers crafting yak chews' }}"
+              loading="lazy"
+              width="800"
+            >
+          {% else %}
+            <div class="ppo-image-fallback">🏔️</div>
+          {% endif %}
+
+          {% if section.settings.caption_line1 != blank or section.settings.caption_line2 != blank %}
+            <div class="ppo-image-caption">
+              {% if section.settings.caption_line1 != blank %}
+                <p>{{ section.settings.caption_line1 }}</p>
+              {% endif %}
+              {% if section.settings.caption_line2 != blank %}
+                <p>{{ section.settings.caption_line2 }}</p>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+
+        <!-- Floating Stat Card -->
+        {% if section.settings.stat_number != blank %}
+          <div class="ppo-stat-card">
+            <div class="ppo-stat-num">{{ section.settings.stat_number }}</div>
+            <div class="ppo-stat-text">{{ section.settings.stat_label }}</div>
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Right: Content -->
+      <div class="ppo-content">
+
+        {% if section.settings.eyebrow != blank %}
+          <p class="ppo-eyebrow">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+
+        {% if section.settings.title != blank %}
+          <h2 class="ppo-title">{{ section.settings.title }}</h2>
+        {% endif %}
+
+        {% if section.settings.quote != blank %}
+          <blockquote class="ppo-quote">{{ section.settings.quote }}</blockquote>
+        {% endif %}
+
+        <!-- Fact items (blocks) -->
+        {% assign has_facts = false %}
+        {% for block in section.blocks %}
+          {% if block.type == 'fact' %}{% assign has_facts = true %}{% endif %}
+        {% endfor %}
+
+        {% if has_facts %}
+          <div class="ppo-facts">
+            {% for block in section.blocks %}
+              {% if block.type == 'fact' %}
+                <div class="ppo-fact" {{ block.shopify_attributes }}>
+                  {% if block.settings.icon != blank %}
+                    <div class="ppo-fact-icon">{{ block.settings.icon }}</div>
+                  {% endif %}
+                  <p class="ppo-fact-text">
+                    {% if block.settings.bold_text != blank %}
+                      <strong>{{ block.settings.bold_text }}</strong>
+                    {% endif %}
+                    {{ block.settings.text }}
+                  </p>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <!-- CTA Button -->
+        {% if section.settings.btn_label != blank %}
+          <a href="{{ section.settings.btn_url }}" class="ppo-btn">
+            {{ section.settings.btn_label }}
+          </a>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "PP — Origin Story",
+  "tag": "section",
+  "class": "prime-pet-origin",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image (Left Side)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Section Image"
+    },
+    {
+      "type": "text",
+      "id": "caption_line1",
+      "label": "Image Caption Line 1",
+      "default": "Himalayan Mountains, Nepal"
+    },
+    {
+      "type": "text",
+      "id": "caption_line2",
+      "label": "Image Caption Line 2",
+      "default": "Altitude: 15,000 ft"
+    },
+    {
+      "type": "header",
+      "content": "Floating Stat Card"
+    },
+    {
+      "type": "text",
+      "id": "stat_number",
+      "label": "Stat Number",
+      "default": "500+"
+    },
+    {
+      "type": "text",
+      "id": "stat_label",
+      "label": "Stat Label",
+      "default": "Nepalese families supported"
+    },
+    {
+      "type": "header",
+      "content": "Content (Right Side)"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Label",
+      "default": "Our Story"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Handcrafted by Nepalese Farmers"
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Pull Quote",
+      "default": "\"Every chew tells a story of Himalayan craftsmanship passed down through generations. When you choose Prime Pet, you're not just feeding your dog — you're supporting families who have perfected this ancient art for centuries.\""
+    },
+    {
+      "type": "header",
+      "content": "CTA Button"
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Button Label",
+      "default": "Read Full Story →"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "Button URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "fact",
+      "name": "Fact Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (Emoji)",
+          "default": "🐄"
+        },
+        {
+          "type": "text",
+          "id": "bold_text",
+          "label": "Bold Intro Text",
+          "default": "Free-range yak milk"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "from animals that graze on pristine Himalayan pastures — no hormones, no antibiotics, ever."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PP — Origin Story",
+      "blocks": [
+        {
+          "type": "fact",
+          "settings": {
+            "icon": "🐄",
+            "bold_text": "Free-range yak milk",
+            "text": "from animals that graze on pristine Himalayan pastures — no hormones, no antibiotics, ever."
+          }
+        },
+        {
+          "type": "fact",
+          "settings": {
+            "icon": "🧀",
+            "bold_text": "Ancient Churpi recipe",
+            "text": "— a traditional protein-rich cheese made the same way for over 2,000 years. Only 4 ingredients: yak milk, cow milk, lime juice, salt."
+          }
+        },
+        {
+          "type": "fact",
+          "settings": {
+            "icon": "🌱",
+            "bold_text": "Ethical and sustainable",
+            "text": "— fair wages, community investment, and zero-waste production. Good for dogs, good for the planet."
+          }
+        },
+        {
+          "type": "fact",
+          "settings": {
+            "icon": "✅",
+            "bold_text": "Quality tested",
+            "text": "in the USA before every shipment. Every batch passes our strict safety and purity standards."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

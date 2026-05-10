@@ -1,0 +1,438 @@
+{% comment %}
+  Section: The Puff Trick — Zero Waste!
+  File: sections/puff-trick.liquid
+  Dynamic: All text, colors, steps editable from Shopify Theme Editor
+{% endcomment %}
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --pt-bg:              {{ section.settings.bg_color }};
+    --pt-eyebrow:         {{ section.settings.eyebrow_color }};
+    --pt-heading:         {{ section.settings.heading_color }};
+    --pt-subtext:         {{ section.settings.subtext_color }};
+    --pt-icon-bg:         {{ section.settings.icon_bg }};
+    --pt-icon-border:     {{ section.settings.icon_border }};
+    --pt-step-label:      {{ section.settings.step_label_color }};
+    --pt-arrow:           {{ section.settings.arrow_color }};
+    --pt-badge-bg:        {{ section.settings.badge_bg }};
+    --pt-badge-text:      {{ section.settings.badge_text_color }};
+    --pt-badge-border:    {{ section.settings.badge_border }};
+  }
+
+  #shopify-section-{{ section.id }} .pt-section {
+    padding: {{ section.settings.padding_top }}px 20px {{ section.settings.padding_bottom }}px;
+    background: var(--pt-bg);
+    overflow: hidden;
+  }
+
+  /* ── Title ── */
+  #shopify-section-{{ section.id }} .pt-title-wrap {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  #shopify-section-{{ section.id }} .pt-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--pt-eyebrow);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  #shopify-section-{{ section.id }} .pt-eyebrow::before,
+  #shopify-section-{{ section.id }} .pt-eyebrow::after {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--pt-eyebrow);
+    opacity: 0.5;
+    display: inline-block;
+  }
+  #shopify-section-{{ section.id }} .pt-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 700;
+    color: var(--pt-heading);
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  #shopify-section-{{ section.id }} .pt-subtext {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--pt-subtext);
+    margin: 0;
+  }
+
+  /* ── Steps Row ── */
+  #shopify-section-{{ section.id }} .pt-steps {
+    max-width: 900px;
+    margin: 48px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  #shopify-section-{{ section.id }} .pt-step-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .pt-step {
+    text-align: center;
+    padding: 0 10px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: ptFadeUp 0.45s ease forwards;
+  }
+
+  {% for block in section.blocks %}
+    {% if block.type == 'step' %}
+      #shopify-section-{{ section.id }} .pt-step-wrapper:nth-child({{ forloop.index | times: 2 | minus: 1 }}) .pt-step {
+        animation-delay: {{ forloop.index0 | times: 0.12 }}s;
+      }
+    {% endif %}
+  {% endfor %}
+
+  @keyframes ptFadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  #shopify-section-{{ section.id }} .pt-icon-wrap {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--pt-icon-bg);
+    border: 2px solid var(--pt-icon-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+    font-size: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  }
+  #shopify-section-{{ section.id }} .pt-step:hover .pt-icon-wrap {
+    transform: translateY(-5px) scale(1.07);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.1);
+  }
+
+  #shopify-section-{{ section.id }} .pt-step-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--pt-step-label);
+    line-height: 1.5;
+    max-width: 120px;
+    margin: 0 auto;
+  }
+
+  /* ── Arrow ── */
+  #shopify-section-{{ section.id }} .pt-arrow {
+    font-size: 22px;
+    color: var(--pt-arrow);
+    padding: 0 4px;
+    margin-bottom: 24px;
+    opacity: 0.5;
+    flex-shrink: 0;
+  }
+
+  /* ── Optional Badge ── */
+  #shopify-section-{{ section.id }} .pt-badge-wrap {
+    text-align: center;
+    margin-top: 36px;
+  }
+  #shopify-section-{{ section.id }} .pt-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    border-radius: 40px;
+    background: var(--pt-badge-bg);
+    border: 1.5px solid var(--pt-badge-border);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--pt-badge-text);
+    letter-spacing: 0.3px;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    #shopify-section-{{ section.id }} .pt-steps {
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 36px;
+    }
+    #shopify-section-{{ section.id }} .pt-step-wrapper {
+      flex-direction: column;
+    }
+    #shopify-section-{{ section.id }} .pt-arrow {
+      transform: rotate(90deg);
+      margin: 0;
+    }
+  }
+</style>
+
+<section class="pt-section">
+
+  <!-- Title -->
+  <div class="pt-title-wrap">
+    {% if section.settings.eyebrow != blank %}
+      <div class="pt-eyebrow">{{ section.settings.eyebrow }}</div>
+    {% endif %}
+    {% if section.settings.heading != blank %}
+      <h2 class="pt-heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+    {% if section.settings.subtext != blank %}
+      <p class="pt-subtext">{{ section.settings.subtext }}</p>
+    {% endif %}
+  </div>
+
+  <!-- Steps -->
+  {% assign step_blocks = section.blocks | where: "type", "step" %}
+  {% if step_blocks.size > 0 %}
+    <div class="pt-steps">
+      {% for block in step_blocks %}
+        <div class="pt-step-wrapper" {{ block.shopify_attributes }}>
+          <div class="pt-step">
+            {% if block.settings.emoji != blank %}
+              <div class="pt-icon-wrap">{{ block.settings.emoji }}</div>
+            {% endif %}
+            {% if block.settings.label != blank %}
+              <div class="pt-step-label">{{ block.settings.label }}</div>
+            {% endif %}
+          </div>
+          {% unless forloop.last %}
+            <div class="pt-arrow">→</div>
+          {% endunless %}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <!-- Optional Badge -->
+  {% if section.settings.show_badge and section.settings.badge_text != blank %}
+    <div class="pt-badge-wrap">
+      <div class="pt-badge">
+        {% if section.settings.badge_emoji != blank %}
+          <span>{{ section.settings.badge_emoji }}</span>
+        {% endif %}
+        {{ section.settings.badge_text }}
+      </div>
+    </div>
+  {% endif %}
+
+</section>
+
+{% schema %}
+{
+  "name": "Puff Trick",
+  "tag": "section",
+  "class": "puff-trick-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Label",
+      "default": "Pro Tip"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Puff Trick — Zero Waste!"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Description",
+      "default": "When the chew gets small, don't throw it away. Microwave it for a delicious puffed treat!"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Badge"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show Badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_emoji",
+      "label": "Badge Emoji",
+      "default": "✅"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "default": "Zero Waste — Nothing Gets Thrown Away!"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top (px)",
+      "min": 20,
+      "max": 140,
+      "step": 4,
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom (px)",
+      "min": 20,
+      "max": 140,
+      "step": 4,
+      "default": 64
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FEFCF9"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Color",
+      "default": "#C8943E"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#1B3028"
+    },
+    {
+      "type": "color",
+      "id": "subtext_color",
+      "label": "Description Color",
+      "default": "#8B7D6B"
+    },
+    {
+      "type": "color",
+      "id": "icon_bg",
+      "label": "Icon Circle Background",
+      "default": "#FAF5ED"
+    },
+    {
+      "type": "color",
+      "id": "icon_border",
+      "label": "Icon Circle Border",
+      "default": "#EDE5D8"
+    },
+    {
+      "type": "color",
+      "id": "step_label_color",
+      "label": "Step Label Color",
+      "default": "#2C2C2C"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow Color",
+      "default": "#2D4A3E"
+    },
+    {
+      "type": "color",
+      "id": "badge_bg",
+      "label": "Badge Background",
+      "default": "#F0F7F3"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge Text Color",
+      "default": "#2D4A3E"
+    },
+    {
+      "type": "color",
+      "id": "badge_border",
+      "label": "Badge Border Color",
+      "default": "#2D4A3E"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Puff Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "emoji",
+          "label": "Emoji Icon",
+          "default": "🦴",
+          "info": "Paste any emoji, e.g. 🦴 💧 📡 🍿"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Step Description",
+          "default": "Dog chews until small piece is left"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Puff Trick",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "emoji": "🦴",
+            "label": "Dog chews until small piece is left"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "emoji": "💧",
+            "label": "Soak in hot water for 5 minutes"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "emoji": "📡",
+            "label": "Microwave on high for 45-60 sec"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "emoji": "🍿",
+            "label": "It puffs into a cheesy treat!"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

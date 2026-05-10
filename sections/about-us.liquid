@@ -1,0 +1,911 @@
+{{ 'https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Nunito+Sans:wght@300;400;500;600;700;800&display=swap' | stylesheet_tag }}
+
+<section class="prime-about-v2">
+  <!-- HERO -->
+  <section class="pav2-hero">
+    <div class="pav2-page pav2-hero__grid">
+      <div class="pav2-hero__copy">
+        {% if section.settings.hero_eyebrow != blank %}
+          <p class="pav2-kicker">{{ section.settings.hero_eyebrow }}</p>
+        {% endif %}
+
+        <h1 class="pav2-hero__title">
+          {{ section.settings.hero_title }}
+          <span>{{ section.settings.hero_title_em }}</span>
+        </h1>
+
+        {% if section.settings.hero_sub != blank %}
+          <p class="pav2-hero__text">{{ section.settings.hero_sub }}</p>
+        {% endif %}
+
+        <div class="pav2-hero__actions">
+          {% if section.settings.cta_button_label != blank and section.settings.cta_button_link != blank %}
+            <a href="{{ section.settings.cta_button_link }}" class="pav2-btn pav2-btn--primary">{{ section.settings.cta_button_label }}</a>
+          {% endif %}
+          <a href="#prime-values" class="pav2-btn pav2-btn--ghost">Why we exist</a>
+        </div>
+
+        <div class="pav2-proof">
+          <div>
+            <strong>{{ section.settings.stat_1_num }}</strong>
+            <span>{{ section.settings.stat_1_label }}</span>
+          </div>
+          <div>
+            <strong>{{ section.settings.stat_2_num }}</strong>
+            <span>{{ section.settings.stat_2_label }}</span>
+          </div>
+          <div>
+            <strong>{{ section.settings.stat_3_num }}</strong>
+            <span>{{ section.settings.stat_3_label }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pav2-hero__visual">
+        <div class="pav2-photo-card pav2-photo-card--hero">
+          {% if section.settings.hero_image != blank %}
+            {{ section.settings.hero_image | image_url: width: 1400 | image_tag: loading: 'eager', class: 'pav2-img', alt: section.settings.hero_title_em }}
+          {% elsif section.settings.story_image != blank %}
+            {{ section.settings.story_image | image_url: width: 1400 | image_tag: loading: 'eager', class: 'pav2-img', alt: section.settings.story_heading }}
+          {% else %}
+            <div class="pav2-img-placeholder">
+              <span>Prime Pet Food</span>
+            </div>
+          {% endif %}
+          <div class="pav2-hero__badge">
+            <span>{{ section.settings.story_badge }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION -->
+  <section class="pav2-mission pav2-page">
+    <div class="pav2-mission__label reveal">{{ section.settings.mission_label }}</div>
+    <div class="pav2-mission__text reveal reveal-delay-1">
+      {{ section.settings.mission_text }}
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="pav2-values" id="prime-values">
+    <div class="pav2-page">
+      <div class="pav2-section-head reveal">
+        <p class="pav2-kicker">{{ section.settings.values_tag }}</p>
+        <h2>{{ section.settings.values_title }}</h2>
+      </div>
+
+      <div class="pav2-values__grid">
+        {% for i in (1..4) %}
+          {% assign icon_id = 'value_' | append: i | append: '_icon' %}
+          {% assign title_id = 'value_' | append: i | append: '_title' %}
+          {% assign desc_id = 'value_' | append: i | append: '_desc' %}
+          <article class="pav2-value-card reveal reveal-delay-{{ i }}">
+            <div class="pav2-value-card__icon">{{ section.settings[icon_id] }}</div>
+            <h3>{{ section.settings[title_id] }}</h3>
+            <p>{{ section.settings[desc_id] }}</p>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY / IMAGE FEATURE -->
+  <section class="pav2-feature">
+    <div class="pav2-page pav2-feature__grid">
+      <div class="pav2-feature__image reveal">
+        <div class="pav2-photo-card">
+          {% if section.settings.story_image != blank %}
+            {{ section.settings.story_image | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'pav2-img', alt: section.settings.story_heading }}
+          {% else %}
+            <div class="pav2-img-placeholder pav2-img-placeholder--light">
+              <span>Add a real lifestyle or product photo here</span>
+            </div>
+          {% endif %}
+          <div class="pav2-caption">{{ section.settings.story_caption }}</div>
+        </div>
+      </div>
+
+      <div class="pav2-feature__copy reveal reveal-delay-1">
+        <p class="pav2-kicker">{{ section.settings.story_subtitle }}</p>
+        <h2>{{ section.settings.story_heading }}</h2>
+        <p>{{ section.settings.story_body_1 }}</p>
+        <p>{{ section.settings.story_body_2 }}</p>
+
+        <div class="pav2-mini-stats">
+          <div>
+            <strong>{{ section.settings.stat_1_num }}</strong>
+            <span>{{ section.settings.stat_1_label }}</span>
+          </div>
+          <div>
+            <strong>{{ section.settings.stat_2_num }}</strong>
+            <span>{{ section.settings.stat_2_label }}</span>
+          </div>
+          <div>
+            <strong>{{ section.settings.stat_3_num }}</strong>
+            <span>{{ section.settings.stat_3_label }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIFFERENTIATORS -->
+  <section class="pav2-pillars">
+    <div class="pav2-page">
+      <div class="pav2-pillars__head reveal">
+        <h2>{{ section.settings.pillars_heading }}</h2>
+        <p>{{ section.settings.pillars_intro }}</p>
+      </div>
+
+      <div class="pav2-pillars__list">
+        {% for i in (1..4) %}
+          {% assign title_id = 'pillar_' | append: i | append: '_title' %}
+          {% assign desc_id = 'pillar_' | append: i | append: '_desc' %}
+          <article class="pav2-pillar reveal">
+            <div class="pav2-pillar__num">0{{ i }}</div>
+            <div>
+              <h3>{{ section.settings[title_id] }}</h3>
+              <p>{{ section.settings[desc_id] }}</p>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- PURPOSE -->
+  <section class="pav2-purpose">
+    <div class="pav2-page pav2-purpose__card reveal">
+      <div class="pav2-purpose__copy">
+        <p class="pav2-kicker">{{ section.settings.cause_tag }}</p>
+        <h2>{{ section.settings.cause_heading }}</h2>
+        <p>{{ section.settings.cause_body }}</p>
+      </div>
+      <div class="pav2-purpose__stats">
+        <div>
+          <strong>{{ section.settings.cause_stat_1_num }}</strong>
+          <span>{{ section.settings.cause_stat_1_label }}</span>
+        </div>
+        <div>
+          <strong>{{ section.settings.cause_stat_2_num }}</strong>
+          <span>{{ section.settings.cause_stat_2_label }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROMISE -->
+  <section class="pav2-promise">
+    <div class="pav2-page">
+      <div class="pav2-section-head reveal">
+        <p class="pav2-kicker">Our standard</p>
+        <h2>{{ section.settings.promise_title }}</h2>
+      </div>
+
+      <div class="pav2-promise__grid">
+        {% for i in (1..4) %}
+          {% assign icon_id = 'promise_' | append: i | append: '_icon' %}
+          {% assign name_id = 'promise_' | append: i | append: '_name' %}
+          {% assign text_id = 'promise_' | append: i | append: '_text' %}
+          <article class="pav2-promise-card reveal reveal-delay-{{ i }}">
+            <span>{{ section.settings[icon_id] }}</span>
+            <h3>{{ section.settings[name_id] }}</h3>
+            <p>{{ section.settings[text_id] }}</p>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  {% comment %} <section class="pav2-cta">
+    <div class="pav2-page pav2-cta__inner reveal">
+      <p class="pav2-kicker">{{ section.settings.cta_eyebrow }}</p>
+      <h2>{{ section.settings.cta_heading }}</h2>
+      <p>{{ section.settings.cta_body }}</p>
+      <div class="pav2-cta__actions">
+        {% if section.settings.cta_button_label != blank and section.settings.cta_button_link != blank %}
+          <a href="{{ section.settings.cta_button_link }}" class="pav2-btn pav2-btn--primary">{{ section.settings.cta_button_label }}</a>
+        {% endif %}
+        {% if section.settings.cta_button_2_label != blank and section.settings.cta_button_2_link != blank %}
+          <a href="{{ section.settings.cta_button_2_link }}" class="pav2-btn pav2-btn--ghost-light">{{ section.settings.cta_button_2_label }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </section> {% endcomment %}
+</section>
+
+<style>
+  .prime-about-v2 {
+    --pav2-orange: #d2632e;
+    --pav2-orange-dark: #b94f22;
+    --pav2-orange-soft: #fff1e7;
+    --pav2-cream: #f1eee9;
+    --pav2-warm: #fff8ef;
+    --pav2-ink: #1f1f1f;
+    --pav2-muted: #716860;
+    --pav2-line: #eadfd3;
+    --pav2-card: #ffffff;
+    --pav2-shadow: 0 24px 70px rgba(31, 31, 31, 0.08);
+    font-family: 'Nunito Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--pav2-ink);
+    background: var(--pav2-warm);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .prime-about-v2 * { box-sizing: border-box; }
+
+  .pav2-page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .pav2-hero__title,
+  .pav2-section-head h2,
+  .pav2-feature__copy h2,
+  .pav2-pillars__head h2,
+  .pav2-purpose h2,
+  .pav2-cta h2 {
+    font-family: 'Lora', Georgia, serif;
+    font-weight: 600;
+    letter-spacing: -0.035em;
+  }
+
+  .pav2-kicker {
+    margin: 0 0 14px;
+    color: var(--pav2-orange);
+    font-size: 12px;
+    line-height: 1.2;
+    letter-spacing: 0.19em;
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+
+  .pav2-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 84px 0 92px;
+    background:
+      radial-gradient(circle at 12% 18%, rgba(210,99,46,0.13), transparent 34%),
+      radial-gradient(circle at 92% 16%, rgba(210,99,46,0.08), transparent 32%),
+      linear-gradient(135deg, #fff8ef 0%, #f1eee9 100%);
+  }
+
+  .pav2-hero::after {
+    content: '';
+    position: absolute;
+    inset: auto -8% -35% auto;
+    width: 480px;
+    height: 480px;
+    border-radius: 50%;
+    background: rgba(210, 99, 46, 0.12);
+    filter: blur(14px);
+    pointer-events: none;
+  }
+
+  .pav2-hero__grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.02fr) minmax(380px, 0.88fr);
+    gap: 72px;
+    align-items: center;
+  }
+
+  .pav2-hero__title {
+    margin: 0;
+    max-width: 720px;
+    color: var(--pav2-ink);
+    font-size: clamp(42px, 5.7vw, 82px);
+    line-height: 1.04;
+  }
+
+  .pav2-hero__title span {
+    display: block;
+    color: var(--pav2-orange);
+    font-style: italic;
+  }
+
+  .pav2-hero__text {
+    max-width: 620px;
+    margin: 24px 0 0;
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--pav2-muted);
+  }
+
+  .pav2-hero__actions,
+  .pav2-cta__actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 32px;
+  }
+
+  .pav2-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    padding: 14px 28px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 1;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 800;
+    transition: transform .24s ease, background .24s ease, border-color .24s ease, color .24s ease, box-shadow .24s ease;
+  }
+
+  .pav2-btn:hover { transform: translateY(-2px); }
+
+  .pav2-btn--primary {
+    background: var(--pav2-orange);
+    color: #fff;
+    box-shadow: 0 16px 36px rgba(210,99,46,.26);
+  }
+
+  .pav2-btn--primary:hover {
+    background: var(--pav2-orange-dark);
+    color: #fff;
+  }
+
+  .pav2-btn--ghost {
+    background: #fff;
+    color: var(--pav2-ink);
+    border: 1px solid var(--pav2-line);
+  }
+
+  .pav2-btn--ghost:hover {
+    color: var(--pav2-orange);
+    border-color: rgba(210,99,46,.32);
+  }
+
+  .pav2-btn--ghost-light {
+    color: #fff;
+    border: 1.5px solid rgba(255,255,255,.52);
+  }
+
+  .pav2-btn--ghost-light:hover {
+    background: #fff;
+    color: var(--pav2-orange);
+  }
+
+  .pav2-proof {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    max-width: 650px;
+    margin-top: 44px;
+  }
+
+  .pav2-proof > div,
+  .pav2-mini-stats > div,
+  .pav2-purpose__stats > div {
+    background: rgba(255,255,255,.72);
+    border: 1px solid var(--pav2-line);
+    border-radius: 18px;
+    padding: 18px 16px;
+  }
+
+  .pav2-proof strong,
+  .pav2-mini-stats strong,
+  .pav2-purpose__stats strong {
+    display: block;
+    color: var(--pav2-orange);
+    font-size: 30px;
+    line-height: 1;
+    font-weight: 900;
+  }
+
+  .pav2-proof span,
+  .pav2-mini-stats span,
+  .pav2-purpose__stats span {
+    display: block;
+    margin-top: 8px;
+    color: var(--pav2-muted);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+
+  .pav2-photo-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 34px;
+    background: #fff;
+    border: 1px solid var(--pav2-line);
+    box-shadow: var(--pav2-shadow);
+  }
+
+  .pav2-photo-card--hero {
+    aspect-ratio: 4 / 5;
+    transform: rotate(1deg);
+  }
+
+  .pav2-photo-card--hero::before {
+    content: '';
+    position: absolute;
+    inset: 16px;
+    border: 1px solid rgba(255,255,255,.45);
+    border-radius: 24px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .pav2-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .pav2-img-placeholder {
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    text-align: center;
+    background:
+      linear-gradient(135deg, rgba(210,99,46,.18), rgba(210,99,46,.05)),
+      #fff;
+    color: var(--pav2-orange);
+    font-weight: 900;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+
+  .pav2-img-placeholder--light { min-height: 480px; color: var(--pav2-muted); }
+
+  .pav2-hero__badge {
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+    max-width: 180px;
+    background: var(--pav2-orange);
+    color: #fff;
+    border-radius: 20px;
+    padding: 18px;
+    font-size: 12px;
+    line-height: 1.4;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-weight: 900;
+    box-shadow: 0 16px 34px rgba(210,99,46,.32);
+  }
+
+  .pav2-mission {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 52px;
+    padding-top: 82px;
+    padding-bottom: 82px;
+    background: var(--pav2-warm);
+  }
+
+  .pav2-mission__label {
+    color: var(--pav2-orange);
+    font-size: 12px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    font-weight: 900;
+  }
+
+  .pav2-mission__label::before {
+    content: '';
+    display: block;
+    width: 46px;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--pav2-orange);
+    margin-bottom: 14px;
+  }
+
+  .pav2-mission__text {
+    font-family: 'Lora', Georgia, serif;
+    font-size: clamp(26px, 3vw, 42px);
+    line-height: 1.55;
+    color: var(--pav2-ink);
+  }
+
+  .pav2-mission__text p { margin: 0 0 16px; }
+  .pav2-mission__text strong { color: var(--pav2-orange); font-weight: 600; }
+
+  .pav2-values,
+  .pav2-promise {
+    padding: 84px 0;
+    background: var(--pav2-cream);
+  }
+
+  .pav2-section-head {
+    max-width: 720px;
+    margin: 0 auto 44px;
+    text-align: center;
+  }
+
+  .pav2-section-head h2,
+  .pav2-feature__copy h2,
+  .pav2-pillars__head h2,
+  .pav2-purpose h2,
+  .pav2-cta h2 {
+    margin: 0;
+    color: var(--pav2-ink);
+    font-size: clamp(34px, 4vw, 56px);
+    line-height: 1.12;
+  }
+
+  .pav2-values__grid,
+  .pav2-promise__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+
+  .pav2-value-card,
+  .pav2-promise-card {
+    background: rgba(255,255,255,.78);
+    border: 1px solid var(--pav2-line);
+    border-radius: 26px;
+    padding: 28px 24px;
+    box-shadow: 0 18px 44px rgba(31,31,31,.04);
+    transition: transform .24s ease, box-shadow .24s ease, border-color .24s ease;
+  }
+
+  .pav2-value-card:hover,
+  .pav2-promise-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(210,99,46,.28);
+    box-shadow: 0 26px 64px rgba(31,31,31,.08);
+  }
+
+  .pav2-value-card__icon,
+  .pav2-promise-card span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 18px;
+    background: var(--pav2-orange-soft);
+    color: var(--pav2-orange);
+    font-size: 25px;
+    margin-bottom: 18px;
+  }
+
+  .pav2-value-card h3,
+  .pav2-promise-card h3,
+  .pav2-pillar h3 {
+    margin: 0 0 10px;
+    color: var(--pav2-ink);
+    font-size: 21px;
+    line-height: 1.24;
+    font-weight: 900;
+  }
+
+  .pav2-value-card p,
+  .pav2-promise-card p,
+  .pav2-pillar p,
+  .pav2-feature__copy p,
+  .pav2-pillars__head p,
+  .pav2-purpose p,
+  .pav2-cta p {
+    margin: 0;
+    color: var(--pav2-muted);
+    font-size: 16px;
+    line-height: 1.78;
+  }
+
+  .pav2-feature {
+    padding: 92px 0;
+    background: var(--pav2-warm);
+  }
+
+  .pav2-feature__grid {
+    display: grid;
+    grid-template-columns: minmax(360px, .9fr) minmax(0, 1.1fr);
+    gap: 68px;
+    align-items: center;
+  }
+
+  .pav2-feature__image .pav2-photo-card { aspect-ratio: 4 / 4.7; }
+
+  .pav2-caption {
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    bottom: 18px;
+    background: rgba(255,255,255,.88);
+    backdrop-filter: blur(8px);
+    padding: 16px 18px;
+    border-radius: 18px;
+    color: var(--pav2-ink);
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 800;
+  }
+
+  .pav2-feature__copy p + p { margin-top: 14px; }
+
+  .pav2-mini-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 30px;
+  }
+
+  .pav2-pillars {
+    padding: 88px 0;
+    background: var(--pav2-cream);
+  }
+
+  .pav2-pillars__head {
+    display: grid;
+    grid-template-columns: minmax(0, .85fr) minmax(0, 1fr);
+    gap: 48px;
+    align-items: end;
+    margin-bottom: 34px;
+  }
+
+  .pav2-pillars__list {
+    background: rgba(255,255,255,.62);
+    border: 1px solid var(--pav2-line);
+    border-radius: 30px;
+    overflow: hidden;
+  }
+
+  .pav2-pillar {
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr);
+    gap: 22px;
+    padding: 30px 34px;
+    border-bottom: 1px solid var(--pav2-line);
+    transition: background .22s ease;
+  }
+
+  .pav2-pillar:last-child { border-bottom: 0; }
+  .pav2-pillar:hover { background: #fff; }
+
+  .pav2-pillar__num {
+    color: var(--pav2-orange);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 24px;
+    font-style: italic;
+  }
+
+  .pav2-purpose {
+    padding: 88px 0;
+    background: var(--pav2-warm);
+  }
+
+  .pav2-purpose__card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, .65fr);
+    gap: 44px;
+    align-items: center;
+    padding-top: 54px;
+    padding-bottom: 54px;
+    background: linear-gradient(135deg, var(--pav2-orange) 0%, #e5783a 100%);
+    border-radius: 34px;
+    color: #fff;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 28px 78px rgba(210,99,46,.24);
+  }
+
+  .pav2-purpose__card::after {
+    content: '';
+    position: absolute;
+    top: -140px;
+    right: -120px;
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.14);
+  }
+
+  .pav2-purpose__copy,
+  .pav2-purpose__stats { position: relative; z-index: 1; }
+  .pav2-purpose .pav2-kicker,
+  .pav2-purpose h2,
+  .pav2-purpose p { color: #fff; }
+  .pav2-purpose p { opacity: .84; max-width: 720px; }
+
+  .pav2-purpose__stats {
+    display: grid;
+    gap: 14px;
+  }
+
+  .pav2-purpose__stats > div {
+    background: rgba(255,255,255,.16);
+    border-color: rgba(255,255,255,.24);
+  }
+
+  .pav2-purpose__stats strong,
+  .pav2-purpose__stats span { color: #fff; }
+  .pav2-purpose__stats span { opacity: .78; }
+
+  .pav2-cta {
+    padding: 96px 0;
+    text-align: center;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(210,99,46,.16), transparent 38%),
+      #1f1f1f;
+  }
+
+  .pav2-cta__inner {
+    max-width: 880px;
+  }
+
+  .pav2-cta h2,
+  .pav2-cta p { color: #fff; }
+  .pav2-cta p { max-width: 640px; margin: 18px auto 0; opacity: .76; }
+  .pav2-cta__actions { justify-content: center; }
+
+  .prime-about-v2 .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .72s ease, transform .72s cubic-bezier(.2,.8,.2,1);
+  }
+
+  .prime-about-v2 .reveal.visible { opacity: 1; transform: translateY(0); }
+  .prime-about-v2 .reveal-delay-1 { transition-delay: .08s; }
+  .prime-about-v2 .reveal-delay-2 { transition-delay: .16s; }
+  .prime-about-v2 .reveal-delay-3 { transition-delay: .24s; }
+  .prime-about-v2 .reveal-delay-4 { transition-delay: .32s; }
+
+  @media (max-width: 1100px) {
+    .pav2-hero__grid,
+    .pav2-feature__grid,
+    .pav2-purpose__card,
+    .pav2-pillars__head {
+      grid-template-columns: 1fr;
+    }
+
+    .pav2-hero__visual { max-width: 560px; }
+    .pav2-values__grid,
+    .pav2-promise__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 760px) {
+    .pav2-page { padding-left: 20px; padding-right: 20px; }
+    .pav2-hero { padding: 62px 0 72px; }
+    .pav2-hero__grid { gap: 42px; }
+    .pav2-hero__title { font-size: 42px; }
+    .pav2-hero__text { font-size: 16px; }
+    .pav2-proof,
+    .pav2-mini-stats,
+    .pav2-values__grid,
+    .pav2-promise__grid { grid-template-columns: 1fr; }
+    .pav2-mission { grid-template-columns: 1fr; gap: 24px; padding-top: 62px; padding-bottom: 62px; }
+    .pav2-mission__text { font-size: 26px; }
+    .pav2-values,
+    .pav2-feature,
+    .pav2-pillars,
+    .pav2-purpose,
+    .pav2-promise,
+    .pav2-cta { padding-top: 62px; padding-bottom: 62px; }
+    .pav2-pillar { grid-template-columns: 1fr; padding: 26px 22px; gap: 8px; }
+    .pav2-purpose__card { border-radius: 26px; padding-top: 38px; padding-bottom: 38px; }
+  }
+</style>
+
+<script>
+  (function() {
+    var root = document.currentScript.closest('.shopify-section') || document;
+    var reveals = root.querySelectorAll('.prime-about-v2 .reveal');
+    if (!reveals.length) return;
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    reveals.forEach(function(el) { observer.observe(el); });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Prime About Premium",
+  "settings": [
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Hero eyebrow", "default": "Nurturing Paws · Enriching Lives" },
+    { "type": "text", "id": "hero_title", "label": "Hero title line 1", "default": "More Than a" },
+    { "type": "text", "id": "hero_title_em", "label": "Hero italic title", "default": "Pet Food Brand" },
+    { "type": "textarea", "id": "hero_sub", "label": "Hero subtitle", "default": "We are a family of dog lovers, dedicated to natural ingredients, honest quality, and a mission that reaches from American homes to the Himalayan highlands." },
+
+    { "type": "text", "id": "mission_label", "label": "Mission label", "default": "Our Philosophy" },
+    { "type": "richtext", "id": "mission_text", "label": "Mission text", "default": "<p>At Prime Pet Food, we believe your dog deserves <strong>exactly what nature intended</strong> — nothing more, nothing less. That conviction shapes every chew we craft, every ingredient we source, and every relationship we build with our customers.</p><p>We're not just a business. <strong>We are fellow dog lovers</strong> who understand what it means to have a furry member of the family.</p>" },
+
+    { "type": "text", "id": "values_tag", "label": "Values tag", "default": "What Drives Us" },
+    { "type": "text", "id": "values_title", "label": "Values title", "default": "Our Core Values" },
+
+    { "type": "text", "id": "value_1_icon", "label": "Value 1 icon", "default": "🌿" },
+    { "type": "text", "id": "value_1_title", "label": "Value 1 title", "default": "100% Natural & Organic" },
+    { "type": "textarea", "id": "value_1_desc", "label": "Value 1 description", "default": "Our treats and chews are crafted from nature's finest — no artificial additives, no fillers. Only wholesome, organic ingredients your dog's body was built to enjoy." },
+
+    { "type": "text", "id": "value_2_icon", "label": "Value 2 icon", "default": "🏡" },
+    { "type": "text", "id": "value_2_title", "label": "Value 2 title", "default": "USA-Based, Family-Operated" },
+    { "type": "textarea", "id": "value_2_desc", "label": "Value 2 description", "default": "Our roots are in American soil. As a family business, we hold dear the values of trust, integrity, and the kind of care you simply can't factory-scale." },
+
+    { "type": "text", "id": "value_3_icon", "label": "Value 3 icon", "default": "🩺" },
+    { "type": "text", "id": "value_3_title", "label": "Value 3 title", "default": "Vet-Approved Quality" },
+    { "type": "textarea", "id": "value_3_desc", "label": "Value 3 description", "default": "Every product is meticulously sourced and tested. When you choose Prime Pet Food, you're choosing a standard that veterinary professionals stand behind." },
+
+    { "type": "text", "id": "value_4_icon", "label": "Value 4 icon", "default": "🤝" },
+    { "type": "text", "id": "value_4_title", "label": "Value 4 title", "default": "Ethical Sourcing" },
+    { "type": "textarea", "id": "value_4_desc", "label": "Value 4 description", "default": "From the high Himalayas to your doorstep, we trace every ingredient to ensure ethical, sustainable practices at every step of the supply chain." },
+
+    { "type": "image_picker", "id": "story_image", "label": "Feature image" },
+    { "type": "text", "id": "story_caption", "label": "Feature image caption", "default": "Your pets are cherished family members. We treat them that way." },
+    { "type": "text", "id": "story_badge", "label": "Hero badge text", "default": "50,000+ Happy Dogs" },
+    { "type": "text", "id": "story_subtitle", "label": "Feature subtitle", "default": "Our Story" },
+    { "type": "text", "id": "story_heading", "label": "Feature heading", "default": "Born from Love, Built on Trust" },
+    { "type": "textarea", "id": "story_body_1", "label": "Feature paragraph 1", "default": "We started Prime Pet Food with a single belief: that dogs deserve the same thoughtful, wholesome care we give ourselves. Our team consists of devoted animal lovers who've experienced firsthand the joy — and responsibility — of caring for a dog." },
+    { "type": "textarea", "id": "story_body_2", "label": "Feature paragraph 2", "default": "We curate only the best natural chews and treats, sourced from trusted, ethical suppliers. Our Himalayan Yak Chews are handcrafted using a centuries-old tradition — no shortcuts, no compromise — just pure, long-lasting nourishment your dog will love." },
+
+    { "type": "text", "id": "stat_1_num", "label": "Stat 1 number", "default": "20k+" },
+    { "type": "text", "id": "stat_1_label", "label": "Stat 1 label", "default": "Happy Customers" },
+    { "type": "text", "id": "stat_2_num", "label": "Stat 2 number", "default": "5★" },
+    { "type": "text", "id": "stat_2_label", "label": "Stat 2 label", "default": "Average Rating" },
+    { "type": "text", "id": "stat_3_num", "label": "Stat 3 number", "default": "1%" },
+    { "type": "text", "id": "stat_3_label", "label": "Stat 3 label", "default": "Profits Donated" },
+
+    { "type": "text", "id": "pillars_heading", "label": "Pillars heading", "default": "What Makes Us Different" },
+    { "type": "textarea", "id": "pillars_intro", "label": "Pillars intro", "default": "These aren't just selling points. They're the commitments we make to every dog owner who trusts us with their pet's wellbeing." },
+
+    { "type": "text", "id": "pillar_1_title", "label": "Pillar 1 title", "default": "Premium Quality Assurance" },
+    { "type": "textarea", "id": "pillar_1_desc", "label": "Pillar 1 description", "default": "Every product passes rigorous quality checks. We meticulously source, test, and hand-select what makes it to your door — because your pet deserves nothing less than the best." },
+    { "type": "text", "id": "pillar_2_title", "label": "Pillar 2 title", "default": "Exceptional Customer Service" },
+    { "type": "textarea", "id": "pillar_2_desc", "label": "Pillar 2 description", "default": "Your trust is our most valuable asset. Our knowledgeable team is always here — whether you need advice, have a question, or need help with your order. We treat every customer like family." },
+    { "type": "text", "id": "pillar_3_title", "label": "Pillar 3 title", "default": "Authentic Himalayan Craftsmanship" },
+    { "type": "textarea", "id": "pillar_3_desc", "label": "Pillar 3 description", "default": "Our Yak Chews are made using a centuries-old tradition from the highlands of the Himalayas — slow-smoked, hardened naturally, and free from any artificial processing." },
+    { "type": "text", "id": "pillar_4_title", "label": "Pillar 4 title", "default": "A Community, Not Just a Brand" },
+    { "type": "textarea", "id": "pillar_4_desc", "label": "Pillar 4 description", "default": "When you shop with us, you join a community of passionate pet lovers. We share your commitment to giving dogs a healthier, happier life — and we grow together." },
+
+    { "type": "text", "id": "cause_tag", "label": "Cause tag", "default": "Our Purpose Beyond Pets" },
+    { "type": "text", "id": "cause_heading", "label": "Cause heading", "default": "Supporting Education in the Himalayas" },
+    { "type": "textarea", "id": "cause_body", "label": "Cause body", "default": "Every purchase you make does more than nourish your dog. We donate 1% of our profits to support education for children in the remote villages of the Himalayas — communities that are underserved but full of potential. When you choose Prime Pet Food, you become part of something larger." },
+    { "type": "text", "id": "cause_stat_1_num", "label": "Cause stat 1 number", "default": "1%" },
+    { "type": "text", "id": "cause_stat_1_label", "label": "Cause stat 1 label", "default": "Profits donated" },
+    { "type": "text", "id": "cause_stat_2_num", "label": "Cause stat 2 number", "default": "∞" },
+    { "type": "text", "id": "cause_stat_2_label", "label": "Cause stat 2 label", "default": "Impact created" },
+
+    { "type": "text", "id": "promise_title", "label": "Promise title", "default": "The Prime Pet Promise" },
+    { "type": "text", "id": "promise_1_icon", "label": "Promise 1 icon", "default": "🚚" },
+    { "type": "text", "id": "promise_1_name", "label": "Promise 1 title", "default": "Fast Delivery" },
+    { "type": "textarea", "id": "promise_1_text", "label": "Promise 1 description", "default": "Same-day processing on most orders. Your dog shouldn't have to wait." },
+    { "type": "text", "id": "promise_2_icon", "label": "Promise 2 icon", "default": "🎉" },
+    { "type": "text", "id": "promise_2_name", "label": "Promise 2 title", "default": "Free Shipping" },
+    { "type": "textarea", "id": "promise_2_text", "label": "Promise 2 description", "default": "On orders over $30. No surprise fees at checkout." },
+    { "type": "text", "id": "promise_3_icon", "label": "Promise 3 icon", "default": "🔒" },
+    { "type": "text", "id": "promise_3_name", "label": "Promise 3 title", "default": "Secure Checkout" },
+    { "type": "textarea", "id": "promise_3_text", "label": "Promise 3 description", "default": "Your payment and personal data are always protected." },
+    { "type": "text", "id": "promise_4_icon", "label": "Promise 4 icon", "default": "👍" },
+    { "type": "text", "id": "promise_4_name", "label": "Promise 4 title", "default": "Satisfaction Guaranteed" },
+    { "type": "textarea", "id": "promise_4_text", "label": "Promise 4 description", "default": "Easy returns and hassle-free refunds — always." },
+
+    { "type": "text", "id": "cta_eyebrow", "label": "CTA eyebrow", "default": "Join the Family" },
+    { "type": "text", "id": "cta_heading", "label": "CTA heading", "default": "Your Dog Deserves the Very Best" },
+    { "type": "textarea", "id": "cta_body", "label": "CTA body", "default": "Explore our collection of premium Himalayan Yak Chews and natural treats — crafted with love, backed by quality, and trusted by pet parents." },
+    { "type": "text", "id": "cta_button_label", "label": "CTA button label", "default": "Shop Now" },
+    { "type": "url", "id": "cta_button_link", "label": "CTA button link" },
+    { "type": "text", "id": "cta_button_2_label", "label": "CTA second button label", "default": "Contact Us" },
+    { "type": "url", "id": "cta_button_2_link", "label": "CTA second button link" }
+  ],
+  "presets": [
+    { "name": "Prime About Premium" }
+  ]
+}
+{% endschema %}

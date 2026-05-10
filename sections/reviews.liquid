@@ -1,0 +1,470 @@
+{% comment %}
+  Section: Reviews / Social Proof
+  File: sections/reviews.liquid
+  Description: Compact 3-column review cards grid with rating summary header — fully color customizable
+{% endcomment %}
+
+<style>
+  /* REVIEW GRID / SLIDER WRAPPERS */
+  #pp-reviews-wrapper-{{ section.id }} .pp-reviews-grid,
+  #pp-reviews-wrapper-{{ section.id }} .swiper-wrapper,
+  #pp-reviews-wrapper-{{ section.id }} .slick-track,
+  #pp-reviews-wrapper-{{ section.id }} .embla__container {
+    align-items: flex-start !important;
+  }
+
+  /* EACH SLIDE / ITEM */
+  #pp-reviews-wrapper-{{ section.id }} .pp-reviews-grid > *,
+  #pp-reviews-wrapper-{{ section.id }} .swiper-slide,
+  #pp-reviews-wrapper-{{ section.id }} .slick-slide,
+  #pp-reviews-wrapper-{{ section.id }} .embla__slide {
+    height: auto !important;
+    min-height: 0 !important;
+    display: block !important;
+    padding: 10px 0
+  }
+
+  /* MAIN CARD */
+  #pp-reviews-wrapper-{{ section.id }} .pp-review-card {
+    background: {{ section.settings.card_bg_color }};
+    border: 1px solid {{ section.settings.card_border_color }};
+    border-radius: 18px;
+    padding: 12px !important;
+
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    display: inline-block !important;
+    width: 100%;
+    box-sizing: border-box;
+    vertical-align: top;
+    align-self: flex-start !important;
+  }
+
+  /* REMOVE FORCED HEIGHT FROM ANY INNER BLOCK */
+  #pp-reviews-wrapper-{{ section.id }} .pp-review-card *,
+  #pp-reviews-wrapper-{{ section.id }} .pp-review-card *::before,
+  #pp-reviews-wrapper-{{ section.id }} .pp-review-card *::after {
+    box-sizing: border-box;
+  }
+
+  /* IMAGE */
+  #pp-reviews-wrapper-{{ section.id }} .pp-review-card img,
+  #pp-reviews-wrapper-{{ section.id }} .pp-review-image {
+    width: 100%;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    object-fit: cover;
+    display: block;
+    margin: 0 0 12px !important;
+    border-radius: 18px;
+  }
+
+  /* STARS */
+  #pp-reviews-wrapper-{{ section.id }} .pp-review-stars {
+    margin: 0 0 8px !important;
+    line-height: 1 !important;
+  }
+
+  /* TEXT */
+  #pp-reviews-wrapper-{{ section.id }} .pp-review-text {
+    margin: 0 0 10px !important;
+    line-height: 1.45 !important;
+  }
+
+  /* DIVIDER */
+  #pp-reviews-wrapper-{{ section.id }} .pp-divider,
+  #pp-reviews-wrapper-{{ section.id }} .divider,
+  #pp-reviews-wrapper-{{ section.id }} hr {
+    margin: 8px 0 10px !important;
+  }
+
+  /* NAME / LOCATION BLOCK */
+  #pp-reviews-wrapper-{{ section.id }} .pp-review-name {
+    margin: 0 0 2px !important;
+    line-height: 1.2 !important;
+  }
+
+  #pp-reviews-wrapper-{{ section.id }} .pp-review-location {
+    margin: 0 !important;
+    line-height: 1.2 !important;
+  }
+
+  /* KILL EXTRA SPACE FROM LAST ELEMENTS */
+  #pp-reviews-wrapper-{{ section.id }} .pp-review-card > :last-child {
+    margin-bottom: 0 !important;
+  }
+
+  /* VERY IMPORTANT: if parent card wrapper exists */
+  #pp-reviews-wrapper-{{ section.id }} .card,
+  #pp-reviews-wrapper-{{ section.id }} .Card,
+  #pp-reviews-wrapper-{{ section.id }} [class*="card"],
+  #pp-reviews-wrapper-{{ section.id }} [class*="Card"] {
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+</style>
+
+<div id="pp-reviews-wrapper-{{ section.id }}">
+  <section class="pp-reviews-section" id="pp-reviews-{{ section.id }}">
+    <div class="pp-reviews-inner">
+
+      <div class="pp-reviews-header">
+        <div>
+          {% if section.settings.section_label != blank %}
+            <div class="pp-section-label">{{ section.settings.section_label }}</div>
+          {% endif %}
+          {% if section.settings.section_title != blank %}
+            <h2 class="pp-section-title">{{ section.settings.section_title }}</h2>
+          {% endif %}
+        </div>
+
+        {% if section.settings.show_rating_summary %}
+          <div class="pp-reviews-summary">
+            <div class="pp-reviews-big-number">{{ section.settings.rating_number }}</div>
+            <div class="pp-reviews-meta">
+              <span class="pp-stars">★★★★★</span>
+              <span>{{ section.settings.rating_label }}</span>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="pp-reviews-grid" id="pp-reviews-grid-{{ section.id }}">
+        {% for block in section.blocks %}
+          {% if block.type == 'review_card' %}
+            {% assign avatar_initial = block.settings.reviewer_name | slice: 0 %}
+            <div class="pp-review-card" {{ block.shopify_attributes }}>
+              <div class="pp-review-card-header">
+                <div class="pp-review-avatar" style="background: {{ block.settings.avatar_color }};">
+                  {{ avatar_initial | upcase }}
+                </div>
+                <div>
+                  <div class="pp-review-name">{{ block.settings.reviewer_name }}</div>
+                  {% if block.settings.reviewer_location != blank %}
+                    <div class="pp-review-location">{{ block.settings.reviewer_location }}</div>
+                  {% endif %}
+                </div>
+              </div>
+
+              <div class="pp-review-stars">
+                {% assign star_count = block.settings.star_rating | plus: 0 %}
+                {% for i in (1..5) %}
+                  {% if i <= star_count %}★{% else %}☆{% endif %}
+                {% endfor %}
+              </div>
+
+              <div class="pp-review-text">{{ block.settings.review_text }}</div>
+
+              {% if block.settings.show_verified %}
+                <div class="pp-review-verified">✓ Verified Purchase</div>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<script>
+(function() {
+  var grid = document.getElementById('pp-reviews-grid-{{ section.id }}');
+  if (!grid) return;
+  var cards = grid.querySelectorAll('.pp-review-card');
+
+  cards.forEach(function(card, i) {
+    card.style.transition = 'all 0.45s ease-out';
+    card.style.transitionDelay = (i * 0.08) + 's';
+  });
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+
+  cards.forEach(function(card) {
+    observer.observe(card);
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Reviews Compact",
+  "tag": "div",
+  "class": "reviews-section-wrapper",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header Text"
+    },
+    {
+      "type": "text",
+      "id": "section_label",
+      "label": "Section Label (small caps)",
+      "default": "Real Reviews, Real Dogs"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Approved by Dogs & Their Parents"
+    },
+    {
+      "type": "header",
+      "content": "Rating Summary Box"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating_summary",
+      "label": "Show Rating Summary",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "rating_number",
+      "label": "Overall Rating Number",
+      "default": "4.9"
+    },
+    {
+      "type": "text",
+      "id": "rating_label",
+      "label": "Rating Label",
+      "default": "Based on 500+ reviews"
+    },
+    {
+      "type": "header",
+      "content": "Colors — Section & Cards"
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Section Background",
+      "default": "#FEFAE0"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Review Card Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Review Card Border",
+      "default": "#F0EDE8"
+    },
+    {
+      "type": "color",
+      "id": "summary_bg_color",
+      "label": "Rating Summary Box Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Colors — Header Text"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Section Label Color",
+      "default": "#7A8B6A"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Section Title Color",
+      "default": "#1A3409"
+    },
+    {
+      "type": "header",
+      "content": "Colors — Rating Summary"
+    },
+    {
+      "type": "color",
+      "id": "big_number_color",
+      "label": "Big Rating Number Color",
+      "default": "#1A3409"
+    },
+    {
+      "type": "color",
+      "id": "stars_color",
+      "label": "Stars Color",
+      "default": "#C9A84C"
+    },
+    {
+      "type": "color",
+      "id": "rating_label_color",
+      "label": "Rating Label Text Color",
+      "default": "#8B8B7A"
+    },
+    {
+      "type": "header",
+      "content": "Colors — Review Cards"
+    },
+    {
+      "type": "color",
+      "id": "reviewer_name_color",
+      "label": "Reviewer Name Color",
+      "default": "#1A3409"
+    },
+    {
+      "type": "color",
+      "id": "reviewer_loc_color",
+      "label": "Reviewer Location Color",
+      "default": "#8B8B7A"
+    },
+    {
+      "type": "color",
+      "id": "review_text_color",
+      "label": "Review Text Color",
+      "default": "#5A5A4F"
+    },
+    {
+      "type": "color",
+      "id": "verified_color",
+      "label": "Verified Badge Color",
+      "default": "#2D5016"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 28
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review_card",
+      "name": "Review Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "reviewer_name",
+          "label": "Reviewer Name",
+          "default": "Jordan S."
+        },
+        {
+          "type": "text",
+          "id": "reviewer_location",
+          "label": "Reviewer Location",
+          "default": "Seattle, WA"
+        },
+        {
+          "type": "color",
+          "id": "avatar_color",
+          "label": "Avatar Background Color",
+          "default": "#7A8B6A"
+        },
+        {
+          "type": "range",
+          "id": "star_rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Star Rating",
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Review Text",
+          "default": "Amazing product and fast shipping! My dog goes absolutely crazy for these chews. They last way longer than anything else we've tried."
+        },
+        {
+          "type": "checkbox",
+          "id": "show_verified",
+          "label": "Show Verified Purchase Badge",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews Compact",
+      "blocks": [
+        {
+          "type": "review_card",
+          "settings": {
+            "reviewer_name": "Jordan S.",
+            "reviewer_location": "Seattle, WA",
+            "avatar_color": "#7A8B6A",
+            "star_rating": 5,
+            "review_text": "Amazing product and fast shipping! My dog goes absolutely crazy for these chews. They last way longer than anything else we've tried. The quality is incredible and they last a long time.",
+            "show_verified": true
+          }
+        },
+        {
+          "type": "review_card",
+          "settings": {
+            "reviewer_name": "Taylor C.",
+            "reviewer_location": "Austin, TX",
+            "avatar_color": "#C9A84C",
+            "star_rating": 5,
+            "review_text": "These chews are the standout among many I've tried. They last a long time, leave no mess, and I don't have to worry about artificial additives.",
+            "show_verified": true
+          }
+        },
+        {
+          "type": "review_card",
+          "settings": {
+            "reviewer_name": "Sam D.",
+            "reviewer_location": "San Francisco, CA",
+            "avatar_color": "#D4770B",
+            "star_rating": 5,
+            "review_text": "Great value for the price. One chew keeps my dog busy for days and they look much cleaner and more premium than most alternatives.",
+            "show_verified": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

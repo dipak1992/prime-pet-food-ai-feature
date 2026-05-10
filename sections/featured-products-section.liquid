@@ -1,0 +1,508 @@
+{%- comment -%}theme-check-disable NestedSnippet,SchemaJsonFormat{%- endcomment -%}
+{% render 'featured-collection', products_to_show: section.settings.products_to_show %}
+
+{% schema %}
+{
+  "name": "Featured Products Section",
+  "tag": "section",
+  "class": "section section-featured-products",
+  "disabled_on": {
+    "groups": ["header", "footer", "aside"],
+    "templates": ["password"]
+  },
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 24,
+      "step": 1,
+      "default": 6,
+      "label": "Maximum products to show"
+    },
+    {
+      "type": "header",
+      "content": "Grid/carousel"
+    },
+    {
+      "type": "select",
+      "id": "desktop_layout",
+      "default": "carousel",
+      "label": "Desktop layout",
+      "options": [
+        {
+          "value": "carousel",
+          "label": "Carousel"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "default": "carousel",
+      "label": "Mobile layout",
+      "options": [
+        {
+          "value": "carousel",
+          "label": "Carousel"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "columns_desktop",
+      "options": [
+        {
+          "value": "6",
+          "label": "XS"
+        },
+        {
+          "value": "5",
+          "label": "S"
+        },
+        {
+          "value": "4",
+          "label": "M"
+        },
+        {
+          "value": "3",
+          "label": "L"
+        },
+        {
+          "value": "2",
+          "label": "XL"
+        }
+      ],
+      "default": "4",
+      "label": "Card size on desktop"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "default": "2",
+      "label": "Number of columns on mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Set carousel/grid to full screen width",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Header layout"
+    },
+    {
+      "type": "select",
+      "id": "content_max_width",
+      "options": [
+        {
+          "value": "xs",
+          "label": "XS"
+        },
+        {
+          "value": "s",
+          "label": "S"
+        },
+        {
+          "value": "m",
+          "label": "M"
+        },
+        {
+          "value": "l",
+          "label": "L"
+        },
+        {
+          "value": "xl",
+          "label": "XL"
+        }
+      ],
+      "default": "m",
+      "label": "Maximum heading width"
+    },
+    {
+      "type": "text_alignment",
+      "id": "desktop_heading_alignment",
+      "default": "left",
+      "label": "Heading alignment on desktop"
+    },
+    {
+      "type": "text_alignment",
+      "id": "mobile_heading_alignment",
+      "default": "left",
+      "label": "Heading alignment on mobile"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "default": "Featured collection",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "italic_convert",
+      "options": [
+        {
+          "value": "",
+          "label": "Off (keep as italics)"
+        },
+        {
+          "value": "light",
+          "label": "Lighter"
+        },
+        {
+          "value": "accent_color",
+          "label": "Accent color"
+        },
+        {
+          "value": "accent",
+          "label": "Accent gradient color"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        },
+        {
+          "value": "outline_accent",
+          "label": "Outline - Accent color"
+        }
+      ],
+      "default": "",
+      "label": "Style italics"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h3",
+          "label": "Small"
+        },
+        {
+          "value": "h2",
+          "label": "Medium"
+        },
+        {
+          "value": "h1",
+          "label": "Large"
+        }
+      ],
+      "default": "h2",
+      "label": "Heading size"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "h1"
+        },
+        {
+          "value": "h2",
+          "label": "h2"
+        },
+        {
+          "value": "h3",
+          "label": "h3"
+        }
+      ],
+      "default": "h2",
+      "label": "Heading tag"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "select",
+      "id": "text_size",
+      "options": [
+        {
+          "value": "t6",
+          "label": "Extra small"
+        },
+        {
+          "value": "t5",
+          "label": "Small"
+        },
+        {
+          "value": "t4",
+          "label": "Medium"
+        },
+        {
+          "value": "t3",
+          "label": "Large"
+        }
+      ],
+      "default": "t4",
+      "label": "Text size"
+    },
+    {
+      "type": "header",
+      "content": "View all link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all_link",
+      "default": false,
+      "label": "Show view all link"
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "Link",
+      "info": "Overrides collection link if selected"
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "default": "View more",
+      "label": "Label"
+    },
+    {
+      "type": "select",
+      "id": "view_all_text_size",
+      "options": [
+        {
+          "value": "t6",
+          "label": "Extra small"
+        },
+        {
+          "value": "t5",
+          "label": "Small"
+        },
+        {
+          "value": "t4",
+          "label": "Medium"
+        },
+        {
+          "value": "t3",
+          "label": "Large"
+        }
+      ],
+      "default": "t4",
+      "label": "Text size"
+    },
+    {
+      "type": "header",
+      "content": "View all card"
+    },
+    {
+      "type": "select",
+      "id": "view_all_card_visibility",
+      "options": [
+        {
+          "value": "off",
+          "label": "Off"
+        },
+        {
+          "value": "md:hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "hidden md:block",
+          "label": "Desktop only"
+        },
+        {
+          "value": "",
+          "label": "Always"
+        }
+      ],
+      "default": "off",
+      "label": "Visible on"
+    },
+    {
+      "type": "text",
+      "id": "view_all_card_text",
+      "default": "There's plenty more",
+      "label": "Heading"
+    },
+    {
+      "type": "color_scheme",
+      "id": "view_all_color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "line_separator",
+      "options": [
+        {
+          "value": "",
+          "label": "None"
+        },
+        {
+          "value": "border-top",
+          "label": "Top"
+        },
+        {
+          "value": "border-bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "",
+      "label": "Line separator"
+    },
+    {
+      "type": "select",
+      "id": "top_padding",
+      "options": [
+        {
+          "value": "pt-0",
+          "label": "None"
+        },
+        {
+          "value": "pt-s",
+          "label": "Small"
+        },
+        {
+          "value": "pt-m",
+          "label": "Medium"
+        },
+        {
+          "value": "pt-l",
+          "label": "Large"
+        }
+      ],
+      "default": "pt-s",
+      "label": "Top padding"
+    },
+    {
+      "type": "select",
+      "id": "bottom_padding",
+      "options": [
+        {
+          "value": "pb-0",
+          "label": "None"
+        },
+        {
+          "value": "pb-s",
+          "label": "Small"
+        },
+        {
+          "value": "pb-m",
+          "label": "Medium"
+        },
+        {
+          "value": "pb-l",
+          "label": "Large"
+        }
+      ],
+      "default": "pb-s",
+      "label": "Bottom padding"
+    },
+    {
+      "type": "header",
+      "content": "Visibility"
+    },
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "",
+          "label": "Always"
+        },
+        {
+          "value": "md:hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "hidden md:block",
+          "label": "Desktop only"
+        }
+      ],
+      "default": "",
+      "label": "Visible on"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_when_empty",
+      "default": false,
+      "label": "Hide when empty"
+    },
+    {
+      "type": "header",
+      "content": "Time schedule"
+    },
+    {
+      "type": "paragraph",
+      "content": "Show this section only at specific time of day."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_at_specific_time_of_day",
+      "default": false,
+      "label": "Enable time schedule"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_time_morning",
+      "default": true,
+      "label": "Morning (6am - 12pm)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_time_afternoon",
+      "default": true,
+      "label": "Afternoon (12pm - 6pm)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_time_evening",
+      "default": true,
+      "label": "Evening (6pm - 12am)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_time_night",
+      "default": true,
+      "label": "Night (12am - 6am)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Products Section"
+    }
+  ]
+}
+{% endschema %}

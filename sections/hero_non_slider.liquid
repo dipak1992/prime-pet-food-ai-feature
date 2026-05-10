@@ -1,0 +1,319 @@
+{%- comment -%}theme-check-disable SchemaJsonFormat{%- endcomment -%}
+{%- if request.design_mode or section.settings.image != blank or section.settings.mobile_image != blank -%}
+  {%- if section.index < 4 or request.design_mode -%}
+    {{ 'section-hero-non-slider.css' | asset_url | stylesheet_tag: preload: true }}
+  {%- else -%}
+    <link rel="stylesheet" href="{{ 'section-hero-non-slider.css' | asset_url }}" media="print" onload="this.media='all'">
+  {%- endif -%}
+
+  {%- liquid
+    assign desktop_height = 'min(' | append: section.settings.desktop_section_height | append: 'px, 60vh)'
+    assign mobile_height = 'min(' | append: section.settings.mobile_section_height | append: 'px, 60vh)'
+    assign overlay_opacity = section.settings.image_overlay_opacity | divided_by: 100.0
+    assign title = section.settings.title | default: "Upgrade Your Dog's Chew Time With <em>Premium Yak Chews</em> They'll Love"
+    assign bottom_proof = section.settings.bottom_social_proof | strip | truncate: 60, ''
+    assign fetch_priority = 'auto'
+    if section.index == 1 or request.design_mode
+      assign fetch_priority = 'high'
+    endif
+  -%}
+
+  <div class="section section-hero-non-slider {{ section.settings.line_separator }} {{ section.settings.visibility }} {%- render 'class-time-of-day-to-show' -%}">
+    <section
+      class="hero-non-slider"
+      style="
+        --hero-desktop-height: {{ desktop_height }};
+        --hero-mobile-height: {{ mobile_height }};
+        --hero-overlay-opacity: {{ overlay_opacity }};
+        --hero-title-color: {{ section.settings.title_color }};
+        --hero-accent-color: {{ section.settings.accent_color }};
+        --hero-button-bg: {{ section.settings.button_background_color }};
+        --hero-button-text: {{ section.settings.button_text_color }};
+      "
+    >
+      <div class="hero-non-slider__wrap">
+        <div class="hero-non-slider__media">
+          {%- if section.settings.image != blank -%}
+            {%- liquid
+              assign widths = '750, 1100, 1500, 2000, 3000, 3840'
+              assign sizes = '100vw'
+              assign height = section.settings.image.width | divided_by: section.settings.image.aspect_ratio | round
+            -%}
+            <picture>
+              {%- if section.settings.mobile_image != blank -%}
+                <source
+                  media="(max-width: 749px)"
+                  srcset="{{ section.settings.mobile_image | image_url: width: 1200 }}"
+                >
+              {%- endif -%}
+              {{
+                section.settings.image
+                | image_url: width: 3840
+                | image_tag:
+                  widths: widths,
+                  sizes: sizes,
+                  fetchpriority: fetch_priority,
+                  loading: 'eager',
+                  width: section.settings.image.width,
+                  height: height,
+                  alt: section.settings.image.alt
+              }}
+            </picture>
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg placeholder-svg--cover' }}
+          {%- endif -%}
+        </div>
+
+        <div class="hero-non-slider__overlay"></div>
+        <div class="hero-non-slider__backdrop"></div>
+
+        <div class="hero-non-slider__content page-width">
+          <div class="hero-non-slider__inner">
+            <div class="hero-non-slider__top-group">
+              {%- if section.settings.social_proof_top != blank -%}
+                <div class="hero-non-slider__proof-top">
+                  <span class="hero-non-slider__stars" aria-hidden="true">★★★★★</span>
+                  <span class="hero-non-slider__proof-top-text">{{ section.settings.social_proof_top | escape }}</span>
+                </div>
+              {%- endif -%}
+
+              <h1 class="hero-non-slider__title">{{ title }}</h1>
+
+              {%- if section.settings.description != blank -%}
+                <div class="hero-non-slider__description rte">
+                  {{ section.settings.description }}
+                </div>
+              {%- endif -%}
+            </div>
+
+            <div class="hero-non-slider__bottom-group">
+              {%- if section.settings.button_label != blank -%}
+                <div class="hero-non-slider__actions">
+                  <a
+                    {% if section.settings.button_link != blank %}
+                      href="{{ section.settings.button_link }}"
+                    {% else %}
+                      role="link" aria-disabled="true"
+                    {% endif %}
+                    class="hero-non-slider__button"
+                  >
+                    <span class="hero-non-slider__button-primary">{{ section.settings.button_label | escape }}</span>
+                    {%- if section.settings.button_subtext != blank -%}
+                      <span class="hero-non-slider__button-subtext">{{ section.settings.button_subtext | escape }}</span>
+                    {%- endif -%}
+                  </a>
+                </div>
+              {%- endif -%}
+
+              {%- if bottom_proof != blank -%}
+                <div class="hero-non-slider__proof-bottom">{{ bottom_proof | escape }}</div>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <style>
+
+      .hero-non-slider__button{
+        min-width: 32rem !important;
+        font-size: 22px !important;
+        border-radius: 0.4rem !important;
+      }
+      .hero-non-slider__button-primary {
+    font-size: 22px;
+  }
+       
+    </style>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Hero Non Slider",
+  "tag": "section",
+  "class": "section section-hero-non-slider",
+  "disabled_on": {
+    "groups": ["header", "footer", "aside"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Desktop image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile image"
+    },
+    {
+      "type": "range",
+      "id": "image_overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 55,
+      "label": "Overlay opacity"
+    },
+    {
+      "type": "range",
+      "id": "desktop_section_height",
+      "min": 500,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "default": 720,
+      "label": "Desktop height"
+    },
+    {
+      "type": "range",
+      "id": "mobile_section_height",
+      "min": 420,
+      "max": 900,
+      "step": 10,
+      "unit": "px",
+      "default": 620,
+      "label": "Mobile height"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "social_proof_top",
+      "label": "Social proof over title",
+      "default": "149,467+ Dogs (and Their Humans) Love Safe Dog Chews"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Hero title",
+      "default": "Upgrade Your Dog's Chew Time With <em>Premium Yak Chews</em> They'll Love",
+      "info": "Wrap highlighted words in italics to use the accent color."
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Hero title color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Title accent color",
+      "default": "#ff962d"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Hero description",
+      "default": "<p>Long-lasting, natural yak chews made to keep dogs busy, happy, and chewing safely.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button text",
+      "default": "SHOP NOW!"
+    },
+    {
+      "type": "text",
+      "id": "button_subtext",
+      "label": "Button subtext",
+      "default": "AND SAVE 15%"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Button background color",
+      "default": "#f7842a"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Lower social proof"
+    },
+    {
+      "type": "text",
+      "id": "bottom_social_proof",
+      "label": "Text below button",
+      "default": "VET approved | 30 day Money Back Guarantee",
+      "info": "Displayed with a 60 character limit."
+    },
+    {
+      "type": "header",
+      "content": "Advanced"
+    },
+    {
+      "type": "select",
+      "id": "line_separator",
+      "options": [
+        {
+          "value": "",
+          "label": "Off"
+        },
+        {
+          "value": "border-top",
+          "label": "Top"
+        },
+        {
+          "value": "border-bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "border-top border-bottom",
+          "label": "Both"
+        }
+      ],
+      "default": "",
+      "label": "Line separator"
+    },
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "visible-xs",
+          "label": "Mobile"
+        },
+        {
+          "value": "hidden-xs",
+          "label": "Desktop"
+        },
+        {
+          "value": "",
+          "label": "Both"
+        }
+      ],
+      "default": "",
+      "label": "Show on"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Non Slider"
+    }
+  ]
+}
+{% endschema %}

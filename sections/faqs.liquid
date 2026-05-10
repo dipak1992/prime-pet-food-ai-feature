@@ -1,0 +1,637 @@
+{% comment %}
+  Section: FAQ — Everything You Need to Know
+  File: sections/faq.liquid
+{% endcomment %}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --faq-bg:               {{ section.settings.bg_color }};
+    --faq-eyebrow:          {{ section.settings.eyebrow_color }};
+    --faq-heading:          {{ section.settings.heading_color }};
+    --faq-subtext:          {{ section.settings.subtext_color }};
+    --faq-item-bg:          {{ section.settings.item_bg }};
+    --faq-item-border:      {{ section.settings.item_border }};
+    --faq-item-border-open: {{ section.settings.item_border_open }};
+    --faq-q-color:          {{ section.settings.question_color }};
+    --faq-a-color:          {{ section.settings.answer_color }};
+    --faq-icon-color:       {{ section.settings.icon_color }};
+    --faq-icon-bg:          {{ section.settings.icon_bg }};
+    --faq-icon-color-open:  {{ section.settings.icon_color_open }};
+    --faq-icon-bg-open:     {{ section.settings.icon_bg_open }};
+    --faq-shadow-open:      rgba(210, 99, 46, 0.14);
+    --faq-divider:          rgba(210, 99, 46, 0.16);
+  }
+
+  #shopify-section-{{ section.id }} .faq-section {
+    padding: {{ section.settings.padding_top }}px 20px {{ section.settings.padding_bottom }}px;
+    background: var(--faq-bg);
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .faq-title-wrap {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  #shopify-section-{{ section.id }} .faq-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--faq-eyebrow);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  #shopify-section-{{ section.id }} .faq-eyebrow::before,
+  #shopify-section-{{ section.id }} .faq-eyebrow::after {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.35;
+    display: inline-block;
+  }
+
+  #shopify-section-{{ section.id }} .faq-heading {
+    margin: 0 0 14px;
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1.15;
+    font-weight: 700;
+    color: var(--faq-heading);
+  }
+
+  #shopify-section-{{ section.id }} .faq-subtext {
+    margin: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--faq-subtext);
+  }
+
+  #shopify-section-{{ section.id }} .faq-list {
+    max-width: {{ section.settings.list_max_width }}px;
+    margin: 42px auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  #shopify-section-{{ section.id }} .faq-item {
+    background: var(--faq-item-bg);
+    border: 1.5px solid var(--faq-item-border);
+    border-radius: 18px;
+    overflow: hidden;
+    transition:
+      border-color 0.3s ease,
+      box-shadow 0.3s ease,
+      transform 0.25s ease,
+      background-color 0.25s ease;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: faqFadeUp 0.5s ease forwards;
+    will-change: transform;
+  }
+
+  {% for block in section.blocks %}
+    #shopify-section-{{ section.id }} .faq-item:nth-child({{ forloop.index }}) {
+      animation-delay: {{ forloop.index0 | times: 0.08 }}s;
+    }
+  {% endfor %}
+
+  @keyframes faqFadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  #shopify-section-{{ section.id }} .faq-item.open {
+    border-color: var(--faq-item-border-open);
+    box-shadow: 0 12px 32px var(--faq-shadow-open);
+  }
+
+  #shopify-section-{{ section.id }} .faq-question {
+    width: 100%;
+    appearance: none;
+    background: transparent;
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 24px;
+    cursor: pointer;
+    text-align: left;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  #shopify-section-{{ section.id }} .faq-question:focus-visible {
+    outline: 2px solid var(--faq-item-border-open);
+    outline-offset: -2px;
+  }
+
+  #shopify-section-{{ section.id }} .faq-question-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--faq-q-color);
+    line-height: 1.45;
+    flex: 1;
+    padding-right: 4px;
+  }
+
+  #shopify-section-{{ section.id }} .faq-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    background: var(--faq-icon-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition:
+      background-color 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} .faq-icon svg {
+    width: 14px;
+    height: 14px;
+    stroke: var(--faq-icon-color);
+    stroke-width: 2.4;
+    fill: none;
+    transition:
+      transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+      stroke 0.25s ease;
+  }
+
+  #shopify-section-{{ section.id }} .faq-item.open .faq-icon {
+    background: var(--faq-icon-bg-open);
+  }
+
+  #shopify-section-{{ section.id }} .faq-item.open .faq-icon svg {
+    transform: rotate(180deg);
+    stroke: var(--faq-icon-color-open);
+  }
+
+  #shopify-section-{{ section.id }} .faq-answer-wrap {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  #shopify-section-{{ section.id }} .faq-answer {
+    padding: 0 24px 20px;
+  }
+
+  #shopify-section-{{ section.id }} .faq-answer-inner {
+    border-top: 1px solid var(--faq-divider);
+    padding-top: 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--faq-a-color);
+  }
+
+  #shopify-section-{{ section.id }} .faq-answer-inner p:first-child,
+  #shopify-section-{{ section.id }} .faq-answer-inner ul:first-child,
+  #shopify-section-{{ section.id }} .faq-answer-inner ol:first-child {
+    margin-top: 0;
+  }
+
+  #shopify-section-{{ section.id }} .faq-answer-inner p:last-child,
+  #shopify-section-{{ section.id }} .faq-answer-inner ul:last-child,
+  #shopify-section-{{ section.id }} .faq-answer-inner ol:last-child {
+    margin-bottom: 0;
+  }
+
+  #shopify-section-{{ section.id }} .faq-answer-inner ul,
+  #shopify-section-{{ section.id }} .faq-answer-inner ol {
+    padding-left: 20px;
+    margin: 10px 0;
+  }
+
+  #shopify-section-{{ section.id }} .faq-answer-inner li {
+    margin-bottom: 6px;
+  }
+
+  #shopify-section-{{ section.id }} .faq-answer-inner li::marker {
+    color: #D2632E;
+  }
+
+  @media (hover: hover) {
+    #shopify-section-{{ section.id }} .faq-item:hover {
+      transform: translateY(-1px);
+    }
+  }
+
+  @media (max-width: 600px) {
+    #shopify-section-{{ section.id }} .faq-section {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    #shopify-section-{{ section.id }} .faq-title-wrap {
+      padding: 0;
+    }
+
+    #shopify-section-{{ section.id }} .faq-list {
+      margin-top: 34px;
+      gap: 10px;
+    }
+
+    #shopify-section-{{ section.id }} .faq-item {
+      border-radius: 16px;
+    }
+
+    #shopify-section-{{ section.id }} .faq-question {
+      padding: 16px 18px;
+      gap: 12px;
+    }
+
+    #shopify-section-{{ section.id }} .faq-answer {
+      padding: 0 18px 18px;
+    }
+
+    #shopify-section-{{ section.id }} .faq-question-text {
+      font-size: 14px;
+    }
+
+    #shopify-section-{{ section.id }} .faq-answer-inner {
+      font-size: 13.5px;
+      padding-top: 14px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #shopify-section-{{ section.id }} .faq-item,
+    #shopify-section-{{ section.id }} .faq-answer-wrap,
+    #shopify-section-{{ section.id }} .faq-icon,
+    #shopify-section-{{ section.id }} .faq-icon svg {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+</style>
+
+<section class="faq-section">
+  <div class="faq-title-wrap">
+    {% if section.settings.eyebrow != blank %}
+      <div class="faq-eyebrow">{{ section.settings.eyebrow }}</div>
+    {% endif %}
+
+    {% if section.settings.heading != blank %}
+      <h2 class="faq-heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+
+    {% if section.settings.subtext != blank %}
+      <p class="faq-subtext">{{ section.settings.subtext }}</p>
+    {% endif %}
+  </div>
+
+  {% if section.blocks.size > 0 %}
+    <div class="faq-list">
+      {% for block in section.blocks %}
+        {% if block.type == 'faq_item' %}
+          <div class="faq-item{% if forloop.first and section.settings.first_open %} open{% endif %}" {{ block.shopify_attributes }}>
+            <button
+              class="faq-question"
+              type="button"
+              aria-expanded="{% if forloop.first and section.settings.first_open %}true{% else %}false{% endif %}"
+            >
+              <span class="faq-question-text">{{ block.settings.question }}</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </span>
+            </button>
+
+            <div class="faq-answer-wrap">
+              <div class="faq-answer">
+                <div class="faq-answer-inner rte">{{ block.settings.answer }}</div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+</section>
+
+<script>
+(function() {
+  var sectionEl = document.querySelector('#shopify-section-{{ section.id }}');
+  if (!sectionEl) return;
+
+  var items = Array.prototype.slice.call(sectionEl.querySelectorAll('.faq-item'));
+
+  function setExpanded(item, open, instant) {
+    var button = item.querySelector('.faq-question');
+    var wrap = item.querySelector('.faq-answer-wrap');
+
+    if (!button || !wrap) return;
+
+    if (open) {
+      item.classList.add('open');
+      button.setAttribute('aria-expanded', 'true');
+
+      if (instant) {
+        wrap.style.height = 'auto';
+      } else {
+        wrap.style.height = wrap.scrollHeight + 'px';
+
+        var onOpenEnd = function(e) {
+          if (e.propertyName !== 'height') return;
+          if (item.classList.contains('open')) {
+            wrap.style.height = 'auto';
+          }
+          wrap.removeEventListener('transitionend', onOpenEnd);
+        };
+
+        wrap.addEventListener('transitionend', onOpenEnd);
+      }
+    } else {
+      button.setAttribute('aria-expanded', 'false');
+
+      if (wrap.style.height === 'auto' || !wrap.style.height) {
+        wrap.style.height = wrap.scrollHeight + 'px';
+        wrap.offsetHeight;
+      }
+
+      wrap.style.height = '0px';
+      item.classList.remove('open');
+    }
+  }
+
+  function closeOthers(currentItem) {
+    items.forEach(function(item) {
+      if (item !== currentItem && item.classList.contains('open')) {
+        setExpanded(item, false, false);
+      }
+    });
+  }
+
+  function toggleItem(item) {
+    var isOpen = item.classList.contains('open');
+
+    {% if section.settings.accordion_mode %}
+      if (!isOpen) closeOthers(item);
+    {% endif %}
+
+    setExpanded(item, !isOpen, false);
+  }
+
+  items.forEach(function(item) {
+    var button = item.querySelector('.faq-question');
+    var wrap = item.querySelector('.faq-answer-wrap');
+
+    if (!button || !wrap) return;
+
+    if (item.classList.contains('open')) {
+      wrap.style.height = 'auto';
+      button.setAttribute('aria-expanded', 'true');
+    } else {
+      wrap.style.height = '0px';
+      button.setAttribute('aria-expanded', 'false');
+    }
+
+    button.addEventListener('click', function() {
+      toggleItem(item);
+    });
+  });
+
+  window.addEventListener('resize', function() {
+    items.forEach(function(item) {
+      var wrap = item.querySelector('.faq-answer-wrap');
+      if (item.classList.contains('open') && wrap) {
+        wrap.style.height = 'auto';
+      }
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Accordion FAQ",
+  "tag": "section",
+  "class": "faq-section-wrapper",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Label",
+      "default": "Common Questions"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Everything You Need to Know"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Description (optional)",
+      "default": "Have more questions? We are here to help."
+    },
+    {
+      "type": "header",
+      "content": "Behaviour"
+    },
+    {
+      "type": "checkbox",
+      "id": "accordion_mode",
+      "label": "Accordion Mode (close others when one opens)",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "first_open",
+      "label": "First item open by default",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "list_max_width",
+      "label": "FAQ List Max Width (px)",
+      "min": 480,
+      "max": 960,
+      "step": 20,
+      "default": 760
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top (px)",
+      "min": 20,
+      "max": 140,
+      "step": 4,
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom (px)",
+      "min": 20,
+      "max": 140,
+      "step": 4,
+      "default": 64
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FEFCF9"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Color",
+      "default": "#D2632E"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#24130D"
+    },
+    {
+      "type": "color",
+      "id": "subtext_color",
+      "label": "Description Color",
+      "default": "#7A6258"
+    },
+    {
+      "type": "color",
+      "id": "item_bg",
+      "label": "FAQ Item Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "item_border",
+      "label": "FAQ Item Border",
+      "default": "#EAD9CF"
+    },
+    {
+      "type": "color",
+      "id": "item_border_open",
+      "label": "FAQ Item Border (when open)",
+      "default": "#D2632E"
+    },
+    {
+      "type": "color",
+      "id": "question_color",
+      "label": "Question Text Color",
+      "default": "#24130D"
+    },
+    {
+      "type": "color",
+      "id": "answer_color",
+      "label": "Answer Text Color",
+      "default": "#6F5A50"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Chevron Icon Color",
+      "default": "#D2632E"
+    },
+    {
+      "type": "color",
+      "id": "icon_bg",
+      "label": "Icon Circle Background",
+      "default": "#F6E6DD"
+    },
+    {
+      "type": "color",
+      "id": "icon_color_open",
+      "label": "Chevron Icon Color (Open)",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "icon_bg_open",
+      "label": "Icon Circle Background (Open)",
+      "default": "#D2632E"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What are yak chews made from?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Just 4 ingredients: yak milk, cow milk, lime juice, and a pinch of salt. No chemicals, preservatives, or artificial flavors.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Accordion FAQ",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What are yak chews made from?",
+            "answer": "<p>Just 4 ingredients: yak milk, cow milk, lime juice, and a pinch of salt. No chemicals, preservatives, or artificial flavors.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long do they last?",
+            "answer": "<p>Depending on your dog's chewing intensity, a single chew can last anywhere from 3 days to 2+ weeks.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are they safe for puppies?",
+            "answer": "<p>We recommend yak chews for puppies 4+ months old who have started teething. Always supervise chewing.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What do I do with the small end piece?",
+            "answer": "<p>Soak it in hot water for 5 minutes, then microwave for 45–60 seconds. It puffs up into a delicious cheesy treat.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

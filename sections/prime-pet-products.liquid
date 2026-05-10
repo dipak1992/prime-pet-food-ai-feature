@@ -1,0 +1,192 @@
+{% comment %}
+  Prime Pet Food — Bundle Banner Only
+  Upload to: sections/prime-pet-bundle.liquid
+{% endcomment %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --cream:    #FAF7F2;
+    --ivory:    #F4EFE6;
+    --sand:     #E8DDD0;
+    --warm-gray:#C4B8AA;
+    --bark:     #8C6E4B;
+    --earth:    #5C4030;
+    --forest:   #2D4A30;
+    --leaf:     #4A7A4E;
+    --sage:     #7A9E7E;
+    --sage-lt:  #D4E6D5;
+    --amber:    #d4770b;
+    --amber-lt: #FAE8D5;
+    --amber-dk: #C06818;
+    --text-dark:#1A1410;
+    --text-mid: #4A3C30;
+    --text-lite:#8C7A6A;
+    --white:    #FFFFFF;
+    --radius-sm:6px;
+    --radius-md:12px;
+    --radius-lg:20px;
+    --radius-xl:32px;
+    --shadow-sm:0 2px 8px rgba(92,64,48,.08);
+    --shadow-md:0 6px 24px rgba(92,64,48,.12);
+    --shadow-lg:0 16px 48px rgba(92,64,48,.16);
+    --transition:.25s cubic-bezier(.4,0,.2,1);
+  }
+
+  .pp-products-section {
+    background: #faf5ed;
+    {% comment %} padding: 88px 40px; {% endcomment %}
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .pp-section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* ---- Bundle Banner ---- */
+  .pp-bundle-banner {
+    background: linear-gradient(135deg, var(--sage-lt), var(--amber-lt));
+    border-radius: 20px;
+    padding: 32px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    border: 1px solid var(--sand);
+  }
+
+  .pp-bundle-eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #d2770b;
+    margin-bottom: 6px;
+  }
+
+  .pp-bundle-title-product {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+  }
+
+  .pp-bundle-desc {
+    font-size: 14px;
+    color: var(--text-lite);
+  }
+
+  .pp-btn-primary {
+    background: #d4770b;
+    color: var(--white);
+    padding: 16px 32px;
+    border-radius: var(--radius-xl);
+    font-size: 15px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 20px rgba(232,136,58,.4);
+    transition: all var(--transition);
+    text-decoration: none;
+    white-space: nowrap;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .pp-btn-primary:hover {
+    background: var(--amber-dk);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(232,136,58,.5);
+  }
+
+  @media(max-width: 768px) {
+    .pp-products-section { padding: 60px 20px; }
+    .pp-bundle-banner    { flex-direction: column; text-align: center; }
+  }
+</style>
+
+<section class="pp-products-section" id="products">
+  <div class="pp-section-inner">
+
+    {% if section.settings.show_bundle_banner %}
+      <div class="pp-bundle-banner">
+        <div>
+          {% if section.settings.bundle_eyebrow != blank %}
+            <p class="pp-bundle-eyebrow">{{ section.settings.bundle_eyebrow }}</p>
+          {% endif %}
+          {% if section.settings.bundle_title != blank %}
+            <h3 class="pp-bundle-title-product">{{ section.settings.bundle_title }}</h3>
+          {% endif %}
+          {% if section.settings.bundle_desc != blank %}
+            <p class="pp-bundle-desc">{{ section.settings.bundle_desc }}</p>
+          {% endif %}
+        </div>
+        {% if section.settings.bundle_btn_label != blank %}
+          <a href="{{ section.settings.bundle_btn_url }}" class="pp-btn-primary">
+            {{ section.settings.bundle_btn_label }}
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "PP — Bundle Banner",
+  "tag": "section",
+  "class": "prime-pet-products",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Bundle Banner"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bundle_banner",
+      "label": "Show Bundle Banner",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "bundle_eyebrow",
+      "label": "Bundle Eyebrow",
+      "default": "🎉 Bundle Offer"
+    },
+    {
+      "type": "text",
+      "id": "bundle_title",
+      "label": "Bundle Title",
+      "default": "Buy 2 Get 1 FREE"
+    },
+    {
+      "type": "text",
+      "id": "bundle_desc",
+      "label": "Bundle Description",
+      "default": "Mix and match any chews. Add 3 to cart — discount applied automatically at checkout."
+    },
+    {
+      "type": "text",
+      "id": "bundle_btn_label",
+      "label": "Bundle Button Label",
+      "default": "Shop Bundle Deal →"
+    },
+    {
+      "type": "url",
+      "id": "bundle_btn_url",
+      "label": "Bundle Button URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "PP — Bundle Banner"
+    }
+  ]
+}
+{% endschema %}

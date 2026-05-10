@@ -1,0 +1,390 @@
+{% comment %}
+  Section: Bundle Deals
+  File: sections/bundle-deals.liquid
+  Description: Orange gradient section with bundle deal cards — one card can be marked as "popular"
+{% endcomment %}
+
+<style>
+  :root {
+    --forest: #2D5016;
+    --ember: #D4770B;
+    --ember-bright: #E8890F;
+    --sage: #7A8B6A;
+    --text-primary: #1A1A1A;
+    --text-secondary: #5A5A4F;
+    --radius-lg: 20px;
+    --radius-full: 999px;
+    --shadow-xl: 0 16px 48px rgba(0,0,0,0.12);
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  }
+
+  /* ===== BUNDLE SECTION ===== */
+  .pp-bundle-section {
+    background: linear-gradient(135deg, var(--ember) 0%, #B8620A 100%);
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: {{ section.settings.padding_top }}px 24px {{ section.settings.padding_bottom }}px;
+  }
+
+  .pp-bundle-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    background-image: radial-gradient(circle, white 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .pp-bundle-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Header */
+  .pp-bundle-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 12px;
+    font-family: var(--font-body);
+  }
+
+  .pp-bundle-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.5vw, 42px);
+    color: white;
+    line-height: 1.15;
+    margin-bottom: 0;
+  }
+
+  /* Cards Row */
+  .pp-bundle-cards {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  /* Base card */
+  .pp-bundle-card {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-lg);
+    padding: 32px 28px;
+    min-width: 220px;
+    max-width: 280px;
+    flex: 1;
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: all 0.3s;
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  .pp-bundle-card:hover {
+    background: rgba(255,255,255,0.25);
+    transform: translateY(-4px) !important;
+  }
+
+  /* Popular card */
+  .pp-bundle-card.pp-popular {
+    background: white;
+    color: var(--text-primary);
+    transform: scale(1.05) translateY(0) !important;
+    box-shadow: var(--shadow-xl);
+    border-color: transparent;
+  }
+
+  .pp-bundle-card.pp-popular:hover {
+    transform: scale(1.08) translateY(-4px) !important;
+  }
+
+  /* Card inner elements */
+  .pp-bundle-card-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    opacity: 0.85;
+    font-family: var(--font-body);
+  }
+
+  .pp-bundle-card.pp-popular .pp-bundle-card-label {
+    color: var(--ember);
+    opacity: 1;
+  }
+
+  .pp-bundle-card-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+
+  .pp-bundle-card.pp-popular .pp-bundle-card-title {
+    color: var(--text-primary);
+  }
+
+  .pp-bundle-card-price {
+    font-size: 14px;
+    margin-bottom: 20px;
+    opacity: 0.85;
+    font-family: var(--font-body);
+    line-height: 1.5;
+  }
+
+  .pp-bundle-card.pp-popular .pp-bundle-card-price {
+    color: var(--text-secondary);
+  }
+
+  /* CTA button inside card */
+  .pp-bundle-card-cta {
+    display: block;
+    padding: 12px 28px;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.3s;
+    text-align: center;
+    font-family: var(--font-body);
+    background: white;
+    color: var(--ember);
+  }
+
+  .pp-bundle-card-cta:hover {
+    background: rgba(255,255,255,0.9);
+    color: var(--ember);
+    transform: translateY(-1px);
+  }
+
+  .pp-bundle-card.pp-popular .pp-bundle-card-cta {
+    background: var(--ember);
+    color: white;
+  }
+
+  .pp-bundle-card.pp-popular .pp-bundle-card-cta:hover {
+    background: var(--ember-bright);
+    color: white;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .pp-bundle-section { padding: 56px 16px; }
+    .pp-bundle-cards { flex-direction: column; align-items: center; }
+    .pp-bundle-card { width: 100%; max-width: 340px; }
+    .pp-bundle-card.pp-popular { transform: scale(1) !important; }
+    .pp-bundle-card.pp-popular:hover { transform: translateY(-4px) !important; }
+  }
+</style>
+
+<!-- ===== BUNDLE DEALS SECTION ===== -->
+<section class="pp-bundle-section" id="pp-bundle-{{ section.id }}">
+  <div class="pp-bundle-inner">
+
+    <!-- Header -->
+    {% if section.settings.section_label != blank %}
+      <div class="pp-bundle-label">{{ section.settings.section_label }}</div>
+    {% endif %}
+    {% if section.settings.section_title != blank %}
+      <h2 class="pp-bundle-title">{{ section.settings.section_title }}</h2>
+    {% endif %}
+
+    <!-- Bundle Cards (Blocks) -->
+    <div class="pp-bundle-cards" id="pp-bundle-cards-{{ section.id }}">
+      {% for block in section.blocks %}
+        {% if block.type == 'bundle_card' %}
+          <div class="pp-bundle-card{% if block.settings.is_popular %} pp-popular{% endif %}" {{ block.shopify_attributes }}>
+
+            {% if block.settings.card_label != blank %}
+              <div class="pp-bundle-card-label">{{ block.settings.card_label }}</div>
+            {% endif %}
+
+            {% if block.settings.card_title != blank %}
+              <div class="pp-bundle-card-title">{{ block.settings.card_title }}</div>
+            {% endif %}
+
+            {% if block.settings.card_price_text != blank %}
+              <div class="pp-bundle-card-price">{{ block.settings.card_price_text }}</div>
+            {% endif %}
+
+            {% if block.settings.btn_label != blank %}
+              <a href="{{ block.settings.btn_link }}" class="pp-bundle-card-cta">
+                {{ block.settings.btn_label }}
+              </a>
+            {% endif %}
+
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<!-- Scroll Reveal Animation -->
+<script>
+(function() {
+  var container = document.getElementById('pp-bundle-cards-{{ section.id }}');
+  if (!container) return;
+
+  var cards = container.querySelectorAll('.pp-bundle-card');
+  cards.forEach(function(card, i) {
+    card.style.transition = 'all 0.6s ease-out';
+    card.style.transitionDelay = (i * 0.12) + 's';
+  });
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var isPopular = entry.target.classList.contains('pp-popular');
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = isPopular ? 'scale(1.05)' : 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+
+  cards.forEach(function(card) { observer.observe(card); });
+})();
+</script>
+
+
+{% schema %}
+{
+  "name": "Bundle Deals",
+  "tag": "div",
+  "class": "bundle-deals-wrapper",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "section_label",
+      "label": "Section Label (small caps)",
+      "default": "Save More, Chew More"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Bundle Deals Your Dog Will Love"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bundle_card",
+      "name": "Bundle Card",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "is_popular",
+          "label": "Mark as Popular (highlighted card)",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "card_label",
+          "label": "Card Label (top small text)",
+          "default": "Starter Pack"
+        },
+        {
+          "type": "text",
+          "id": "card_title",
+          "label": "Card Title",
+          "default": "Buy 2 Packs"
+        },
+        {
+          "type": "text",
+          "id": "card_price_text",
+          "label": "Price / Savings Text",
+          "default": "Save 15% automatically"
+        },
+        {
+          "type": "text",
+          "id": "btn_label",
+          "label": "Button Label",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "btn_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bundle Deals",
+      "blocks": [
+        {
+          "type": "bundle_card",
+          "settings": {
+            "is_popular": false,
+            "card_label": "Starter Pack",
+            "card_title": "Buy 2 Packs",
+            "card_price_text": "Save 15% automatically",
+            "btn_label": "Shop Now"
+          }
+        },
+        {
+          "type": "bundle_card",
+          "settings": {
+            "is_popular": true,
+            "card_label": "🔥 Most Popular",
+            "card_title": "Buy 2 Get 1 Free",
+            "card_price_text": "Best value — save up to 33%",
+            "btn_label": "Shop Now"
+          }
+        },
+        {
+          "type": "bundle_card",
+          "settings": {
+            "is_popular": false,
+            "card_label": "Subscribe & Save",
+            "card_title": "Monthly Delivery",
+            "card_price_text": "30% off + free shipping always",
+            "btn_label": "Subscribe"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

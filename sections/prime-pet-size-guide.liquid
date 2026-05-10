@@ -1,0 +1,339 @@
+{% comment %}
+  Prime Pet Food — Size Guide Section
+  Section: "Which Size Is Right for Your Dog?"
+  Upload to: sections/prime-pet-size-guide.liquid
+{% endcomment %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  .pps-section {
+    background: #111111de;
+    padding: 88px 40px;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .pps-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* ---- Header ---- */
+  .pps-header {
+    text-align: center;
+    margin-bottom: 52px;
+  }
+
+  .pps-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #F9C56A;
+    margin-bottom: 12px;
+  }
+
+  .pps-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 3.5vw, 42px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: #FFFFFF;
+    margin-bottom: 16px;
+  }
+
+  .pps-subtitle {
+    font-size: 16px;
+    color: rgba(255,255,255,.6);
+    max-width: 560px;
+    line-height: 1.7;
+    margin: 0 auto;
+  }
+
+  /* ---- Size Cards Grid ---- */
+  .pps-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .pps-card {
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgb(232 228 228 / 82%);
+    border-radius: 16px;
+    padding: 24px 16px;
+    text-align: center;
+    transition: all .25s cubic-bezier(.4,0,.2,1);
+    cursor: pointer;
+    position: relative;
+  }
+
+  .pps-card:hover {
+    background: rgba(232,136,58,.2);
+    border-color: #E8883A;
+    transform: translateY(-4px);
+  }
+
+  .pps-card.active {
+    background: rgba(232,136,58,.2);
+    border-color: #E8883A;
+    transform: translateY(-4px);
+  }
+
+  .pps-dog-emoji {
+    font-size: 40px;
+    display: block;
+    margin-bottom: 12px;
+    line-height: 1;
+  }
+
+  .pps-size-label {
+    font-size: 16px;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 4px;
+  }
+
+  .pps-weight {
+    font-size: 12px;
+    color: rgba(255,255,255,.55);
+    margin-bottom: 10px;
+  }
+
+  .pps-price {
+    font-size: 14px;
+    font-weight: 600;
+    color: #F9C56A;
+  }
+
+  .pps-check {
+    display: none;
+    font-size: 20px;
+    color: #F9C56A;
+    margin-top: 10px;
+  }
+
+  .pps-card.active .pps-check {
+    display: block;
+  }
+
+  /* ---- Safety note ---- */
+  .pps-safety-note {
+    text-align: center;
+    color: rgba(255,255,255,.45);
+    font-size: 13px;
+    margin-top: 20px;
+  }
+
+  /* ---- Responsive ---- */
+  @media(max-width: 1024px) {
+    .pps-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media(max-width: 768px) {
+    .pps-section { padding: 60px 20px; }
+    .pps-grid    { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  }
+
+  @media(max-width: 480px) {
+    .pps-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+
+<section class="pps-section" id="size-guide">
+  <div class="pps-inner">
+
+    <!-- Header -->
+    <div class="pps-header">
+      {% if section.settings.eyebrow != blank %}
+        <p class="pps-eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      {% if section.settings.title != blank %}
+        <h2 class="pps-title">{{ section.settings.title }}</h2>
+      {% endif %}
+      {% if section.settings.subtitle != blank %}
+        <p class="pps-subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Size Cards -->
+    <div class="pps-grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'size_card' %}
+          <div
+            class="pps-card{% if block.settings.default_active %} active{% endif %}"
+            onclick="ppsSelectSize(this)"
+            {{ block.shopify_attributes }}
+          >
+            {% if block.settings.emoji != blank %}
+              <span class="pps-dog-emoji">{{ block.settings.emoji }}</span>
+            {% endif %}
+            {% if block.settings.size_label != blank %}
+              <div class="pps-size-label">{{ block.settings.size_label }}</div>
+            {% endif %}
+            {% if block.settings.weight_range != blank %}
+              <div class="pps-weight">{{ block.settings.weight_range }}</div>
+            {% endif %}
+            {% if block.settings.product != blank %}
+              <div class="pps-price">From {{ block.settings.product.price_min | money }}</div>
+            {% elsif block.settings.fallback_price != blank %}
+              <div class="pps-price">{{ block.settings.fallback_price }}</div>
+            {% endif %}
+            <div class="pps-check">✓</div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <!-- Safety Note -->
+    {% if section.settings.safety_note != blank %}
+      <p class="pps-safety-note">{{ section.settings.safety_note }}</p>
+    {% endif %}
+
+  </div>
+</section>
+
+<script>
+function ppsSelectSize(el) {
+  document.querySelectorAll('.pps-card').forEach(function(c) {
+    c.classList.remove('active');
+  });
+  el.classList.add('active');
+}
+</script>
+
+{% schema %}
+{
+  "name": "PP — Size Guide",
+  "tag": "section",
+  "class": "prime-pet-size-guide",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Label",
+      "default": "Find the Right Fit"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Which Size Is Right for Your Dog?"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "default": "Choosing the right size keeps your dog safe and makes the chew last longer. Match your dog's weight below."
+    },
+    {
+      "type": "textarea",
+      "id": "safety_note",
+      "label": "Safety Note (bottom)",
+      "default": "💡 Always supervise your dog while chewing. Remove and discard when chew is small enough to swallow whole."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "size_card",
+      "name": "Size Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "emoji",
+          "label": "Dog Emoji",
+          "default": "🐩"
+        },
+        {
+          "type": "text",
+          "id": "size_label",
+          "label": "Size Label",
+          "default": "Small"
+        },
+        {
+          "type": "text",
+          "id": "weight_range",
+          "label": "Weight Range",
+          "default": "Up to 15 lbs"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Link to Product (auto price)"
+        },
+        {
+          "type": "text",
+          "id": "fallback_price",
+          "label": "Fallback Price (if no product)",
+          "default": "From $16.99"
+        },
+        {
+          "type": "checkbox",
+          "id": "default_active",
+          "label": "Default Selected?",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PP — Size Guide",
+      "blocks": [
+        {
+          "type": "size_card",
+          "settings": {
+            "emoji": "🐩",
+            "size_label": "Small",
+            "weight_range": "Up to 15 lbs",
+            "fallback_price": "From $16.99",
+            "default_active": false
+          }
+        },
+        {
+          "type": "size_card",
+          "settings": {
+            "emoji": "🐕",
+            "size_label": "Medium",
+            "weight_range": "15 – 35 lbs",
+            "fallback_price": "From $16.14",
+            "default_active": false
+          }
+        },
+        {
+          "type": "size_card",
+          "settings": {
+            "emoji": "🐕‍🦺",
+            "size_label": "Large",
+            "weight_range": "35 – 55 lbs",
+            "fallback_price": "From $15.99",
+            "default_active": true
+          }
+        },
+        {
+          "type": "size_card",
+          "settings": {
+            "emoji": "🦮",
+            "size_label": "XL",
+            "weight_range": "55 – 75 lbs",
+            "fallback_price": "From $17.99",
+            "default_active": false
+          }
+        },
+        {
+          "type": "size_card",
+          "settings": {
+            "emoji": "🐻",
+            "size_label": "Jumbo",
+            "weight_range": "75+ lbs",
+            "fallback_price": "From $16.99",
+            "default_active": false
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

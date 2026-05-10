@@ -1,0 +1,496 @@
+{%- comment -%}theme-check-disable SchemaJsonFormat{%- endcomment -%}
+{%- liquid
+  assign is_empty = true
+  for block in section.blocks
+    if block.settings.heading != blank or block.settings.text != blank or block.settings.caption != blank or block.settings.button_label_1 != blank or block.settings.button_label_2 != blank or block.settings.custom_liquid != blank or block.settings.image_1 != blank or block.settings.image_2 != blank or block.settings.image_3 != blank or block.settings.image_4 != blank or block.settings.icon != blank or block.settings.stat_number != blank or block.settings.discount_code != blank
+      assign is_empty = false
+      break
+    endif
+  endfor
+-%}
+
+{%- if request.design_mode or section.settings.hide_when_empty == false or is_empty == false -%}
+  {%- liquid
+    if settings.animations_reveal_on_scroll and section.index > 3 and section.location != 'header'
+      assign animate = true
+    else
+      assign animate = false
+    endif
+  -%}
+
+  {%- if section.index < 4 or request.design_mode -%}
+    {{ 'component-ribbon-banner.css' | asset_url | stylesheet_tag }}
+  {%- else -%}
+    <link rel="stylesheet" href="{{ 'component-ribbon-banner.css' | asset_url }}" media="print" onload="this.media='all'">
+  {%- endif -%}
+
+  {% if section.settings.closable %}
+    <lazy-script src="{{ 'closable-element.js' | asset_url }}" defer="defer"></lazy-script>
+  {% endif %}
+
+
+  {% if section.settings.closable %}<closable-element data-closes-section="true" class="block short-section hidden-during-load">{% endif %}
+
+  <div id="{{ section.id }}" class="discount-bar-section isolate motion-reduce {{ section.settings.line_separator }}
+    {% if section.settings.visibility == "mobile" %} visible-xs{% elsif section.settings.visibility == "desktop" %} hidden-xs{% endif %} {%- render 'class-time-of-day-to-show' -%}
+    {% unless section.settings.full_width %} page-width section__inner {{ section.settings.top_padding }} {{ section.settings.bottom_padding }}{% endunless %}
+    "
+  >
+    <div class="section__inner ribbon-banner z-1 content-container color-{{ section.settings.color_scheme }} gradient overflow-hidden responsive-padding-y
+        {% if section.settings.full_width %} content-container--full-width{% endif %}"
+       style="--responsive-padding-y: {{ section.settings.vertical_padding }}rem; {% if section.settings.image != blank %}--overlay-opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};{% endif %}"
+    >
+      {% if section.settings.closable %}
+        <button
+          type="button"
+          class="closable-element__close button-close button button--tertiary focus-inset absolute z-2 p-0 tap-target text-current no-js-hidden js-close-button"
+          aria-label="{{ 'accessibility.close' | t }}"
+        >
+          {% render 'icon-close' %}
+        </button>
+      {% endif %}
+
+      {%- if section.settings.image != blank -%}
+        <div class="banner__media media
+          {% if section.settings.image != blank %} image-overlay{% endif %}"
+        >
+          {%- liquid
+            assign image_height = section.settings.image.width | divided_by: section.settings.image.aspect_ratio
+            assign fetch_priority = 'auto'
+            if section.index < 4 or request.design_mode
+              assign fetch_priority = 'high'
+            endif
+          -%}
+          {{
+          section.settings.image
+            | image_url: width: 3840
+            | image_tag:
+            width: section.settings.image.width,
+            height: image_height,
+            sizes: '100vw',
+            widths: '375, 500, 1100, 1500, 1780, 2000, 3000, 3840',
+            fetchpriority: fetch_priority
+          }}
+        </div>
+      {%- endif -%}
+
+      <div class="flex md:w-full justify-center
+          {% unless section.settings.content_alignment == 'last-right' %}{{ section.settings.content_alignment }}{% endunless %}
+          {% if section.settings.full_width %} page-width pl-0 pr-0{% endif %}"
+      >
+        <div class="ribbon-banner__grid section-content flex items-center flex-col md:flex-row md:responsive-gap xs:text-center responsive-padding-x pt-0 pb-0
+            {% if section.settings.content_alignment == 'last-right' %}justify-between w-full{% endif %}"
+             style="--responsive-gap: {{ section.settings.spacing_grid }}rem;--responsive-padding-x: {{ section.settings.horizontal_padding }}rem;"
+        >
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'spacer_horizontal' -%}
+              <div class="m-0">
+                <div style="display: block;width: {{ block.settings.spacing }}rem;"></div>
+              </div>
+            {%- elsif section.settings.content_alignment == 'last-right' and forloop.last -%}
+              <div class="m-0 grow flex justify-end ribbon-banner__child-right">
+                {%- render 'standard-blocks', section_name: 'ribbon-banner', block: block, animate: animate -%}
+              </div>
+            {%- else -%}
+              <div class="m-0">
+                {%- render 'standard-blocks', section_name: 'ribbon-banner', block: block, animate: animate -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% if section.settings.closable %}</closable-element>{% endif %}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Discount Bar Section",
+  "tag": "section",
+  "class": "section section-discount-bar",
+  "disabled_on": {
+    "groups": ["aside"]
+  },
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "default": true,
+      "label": "Full width"
+    },
+    {
+      "type": "checkbox",
+      "id": "closable",
+      "default": false,
+      "label": "Show close button"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "default": "justify-center",
+      "label": "Content alignment on desktop",
+      "options": [
+        {
+          "value": "md:justify-start",
+          "label": "Left"
+        },
+        {
+          "value": "justify-center",
+          "label": "Center"
+        },
+        {
+          "value": "last-right",
+          "label": "Right align last block"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "vertical_padding",
+      "min": 1,
+      "max": 10,
+      "step": 0.1,
+      "unit": "rem",
+      "default": 1.2,
+      "label": "Vertical padding"
+    },
+    {
+      "type": "range",
+      "id": "horizontal_padding",
+      "min": 3.5,
+      "max": 10,
+      "step": 0.1,
+      "default": 3.5,
+      "unit": "rem",
+      "label": "Horizontal padding"
+    },
+    {
+      "type": "range",
+      "id": "spacing_grid",
+      "min": 1,
+      "max": 10,
+      "step": 0.2,
+      "default": 3,
+      "unit": "rem",
+      "label": "Gap between blocks"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    },
+    {
+      "type": "range",
+      "id": "image_overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "%",
+      "label": "Image overlay opacity",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "line_separator",
+      "options": [
+        {
+          "value": "",
+          "label": "None"
+        },
+        {
+          "value": "border-top",
+          "label": "Top"
+        },
+        {
+          "value": "border-bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "",
+      "label": "Line separator"
+    },
+    {
+      "type": "select",
+      "id": "top_padding",
+      "options": [
+        {
+          "value": "pt-0",
+          "label": "None"
+        },
+        {
+          "value": "pt-s",
+          "label": "Small"
+        },
+        {
+          "value": "pt-m",
+          "label": "Medium"
+        },
+        {
+          "value": "pt-l",
+          "label": "Large"
+        }
+      ],
+      "default": "pt-s",
+      "label": "Top padding"
+    },
+    {
+      "type": "select",
+      "id": "bottom_padding",
+      "options": [
+        {
+          "value": "pb-0",
+          "label": "None"
+        },
+        {
+          "value": "pb-s",
+          "label": "Small"
+        },
+        {
+          "value": "pb-m",
+          "label": "Medium"
+        },
+        {
+          "value": "pb-l",
+          "label": "Large"
+        }
+      ],
+      "default": "pb-s",
+      "label": "Bottom padding"
+    },
+    {
+      "type": "header",
+      "content": "Visibility"
+    },
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "both",
+          "label": "Always"
+        },
+        {
+          "value": "mobile",
+          "label": "Mobile only"
+        },
+        {
+          "value": "desktop",
+          "label": "Desktop only"
+        }
+      ],
+      "default": "both",
+      "label": "Visible on"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_when_empty",
+      "default": false,
+      "label": "Hide when empty"
+    },
+    {
+      "type": "header",
+      "content": "Time schedule"
+    },
+    {
+      "type": "paragraph",
+      "content": "Show this section only at specific time of day."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_at_specific_time_of_day",
+      "default": false,
+      "label": "Enable time schedule"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_time_morning",
+      "default": true,
+      "label": "Morning (6am - 12pm)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_time_afternoon",
+      "default": true,
+      "label": "Afternoon (12pm - 6pm)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_time_evening",
+      "default": true,
+      "label": "Evening (6pm - 12am)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_time_night",
+      "default": true,
+      "label": "Night (12am - 6am)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Share information about your brand with your customers.</p>",
+          "label": "Text"
+        },
+        {
+          "type": "select",
+          "id": "text_size",
+          "options": [
+            {
+              "value": "t6",
+              "label": "Extra small"
+            },
+            {
+              "value": "t5",
+              "label": "Small"
+            },
+            {
+              "value": "t4",
+              "label": "Medium"
+            },
+            {
+              "value": "t3",
+              "label": "Large"
+            }
+          ],
+          "default": "t4",
+          "label": "Text size"
+        },
+        {
+          "type": "select",
+          "id": "content_max_width",
+          "options": [
+            {
+              "value": "xs",
+              "label": "S"
+            },
+            {
+              "value": "s",
+              "label": "M"
+            },
+            {
+              "value": "m",
+              "label": "L"
+            },
+            {
+              "value": "l",
+              "label": "XL"
+            },
+            {
+              "value": "xl",
+              "label": "2XL"
+            },
+            {
+              "value": "",
+              "label": "Full"
+            }
+          ],
+          "default": "m",
+          "label": "Maximum width"
+        }
+      ]
+    },
+    {
+      "type": "discount",
+      "name": "Discount code",
+      "settings": [
+        {
+          "type": "text",
+          "id": "discount_code",
+          "label": "Discount code",
+          "default": "YOURCODE"
+        },
+        {
+          "type": "select",
+          "id": "text_size",
+          "options": [
+            {
+              "value": "t6",
+              "label": "Extra small"
+            },
+            {
+              "value": "t5",
+              "label": "Small"
+            },
+            {
+              "value": "t4",
+              "label": "Medium"
+            }
+          ],
+          "default": "t6",
+          "label": "Text size"
+        },
+        {
+          "type": "checkbox",
+          "id": "discount_gated",
+          "default": false,
+          "label": "Only show code when clicked"
+        },
+        {
+          "type": "color",
+          "id": "color_peel_background",
+          "label": "Code background color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "color_peel_foreground",
+          "label": "Code text color",
+          "default": "#ffffff"
+        }
+      ]
+    },
+    {
+      "type": "spacer_horizontal",
+      "name": "Horizontal spacer",
+      "settings": [
+        {
+          "type": "range",
+          "id": "spacing",
+          "min": 1,
+          "max": 10,
+          "step": 0.5,
+          "unit": "rem",
+          "default": 1,
+          "label": "Spacing"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Discount Bar Section",
+      "blocks": [
+        {
+          "type": "text"
+        },
+        {
+          "type": "discount"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

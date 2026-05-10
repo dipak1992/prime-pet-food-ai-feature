@@ -1,0 +1,261 @@
+{%- comment -%}theme-check-disable SchemaJsonFormat{%- endcomment -%}
+
+{%- if request.design_mode or section.settings.hide_when_empty == false -%}
+  <div class="isolate{% unless section.settings.full_width %} page-width section__inner {{ section.settings.top_padding }} {{ section.settings.bottom_padding }}{% endunless %} {{ section.settings.visibility }}">
+    <div class="trust-badges-section content-container color-{{ section.settings.color_scheme }} gradient
+        {% if section.settings.full_width %} content-container--full-width{% endif %}"
+         style="padding-top: {{ section.settings.spacing }}rem; padding-bottom: {{ section.settings.spacing }}rem;">
+
+      {% if section.settings.full_width %}<div class="{{ section.settings.top_padding }} {{ section.settings.bottom_padding }}">{% endif %}
+
+        <div class="trust-badges-grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'badge' -%}
+              <div class="trust-badge-item" {{ block.shopify_attributes }}>
+                {%- if block.settings.emoji != blank -%}
+                  <span class="trust-badge-emoji">{{ block.settings.emoji }}</span>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <span class="trust-badge-text">{{ block.settings.text }}</span>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+      {% if section.settings.full_width %}</div>{% endif %}
+    </div>
+  </div>
+
+  <style>
+    .trust-badges-section {
+      width: 100%;
+    }
+
+    .trust-badges-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: {{ section.settings.gap }}rem;
+      align-items: center;
+      justify-items: center;
+      width: 100%;
+      max-width: 100%;
+      padding: 0 1.6rem;
+      box-sizing: border-box;
+    }
+
+    .trust-badge-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      text-align: center;
+      flex-direction: row;
+      padding: 0.6rem 1rem;
+    }
+
+    .trust-badge-emoji {
+      font-size: {{ section.settings.emoji_size }}rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .trust-badge-text {
+      font-size: {{ section.settings.text_size_value }}rem;
+      font-weight: 500;
+      line-height: 1.3;
+      white-space: nowrap;
+    }
+
+    @media screen and (max-width: 749px) {
+      .trust-badges-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+
+      .trust-badge-text {
+        white-space: normal;
+        font-size: calc({{ section.settings.text_size_value }}rem * 0.85);
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .trust-badges-grid {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+  </style>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Trust Badges",
+  "tag": "section",
+  "class": "section section-trust-badges",
+  "max_blocks": 4,
+  "disabled_on": {
+    "groups": ["aside"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "default": true,
+      "label": "Full width"
+    },
+    {
+      "type": "range",
+      "id": "spacing",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "unit": "rem",
+      "default": 1.5,
+      "label": "Vertical padding"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "default": 1.0,
+      "unit": "rem",
+      "label": "Gap between badges"
+    },
+    {
+      "type": "range",
+      "id": "emoji_size",
+      "min": 1,
+      "max": 4,
+      "step": 0.2,
+      "default": 1.6,
+      "unit": "rem",
+      "label": "Emoji size"
+    },
+    {
+      "type": "range",
+      "id": "text_size_value",
+      "min": 0.8,
+      "max": 2,
+      "step": 0.1,
+      "default": 1.0,
+      "unit": "rem",
+      "label": "Text size"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Section color scheme",
+      "default": "scheme-3"
+    },
+    {
+      "type": "header",
+      "content": "Advanced"
+    },
+    {
+      "type": "select",
+      "id": "top_padding",
+      "options": [
+        { "value": "pt-0", "label": "0" },
+        { "value": "pt-s05", "label": "0.5" },
+        { "value": "pt-s", "label": "1" },
+        { "value": "pt-s15", "label": "1.5" },
+        { "value": "pt-s2", "label": "2" }
+      ],
+      "default": "pt-0",
+      "label": "Top section spacing"
+    },
+    {
+      "type": "select",
+      "id": "bottom_padding",
+      "options": [
+        { "value": "pb-0", "label": "0" },
+        { "value": "pb-s05", "label": "0.5" },
+        { "value": "pb-s", "label": "1" },
+        { "value": "pb-s15", "label": "1.5" },
+        { "value": "pb-s2", "label": "2" }
+      ],
+      "default": "pb-0",
+      "label": "Bottom section spacing"
+    },
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        { "value": "visible-xs", "label": "Mobile" },
+        { "value": "hidden-xs", "label": "Desktop" },
+        { "value": "", "label": "Both" }
+      ],
+      "default": "",
+      "label": "Show on"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_when_empty",
+      "default": false,
+      "label": "Hide this section when there's no content to show"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Badge",
+      "settings": [
+        {
+          "type": "text",
+          "id": "emoji",
+          "label": "Emoji / Icon",
+          "default": "🎉",
+          "info": "Paste any emoji here."
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Badge Text",
+          "default": "Free Shipping Over $50"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust Badges",
+      "blocks": [
+        {
+          "type": "badge",
+          "settings": {
+            "emoji": "🎉",
+            "text": "Free Shipping Over $50"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "emoji": "🔒",
+            "text": "Secure Checkout"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "emoji": "👍",
+            "text": "Satisfaction Guaranteed"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "emoji": "🔁",
+            "text": "Easy Returns & Hassle-Free Refunds"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

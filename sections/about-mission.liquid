@@ -1,0 +1,166 @@
+{{ 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap' | stylesheet_tag }}
+
+{%- liquid
+  case section.settings.font_size_scale
+    when 'small'
+      assign base_size = '13px'
+    when 'large'
+      assign base_size = '18px'
+    when 'xlarge'
+      assign base_size = '20px'
+    else
+      assign base_size = '16px'
+  endcase
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    font-size: {{ base_size }};
+    --forest:     {{ section.settings.color_forest }};
+    --sage:       {{ section.settings.color_sage }};
+    --sage-light: {{ section.settings.color_sage_light }};
+    --charcoal:   {{ section.settings.color_charcoal }};
+    --warm-white: {{ section.settings.color_bg }};
+  }
+
+  .ppf-mission-wrap-{{ section.id }} {
+    background: var(--warm-white);
+  }
+
+  .ppf-mission-{{ section.id }} {
+    padding: {{ section.settings.section_padding_top }}px 5% {{ section.settings.section_padding_bottom }}px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: start;
+  }
+
+  .ppf-mission-label-{{ section.id }} {
+    font-size: 0.7em;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage);
+    padding-top: 0.5rem;
+    position: sticky;
+    top: 5rem;
+  }
+
+  .ppf-mission-label-{{ section.id }}::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 2px;
+    background: var(--sage);
+    margin-bottom: 14px;
+  }
+
+  .ppf-mission-text-{{ section.id }} {
+    font-family: '{{ section.settings.heading_font }}', serif;
+    font-size: clamp(1.8em, 3vw, 2.6em);
+    font-weight: 300;
+    line-height: 1.55;
+    color: var(--charcoal);
+  }
+
+  .ppf-mission-text-{{ section.id }} strong {
+    font-weight: 600;
+    color: var(--forest);
+  }
+
+  .ppf-ornament-{{ section.id }} {
+    text-align: center;
+    padding: 20px;
+    color: var(--sage-light);
+    font-size: 1.2em;
+    letter-spacing: 0.4em;
+  }
+
+  .ppf-reveal-{{ section.id }} {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .ppf-reveal-{{ section.id }}.ppf-visible { opacity: 1; transform: translateY(0); }
+  .ppf-d1-{{ section.id }} { transition-delay: 0.15s; }
+
+  @media (max-width: 900px) {
+    .ppf-mission-{{ section.id }} { grid-template-columns: 1fr; gap: 30px; }
+    .ppf-mission-label-{{ section.id }} { position: static; }
+  }
+</style>
+
+<div class="ppf-mission-wrap-{{ section.id }}">
+  <div class="ppf-mission-{{ section.id }}">
+    <div class="ppf-mission-label-{{ section.id }} ppf-reveal-{{ section.id }}">
+      {{ section.settings.mission_label }}
+    </div>
+    <div class="ppf-mission-text-{{ section.id }} ppf-reveal-{{ section.id }} ppf-d1-{{ section.id }}">
+      {{ section.settings.mission_text }}
+    </div>
+  </div>
+
+  {%- if section.settings.show_ornament -%}
+    <div class="ppf-ornament-{{ section.id }}">✦ &nbsp;&nbsp; ✦ &nbsp;&nbsp; ✦</div>
+  {%- endif -%}
+</div>
+
+<script>
+(function(){
+  var sec = document.getElementById('shopify-section-{{ section.id }}');
+  if (!sec) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('ppf-visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  sec.querySelectorAll('.ppf-reveal-{{ section.id }}').forEach(function(el){ obs.observe(el); });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Mission Statement",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "🎨 Colors" },
+    { "type": "color", "id": "color_bg",         "label": "Background",       "default": "#FDFAF5" },
+    { "type": "color", "id": "color_forest",      "label": "Strong Text Color","default": "#2C4A2E" },
+    { "type": "color", "id": "color_sage",        "label": "Label Color",      "default": "#6B8F6E" },
+    { "type": "color", "id": "color_sage_light",  "label": "Ornament Color",   "default": "#A8C5A0" },
+    { "type": "color", "id": "color_charcoal",    "label": "Body Text Color",  "default": "#1E1E1E" },
+
+    { "type": "header", "content": "🔠 Typography" },
+    {
+      "type": "select", "id": "font_size_scale", "label": "Font Size",
+      "options": [
+        { "value": "small",  "label": "Small (13px)" },
+        { "value": "medium", "label": "Medium (16px)" },
+        { "value": "large",  "label": "Large (18px)" },
+        { "value": "xlarge", "label": "X-Large (20px)" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "select", "id": "heading_font", "label": "Text Font",
+      "options": [
+        { "value": "Cormorant Garamond", "label": "Cormorant Garamond" },
+        { "value": "Georgia",            "label": "Georgia" },
+        { "value": "Playfair Display",   "label": "Playfair Display" },
+        { "value": "Times New Roman",    "label": "Times New Roman" }
+      ],
+      "default": "Cormorant Garamond"
+    },
+
+    { "type": "header", "content": "📐 Spacing" },
+    { "type": "range", "id": "section_padding_top",    "label": "Padding Top",    "min": 20, "max": 200, "step": 10, "default": 120, "unit": "px" },
+    { "type": "range", "id": "section_padding_bottom", "label": "Padding Bottom", "min": 20, "max": 200, "step": 10, "default": 100, "unit": "px" },
+
+    { "type": "header", "content": "✏️ Content" },
+    { "type": "text",     "id": "mission_label", "label": "Side Label",           "default": "Our Philosophy" },
+    { "type": "richtext", "id": "mission_text",  "label": "Mission Text",
+      "default": "<p>At Prime Pet Food, we believe your dog deserves <strong>exactly what nature intended</strong> — nothing more, nothing less. That conviction shapes every chew we craft, every ingredient we source, and every relationship we build with our customers.<br><br>We're not just a business. <strong>We are fellow dog lovers</strong> who understand what it means to have a furry member of the family.</p>" },
+    { "type": "checkbox", "id": "show_ornament", "label": "Show ✦ Ornament Below", "default": true }
+  ],
+  "presets": [{ "name": "Mission Statement" }]
+}
+{% endschema %}

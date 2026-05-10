@@ -1,0 +1,713 @@
+{% liquid
+  assign section_id = 'yak-comparison-' | append: section.id
+%}
+
+<section id="{{ section_id }}" class="yak-comparison-section">
+  <div class="page-width">
+    <div class="yak-comparison__header">
+      {% if section.settings.eyebrow != blank %}
+        <p class="yak-comparison__eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="yak-comparison__heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+
+      {% if section.settings.subtext != blank %}
+        <div class="yak-comparison__subtext rte">
+          {{ section.settings.subtext }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="yak-comparison__grid">
+      <div class="yak-comparison__card yak-comparison__card--side yak-comparison__card--left">
+        {% if section.settings.left_label != blank %}
+          <p class="yak-comparison__mini-label">{{ section.settings.left_label }}</p>
+        {% endif %}
+
+        {% if section.settings.left_title != blank %}
+          <h3 class="yak-comparison__card-title">{{ section.settings.left_title }}</h3>
+        {% endif %}
+
+        <div class="yak-comparison__list yak-comparison__list--negative">
+          {% for block in section.blocks %}
+            {% if block.type == 'left_item' %}
+              <div class="yak-comparison__list-item" {{ block.shopify_attributes }}>
+                <span class="yak-comparison__icon yak-comparison__icon--negative">×</span>
+                <span class="yak-comparison__item-text">{{ block.settings.text }}</span>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="yak-comparison__card yak-comparison__card--featured">
+        <div class="yak-comparison__featured-inner">
+          {% if section.settings.center_badge != blank %}
+            <div class="yak-comparison__badge">{{ section.settings.center_badge }}</div>
+          {% endif %}
+
+          {% if section.settings.center_image != blank %}
+            <div class="yak-comparison__image-wrap">
+              {{
+                section.settings.center_image
+                | image_url: width: 900
+                | image_tag:
+                  class: 'yak-comparison__image',
+                  loading: 'lazy',
+                  widths: '300, 450, 600, 750, 900',
+                  alt: section.settings.center_title
+              }}
+            </div>
+          {% endif %}
+
+          {% if section.settings.center_title != blank %}
+            <h3 class="yak-comparison__featured-title">{{ section.settings.center_title }}</h3>
+          {% endif %}
+
+          <div class="yak-comparison__list yak-comparison__list--positive">
+            {% for block in section.blocks %}
+              {% if block.type == 'center_item' %}
+                <div class="yak-comparison__list-item" {{ block.shopify_attributes }}>
+                  <span class="yak-comparison__icon yak-comparison__icon--positive">✓</span>
+                  <span class="yak-comparison__item-text">{{ block.settings.text }}</span>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+
+          {% if section.settings.button_label != blank %}
+            <div class="yak-comparison__actions">
+              <a
+                {% if section.settings.button_link != blank %}
+                  href="{{ section.settings.button_link }}"
+                {% else %}
+                  role="link" aria-disabled="true"
+                {% endif %}
+                class="yak-comparison__button"
+              >
+                {{ section.settings.button_label }}
+              </a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="yak-comparison__card yak-comparison__card--side yak-comparison__card--right">
+        {% if section.settings.right_label != blank %}
+          <p class="yak-comparison__mini-label">{{ section.settings.right_label }}</p>
+        {% endif %}
+
+        {% if section.settings.right_title != blank %}
+          <h3 class="yak-comparison__card-title">{{ section.settings.right_title }}</h3>
+        {% endif %}
+
+        <div class="yak-comparison__list yak-comparison__list--negative">
+          {% for block in section.blocks %}
+            {% if block.type == 'right_item' %}
+              <div class="yak-comparison__list-item" {{ block.shopify_attributes }}>
+                <span class="yak-comparison__icon yak-comparison__icon--negative">×</span>
+                <span class="yak-comparison__item-text">{{ block.settings.text }}</span>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    #{{ section_id }} {
+      background: {{ section.settings.section_bg }};
+      padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    }
+
+    #{{ section_id }} .yak-comparison__header {
+      max-width: 980px;
+      margin: 0 auto 42px;
+      text-align: center;
+    }
+
+    #{{ section_id }} .yak-comparison__eyebrow {
+      margin: 0 0 14px;
+      font-size: 14px;
+      line-height: 1;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: {{ section.settings.eyebrow_color }};
+    }
+
+    #{{ section_id }} .yak-comparison__heading {
+      margin: 0;
+      color: {{ section.settings.heading_color }};
+      font-size: clamp(34px, 5vw, 46px);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      font-weight: 700;
+    }
+
+    #{{ section_id }} .yak-comparison__subtext {
+      margin-top: 18px;
+      color: {{ section.settings.subtext_color }};
+      font-size: 22px;
+      line-height: 1.6;
+      max-width: 820px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #{{ section_id }} .yak-comparison__subtext p {
+      margin: 0;
+    }
+
+    #{{ section_id }} .yak-comparison__grid {
+      display: grid;
+      grid-template-columns: minmax(250px, 1fr) minmax(340px, 1.03fr) minmax(250px, 1fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    #{{ section_id }} .yak-comparison__card {
+      border-radius: 34px;
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+    }
+
+    #{{ section_id }} .yak-comparison__card--side {
+      background: {{ section.settings.side_card_bg }};
+      padding: 52px 34px 36px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+      border: 1px solid {{ section.settings.side_card_border }};
+    }
+
+    #{{ section_id }} .yak-comparison__card--featured {
+      background: linear-gradient(180deg, {{ section.settings.featured_card_bg }} 0%, {{ section.settings.featured_card_bg_2 }} 100%);
+      border: 2px solid {{ section.settings.featured_border }};
+      box-shadow: 0 16px 40px rgba(120, 78, 25, 0.10);
+    }
+
+    #{{ section_id }} .yak-comparison__featured-inner {
+      padding: 30px 32px 34px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #{{ section_id }} .yak-comparison__badge {
+      align-self: center;
+      margin-bottom: 16px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(210, 99, 46, 0.10);
+      color: {{ section.settings.accent_color }};
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    #{{ section_id }} .yak-comparison__image-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    #{{ section_id }} .yak-comparison__image {
+      display: block;
+      width: 100%;
+      max-width: 360px;
+      height: auto;
+      object-fit: contain;
+      border-radius: 24px;
+    }
+
+    #{{ section_id }} .yak-comparison__mini-label {
+      margin: 0 0 10px;
+      color: {{ section.settings.card_label_color }};
+      font-size: 16px;
+      line-height: 1.2;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    #{{ section_id }} .yak-comparison__card-title {
+      margin: 0 0 28px;
+      color: {{ section.settings.heading_color }};
+      font-size: clamp(30px, 3vw, 46px);
+      line-height: 1.05;
+      text-align: center;
+      letter-spacing: -0.03em;
+      font-weight: 700;
+    }
+
+    #{{ section_id }} .yak-comparison__featured-title {
+      margin: 0 0 24px;
+      color: {{ section.settings.heading_color }};
+      font-size: clamp(30px, 3vw, 48px);
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    #{{ section_id }} .yak-comparison__list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    #{{ section_id }} .yak-comparison__list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    #{{ section_id }} .yak-comparison__icon {
+      width: 26px;
+      height: 26px;
+      min-width: 26px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      line-height: 1;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    #{{ section_id }} .yak-comparison__icon--negative {
+      background: rgba(140, 140, 140, 0.12);
+      color: {{ section.settings.negative_icon_color }};
+    }
+
+    #{{ section_id }} .yak-comparison__icon--positive {
+      background: rgba(210, 99, 46, 0.12);
+      color: {{ section.settings.accent_color }};
+    }
+
+    #{{ section_id }} .yak-comparison__item-text {
+      color: {{ section.settings.body_color }};
+      font-size: 18px;
+      line-height: 1.65;
+      font-weight: 500;
+    }
+
+    #{{ section_id }} .yak-comparison__actions {
+      margin-top: 28px;
+      display: flex;
+      justify-content: center;
+    }
+
+    #{{ section_id }} .yak-comparison__button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 26px;
+      border-radius: 999px;
+      background: {{ section.settings.button_bg }};
+      color: {{ section.settings.button_text }};
+      text-decoration: none;
+      font-size: 17px;
+      line-height: 1;
+      font-weight: 700;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 10px 24px rgba(210, 99, 46, 0.18);
+    }
+
+    #{{ section_id }} .yak-comparison__button:hover {
+      transform: translateY(-1px);
+      background: {{ section.settings.button_hover_bg }};
+      box-shadow: 0 14px 30px rgba(210, 99, 46, 0.24);
+    }
+
+    @media screen and (max-width: 1200px) {
+      #{{ section_id }} .yak-comparison__grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      #{{ section_id }} .yak-comparison__card--featured {
+        order: -1;
+      }
+
+      #{{ section_id }} .yak-comparison__card--side,
+      #{{ section_id }} .yak-comparison__featured-inner {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+    }
+
+    @media screen and (max-width: 749px) {
+      #{{ section_id }} {
+        padding: {{ section.settings.mobile_padding_top }}px 0 {{ section.settings.mobile_padding_bottom }}px;
+      }
+
+      #{{ section_id }} .yak-comparison__header {
+        margin-bottom: 28px;
+      }
+
+      #{{ section_id }} .yak-comparison__eyebrow {
+        font-size: 12px;
+        margin-bottom: 12px;
+      }
+
+      #{{ section_id }} .yak-comparison__heading {
+        font-size: clamp(28px, 9vw, 46px);
+      }
+
+      #{{ section_id }} .yak-comparison__subtext {
+        margin-top: 14px;
+        font-size: 17px;
+      }
+
+      #{{ section_id }} .yak-comparison__card {
+        border-radius: 24px;
+      }
+
+      #{{ section_id }} .yak-comparison__card--side {
+        padding: 28px 20px 24px;
+      }
+
+      #{{ section_id }} .yak-comparison__featured-inner {
+        padding: 22px 20px 24px;
+      }
+
+      #{{ section_id }} .yak-comparison__mini-label {
+        font-size: 15px;
+      }
+
+      #{{ section_id }} .yak-comparison__card-title,
+      #{{ section_id }} .yak-comparison__featured-title {
+        font-size: 24px;
+        margin-bottom: 18px;
+      }
+
+      #{{ section_id }} .yak-comparison__image {
+        max-width: 260px;
+      }
+
+      #{{ section_id }} .yak-comparison__list {
+        gap: 14px;
+      }
+
+      #{{ section_id }} .yak-comparison__item-text {
+        font-size: 16px;
+        line-height: 1.55;
+      }
+
+      #{{ section_id }} .yak-comparison__button {
+        width: 100%;
+      }
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "Yak Chew Comparison",
+  "tag": "section",
+  "class": "section section-yak-comparison",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "THE SMARTER CHEW"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Why Pet Parents Are Making the Switch"
+    },
+    {
+      "type": "richtext",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "<p>See how Himalayan Yak Chews compare to common alternatives.</p>"
+    },
+
+    {
+      "type": "header",
+      "content": "Left card"
+    },
+    {
+      "type": "text",
+      "id": "left_label",
+      "label": "Left small label",
+      "default": "Rawhide"
+    },
+    {
+      "type": "text",
+      "id": "left_title",
+      "label": "Left title",
+      "default": "Rawhide"
+    },
+
+    {
+      "type": "header",
+      "content": "Center card"
+    },
+    {
+      "type": "text",
+      "id": "center_badge",
+      "label": "Center badge",
+      "default": "Prime Pet Food Favorite"
+    },
+    {
+      "type": "image_picker",
+      "id": "center_image",
+      "label": "Center image"
+    },
+    {
+      "type": "text",
+      "id": "center_title",
+      "label": "Center title",
+      "default": "Himalayan Regular Yak Chews for Dogs"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop Yak Chews"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+
+    {
+      "type": "header",
+      "content": "Right card"
+    },
+    {
+      "type": "text",
+      "id": "right_label",
+      "label": "Right small label",
+      "default": "Bully Sticks"
+    },
+    {
+      "type": "text",
+      "id": "right_title",
+      "label": "Right title",
+      "default": "Bully Sticks"
+    },
+
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Section background",
+      "default": "#f4f0eb"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow color",
+      "default": "#c89a43"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#1f4b3b"
+    },
+    {
+      "type": "color",
+      "id": "subtext_color",
+      "label": "Subtext color",
+      "default": "#6f6f6f"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Body text color",
+      "default": "#5f5f5f"
+    },
+    {
+      "type": "color",
+      "id": "card_label_color",
+      "label": "Card small label color",
+      "default": "#496155"
+    },
+    {
+      "type": "color",
+      "id": "side_card_bg",
+      "label": "Side card background",
+      "default": "#fbfaf8"
+    },
+    {
+      "type": "color",
+      "id": "side_card_border",
+      "label": "Side card border",
+      "default": "#ece5db"
+    },
+    {
+      "type": "color",
+      "id": "featured_card_bg",
+      "label": "Featured card background 1",
+      "default": "#fffdf8"
+    },
+    {
+      "type": "color",
+      "id": "featured_card_bg_2",
+      "label": "Featured card background 2",
+      "default": "#f9f3e8"
+    },
+    {
+      "type": "color",
+      "id": "featured_border",
+      "label": "Featured card border",
+      "default": "#d6a64d"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#d2632e"
+    },
+    {
+      "type": "color",
+      "id": "negative_icon_color",
+      "label": "Negative icon color",
+      "default": "#7b7b7b"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background",
+      "default": "#d2632e"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg",
+      "label": "Button hover background",
+      "default": "#ba5626"
+    },
+    {
+      "type": "color",
+      "id": "button_text",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Desktop top padding",
+      "min": 20,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 84
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Desktop bottom padding",
+      "min": 20,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 84
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "Mobile top padding",
+      "min": 16,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "Mobile bottom padding",
+      "min": 16,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "left_item",
+      "name": "Left item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Bleached and processed"
+        }
+      ]
+    },
+    {
+      "type": "center_item",
+      "name": "Center item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "100% natural ingredients"
+        }
+      ]
+    },
+    {
+      "type": "right_item",
+      "name": "Right item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Strong odor indoors"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Yak Chew Comparison",
+      "blocks": [
+        { "type": "left_item", "settings": { "text": "Bleached and processed" } },
+        { "type": "left_item", "settings": { "text": "Not fully digestible" } },
+        { "type": "left_item", "settings": { "text": "Higher blockage risk" } },
+        { "type": "left_item", "settings": { "text": "Low nutritional value" } },
+        { "type": "left_item", "settings": { "text": "Unclear sourcing" } },
+
+        { "type": "center_item", "settings": { "text": "100% natural ingredients" } },
+        { "type": "center_item", "settings": { "text": "Dense and long-lasting" } },
+        { "type": "center_item", "settings": { "text": "High protein & calcium" } },
+        { "type": "center_item", "settings": { "text": "Cleaner indoor chew" } },
+        { "type": "center_item", "settings": { "text": "Traditional Himalayan process" } },
+
+        { "type": "right_item", "settings": { "text": "Strong odor indoors" } },
+        { "type": "right_item", "settings": { "text": "Often short-lasting" } },
+        { "type": "right_item", "settings": { "text": "Can leave greasy residue" } },
+        { "type": "right_item", "settings": { "text": "Higher calorie chew" } },
+        { "type": "right_item", "settings": { "text": "Messier overall experience" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,781 @@
+{%- comment -%}theme-check-disable SchemaJsonFormat{%- endcomment -%}
+{%- liquid
+  assign section_has_content = false
+  if section.settings.image != blank
+    assign section_has_content = true
+  endif
+
+  if section.blocks.size > 0
+    assign section_has_content = true
+  endif
+-%}
+{%- if request.design_mode or section.settings.hide_when_empty == false or section_has_content -%}
+  {%- if section.index == 1 or request.design_mode -%}
+    {{ 'component-image-with-text.css' | asset_url | stylesheet_tag }}
+  {%- else -%}
+    <link rel="stylesheet" href="{{ 'component-image-with-text.css' | asset_url }}" media="print" onload="this.media='all'">
+  {%- endif -%}
+
+  {%- liquid
+    assign preload = false
+    assign fetch_priority = 'auto'
+    assign has_media = false
+    if section.settings.image != blank
+      assign has_media = true
+    endif
+    if section.index == 1 or request.design_mode
+      assign fetch_priority = 'high'
+      assign preload = true
+    endif
+
+    if section.settings.color_scheme == section.settings.section_color_scheme and section.settings.content_layout contains 'no-overlap'
+      assign remove_color_classes = true
+    endif
+  -%}
+
+  <style>
+    #shopify-section-{{ section.id }} .our-promises-section__container--text-only {
+      display: block;
+      min-height: auto !important;
+    }
+
+    #shopify-section-{{ section.id }} .our-promises-section__text-item--full {
+      width: 100%;
+      max-width: 100%;
+      flex-basis: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .our-promises-section__text-item--full .image-with-text__content {
+      max-width: 100%;
+      padding: 0;
+      background: transparent;
+    }
+
+    #shopify-section-{{ section.id }} .our-promises-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.4rem;
+      margin-top: 2.4rem;
+    }
+
+    #shopify-section-{{ section.id }} .our-promises-item {
+      padding: 1.8rem;
+      border-radius: 2rem;
+      border: 1px solid rgba(var(--color-foreground), 0.08);
+      background: rgba(var(--color-foreground), 0.04);
+    }
+
+    #shopify-section-{{ section.id }} .our-promises-item-title {
+      margin: 0 0 0.6rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    #shopify-section-{{ section.id }} .our-promises-item-text {
+      margin: 0;
+      color: rgba(var(--color-foreground), 0.74);
+      line-height: 1.55;
+    }
+
+    @media screen and (max-width: 749.98px) {
+      #shopify-section-{{ section.id }} .our-promises-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <div class="our-promises-section section__inner {{ section.settings.line_separator }} {{ section.settings.top_padding }} {{ section.settings.bottom_padding }} gradient color-{{ section.settings.section_color_scheme }} {{ section.settings.visibility }} {%- render 'class-time-of-day-to-show' -%}">
+    <div class="page-width">
+      <div class="image-with-text isolate
+        {% unless section.settings.color_scheme == section.settings.section_color_scheme %} image-with-text--{{ section.settings.content_layout }}{% endunless %}
+        {% unless section.settings.color_scheme == section.settings.section_color_scheme or section.settings.content_layout == 'no-overlap-separate' %} collapse-corners{% endunless %}
+        {% if section.settings.desktop_media_scale != 100 %} image-scaled{% endif %}{% if settings.animations_reveal_on_scroll and section.index > 3 %} scroll-trigger animate--slide-in{% endif %}"
+       style="--image-width: {{ section.settings.desktop_media_width }}%;--image-scale:{{ section.settings.desktop_media_scale | times: 0.01 }}"
+      >
+        <div class="image-with-text__container flex section-height-responsive--desktop
+            {% if section.settings.layout == 'text_first' %} image-with-text__container--reverse{% endif %}{% unless has_media %} our-promises-section__container--text-only{% endunless %}"
+          style="--mobile-height: {{ section.settings.mobile_section_height }}px;--desktop-height: {{ section.settings.desktop_section_height }}px;"
+        >
+          {% if has_media %}
+            <div class="image-with-text__media-item flex__item">
+              <div
+                class="image-with-text__media global-media-settings section-height-responsive--mobile
+                  {% unless remove_color_classes %} gradient color-{{ section.settings.color_scheme }}{% else %} background-transparent{% endunless %}
+                  media"
+              >
+                {%- assign widths = '535, 750, 1070, 1500' -%}
+                {%- capture sizes -%}
+                  (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px,
+                  (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)
+                {%- endcapture -%}
+                {%- liquid
+                   if section.settings.image_cover == false
+                     assign image_class = 'object-contain'
+                   endif
+                -%}
+                {{
+                  section.settings.image
+                  | image_url: width: 1500
+                  | image_tag: sizes: sizes, widths: widths, fetchpriority: fetch_priority, class: image_class
+                }}
+              </div>
+            </div>
+          {% endif %}
+          <div class="image-with-text__text-item section-height-responsive--desktop flex__item{% unless has_media %} our-promises-section__text-item--full{% endunless %}">
+            <div
+              id="ImageWithText--{{ section.id }}"
+              class="image-with-text__content{% if section.settings.show_content_shadow and remove_color_classes != true %} card--shadow{% endif %} self-{{ section.settings.mobile_content_alignment }} text-{{ section.settings.mobile_content_alignment }} md:self-{{ section.settings.desktop_content_alignment }} md:text-{{ section.settings.desktop_content_alignment }} content-container{% unless remove_color_classes %} gradient color-{{ section.settings.color_scheme }}{% else %} background-transparent{% endunless %}"
+            >
+              <div class="section-content section-content-{{ section.id }} lg:p-0 max-w-{{ section.settings.text_max_width }} ml-auto mr-auto">
+                {%- liquid
+                  for block in section.blocks
+                    render 'standard-blocks', section_name: 'image-with-text', block: block
+                  endfor
+                -%}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Our Promises Section",
+  "tag": "section",
+  "class": "section section-our-promises",
+  "disabled_on": {
+    "groups": ["header", "footer", "aside"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "desktop_section_height",
+      "min": 200,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "label": "Minimum height on desktop",
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "mobile_section_height",
+      "min": 100,
+      "max": 800,
+      "step": 20,
+      "unit": "px",
+      "label": "Minimum height on mobile",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "desktop_media_width",
+      "min": 25,
+      "max": 75,
+      "step": 1,
+      "default": 50,
+      "unit": "%",
+      "label": "Image width on desktop"
+    },
+    {
+      "type": "range",
+      "id": "desktop_media_scale",
+      "min": 30,
+      "max": 110,
+      "step": 5,
+      "default": 100,
+      "unit": "%",
+      "label": "Image scale on desktop"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "options": [
+        {
+          "value": "media_first",
+          "label": "Left"
+        },
+        {
+          "value": "text_first",
+          "label": "Right"
+        }
+      ],
+      "default": "media_first",
+      "label": "Image placement on desktop"
+    },
+    {
+      "type": "checkbox",
+      "id": "image_cover",
+      "default": true,
+      "label": "Image fills available space"
+    },
+    {
+      "type": "header",
+      "content": "Text layout"
+    },
+    {
+      "type": "text_alignment",
+      "id": "desktop_content_alignment",
+      "default": "left",
+      "label": "Text alignment on desktop"
+    },
+    {
+      "type": "text_alignment",
+      "id": "mobile_content_alignment",
+      "default": "left",
+      "label": "Text alignment on mobile"
+    },
+    {
+      "type": "select",
+      "id": "text_max_width",
+      "options": [
+        {
+          "value": "xxs",
+          "label": "S"
+        },
+        {
+          "value": "xs",
+          "label": "M"
+        },
+        {
+          "value": "s",
+          "label": "L"
+        },
+        {
+          "value": "m",
+          "label": "XL"
+        },
+        {
+          "value": "",
+          "label": "2XL"
+        }
+      ],
+      "default": "xs",
+      "label": "Text max width"
+    },
+    {
+      "type": "select",
+      "id": "content_layout",
+      "options": [
+        {
+          "value": "no-overlap",
+          "label": "No overlap"
+        },
+        {
+          "value": "no-overlap-separate",
+          "label": "No overlap (separate backgrounds)"
+        },
+        {
+          "value": "overlap",
+          "label": "Overlap"
+        }
+      ],
+      "default": "no-overlap",
+      "label": "Desktop content layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_content_shadow",
+      "default": false,
+      "label": "Show shadow"
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color_scheme",
+      "id": "section_color_scheme",
+      "label": "Section color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Content color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "line_separator",
+      "options": [
+        {
+          "value": "",
+          "label": "None"
+        },
+        {
+          "value": "border-top",
+          "label": "Top"
+        },
+        {
+          "value": "border-bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "",
+      "label": "Line separator"
+    },
+    {
+      "type": "select",
+      "id": "top_padding",
+      "options": [
+        {
+          "value": "pt-0",
+          "label": "None"
+        },
+        {
+          "value": "pt-s",
+          "label": "Small"
+        },
+        {
+          "value": "pt-m",
+          "label": "Medium"
+        },
+        {
+          "value": "pt-l",
+          "label": "Large"
+        }
+      ],
+      "default": "pt-s",
+      "label": "Top padding"
+    },
+    {
+      "type": "select",
+      "id": "bottom_padding",
+      "options": [
+        {
+          "value": "pb-0",
+          "label": "None"
+        },
+        {
+          "value": "pb-s",
+          "label": "Small"
+        },
+        {
+          "value": "pb-m",
+          "label": "Medium"
+        },
+        {
+          "value": "pb-l",
+          "label": "Large"
+        }
+      ],
+      "default": "pb-s",
+      "label": "Bottom padding"
+    },
+    {
+      "type": "header",
+      "content": "Visibility"
+    },
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "",
+          "label": "Always"
+        },
+        {
+          "value": "md:hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "hidden md:block",
+          "label": "Desktop only"
+        }
+      ],
+      "default": "",
+      "label": "Visible on"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_when_empty",
+      "default": false,
+      "label": "Hide when empty"
+    },
+    {
+      "type": "header",
+      "content": "Time schedule"
+    },
+    {
+      "type": "paragraph",
+      "content": "Show this section only at specific time of day."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_at_specific_time_of_day",
+      "default": false,
+      "label": "Enable time schedule"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_time_morning",
+      "default": true,
+      "label": "Morning (6am - 12pm)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_time_afternoon",
+      "default": true,
+      "label": "Afternoon (12pm - 6pm)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_time_evening",
+      "default": true,
+      "label": "Evening (6pm - 12am)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_time_night",
+      "default": true,
+      "label": "Night (12am - 6am)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "default": "Image with text",
+          "label": "Heading"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            {
+              "value": "h4",
+              "label": "Extra small"
+            },
+            {
+              "value": "h3",
+              "label": "Small"
+            },
+            {
+              "value": "h2",
+              "label": "Medium"
+            },
+            {
+              "value": "h1",
+              "label": "Large"
+            },
+            {
+              "value": "h0",
+              "label": "Extra large"
+            },
+            {
+              "value": "custom",
+              "label": "Custom"
+            }
+          ],
+          "default": "h2",
+          "label": "Heading size"
+        },
+        {
+          "type": "range",
+          "id": "heading_size_custom",
+          "min": 1,
+          "max": 10,
+          "step": 0.1,
+          "unit": "rem",
+          "visible_if": "{{ block.settings.heading_size == 'custom' }}",
+          "label": "Custom heading size",
+          "default": 3
+        },
+        {
+          "type": "range",
+          "id": "heading_line_height_custom",
+          "min": 0.5,
+          "max": 2,
+          "step": 0.1,
+          "visible_if": "{{ block.settings.heading_size == 'custom' }}",
+          "label": "Custom heading line height",
+          "default": 1.2
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "options": [
+            {
+              "value": "h1",
+              "label": "h1"
+            },
+            {
+              "value": "h2",
+              "label": "h2"
+            },
+            {
+              "value": "h3",
+              "label": "h3"
+            },
+            {
+              "value": "h4",
+              "label": "h4"
+            },
+            {
+              "value": "h5",
+              "label": "h5"
+            },
+            {
+              "value": "h6",
+              "label": "h6"
+            },
+            {
+              "value": "div",
+              "label": "div"
+            },
+            {
+              "value": "span",
+              "label": "span"
+            },
+            {
+              "value": "p",
+              "label": "p"
+            }
+          ],
+          "default": "h2",
+          "label": "Heading tag",
+          "info": "Used for accessibility and SEO. [Learn more](https://benchmarkthemes.com/help-center/ignite/guides/accessibility-seo-best-practices/)"
+        }
+      ]
+    },
+    {
+      "type": "caption",
+      "name": "Caption",
+      "settings": [
+        {
+          "type": "text",
+          "id": "caption",
+          "default": "Add a tagline",
+          "label": "Caption"
+        },
+        {
+          "type": "select",
+          "id": "caption_text_style",
+          "options": [
+            {
+              "value": "subtitle",
+              "label": "Subtitle"
+            },
+            {
+              "value": "caption-with-letter-spacing",
+              "label": "Uppercase"
+            }
+          ],
+          "default": "caption-with-letter-spacing",
+          "label": "Caption style"
+        },
+        {
+          "type": "select",
+          "id": "caption_text_size",
+          "options": [
+            {
+              "value": "t6",
+              "label": "Extra small"
+            },
+            {
+              "value": "t5",
+              "label": "Small"
+            },
+            {
+              "value": "t4",
+              "label": "Medium"
+            },
+            {
+              "value": "t3",
+              "label": "Large"
+            }
+          ],
+          "default": "t5",
+          "label": "Caption size"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+          "label": "Text"
+        },
+        {
+          "type": "select",
+          "id": "text_size",
+          "options": [
+            {
+              "value": "t6",
+              "label": "Extra small"
+            },
+            {
+              "value": "t5",
+              "label": "Small"
+            },
+            {
+              "value": "t4",
+              "label": "Medium"
+            },
+            {
+              "value": "t3",
+              "label": "Large"
+            },
+            {
+              "value": "t2",
+              "label": "Extra large"
+            },
+            {
+              "value": "t1",
+              "label": "Huge"
+            },
+            {
+              "value": "t0",
+              "label": "Colossal"
+            }
+          ],
+          "default": "t5",
+          "label": "Text size"
+        }
+      ]
+    },
+    {
+      "type": "buttons",
+      "name": "Buttons",
+      "settings": [
+        {
+          "type": "select",
+          "id": "button_text_size",
+          "options": [
+            {
+              "value": "t6",
+              "label": "Extra small"
+            },
+            {
+              "value": "t5",
+              "label": "Small"
+            },
+            {
+              "value": "t4",
+              "label": "Medium"
+            },
+            {
+              "value": "t3",
+              "label": "Large"
+            }
+          ],
+          "default": "t4",
+          "label": "Button text size"
+        },
+        {
+          "type": "text",
+          "id": "button_label_1",
+          "default": "Button label",
+          "label": "First button label",
+          "info": "Leave the label blank to hide the button."
+        },
+        {
+          "type": "url",
+          "id": "button_link_1",
+          "label": "First button link"
+        },
+        {
+          "type": "select",
+          "id": "button_style_1",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "link",
+              "label": "Link"
+            }
+          ],
+          "default": "primary",
+          "label": "First button style"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_style_1_show_arrow",
+          "default": false,
+          "label": "Show arrow on first button",
+          "info": "Only applies to primary and secondary buttons."
+        },
+        {
+          "type": "text",
+          "id": "button_label_2",
+          "label": "Second button label",
+          "info": "Leave the label blank to hide the button."
+        },
+        {
+          "type": "url",
+          "id": "button_link_2",
+          "label": "Second button link"
+        },
+        {
+          "type": "select",
+          "id": "button_style_2",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "link",
+              "label": "Link"
+            }
+          ],
+          "default": "secondary",
+          "label": "Second button style"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_style_2_show_arrow",
+          "default": false,
+          "label": "Show arrow on second button",
+          "info": "Only applies to primary and secondary buttons."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our Promises Section",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "buttons"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

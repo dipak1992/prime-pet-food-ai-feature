@@ -1,0 +1,287 @@
+@media screen and (max-width: 549.98px) {
+  .articles-wrapper .article {
+    width: 100%;
+  }
+}
+
+.article-card-wrapper {
+  width: 100%;
+}
+
+.article {
+  display: flex;
+  align-items: stretch;
+}
+
+.blog-articles .article-card,
+.blog__posts .article-card {
+  height: 100%;
+  border: 1px solid rgba(var(--color-foreground), 0.08);
+  border-radius: 2.4rem;
+  background:
+    linear-gradient(180deg, rgba(var(--color-background), 0.98), rgba(var(--color-background), 1)),
+    radial-gradient(circle at top right, rgba(var(--color-foreground), 0.04), transparent 30%);
+  box-shadow: 0 1.2rem 3rem rgba(15, 23, 42, 0.06);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.article-card__title {
+  line-height: 1.25em;
+  letter-spacing: -0.02em;
+}
+
+.article-card__title .sticker-wrapper-above {
+  margin-top: 0;
+}
+
+.article.grid__item {
+  padding: 0;
+}
+
+.grid--peek .article-card {
+  box-sizing: border-box;
+}
+
+.article-card__image {
+  background-color: rgba(var(--blog-card-image-background, '0,0,0,0'));
+}
+
+.article-card__image-relative {
+  position: relative !important;
+}
+
+.article-card__image-wrapper > a {
+  display: block;
+}
+
+.article-card__link.link {
+  padding: 0;
+}
+
+.article-card__link {
+  text-underline-offset: 0.3rem;
+}
+
+.blog-articles .article-card .card__information,
+.blog__posts .article-card .card__information {
+  padding: 2.2rem 2rem 2rem;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.article-card__meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.article-card__tag {
+  display: inline-flex;
+  align-items: center;
+  max-width: fit-content;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  background: rgba(var(--color-foreground), 0.06);
+  color: rgba(var(--color-foreground), 0.8);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.article-card__footer,
+.article-card__featured-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.4rem;
+  margin-top: auto;
+}
+
+.article-card__footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem 1.2rem;
+  min-width: 0;
+}
+
+.article-card__excerpt {
+  width: 100%;
+  font-size: 1.5rem;
+  color: rgba(var(--color-foreground), 0.74);
+  line-height: 1.65;
+}
+
+.article-card__link:not(:only-child) {
+  margin-inline-end: 3rem;
+}
+
+@media screen and (min-width: 990px) {
+  .article-card__link:not(:only-child) {
+    margin-inline-end: 4rem;
+  }
+
+  .blog-articles .article-card:hover,
+  .blog__posts .article-card:hover {
+    transform: translateY(-0.6rem);
+    border-color: rgba(var(--color-foreground), 0.14);
+    box-shadow: 0 2rem 4rem rgba(15, 23, 42, 0.1);
+  }
+}
+
+.article-card__image--small .ratio::before {
+  padding-bottom: 11rem;
+}
+
+.article-card__image--medium .ratio::before {
+  padding-bottom: 22rem;
+}
+
+.article-card__image--large .ratio::before {
+  padding-bottom: 33rem;
+}
+
+@media screen and (min-width: 750px) {
+  .article-card__image--small .ratio::before {
+    padding-bottom: 14.3rem;
+  }
+
+  .article-card__image--medium .ratio::before {
+    padding-bottom: 21.9rem;
+  }
+
+  .article-card__image--large .ratio::before {
+    padding-bottom: 27.5rem;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .article-card__image--small .ratio::before {
+    padding-bottom: 17.7rem;
+  }
+
+  .article-card__image--medium .ratio::before {
+    padding-bottom: 30.7rem;
+  }
+
+  .article-card__image--large .ratio::before {
+    padding-bottom: 40.7rem;
+  }
+}
+
+/* check for flexbox gap in older Safari versions */
+@supports not (inset: 10px) {
+  .articles-wrapper.grid {
+    margin: 0 0 5rem 0;
+  }
+
+  @media screen and (min-width: 750px) {
+    .articles-wrapper.grid {
+      margin-bottom: 7rem;
+    }
+  }
+}
+
+.article-card--featured .card__inner {
+  height: 100%;
+}
+
+.article-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.2rem;
+  border-radius: 999px;
+  background: rgba(var(--color-foreground), 0.06);
+  color: rgb(var(--color-foreground));
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.article-card__cta:hover {
+  background: rgba(var(--color-foreground), 0.1);
+  color: rgb(var(--color-foreground));
+}
+
+.article-card__cta .icon {
+  position: static;
+  width: 1.2em;
+  margin-top: 0;
+}
+
+.article-card__footer-meta .t7 {
+  line-height: 1.25;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+.article-card--featured .card__media,
+.article-card--featured .card__content .card__information {
+  border-radius: calc(var(--border-radius) - var(--border-width) - var(--image-padding)) !important;
+}
+
+.article-card.article-card--featured .card__content {
+  --color-foreground: 255,255,255;
+  padding-top: 10rem;
+}
+
+.article-card.article-card--featured .card__heading {
+  margin-top: 5rem;
+}
+
+.article-card.article-card--featured .card__inner {
+  position: absolute;
+  bottom: 0;
+  inset-inline-start: 0;
+  top: 0;
+  z-index: -1;;
+}
+
+.article-card--featured .article-card__excerpt {
+  color: rgba(var(--color-foreground),1);
+}
+
+.article-card.article-card--featured .article-card__cta {
+  background: rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 1);
+}
+
+.article-card.article-card--featured .article-card__cta:hover {
+  background: rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 1);
+}
+
+.article-card--featured .card__content .card__information {
+  padding: 2rem !important;
+  background: linear-gradient(
+    to bottom, rgba(0, 0, 0, 0) 0,
+    rgba(0, 1, 1, 0.009) 20px,
+    rgba(0, 1, 1, 0.07) 55px,
+    rgba(0, 1, 1, 0.16) 86px,
+    rgba(0, 1, 1, 0.28) 115px,
+    rgba(0, 1, 1, 0.38) 145px,
+    rgba(0, 1, 1, 0.44) 180px,
+    rgba(0, 1, 1, 0.8) 100%
+  );
+}
+
+@media screen and (max-width: 549.98px) {
+  .article-card__meta-row,
+  .article-card__footer,
+  .article-card__featured-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .article-card__footer-meta {
+    flex-direction: row;
+  }
+}

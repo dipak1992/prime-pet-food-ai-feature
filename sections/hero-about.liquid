@@ -1,0 +1,516 @@
+{% comment %}
+  ╔══════════════════════════════════════════════════════════╗
+  ║   PRIME PET FOOD — About Us: HERO Section               ║
+  ║   File: sections/about-hero.liquid                      ║
+  ║   v3 — Font size sliders + subtitle center fix          ║
+  ╚══════════════════════════════════════════════════════════╝
+{% endcomment %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --hero-bg-color:   {{ section.settings.hero_bg_color }};
+    --hero-gold-light: {{ section.settings.hero_gold_light_color }};
+  }
+
+  #shopify-section-{{ section.id }} *,
+  #shopify-section-{{ section.id }} *::before,
+  #shopify-section-{{ section.id }} *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* ── HERO WRAPPER ── */
+  .ppf-hero {
+    position: relative;
+    min-height: {{ section.settings.hero_min_height }}vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--hero-bg-color);
+    overflow: hidden;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  /* ── BG IMAGE — <img> tag (sabse reliable) ── */
+  .ppf-hero__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: {{ section.settings.bg_image_position }};
+    z-index: 0;
+    display: block;
+  }
+
+  /* ── OVERLAY (image ke upar) ── */
+  .ppf-hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: {{ section.settings.overlay_color }};
+    opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+  }
+
+  /* ── GRADIENT fallback (jab image nahi) ── */
+  .ppf-hero__gradient {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 110%, rgba(100,160,100,0.25) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 10% 20%, rgba(196,146,58,0.12) 0%, transparent 60%),
+      linear-gradient(160deg, #1a3020 0%, var(--hero-bg-color) 40%, #1e3525 100%);
+  }
+
+  /* ── Grain texture ── */
+  .ppf-hero__grain {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    pointer-events: none;
+  }
+
+  /* ── Mountain silhouette ── */
+  .ppf-hero__mountains {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 45%;
+    z-index: 3;
+    opacity: 0.18;
+  }
+
+  /* ── Main content ── */
+  .ppf-hero__content {
+    position: relative;
+    z-index: 4;
+    text-align: center;
+    padding: 2rem;
+    max-width: 900px;
+    {% comment %} width: 100%; {% endcomment %}
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ── Eyebrow ── */
+  .ppf-hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: {{ section.settings.eyebrow_font_size }}px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: {{ section.settings.eyebrow_color }};
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: ppf-fadeUp 0.9s 0.3s ease forwards;
+  }
+  .ppf-hero__eyebrow::before,
+  .ppf-hero__eyebrow::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: {{ section.settings.eyebrow_color }};
+    opacity: 0.6;
+  }
+
+  /* ── TITLE ── */
+  .ppf-hero__title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: {{ section.settings.title_font_size }}px;
+    font-weight: 300;
+    color: {{ section.settings.title_color }};
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    text-align: center;
+    opacity: 0;
+    animation: ppf-fadeUp 1s 0.5s ease forwards;
+  }
+  .ppf-hero__title em {
+    font-style: italic;
+    color: {{ section.settings.title_highlight_color }};
+  }
+  /* richtext p reset */
+  .ppf-hero__title p {
+    margin: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    color: inherit;
+    font-family: inherit;
+    text-align: center;
+  }
+
+  /* ── SUBTITLE / DESCRIPTION ── */
+  .ppf-hero__sub {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    margin: 2rem auto 0 auto;
+    font-size: {{ section.settings.subtitle_font_size }}px;
+    font-weight: 300;
+    color: {{ section.settings.subtitle_color }};
+    letter-spacing: 0.03em;
+    line-height: 1.7;
+    text-align: center;
+    opacity: 0;
+    animation: ppf-fadeUp 1s 0.75s ease forwards;
+  }
+  /* richtext p inside subtitle */
+  .ppf-hero__sub p {
+    margin: 0;
+    text-align: center;
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+  }
+
+  /* ── Scroll indicator ── */
+  .ppf-hero__scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: {{ section.settings.scroll_color }};
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    z-index: 5;
+    opacity: 0;
+    animation: ppf-fadeIn 1s 1.5s ease forwards;
+  }
+  .ppf-hero__scroll-line {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, {{ section.settings.scroll_color }}, transparent);
+    animation: ppf-scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* ── Animations ── */
+  @keyframes ppf-fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes ppf-fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes ppf-scrollPulse {
+    0%, 100% { transform: scaleY(1); opacity: 1; }
+    50%       { transform: scaleY(0.6); opacity: 0.4; }
+  }
+
+  /* ── MOBILE font sizes ── */
+  @media (max-width: 768px) {
+    .ppf-hero__title {
+      font-size: {{ section.settings.title_font_size_mobile }}px;
+    }
+    .ppf-hero__sub {
+      font-size: {{ section.settings.subtitle_font_size_mobile }}px;
+      max-width: 100%;
+    }
+  }
+</style>
+
+<!-- ══ HERO HTML ══ -->
+<section class="ppf-hero" id="ppf-hero-{{ section.id }}">
+
+  <!-- BG Image -->
+  {% if section.settings.hero_bg_image != blank %}
+    {{
+      section.settings.hero_bg_image
+      | image_url: width: 1920
+      | image_tag:
+        class: 'ppf-hero__img',
+        alt: section.settings.hero_bg_image.alt | default: '',
+        loading: 'eager',
+        fetchpriority: 'high'
+    }}
+    <div class="ppf-hero__overlay" aria-hidden="true"></div>
+  {% else %}
+    <div class="ppf-hero__gradient" aria-hidden="true"></div>
+  {% endif %}
+
+  <!-- Grain -->
+  <div class="ppf-hero__grain" aria-hidden="true"></div>
+
+  <!-- Mountains -->
+  {% if section.settings.show_mountains %}
+  <svg class="ppf-hero__mountains" viewBox="0 0 1440 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true">
+    <polygon points="0,400 180,120 360,250 540,80 720,180 900,40 1080,160 1260,90 1440,200 1440,400" fill="rgba(255,255,255,1)"/>
+    <polygon points="0,400 220,200 440,290 660,140 880,220 1100,100 1320,190 1440,150 1440,400" fill="rgba(255,255,255,0.5)"/>
+  </svg>
+  {% endif %}
+
+  <!-- Content -->
+  <div class="ppf-hero__content">
+
+    {% if section.settings.eyebrow_text != blank %}
+      <div class="ppf-hero__eyebrow">{{ section.settings.eyebrow_text }}</div>
+    {% endif %}
+
+    {% if section.settings.hero_title != blank %}
+      <h1 class="ppf-hero__title">{{ section.settings.hero_title }}</h1>
+    {% endif %}
+
+    {% if section.settings.hero_subtitle != blank %}
+      <div class="ppf-hero__sub">{{ section.settings.hero_subtitle }}</div>
+    {% endif %}
+
+  </div>
+
+  <!-- Scroll -->
+  {% if section.settings.show_scroll_indicator %}
+  <div class="ppf-hero__scroll" aria-hidden="true">
+    <div class="ppf-hero__scroll-line"></div>
+    <span>{{ section.settings.scroll_label }}</span>
+  </div>
+  {% endif %}
+
+</section>
+
+
+{% schema %}
+{
+  "name": "About — Hero",
+  "tag": "section",
+  "class": "ppf-about-hero",
+  "settings": [
+
+    {
+      "type": "header",
+      "content": "📝 Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow_text",
+      "label": "Eyebrow Text (top tag line)",
+      "default": "Nurturing Paws · Enriching Lives"
+    },
+    {
+      "type": "richtext",
+      "id": "hero_title",
+      "label": "Main Heading",
+      "info": "Italic word ke liye <em> tag use karo — jaise: <em>Pet Food Brand<\/em>",
+      "default": "<p>More Than a<br><em>Pet Food Brand<\/em><\/p>"
+    },
+    {
+      "type": "richtext",
+      "id": "hero_subtitle",
+      "label": "Subtitle \/ Description",
+      "default": "<p>We are a family of dog lovers, dedicated to natural ingredients, honest quality, and a mission that reaches from American homes to the Himalayan highlands.<\/p>"
+    },
+
+    {
+      "type": "header",
+      "content": "🔡 Font Sizes — Desktop"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size",
+      "label": "Eyebrow Text Size",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "default": 11,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Heading (Title) Size",
+      "min": 30,
+      "max": 120,
+      "step": 2,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_font_size",
+      "label": "Subtitle \/ Description Size",
+      "min": 12,
+      "max": 30,
+      "step": 1,
+      "default": 17,
+      "unit": "px"
+    },
+
+    {
+      "type": "header",
+      "content": "📱 Font Sizes — Mobile"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "label": "Heading Size (Mobile)",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "default": 42,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_font_size_mobile",
+      "label": "Subtitle Size (Mobile)",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 15,
+      "unit": "px"
+    },
+
+    {
+      "type": "header",
+      "content": "🖼️ Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_bg_image",
+      "label": "Background Image",
+      "info": "Recommended: 1920x1080px. Image nahi hogi to green gradient dikhega."
+    },
+    {
+      "type": "select",
+      "id": "bg_image_position",
+      "label": "Image Position",
+      "default": "center center",
+      "options": [
+        { "value": "center center", "label": "Center" },
+        { "value": "center top",    "label": "Top Center" },
+        { "value": "center bottom", "label": "Bottom Center" },
+        { "value": "left center",   "label": "Left" },
+        { "value": "right center",  "label": "Right" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Image Overlay Color",
+      "default": "#1a3020"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Darkness",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "default": 60,
+      "unit": "%",
+      "info": "0% = full image, 90% = almost black"
+    },
+
+    {
+      "type": "header",
+      "content": "🎨 Background Color (image nahi ho tab)"
+    },
+    {
+      "type": "color",
+      "id": "hero_bg_color",
+      "label": "Background Color",
+      "default": "#2C4A2E"
+    },
+    {
+      "type": "color",
+      "id": "hero_gold_light_color",
+      "label": "Gold \/ Accent Color",
+      "default": "#E8C47A"
+    },
+
+    {
+      "type": "header",
+      "content": "🖊️ Text Colors"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Text Color",
+      "default": "#E8C47A"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_color",
+      "label": "Title Italic Word Color",
+      "default": "#E8C47A"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle \/ Description Color",
+      "default": "#a8a8a8"
+    },
+
+    {
+      "type": "header",
+      "content": "📐 Layout"
+    },
+    {
+      "type": "range",
+      "id": "hero_min_height",
+      "label": "Hero Height",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "default": 100,
+      "unit": "vh"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mountains",
+      "label": "Mountain Silhouette Dikhao",
+      "default": true
+    },
+
+    {
+      "type": "header",
+      "content": "⬇️ Scroll Indicator"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_scroll_indicator",
+      "label": "Scroll Indicator Dikhao",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "scroll_label",
+      "label": "Scroll Label Text",
+      "default": "Scroll"
+    },
+    {
+      "type": "color",
+      "id": "scroll_color",
+      "label": "Scroll Indicator Color",
+      "default": "#888888"
+    }
+
+  ],
+  "presets": [
+    {
+      "name": "About — Hero"
+    }
+  ]
+}
+{% endschema %}

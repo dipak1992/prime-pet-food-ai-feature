@@ -1,0 +1,506 @@
+{% comment %}
+  Prime Pet Food — Benefits Section
+  Section: "Packed With Goodness in Every Chew"
+  Upload to: sections/prime-pet-benefits.liquid
+{% endcomment %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  .ppb-section {
+    background: #F4EFE6;
+    padding: 88px 40px;
+    font-family: 'DM Sans', sans-serif;
+    color: #1A1410;
+  }
+
+  .ppb-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* ---- Header ---- */
+  .ppb-header {
+    text-align: center;
+    margin-bottom: 52px;
+  }
+
+  .ppb-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #E8883A;
+    margin-bottom: 12px;
+  }
+
+  .ppb-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 3.5vw, 42px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: #1A1410;
+    margin-bottom: 16px;
+  }
+
+  .ppb-subtitle {
+    font-size: 16px;
+    color: #8C7A6A;
+    max-width: 560px;
+    line-height: 1.7;
+    margin: 0 auto;
+  }
+
+  /* ---- Benefits Grid ---- */
+  .ppb-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .ppb-card {
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: 32px 24px;
+    text-align: center;
+    border: 1px solid #E8DDD0;
+    transition: all .25s cubic-bezier(.4,0,.2,1);
+    cursor: default;
+  }
+
+  .ppb-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 24px rgba(92,64,48,.12);
+    border-color: #7A9E7E;
+  }
+
+  .ppb-icon-wrap {
+    width: 72px;
+    height: 72px;
+    border-radius: 20px;
+    background: #D4E6D5;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    transition: transform .25s cubic-bezier(.4,0,.2,1);
+  }
+
+  .ppb-card:hover .ppb-icon-wrap {
+    transform: scale(1.1) rotate(-5deg);
+  }
+
+  .ppb-card-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1A1410;
+    margin-bottom: 8px;
+  }
+
+  .ppb-card-desc {
+    font-size: 13px;
+    color: #8C7A6A;
+    line-height: 1.5;
+  }
+
+  /* ---- Comparison Table ---- */
+  .ppb-compare-wrap {
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: 36px;
+    border: 1px solid #E8DDD0;
+    overflow-x: auto;
+  }
+
+  .ppb-compare-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1A1410;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  .ppb-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 500px;
+  }
+
+  .ppb-table thead th {
+    padding: 12px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #8C7A6A;
+    text-align: left;
+  }
+
+  .ppb-table thead th.ppb-col-us {
+    font-size: 13px;
+    font-weight: 700;
+    color: #2D4A30;
+    text-align: center;
+    background: #D4E6D5;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .ppb-table thead th.ppb-col-other {
+    font-size: 12px;
+    font-weight: 500;
+    color: #8C7A6A;
+    text-align: center;
+  }
+
+  .ppb-table tbody tr {
+    border-top: 1px solid #E8DDD0;
+  }
+
+  .ppb-table tbody td {
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #4A3C30;
+  }
+
+  .ppb-table tbody td.ppb-col-us {
+    text-align: center;
+    font-size: 18px;
+    background: rgba(74,122,78,.05);
+  }
+
+  .ppb-table tbody td.ppb-col-other {
+    text-align: center;
+    font-size: 18px;
+  }
+
+  /* ---- Animations ---- */
+  @keyframes ppbFadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .ppb-fade-up            { animation: ppbFadeUp .6s ease both; }
+  .ppb-fade-up.ppb-d1     { animation-delay: .1s; }
+  .ppb-fade-up.ppb-d2     { animation-delay: .2s; }
+  .ppb-fade-up.ppb-d3     { animation-delay: .3s; }
+  .ppb-fade-up.ppb-d4     { animation-delay: .4s; }
+
+  /* ---- Responsive ---- */
+  @media(max-width: 768px) {
+    .ppb-section { padding: 60px 20px; }
+    .ppb-grid    { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .ppb-compare-wrap { padding: 20px 16px; }
+  }
+
+  @media(max-width: 480px) {
+    .ppb-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<section class="ppb-section" id="benefits">
+  <div class="ppb-inner">
+
+    <!-- Section Header -->
+    <div class="ppb-header">
+      {% if section.settings.eyebrow != blank %}
+        <p class="ppb-eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      {% if section.settings.title != blank %}
+        <h2 class="ppb-title">{{ section.settings.title }}</h2>
+      {% endif %}
+      {% if section.settings.subtitle != blank %}
+        <p class="ppb-subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Benefits Cards Grid -->
+    <div class="ppb-grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'benefit_card' %}
+          {% assign delay_class = '' %}
+          {% if forloop.index == 2 %}{% assign delay_class = 'ppb-d1' %}{% endif %}
+          {% if forloop.index == 3 %}{% assign delay_class = 'ppb-d2' %}{% endif %}
+          {% if forloop.index == 4 %}{% assign delay_class = 'ppb-d3' %}{% endif %}
+          {% if forloop.index == 5 %}{% assign delay_class = 'ppb-d4' %}{% endif %}
+
+          <div class="ppb-card ppb-fade-up {{ delay_class }}" {{ block.shopify_attributes }}>
+            {% if block.settings.icon != blank %}
+              <div class="ppb-icon-wrap">{{ block.settings.icon }}</div>
+            {% endif %}
+            {% if block.settings.title != blank %}
+              <h3 class="ppb-card-title">{{ block.settings.title }}</h3>
+            {% endif %}
+            {% if block.settings.description != blank %}
+              <p class="ppb-card-desc">{{ block.settings.description }}</p>
+            {% endif %}
+          </div>
+
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <!-- Comparison Table -->
+    {% if section.settings.show_comparison %}
+      <div class="ppb-compare-wrap">
+        {% if section.settings.compare_title != blank %}
+          <h3 class="ppb-compare-title">{{ section.settings.compare_title }}</h3>
+        {% endif %}
+
+        <table class="ppb-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th class="ppb-col-us">{{ section.settings.col_us_label }}</th>
+              <th class="ppb-col-other">{{ section.settings.col_2_label }}</th>
+              <th class="ppb-col-other">{{ section.settings.col_3_label }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for block in section.blocks %}
+              {% if block.type == 'compare_row' %}
+                <tr {{ block.shopify_attributes }}>
+                  <td>{{ block.settings.feature }}</td>
+                  <td class="ppb-col-us">{{ block.settings.us_value }}</td>
+                  <td class="ppb-col-other">{{ block.settings.col2_value }}</td>
+                  <td class="ppb-col-other">{{ block.settings.col3_value }}</td>
+                </tr>
+              {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+<!-- Scroll animation JS -->
+<script>
+(function(){
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.animationPlayState = 'running';
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.ppb-fade-up').forEach(el => {
+    el.style.animationPlayState = 'paused';
+    obs.observe(el);
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "PP — Benefits Section",
+  "tag": "section",
+  "class": "prime-pet-benefits",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Label",
+      "default": "Why Your Dog Needs This"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Packed With Goodness in Every Chew"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "default": "Our yak chews aren't just treats — they're a complete wellness experience for your dog."
+    },
+    {
+      "type": "header",
+      "content": "Comparison Table"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_comparison",
+      "label": "Show Comparison Table",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "compare_title",
+      "label": "Comparison Table Title",
+      "default": "How We Compare"
+    },
+    {
+      "type": "text",
+      "id": "col_us_label",
+      "label": "Our Brand Column Label",
+      "default": "Prime Pet Yak Chews"
+    },
+    {
+      "type": "text",
+      "id": "col_2_label",
+      "label": "Competitor 1 Label",
+      "default": "Rawhide"
+    },
+    {
+      "type": "text",
+      "id": "col_3_label",
+      "label": "Competitor 2 Label",
+      "default": "Bully Sticks"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit_card",
+      "name": "Benefit Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (Emoji)",
+          "default": "💪"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Benefit Title",
+          "default": "High Protein"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Benefit Description",
+          "default": "Rich in natural protein from pure Himalayan yak and cow milk. Builds and maintains muscle mass."
+        }
+      ]
+    },
+    {
+      "type": "compare_row",
+      "name": "Comparison Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature",
+          "label": "Feature Name",
+          "default": "100% Natural"
+        },
+        {
+          "type": "text",
+          "id": "us_value",
+          "label": "Our Value (emoji)",
+          "default": "✅"
+        },
+        {
+          "type": "text",
+          "id": "col2_value",
+          "label": "Competitor 1 Value (emoji)",
+          "default": "❌"
+        },
+        {
+          "type": "text",
+          "id": "col3_value",
+          "label": "Competitor 2 Value (emoji)",
+          "default": "⚠️"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PP — Benefits Section",
+      "blocks": [
+        {
+          "type": "benefit_card",
+          "settings": {
+            "icon": "💪",
+            "title": "High Protein",
+            "description": "Rich in natural protein from pure Himalayan yak and cow milk. Builds and maintains muscle mass."
+          }
+        },
+        {
+          "type": "benefit_card",
+          "settings": {
+            "icon": "🦷",
+            "title": "Dental Health",
+            "description": "The natural scraping action cleans teeth and gums, reducing plaque and tartar buildup."
+          }
+        },
+        {
+          "type": "benefit_card",
+          "settings": {
+            "icon": "✨",
+            "title": "Easy to Digest",
+            "description": "Fully digestible when softened. No rawhide risks. Safe for sensitive stomachs."
+          }
+        },
+        {
+          "type": "benefit_card",
+          "settings": {
+            "icon": "🌬️",
+            "title": "Low Odor",
+            "description": "Unlike rawhide or bully sticks, our yak chews are virtually odor-free. Happy dog, happy home."
+          }
+        },
+        {
+          "type": "benefit_card",
+          "settings": {
+            "icon": "⏰",
+            "title": "Long-Lasting",
+            "description": "Hours to weeks of chewing satisfaction. Keep anxious or bored dogs occupied for longer."
+          }
+        },
+        {
+          "type": "compare_row",
+          "settings": {
+            "feature": "100% Natural",
+            "us_value": "✅",
+            "col2_value": "❌",
+            "col3_value": "⚠️"
+          }
+        },
+        {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Long-Lasting",
+            "us_value": "✅",
+            "col2_value": "⚠️",
+            "col3_value": "❌"
+          }
+        },
+        {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Fully Digestible",
+            "us_value": "✅",
+            "col2_value": "❌",
+            "col3_value": "✅"
+          }
+        },
+        {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Low Odor",
+            "us_value": "✅",
+            "col2_value": "⚠️",
+            "col3_value": "❌"
+          }
+        },
+        {
+          "type": "compare_row",
+          "settings": {
+            "feature": "No Chemicals",
+            "us_value": "✅",
+            "col2_value": "❌",
+            "col3_value": "⚠️"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

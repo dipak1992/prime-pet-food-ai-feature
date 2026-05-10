@@ -1,0 +1,967 @@
+<section class="ypd-wrap">
+  <div class="ypd-container">
+    <div class="ypd-section-header">
+      <span class="ypd-eyebrow">{{ section.settings.size_eyebrow }}</span>
+      <h2 class="ypd-title">{{ section.settings.size_title }}</h2>
+      <p class="ypd-subtitle">{{ section.settings.size_subtitle }}</p>
+    </div>
+
+    <div class="ypd-table-wrap">
+      <table class="ypd-table">
+        <thead>
+          <tr>
+            <th>Size</th>
+            <th>Dog Weight</th>
+            <th>Chew Weight</th>
+            <th>Best For</th>
+            <th>Lasts</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>🐕 <strong>Small</strong></td>
+            <td>Under 15 lbs</td>
+            <td>~1.5 oz</td>
+            <td>Toy breeds, puppies</td>
+            <td>2–4 days</td>
+          </tr>
+          <tr>
+            <td>🐕 <strong>Medium</strong></td>
+            <td>15–35 lbs</td>
+            <td>~2.5 oz</td>
+            <td>Beagles, Corgis, Cockers</td>
+            <td>3–7 days</td>
+          </tr>
+          <tr>
+            <td>🐕‍🦺 <strong>Large</strong> <span class="ypd-pill">Popular</span></td>
+            <td>35–55 lbs</td>
+            <td>~4 oz</td>
+            <td>Labs, Goldens, Huskies</td>
+            <td>5–10 days</td>
+          </tr>
+          <tr>
+            <td>🐕‍🦺 <strong>Extra Large</strong></td>
+            <td>55–85 lbs</td>
+            <td>~6 oz</td>
+            <td>German Shepherds, Boxers</td>
+            <td>1–2 weeks</td>
+          </tr>
+          <tr>
+            <td>🦮 <strong>Jumbo</strong></td>
+            <td>85+ lbs</td>
+            <td>~8 oz</td>
+            <td>Great Danes, Mastiffs, Saint Bernards</td>
+            <td>2–3 weeks</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="ypd-wrap ypd-wrap--white">
+  <div class="ypd-container">
+    <div class="ypd-section-header">
+      <span class="ypd-eyebrow">{{ section.settings.compare_eyebrow }}</span>
+      <h2 class="ypd-title">{{ section.settings.compare_title }}</h2>
+      <p class="ypd-subtitle">{{ section.settings.compare_subtitle }}</p>
+    </div>
+
+    <div class="ypd-compare-grid">
+      <div class="ypd-compare-card">
+        <div class="ypd-compare-media">
+          {% if section.settings.compare_image_1 != blank %}
+            {{
+              section.settings.compare_image_1
+              | image_url: width: 300
+              | image_tag: loading: 'lazy', widths: '150, 200, 300', class: 'ypd-compare-img', alt: 'Rawhide'
+            }}
+          {% else %}
+            <div class="ypd-compare-fallback">Rawhide</div>
+          {% endif %}
+        </div>
+
+        <h3>Rawhide</h3>
+        <ul class="ypd-compare-list">
+          <li><span class="ypd-compare-bullet ypd-compare-bullet--bad">✕</span><span>Bleached and processed</span></li>
+          <li><span class="ypd-compare-bullet ypd-compare-bullet--bad">✕</span><span>Not fully digestible</span></li>
+          <li><span class="ypd-compare-bullet ypd-compare-bullet--bad">✕</span><span>Higher blockage risk</span></li>
+          <li><span class="ypd-compare-bullet ypd-compare-bullet--bad">✕</span><span>Low nutritional value</span></li>
+          <li><span class="ypd-compare-bullet ypd-compare-bullet--bad">✕</span><span>Unclear sourcing</span></li>
+        </ul>
+      </div>
+
+      <div class="ypd-compare-card ypd-compare-card--best">
+        <div class="ypd-compare-media">
+          {% if section.settings.compare_image_2 != blank %}
+            {{
+              section.settings.compare_image_2
+              | image_url: width: 300
+              | image_tag: loading: 'lazy', widths: '150, 200, 300', class: 'ypd-compare-img', alt: product.title
+            }}
+          {% elsif product.featured_image %}
+            {{
+              product.featured_image
+              | image_url: width: 300
+              | image_tag: loading: 'lazy', widths: '150, 200, 300', class: 'ypd-compare-img', alt: product.title
+            }}
+          {% else %}
+            <div class="ypd-compare-fallback">{{ product.title }}</div>
+          {% endif %}
+        </div>
+
+        <h3>{{ product.title }}</h3>
+        <ul class="ypd-compare-list">
+          <li>
+            <span class="ypd-compare-bullet ypd-compare-bullet--good">✓</span><span>100% natural ingredients</span>
+          </li>
+          <li><span class="ypd-compare-bullet ypd-compare-bullet--good">✓</span><span>Dense and long-lasting</span></li>
+          <li>
+            <span class="ypd-compare-bullet ypd-compare-bullet--good">✓</span><span>High protein &amp; calcium</span>
+          </li>
+          <li><span class="ypd-compare-bullet ypd-compare-bullet--good">✓</span><span>Cleaner indoor chew</span></li>
+          <li>
+            <span class="ypd-compare-bullet ypd-compare-bullet--good">✓</span><span>Traditional Himalayan process</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="ypd-compare-card">
+        <div class="ypd-compare-media">
+          {% if section.settings.compare_image_3 != blank %}
+            {{
+              section.settings.compare_image_3
+              | image_url: width: 300
+              | image_tag: loading: 'lazy', widths: '150, 200, 300', class: 'ypd-compare-img', alt: 'Bully sticks'
+            }}
+          {% else %}
+            <div class="ypd-compare-fallback">Bully Sticks</div>
+          {% endif %}
+        </div>
+
+        <h3>Bully Sticks</h3>
+        <ul class="ypd-compare-list">
+          <li><span class="ypd-compare-bullet ypd-compare-bullet--bad">✕</span><span>Strong odor indoors</span></li>
+          <li><span class="ypd-compare-bullet ypd-compare-bullet--bad">✕</span><span>Often short-lasting</span></li>
+          <li>
+            <span class="ypd-compare-bullet ypd-compare-bullet--bad">✕</span><span>Can leave greasy residue</span>
+          </li>
+          <li><span class="ypd-compare-bullet ypd-compare-bullet--bad">✕</span><span>Higher calorie chew</span></li>
+          <li>
+            <span class="ypd-compare-bullet ypd-compare-bullet--bad">✕</span><span>Messier overall experience</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ypd-wrap ypd-wrap--dark">
+  <div class="ypd-container">
+    <div class="ypd-section-header">
+      <span class="ypd-eyebrow">{{ section.settings.benefits_eyebrow }}</span>
+      <h2 class="ypd-title ypd-title--light">{{ section.settings.benefits_title }}</h2>
+    </div>
+
+    <div class="ypd-benefits-grid">
+      <div class="ypd-benefit-card">
+        <div class="ypd-benefit-icon">🌿</div>
+        <h4>100% Natural</h4>
+        <p>Made with a short, simple ingredient list and no artificial additives.</p>
+      </div>
+      <div class="ypd-benefit-card">
+        <div class="ypd-benefit-icon">💪</div>
+        <h4>High Protein</h4>
+        <p>Supports strong muscles and healthy daily nutrition for active dogs.</p>
+      </div>
+      <div class="ypd-benefit-card">
+        <div class="ypd-benefit-icon">⏱️</div>
+        <h4>Long-Lasting</h4>
+        <p>Keeps dogs occupied longer than many soft or processed chews.</p>
+      </div>
+      <div class="ypd-benefit-card">
+        <div class="ypd-benefit-icon">🦷</div>
+        <h4>Dental Support</h4>
+        <p>The chewing action helps reduce plaque and tartar buildup.</p>
+      </div>
+      <div class="ypd-benefit-card">
+        <div class="ypd-benefit-icon">🚫</div>
+        <h4>Cleaner Choice</h4>
+        <p>Less mess and odor than many common alternatives.</p>
+      </div>
+      <div class="ypd-benefit-card">
+        <div class="ypd-benefit-icon">🐶</div>
+        <h4>Dogs Love It</h4>
+        <p>A satisfying chew texture that helps reduce boredom and stress.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ypd-wrap ypd-wrap--white">
+  <div class="ypd-container">
+    <div class="ypd-story-grid">
+      <div class="ypd-story-media">
+        {% if section.settings.story_image != blank %}
+          {{
+            section.settings.story_image
+            | image_url: width: 1200
+            | image_tag:
+              loading: 'lazy',
+              widths: '400, 600, 800, 1000, 1200',
+              class: 'ypd-img',
+              alt: section.settings.story_title
+          }}
+        {% elsif product.images[2] %}
+          {{
+            product.images[2]
+            | image_url: width: 1200
+            | image_tag: loading: 'lazy', widths: '400, 600, 800, 1000, 1200', class: 'ypd-img', alt: product.title
+          }}
+        {% else %}
+          <div class="ypd-fallback">🏔️</div>
+        {% endif %}
+      </div>
+
+      <div class="ypd-story-content">
+        <span class="ypd-eyebrow">{{ section.settings.story_eyebrow }}</span>
+        <h2 class="ypd-title ypd-title--left">{{ section.settings.story_title }}</h2>
+        <p>{{ section.settings.story_text_1 }}</p>
+        <p>{{ section.settings.story_text_2 }}</p>
+
+        <div class="ypd-steps">
+          <div class="ypd-step">
+            <span>1</span>
+            <p>Fresh milk is collected and prepared using a traditional recipe.</p>
+          </div>
+          <div class="ypd-step">
+            <span>2</span>
+            <p>The curd is pressed and shaped into dense chew blocks.</p>
+          </div>
+          <div class="ypd-step">
+            <span>3</span>
+            <p>Each piece is slow dried to create a long-lasting texture.</p>
+          </div>
+          <div class="ypd-step">
+            <span>4</span>
+            <p>The final chew is packed and delivered ready for your dog.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ypd-wrap ypd-wrap--cream">
+  <div class="ypd-container">
+    <div class="ypd-section-header">
+      <span class="ypd-eyebrow">{{ section.settings.puff_eyebrow }}</span>
+      <h2 class="ypd-title">{{ section.settings.puff_title }}</h2>
+      <p class="ypd-subtitle">{{ section.settings.puff_subtitle }}</p>
+    </div>
+
+    <div class="ypd-puff-grid">
+      <div class="ypd-puff-card">
+        <div class="ypd-puff-num">1</div>
+        <div class="ypd-puff-icon">💧</div>
+        <h4>Soak</h4>
+        <p>Place the leftover end piece in warm water for a few minutes.</p>
+      </div>
+      <div class="ypd-puff-card">
+        <div class="ypd-puff-num">2</div>
+        <div class="ypd-puff-icon">📡</div>
+        <h4>Microwave</h4>
+        <p>Heat it until it puffs into a crunchy cheese treat.</p>
+      </div>
+      <div class="ypd-puff-card">
+        <div class="ypd-puff-num">3</div>
+        <div class="ypd-puff-icon">🐶</div>
+        <h4>Enjoy</h4>
+        <p>Let it cool and serve as a bonus snack your dog will love.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ypd-wrap ypd-wrap--white">
+  <div class="ypd-container">
+    <div class="ypd-section-header">
+      <span class="ypd-eyebrow">{{ section.settings.reviews_eyebrow }}</span>
+      <h2 class="ypd-title">{{ section.settings.reviews_title }}</h2>
+    </div>
+
+    <div class="ypd-review-grid">
+      <div class="ypd-review-card">
+        <div class="ypd-review-stars">★★★★★</div>
+        <p>“These last much longer than anything else we’ve tried, and they don’t stink up the house.”</p>
+        <strong>Sarah T.</strong>
+      </div>
+      <div class="ypd-review-card">
+        <div class="ypd-review-stars">★★★★★</div>
+        <p>“The puff trick at the end is genius. My dog gets excited every time.”</p>
+        <strong>James R.</strong>
+      </div>
+      <div class="ypd-review-card">
+        <div class="ypd-review-stars">★★★★★</div>
+        <p>“Great for sensitive stomachs and a much cleaner option than bully sticks.”</p>
+        <strong>Elena M.</strong>
+      </div>
+      <div class="ypd-review-card">
+        <div class="ypd-review-stars">★★★★★</div>
+        <p>“A premium chew that actually feels worth the price.”</p>
+        <strong>Marcus T.</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ypd-wrap ypd-wrap--dark">
+  <div class="ypd-container">
+    <div class="ypd-section-header">
+      <span class="ypd-eyebrow">{{ section.settings.promise_eyebrow }}</span>
+      <h2 class="ypd-title ypd-title--light">{{ section.settings.promise_title }}</h2>
+    </div>
+
+    <div class="ypd-promise-grid">
+      <div class="ypd-promise-card">
+        <div class="ypd-promise-icon">🩺</div>
+        <h4>Vet Recommended</h4>
+        <p>Positioned as a healthier alternative to many common processed chews.</p>
+      </div>
+      <div class="ypd-promise-card">
+        <div class="ypd-promise-icon">🤝</div>
+        <h4>Traditionally Crafted</h4>
+        <p>Inspired by a time-tested Himalayan cheese-making process.</p>
+      </div>
+      <div class="ypd-promise-card">
+        <div class="ypd-promise-icon">🛡️</div>
+        <h4>Quality Focused</h4>
+        <p>Made to feel premium, clean, and consistent in every order.</p>
+      </div>
+      <div class="ypd-promise-card">
+        <div class="ypd-promise-icon">💯</div>
+        <h4>Satisfaction Promise</h4>
+        <p>A strong reassurance block that supports trust and purchase confidence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ypd-wrap ypd-wrap--white">
+  <div class="ypd-container ypd-container--narrow">
+    <div class="ypd-section-header">
+      <span class="ypd-eyebrow">{{ section.settings.faq_eyebrow }}</span>
+      <h2 class="ypd-title">{{ section.settings.faq_title }}</h2>
+    </div>
+
+    <div class="ypd-faq">
+      <div class="ypd-faq-item is-open">
+        <button type="button" class="ypd-faq-question">Are yak chews safe for dogs?<span>+</span></button>
+        <div class="ypd-faq-answer">
+          Yes, when sized appropriately and given under supervision, they are positioned as a safer alternative to many
+          processed chews.
+        </div>
+      </div>
+      <div class="ypd-faq-item">
+        <button type="button" class="ypd-faq-question">How long does one chew last?<span>+</span></button>
+        <div class="ypd-faq-answer">
+          It depends on dog size and chewing style, but they are designed to last much longer than many everyday chew
+          options.
+        </div>
+      </div>
+      <div class="ypd-faq-item">
+        <button type="button" class="ypd-faq-question">Which size should I choose?<span>+</span></button>
+        <div class="ypd-faq-answer">Use the size guide above and size up if your dog is between weight ranges.</div>
+      </div>
+      <div class="ypd-faq-item">
+        <button type="button" class="ypd-faq-question">What do I do with the leftover end piece?<span>+</span></button>
+        <div class="ypd-faq-answer">Soak it, microwave it, cool it, and turn it into a crunchy puff treat.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ypd-final">
+  <div class="ypd-container ypd-container--narrow">
+    <span class="ypd-eyebrow ypd-eyebrow--gold">{{ section.settings.cta_eyebrow }}</span>
+    <h2 class="ypd-final-title">{{ section.settings.cta_title }}</h2>
+    <p class="ypd-final-subtitle">{{ section.settings.cta_subtitle }}</p>
+    <a href="{{ product.url }}" class="ypd-final-btn">{{ section.settings.cta_button }}</a>
+  </div>
+</section>
+
+<script>
+  (function () {
+    document.querySelectorAll('.ypd-faq-question').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var item = btn.closest('.ypd-faq-item');
+        var isOpen = item.classList.contains('is-open');
+
+        document.querySelectorAll('.ypd-faq-item').forEach(function (el) {
+          el.classList.remove('is-open');
+        });
+
+        if (!isOpen) item.classList.add('is-open');
+      });
+    });
+  })();
+</script>
+
+<style>
+    .ypd-wrap, .ypd-final, .ypd-wrap *, .ypd-final * { box-sizing: border-box; }
+    .ypd-wrap { padding: 84px 0; background: #f6f1e9; }
+    .ypd-wrap--white { background: #fffdf9; }
+    .ypd-wrap--cream { background: linear-gradient(180deg, #fbf4e8 0%, #f7efe1 100%); }
+    .ypd-wrap--dark { background: #11261c; }
+    .ypd-final { padding: 96px 0; background: linear-gradient(135deg, #163425 0%, #0f2418 100%); text-align: center; }
+
+    .ypd-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .ypd-container--narrow { max-width: 900px; }
+
+    .ypd-section-header { text-align: center; margin-bottom: 44px; }
+    .ypd-eyebrow {
+      display: inline-block;
+      margin-bottom: 12px;
+      font: 800 12px/1.2 system-ui, sans-serif;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #c8a456;
+    }
+    .ypd-eyebrow--gold { color: #d6b36b; }
+    .ypd-title {
+      margin: 0 0 12px;
+      font: 700 clamp(32px, 4vw, 48px)/1.08 Georgia, serif;
+      color: #173b2b;
+    }
+    .ypd-title--left { text-align: left; }
+    .ypd-title--light { color: #f8f1e4; }
+    .ypd-subtitle {
+      max-width: 720px;
+      margin: 0 auto;
+      font: 500 17px/1.7 system-ui, sans-serif;
+      color: #6c6c6c;
+    }
+
+    .ypd-img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .ypd-fallback {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 320px;
+      font-size: 72px;
+      background: #efe6d8;
+      border-radius: 20px;
+    }
+
+    .ypd-size-card {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      background: #fff;
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: 0 10px 30px rgba(17,38,28,0.08);
+    }
+    .ypd-size-card__media {
+      overflow: hidden;
+      border-radius: 18px;
+      min-height: 420px;
+      background: #f3eee7;
+    }
+    .ypd-size-card__content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .ypd-size-list { display: grid; gap: 12px; }
+    .ypd-size-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 16px;
+      border: 1px solid #e6ddcf;
+      border-radius: 14px;
+      background: #fffaf2;
+      font: 600 15px/1.4 system-ui, sans-serif;
+      color: #294538;
+    }
+    .ypd-size-row strong { color: #6d5a40; }
+    .ypd-note {
+      margin-top: 16px;
+      font: 500 14px/1.7 system-ui, sans-serif;
+      color: #7a756e;
+    }
+
+    .ypd-compare-grid,
+    .ypd-benefits-grid,
+    .ypd-review-grid,
+    .ypd-promise-grid {
+      display: grid;
+      gap: 24px;
+    }
+    .ypd-compare-grid { grid-template-columns: repeat(3, 1fr); }
+    .ypd-benefits-grid { grid-template-columns: repeat(3, 1fr); }
+    .ypd-review-grid { grid-template-columns: repeat(2, 1fr); }
+    .ypd-promise-grid { grid-template-columns: repeat(4, 1fr); }
+
+    .ypd-compare-card,
+    .ypd-benefit-card,
+    .ypd-review-card,
+    .ypd-promise-card {
+      border-radius: 22px;
+      padding: 30px 24px;
+    }
+
+    .ypd-compare-card {
+      background: #fff;
+      box-shadow: 0 10px 28px rgba(17,38,28,0.08);
+      text-align: center;
+    }
+    .ypd-compare-card--best {
+      border: 2px solid #d5b067;
+      background: linear-gradient(180deg, #fffaf0 0%, #fff 100%);
+    }
+    .ypd-compare-icon { font-size: 42px; margin-bottom: 10px; }
+    .ypd-compare-card h3 {
+      margin: 0 0 12px;
+      font: 700 24px/1.15 Georgia, serif;
+      color: #173b2b;
+    }
+    .ypd-compare-card ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+      text-align: left;
+      color: #615e58;
+      font: 500 14px/1.6 system-ui, sans-serif;
+    }
+
+    .ypd-benefit-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+    }
+    .ypd-benefit-icon {
+      width: 62px;
+      height: 62px;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: rgba(214,179,107,0.14);
+      font-size: 28px;
+    }
+    .ypd-benefit-card h4 {
+      margin: 0 0 8px;
+      font: 700 20px/1.2 Georgia, serif;
+      color: #f8f1e4;
+    }
+    .ypd-benefit-card p {
+      margin: 0;
+      color: rgba(248,241,228,0.72);
+      font: 500 14px/1.7 system-ui, sans-serif;
+    }
+
+    .ypd-compare-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .ypd-compare-card {
+    background: #fff;
+    box-shadow: 0 10px 28px rgba(17,38,28,0.08);
+    text-align: center;
+    border-radius: 24px;
+    padding: 34px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ypd-compare-card--best {
+    border: 2px solid #d5b067;
+    background: linear-gradient(180deg, #fffaf0 0%, #fff 100%);
+  }
+
+    .ypd-story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 52px;
+      align-items: center;
+    }
+    .ypd-story-media {
+      min-height: 480px;
+      border-radius: 24px;
+      overflow: hidden;
+      background: #efe7d8;
+      box-shadow: 0 14px 36px rgba(17,38,28,0.12);
+    }
+    .ypd-story-content p {
+      margin: 0 0 16px;
+      color: #66615b;
+      font: 500 16px/1.8 system-ui, sans-serif;
+    }
+    .ypd-steps {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .ypd-step {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+    .ypd-step span {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #173b2b;
+      color: #d6b36b;
+      font: 800 14px/1 system-ui, sans-serif;
+    }
+    .ypd-step p {
+      margin: 0;
+    }
+
+    .ypd-puff-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .ypd-puff-card {
+      position: relative;
+      background: #fff;
+      border-radius: 22px;
+      padding: 34px 24px 28px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(17,38,28,0.08);
+    }
+    .ypd-puff-num {
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #d5b067;
+      color: #173b2b;
+      font: 800 15px/1 system-ui, sans-serif;
+    }
+    .ypd-puff-icon { font-size: 46px; margin: 10px 0 14px; }
+    .ypd-puff-card h4 {
+      margin: 0 0 8px;
+      font: 700 20px/1.2 Georgia, serif;
+      color: #173b2b;
+    }
+    .ypd-puff-card p {
+      margin: 0;
+      color: #6a6660;
+      font: 500 14px/1.7 system-ui, sans-serif;
+    }
+
+    .ypd-review-card {
+      background: #fff;
+      box-shadow: 0 10px 28px rgba(17,38,28,0.08);
+    }
+    .ypd-review-stars {
+      margin-bottom: 12px;
+      color: #d5a72c;
+      letter-spacing: 2px;
+      font-size: 16px;
+    }
+    .ypd-review-card p {
+      margin: 0 0 14px;
+      color: #55514a;
+      font: italic 500 15px/1.8 system-ui, sans-serif;
+    }
+    .ypd-review-card strong {
+      color: #173b2b;
+      font: 700 14px/1.3 system-ui, sans-serif;
+    }
+
+    .ypd-promise-card {
+      text-align: center;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .ypd-promise-icon { font-size: 42px; margin-bottom: 14px; }
+    .ypd-promise-card h4 {
+      margin: 0 0 8px;
+      color: #f8f1e4;
+      font: 700 18px/1.2 Georgia, serif;
+    }
+    .ypd-promise-card p {
+      margin: 0;
+      color: rgba(248,241,228,0.72);
+      font: 500 13px/1.7 system-ui, sans-serif;
+    }
+
+    .ypd-faq { display: grid; gap: 12px; }
+    .ypd-faq-item {
+      border: 1px solid #e7decf;
+      border-radius: 18px;
+      background: #fff;
+      overflow: hidden;
+    }
+    .ypd-faq-question {
+      width: 100%;
+      background: none;
+      border: 0;
+      padding: 22px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+      color: #173b2b;
+      text-align: left;
+      font: 700 17px/1.4 system-ui, sans-serif;
+    }
+    .ypd-faq-question span {
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f3ece0;
+      color: #173b2b;
+      font-size: 22px;
+      line-height: 1;
+    }
+    .ypd-faq-answer {
+      display: none;
+      padding: 0 24px 22px;
+      color: #6d6963;
+      font: 500 15px/1.8 system-ui, sans-serif;
+    }
+    .ypd-faq-item.is-open .ypd-faq-answer { display: block; }
+    .ypd-faq-item.is-open .ypd-faq-question span {
+      background: #173b2b;
+      color: #fff;
+      transform: rotate(45deg);
+    }
+
+    .ypd-final-title {
+      margin: 0 0 16px;
+      color: #f8f1e4;
+      font: 700 clamp(38px, 5vw, 62px)/1.06 Georgia, serif;
+    }
+    .ypd-final-subtitle {
+      max-width: 760px;
+      margin: 0 auto 30px;
+      color: rgba(248,241,228,0.76);
+      font: 500 18px/1.8 system-ui, sans-serif;
+    }
+    .ypd-final-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 320px;
+      padding: 20px 32px;
+      border-radius: 16px;
+      background: #d5a75a;
+      color: #13241b;
+      text-decoration: none;
+      font: 800 17px/1.2 system-ui, sans-serif;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+    .ypd-table-wrap {
+    overflow-x: auto;
+    border-radius: 16px;
+    box-shadow: 0 10px 28px rgba(17,38,28,0.08);
+  }
+
+  .ypd-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-family: system-ui, sans-serif;
+  }
+
+  .ypd-table thead th {
+    background: #173b2b;
+    color: #f8f1e4;
+    padding: 16px 20px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: left;
+  }
+
+  .ypd-table tbody td {
+    padding: 16px 20px;
+    border-bottom: 1px solid #e7decf;
+    font-size: 15px;
+    color: #4b4b4b;
+    background: #fffdf9;
+  }
+
+  .ypd-table tbody tr:nth-child(even) td {
+    background: #f8f2e9;
+  }
+
+  .ypd-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .ypd-pill {
+    display: inline-block;
+    background: #173b2b;
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-left: 8px;
+  }
+
+    @media (max-width: 991px) {
+      .ypd-size-card,
+      .ypd-story-grid { grid-template-columns: 1fr; }
+      .ypd-compare-grid,
+      .ypd-benefits-grid,
+      .ypd-puff-grid,
+      .ypd-promise-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 767px) {
+      .ypd-wrap, .ypd-final { padding: 60px 0; }
+      .ypd-title { font-size: 30px; }
+      .ypd-compare-grid,
+      .ypd-benefits-grid,
+      .ypd-review-grid,
+      .ypd-puff-grid,
+      .ypd-promise-grid { grid-template-columns: 1fr; }
+      .ypd-final-btn { min-width: 0; width: 100%; }
+    }
+</style>
+
+{% schema %}
+{
+  "name": "YPC Product Details v2",
+  "settings": [
+    { "type": "text", "id": "size_eyebrow", "label": "Size eyebrow", "default": "Perfect Fit" },
+    { "type": "text", "id": "size_title", "label": "Size title", "default": "Find the Right Size for Your Dog" },
+    {
+      "type": "textarea",
+      "id": "size_subtitle",
+      "label": "Size subtitle",
+      "default": "Choosing the correct size helps create a safer and longer-lasting chewing experience."
+    },
+    { "type": "image_picker", "id": "size_image", "label": "Size guide image" },
+    {
+      "type": "textarea",
+      "id": "size_note",
+      "label": "Size note",
+      "default": "When in doubt, size up for a safer chewing experience."
+    },
+
+    { "type": "text", "id": "compare_eyebrow", "label": "Compare eyebrow", "default": "The Smarter Chew" },
+    {
+      "type": "text",
+      "id": "compare_title",
+      "label": "Compare title",
+      "default": "Why Pet Parents Are Making the Switch"
+    },
+    {
+      "type": "textarea",
+      "id": "compare_subtitle",
+      "label": "Compare subtitle",
+      "default": "See how Himalayan Yak Chews compare to common alternatives."
+    },
+
+    {
+      "type": "text",
+      "id": "benefits_eyebrow",
+      "label": "Benefits eyebrow",
+      "default": "Why Dogs (and Owners) Love It"
+    },
+    {
+      "type": "text",
+      "id": "benefits_title",
+      "label": "Benefits title",
+      "default": "The Benefits Speak for Themselves"
+    },
+
+    { "type": "text", "id": "story_eyebrow", "label": "Story eyebrow", "default": "Our Story" },
+    {
+      "type": "text",
+      "id": "story_title",
+      "label": "Story title",
+      "default": "Handcrafted in the Himalayas. Loved Everywhere."
+    },
+    {
+      "type": "textarea",
+      "id": "story_text_1",
+      "label": "Story text 1",
+      "default": "Inspired by a traditional Himalayan cheese-making process, these chews bring a premium and natural feel to your dog’s routine."
+    },
+    {
+      "type": "textarea",
+      "id": "story_text_2",
+      "label": "Story text 2",
+      "default": "Each chew is designed to be dense, long-lasting, and satisfying for dogs who love to chew."
+    },
+    { "type": "image_picker", "id": "story_image", "label": "Story image" },
+
+    { "type": "text", "id": "puff_eyebrow", "label": "Puff eyebrow", "default": "Zero Waste" },
+    { "type": "text", "id": "puff_title", "label": "Puff title", "default": "The Magic Puff Trick" },
+    {
+      "type": "textarea",
+      "id": "puff_subtitle",
+      "label": "Puff subtitle",
+      "default": "Turn the leftover end piece into a crunchy bonus treat in 3 easy steps."
+    },
+
+    { "type": "text", "id": "reviews_eyebrow", "label": "Reviews eyebrow", "default": "Real Dogs, Real Results" },
+    { "type": "text", "id": "reviews_title", "label": "Reviews title", "default": "What Pet Parents Are Saying" },
+
+    { "type": "text", "id": "promise_eyebrow", "label": "Promise eyebrow", "default": "Our Promise" },
+    { "type": "text", "id": "promise_title", "label": "Promise title", "default": "Trust Built Into Every Chew" },
+
+    { "type": "text", "id": "faq_eyebrow", "label": "FAQ eyebrow", "default": "Questions?" },
+    { "type": "text", "id": "faq_title", "label": "FAQ title", "default": "Frequently Asked Questions" },
+
+    { "type": "text", "id": "cta_eyebrow", "label": "CTA eyebrow", "default": "Your Dog Deserves the Best" },
+    { "type": "text", "id": "cta_title", "label": "CTA title", "default": "Give Them a Chew Worth Wagging About" },
+    {
+      "type": "textarea",
+      "id": "cta_subtitle",
+      "label": "CTA subtitle",
+      "default": "Join happy dog parents who switched to a cleaner, longer-lasting chew."
+    },
+    { "type": "text", "id": "cta_button", "label": "CTA button", "default": "Shop Yak Chews Now" },
+
+    { "type": "image_picker", "id": "compare_image_1", "label": "Comparison image 1 - Rawhide" },
+    { "type": "image_picker", "id": "compare_image_2", "label": "Comparison image 2 - Your product" },
+    { "type": "image_picker", "id": "compare_image_3", "label": "Comparison image 3 - Bully sticks" }
+  ],
+  "presets": [{ "name": "YPC Product Details" }]
+}
+{% endschema %}

@@ -1,0 +1,542 @@
+<section class="ppf-hero">
+  <div class="ppf-hero__main">
+    {% if section.settings.left_image != blank %}
+      <div class="ppf-hero__float-left">
+        <div class="ppf-float-card">
+          <div class="ppf-float-card__img">
+            {{
+              section.settings.left_image
+              | image_url: width: 800
+              | image_tag: loading: 'lazy', alt: section.settings.left_title, class: 'ppf-float-card__image'
+            }}
+          </div>
+          {% if section.settings.left_title != blank or section.settings.left_caption != blank %}
+            <div class="ppf-float-card__body">
+              {% if section.settings.left_title != blank %}
+                <div class="ppf-float-card__title">{{ section.settings.left_title }}</div>
+              {% endif %}
+              {% if section.settings.left_caption != blank %}
+                <div class="ppf-float-card__caption">{{ section.settings.left_caption }}</div>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+
+    {% if section.settings.right_image != blank %}
+      <div class="ppf-hero__float-right">
+        <div class="ppf-float-card">
+          <div class="ppf-float-card__img">
+            {{
+              section.settings.right_image
+              | image_url: width: 800
+              | image_tag: loading: 'lazy', alt: section.settings.right_title, class: 'ppf-float-card__image'
+            }}
+          </div>
+          {% if section.settings.right_title != blank or section.settings.right_caption != blank %}
+            <div class="ppf-float-card__body">
+              {% if section.settings.right_title != blank %}
+                <div class="ppf-float-card__title">{{ section.settings.right_title }}</div>
+              {% endif %}
+              {% if section.settings.right_caption != blank %}
+                <div class="ppf-float-card__caption">{{ section.settings.right_caption }}</div>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+
+    {% if section.settings.show_social_proof %}
+      <div class="ppf-hero__social-proof">
+        <div class="ppf-hero__stars">
+          {% for i in (1..5) %}
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/>
+            </svg>
+          {% endfor %}
+        </div>
+        <div class="ppf-hero__social-text">
+          <span>{{ section.settings.social_count }}</span> {{ section.settings.social_text }}
+        </div>
+      </div>
+    {% endif %}
+
+    {% if section.settings.heading != blank %}
+      <div class="ppf-hero__heading rte">{{ section.settings.heading }}</div>
+    {% endif %}
+
+    {% if section.settings.subheading != blank %}
+      <p class="ppf-hero__sub">{{ section.settings.subheading }}</p>
+    {% endif %}
+
+    <div class="ppf-hero__actions">
+      {% if section.settings.primary_button_label != blank and section.settings.primary_button_link != blank %}
+        <a href="{{ section.settings.primary_button_link }}" class="ppf-btn-primary">
+          {{ section.settings.primary_button_label }}
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      {% endif %}
+
+      {% if section.settings.secondary_button_label != blank and section.settings.secondary_button_link != blank %}
+        <a href="{{ section.settings.secondary_button_link }}" class="ppf-btn-outline">
+          {{ section.settings.secondary_button_label }}
+        </a>
+      {% endif %}
+    </div>
+
+    {% if section.blocks.size > 0 %}
+      <div class="ppf-hero__trust-row">
+        {% for block in section.blocks %}
+          <div class="ppf-hero__trust-item" {{ block.shopify_attributes }}>
+            <div class="ppf-hero__trust-icon">
+              {% case block.settings.icon %}
+                {% when 'shield' %}
+                  <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                {% when 'layers' %}
+                  <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                {% when 'clock' %}
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                {% when 'heart' %}
+                  <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                {% else %}
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+              {% endcase %}
+            </div>
+            {{ block.settings.text }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  .ppf-hero {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ppf-hero *,
+  .ppf-hero *::before,
+  .ppf-hero *::after {
+    box-sizing: border-box;
+  }
+
+  .ppf-hero {
+    --orange: #D4711E;
+    --orange-light: #E8863A;
+    --orange-hover: #C0640F;
+    --dark: #1A1108;
+    --dark-mid: #2C1E0E;
+    --green: #3B9B4F;
+    --text: #3A2E1F;
+    --text-light: #7A6B58;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .ppf-hero__main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 40px 80px;
+    position: relative;
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .ppf-hero__social-proof {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+    padding: 10px 20px;
+    border-radius: 100px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    margin-bottom: 36px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .ppf-hero__stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  .ppf-hero__stars svg {
+    width: 16px;
+    height: 16px;
+    fill: #F5A623;
+  }
+
+  .ppf-hero__social-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .ppf-hero__social-text span {
+    color: var(--orange);
+  }
+
+  .ppf-hero__heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 800;
+    line-height: 1.08;
+    color: var(--dark);
+    margin-bottom: 24px;
+    max-width: 800px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .ppf-hero__heading p {
+    margin: 0;
+  }
+
+  .ppf-hero__heading em {
+    color: var(--orange);
+    font-style: italic;
+  }
+
+  .ppf-hero__sub {
+    font-size: 19px;
+    line-height: 1.7;
+    color: var(--text-light);
+    max-width: 540px;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .ppf-hero__actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 48px;
+    position: relative;
+    z-index: 2;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .ppf-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--orange);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 16px 36px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .ppf-btn-primary:hover {
+    background: var(--orange-hover);
+    transform: translateY(-1px);
+  }
+
+  .ppf-btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: var(--text);
+    font-size: 16px;
+    font-weight: 600;
+    padding: 16px 36px;
+    border-radius: 12px;
+    text-decoration: none;
+    border: 2px solid #d4c8b8;
+    transition: border-color 0.2s, background 0.2s;
+    cursor: pointer;
+  }
+
+  .ppf-btn-outline:hover {
+    border-color: var(--orange);
+    background: rgba(212,113,30,0.04);
+  }
+
+  .ppf-hero__trust-row {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .ppf-hero__trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .ppf-hero__trust-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(212,113,30,0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ppf-hero__trust-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--orange);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .ppf-hero__float-left,
+  .ppf-hero__float-right {
+    position: absolute;
+    z-index: 1;
+  }
+
+  .ppf-hero__float-left {
+    left: 4%;
+    top: 50%;
+    transform: translateY(-50%) rotate(-4deg);
+  }
+
+  .ppf-hero__float-right {
+    right: 4%;
+    top: 50%;
+    transform: translateY(-50%) rotate(4deg);
+  }
+
+  .ppf-float-card {
+    width: 220px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+
+  .ppf-float-card__img {
+    height: 220px;
+    background: linear-gradient(135deg, #f5ede3, #ede3d3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .ppf-float-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ppf-float-card__body {
+    padding: 16px;
+  }
+
+  .ppf-float-card__title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+
+  .ppf-float-card__caption {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--orange);
+  }
+
+  @media (max-width: 900px) {
+    .ppf-hero__float-left,
+    .ppf-hero__float-right {
+      display: none;
+    }
+
+    .ppf-hero__main {
+      padding: 40px 24px 60px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Hero floating images",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_social_proof",
+      "label": "Show social proof",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "social_count",
+      "label": "Social proof number",
+      "default": "10,000+"
+    },
+    {
+      "type": "text",
+      "id": "social_text",
+      "label": "Social proof text",
+      "default": "happy dogs & counting"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>The All-Natural Chew<br>Dogs <em>Actually</em> Love</p>"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Three simple ingredients. Handcrafted by Nepalese farmers. A cleaner, longer-lasting alternative to rawhide."
+    },
+    {
+      "type": "text",
+      "id": "primary_button_label",
+      "label": "Primary button label",
+      "default": "Shop Yak Chews"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_label",
+      "label": "Secondary button label",
+      "default": "See How It's Made"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Left floating image"
+    },
+    {
+      "type": "text",
+      "id": "left_title",
+      "label": "Left image title",
+      "default": "Naturally Sourced"
+    },
+    {
+      "type": "text",
+      "id": "left_caption",
+      "label": "Left image caption",
+      "default": "From the Himalayas"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image",
+      "label": "Right floating image"
+    },
+    {
+      "type": "text",
+      "id": "right_title",
+      "label": "Right image title",
+      "default": "Dog Approved"
+    },
+    {
+      "type": "text",
+      "id": "right_caption",
+      "label": "Right image caption",
+      "default": "Long-lasting chew"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trust_item",
+      "name": "Trust item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "shield",
+          "options": [
+            { "value": "shield", "label": "Shield" },
+            { "value": "layers", "label": "Layers" },
+            { "value": "clock", "label": "Clock" },
+            { "value": "heart", "label": "Heart" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Vet Approved"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero floating images",
+      "blocks": [
+        {
+          "type": "trust_item",
+          "settings": {
+            "icon": "shield",
+            "text": "Vet Approved"
+          }
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "icon": "layers",
+            "text": "Only 3 Ingredients"
+          }
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "icon": "clock",
+            "text": "Lasts for Hours"
+          }
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "icon": "heart",
+            "text": "Grain & Gluten Free"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

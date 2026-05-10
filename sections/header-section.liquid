@@ -1,0 +1,159 @@
+{{ 'header.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'header.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign announcements_size = 0
+  assign announcements_to_show = ""
+  assign announcements_first_color = ""
+
+  for block in section.blocks
+    if block.type == 'announcement'
+      assign show_this_announcement = false
+      if block.settings.text != blank
+        unless block.settings.announcement_pages == blank
+          assign match = block.settings.announcement_pages.links | where: 'url', request.path
+          if match != blank
+            assign show_this_announcement = true
+          endif
+        endunless
+
+        if block.settings.announcement_pages == blank or show_this_announcement
+          if announcements_first_color == ""
+            assign announcements_first_color = block.settings.color_scheme
+          endif
+          assign announcements_size = announcements_size | plus: 1
+          assign announcements_to_show = announcements_to_show | append: "," | append: forloop.index | append: ","
+        endif
+      endif
+    endif
+  endfor
+-%}
+
+<header class="header-section-wrapper">
+  {%- if announcements_size > 0 -%}
+    <div class="announcement-bar-container color-{{ announcements_first_color }} gradient">
+      <div class="page-width">
+        <slideshow-component
+          class="announcement-bar"
+          role="region"
+          aria-roledescription="{{ 'sections.announcements.carousel' | t }}"
+          aria-label="{{ 'sections.announcements.announcement_bar' | t }}"
+        >
+          <div class="announcement-bar-slider slider-buttons w-full">
+            <div
+              class="grid grid--1-col slider slider--everywhere"
+              id="Slider-{{ section.id }}-announcement"
+              aria-live="polite"
+              aria-atomic="true"
+              data-autoplay="{% if announcements_size > 1 %}true{% else %}false{% endif %}"
+              data-speed="{{ section.settings.change_slides_speed }}"
+            >
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'announcement' -%}
+                  {%- assign this_index = "," | append: forloop.index | append: "," -%}
+                  {%- if announcements_to_show contains this_index -%}
+                    <div
+                      class="slideshow__slide announcement-slideshow__slide slider__slide grid__item grid--1-col{% unless forloop.first %} hidden-during-load{% endunless %}"
+                      id="Slide-{{ section.id }}-{{ forloop.index }}"
+                      {{ block.shopify_attributes }}
+                      data-color-scheme="color-{{ block.settings.color_scheme }}"
+                      role="group"
+                    >
+                      <div class="announcement-bar__announcement text-center">
+                        {%- if block.settings.text != blank -%}
+                          <div class="announcement-bar__message rte">
+                            {{ block.settings.text }}
+                          </div>
+                        {%- endif -%}
+                      </div>
+                    </div>
+                  {%- endif -%}
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        </slideshow-component>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="header-bar-container" style="background: var(--header-bg); color: var(--header-text);">
+    <div class="header-desktop page-width">
+      <div class="header-desktop-inner">
+        <div class="header__logo">
+          <a href="{{ routes.root_url }}">
+            {%- if section.settings.logo != blank -%}
+              {{ section.settings.logo | image_url: width: 300 | image_tag: class: 'header__logo-img' }}
+            {%- else -%}
+              <span class="h2">{{ shop.name }}</span>
+            {%- endif -%}
+          </a>
+        </div>
+        <nav class="header__nav">
+          <ul class="header__menu">
+            {%- for link in section.settings.menu.links -%}
+              <li class="header__menu-item">
+                <a href="{{ link.url }}" class="header__link">{{ link.title }}</a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </nav>
+        <div class="header__icons">
+           {%- comment -%} Simplified for brevity, will expand as needed {%- endcomment -%}
+           <a href="{{ routes.cart_url }}" class="header__icon-link">
+             {% render 'icon', icon: 'cart', size: 24 %}
+           </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "range",
+      "id": "change_slides_speed",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Announcement speed",
+      "default": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Announcement",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Welcome to our store</p>"
+        },
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "Color scheme",
+          "default": "scheme-1"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,348 @@
+{{ 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap' | stylesheet_tag }}
+
+{%- liquid
+  case section.settings.font_size_scale
+    when 'small'
+      assign base_size = '13px'
+    when 'large'
+      assign base_size = '18px'
+    when 'xlarge'
+      assign base_size = '20px'
+    else
+      assign base_size = '16px'
+  endcase
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    font-size: {{ base_size }};
+    --forest:     {{ section.settings.color_forest }};
+    --sage:       {{ section.settings.color_sage }};
+    --gold:       {{ section.settings.color_gold }};
+    --cream:      {{ section.settings.color_bg }};
+  }
+
+  .ppf-story-{{ section.id }} {
+    background: var(--cream);
+    padding: {{ section.settings.section_padding_top }}px 5% {{ section.settings.section_padding_bottom }}px;
+  }
+
+  .ppf-story-inner-{{ section.id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+  }
+
+  /* Visual Side */
+  .ppf-story-visual-{{ section.id }} { position: relative; }
+
+  .ppf-story-img-wrap-{{ section.id }} {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    aspect-ratio: {{ section.settings.image_ratio }};
+    background: linear-gradient(135deg, var(--forest) 0%, #4a7a4c 40%, var(--sage) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ppf-story-img-wrap-{{ section.id }} img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+  }
+
+  .ppf-story-img-overlay-{{ section.id }} {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 40%, rgba(44,74,46,0.7) 100%);
+  }
+
+  .ppf-story-img-svg-{{ section.id }} { width: 70%; opacity: 0.25; }
+
+  .ppf-story-img-caption-{{ section.id }} {
+    position: absolute;
+    bottom: 30px; left: 30px; right: 30px;
+    font-family: '{{ section.settings.heading_font }}', serif;
+    font-size: {{ section.settings.caption_size }}em;
+    font-style: italic;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.5;
+  }
+
+  .ppf-story-badge-{{ section.id }} {
+    position: absolute;
+    top: -20px; right: -20px;
+    width: {{ section.settings.badge_size }}px;
+    height: {{ section.settings.badge_size }}px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 12px;
+    box-shadow: 0 8px 30px rgba(196,146,58,0.4);
+  }
+
+  .ppf-story-badge-text-{{ section.id }} {
+    font-size: 0.62em;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 1.4;
+  }
+
+  /* Content Side */
+  .ppf-story-subtitle-{{ section.id }} {
+    font-size: 0.7em;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .ppf-story-subtitle-{{ section.id }}::before {
+    content: '';
+    width: 28px; height: 2px;
+    background: var(--sage);
+    display: block;
+  }
+
+  .ppf-story-heading-{{ section.id }} {
+    font-family: '{{ section.settings.heading_font }}', serif;
+    font-size: clamp(2em, 3.5vw, {{ section.settings.heading_size }}em);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--forest);
+    margin-bottom: 2rem;
+  }
+
+  .ppf-story-heading-{{ section.id }} em { font-style: italic; }
+
+  .ppf-story-body-{{ section.id }} {
+    font-size: {{ section.settings.body_size }}em;
+    line-height: 1.85;
+    color: {{ section.settings.color_body_text }};
+    font-weight: 300;
+    margin-bottom: 1.6rem;
+  }
+
+  .ppf-story-stats-{{ section.id }} {
+    display: flex;
+    gap: 40px;
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(44,74,46,0.15);
+  }
+
+  .ppf-stat-num-{{ section.id }} {
+    font-family: '{{ section.settings.heading_font }}', serif;
+    font-size: {{ section.settings.stat_num_size }}em;
+    font-weight: 300;
+    color: var(--forest);
+    line-height: 1;
+  }
+
+  .ppf-stat-num-{{ section.id }} span { color: var(--gold); font-style: italic; }
+
+  .ppf-stat-label-{{ section.id }} {
+    font-size: 0.75em;
+    letter-spacing: 0.08em;
+    color: #888;
+    margin-top: 6px;
+    text-transform: uppercase;
+  }
+
+  .ppf-reveal-{{ section.id }} {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .ppf-reveal-{{ section.id }}.ppf-visible { opacity: 1; transform: translateY(0); }
+  .ppf-d2-{{ section.id }} { transition-delay: 0.2s; }
+
+  @media (max-width: 900px) {
+    .ppf-story-inner-{{ section.id }} { grid-template-columns: 1fr; gap: 50px; }
+    .ppf-story-visual-{{ section.id }} { order: -1; }
+  }
+  @media (max-width: 600px) {
+    .ppf-story-stats-{{ section.id }} { flex-direction: column; gap: 24px; }
+  }
+</style>
+
+<section class="ppf-story-{{ section.id }}">
+  <div class="ppf-story-inner-{{ section.id }}">
+
+    <!-- Visual -->
+    <div class="ppf-story-visual-{{ section.id }} ppf-reveal-{{ section.id }}">
+      <div class="ppf-story-img-wrap-{{ section.id }}">
+        {%- if section.settings.story_image != blank -%}
+          {{ section.settings.story_image | image_url: width: 800 | image_tag: loading: 'lazy' }}
+        {%- else -%}
+          <svg class="ppf-story-img-svg-{{ section.id }}" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="100" cy="160" rx="70" ry="20" fill="rgba(255,255,255,0.1)"/>
+            <path d="M100 40 C80 40 60 60 60 90 C60 115 75 130 100 145 C125 130 140 115 140 90 C140 60 120 40 100 40Z" fill="rgba(255,255,255,0.15)"/>
+            <circle cx="85" cy="85" r="8" fill="rgba(255,255,255,0.3)"/>
+            <circle cx="115" cy="85" r="8" fill="rgba(255,255,255,0.3)"/>
+            <path d="M88 108 Q100 120 112 108" stroke="rgba(255,255,255,0.4)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M68 60 L60 30 L85 55Z" fill="rgba(255,255,255,0.12)"/>
+            <path d="M132 60 L140 30 L115 55Z" fill="rgba(255,255,255,0.12)"/>
+          </svg>
+        {%- endif -%}
+        <div class="ppf-story-img-overlay-{{ section.id }}"></div>
+        {%- if section.settings.story_quote != blank -%}
+          <div class="ppf-story-img-caption-{{ section.id }}">{{ section.settings.story_quote }}</div>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.story_badge != blank -%}
+        <div class="ppf-story-badge-{{ section.id }}">
+          <div class="ppf-story-badge-text-{{ section.id }}">{{ section.settings.story_badge | newline_to_br }}</div>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Content -->
+    <div class="ppf-reveal-{{ section.id }} ppf-d2-{{ section.id }}">
+      {%- if section.settings.story_subtitle != blank -%}
+        <div class="ppf-story-subtitle-{{ section.id }}">{{ section.settings.story_subtitle }}</div>
+      {%- endif -%}
+      <h2 class="ppf-story-heading-{{ section.id }}">
+        {{ section.settings.story_heading }}
+        {%- if section.settings.story_heading_italic != blank -%}
+          <br><em>{{ section.settings.story_heading_italic }}</em>
+        {%- endif -%}
+      </h2>
+      {%- if section.settings.story_body_1 != blank -%}
+        <p class="ppf-story-body-{{ section.id }}">{{ section.settings.story_body_1 }}</p>
+      {%- endif -%}
+      {%- if section.settings.story_body_2 != blank -%}
+        <p class="ppf-story-body-{{ section.id }}">{{ section.settings.story_body_2 }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.stat1_num != blank or section.settings.stat2_num != blank or section.settings.stat3_num != blank -%}
+        <div class="ppf-story-stats-{{ section.id }}">
+          {%- if section.settings.stat1_num != blank -%}
+            <div>
+              <div class="ppf-stat-num-{{ section.id }}">{{ section.settings.stat1_num }}<span>{{ section.settings.stat1_suffix }}</span></div>
+              <div class="ppf-stat-label-{{ section.id }}">{{ section.settings.stat1_label }}</div>
+            </div>
+          {%- endif -%}
+          {%- if section.settings.stat2_num != blank -%}
+            <div>
+              <div class="ppf-stat-num-{{ section.id }}">{{ section.settings.stat2_num }}<span>{{ section.settings.stat2_suffix }}</span></div>
+              <div class="ppf-stat-label-{{ section.id }}">{{ section.settings.stat2_label }}</div>
+            </div>
+          {%- endif -%}
+          {%- if section.settings.stat3_num != blank -%}
+            <div>
+              <div class="ppf-stat-num-{{ section.id }}">{{ section.settings.stat3_num }}<span>{{ section.settings.stat3_suffix }}</span></div>
+              <div class="ppf-stat-label-{{ section.id }}">{{ section.settings.stat3_label }}</div>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function(){
+  var sec = document.getElementById('shopify-section-{{ section.id }}');
+  if (!sec) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('ppf-visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  sec.querySelectorAll('.ppf-reveal-{{ section.id }}').forEach(function(el){ obs.observe(el); });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Our Story",
+  "tag": "div",
+  "settings": [
+    { "type": "header", "content": "🎨 Colors" },
+    { "type": "color", "id": "color_bg",        "label": "Background",      "default": "#F8F3EB" },
+    { "type": "color", "id": "color_forest",    "label": "Heading Color",   "default": "#2C4A2E" },
+    { "type": "color", "id": "color_sage",      "label": "Subtitle Color",  "default": "#6B8F6E" },
+    { "type": "color", "id": "color_gold",      "label": "Accent / Badge",  "default": "#C4923A" },
+    { "type": "color", "id": "color_body_text", "label": "Body Text Color", "default": "#5a5a5a" },
+
+    { "type": "header", "content": "🔠 Typography" },
+    {
+      "type": "select", "id": "font_size_scale", "label": "Base Font Size",
+      "options": [
+        { "value": "small",  "label": "Small (13px)" },
+        { "value": "medium", "label": "Medium (16px)" },
+        { "value": "large",  "label": "Large (18px)" },
+        { "value": "xlarge", "label": "X-Large (20px)" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "select", "id": "heading_font", "label": "Heading Font",
+      "options": [
+        { "value": "Cormorant Garamond", "label": "Cormorant Garamond" },
+        { "value": "Georgia",            "label": "Georgia" },
+        { "value": "Playfair Display",   "label": "Playfair Display" },
+        { "value": "Times New Roman",    "label": "Times New Roman" }
+      ],
+      "default": "Cormorant Garamond"
+    },
+    { "type": "range", "id": "heading_size",  "label": "Heading Max Size", "min": 2.0, "max": 5.0, "step": 0.1, "default": 3.0 },
+    { "type": "range", "id": "body_size",     "label": "Body Text Size",   "min": 0.7, "max": 1.3, "step": 0.1,"default": 0.9 },
+    { "type": "range", "id": "caption_size",  "label": "Image Caption Size","min": 0.8, "max": 2.0, "step": 0.1, "default": 1.3 },
+    { "type": "range", "id": "stat_num_size", "label": "Stat Number Size", "min": 1.5, "max": 5.0, "step": 0.1, "default": 2.8 },
+
+    { "type": "header", "content": "📐 Spacing & Layout" },
+    { "type": "range",  "id": "section_padding_top",    "label": "Padding Top",    "min": 40, "max": 200, "step": 10, "default": 120, "unit": "px" },
+    { "type": "range",  "id": "section_padding_bottom", "label": "Padding Bottom", "min": 40, "max": 200, "step": 10, "default": 120, "unit": "px" },
+    {
+      "type": "select", "id": "image_ratio", "label": "Image Aspect Ratio",
+      "options": [
+        { "value": "3/4",  "label": "Portrait 3:4" },
+        { "value": "4/5",  "label": "Portrait 4:5" },
+        { "value": "1/1",  "label": "Square 1:1" },
+        { "value": "4/3",  "label": "Landscape 4:3" }
+      ],
+      "default": "4/5"
+    },
+    { "type": "range", "id": "badge_size", "label": "Badge Circle Size", "min": 70, "max": 150, "step": 5, "default": 100, "unit": "px" },
+
+    { "type": "header", "content": "🖼 Visual Side" },
+    { "type": "image_picker", "id": "story_image", "label": "Story Image (optional)" },
+    { "type": "text", "id": "story_quote", "label": "Image Caption / Quote", "default": "\"Your pets are cherished family members. We treat them that way.\"" },
+    { "type": "text", "id": "story_badge", "label": "Badge Text (use newlines)", "default": "50,000+\nHappy\nDogs" },
+
+    { "type": "header", "content": "✏️ Content Side" },
+    { "type": "text",     "id": "story_subtitle",        "label": "Sub-label",          "default": "Our Story" },
+    { "type": "text",     "id": "story_heading",         "label": "Heading (Normal)",   "default": "Born from" },
+    { "type": "text",     "id": "story_heading_italic",  "label": "Heading (Italic)",   "default": "Love, Built on Trust" },
+    { "type": "textarea", "id": "story_body_1",          "label": "Body Paragraph 1",   "default": "We started Prime Pet Food with a single belief: that dogs deserve the same thoughtful, wholesome care we give ourselves. Our team consists of devoted animal lovers who've experienced firsthand the joy — and responsibility — of caring for a dog." },
+    { "type": "textarea", "id": "story_body_2",          "label": "Body Paragraph 2",   "default": "We curate only the best natural chews and treats, sourced from trusted, ethical suppliers. Our Himalayan Yak Chews are handcrafted using a centuries-old tradition — no shortcuts, no compromise." },
+
+    { "type": "header", "content": "📊 Stats" },
+    { "type": "text", "id": "stat1_num",    "label": "Stat 1 Number",  "default": "20" },
+    { "type": "text", "id": "stat1_suffix", "label": "Stat 1 Suffix",  "default": "k+" },
+    { "type": "text", "id": "stat1_label",  "label": "Stat 1 Label",   "default": "Happy Customers" },
+    { "type": "text", "id": "stat2_num",    "label": "Stat 2 Number",  "default": "5" },
+    { "type": "text", "id": "stat2_suffix", "label": "Stat 2 Suffix",  "default": "★" },
+    { "type": "text", "id": "stat2_label",  "label": "Stat 2 Label",   "default": "Average Rating" },
+    { "type": "text", "id": "stat3_num",    "label": "Stat 3 Number",  "default": "1" },
+    { "type": "text", "id": "stat3_suffix", "label": "Stat 3 Suffix",  "default": "%" },
+    { "type": "text", "id": "stat3_label",  "label": "Stat 3 Label",   "default": "Profits Donated" }
+  ],
+  "presets": [{ "name": "Our Story" }]
+}
+{% endschema %}

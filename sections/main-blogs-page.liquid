@@ -1,0 +1,267 @@
+{{ 'component-article-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign selected_menu = linklists[section.settings.blog_menu]
+  assign aggregated_articles = '' | split: ''
+
+  if selected_menu != blank
+    for link in selected_menu.links
+      if link.type == 'blog_link' and link.object != blank
+        assign aggregated_articles = aggregated_articles | concat: link.object.articles
+      endif
+    endfor
+  endif
+
+  assign aggregated_articles = aggregated_articles | sort: 'published_at' | reverse
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} .blogs-page {
+    display: grid;
+    gap: 2rem;
+  }
+
+  #shopify-section-{{ section.id }} .blogs-page__grid {
+    display: grid;
+    gap: 2rem;
+    align-items: stretch;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #shopify-section-{{ section.id }} .blogs-page__post,
+  #shopify-section-{{ section.id }} .blogs-page__post .article-card-wrapper {
+    height: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .blogs-page__post {
+    width: auto;
+    max-width: none;
+    padding: 0;
+  }
+
+  #shopify-section-{{ section.id }} .blogs-page__intro {
+    max-width: 72rem;
+  }
+
+  #shopify-section-{{ section.id }} .blogs-page__empty {
+    padding: 2.4rem;
+    border: 1px solid rgba(var(--color-foreground), 0.08);
+    border-radius: 2rem;
+    background: rgb(var(--color-background));
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .blogs-page__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    #shopify-section-{{ section.id }} .blogs-page__grid {
+      grid-template-columns: repeat({{ section.settings.columns_desktop }}, minmax(0, 1fr));
+    }
+  }
+</style>
+
+<div class="blogs-page page-width section__inner {{ section.settings.top_padding }} {{ section.settings.bottom_padding }}">
+  {%- if section.settings.intro != blank -%}
+    <div class="blogs-page__intro rte">
+      {{ section.settings.intro }}
+    </div>
+  {%- endif -%}
+
+  {%- if aggregated_articles.size > 0 -%}
+    <div class="blogs-page__grid section-grid grid articles-wrapper contains-card contains-card--article{% if settings.blog_card_style == 'standard' %} contains-card--standard{% endif %}">
+      {%- for article in aggregated_articles limit: section.settings.items_to_show -%}
+        <div
+          class="blogs-page__post grid__item article{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+          {% if settings.animations_reveal_on_scroll %}
+            data-cascade
+            style="--animation-order: {{ forloop.index }};"
+          {% endif %}
+        >
+          {%- render 'article-card',
+            article: article,
+            show_image: section.settings.show_image,
+            show_date: section.settings.show_date,
+            show_author: section.settings.show_author,
+            excerpt_mode: section.settings.excerpt_mode,
+            show_reading_estimate: section.settings.show_reading_estimate,
+            show_first_tag: section.settings.show_first_tag,
+            columns_desktop: section.settings.columns_desktop
+          -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- else -%}
+    <div class="blogs-page__empty rte">
+      <p>Select a menu with blog links in this section’s settings to populate the blogs page.</p>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Blogs page",
+  "tag": "section",
+  "class": "section section-main-blogs-page",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "blog_menu",
+      "label": "Menu with blog links"
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Intro text",
+      "default": "<p>Browse all of our latest blog posts in one place.</p>"
+    },
+    {
+      "type": "range",
+      "id": "items_to_show",
+      "label": "Posts to show",
+      "min": 4,
+      "max": 100,
+      "step": 1,
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "columns_desktop",
+      "label": "Desktop columns",
+      "options": [
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "label": "Show image",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "Show date",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "Show author",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reading_estimate",
+      "label": "Show reading estimate",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_first_tag",
+      "label": "Show first tag",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "excerpt_mode",
+      "label": "Excerpt length",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "short",
+          "label": "Short"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "long",
+          "label": "Long"
+        }
+      ],
+      "default": "short"
+    },
+    {
+      "type": "select",
+      "id": "top_padding",
+      "label": "Top padding",
+      "options": [
+        {
+          "value": "pt-0",
+          "label": "0"
+        },
+        {
+          "value": "pt-s05",
+          "label": "0.5"
+        },
+        {
+          "value": "pt-s",
+          "label": "1"
+        },
+        {
+          "value": "pt-s15",
+          "label": "1.5"
+        },
+        {
+          "value": "pt-s2",
+          "label": "2"
+        }
+      ],
+      "default": "pt-0"
+    },
+    {
+      "type": "select",
+      "id": "bottom_padding",
+      "label": "Bottom padding",
+      "options": [
+        {
+          "value": "pb-0",
+          "label": "0"
+        },
+        {
+          "value": "pb-s05",
+          "label": "0.5"
+        },
+        {
+          "value": "pb-s",
+          "label": "1"
+        },
+        {
+          "value": "pb-s15",
+          "label": "1.5"
+        },
+        {
+          "value": "pb-s2",
+          "label": "2"
+        }
+      ],
+      "default": "pb-s"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blogs page"
+    }
+  ]
+}
+{% endschema %}

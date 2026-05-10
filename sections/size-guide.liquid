@@ -1,0 +1,410 @@
+{% comment %}
+  Section: Size Guide
+  File: sections/size-guide.liquid
+  Description: Dog size cards grid — emoji icon, size name, weight range, shop link
+{% endcomment %}
+
+<style>
+  :root {
+    --forest: #2D5016;
+    --forest-deep: #1A3409;
+    --sage: #7A8B6A;
+    --cream-warm: #F5F0DC;
+    --warm-white: #FDFCF7;
+    --text-muted: #8B8B7A;
+    --text-secondary: #5A5A4F;
+    --radius-lg: 20px;
+    --radius-full: 999px;
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.10);
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  }
+
+  /* ===== SIZE GUIDE SECTION ===== */
+  .pp-sizes-section {
+    background: var(--warm-white);
+    padding: {{ section.settings.padding_top }}px 24px {{ section.settings.padding_bottom }}px;
+  }
+
+  .pp-sizes-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .pp-sizes-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .pp-section-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 12px;
+    font-family: var(--font-body);
+  }
+
+  .pp-section-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.5vw, 42px);
+    color: var(--forest-deep);
+    line-height: 1.15;
+    margin: 0 auto 12px;
+  }
+
+  .pp-section-desc {
+    font-size: 16px;
+    color: var(--text-secondary);
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.7;
+    font-family: var(--font-body);
+  }
+
+  /* Grid */
+  .pp-sizes-grid {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
+    gap: 16px;
+  }
+
+  /* Size Card */
+  .pp-size-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: all 0.3s;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  .pp-size-card:hover {
+    border-color: var(--forest);
+    transform: translateY(-4px) !important;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .pp-size-card-img {
+    aspect-ratio: 1;
+    background: var(--cream-warm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    padding: 20px;
+    overflow: hidden;
+  }
+
+  .pp-size-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .pp-size-card-info {
+    padding: 16px;
+  }
+
+  .pp-size-card-name {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--forest-deep);
+    margin-bottom: 2px;
+    font-family: var(--font-body);
+  }
+
+  .pp-size-card-weight {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    font-family: var(--font-body);
+  }
+
+  .pp-size-card-link {
+    display: inline-block;
+    background: var(--forest);
+    color: white;
+    padding: 8px 20px;
+    border-radius: var(--radius-full);
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-family: var(--font-body);
+  }
+
+  .pp-size-card-link:hover {
+    background: var(--forest-deep);
+    color: white;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    .pp-sizes-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 768px) {
+    .pp-sizes-section { padding: 56px 16px; }
+    .pp-sizes-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 400px) {
+    .pp-sizes-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+
+<!-- ===== SIZE GUIDE SECTION ===== -->
+<section class="pp-sizes-section" id="pp-sizes-{{ section.id }}">
+  <div class="pp-sizes-inner">
+
+    <!-- Header -->
+    <div class="pp-sizes-header">
+      {% if section.settings.section_label != blank %}
+        <div class="pp-section-label">{{ section.settings.section_label }}</div>
+      {% endif %}
+      {% if section.settings.section_title != blank %}
+        <h2 class="pp-section-title">{{ section.settings.section_title }}</h2>
+      {% endif %}
+      {% if section.settings.section_desc != blank %}
+        <p class="pp-section-desc">{{ section.settings.section_desc }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Size Cards Grid (Blocks) -->
+    <div class="pp-sizes-grid" id="pp-sizes-grid-{{ section.id }}">
+      {% for block in section.blocks %}
+        {% if block.type == 'size_card' %}
+          <div class="pp-size-card" {{ block.shopify_attributes }}>
+
+            <div class="pp-size-card-img">
+              {% if block.settings.card_image != blank %}
+                {{ block.settings.card_image | image_url: width: 400 | image_tag:
+                  loading: 'lazy',
+                  alt: block.settings.size_name
+                }}
+              {% else %}
+                {{ block.settings.icon }}
+              {% endif %}
+            </div>
+
+            <div class="pp-size-card-info">
+              {% if block.settings.size_name != blank %}
+                <div class="pp-size-card-name">{{ block.settings.size_name }}</div>
+              {% endif %}
+              {% if block.settings.weight_range != blank %}
+                <div class="pp-size-card-weight">{{ block.settings.weight_range }}</div>
+              {% endif %}
+              {% if block.settings.btn_label != blank and block.settings.btn_link != blank %}
+                <a href="{{ block.settings.btn_link }}" class="pp-size-card-link">
+                  {{ block.settings.btn_label }} →
+                </a>
+              {% endif %}
+            </div>
+
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<!-- Scroll Reveal Animation -->
+<script>
+(function() {
+  var grid = document.getElementById('pp-sizes-grid-{{ section.id }}');
+  if (!grid) return;
+
+  var cards = grid.querySelectorAll('.pp-size-card');
+  cards.forEach(function(card, i) {
+    card.style.transition = 'all 0.6s ease-out';
+    card.style.transitionDelay = (i * 0.08) + 's';
+  });
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+
+  cards.forEach(function(card) { observer.observe(card); });
+})();
+</script>
+
+
+{% schema %}
+{
+  "name": "Size Guide",
+  "tag": "div",
+  "class": "size-guide-wrapper",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "section_label",
+      "label": "Section Label (small caps)",
+      "default": "Find the Perfect Fit"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Right Size for Every Pup"
+    },
+    {
+      "type": "textarea",
+      "id": "section_desc",
+      "label": "Section Description",
+      "default": "Choosing the right size keeps your dog safe and makes chew time last longer."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "columns_desktop",
+      "label": "Columns on Desktop",
+      "options": [
+        { "value": "3", "label": "3 Columns" },
+        { "value": "4", "label": "4 Columns" },
+        { "value": "5", "label": "5 Columns" }
+      ],
+      "default": "5"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "size_card",
+      "name": "Size Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "card_image",
+          "label": "Card Image (optional)",
+          "info": "If uploaded, image will show instead of emoji icon"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (Emoji) — fallback if no image",
+          "default": "🐕",
+          "info": "Used only when no image is uploaded"
+        },
+        {
+          "type": "text",
+          "id": "size_name",
+          "label": "Size Name",
+          "default": "Small"
+        },
+        {
+          "type": "text",
+          "id": "weight_range",
+          "label": "Dog Weight Range",
+          "default": "Dogs up to 15 lbs"
+        },
+        {
+          "type": "text",
+          "id": "btn_label",
+          "label": "Button Label",
+          "default": "Shop Small"
+        },
+        {
+          "type": "url",
+          "id": "btn_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Size Guide",
+      "blocks": [
+        {
+          "type": "size_card",
+          "settings": {
+            "icon": "🐕",
+            "size_name": "Small",
+            "weight_range": "Dogs up to 15 lbs",
+            "btn_label": "Shop Small"
+          }
+        },
+        {
+          "type": "size_card",
+          "settings": {
+            "icon": "🐕‍🦺",
+            "size_name": "Medium",
+            "weight_range": "Dogs up to 35 lbs",
+            "btn_label": "Shop Medium"
+          }
+        },
+        {
+          "type": "size_card",
+          "settings": {
+            "icon": "🦮",
+            "size_name": "Large",
+            "weight_range": "Dogs up to 55 lbs",
+            "btn_label": "Shop Large"
+          }
+        },
+        {
+          "type": "size_card",
+          "settings": {
+            "icon": "🐕‍🦺",
+            "size_name": "Extra Large",
+            "weight_range": "Dogs up to 75 lbs",
+            "btn_label": "Shop XL"
+          }
+        },
+        {
+          "type": "size_card",
+          "settings": {
+            "icon": "🐾",
+            "size_name": "Jumbo",
+            "weight_range": "Dogs above 75 lbs",
+            "btn_label": "Shop Jumbo"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,342 @@
+{% comment %}
+  Section: Benefits
+  File: sections/benefits.liquid
+  Description: "Why Pet Parents Choose Us" — benefit cards grid with section heading
+{% endcomment %}
+
+<style>
+  :root {
+    --forest: #2D5016;
+    --forest-deep: #1A3409;
+    --sage: #7A8B6A;
+    --sage-light: #A3B18A;
+    --cream: #FEFAE0;
+    --cream-warm: #F5F0DC;
+    --sand: #E9E0C8;
+    --warm-white: #FDFCF7;
+    --text-muted: #8B8B7A;
+    --radius-lg: 20px;
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.10);
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  }
+
+  /* ===== BENEFITS SECTION ===== */
+  .pp-benefits-section {
+    padding: {{ section.settings.section_padding_top }}px 24px {{ section.settings.section_padding_bottom }}px;
+    background: linear-gradient(180deg, var(--cream) 0%, var(--warm-white) 100%);
+  }
+
+  .pp-benefits-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .pp-benefits-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .pp-section-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 12px;
+    font-family: var(--font-body);
+  }
+
+  .pp-section-title-why {
+    font-family: var(--font-display);
+    font-size: clamp(30px, 4vw, 44px);
+    color: #d4770b;
+    line-height: 1.15;
+    margin: 0 auto;
+  }
+
+  .pp-section-desc {
+    font-size: 17px;
+    color: var(--text-muted);
+    max-width: 560px;
+    line-height: 1.7;
+    margin: 14px auto 0;
+    font-family: var(--font-body);
+  }
+
+  /* ===== BENEFITS GRID ===== */
+  .pp-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
+    gap: 20px;
+  }
+
+  .pp-benefit-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 32px 24px;
+    text-align: center;
+    border: 1px solid #d4770b6b;
+    transition: all 0.3s;
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  .pp-benefit-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: var(--shadow-lg);
+    border-color: var(--sage-light);
+  }
+
+  .pp-benefit-icon {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, var(--cream) 0%, var(--sand) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+    font-size: 28px;
+  }
+
+  .pp-benefit-title {
+    font-weight: 700;
+    font-size: 15px;
+    color: #d4770b;
+    margin-bottom: 6px;
+    font-family: var(--font-body);
+  }
+
+  .pp-benefit-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.55;
+    font-family: var(--font-body);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    .pp-benefits-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 768px) {
+    .pp-benefits-section { padding: 56px 16px; }
+    .pp-benefits-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 480px) {
+    .pp-benefits-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<!-- ===== BENEFITS SECTION ===== -->
+<section class="pp-benefits-section" id="pp-benefits-{{ section.id }}">
+  <div class="pp-benefits-inner">
+
+    <!-- Section Header -->
+    <div class="pp-benefits-header">
+      {% if section.settings.section_label != blank %}
+        <div class="pp-section-label">{{ section.settings.section_label }}</div>
+      {% endif %}
+
+      {% if section.settings.section_title != blank %}
+        <h2 class="pp-section-title-why">{{ section.settings.section_title }}</h2>
+      {% endif %}
+
+      {% if section.settings.section_desc != blank %}
+        <p class="pp-section-desc">{{ section.settings.section_desc }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Benefits Grid (Blocks) -->
+    <div class="pp-benefits-grid" id="pp-benefits-grid-{{ section.id }}">
+      {% for block in section.blocks %}
+        {% if block.type == 'benefit_card' %}
+          <div class="pp-benefit-card" {{ block.shopify_attributes }}>
+            {% if block.settings.icon != blank %}
+              <div class="pp-benefit-icon">{{ block.settings.icon }}</div>
+            {% endif %}
+            {% if block.settings.title != blank %}
+              <div class="pp-benefit-title">{{ block.settings.title }}</div>
+            {% endif %}
+            {% if block.settings.description != blank %}
+              <div class="pp-benefit-desc">{{ block.settings.description }}</div>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<!-- Scroll Reveal Animation -->
+<script>
+(function() {
+  var grid = document.getElementById('pp-benefits-grid-{{ section.id }}');
+  if (!grid) return;
+
+  var cards = grid.querySelectorAll('.pp-benefit-card');
+  cards.forEach(function(card, i) {
+    card.style.transitionDelay = (i * 0.1) + 's';
+    card.style.transition = 'all 0.6s ease-out';
+  });
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  cards.forEach(function(card) { observer.observe(card); });
+})();
+</script>
+
+
+{% schema %}
+{
+  "name": "Benefits",
+  "tag": "div",
+  "class": "benefits-section-wrapper",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "section_label",
+      "label": "Section Label (small caps)",
+      "default": "Why Pet Parents Choose Us"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "The Science Behind the Chew"
+    },
+    {
+      "type": "textarea",
+      "id": "section_desc",
+      "label": "Section Description (optional)"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "columns_desktop",
+      "label": "Columns on Desktop",
+      "options": [
+        { "value": "3", "label": "3 Columns" },
+        { "value": "4", "label": "4 Columns" },
+        { "value": "5", "label": "5 Columns" }
+      ],
+      "default": "5"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit_card",
+      "name": "Benefit Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (Emoji)",
+          "default": "💪",
+          "info": "Paste any emoji here"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Card Title",
+          "default": "High Protein"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Card Description",
+          "default": "Packed with 60%+ protein to support strong muscles and energy"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Benefits",
+      "blocks": [
+        {
+          "type": "benefit_card",
+          "settings": {
+            "icon": "💪",
+            "title": "High Protein",
+            "description": "Packed with 60%+ protein to support strong muscles and energy"
+          }
+        },
+        {
+          "type": "benefit_card",
+          "settings": {
+            "icon": "🦷",
+            "title": "Dental Health",
+            "description": "Natural chewing action scrapes away plaque and tartar buildup"
+          }
+        },
+        {
+          "type": "benefit_card",
+          "settings": {
+            "icon": "✨",
+            "title": "Easy to Digest",
+            "description": "Gentle on tummies — no grains, no gluten, no artificial fillers"
+          }
+        },
+        {
+          "type": "benefit_card",
+          "settings": {
+            "icon": "🍃",
+            "title": "Low Odor",
+            "description": "Clean chewing experience — no mess, no stinky residue"
+          }
+        },
+        {
+          "type": "benefit_card",
+          "settings": {
+            "icon": "⏱️",
+            "title": "Long-Lasting",
+            "description": "Hours of entertainment — keeps even power chewers busy"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

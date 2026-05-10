@@ -1,0 +1,524 @@
+{% comment %}
+  Prime Pet Food — B2B Wholesale Final
+  Combined editorial story + retailer-focused conversion design.
+  Theme colors: #24130d dark brown, #d2632e orange, #f1eee9 cream, #fff7ec warm cream.
+{% endcomment %}
+
+<section class="ppf-b2b-hero" id="ppf-b2b-top">
+  <div class="ppf-b2b-hero__bg">
+    {%- if section.settings.hero_image != blank -%}
+      <img src="{{ section.settings.hero_image | image_url: width: 2200 }}" alt="{{ section.settings.hero_image.alt | escape }}" loading="eager" width="2200" height="1200">
+    {%- endif -%}
+  </div>
+  <div class="ppf-b2b-hero__overlay"></div>
+
+  <div class="ppf-b2b-hero__inner">
+    <div class="ppf-b2b-hero__content">
+      <div class="ppf-kicker"><span></span>{{ section.settings.hero_kicker }}</div>
+      <h1>{{ section.settings.hero_title }}</h1>
+      <p>{{ section.settings.hero_text }}</p>
+      <div class="ppf-b2b-hero__actions">
+        <a href="#ppf-b2b-apply" class="ppf-btn ppf-btn--primary">{{ section.settings.hero_primary }}</a>
+        <a href="#ppf-b2b-story" class="ppf-btn ppf-btn--light">{{ section.settings.hero_secondary }}</a>
+      </div>
+    </div>
+
+    <div class="ppf-b2b-hero__panel">
+      <div class="ppf-panel__label">{{ section.settings.panel_label }}</div>
+      <h3>{{ section.settings.panel_title }}</h3>
+      <div class="ppf-panel__rows">
+        <div class="ppf-panel__row"><span>{{ section.settings.panel_1_label }}</span><strong>{{ section.settings.panel_1_value }}</strong></div>
+        <div class="ppf-panel__row"><span>{{ section.settings.panel_2_label }}</span><strong>{{ section.settings.panel_2_value }}</strong></div>
+        <div class="ppf-panel__row"><span>{{ section.settings.panel_3_label }}</span><strong>{{ section.settings.panel_3_value }}</strong></div>
+      </div>
+      <a href="#ppf-b2b-apply" class="ppf-panel__link">{{ section.settings.panel_cta }} <span>→</span></a>
+    </div>
+  </div>
+
+  <div class="ppf-b2b-marquee" aria-hidden="true">
+    <div class="ppf-b2b-marquee__track">
+      {% for i in (1..7) %}
+        {%- assign item = 'marquee_' | append: i -%}
+        {%- if section.settings[item] != blank -%}
+          <span>{{ section.settings[item] }}</span><i>•</i>
+        {%- endif -%}
+      {% endfor %}
+      {% for i in (1..7) %}
+        {%- assign item = 'marquee_' | append: i -%}
+        {%- if section.settings[item] != blank -%}
+          <span>{{ section.settings[item] }}</span><i>•</i>
+        {%- endif -%}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="ppf-b2b-stats">
+  <div class="ppf-b2b-stats__inner">
+    {% for i in (1..4) %}
+      {%- assign num = 'stat_' | append: i | append: '_num' -%}
+      {%- assign label = 'stat_' | append: i | append: '_label' -%}
+      {%- if section.settings[num] != blank -%}
+        <div class="ppf-stat-card">
+          <strong>{{ section.settings[num] }}</strong>
+          <span>{{ section.settings[label] }}</span>
+        </div>
+      {%- endif -%}
+    {% endfor %}
+  </div>
+</section>
+
+<section class="ppf-b2b-story" id="ppf-b2b-story">
+  <div class="ppf-b2b-story__inner">
+    <div class="ppf-b2b-story__media">
+      <div class="ppf-story-image">
+        {%- if section.settings.story_image != blank -%}
+          <img src="{{ section.settings.story_image | image_url: width: 1200 }}" alt="{{ section.settings.story_image.alt | escape }}" loading="lazy" width="1200" height="900">
+        {%- else -%}
+          <div class="ppf-story-image__placeholder">Add a Himalayan sourcing image</div>
+        {%- endif -%}
+      </div>
+      <div class="ppf-story-quote">
+        <p>“{{ section.settings.story_quote }}”</p>
+        <span>{{ section.settings.story_quote_author }}</span>
+      </div>
+    </div>
+
+    <div class="ppf-b2b-story__copy">
+      <div class="ppf-eyebrow">{{ section.settings.story_kicker }}</div>
+      <h2>{{ section.settings.story_title }}</h2>
+      <p>{{ section.settings.story_p1 }}</p>
+      <p>{{ section.settings.story_p2 }}</p>
+      <div class="ppf-story-mini">
+        <div><strong>{{ section.settings.story_mini_1_num }}</strong><span>{{ section.settings.story_mini_1_label }}</span></div>
+        <div><strong>{{ section.settings.story_mini_2_num }}</strong><span>{{ section.settings.story_mini_2_label }}</span></div>
+        <div><strong>{{ section.settings.story_mini_3_num }}</strong><span>{{ section.settings.story_mini_3_label }}</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ppf-b2b-edge" id="ppf-b2b-edge">
+  <div class="ppf-b2b-edge__inner">
+    <div class="ppf-section-head ppf-section-head--center">
+      <div class="ppf-eyebrow">{{ section.settings.edge_kicker }}</div>
+      <h2>{{ section.settings.edge_title }}</h2>
+      <p>{{ section.settings.edge_text }}</p>
+    </div>
+
+    <div class="ppf-edge-grid">
+      {% for i in (1..6) %}
+        {%- assign icon = 'edge_' | append: i | append: '_icon' -%}
+        {%- assign title = 'edge_' | append: i | append: '_title' -%}
+        {%- assign text = 'edge_' | append: i | append: '_text' -%}
+        {%- if section.settings[title] != blank -%}
+          <article class="ppf-edge-card">
+            <div class="ppf-edge-card__icon">{{ section.settings[icon] }}</div>
+            <h3>{{ section.settings[title] }}</h3>
+            <p>{{ section.settings[text] }}</p>
+          </article>
+        {%- endif -%}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="ppf-b2b-compare" id="ppf-b2b-compare">
+  <div class="ppf-b2b-compare__inner">
+    <div class="ppf-section-head">
+      <div class="ppf-eyebrow">{{ section.settings.compare_kicker }}</div>
+      <h2>{{ section.settings.compare_title }}</h2>
+      <p>{{ section.settings.compare_text }}</p>
+    </div>
+
+    <div class="ppf-compare-table" role="table">
+      <div class="ppf-compare-row ppf-compare-row--head" role="row">
+        <div role="columnheader">Retail Factor</div>
+        <div role="columnheader">Standard Chews</div>
+        <div role="columnheader" class="is-prime">Prime Yak Chews</div>
+      </div>
+      {% for i in (1..5) %}
+        {%- assign factor = 'compare_' | append: i | append: '_factor' -%}
+        {%- assign normal = 'compare_' | append: i | append: '_normal' -%}
+        {%- assign prime = 'compare_' | append: i | append: '_prime' -%}
+        {%- if section.settings[factor] != blank -%}
+          <div class="ppf-compare-row" role="row">
+            <div role="cell">{{ section.settings[factor] }}</div>
+            <div role="cell" class="is-muted">{{ section.settings[normal] }}</div>
+            <div role="cell" class="is-prime">{{ section.settings[prime] }}</div>
+          </div>
+        {%- endif -%}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="ppf-b2b-lineup" id="ppf-b2b-lineup">
+  <div class="ppf-b2b-lineup__inner">
+    <div class="ppf-section-head ppf-section-head--center">
+      <div class="ppf-eyebrow">{{ section.settings.lineup_kicker }}</div>
+      <h2>{{ section.settings.lineup_title }}</h2>
+      <p>{{ section.settings.lineup_text }}</p>
+    </div>
+
+    <div class="ppf-lineup-grid">
+      {% for i in (1..5) %}
+        {%- assign badge = 'product_' | append: i | append: '_badge' -%}
+        {%- assign size = 'product_' | append: i | append: '_size' -%}
+        {%- assign name = 'product_' | append: i | append: '_name' -%}
+        {%- assign desc = 'product_' | append: i | append: '_desc' -%}
+        {%- assign pack = 'product_' | append: i | append: '_pack' -%}
+        {%- if section.settings[name] != blank -%}
+          <article class="ppf-product-card">
+            {%- if section.settings[badge] != blank -%}<div class="ppf-product-card__badge">{{ section.settings[badge] }}</div>{%- endif -%}
+            <div class="ppf-product-card__size">{{ section.settings[size] }}</div>
+            <h3>{{ section.settings[name] }}</h3>
+            <p>{{ section.settings[desc] }}</p>
+            <div class="ppf-product-card__pack"><span>Case Pack</span><strong>{{ section.settings[pack] }}</strong></div>
+          </article>
+        {%- endif -%}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="ppf-b2b-process" id="ppf-b2b-process">
+  <div class="ppf-b2b-process__inner">
+    <div class="ppf-section-head ppf-section-head--center ppf-section-head--light">
+      <div class="ppf-eyebrow">{{ section.settings.process_kicker }}</div>
+      <h2>{{ section.settings.process_title }}</h2>
+      <p>{{ section.settings.process_text }}</p>
+    </div>
+
+    <div class="ppf-process-grid">
+      {% for i in (1..4) %}
+        {%- assign title = 'step_' | append: i | append: '_title' -%}
+        {%- assign text = 'step_' | append: i | append: '_text' -%}
+        {%- if section.settings[title] != blank -%}
+          <div class="ppf-process-step">
+            <div class="ppf-process-step__num">0{{ i }}</div>
+            <h3>{{ section.settings[title] }}</h3>
+            <p>{{ section.settings[text] }}</p>
+          </div>
+        {%- endif -%}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="ppf-b2b-faq" id="ppf-b2b-faq">
+  <div class="ppf-b2b-faq__inner">
+    <div class="ppf-b2b-faq__intro">
+      <div class="ppf-eyebrow">{{ section.settings.faq_kicker }}</div>
+      <h2>{{ section.settings.faq_title }}</h2>
+      <p>{{ section.settings.faq_text }}</p>
+      <a href="#ppf-b2b-apply" class="ppf-btn ppf-btn--primary">{{ section.settings.faq_cta }}</a>
+    </div>
+    <div class="ppf-faq-list">
+      {% for i in (1..6) %}
+        {%- assign q = 'faq_' | append: i | append: '_q' -%}
+        {%- assign a = 'faq_' | append: i | append: '_a' -%}
+        {%- if section.settings[q] != blank -%}
+          <div class="ppf-faq-item">
+            <button type="button" class="ppf-faq-q" aria-expanded="false">
+              <span>{{ section.settings[q] }}</span><i>+</i>
+            </button>
+            <div class="ppf-faq-a"><p>{{ section.settings[a] }}</p></div>
+          </div>
+        {%- endif -%}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="ppf-b2b-apply" id="ppf-b2b-apply">
+  <div class="ppf-b2b-apply__inner">
+    <div class="ppf-b2b-apply__copy">
+      <div class="ppf-eyebrow">{{ section.settings.form_kicker }}</div>
+      <h2>{{ section.settings.form_title }}</h2>
+      <p>{{ section.settings.form_text }}</p>
+      <div class="ppf-apply-points">
+        {% for i in (1..4) %}
+          {%- assign perk = 'perk_' | append: i -%}
+          {%- if section.settings[perk] != blank -%}
+            <div><span>✓</span>{{ section.settings[perk] }}</div>
+          {%- endif -%}
+        {% endfor %}
+      </div>
+      <div class="ppf-apply-contact">
+        <a href="tel:{{ section.settings.phone }}">{{ section.settings.phone }}</a>
+        <a href="https://wa.me/{{ section.settings.whatsapp }}" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="ppf-b2b-apply__formwrap">
+      {%- if form.posted_successfully? -%}
+        <div class="ppf-success">
+          <h3>Application Received</h3>
+          <p>Thank you. Our wholesale team will review your details and reach out within 24 hours.</p>
+        </div>
+      {%- else -%}
+        {% form 'contact', id: 'ppf-b2b-form' %}
+          {%- if form.errors -%}<div class="ppf-form-errors">{{ form.errors | default_errors }}</div>{%- endif -%}
+          <input type="hidden" name="contact[form_type]" value="B2B Wholesale Application">
+          <div class="ppf-form-grid">
+            <label>First Name <em>*</em><input type="text" name="contact[first_name]" placeholder="John" required autocomplete="given-name"></label>
+            <label>Last Name <em>*</em><input type="text" name="contact[last_name]" placeholder="Smith" required autocomplete="family-name"></label>
+            <label>Business Email <em>*</em><input type="email" name="contact[email]" placeholder="john@store.com" value="{{ form.email }}" required autocomplete="email"></label>
+            <label>Phone <em>*</em><input type="tel" name="contact[phone]" placeholder="+1 (555) 000-0000" required autocomplete="tel"></label>
+            <label class="is-full">Business / Store Name <em>*</em><input type="text" name="contact[business_name]" placeholder="Your Business Name" required></label>
+            <label>Business Type <em>*</em>
+              <select name="contact[business_type]" required>
+                <option value="" disabled selected>Select type</option>
+                <option>Pet Store / Boutique</option>
+                <option>Online Retailer</option>
+                <option>Veterinary Clinic</option>
+                <option>Grooming / Daycare</option>
+                <option>Distributor</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <label>Monthly Volume
+              <select name="contact[monthly_volume]">
+                <option value="" disabled selected>Select volume</option>
+                <option>1–5 Cases</option>
+                <option>5–15 Cases</option>
+                <option>15–50 Cases</option>
+                <option>50+ Cases</option>
+                <option>Not Sure Yet</option>
+              </select>
+            </label>
+            <label>Website<input type="url" name="contact[website]" placeholder="https://yourstore.com"></label>
+            <label>State / Region<input type="text" name="contact[region]" placeholder="Florida"></label>
+            <label class="is-full">Tell Us About Your Business<textarea name="contact[body]" rows="4" placeholder="Products of interest, customer base, expected order size, or any questions…"></textarea></label>
+          </div>
+          <button type="submit" class="ppf-form-submit">{{ section.settings.form_cta }}</button>
+          <p class="ppf-form-note">{{ section.settings.form_note }}</p>
+        {% endform %}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .ppf-b2b-hero,.ppf-b2b-stats,.ppf-b2b-story,.ppf-b2b-edge,.ppf-b2b-compare,.ppf-b2b-lineup,.ppf-b2b-process,.ppf-b2b-faq,.ppf-b2b-apply,
+  .ppf-b2b-hero *,.ppf-b2b-stats *,.ppf-b2b-story *,.ppf-b2b-edge *,.ppf-b2b-compare *,.ppf-b2b-lineup *,.ppf-b2b-process *,.ppf-b2b-faq *,.ppf-b2b-apply *{box-sizing:border-box}
+  .ppf-b2b-hero{--dark:#24130d;--brown:#3a2418;--orange:#d2632e;--orange2:#e8783d;--cream:#f1eee9;--warm:#fff7ec;--line:#eadfce;position:relative;min-height:78vh;display:flex;align-items:center;overflow:hidden;background:var(--dark)}
+  .ppf-b2b-hero__bg{position:absolute;inset:0;background:linear-gradient(135deg,#3a2418,#24130d)}
+  .ppf-b2b-hero__bg img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+  .ppf-b2b-hero__overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(36,19,13,.92) 0%,rgba(36,19,13,.76) 43%,rgba(36,19,13,.36) 100%),linear-gradient(0deg,rgba(36,19,13,.48),rgba(36,19,13,.1))}
+  .ppf-b2b-hero__inner{position:relative;z-index:2;width:100%;max-width:1280px;margin:0 auto;padding:98px 56px 118px;display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:56px;align-items:center}
+  .ppf-kicker,.ppf-eyebrow{font-size:12px;letter-spacing:2.8px;text-transform:uppercase;font-weight:800;color:#d2632e;margin-bottom:14px}.ppf-kicker{display:flex;gap:12px;align-items:center}.ppf-kicker span{width:38px;height:2px;background:#d2632e;display:inline-block}
+  .ppf-b2b-hero h1{font-size:clamp(42px,5.8vw,78px);line-height:1.02;letter-spacing:-1.6px;color:#fff;margin:0 0 22px;max-width:760px;font-weight:850}.ppf-b2b-hero__content p{font-size:17px;line-height:1.75;color:rgba(255,247,236,.8);max-width:580px;margin:0 0 34px}
+  .ppf-b2b-hero__actions{display:flex;gap:14px;flex-wrap:wrap}.ppf-btn{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:15px 28px;text-decoration:none;font-size:13px;font-weight:850;letter-spacing:.5px;transition:.25s ease;border:1px solid transparent}.ppf-btn--primary{background:#d2632e;color:#fff}.ppf-btn--primary:hover{background:#e8783d;transform:translateY(-2px);box-shadow:0 14px 36px rgba(210,99,46,.32)}.ppf-btn--light{color:#fff7ec;border-color:rgba(255,247,236,.45);background:rgba(255,255,255,.04)}.ppf-btn--light:hover{border-color:#d2632e;color:#fff;background:rgba(210,99,46,.12)}
+  .ppf-b2b-hero__panel{background:rgba(255,247,236,.95);border:1px solid rgba(255,255,255,.6);border-radius:28px;padding:28px;box-shadow:0 28px 80px rgba(0,0,0,.28)}.ppf-panel__label{display:inline-block;background:#d2632e;color:#fff;border-radius:999px;padding:6px 12px;font-size:10px;font-weight:850;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px}.ppf-b2b-hero__panel h3{color:#24130d;font-size:25px;line-height:1.15;margin:0 0 22px}.ppf-panel__rows{border-top:1px solid #eadfce}.ppf-panel__row{display:flex;justify-content:space-between;gap:18px;padding:15px 0;border-bottom:1px solid #eadfce}.ppf-panel__row span{color:#7b6256;font-size:13px}.ppf-panel__row strong{color:#24130d;font-size:14px;text-align:right}.ppf-panel__link{display:flex;justify-content:space-between;align-items:center;margin-top:20px;background:#24130d;color:#fff7ec;text-decoration:none;border-radius:16px;padding:15px 18px;font-weight:850;font-size:13px}.ppf-panel__link span{color:#d2632e}
+  .ppf-b2b-marquee{position:absolute;z-index:3;left:0;right:0;bottom:0;background:#d2632e;overflow:hidden}.ppf-b2b-marquee__track{display:flex;gap:26px;white-space:nowrap;align-items:center;padding:13px 0;animation:ppfMarquee 36s linear infinite}.ppf-b2b-marquee span{color:#fff;font-size:11px;font-weight:850;letter-spacing:1.4px;text-transform:uppercase}.ppf-b2b-marquee i{color:rgba(255,255,255,.45);font-style:normal}@keyframes ppfMarquee{to{transform:translateX(-50%)}}
+  .ppf-b2b-stats{background:#fff7ec;border-bottom:1px solid #eadfce}.ppf-b2b-stats__inner{max-width:1280px;margin:0 auto;padding:0 56px;display:grid;grid-template-columns:repeat(4,1fr)}.ppf-stat-card{padding:30px 20px;text-align:center;border-right:1px solid #eadfce}.ppf-stat-card:last-child{border-right:none}.ppf-stat-card strong{display:block;color:#d2632e;font-size:32px;line-height:1;font-weight:900;margin-bottom:8px}.ppf-stat-card span{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;font-weight:800;color:#6b5348}
+  .ppf-b2b-story,.ppf-b2b-edge,.ppf-b2b-compare,.ppf-b2b-lineup,.ppf-b2b-faq{background:#f1eee9}.ppf-b2b-story__inner,.ppf-b2b-edge__inner,.ppf-b2b-compare__inner,.ppf-b2b-lineup__inner,.ppf-b2b-process__inner,.ppf-b2b-faq__inner,.ppf-b2b-apply__inner{max-width:1280px;margin:0 auto;padding:96px 56px}.ppf-b2b-story__inner{display:grid;grid-template-columns:.95fr 1fr;gap:70px;align-items:center}.ppf-story-image{border-radius:0 0 0 0;overflow:hidden;background:#fff7ec;min-height:440px}.ppf-story-image img{width:100%;height:100%;min-height:440px;object-fit:cover;display:block}.ppf-story-image__placeholder{min-height:440px;display:flex;align-items:center;justify-content:center;color:#8a7368}.ppf-story-quote{background:#d2632e;color:#fff;padding:28px 34px}.ppf-story-quote p{margin:0 0 16px;font-size:20px;line-height:1.35;font-weight:850;font-style:italic}.ppf-story-quote span{font-size:12px;opacity:.85}.ppf-b2b-story__copy h2,.ppf-section-head h2,.ppf-b2b-faq__intro h2,.ppf-b2b-apply__copy h2{font-size:clamp(30px,3.6vw,52px);line-height:1.08;color:#24130d;margin:0 0 22px;letter-spacing:-1px}.ppf-b2b-story__copy p,.ppf-section-head p,.ppf-b2b-faq__intro p,.ppf-b2b-apply__copy p{font-size:16px;line-height:1.8;color:#5f4b42;margin:0 0 18px}.ppf-story-mini{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}.ppf-story-mini div{background:rgba(255,247,236,.8);border:1px solid #eadfce;border-radius:10px;padding:24px 16px;text-align:center}.ppf-story-mini strong{display:block;color:#d2632e;font-size:30px;line-height:1;font-weight:900;margin-bottom:10px}.ppf-story-mini span{font-size:12px;color:#5f4b42}
+  .ppf-section-head{max-width:680px;margin-bottom:52px}.ppf-section-head--center{text-align:center;margin-left:auto;margin-right:auto}.ppf-edge-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.ppf-edge-card{background:#fff7ec;border:1px solid #eadfce;border-radius:22px;padding:30px;transition:.25s ease}.ppf-edge-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(36,19,13,.08);border-color:rgba(210,99,46,.45)}.ppf-edge-card__icon{width:54px;height:54px;border-radius:16px;background:rgba(210,99,46,.12);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:20px}.ppf-edge-card h3,.ppf-product-card h3,.ppf-process-step h3{color:#24130d;font-size:19px;margin:0 0 10px}.ppf-edge-card p,.ppf-product-card p,.ppf-process-step p{font-size:14px;line-height:1.7;color:#6b5348;margin:0}
+  .ppf-b2b-compare{background:#fff}.ppf-b2b-compare__inner{padding-top:92px}.ppf-compare-table{border:1px solid #eadfce;border-radius:22px;overflow:hidden;background:#fff7ec;box-shadow:0 24px 70px rgba(36,19,13,.06)}.ppf-compare-row{display:grid;grid-template-columns:1fr 1.1fr 1.1fr}.ppf-compare-row>div{padding:20px 24px;border-right:1px solid #eadfce;border-bottom:1px solid #eadfce;font-size:14px;color:#5f4b42}.ppf-compare-row>div:last-child{border-right:none}.ppf-compare-row:last-child>div{border-bottom:none}.ppf-compare-row--head>div{background:#24130d;color:#fff7ec;text-transform:uppercase;font-size:11px;letter-spacing:1.4px;font-weight:850}.ppf-compare-row .is-prime{background:rgba(210,99,46,.08);color:#24130d;font-weight:750}.ppf-compare-row--head .is-prime{background:#d2632e;color:#fff}.ppf-compare-row .is-muted{color:#8a7368}
+  .ppf-b2b-lineup{background:#f1eee9}.ppf-lineup-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}.ppf-product-card{position:relative;background:#fff7ec;border:1px solid #eadfce;border-radius:24px;padding:30px 22px 24px;min-height:260px;transition:.25s ease}.ppf-product-card:hover{transform:translateY(-5px);box-shadow:0 18px 56px rgba(36,19,13,.08);border-color:#d2632e}.ppf-product-card__badge{position:absolute;top:0;left:22px;transform:translateY(-50%);background:#d2632e;color:#fff;border-radius:999px;padding:7px 12px;text-transform:uppercase;font-size:10px;font-weight:900;letter-spacing:1.4px}.ppf-product-card__size{display:inline-block;background:rgba(210,99,46,.1);color:#d2632e;border-radius:999px;padding:7px 11px;font-size:10px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:18px}.ppf-product-card__pack{display:flex;justify-content:space-between;gap:12px;border-top:1px solid #eadfce;padding-top:16px;margin-top:20px;font-size:12px}.ppf-product-card__pack span{color:#8a7368}.ppf-product-card__pack strong{color:#24130d}
+  .ppf-b2b-process{background:#24130d}.ppf-section-head--light h2{color:#fff7ec}.ppf-section-head--light p{color:rgba(255,247,236,.64)}.ppf-process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.ppf-process-step{background:rgba(255,247,236,.055);border:1px solid rgba(255,247,236,.12);border-radius:22px;padding:32px;transition:.25s ease}.ppf-process-step:hover{background:rgba(210,99,46,.1);border-color:rgba(210,99,46,.38);transform:translateY(-4px)}.ppf-process-step__num{font-size:36px;font-weight:900;color:#d2632e;line-height:1;margin-bottom:18px}.ppf-process-step h3{color:#fff7ec}.ppf-process-step p{color:rgba(255,247,236,.62)}
+  .ppf-b2b-faq__inner{display:grid;grid-template-columns:.85fr 1.15fr;gap:70px;align-items:start}.ppf-b2b-faq__intro{position:sticky;top:120px}.ppf-faq-list{background:#fff7ec;border:1px solid #eadfce;border-radius:24px;padding:6px 28px}.ppf-faq-item{border-bottom:1px solid #eadfce}.ppf-faq-item:last-child{border-bottom:none}.ppf-faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0;background:none;border:none;cursor:pointer;text-align:left;color:#24130d;font-size:16px;font-weight:850}.ppf-faq-q i{width:30px;height:30px;border:1px solid #eadfce;border-radius:999px;display:flex;align-items:center;justify-content:center;font-style:normal;color:#d2632e;transition:.25s ease}.ppf-faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding-bottom .35s ease}.ppf-faq-a p{font-size:14px;line-height:1.75;color:#6b5348;margin:0}.ppf-faq-item.is-open .ppf-faq-a{max-height:220px;padding-bottom:22px}.ppf-faq-item.is-open .ppf-faq-q i{transform:rotate(45deg);background:#d2632e;color:#fff;border-color:#d2632e}
+  .ppf-b2b-apply{background:#fff7ec}.ppf-b2b-apply__inner{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px}.ppf-apply-points{display:grid;gap:12px;margin:28px 0}.ppf-apply-points div{display:flex;gap:12px;color:#5f4b42;font-size:14px}.ppf-apply-points span{width:22px;height:22px;border-radius:999px;background:rgba(210,99,46,.12);color:#d2632e;display:inline-flex;align-items:center;justify-content:center;font-weight:900;flex-shrink:0}.ppf-apply-contact{display:flex;gap:12px;flex-wrap:wrap}.ppf-apply-contact a{color:#24130d;text-decoration:none;border:1px solid #eadfce;background:#fff;border-radius:999px;padding:10px 16px;font-weight:800;font-size:13px}.ppf-b2b-apply__formwrap{background:#24130d;border-radius:28px;padding:34px;box-shadow:0 26px 80px rgba(36,19,13,.12)}.ppf-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.ppf-form-grid label{display:flex;flex-direction:column;gap:8px;color:rgba(255,247,236,.66);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:850}.ppf-form-grid label.is-full{grid-column:1/-1}.ppf-form-grid em{font-style:normal;color:#d2632e}.ppf-form-grid input,.ppf-form-grid select,.ppf-form-grid textarea{width:100%;border:1px solid rgba(255,247,236,.14);background:rgba(255,247,236,.06);color:#fff7ec;border-radius:14px;padding:14px 15px;font-size:14px;text-transform:none;letter-spacing:0;outline:none;font-family:inherit}.ppf-form-grid input::placeholder,.ppf-form-grid textarea::placeholder{color:rgba(255,247,236,.28)}.ppf-form-grid input:focus,.ppf-form-grid select:focus,.ppf-form-grid textarea:focus{border-color:#d2632e;background:rgba(210,99,46,.08)}.ppf-form-grid select option{background:#24130d;color:#fff7ec}.ppf-form-submit{width:100%;margin-top:22px;background:#d2632e;color:#fff;border:none;border-radius:16px;padding:18px 24px;font-size:13px;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;cursor:pointer;transition:.25s ease}.ppf-form-submit:hover{background:#e8783d;transform:translateY(-2px)}.ppf-form-note{color:rgba(255,247,236,.36);font-size:12px;text-align:center;margin:14px 0 0}.ppf-form-errors{background:rgba(210,99,46,.14);border:1px solid rgba(210,99,46,.28);color:#fff7ec;border-radius:14px;padding:14px 16px;margin-bottom:16px}.ppf-success{color:#fff7ec;text-align:center;padding:40px 20px}.ppf-success h3{font-size:28px;margin:0 0 12px}.ppf-success p{margin:0;color:rgba(255,247,236,.65);line-height:1.7}
+  @media(max-width:1100px){.ppf-b2b-hero__inner,.ppf-b2b-story__inner,.ppf-b2b-faq__inner,.ppf-b2b-apply__inner{grid-template-columns:1fr}.ppf-b2b-hero__panel{max-width:520px}.ppf-edge-grid{grid-template-columns:repeat(2,1fr)}.ppf-lineup-grid{grid-template-columns:repeat(3,1fr)}.ppf-process-grid{grid-template-columns:repeat(2,1fr)}.ppf-b2b-faq__intro{position:static}}
+  @media(max-width:760px){.ppf-b2b-hero__inner,.ppf-b2b-story__inner,.ppf-b2b-edge__inner,.ppf-b2b-compare__inner,.ppf-b2b-lineup__inner,.ppf-b2b-process__inner,.ppf-b2b-faq__inner,.ppf-b2b-apply__inner{padding:66px 20px}.ppf-b2b-hero__inner{padding-bottom:98px}.ppf-b2b-hero{min-height:auto}.ppf-b2b-hero h1{font-size:38px}.ppf-b2b-stats__inner{grid-template-columns:repeat(2,1fr);padding:0 20px}.ppf-stat-card:nth-child(2){border-right:none}.ppf-stat-card:nth-child(n+3){border-top:1px solid #eadfce}.ppf-b2b-story__inner{gap:34px}.ppf-story-mini{grid-template-columns:1fr}.ppf-edge-grid,.ppf-lineup-grid,.ppf-process-grid{grid-template-columns:1fr}.ppf-compare-table{overflow-x:auto}.ppf-compare-row{min-width:620px}.ppf-b2b-apply__formwrap{padding:24px 18px;border-radius:22px}.ppf-form-grid{grid-template-columns:1fr}.ppf-form-grid label{grid-column:1/-1}.ppf-faq-list{padding:4px 18px}.ppf-b2b-marquee__track{animation-duration:28s}}
+</style>
+
+<script>
+  (function(){
+    document.querySelectorAll('.ppf-faq-q').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        var item = btn.closest('.ppf-faq-item');
+        var open = item.classList.contains('is-open');
+        document.querySelectorAll('.ppf-faq-item').forEach(function(el){
+          el.classList.remove('is-open');
+          var q = el.querySelector('.ppf-faq-q');
+          if(q) q.setAttribute('aria-expanded','false');
+        });
+        if(!open){
+          item.classList.add('is-open');
+          btn.setAttribute('aria-expanded','true');
+        }
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "B2B Wholesale Final",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero background image" },
+    { "type": "text", "id": "hero_kicker", "label": "Kicker", "default": "Wholesale for pet retailers" },
+    { "type": "textarea", "id": "hero_title", "label": "Title", "default": "Stock the chews dogs keep coming back for." },
+    { "type": "textarea", "id": "hero_text", "label": "Text", "default": "Premium Himalayan yak chews with warm, retail-ready packaging, strong margins, and a real sourcing story your customers can believe in." },
+    { "type": "text", "id": "hero_primary", "label": "Primary button", "default": "Apply for Wholesale" },
+    { "type": "text", "id": "hero_secondary", "label": "Secondary button", "default": "Read the Story" },
+    { "type": "text", "id": "panel_label", "label": "Panel label", "default": "Partner Benefits" },
+    { "type": "text", "id": "panel_title", "label": "Panel title", "default": "Built for stores that want better repeat sales." },
+    { "type": "text", "id": "panel_1_label", "label": "Panel row 1 label", "default": "Minimum order" },
+    { "type": "text", "id": "panel_1_value", "label": "Panel row 1 value", "default": "1 case" },
+    { "type": "text", "id": "panel_2_label", "label": "Panel row 2 label", "default": "Wholesale savings" },
+    { "type": "text", "id": "panel_2_value", "label": "Panel row 2 value", "default": "Up to 40%" },
+    { "type": "text", "id": "panel_3_label", "label": "Panel row 3 label", "default": "Fulfillment" },
+    { "type": "text", "id": "panel_3_value", "label": "Panel row 3 value", "default": "24–48 hours" },
+    { "type": "text", "id": "panel_cta", "label": "Panel CTA", "default": "Unlock pricing" },
+
+    { "type": "header", "content": "Marquee" },
+    { "type": "text", "id": "marquee_1", "label": "Item 1", "default": "4 ingredients only" },
+    { "type": "text", "id": "marquee_2", "label": "Item 2", "default": "Easily digestible" },
+    { "type": "text", "id": "marquee_3", "label": "Item 3", "default": "All natural" },
+    { "type": "text", "id": "marquee_4", "label": "Item 4", "default": "No odor" },
+    { "type": "text", "id": "marquee_5", "label": "Item 5", "default": "Long lasting" },
+    { "type": "text", "id": "marquee_6", "label": "Item 6", "default": "Himalayan source" },
+    { "type": "text", "id": "marquee_7", "label": "Item 7", "default": "Vet approved" },
+
+    { "type": "header", "content": "Stats" },
+    { "type": "text", "id": "stat_1_num", "label": "Stat 1 number", "default": "40%" },
+    { "type": "text", "id": "stat_1_label", "label": "Stat 1 label", "default": "Wholesale Savings" },
+    { "type": "text", "id": "stat_2_num", "label": "Stat 2 number", "default": "1 Case" },
+    { "type": "text", "id": "stat_2_label", "label": "Stat 2 label", "default": "Low MOQ" },
+    { "type": "text", "id": "stat_3_num", "label": "Stat 3 number", "default": "24h" },
+    { "type": "text", "id": "stat_3_label", "label": "Stat 3 label", "default": "Fast Approval" },
+    { "type": "text", "id": "stat_4_num", "label": "Stat 4 number", "default": "5" },
+    { "type": "text", "id": "stat_4_label", "label": "Stat 4 label", "default": "Core Sizes" },
+
+    { "type": "header", "content": "Story" },
+    { "type": "image_picker", "id": "story_image", "label": "Story image" },
+    { "type": "text", "id": "story_kicker", "label": "Kicker", "default": "Our Story" },
+    { "type": "textarea", "id": "story_title", "label": "Title", "default": "A tradition worth sharing." },
+    { "type": "textarea", "id": "story_p1", "label": "Paragraph 1", "default": "High in the Himalayan mountains of Nepal, yak herders have made churpi for generations as both sustenance and trade." },
+    { "type": "textarea", "id": "story_p2", "label": "Paragraph 2", "default": "We bring that traditional craft to modern pet retail: simple ingredients, long-lasting chew time, and a sourcing story that feels premium without feeling overproduced." },
+    { "type": "textarea", "id": "story_quote", "label": "Quote", "default": "My family has made churpi for five generations. Now our work reaches dogs around the world." },
+    { "type": "text", "id": "story_quote_author", "label": "Quote author", "default": "Farmer, Mustang Region Nepal" },
+    { "type": "text", "id": "story_mini_1_num", "label": "Mini stat 1 number", "default": "47+" },
+    { "type": "text", "id": "story_mini_1_label", "label": "Mini stat 1 label", "default": "Partner Families" },
+    { "type": "text", "id": "story_mini_2_num", "label": "Mini stat 2 number", "default": "8K+" },
+    { "type": "text", "id": "story_mini_2_label", "label": "Mini stat 2 label", "default": "Happy Dogs" },
+    { "type": "text", "id": "story_mini_3_num", "label": "Mini stat 3 number", "default": "100%" },
+    { "type": "text", "id": "story_mini_3_label", "label": "Mini stat 3 label", "default": "Natural Ingredients" },
+
+    { "type": "header", "content": "Retailer Edge" },
+    { "type": "text", "id": "edge_kicker", "label": "Kicker", "default": "Why retailers choose us" },
+    { "type": "textarea", "id": "edge_title", "label": "Title", "default": "A shelf-ready product with a story, margin, and repeat demand." },
+    { "type": "textarea", "id": "edge_text", "label": "Text", "default": "Designed for pet stores, groomers, clinics, and online retailers who want a premium chew that does not feel generic." },
+    { "type": "text", "id": "edge_1_icon", "label": "Edge 1 icon", "default": "📦" },
+    { "type": "text", "id": "edge_1_title", "label": "Edge 1 title", "default": "Retail-Ready Packs" },
+    { "type": "textarea", "id": "edge_1_text", "label": "Edge 1 text", "default": "UPC-labeled, clean packaging, and ready to place on shelf or ship online." },
+    { "type": "text", "id": "edge_2_icon", "label": "Edge 2 icon", "default": "💰" },
+    { "type": "text", "id": "edge_2_title", "label": "Edge 2 title", "default": "Better Margins" },
+    { "type": "textarea", "id": "edge_2_text", "label": "Edge 2 text", "default": "Tiered pricing helps you protect margin as volume grows." },
+    { "type": "text", "id": "edge_3_icon", "label": "Edge 3 icon", "default": "🔁" },
+    { "type": "text", "id": "edge_3_title", "label": "Edge 3 title", "default": "Repeat Purchase" },
+    { "type": "textarea", "id": "edge_3_text", "label": "Edge 3 text", "default": "Long-lasting chews bring customers back without needing constant discounting." },
+    { "type": "text", "id": "edge_4_icon", "label": "Edge 4 icon", "default": "🐾" },
+    { "type": "text", "id": "edge_4_title", "label": "Edge 4 title", "default": "Simple Ingredients" },
+    { "type": "textarea", "id": "edge_4_text", "label": "Edge 4 text", "default": "A natural chew customers can understand quickly at point of sale." },
+    { "type": "text", "id": "edge_5_icon", "label": "Edge 5 icon", "default": "🚚" },
+    { "type": "text", "id": "edge_5_title", "label": "Edge 5 title", "default": "Fast Restocking" },
+    { "type": "textarea", "id": "edge_5_text", "label": "Edge 5 text", "default": "Quick fulfillment helps you avoid empty shelves during demand spikes." },
+    { "type": "text", "id": "edge_6_icon", "label": "Edge 6 icon", "default": "🤝" },
+    { "type": "text", "id": "edge_6_title", "label": "Edge 6 title", "default": "Partner Support" },
+    { "type": "textarea", "id": "edge_6_text", "label": "Edge 6 text", "default": "Direct support for product questions, ordering, and wholesale growth." },
+
+    { "type": "header", "content": "Comparison" },
+    { "type": "text", "id": "compare_kicker", "label": "Kicker", "default": "The smarter chew" },
+    { "type": "textarea", "id": "compare_title", "label": "Title", "default": "Why yak chews earn better shelf space." },
+    { "type": "textarea", "id": "compare_text", "label": "Text", "default": "A simple comparison your team can understand and your customers can feel confident about." },
+    { "type": "text", "id": "compare_1_factor", "label": "Factor 1", "default": "Ingredient Story" },
+    { "type": "text", "id": "compare_1_normal", "label": "Standard 1", "default": "Often generic or unclear" },
+    { "type": "text", "id": "compare_1_prime", "label": "Prime 1", "default": "Himalayan churpi tradition" },
+    { "type": "text", "id": "compare_2_factor", "label": "Factor 2", "default": "Customer Confidence" },
+    { "type": "text", "id": "compare_2_normal", "label": "Standard 2", "default": "More objections at shelf" },
+    { "type": "text", "id": "compare_2_prime", "label": "Prime 2", "default": "Simple, natural positioning" },
+    { "type": "text", "id": "compare_3_factor", "label": "Factor 3", "default": "Shelf Life" },
+    { "type": "text", "id": "compare_3_normal", "label": "Standard 3", "default": "Varies by supplier" },
+    { "type": "text", "id": "compare_3_prime", "label": "Prime 3", "default": "Long shelf-ready life" },
+    { "type": "text", "id": "compare_4_factor", "label": "Factor 4", "default": "Chew Time" },
+    { "type": "text", "id": "compare_4_normal", "label": "Standard 4", "default": "Often short-lasting" },
+    { "type": "text", "id": "compare_4_prime", "label": "Prime 4", "default": "Long-lasting, satisfying chew" },
+    { "type": "text", "id": "compare_5_factor", "label": "Factor 5", "default": "Retail Positioning" },
+    { "type": "text", "id": "compare_5_normal", "label": "Standard 5", "default": "Price competition" },
+    { "type": "text", "id": "compare_5_prime", "label": "Prime 5", "default": "Premium story-led product" },
+
+    { "type": "header", "content": "Product Lineup" },
+    { "type": "text", "id": "lineup_kicker", "label": "Kicker", "default": "Wholesale lineup" },
+    { "type": "textarea", "id": "lineup_title", "label": "Title", "default": "Five sizes. One consistent story." },
+    { "type": "textarea", "id": "lineup_text", "label": "Text", "default": "Start with bestsellers or stock the full range for every breed size." },
+    { "type": "text", "id": "product_1_badge", "label": "Product 1 badge", "default": "Best Seller" },
+    { "type": "text", "id": "product_1_size", "label": "Product 1 size", "default": "Small · 1–15 lbs" },
+    { "type": "text", "id": "product_1_name", "label": "Product 1 name", "default": "Puppy Starter Chew" },
+    { "type": "textarea", "id": "product_1_desc", "label": "Product 1 description", "default": "A friendly entry size for small breeds and pups." },
+    { "type": "text", "id": "product_1_pack", "label": "Product 1 pack", "default": "12 / case" },
+    { "type": "text", "id": "product_2_badge", "label": "Product 2 badge", "default": "Most Popular" },
+    { "type": "text", "id": "product_2_size", "label": "Product 2 size", "default": "Medium · 15–35 lbs" },
+    { "type": "text", "id": "product_2_name", "label": "Product 2 name", "default": "Classic Yak Chew" },
+    { "type": "textarea", "id": "product_2_desc", "label": "Product 2 description", "default": "The core bestseller for everyday chewers." },
+    { "type": "text", "id": "product_2_pack", "label": "Product 2 pack", "default": "12 / case" },
+    { "type": "text", "id": "product_3_badge", "label": "Product 3 badge", "default": "Power Chewer" },
+    { "type": "text", "id": "product_3_size", "label": "Product 3 size", "default": "Large · 35–55 lbs" },
+    { "type": "text", "id": "product_3_name", "label": "Product 3 name", "default": "Power Chewer" },
+    { "type": "textarea", "id": "product_3_desc", "label": "Product 3 description", "default": "Extra-dense sizing for stronger chewing habits." },
+    { "type": "text", "id": "product_3_pack", "label": "Product 3 pack", "default": "10 / case" },
+    { "type": "text", "id": "product_4_badge", "label": "Product 4 badge", "default": "XL" },
+    { "type": "text", "id": "product_4_size", "label": "Product 4 size", "default": "XL · 55–85 lbs" },
+    { "type": "text", "id": "product_4_name", "label": "Product 4 name", "default": "Giant Block" },
+    { "type": "textarea", "id": "product_4_desc", "label": "Product 4 description", "default": "A longer-lasting option for large breeds." },
+    { "type": "text", "id": "product_4_pack", "label": "Product 4 pack", "default": "8 / case" },
+    { "type": "text", "id": "product_5_badge", "label": "Product 5 badge", "default": "Jumbo" },
+    { "type": "text", "id": "product_5_size", "label": "Product 5 size", "default": "Jumbo · 85+ lbs" },
+    { "type": "text", "id": "product_5_name", "label": "Product 5 name", "default": "Jumbo Block" },
+    { "type": "textarea", "id": "product_5_desc", "label": "Product 5 description", "default": "Built for serious chewers and big breeds." },
+    { "type": "text", "id": "product_5_pack", "label": "Product 5 pack", "default": "6 / case" },
+
+    { "type": "header", "content": "Process" },
+    { "type": "text", "id": "process_kicker", "label": "Kicker", "default": "How it works" },
+    { "type": "textarea", "id": "process_title", "label": "Title", "default": "From application to first delivery in days." },
+    { "type": "textarea", "id": "process_text", "label": "Text", "default": "Simple onboarding, clear pricing, and fast fulfillment so you can start selling quickly." },
+    { "type": "text", "id": "step_1_title", "label": "Step 1 title", "default": "Apply Below" },
+    { "type": "textarea", "id": "step_1_text", "label": "Step 1 text", "default": "Submit your business details in the wholesale form." },
+    { "type": "text", "id": "step_2_title", "label": "Step 2 title", "default": "Get Approved" },
+    { "type": "textarea", "id": "step_2_text", "label": "Step 2 text", "default": "Our team reviews most applications within 24 hours." },
+    { "type": "text", "id": "step_3_title", "label": "Step 3 title", "default": "Unlock Pricing" },
+    { "type": "textarea", "id": "step_3_text", "label": "Step 3 text", "default": "Receive wholesale rates, case packs, and ordering guidance." },
+    { "type": "text", "id": "step_4_title", "label": "Step 4 title", "default": "Start Selling" },
+    { "type": "textarea", "id": "step_4_text", "label": "Step 4 text", "default": "Stock shelf-ready chews and reorder as demand grows." },
+
+    { "type": "header", "content": "FAQ" },
+    { "type": "text", "id": "faq_kicker", "label": "Kicker", "default": "Common questions" },
+    { "type": "text", "id": "faq_title", "label": "Title", "default": "Everything you need to know before applying." },
+    { "type": "textarea", "id": "faq_text", "label": "Text", "default": "Keep the buying decision simple for your team. These are the questions most wholesale partners ask first." },
+    { "type": "text", "id": "faq_cta", "label": "CTA", "default": "Apply Now" },
+    { "type": "text", "id": "faq_1_q", "label": "Question 1", "default": "What is the minimum order quantity?" },
+    { "type": "textarea", "id": "faq_1_a", "label": "Answer 1", "default": "You can start with one case, making it easy to test demand before scaling." },
+    { "type": "text", "id": "faq_2_q", "label": "Question 2", "default": "How fast do orders ship?" },
+    { "type": "textarea", "id": "faq_2_a", "label": "Answer 2", "default": "Most wholesale orders ship within 24–48 hours after confirmation." },
+    { "type": "text", "id": "faq_3_q", "label": "Question 3", "default": "Are products retail-ready?" },
+    { "type": "textarea", "id": "faq_3_a", "label": "Answer 3", "default": "Yes. Products are designed for clean shelf presentation and easy customer understanding." },
+    { "type": "text", "id": "faq_4_q", "label": "Question 4", "default": "Do you offer volume discounts?" },
+    { "type": "textarea", "id": "faq_4_a", "label": "Answer 4", "default": "Yes. Pricing improves as your monthly case volume increases." },
+    { "type": "text", "id": "faq_5_q", "label": "Question 5", "default": "Can online retailers apply?" },
+    { "type": "textarea", "id": "faq_5_a", "label": "Answer 5", "default": "Yes. We support physical stores, online retailers, clinics, groomers, and distributors." },
+    { "type": "text", "id": "faq_6_q", "label": "Question 6", "default": "Do you provide product support?" },
+    { "type": "textarea", "id": "faq_6_a", "label": "Answer 6", "default": "Yes. Our team can help with product questions, ordering, and choosing the right starting mix." },
+
+    { "type": "header", "content": "Application Form" },
+    { "type": "text", "id": "form_kicker", "label": "Kicker", "default": "Wholesale Application" },
+    { "type": "textarea", "id": "form_title", "label": "Title", "default": "Ready to stock Prime Pet Food?" },
+    { "type": "textarea", "id": "form_text", "label": "Text", "default": "Complete the short form and our wholesale team will reach out with pricing, case options, and next steps." },
+    { "type": "text", "id": "form_cta", "label": "Submit button", "default": "Submit Wholesale Application" },
+    { "type": "text", "id": "form_note", "label": "Form note", "default": "We usually respond within 24 hours. Your information is kept confidential." },
+    { "type": "text", "id": "perk_1", "label": "Perk 1", "default": "Low minimum order to start" },
+    { "type": "text", "id": "perk_2", "label": "Perk 2", "default": "Tiered pricing as you grow" },
+    { "type": "text", "id": "perk_3", "label": "Perk 3", "default": "Fast reorder support" },
+    { "type": "text", "id": "perk_4", "label": "Perk 4", "default": "Dedicated wholesale assistance" },
+    { "type": "text", "id": "phone", "label": "Phone", "default": "+1 (917) 892-7882" },
+    { "type": "text", "id": "whatsapp", "label": "WhatsApp digits only", "default": "19178927882" }
+  ],
+  "presets": [
+    { "name": "B2B Wholesale Final" }
+  ]
+}
+{% endschema %}
