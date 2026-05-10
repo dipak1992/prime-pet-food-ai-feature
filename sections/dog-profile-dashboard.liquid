@@ -1,0 +1,513 @@
+{% comment %}
+  Section: Dog Profile Dashboard
+  Customer-facing "My Dog" page showing profile, personality, session stats,
+  enrichment tips, and smart reorder timing.
+{% endcomment %}
+
+<style>
+  .dog-profile {
+    padding: 60px 24px;
+    background: #FDFCF7;
+    font-family: var(--font-body-family, -apple-system, sans-serif);
+    min-height: 60vh;
+  }
+
+  .dog-profile__inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Empty state */
+  .dog-profile__empty {
+    text-align: center;
+    padding: 80px 24px;
+  }
+
+  .dog-profile__empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+
+  .dog-profile__empty-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 8px;
+  }
+
+  .dog-profile__empty-text {
+    font-size: 16px;
+    color: #6b7280;
+    margin: 0 0 24px;
+  }
+
+  .dog-profile__empty-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    color: #fff;
+    border-radius: 100px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+  }
+
+  .dog-profile__empty-btn:hover {
+    transform: translateY(-1px);
+    color: #fff;
+  }
+
+  /* Profile card */
+  .dog-profile__card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    margin-bottom: 24px;
+  }
+
+  .dog-profile__hero {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  .dog-profile__avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    flex-shrink: 0;
+  }
+
+  .dog-profile__info h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 4px;
+  }
+
+  .dog-profile__meta {
+    font-size: 14px;
+    color: #6b7280;
+  }
+
+  .dog-profile__personality-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    padding: 5px 12px;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #15803d;
+  }
+
+  /* Stats grid */
+  .dog-profile__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .dog-profile__stat {
+    text-align: center;
+    padding: 20px 12px;
+    background: #fafafa;
+    border-radius: 12px;
+  }
+
+  .dog-profile__stat-value {
+    font-size: 24px;
+    font-weight: 800;
+    color: #1a1a1a;
+    line-height: 1;
+  }
+
+  .dog-profile__stat-label {
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Recommendation */
+  .dog-profile__rec {
+    background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+    border-radius: 16px;
+    padding: 24px;
+    color: #fff;
+    margin-bottom: 24px;
+  }
+
+  .dog-profile__rec-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.7);
+    margin: 0 0 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .dog-profile__rec-size {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 4px;
+  }
+
+  .dog-profile__rec-duration {
+    font-size: 14px;
+    color: #4ade80;
+    margin: 0 0 16px;
+  }
+
+  .dog-profile__rec-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: #16a34a;
+    color: #fff;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+  }
+
+  .dog-profile__rec-btn:hover {
+    transform: translateY(-1px);
+    color: #fff;
+  }
+
+  /* Enrichment tips */
+  .dog-profile__tips {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .dog-profile__tip {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 14px;
+    color: #374151;
+    line-height: 1.5;
+  }
+
+  .dog-profile__tip:last-child {
+    border-bottom: none;
+  }
+
+  .dog-profile__tip-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #dcfce7;
+    color: #16a34a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* Session log */
+  .dog-profile__session-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .dog-profile__session-input {
+    flex: 1;
+    min-width: 120px;
+    padding: 10px 14px;
+    border: 1.5px solid #e5e5e5;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+
+  .dog-profile__session-btn {
+    padding: 10px 20px;
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .dog-profile__session-btn:hover {
+    background: #374151;
+  }
+
+  /* Reorder section */
+  .dog-profile__reorder {
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    border: 1px solid #bfdbfe;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 16px;
+  }
+
+  .dog-profile__reorder-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1e40af;
+    margin: 0 0 6px;
+  }
+
+  .dog-profile__reorder-text {
+    font-size: 13px;
+    color: #1d4ed8;
+    margin: 0;
+  }
+
+  /* Section titles */
+  .dog-profile__section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .dog-profile__actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+
+  .dog-profile__action-btn {
+    padding: 10px 18px;
+    border: 1.5px solid #e5e5e5;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    background: #fff;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .dog-profile__action-btn:hover {
+    border-color: #9ca3af;
+    color: #1a1a1a;
+  }
+
+  .dog-profile__action-btn--danger {
+    color: #dc2626;
+    border-color: #fecaca;
+  }
+
+  .dog-profile__action-btn--danger:hover {
+    background: #fef2f2;
+    border-color: #dc2626;
+  }
+
+  @media (max-width: 600px) {
+    .dog-profile { padding: 40px 16px; }
+    .dog-profile__card { padding: 20px; }
+    .dog-profile__hero { flex-direction: column; text-align: center; }
+    .dog-profile__stats { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+
+<section class="dog-profile">
+  <div class="dog-profile__inner" id="dog-profile-app">
+    <!-- Content rendered by JavaScript -->
+    <div class="dog-profile__empty" id="dog-profile-empty">
+      <div class="dog-profile__empty-icon">🐾</div>
+      <h1 class="dog-profile__empty-title">Create Your Dog's Profile</h1>
+      <p class="dog-profile__empty-text">Take our quick quiz to get personalized chew recommendations, track enrichment sessions, and know exactly when to reorder.</p>
+      <a href="/pages/how-long-will-this-last-for-my-dog" class="dog-profile__empty-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        Find Your Size
+      </a>
+    </div>
+
+    <div id="dog-profile-content" style="display:none;"></div>
+  </div>
+</section>
+
+<script>
+(function() {
+  function renderProfile() {
+    if (typeof PrimeDogProfile === 'undefined') return;
+    if (!PrimeDogProfile.hasProfile()) return;
+
+    var profile = PrimeDogProfile.get();
+    var emptyEl = document.getElementById('dog-profile-empty');
+    var contentEl = document.getElementById('dog-profile-content');
+    if (!emptyEl || !contentEl) return;
+
+    emptyEl.style.display = 'none';
+    contentEl.style.display = 'block';
+
+    var rec = PrimeDogProfile.getRecommendation();
+    var personality = PrimeDogProfile.getPersonality();
+    var stats = PrimeDogProfile.getSessionStats();
+    var reorder = PrimeDogProfile.getReorderTiming();
+    var tips = PrimeDogProfile.getEnrichmentTips();
+
+    var dogName = profile.dogName || 'Your Dog';
+    var breedLabel = (profile.breed || 'mixed').replace(/_/g, ' ').replace(/\b\w/g, function(l) { return l.toUpperCase(); });
+    var personalityLabel = personality ? personality.label : 'Unique Chewer';
+    var personalityEmoji = personality ? personality.emoji : '🐾';
+
+    var html = '';
+
+    // Profile card
+    html += '<div class="dog-profile__card">';
+    html += '<div class="dog-profile__hero">';
+    html += '<div class="dog-profile__avatar">' + personalityEmoji + '</div>';
+    html += '<div class="dog-profile__info">';
+    html += '<h2>' + dogName + '</h2>';
+    html += '<div class="dog-profile__meta">' + breedLabel + (profile.weight ? ' · ' + profile.weight + ' lbs' : '') + (profile.age ? ' · ' + profile.age : '') + '</div>';
+    html += '<div class="dog-profile__personality-badge">' + personalityEmoji + ' ' + personalityLabel + '</div>';
+    html += '</div></div>';
+
+    // Stats
+    html += '<div class="dog-profile__stats">';
+    if (rec) {
+      html += '<div class="dog-profile__stat"><div class="dog-profile__stat-value">' + rec.durationRange.split('-')[0] + '-' + rec.durationRange.split('-')[1].split(' ')[0] + '</div><div class="dog-profile__stat-label">Min Est. Duration</div></div>';
+    }
+    if (stats) {
+      html += '<div class="dog-profile__stat"><div class="dog-profile__stat-value">' + stats.totalSessions + '</div><div class="dog-profile__stat-label">Sessions Logged</div></div>';
+      html += '<div class="dog-profile__stat"><div class="dog-profile__stat-value">' + stats.averageDuration + 'm</div><div class="dog-profile__stat-label">Avg Duration</div></div>';
+      html += '<div class="dog-profile__stat"><div class="dog-profile__stat-value">' + stats.streak + '</div><div class="dog-profile__stat-label">Day Streak</div></div>';
+    } else {
+      html += '<div class="dog-profile__stat"><div class="dog-profile__stat-value">0</div><div class="dog-profile__stat-label">Sessions</div></div>';
+      html += '<div class="dog-profile__stat"><div class="dog-profile__stat-value">—</div><div class="dog-profile__stat-label">Avg Duration</div></div>';
+      html += '<div class="dog-profile__stat"><div class="dog-profile__stat-value">0</div><div class="dog-profile__stat-label">Day Streak</div></div>';
+    }
+    html += '</div>';
+    html += '</div>';
+
+    // Recommendation
+    if (rec) {
+      html += '<div class="dog-profile__rec">';
+      html += '<div class="dog-profile__rec-title">Recommended For ' + dogName + '</div>';
+      html += '<div class="dog-profile__rec-size">' + rec.size + '</div>';
+      html += '<div class="dog-profile__rec-duration">Estimated chew time: ' + rec.durationRange + '</div>';
+      html += '<a href="/collections/all" class="dog-profile__rec-btn">Shop Recommended Size →</a>';
+      html += '</div>';
+    }
+
+    // Session tracker
+    html += '<div class="dog-profile__card">';
+    html += '<h3 class="dog-profile__section-title">🎯 Log a Chew Session</h3>';
+    html += '<p style="font-size:14px;color:#6b7280;margin:0 0 12px;">Track how long ' + dogName + ' chews to improve recommendations over time.</p>';
+    html += '<div class="dog-profile__session-form">';
+    html += '<input type="number" id="session-duration" class="dog-profile__session-input" placeholder="Minutes" min="1" max="300">';
+    html += '<select id="session-mood" class="dog-profile__session-input" style="min-width:140px;"><option value="happy">😊 Happy</option><option value="focused">🎯 Focused</option><option value="relaxed">😌 Relaxed</option><option value="excited">🤩 Excited</option></select>';
+    html += '<button type="button" id="log-session-btn" class="dog-profile__session-btn">Log Session</button>';
+    html += '</div>';
+
+    // Reorder timing
+    if (reorder && reorder.lastPurchase) {
+      html += '<div class="dog-profile__reorder">';
+      html += '<div class="dog-profile__reorder-title">📦 Reorder Timing</div>';
+      html += '<div class="dog-profile__reorder-text">' + reorder.suggestion + '</div>';
+      html += '</div>';
+    }
+    html += '</div>';
+
+    // Enrichment tips
+    if (tips && tips.length > 0) {
+      html += '<div class="dog-profile__card">';
+      html += '<h3 class="dog-profile__section-title">💡 Enrichment Tips for ' + dogName + '</h3>';
+      html += '<ul class="dog-profile__tips">';
+      tips.forEach(function(tip) {
+        html += '<li class="dog-profile__tip"><span class="dog-profile__tip-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>' + tip + '</li>';
+      });
+      html += '</ul></div>';
+    }
+
+    // Actions
+    html += '<div class="dog-profile__actions">';
+    html += '<a href="/pages/how-long-will-this-last-for-my-dog" class="dog-profile__action-btn">Retake Quiz</a>';
+    html += '<button type="button" id="clear-profile-btn" class="dog-profile__action-btn dog-profile__action-btn--danger">Reset Profile</button>';
+    html += '</div>';
+
+    contentEl.innerHTML = html;
+
+    // Bind events
+    var logBtn = document.getElementById('log-session-btn');
+    if (logBtn) {
+      logBtn.addEventListener('click', function() {
+        var duration = parseInt(document.getElementById('session-duration').value);
+        var mood = document.getElementById('session-mood').value;
+        if (!duration || duration < 1) { alert('Please enter a valid duration'); return; }
+
+        PrimeDogProfile.trackSession({ duration: duration, mood: mood });
+        document.getElementById('session-duration').value = '';
+        logBtn.textContent = 'Logged ✓';
+        setTimeout(function() {
+          logBtn.textContent = 'Log Session';
+          renderProfile(); // Re-render to update stats
+        }, 1000);
+      });
+    }
+
+    var clearBtn = document.getElementById('clear-profile-btn');
+    if (clearBtn) {
+      clearBtn.addEventListener('click', function() {
+        if (confirm('Are you sure? This will delete your dog profile and all session data.')) {
+          PrimeDogProfile.clear();
+          emptyEl.style.display = 'block';
+          contentEl.style.display = 'none';
+        }
+      });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { setTimeout(renderProfile, 150); });
+  } else {
+    setTimeout(renderProfile, 150);
+  }
+
+  window.addEventListener('prime:profile:ready', renderProfile);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Dog Profile Dashboard",
+  "tag": "div",
+  "class": "dog-profile-section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Dog Profile Dashboard"
+    }
+  ]
+}
+{% endschema %}

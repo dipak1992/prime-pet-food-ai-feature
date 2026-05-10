@@ -660,6 +660,28 @@ body.header-drawer-open .header__drawer-content * {
   color: var(--header-accent);
 }
 
+/* My Dog Profile CTA */
+.header__my-dog-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: rgba(0,0,0,0.06);
+  color: var(--header-text);
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 100px;
+  white-space: nowrap;
+  transition: background 0.2s ease;
+  border: 1.5px solid rgba(0,0,0,0.1);
+}
+
+.header__my-dog-cta:hover {
+  background: rgba(0,0,0,0.1);
+  color: var(--header-text);
+}
+
 /* Find Your Size CTA */
 .header__find-size-cta {
   display: inline-flex;

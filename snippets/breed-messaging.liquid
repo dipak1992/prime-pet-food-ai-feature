@@ -1,0 +1,166 @@
+{%- comment -%}
+  Breed-Specific Product Page Messaging
+  Shows personalized messaging based on the customer's dog profile.
+  Renders dynamically via JavaScript using PrimeDogProfile API.
+  Usage: {% render 'breed-messaging' %}
+{%- endcomment -%}
+
+<div id="breed-messaging" class="breed-messaging" style="display:none;">
+  <style>
+    .breed-messaging {
+      margin: 16px 0;
+      padding: 14px 16px;
+      background: linear-gradient(135deg, #fffbeb, #fef3c7);
+      border: 1px solid #fde68a;
+      border-radius: 12px;
+      font-family: var(--font-body-family, -apple-system, sans-serif);
+    }
+
+    .breed-messaging__inner {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .breed-messaging__icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 18px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .breed-messaging__content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .breed-messaging__headline {
+      font-size: 14px;
+      font-weight: 700;
+      color: #92400e;
+      margin: 0 0 3px;
+      line-height: 1.3;
+    }
+
+    .breed-messaging__text {
+      font-size: 13px;
+      color: #78350f;
+      margin: 0;
+      line-height: 1.4;
+      opacity: 0.85;
+    }
+
+    .breed-messaging__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 8px;
+      padding: 4px 10px;
+      background: #fff;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #b45309;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+    }
+
+    .breed-messaging__badge svg {
+      color: #16a34a;
+    }
+
+    /* Enrichment tips variant */
+    .breed-messaging--tips {
+      background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+      border-color: #bbf7d0;
+    }
+
+    .breed-messaging--tips .breed-messaging__headline {
+      color: #166534;
+    }
+
+    .breed-messaging--tips .breed-messaging__text {
+      color: #15803d;
+    }
+
+    .breed-messaging--tips .breed-messaging__badge {
+      color: #15803d;
+    }
+
+    /* Reorder reminder variant */
+    .breed-messaging--reorder {
+      background: linear-gradient(135deg, #eff6ff, #dbeafe);
+      border-color: #bfdbfe;
+    }
+
+    .breed-messaging--reorder .breed-messaging__headline {
+      color: #1e40af;
+    }
+
+    .breed-messaging--reorder .breed-messaging__text {
+      color: #1d4ed8;
+    }
+  </style>
+</div>
+
+<script>
+(function() {
+  function renderBreedMessaging() {
+    if (typeof PrimeDogProfile === 'undefined') return;
+    if (!PrimeDogProfile.hasProfile()) return;
+
+    var container = document.getElementById('breed-messaging');
+    if (!container) return;
+
+    var message = PrimeDogProfile.getBreedMessage();
+    if (!message) return;
+
+    var personality = PrimeDogProfile.getPersonality();
+    var personalityEmoji = personality ? personality.emoji : '🐾';
+
+    container.innerHTML = '<div class="breed-messaging__inner">' +
+      '<div class="breed-messaging__icon">' + personalityEmoji + '</div>' +
+      '<div class="breed-messaging__content">' +
+        '<p class="breed-messaging__headline">' + message.headline + '</p>' +
+        '<p class="breed-messaging__text">' + message.subtext + '</p>' +
+        '<span class="breed-messaging__badge">' +
+          '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>' +
+          message.badge +
+        '</span>' +
+      '</div>' +
+    '</div>';
+
+    container.style.display = 'block';
+
+    // Also check reorder timing
+    var reorder = PrimeDogProfile.getReorderTiming();
+    if (reorder && reorder.daysUntilReorder !== null && reorder.daysUntilReorder <= 7) {
+      var reorderEl = document.createElement('div');
+      reorderEl.className = 'breed-messaging breed-messaging--reorder';
+      reorderEl.style.marginTop = '10px';
+      reorderEl.innerHTML = '<div class="breed-messaging__inner">' +
+        '<div class="breed-messaging__icon">📦</div>' +
+        '<div class="breed-messaging__content">' +
+          '<p class="breed-messaging__headline">Time to restock!</p>' +
+          '<p class="breed-messaging__text">' + reorder.suggestion + '</p>' +
+        '</div>' +
+      '</div>';
+      container.parentNode.insertBefore(reorderEl, container.nextSibling);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderBreedMessaging);
+  } else {
+    // Small delay to ensure dog-profile.js has loaded
+    setTimeout(renderBreedMessaging, 100);
+  }
+
+  window.addEventListener('prime:profile:ready', renderBreedMessaging);
+})();
+</script>

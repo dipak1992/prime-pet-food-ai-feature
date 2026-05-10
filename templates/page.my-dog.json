@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "dog_profile_dashboard": {
+      "type": "dog-profile-dashboard",
+      "settings": {}
+    }
+  },
+  "order": ["dog_profile_dashboard"]
+}

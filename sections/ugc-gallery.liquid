@@ -1,0 +1,491 @@
+{% comment %}
+  Section: Real Dogs UGC Gallery
+  Shows user-generated content with chew duration timer overlays.
+  Builds social proof through real customer photos with verified chew times.
+{% endcomment %}
+
+<style>
+  .ugc-gallery {
+    padding: 72px 24px;
+    background: #FDFCF7;
+    font-family: var(--font-body-family, -apple-system, sans-serif);
+  }
+
+  .ugc-gallery__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .ugc-gallery__header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .ugc-gallery__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #b45309;
+    margin-bottom: 12px;
+  }
+
+  .ugc-gallery__title {
+    font-size: clamp(26px, 3.5vw, 38px);
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 12px;
+    line-height: 1.2;
+  }
+
+  .ugc-gallery__subtitle {
+    font-size: 16px;
+    color: #6b7280;
+    margin: 0 auto;
+    max-width: 550px;
+    line-height: 1.5;
+  }
+
+  /* Stats bar */
+  .ugc-gallery__stats {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  .ugc-stat {
+    text-align: center;
+  }
+
+  .ugc-stat__value {
+    font-size: 28px;
+    font-weight: 800;
+    color: #1a1a1a;
+    line-height: 1;
+  }
+
+  .ugc-stat__label {
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Grid */
+  .ugc-gallery__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .ugc-card {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 1;
+    background: #f3f4f6;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  .ugc-card:hover {
+    transform: scale(1.02);
+  }
+
+  .ugc-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Timer overlay */
+  .ugc-card__timer {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+
+  .ugc-card__timer svg {
+    flex-shrink: 0;
+    opacity: 0.8;
+  }
+
+  /* Breed badge */
+  .ugc-card__breed {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 10px 14px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .ugc-card__breed-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ugc-card__dog-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+
+  .ugc-card__breed-name {
+    font-size: 12px;
+    color: #6b7280;
+  }
+
+  .ugc-card__verified {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #16a34a;
+  }
+
+  /* Community CTA */
+  .ugc-gallery__cta {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .ugc-gallery__cta-text {
+    font-size: 15px;
+    color: #6b7280;
+    margin-bottom: 16px;
+  }
+
+  .ugc-gallery__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: #1a1a1a;
+    color: #fff;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .ugc-gallery__btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    color: #fff;
+  }
+
+  /* Personalized banner */
+  .ugc-gallery__personalized {
+    display: none;
+    background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+    border: 1px solid #bbf7d0;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+    text-align: center;
+    font-size: 14px;
+    color: #15803d;
+    font-weight: 500;
+  }
+
+  .ugc-gallery__personalized.is-visible {
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .ugc-gallery { padding: 56px 16px; }
+    .ugc-gallery__grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .ugc-gallery__stats { gap: 20px; }
+    .ugc-stat__value { font-size: 22px; }
+    .ugc-card__breed { padding: 8px 10px; }
+    .ugc-card__dog-name { font-size: 12px; }
+    .ugc-card__breed-name { font-size: 10px; }
+    .ugc-card__timer { font-size: 11px; padding: 5px 9px; }
+  }
+</style>
+
+<section class="ugc-gallery">
+  <div class="ugc-gallery__inner">
+
+    <div class="ugc-gallery__header">
+      <div class="ugc-gallery__eyebrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        {{ section.settings.eyebrow }}
+      </div>
+      <h2 class="ugc-gallery__title">{{ section.settings.title }}</h2>
+      <p class="ugc-gallery__subtitle">{{ section.settings.subtitle }}</p>
+    </div>
+
+    <!-- Personalized message (shows if dog profile exists) -->
+    <div class="ugc-gallery__personalized" id="ugc-personalized"></div>
+
+    <!-- Community stats -->
+    <div class="ugc-gallery__stats">
+      <div class="ugc-stat">
+        <div class="ugc-stat__value">{{ section.settings.stat_dogs | default: '10,000+' }}</div>
+        <div class="ugc-stat__label">Happy Dogs</div>
+      </div>
+      <div class="ugc-stat">
+        <div class="ugc-stat__value">{{ section.settings.stat_minutes | default: '67 min' }}</div>
+        <div class="ugc-stat__label">Avg Chew Time</div>
+      </div>
+      <div class="ugc-stat">
+        <div class="ugc-stat__value">{{ section.settings.stat_rating | default: '4.9/5' }}</div>
+        <div class="ugc-stat__label">Owner Rating</div>
+      </div>
+    </div>
+
+    <!-- UGC Grid -->
+    <div class="ugc-gallery__grid">
+      {% for block in section.blocks %}
+        <div class="ugc-card" {{ block.shopify_attributes }}>
+          {% if block.settings.image != blank %}
+            {{ block.settings.image | image_url: width: 600 | image_tag:
+              class: 'ugc-card__img',
+              loading: 'lazy',
+              alt: block.settings.dog_name | append: ' - ' | append: block.settings.breed
+            }}
+          {% else %}
+            <div class="ugc-card__img" style="background: linear-gradient(135deg, #f3f4f6, #e5e7eb);"></div>
+          {% endif %}
+
+          <!-- Timer overlay -->
+          <div class="ugc-card__timer">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            {{ block.settings.duration }}
+          </div>
+
+          <!-- Breed info -->
+          <div class="ugc-card__breed">
+            <div class="ugc-card__breed-info">
+              <span class="ugc-card__dog-name">{{ block.settings.dog_name }}</span>
+              <span class="ugc-card__breed-name">{{ block.settings.breed }}{% if block.settings.weight != blank %} · {{ block.settings.weight }}{% endif %}</span>
+            </div>
+            {% if block.settings.verified %}
+              <span class="ugc-card__verified">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Verified
+              </span>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Community CTA -->
+    <div class="ugc-gallery__cta">
+      <p class="ugc-gallery__cta-text">{{ section.settings.cta_text }}</p>
+      <a href="{{ section.settings.cta_link | default: '#' }}" class="ugc-gallery__btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        {{ section.settings.cta_btn | default: 'Share Your Dog' }}
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function() {
+  // Personalization: show breed-specific message if profile exists
+  function personalize() {
+    if (typeof PrimeDogProfile === 'undefined') return;
+    if (!PrimeDogProfile.hasProfile()) return;
+
+    var profile = PrimeDogProfile.get();
+    var el = document.getElementById('ugc-personalized');
+    if (!el || !profile.breed) return;
+
+    var breedLabel = profile.breed.replace(/_/g, ' ').replace(/\b\w/g, function(l) { return l.toUpperCase(); });
+    var dogName = profile.dogName || 'your ' + breedLabel;
+    var rec = PrimeDogProfile.getRecommendation();
+
+    if (rec) {
+      el.innerHTML = '🐾 Dogs like ' + dogName + ' typically chew for <strong>' + rec.durationRange + '</strong>. See how other ' + breedLabel + 's do below!';
+      el.classList.add('is-visible');
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', personalize);
+  } else {
+    personalize();
+  }
+
+  // Also listen for profile ready event
+  window.addEventListener('prime:profile:ready', personalize);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "UGC Gallery",
+  "tag": "div",
+  "class": "ugc-gallery-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Real Dogs, Real Duration"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "See How Long It Really Lasts"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Real photos from real customers. Every timer is verified by our community."
+    },
+    {
+      "type": "header",
+      "content": "Community Stats"
+    },
+    {
+      "type": "text",
+      "id": "stat_dogs",
+      "label": "Happy Dogs Count",
+      "default": "10,000+"
+    },
+    {
+      "type": "text",
+      "id": "stat_minutes",
+      "label": "Average Chew Time",
+      "default": "67 min"
+    },
+    {
+      "type": "text",
+      "id": "stat_rating",
+      "label": "Owner Rating",
+      "default": "4.9/5"
+    },
+    {
+      "type": "header",
+      "content": "CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text",
+      "default": "Got a photo of your dog enjoying their chew? Share it with the community!"
+    },
+    {
+      "type": "text",
+      "id": "cta_btn",
+      "label": "CTA Button Text",
+      "default": "Share Your Dog"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ugc_photo",
+      "name": "Dog Photo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo"
+        },
+        {
+          "type": "text",
+          "id": "dog_name",
+          "label": "Dog Name",
+          "default": "Max"
+        },
+        {
+          "type": "text",
+          "id": "breed",
+          "label": "Breed",
+          "default": "Golden Retriever"
+        },
+        {
+          "type": "text",
+          "id": "weight",
+          "label": "Weight",
+          "default": "65 lbs"
+        },
+        {
+          "type": "text",
+          "id": "duration",
+          "label": "Chew Duration",
+          "default": "72 min"
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Verified Purchase",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "UGC Gallery",
+      "blocks": [
+        {
+          "type": "ugc_photo",
+          "settings": { "dog_name": "Cooper", "breed": "Labrador", "weight": "72 lbs", "duration": "58 min", "verified": true }
+        },
+        {
+          "type": "ugc_photo",
+          "settings": { "dog_name": "Luna", "breed": "French Bulldog", "weight": "24 lbs", "duration": "84 min", "verified": true }
+        },
+        {
+          "type": "ugc_photo",
+          "settings": { "dog_name": "Bear", "breed": "German Shepherd", "weight": "85 lbs", "duration": "45 min", "verified": true }
+        },
+        {
+          "type": "ugc_photo",
+          "settings": { "dog_name": "Daisy", "breed": "Golden Retriever", "weight": "58 lbs", "duration": "72 min", "verified": true }
+        },
+        {
+          "type": "ugc_photo",
+          "settings": { "dog_name": "Milo", "breed": "Beagle", "weight": "28 lbs", "duration": "91 min", "verified": true }
+        },
+        {
+          "type": "ugc_photo",
+          "settings": { "dog_name": "Bella", "breed": "Poodle", "weight": "45 lbs", "duration": "105 min", "verified": true }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

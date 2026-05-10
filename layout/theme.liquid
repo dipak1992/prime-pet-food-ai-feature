@@ -42,6 +42,7 @@
     {% render 'meta-tags' %}
 
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'dog-profile.js' | asset_url }}" defer="defer"></script>
 
     {%- liquid
       # Fonts
@@ -787,5 +788,33 @@
     {% if request.page_type == 'product' %}
       {% render 'sticky-add-to-cart', product: product %}
     {% endif %}
+
+    <script>
+      (function() {
+        function updateMyDogLink() {
+          if (typeof PrimeDogProfile === 'undefined') return;
+          var link = document.getElementById('header-my-dog-link');
+          if (!link) return;
+          if (PrimeDogProfile.hasProfile()) {
+            var profile = PrimeDogProfile.get();
+            var personality = PrimeDogProfile.getPersonality();
+            var emoji = personality ? personality.emoji : '🐾';
+            var label = profile.dogName ? profile.dogName + "'s Profile" : 'My Dog';
+            var emojiEl = document.getElementById('header-my-dog-emoji');
+            var labelEl = document.getElementById('header-my-dog-label');
+            if (emojiEl) emojiEl.textContent = emoji;
+            if (labelEl) labelEl.textContent = label;
+            link.style.display = 'inline-flex';
+          }
+        }
+        window.addEventListener('prime:profile:ready', updateMyDogLink);
+        window.addEventListener('prime:profile:updated', updateMyDogLink);
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', function() { setTimeout(updateMyDogLink, 300); });
+        } else {
+          setTimeout(updateMyDogLink, 300);
+        }
+      })();
+    </script>
   </body>
 </html>

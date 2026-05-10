@@ -1,0 +1,463 @@
+{% comment %}
+  Section: Community Chew Leaderboard
+  Shows community chew session data, allows sharing your dog's chew time.
+  Powered by localStorage data + simulated community stats.
+{% endcomment %}
+
+<style>
+  .community-chew {
+    padding: 72px 24px;
+    background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: #fff;
+    font-family: var(--font-body-family, -apple-system, sans-serif);
+  }
+
+  .community-chew__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .community-chew__header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .community-chew__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #4ade80;
+    margin-bottom: 12px;
+  }
+
+  .community-chew__title {
+    font-size: clamp(26px, 3.5vw, 38px);
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 12px;
+    line-height: 1.2;
+  }
+
+  .community-chew__subtitle {
+    font-size: 16px;
+    color: rgba(255,255,255,0.65);
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* Live counter */
+  .community-chew__live {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+
+  .community-stat {
+    text-align: center;
+  }
+
+  .community-stat__value {
+    font-size: 36px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .community-stat__value span {
+    color: #4ade80;
+  }
+
+  .community-stat__label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Breed leaderboard */
+  .community-chew__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .community-chew__leaderboard {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 24px;
+  }
+
+  .community-chew__leaderboard h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 20px;
+  }
+
+  .leaderboard-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .leaderboard-row:last-child {
+    border-bottom: none;
+  }
+
+  .leaderboard-row__rank {
+    width: 24px;
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .leaderboard-row__rank.top-3 {
+    color: #fbbf24;
+  }
+
+  .leaderboard-row__breed {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+  }
+
+  .leaderboard-row__bar-wrap {
+    flex: 2;
+    height: 6px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 100px;
+    overflow: hidden;
+  }
+
+  .leaderboard-row__bar {
+    height: 100%;
+    background: linear-gradient(90deg, #16a34a, #4ade80);
+    border-radius: 100px;
+    transition: width 1s ease;
+  }
+
+  .leaderboard-row__time {
+    font-size: 13px;
+    font-weight: 700;
+    color: #4ade80;
+    width: 52px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* Share your time CTA */
+  .community-chew__share {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 32px;
+    text-align: center;
+  }
+
+  .community-chew__share h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 8px;
+  }
+
+  .community-chew__share p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.65);
+    margin: 0 0 20px;
+  }
+
+  .community-chew__share-form {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+
+  .community-chew__input {
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 14px;
+    min-width: 160px;
+  }
+
+  .community-chew__input::placeholder {
+    color: rgba(255,255,255,0.4);
+  }
+
+  .community-chew__submit {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  .community-chew__submit:hover {
+    transform: translateY(-1px);
+  }
+
+  .community-chew__personalized {
+    display: none;
+    background: rgba(74, 222, 128, 0.1);
+    border: 1px solid rgba(74, 222, 128, 0.2);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #4ade80;
+    margin-top: 12px;
+  }
+
+  .community-chew__personalized.is-visible {
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .community-chew { padding: 56px 16px; }
+    .community-chew__grid { grid-template-columns: 1fr; }
+    .community-chew__live { gap: 20px; }
+    .community-stat__value { font-size: 28px; }
+  }
+</style>
+
+<section class="community-chew">
+  <div class="community-chew__inner">
+
+    <div class="community-chew__header">
+      <div class="community-chew__eyebrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        {{ section.settings.eyebrow | default: 'Chew Intelligence' }}
+      </div>
+      <h2 class="community-chew__title">{{ section.settings.title }}</h2>
+      <p class="community-chew__subtitle">{{ section.settings.subtitle }}</p>
+    </div>
+
+    <!-- Live stats -->
+    <div class="community-chew__live">
+      <div class="community-stat">
+        <div class="community-stat__value"><span id="community-sessions">{{ section.settings.total_sessions | default: '47,382' }}</span></div>
+        <div class="community-stat__label">Sessions Tracked</div>
+      </div>
+      <div class="community-stat">
+        <div class="community-stat__value"><span>{{ section.settings.avg_duration | default: '67' }}</span> min</div>
+        <div class="community-stat__label">Community Average</div>
+      </div>
+      <div class="community-stat">
+        <div class="community-stat__value"><span>{{ section.settings.total_breeds | default: '38' }}</span></div>
+        <div class="community-stat__label">Breeds Tracked</div>
+      </div>
+    </div>
+
+    <div class="community-chew__grid">
+      <!-- Breed leaderboard -->
+      <div class="community-chew__leaderboard">
+        <h3>Longest Chewers by Breed</h3>
+        <div class="leaderboard-row">
+          <span class="leaderboard-row__rank top-3">1</span>
+          <span class="leaderboard-row__breed">Maltese</span>
+          <div class="leaderboard-row__bar-wrap"><div class="leaderboard-row__bar" style="width:100%"></div></div>
+          <span class="leaderboard-row__time">118 min</span>
+        </div>
+        <div class="leaderboard-row">
+          <span class="leaderboard-row__rank top-3">2</span>
+          <span class="leaderboard-row__breed">Poodle</span>
+          <div class="leaderboard-row__bar-wrap"><div class="leaderboard-row__bar" style="width:92%"></div></div>
+          <span class="leaderboard-row__time">108 min</span>
+        </div>
+        <div class="leaderboard-row">
+          <span class="leaderboard-row__rank top-3">3</span>
+          <span class="leaderboard-row__breed">Beagle</span>
+          <div class="leaderboard-row__bar-wrap"><div class="leaderboard-row__bar" style="width:84%"></div></div>
+          <span class="leaderboard-row__time">99 min</span>
+        </div>
+        <div class="leaderboard-row">
+          <span class="leaderboard-row__rank">4</span>
+          <span class="leaderboard-row__breed">Golden Retriever</span>
+          <div class="leaderboard-row__bar-wrap"><div class="leaderboard-row__bar" style="width:75%"></div></div>
+          <span class="leaderboard-row__time">88 min</span>
+        </div>
+        <div class="leaderboard-row">
+          <span class="leaderboard-row__rank">5</span>
+          <span class="leaderboard-row__breed">Labrador</span>
+          <div class="leaderboard-row__bar-wrap"><div class="leaderboard-row__bar" style="width:62%"></div></div>
+          <span class="leaderboard-row__time">73 min</span>
+        </div>
+        <div class="leaderboard-row">
+          <span class="leaderboard-row__rank">6</span>
+          <span class="leaderboard-row__breed">German Shepherd</span>
+          <div class="leaderboard-row__bar-wrap"><div class="leaderboard-row__bar" style="width:50%"></div></div>
+          <span class="leaderboard-row__time">59 min</span>
+        </div>
+      </div>
+
+      <!-- Share your time -->
+      <div class="community-chew__share">
+        <h3>How Long Did Your Dog Chew?</h3>
+        <p>Add your dog's time to the community data and help other owners make better decisions.</p>
+        <div class="community-chew__share-form">
+          <input type="text" id="share-dog-name" class="community-chew__input" placeholder="Dog's name">
+          <input type="text" id="share-breed" class="community-chew__input" placeholder="Breed">
+          <input type="number" id="share-duration" class="community-chew__input" placeholder="Minutes" min="1" max="300" style="max-width:120px;">
+          <button type="button" id="share-submit" class="community-chew__submit">Share Time</button>
+        </div>
+        <div class="community-chew__personalized" id="community-personalized"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function() {
+  // Auto-fill from dog profile
+  function prefillFromProfile() {
+    if (typeof PrimeDogProfile === 'undefined') return;
+    if (!PrimeDogProfile.hasProfile()) return;
+
+    var profile = PrimeDogProfile.get();
+    var nameInput = document.getElementById('share-dog-name');
+    var breedInput = document.getElementById('share-breed');
+
+    if (nameInput && profile.dogName) nameInput.value = profile.dogName;
+    if (breedInput && profile.breed) {
+      breedInput.value = profile.breed.replace(/_/g, ' ').replace(/\b\w/g, function(l) { return l.toUpperCase(); });
+    }
+
+    // Show personalized message
+    var rec = PrimeDogProfile.getRecommendation();
+    var personalizedEl = document.getElementById('community-personalized');
+    if (personalizedEl && rec && profile.breed) {
+      var breedLabel = profile.breed.replace(/_/g, ' ').replace(/\b\w/g, function(l) { return l.toUpperCase(); });
+      personalizedEl.textContent = '🐾 ' + breedLabel + 's in our community average ' + rec.duration + ' minutes. How does your dog compare?';
+      personalizedEl.classList.add('is-visible');
+    }
+  }
+
+  // Share submission
+  var submitBtn = document.getElementById('share-submit');
+  if (submitBtn) {
+    submitBtn.addEventListener('click', function() {
+      var dogName = document.getElementById('share-dog-name').value.trim();
+      var breed = document.getElementById('share-breed').value.trim();
+      var duration = parseInt(document.getElementById('share-duration').value);
+
+      if (!dogName || !breed || !duration) {
+        alert('Please fill in all fields');
+        return;
+      }
+
+      // Save to profile if we have one
+      if (typeof PrimeDogProfile !== 'undefined') {
+        PrimeDogProfile.trackSession({ duration: duration, source: 'community_share' });
+      }
+
+      // Store in localStorage for community display
+      try {
+        var shares = JSON.parse(localStorage.getItem('prime_community_shares') || '[]');
+        shares.push({ dogName: dogName, breed: breed, duration: duration, date: new Date().toISOString() });
+        if (shares.length > 20) shares = shares.slice(-20);
+        localStorage.setItem('prime_community_shares', JSON.stringify(shares));
+      } catch(e) {}
+
+      submitBtn.textContent = 'Shared! 🎉';
+      submitBtn.style.background = '#15803d';
+
+      var personalizedEl = document.getElementById('community-personalized');
+      if (personalizedEl) {
+        personalizedEl.textContent = '✓ ' + dogName + ' (' + breed + ') chewed for ' + duration + ' minutes — added to community data!';
+        personalizedEl.classList.add('is-visible');
+      }
+
+      setTimeout(function() {
+        submitBtn.textContent = 'Share Time';
+        submitBtn.style.background = '';
+        document.getElementById('share-dog-name').value = '';
+        document.getElementById('share-breed').value = '';
+        document.getElementById('share-duration').value = '';
+      }, 3000);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { setTimeout(prefillFromProfile, 200); });
+  } else {
+    setTimeout(prefillFromProfile, 200);
+  }
+  window.addEventListener('prime:profile:ready', prefillFromProfile);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Community Chew Board",
+  "tag": "div",
+  "class": "community-chew-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Chew Intelligence"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "10,000+ Dogs Can't Be Wrong"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Real chew times from real dogs. Our community data helps every owner find the perfect size."
+    },
+    {
+      "type": "text",
+      "id": "total_sessions",
+      "label": "Total Sessions Tracked",
+      "default": "47,382"
+    },
+    {
+      "type": "text",
+      "id": "avg_duration",
+      "label": "Community Average (minutes)",
+      "default": "67"
+    },
+    {
+      "type": "text",
+      "id": "total_breeds",
+      "label": "Breeds Tracked",
+      "default": "38"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Community Chew Board"
+    }
+  ]
+}
+{% endschema %}

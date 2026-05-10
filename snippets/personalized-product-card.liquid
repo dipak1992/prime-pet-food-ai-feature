@@ -1,0 +1,161 @@
+{%- comment -%}
+  Personalized Product Card
+  Enhances standard product cards with dog-profile-based personalization.
+  Shows "Perfect for [Dog Name]" badge, estimated duration, and match score.
+  Usage: {% render 'personalized-product-card', product: product %}
+{%- endcomment -%}
+
+<div class="pers-card" data-product-id="{{ product.id }}">
+  <style>
+    .pers-card {
+      position: relative;
+      font-family: var(--font-body-family, -apple-system, sans-serif);
+    }
+
+    .pers-card__match-badge {
+      display: none;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 10;
+      align-items: center;
+      gap: 5px;
+      background: rgba(22, 163, 74, 0.92);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      box-shadow: 0 2px 8px rgba(22, 163, 74, 0.3);
+    }
+
+    .pers-card__match-badge.is-visible {
+      display: inline-flex;
+    }
+
+    .pers-card__duration-overlay {
+      display: none;
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      right: 10px;
+      z-index: 10;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 12px;
+    }
+
+    .pers-card__duration-overlay.is-visible {
+      display: flex;
+    }
+
+    .pers-card__duration-label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 600;
+    }
+
+    .pers-card__duration-label svg {
+      opacity: 0.8;
+    }
+
+    .pers-card__match-score {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: #4ade80;
+      font-weight: 700;
+    }
+  </style>
+
+  <!-- Match badge (shown when profile exists) -->
+  <div class="pers-card__match-badge" id="match-badge-{{ product.id }}">
+    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+    <span id="match-text-{{ product.id }}">Recommended</span>
+  </div>
+
+  <!-- Product image wrapper -->
+  <div style="position:relative;">
+    {% if product.featured_image %}
+      {{ product.featured_image | image_url: width: 600 | image_tag:
+        loading: 'lazy',
+        alt: product.title | escape,
+        style: 'width:100%;border-radius:12px;display:block;'
+      }}
+    {% endif %}
+
+    <!-- Duration overlay -->
+    <div class="pers-card__duration-overlay" id="duration-overlay-{{ product.id }}">
+      <div class="pers-card__duration-label">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span id="duration-text-{{ product.id }}">~60 min</span>
+      </div>
+      <div class="pers-card__match-score" id="match-score-{{ product.id }}">
+        ★ Great match
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function() {
+    var productId = '{{ product.id }}';
+    var productTitle = {{ product.title | json }};
+
+    function personalize() {
+      if (typeof PrimeDogProfile === 'undefined') return;
+      if (!PrimeDogProfile.hasProfile()) return;
+
+      var rec = PrimeDogProfile.getRecommendation();
+      var profile = PrimeDogProfile.get();
+      if (!rec) return;
+
+      var dogName = profile.dogName || 'your dog';
+
+      // Show duration overlay
+      var durationOverlay = document.getElementById('duration-overlay-' + productId);
+      var durationText = document.getElementById('duration-text-' + productId);
+      if (durationOverlay && durationText) {
+        durationText.textContent = '~' + rec.duration + ' min';
+        durationOverlay.classList.add('is-visible');
+      }
+
+      // Show match badge if this product matches recommendation
+      var matchBadge = document.getElementById('match-badge-' + productId);
+      var matchText = document.getElementById('match-text-' + productId);
+      if (matchBadge && matchText) {
+        var isRecommended = productTitle.toLowerCase().includes(rec.variantTitle.toLowerCase()) ||
+                            productTitle.toLowerCase().includes(rec.size.toLowerCase().split(' ')[0]);
+
+        if (isRecommended) {
+          matchText.textContent = 'Perfect for ' + dogName;
+          matchBadge.classList.add('is-visible');
+
+          var scoreEl = document.getElementById('match-score-' + productId);
+          if (scoreEl) scoreEl.textContent = '★ Best match';
+        } else {
+          matchText.textContent = 'Good for ' + dogName;
+          matchBadge.style.background = 'rgba(180, 83, 9, 0.9)';
+          matchBadge.classList.add('is-visible');
+        }
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function() { setTimeout(personalize, 200); });
+    } else {
+      setTimeout(personalize, 200);
+    }
+    window.addEventListener('prime:profile:ready', personalize);
+    window.addEventListener('prime:profile:updated', personalize);
+  })();
+  </script>
+</div>
