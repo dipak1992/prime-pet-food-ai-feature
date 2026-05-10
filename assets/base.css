@@ -5900,3 +5900,291 @@ html.its-night .hidden-night {
   fill: var(--flash-sale-color-light);
   padding: 1px;
 }
+
+/* Prime Pet Food typography system
+   Premium, mobile-first type layer for the full Shopify storefront. */
+:root {
+  --prime-font-sans: var(--font-body-family), ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Arial, sans-serif;
+  --prime-font-display: var(--font-heading-family), var(--prime-font-sans);
+  --prime-text-strong: 36, 19, 13;
+  --prime-text-body: 61, 42, 34;
+  --prime-text-muted: 112, 91, 78;
+  --prime-accent: 230, 103, 17;
+
+  --prime-type-xs: clamp(1.15rem, 1.1rem + 0.12vw, 1.25rem);
+  --prime-type-sm: clamp(1.3rem, 1.22rem + 0.18vw, 1.45rem);
+  --prime-type-base: clamp(1.55rem, 1.48rem + 0.2vw, 1.7rem);
+  --prime-type-md: clamp(1.75rem, 1.62rem + 0.32vw, 2rem);
+  --prime-type-lg: clamp(2.15rem, 1.92rem + 0.7vw, 2.8rem);
+  --prime-type-xl: clamp(2.8rem, 2.32rem + 1.35vw, 4rem);
+  --prime-type-2xl: clamp(3.5rem, 2.7rem + 2.35vw, 6.2rem);
+  --prime-type-hero: clamp(4.2rem, 3.05rem + 3.85vw, 7.8rem);
+
+  --prime-line-tight: 1.08;
+  --prime-line-heading: 1.14;
+  --prime-line-copy: 1.62;
+  --prime-line-ui: 1.28;
+
+  --font-body-letter-spacing: 0;
+  --font-heading-letter-spacing: 0;
+  --font-button-letter-spacing: 0;
+  --font-heading-case: none;
+  --font-button-case: none;
+  --font-button-font-weight: 750;
+  --font-button-text-size: 1.5rem;
+}
+
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--prime-font-sans);
+  font-size: var(--prime-type-base);
+  line-height: var(--prime-line-copy);
+  letter-spacing: 0;
+  color: rgb(var(--prime-text-body));
+}
+
+h1, h2, h3, h4, h5, h6,
+.h0, .h1, .h2, .h3, .h4, .h5, .h6,
+.text-heading,
+.section-title,
+.b-main-title {
+  font-family: var(--prime-font-display);
+  font-weight: 760;
+  letter-spacing: 0;
+  line-height: var(--prime-line-heading);
+  color: rgb(var(--color-heading, var(--prime-text-strong)));
+  text-transform: none;
+  text-wrap: balance;
+}
+
+.hxl { font-size: var(--prime-type-hero); line-height: var(--prime-line-tight); }
+.h0, .h0-size { font-size: var(--prime-type-2xl); line-height: var(--prime-line-tight); }
+h1, .h1, .h1-size { font-size: var(--prime-type-2xl); line-height: var(--prime-line-tight); }
+h2, .h2, .h2-size { font-size: var(--prime-type-xl); }
+h3, .h3, .h3-size { font-size: var(--prime-type-lg); }
+h4, .h4, .h4-size { font-size: clamp(1.95rem, 1.78rem + 0.42vw, 2.35rem); }
+h5, .h5, .h5-size { font-size: clamp(1.7rem, 1.58rem + 0.25vw, 2rem); }
+h6, .h6, .h6-size { font-size: var(--prime-type-base); }
+
+p,
+li,
+.rte,
+.page__description,
+.product__description,
+.product__accordion,
+.article-template__content,
+.shopify-policy__body {
+  letter-spacing: 0;
+  line-height: var(--prime-line-copy);
+}
+
+.rte,
+.rte p,
+.rte li,
+.page__description,
+.article-template__content,
+.shopify-policy__body {
+  font-size: var(--prime-type-base);
+}
+
+.rte p,
+.rte ul,
+.rte ol {
+  max-width: 74ch;
+}
+
+.rte h1,
+.rte h2,
+.rte h3,
+.rte h4,
+.rte h5,
+.rte h6 {
+  margin: 1.4em 0 0.55em;
+}
+
+.caption,
+.caption-large,
+.caption-with-letter-spacing,
+.badge,
+.product-card-wrapper .caption-with-letter-spacing,
+.facets__summary,
+.cart-item__details,
+.price__regular,
+.price__sale,
+.predictive-search__item {
+  letter-spacing: 0;
+  line-height: var(--prime-line-ui);
+}
+
+.caption-with-letter-spacing,
+.badge {
+  font-size: var(--prime-type-xs);
+  font-weight: 700;
+  text-transform: none;
+}
+
+.section-title:not(:only-child),
+.b-main-title:has(+ .rte),
+.b-main-title:has(+ .section-view-all) {
+  margin-bottom: 1rem;
+}
+
+.b-main-title + .rte,
+.section-title + .rte,
+.b-main-title + .rte + .section-view-all,
+.b-main-title + .section-view-all {
+  max-width: 72rem;
+  margin-bottom: clamp(2.8rem, 4vw, 5.6rem);
+  color: rgb(var(--prime-text-muted));
+}
+
+.button,
+.button-label,
+.shopify-challenge__button,
+.customer button,
+button.shopify-payment-button__button--unbranded,
+.shopify-payment-button [role='button'],
+.cart__dynamic-checkout-buttons [role='button'] {
+  min-height: 4.8rem;
+  border-radius: max(var(--buttons-radius-outset), 1.2rem);
+  font-family: var(--prime-font-sans);
+  font-size: var(--font-button-text-size);
+  font-weight: var(--font-button-font-weight);
+  letter-spacing: 0;
+  line-height: var(--prime-line-ui);
+  text-transform: none;
+}
+
+.button,
+.button-label,
+.shopify-challenge__button,
+.customer button,
+button.shopify-payment-button__button--unbranded {
+  padding: 1.15em 1.55em;
+}
+
+@media screen and (min-width: 750px) {
+  .button,
+  .button-label,
+  .shopify-challenge__button,
+  .customer button,
+  button.shopify-payment-button__button--unbranded {
+    padding: 1.1em 1.9em;
+  }
+}
+
+.product-card-wrapper .card__heading,
+.card__heading,
+.article-card__title,
+.collection-card-wrapper .card__heading {
+  font-family: var(--prime-font-display);
+  font-size: clamp(1.55rem, 1.47rem + 0.22vw, 1.8rem);
+  font-weight: 720;
+  letter-spacing: 0;
+  line-height: 1.25;
+  text-transform: none;
+}
+
+.product-card-wrapper .card-information,
+.product-card-wrapper .price,
+.card__information,
+.article-card__excerpt,
+.cart-drawer,
+.cart__items,
+.footer,
+.footer p,
+.footer li,
+.field__input,
+.form__label,
+.select__select,
+input,
+textarea,
+select {
+  font-family: var(--prime-font-sans);
+  letter-spacing: 0;
+}
+
+.field__input,
+.form__label,
+.select__select,
+input,
+textarea,
+select {
+  font-size: 1.6rem;
+  line-height: 1.45;
+}
+
+.price {
+  font-weight: 760;
+  letter-spacing: 0;
+}
+
+.t0 { font-size: clamp(1.85rem, 1.7rem + 0.42vw, 2.2rem); --c-font-size: clamp(1.85rem, 1.7rem + 0.42vw, 2.2rem); }
+.t1 { font-size: clamp(1.7rem, 1.6rem + 0.28vw, 1.95rem); --c-font-size: clamp(1.7rem, 1.6rem + 0.28vw, 1.95rem); }
+.t2 { font-size: clamp(1.6rem, 1.52rem + 0.22vw, 1.8rem); --c-font-size: clamp(1.6rem, 1.52rem + 0.22vw, 1.8rem); }
+.t3 { font-size: clamp(1.5rem, 1.45rem + 0.16vw, 1.65rem); --c-font-size: clamp(1.5rem, 1.45rem + 0.16vw, 1.65rem); }
+.t4 { font-size: clamp(1.4rem, 1.36rem + 0.12vw, 1.52rem); --c-font-size: clamp(1.4rem, 1.36rem + 0.12vw, 1.52rem); }
+.t5 { font-size: clamp(1.3rem, 1.26rem + 0.12vw, 1.42rem); --c-font-size: clamp(1.3rem, 1.26rem + 0.12vw, 1.42rem); }
+.t6, .t7, .t8 { font-size: var(--prime-type-xs); --c-font-size: var(--prime-type-xs); }
+
+.announcement-bar,
+.announcement-bar *,
+.scrolling-text,
+.scrolling-text *,
+.ypc-scrolling,
+.ypc-scrolling * {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.prime-chatbot,
+.chew-analyzer,
+.chew-analyzer * {
+  font-family: var(--prime-font-sans);
+  letter-spacing: 0;
+}
+
+@media screen and (max-width: 749.98px) {
+  :root {
+    --font-button-text-size: 1.45rem;
+  }
+
+  body {
+    font-size: 1.6rem;
+    line-height: 1.62;
+  }
+
+  .section__inner {
+    padding-top: calc(var(--spacing-section) * 0.82);
+    padding-bottom: calc(var(--spacing-section) * 0.82);
+  }
+
+  .rte,
+  .rte p,
+  .rte li,
+  .page__description,
+  .article-template__content,
+  .shopify-policy__body {
+    font-size: 1.6rem;
+  }
+
+  .caption,
+  .caption-large,
+  .caption-with-letter-spacing {
+    font-size: 1.25rem;
+  }
+}
+
+body :where(h1, h2, h3, h4, h5, h6, .h0, .h1, .h2, .h3, .h4, .h5, .h6, .section-title, .b-main-title, .card__heading, .article-card__title, .product__title) {
+  font-family: var(--prime-font-display) !important;
+  letter-spacing: 0 !important;
+}
+
+body :where(p, li, a, button, label, input, textarea, select, summary, small, td, th, .button, .badge, .caption, .caption-large, .caption-with-letter-spacing, .price, .rte, .field__input, .form__label) {
+  letter-spacing: 0;
+}
