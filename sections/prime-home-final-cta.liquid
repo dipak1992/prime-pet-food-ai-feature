@@ -1,0 +1,153 @@
+<section class="prime-home-final-cta" aria-labelledby="PrimeHomeFinalCtaTitle">
+  <div class="phfc-shell">
+    <p class="phfc-kicker">Ready for calmer chew time?</p>
+    <h2 id="PrimeHomeFinalCtaTitle">Choose the yak chew that fits your dog.</h2>
+    <p>
+      Start with Prime Pet Food's best-selling Himalayan yak chews or estimate chew duration
+      before you buy.
+    </p>
+    <div class="phfc-actions" aria-label="Homepage final actions">
+      <a href="/collections/all" class="phfc-button phfc-button--primary">Shop yak chews</a>
+      <a href="/pages/how-long-will-this-last-for-my-dog" class="phfc-button phfc-button--secondary">Estimate chew duration</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .prime-home-final-cta {
+    background: #fffaf2;
+    color: #171512;
+    font-family: var(--prime-font-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+    padding: 74px 0 86px;
+  }
+
+  .prime-home-final-cta * {
+    box-sizing: border-box;
+  }
+
+  .phfc-shell {
+    width: min(920px, calc(100% - 32px));
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .phfc-kicker {
+    margin: 0 0 12px;
+    color: #b85f32;
+    font-size: 12px;
+    line-height: 1.25;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    font-weight: 780;
+  }
+
+  .phfc-shell h2 {
+    margin: 0;
+    color: #171512;
+    font-family: var(--prime-font-display, var(--prime-font-sans, inherit));
+    font-size: 46px;
+    line-height: 1.08;
+    font-weight: 735;
+    letter-spacing: 0;
+  }
+
+  .phfc-shell p:not(.phfc-kicker) {
+    max-width: 640px;
+    margin: 18px auto 0;
+    color: #5f574e;
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  .phfc-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+  }
+
+  .phfc-button {
+    display: inline-flex;
+    min-height: 52px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 15px 26px;
+    font-size: 13px;
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    font-weight: 780;
+    text-decoration: none;
+    transition: transform 180ms ease, background 180ms ease, border-color 180ms ease, color 180ms ease;
+  }
+
+  .phfc-button:hover {
+    transform: translateY(-1px);
+  }
+
+  .phfc-button--primary {
+    background: #b85f32;
+    color: #ffffff;
+  }
+
+  .phfc-button--primary:hover {
+    background: #94451f;
+    color: #ffffff;
+  }
+
+  .phfc-button--secondary {
+    border: 1px solid rgba(55, 43, 31, 0.18);
+    background: #ffffff;
+    color: #171512;
+  }
+
+  .phfc-button--secondary:hover {
+    border-color: rgba(184, 95, 50, 0.42);
+    color: #94451f;
+  }
+
+  @media (max-width: 640px) {
+    .prime-home-final-cta {
+      padding: 58px 0 68px;
+    }
+
+    .phfc-shell {
+      width: min(100% - 24px, 920px);
+      text-align: left;
+    }
+
+    .phfc-shell h2 {
+      font-size: 34px;
+    }
+
+    .phfc-shell p:not(.phfc-kicker) {
+      margin-left: 0;
+      font-size: 16px;
+    }
+
+    .phfc-actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .phfc-button {
+      width: 100%;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Prime home final CTA",
+  "tag": "section",
+  "class": "section section-prime-home-final-cta",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Prime home final CTA"
+    }
+  ]
+}
+{% endschema %}
