@@ -2,6 +2,18 @@
 {{ 'section-blog-post.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'article-images.js' | asset_url }}" defer="defer"></script>
 
+{%- liquid
+  capture generated_article_image
+    render 'generated-article-image', article: article, output: 'filename'
+  endcapture
+  assign generated_article_image = generated_article_image | strip
+
+  capture generated_article_image_alt
+    render 'generated-article-image', article: article, output: 'alt'
+  endcapture
+  assign generated_article_image_alt = generated_article_image_alt | strip
+-%}
+
 <div class="color-{{ section.settings.color_scheme }} isolate gradient">
   <article class="article-template__article section__inner {{ section.settings.top_padding }} {{ section.settings.bottom_padding }}">
     {%- for block in section.blocks -%}
@@ -61,6 +73,50 @@
                   width="{{ article.image.width }}"
                   height="{{ article.image.height }}"
                   alt="{{ article.image.alt | escape }}"
+                >
+              </div>
+            </div>
+          {%- elsif generated_article_image != blank -%}
+            {%- liquid
+              assign media_aspect_ratio = block.settings.image_ratio
+
+              if media_aspect_ratio != 'custom'
+                assign ratio = 1.77
+                if media_aspect_ratio == 'landscape_wide'
+                  assign ratio = 1.77
+                elsif media_aspect_ratio == 'landscape_wider'
+                  assign ratio = 2.33
+                elsif media_aspect_ratio == 'landscape'
+                  assign ratio = 1.33
+                elsif media_aspect_ratio == 'square'
+                  assign ratio = 1
+                endif
+              endif
+            -%}
+
+            <div
+              class="page-width page-width--narrow article-template__block article-template__block--image{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+              style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
+              {{ block.shopify_attributes }}
+            >
+              <div
+                class="media ratio global-media-settings{% if block.settings.enlarge_image %} article-template__image-large{% endif %}"
+              >
+                <img
+                  srcset="
+                    {{ generated_article_image | asset_img_url: '350x' }} 350w,
+                    {{ generated_article_image | asset_img_url: '750x' }} 750w,
+                    {{ generated_article_image | asset_img_url: '1100x' }} 1100w,
+                    {{ generated_article_image | asset_img_url: '1500x' }} 1500w,
+                    {{ generated_article_image | asset_url }} 1672w
+                  "
+                  sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px) calc(100vw - 10rem), 100vw"
+                  src="{{ generated_article_image | asset_img_url: '1100x' }}"
+                  loading="eager"
+                  fetchpriority="high"
+                  width="1672"
+                  height="941"
+                  alt="{{ generated_article_image_alt | escape }}"
                 >
               </div>
             </div>
@@ -231,7 +287,11 @@
         {% endif %}
         {% if article.image %}
           "image": [
-            {{ article | image_url: width: 1920 | prepend: "https:" | json }}
+            {{ article.image | image_url: width: 1920 | prepend: "https:" | json }}
+          ],
+        {% elsif generated_article_image != blank %}
+          "image": [
+            {{ generated_article_image | asset_url | prepend: "https:" | json }}
           ],
         {% endif %}
         "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},

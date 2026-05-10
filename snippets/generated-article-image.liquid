@@ -1,0 +1,32 @@
+{%- liquid
+  assign image_file = ''
+  assign image_alt = article.title
+
+  if article != blank
+    assign article_handle = article.handle | default: ''
+    assign article_title = article.title | downcase
+
+    if article_handle contains 'how-long' or article_handle contains 'longest-lasting' or article_handle contains 'bully-sticks'
+      assign image_file = 'prime-blog-yak-chew-duration.jpg'
+      assign image_alt = 'Himalayan yak cheese chews with a timer for chew duration guidance'
+    elsif article_handle contains 'aggressive'
+      assign image_file = 'prime-blog-aggressive-chewer.jpg'
+      assign image_alt = 'Large dog calmly chewing a Himalayan yak cheese chew on a supervised mat'
+    elsif article_handle contains 'crate' or article_handle contains 'separation'
+      assign image_file = 'prime-blog-crate-calm.jpg'
+      assign image_alt = 'Relaxed dog near an open crate with a Himalayan yak cheese chew'
+    elsif article_handle contains 'rawhide' or article_handle contains 'bored'
+      assign image_file = 'prime-blog-rawhide-alternative.jpg'
+      assign image_alt = 'Natural yak cheese chews arranged with simple ingredients for dog enrichment'
+    elsif article_handle contains 'golden-retrievers' or article_handle contains 'labradors' or article_title contains 'breed'
+      assign image_file = 'prime-calm-dog-yak-chew-hero.jpg'
+      assign image_alt = 'Calm dog enjoying a Himalayan yak cheese chew in a modern home'
+    endif
+  endif
+
+  if output == 'alt'
+    echo image_alt
+  else
+    echo image_file
+  endif
+-%}

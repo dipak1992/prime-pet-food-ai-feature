@@ -98,6 +98,21 @@
   endif
 
   assign columns_desktop_min = columns_desktop | minus: 1
+
+  capture generated_article_image
+    render 'generated-article-image', article: article, output: 'filename'
+  endcapture
+  assign generated_article_image = generated_article_image | strip
+
+  capture generated_article_image_alt
+    render 'generated-article-image', article: article, output: 'alt'
+  endcapture
+  assign generated_article_image_alt = generated_article_image_alt | strip
+
+  assign has_article_visual = false
+  if article.image or generated_article_image != blank
+    assign has_article_visual = true
+  endif
 -%}
 
 {%- if article and article != empty -%}
@@ -106,17 +121,17 @@
       class="
         card article-card card--{{ blog_card_style }}
         {% if is_featured %} article-card--featured{% endif %}
-        {% if article.image and show_image %} card--media{% else %} card--text{% endif %}
+        {% if has_article_visual and show_image %} card--media{% else %} card--text{% endif %}
         {% if blog_card_style == 'card' and settings.blog_card_shadow %} card--shadow{% endif %}
         {% if blog_card_style == 'card' %} color-{{ settings.blog_card_color_scheme }} gradient{% endif %}
-        {% if blog_card_style == 'card' and media_height == nil and article.image == empty or show_image == false %} ratio{% endif %}
+        {% if blog_card_style == 'card' and media_height == nil and has_article_visual == false or show_image == false %} ratio{% endif %}
       "
       style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
     >
       <div
         class="card__inner
           {% if blog_card_style == 'standard' %} color-{{ settings.blog_card_color_scheme }} gradient{% endif %}
-          {% if article.image and show_image or blog_card_style == 'standard' %} ratio{% endif %}
+          {% if has_article_visual and show_image or blog_card_style == 'standard' %} ratio{% endif %}
           {% if media_aspect_ratio == 'grow' %} h-full{% endif %}"
         style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
       >
@@ -155,6 +170,34 @@
                 height="{{ article.image.height }}"
               >
               {% comment %}theme-check-enable ImgLazyLoading{% endcomment %}
+            </div>
+          </div>
+        {%- elsif show_image == true and generated_article_image != blank -%}
+          <div class="article-card__image-wrapper card__media">
+            <div class="article-card__image article-card__image--generated media media--hover-effect{% if image_cover %} media--hover-zoom{% endif %}">
+              <img
+                srcset="
+                  {{ generated_article_image | asset_img_url: '360x' }} 360w,
+                  {{ generated_article_image | asset_img_url: '533x' }} 533w,
+                  {{ generated_article_image | asset_img_url: '720x' }} 720w,
+                  {{ generated_article_image | asset_img_url: '1000x' }} 1000w,
+                  {{ generated_article_image | asset_url }} 1672w
+                "
+                src="{{ generated_article_image | asset_img_url: '533x' }}"
+                sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: columns_desktop_min }}px,
+                  (min-width: 990px) calc((100vw - 130px) / {{ columns_desktop_min | minus: 1 | at_least: 1 }}),
+                  (min-width: 750px) calc((100vw - 130px) / {{ columns_desktop_min }}),
+                  calc((100vw - 50px))"
+                alt="{{ generated_article_image_alt | escape }}"
+                class="motion-reduce object-{{ image_position }}
+                  {% if image_cover == false %} object-contain{% endif %}"
+                {% unless lazy_load == false %}
+                  loading="lazy"
+                  fetchpriority="low"
+                {% endunless %}
+                width="1672"
+                height="941"
+              >
             </div>
           </div>
         {%- endif -%}

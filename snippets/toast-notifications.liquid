@@ -1,37 +1,10 @@
 <script>
-  // Demo setup for the updated 2-toast stack system
   document.addEventListener('DOMContentLoaded', () => {
-    // Small delay to ensure scripts are loaded
-    setTimeout(() => {
-      if (window.Toast) {
-        // Trigger two initial notifications with image, title, and description
-        window.Toast.show(
-          'Someone from London', 
-          'Just purchased a Premium Dog Food pack 2 minutes ago', 
-          'https://cdn.shopify.com/s/files/1/0615/6353/5553/files/dog-food-placeholder.png?v=1645454545',
-          'sale'
-        );
-        
-        setTimeout(() => {
-          window.Toast.show(
-            'Live Visitors', 
-            '12 people are currently viewing this product', 
-            'https://cdn.shopify.com/s/files/1/0615/6353/5553/files/visitor-placeholder.png?v=1645454545',
-            'visit'
-          );
-        }, 1500);
-
-        // A 3rd one to show queueing and 6s FIFO dismiss
-        setTimeout(() => {
-          window.Toast.show(
-            'New Sale', 
-            'A customer from New York just bought a cat toy!', 
-            'https://cdn.shopify.com/s/files/1/0615/6353/5553/files/cat-toy-placeholder.png?v=1645454545',
-            'sale'
-          );
-        }, 3000);
-      }
-    }, 2000);
+    window.PrimeToastImages = {
+      chewFinder: '{{ "prime-calm-dog-yak-chew-hero.jpg" | asset_url }}',
+      chewDuration: '{{ "prime-blog-yak-chew-duration.jpg" | asset_url }}',
+      powerChewer: '{{ "prime-blog-aggressive-chewer.jpg" | asset_url }}'
+    };
   });
 </script>
 

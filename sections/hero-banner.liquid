@@ -346,7 +346,23 @@
 
   <!-- Background Image -->
   <div class="pp-hero-bg-img">
-    {% if section.settings.hero_image != blank %}
+    {% if section.settings.use_generated_hero_image %}
+      <img
+        srcset="
+          {{ 'prime-calm-dog-yak-chew-hero.jpg' | asset_img_url: '750x' }} 750w,
+          {{ 'prime-calm-dog-yak-chew-hero.jpg' | asset_img_url: '1100x' }} 1100w,
+          {{ 'prime-calm-dog-yak-chew-hero.jpg' | asset_img_url: '1500x' }} 1500w,
+          {{ 'prime-calm-dog-yak-chew-hero.jpg' | asset_url }} 1672w
+        "
+        src="{{ 'prime-calm-dog-yak-chew-hero.jpg' | asset_img_url: '1500x' }}"
+        sizes="100vw"
+        loading="eager"
+        fetchpriority="high"
+        width="1672"
+        height="941"
+        alt="{{ section.settings.hero_image_alt | default: 'Calm dog enjoying a Himalayan yak cheese chew at home' | escape }}"
+      >
+    {% elsif section.settings.hero_image != blank %}
       {{ section.settings.hero_image | image_url: width: 1800 | image_tag:
         loading: 'eager',
         fetchpriority: 'high',
@@ -472,6 +488,12 @@
     {
       "type": "header",
       "content": "Background Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_generated_hero_image",
+      "label": "Use Prime generated calm-dog hero",
+      "default": false
     },
     {
       "type": "image_picker",
