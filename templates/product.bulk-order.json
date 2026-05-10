@@ -1505,8 +1505,8 @@
                         "rating_stars": 5,
                         "title": "Testimonial",
                         "text": "<p>Include a review of the product or collection left by a customer. Or perhaps it's a review of your store as whole.</p>",
-                        "author_name": "Jane Doe",
-                        "author_caption": "Director, Company name",
+                        "author_name": "Prime Pet Food Customer",
+                        "author_caption": "Prime Pet Food Customer",
                         "card_link": "",
                         "card_color_scheme": "scheme-2",
                         "color_scheme_bg_fix": false
@@ -1520,8 +1520,8 @@
                         "rating_stars": 5,
                         "title": "Testimonial",
                         "text": "<p>Include a review of the product or collection left by a customer. Or perhaps it's a review of your store as whole.</p>",
-                        "author_name": "Jane Doe",
-                        "author_caption": "Director, Company name",
+                        "author_name": "Prime Pet Food Customer",
+                        "author_caption": "Prime Pet Food Customer",
                         "card_link": "",
                         "card_color_scheme": "",
                         "color_scheme_bg_fix": false
@@ -1535,8 +1535,8 @@
                         "rating_stars": 5,
                         "title": "Testimonial",
                         "text": "<p>Include a review of the product or collection left by a customer. Or perhaps it's a review of your store as whole.</p>",
-                        "author_name": "Jane Doe",
-                        "author_caption": "Director, Company name",
+                        "author_name": "Prime Pet Food Customer",
+                        "author_caption": "Prime Pet Food Customer",
                         "card_link": "",
                         "card_color_scheme": "",
                         "color_scheme_bg_fix": false
@@ -1692,7 +1692,7 @@
                         "background_gradient": "",
                         "image_width": 40,
                         "title": "<strong>WELL TRUSTED</strong>",
-                        "text": "Over 100k customers",
+                        "text": "Built for calm-time routines",
                         "card_link": ""
                     }
                 },

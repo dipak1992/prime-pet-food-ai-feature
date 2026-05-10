@@ -36,6 +36,7 @@
     cursor: pointer;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     transition: all 0.3s ease;
+    text-decoration: none;
   }
   .ca-sticky-cta__btn:hover {
     transform: translateY(-1px);
@@ -45,3 +46,47 @@
     .ca-sticky-cta { display: block; }
   }
 </style>
+
+<div class="ca-sticky-cta" data-global-chew-cta>
+  <a class="ca-sticky-cta__btn" href="/pages/how-long-will-this-last-for-my-dog">
+    <span class="ca-sticky-cta__icon" aria-hidden="true">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2"/>
+        <path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+    <span>Find My Dog's Chew</span>
+  </a>
+</div>
+
+<script>
+  (function() {
+    var cta = document.querySelector('[data-global-chew-cta]');
+    if (!cta) return;
+
+    function updateVisibility() {
+      if (window.innerWidth > 768) {
+        cta.classList.remove('ca-sticky-cta--visible');
+        return;
+      }
+      if (window.scrollY > 360) cta.classList.add('ca-sticky-cta--visible');
+      else cta.classList.remove('ca-sticky-cta--visible');
+    }
+
+    cta.addEventListener('click', function(event) {
+      var widget = document.querySelector('.ca-widget-container');
+      if (!widget) return;
+      event.preventDefault();
+      widget.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(function() {
+        if (widget._chewAnalyzer && !widget._chewAnalyzer.isOpen) {
+          widget._chewAnalyzer.open();
+        }
+      }, 500);
+    });
+
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+    window.addEventListener('resize', updateVisibility);
+    updateVisibility();
+  })();
+</script>

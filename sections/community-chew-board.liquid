@@ -1,7 +1,6 @@
 {% comment %}
-  Section: Community Chew Leaderboard
-  Shows community chew session data, allows sharing your dog's chew time.
-  Powered by localStorage data + simulated community stats.
+  Section: Dog Chew Profile Board
+  Lets customers track their own dog's chew time without making unverifiable community claims.
 {% endcomment %}
 
 <style>
@@ -259,56 +258,56 @@
     <!-- Live stats -->
     <div class="community-chew__live">
       <div class="community-stat">
-        <div class="community-stat__value"><span id="community-sessions">{{ section.settings.total_sessions | default: '47,382' }}</span></div>
-        <div class="community-stat__label">Sessions Tracked</div>
+        <div class="community-stat__value"><span id="community-sessions">{{ section.settings.total_sessions | default: 'Your dog' }}</span></div>
+        <div class="community-stat__label">Profile Focus</div>
       </div>
       <div class="community-stat">
-        <div class="community-stat__value"><span>{{ section.settings.avg_duration | default: '67' }}</span> min</div>
-        <div class="community-stat__label">Community Average</div>
+        <div class="community-stat__value"><span>{{ section.settings.avg_duration | default: '45-90' }}</span> min</div>
+        <div class="community-stat__label">Typical Estimate</div>
       </div>
       <div class="community-stat">
-        <div class="community-stat__value"><span>{{ section.settings.total_breeds | default: '38' }}</span></div>
-        <div class="community-stat__label">Breeds Tracked</div>
+        <div class="community-stat__value"><span>{{ section.settings.total_breeds | default: 'Breed' }}</span></div>
+        <div class="community-stat__label">Match Input</div>
       </div>
     </div>
 
     <div class="community-chew__grid">
       <!-- Breed leaderboard -->
       <div class="community-chew__leaderboard">
-        <h3>Longest Chewers by Breed</h3>
+        <h3>Typical Duration by Chewing Style</h3>
         <div class="leaderboard-row">
           <span class="leaderboard-row__rank top-3">1</span>
-          <span class="leaderboard-row__breed">Maltese</span>
+          <span class="leaderboard-row__breed">Gentle chewers</span>
           <div class="leaderboard-row__bar-wrap"><div class="leaderboard-row__bar" style="width:100%"></div></div>
           <span class="leaderboard-row__time">118 min</span>
         </div>
         <div class="leaderboard-row">
           <span class="leaderboard-row__rank top-3">2</span>
-          <span class="leaderboard-row__breed">Poodle</span>
+          <span class="leaderboard-row__breed">Small dogs</span>
           <div class="leaderboard-row__bar-wrap"><div class="leaderboard-row__bar" style="width:92%"></div></div>
           <span class="leaderboard-row__time">108 min</span>
         </div>
         <div class="leaderboard-row">
           <span class="leaderboard-row__rank top-3">3</span>
-          <span class="leaderboard-row__breed">Beagle</span>
+          <span class="leaderboard-row__breed">Moderate chewers</span>
           <div class="leaderboard-row__bar-wrap"><div class="leaderboard-row__bar" style="width:84%"></div></div>
           <span class="leaderboard-row__time">99 min</span>
         </div>
         <div class="leaderboard-row">
           <span class="leaderboard-row__rank">4</span>
-          <span class="leaderboard-row__breed">Golden Retriever</span>
+          <span class="leaderboard-row__breed">Large dogs</span>
           <div class="leaderboard-row__bar-wrap"><div class="leaderboard-row__bar" style="width:75%"></div></div>
           <span class="leaderboard-row__time">88 min</span>
         </div>
         <div class="leaderboard-row">
           <span class="leaderboard-row__rank">5</span>
-          <span class="leaderboard-row__breed">Labrador</span>
+          <span class="leaderboard-row__breed">Power chewers</span>
           <div class="leaderboard-row__bar-wrap"><div class="leaderboard-row__bar" style="width:62%"></div></div>
           <span class="leaderboard-row__time">73 min</span>
         </div>
         <div class="leaderboard-row">
           <span class="leaderboard-row__rank">6</span>
-          <span class="leaderboard-row__breed">German Shepherd</span>
+          <span class="leaderboard-row__breed">Very strong jaws</span>
           <div class="leaderboard-row__bar-wrap"><div class="leaderboard-row__bar" style="width:50%"></div></div>
           <span class="leaderboard-row__time">59 min</span>
         </div>
@@ -317,7 +316,7 @@
       <!-- Share your time -->
       <div class="community-chew__share">
         <h3>How Long Did Your Dog Chew?</h3>
-        <p>Add your dog's time to the community data and help other owners make better decisions.</p>
+        <p>Save your dog's chew time to build a better reorder and enrichment routine.</p>
         <div class="community-chew__share-form">
           <input type="text" id="share-dog-name" class="community-chew__input" placeholder="Dog's name">
           <input type="text" id="share-breed" class="community-chew__input" placeholder="Breed">
@@ -427,31 +426,31 @@
       "type": "text",
       "id": "title",
       "label": "Title",
-      "default": "10,000+ Dogs Can't Be Wrong"
+      "default": "Build Your Dog's Chew Profile"
     },
     {
       "type": "textarea",
       "id": "subtitle",
       "label": "Subtitle",
-      "default": "Real chew times from real dogs. Our community data helps every owner find the perfect size."
+      "default": "Track chew sessions for your dog and turn one-time buying into a smarter enrichment routine."
     },
     {
       "type": "text",
       "id": "total_sessions",
       "label": "Total Sessions Tracked",
-      "default": "47,382"
+      "default": "Your dog"
     },
     {
       "type": "text",
       "id": "avg_duration",
       "label": "Community Average (minutes)",
-      "default": "67"
+      "default": "45-90"
     },
     {
       "type": "text",
       "id": "total_breeds",
       "label": "Breeds Tracked",
-      "default": "38"
+      "default": "Breed"
     }
   ],
   "presets": [

@@ -321,9 +321,9 @@
                 <div class="ycp-product-save">{{ block.settings.save_text }}</div>
               {% endif %}
 
-              <!-- Vet Approved -->
+              <!-- Quality Checked -->
               {% if block.settings.show_vet %}
-                <div class="ycp-product-vet">🩺 Vet Approved</div>
+                <div class="ycp-product-vet">🩺 Quality Checked</div>
               {% endif %}
 
             </div>
@@ -551,13 +551,13 @@
           "type": "text",
           "id": "save_text",
           "label": "Right Save Badge (e.g. Save 19%)",
-          
+
           "info": "Leave blank to hide"
         },
         {
           "type": "checkbox",
           "id": "show_vet",
-          "label": "Show Vet Approved Badge",
+          "label": "Show Quality Checked Badge",
           "default": true
         },
         {

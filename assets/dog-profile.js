@@ -503,15 +503,57 @@
      INTEGRATION: Auto-save from analyzer
      ═══════════════════════════════════════ */
   function initAnalyzerIntegration() {
+    function normalizeAnalyzerBreed(breed) {
+      var mapped = {
+        'golden-retriever': 'golden_retriever',
+        'labrador-retriever': 'labrador',
+        'german-shepherd': 'german_shepherd',
+        'french-bulldog': 'french_bulldog',
+        'yorkshire-terrier': 'yorkshire_terrier',
+        'siberian-husky': 'husky',
+        'great-dane': 'great_dane',
+        'australian-shepherd': 'australian_shepherd',
+        'cavalier-king-charles': 'cavalier_king_charles',
+        'shih-tzu': 'shih_tzu',
+        'border-collie': 'border_collie',
+        'pit-bull': 'pit_bull',
+        'jack-russell': 'jack_russell',
+        'bernese-mountain-dog': 'bernese_mountain_dog',
+        'mixed-breed': 'mixed'
+      };
+      return mapped[breed] || (breed || 'mixed').replace(/-/g, '_');
+    }
+
+    function normalizeAnalyzerWeight(weight) {
+      var mapped = {
+        'under-15': 12,
+        '15-35': 25,
+        '35-60': 48,
+        '60-plus': 70
+      };
+      return mapped[weight] || weight || 30;
+    }
+
+    function normalizeAnalyzerChewStyle(chewStyle) {
+      if (chewStyle === 'aggressive') return 'destroyer';
+      return chewStyle || 'moderate';
+    }
+
     // Listen for analyzer completion events
     window.addEventListener('prime:analyzer:complete', function(e) {
       if (e.detail) {
         saveProfile({
-          breed: e.detail.breed,
-          weight: e.detail.weight,
-          chewStyle: e.detail.chewStyle,
+          breed: normalizeAnalyzerBreed(e.detail.breed),
+          weight: normalizeAnalyzerWeight(e.detail.weight),
+          chewStyle: normalizeAnalyzerChewStyle(e.detail.chewStyle),
           age: e.detail.age,
           dogName: e.detail.dogName || null,
+          analyzerBreed: e.detail.breed,
+          analyzerWeight: e.detail.weight,
+          analyzerChewStyle: e.detail.chewStyle,
+          analyzerDurationRange: e.detail.durationRange,
+          analyzerEnrichment: e.detail.enrichment,
+          recommendedVariantId: e.detail.recommendedVariantId,
           source: 'analyzer'
         });
       }

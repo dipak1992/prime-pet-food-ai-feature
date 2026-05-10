@@ -10,8 +10,7 @@
     },
     "cart": {
       "type": "main-cart",
-      "settings": {
-      }
+      "settings": {}
     },
     "featured-collection": {
       "type": "featured-collection",
@@ -26,7 +25,7 @@
         "content_max_width": "m",
         "desktop_heading_alignment": "left",
         "mobile_heading_alignment": "left",
-        "title": "Featured collection",
+        "title": "Add more calm-time coverage",
         "italic_convert": "",
         "heading_size": "h2",
         "text": "",

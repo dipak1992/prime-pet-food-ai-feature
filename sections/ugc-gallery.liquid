@@ -251,8 +251,8 @@
     <!-- Community stats -->
     <div class="ugc-gallery__stats">
       <div class="ugc-stat">
-        <div class="ugc-stat__value">{{ section.settings.stat_dogs | default: '10,000+' }}</div>
-        <div class="ugc-stat__label">Happy Dogs</div>
+        <div class="ugc-stat__value">{{ section.settings.stat_dogs | default: 'Personalized' }}</div>
+        <div class="ugc-stat__label">Calm Routines</div>
       </div>
       <div class="ugc-stat">
         <div class="ugc-stat__value">{{ section.settings.stat_minutes | default: '67 min' }}</div>
@@ -293,7 +293,7 @@
             {% if block.settings.verified %}
               <span class="ugc-card__verified">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                Verified
+                Owner shared
               </span>
             {% endif %}
           </div>
@@ -355,19 +355,19 @@
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow",
-      "default": "Real Dogs, Real Duration"
+      "default": "Dog-Matched Chew Guidance"
     },
     {
       "type": "text",
       "id": "title",
       "label": "Title",
-      "default": "See How Long It Really Lasts"
+      "default": "See What May Fit Your Dog"
     },
     {
       "type": "textarea",
       "id": "subtitle",
       "label": "Subtitle",
-      "default": "Real photos from real customers. Every timer is verified by our community."
+      "default": "Chew time varies by breed, weight, age, and chewing style. Use these profiles as guidance, then run the estimator for your dog."
     },
     {
       "type": "header",
@@ -376,8 +376,8 @@
     {
       "type": "text",
       "id": "stat_dogs",
-      "label": "Happy Dogs Count",
-      "default": "10,000+"
+      "label": "Calm Routines Count",
+      "default": "Personalized"
     },
     {
       "type": "text",
@@ -389,7 +389,7 @@
       "type": "text",
       "id": "stat_rating",
       "label": "Owner Rating",
-      "default": "4.9/5"
+      "default": "Breed-aware"
     },
     {
       "type": "header",
@@ -399,13 +399,13 @@
       "type": "text",
       "id": "cta_text",
       "label": "CTA Text",
-      "default": "Got a photo of your dog enjoying their chew? Share it with the community!"
+      "default": "Get a recommendation based on your dog, not a generic size chart."
     },
     {
       "type": "text",
       "id": "cta_btn",
       "label": "CTA Button Text",
-      "default": "Share Your Dog"
+      "default": "Find My Dog's Chew"
     },
     {
       "type": "url",
@@ -450,8 +450,8 @@
         {
           "type": "checkbox",
           "id": "verified",
-          "label": "Verified Purchase",
-          "default": true
+          "label": "Owner-shared label",
+          "default": false
         }
       ]
     }
@@ -462,27 +462,27 @@
       "blocks": [
         {
           "type": "ugc_photo",
-          "settings": { "dog_name": "Cooper", "breed": "Labrador", "weight": "72 lbs", "duration": "58 min", "verified": true }
+          "settings": { "dog_name": "Cooper", "breed": "Labrador", "weight": "72 lbs", "duration": "58 min", "verified": false }
         },
         {
           "type": "ugc_photo",
-          "settings": { "dog_name": "Luna", "breed": "French Bulldog", "weight": "24 lbs", "duration": "84 min", "verified": true }
+          "settings": { "dog_name": "Luna", "breed": "French Bulldog", "weight": "24 lbs", "duration": "84 min", "verified": false }
         },
         {
           "type": "ugc_photo",
-          "settings": { "dog_name": "Bear", "breed": "German Shepherd", "weight": "85 lbs", "duration": "45 min", "verified": true }
+          "settings": { "dog_name": "Bear", "breed": "German Shepherd", "weight": "85 lbs", "duration": "45 min", "verified": false }
         },
         {
           "type": "ugc_photo",
-          "settings": { "dog_name": "Daisy", "breed": "Golden Retriever", "weight": "58 lbs", "duration": "72 min", "verified": true }
+          "settings": { "dog_name": "Daisy", "breed": "Golden Retriever", "weight": "58 lbs", "duration": "72 min", "verified": false }
         },
         {
           "type": "ugc_photo",
-          "settings": { "dog_name": "Milo", "breed": "Beagle", "weight": "28 lbs", "duration": "91 min", "verified": true }
+          "settings": { "dog_name": "Milo", "breed": "Beagle", "weight": "28 lbs", "duration": "91 min", "verified": false }
         },
         {
           "type": "ugc_photo",
-          "settings": { "dog_name": "Bella", "breed": "Poodle", "weight": "45 lbs", "duration": "105 min", "verified": true }
+          "settings": { "dog_name": "Bella", "breed": "Poodle", "weight": "45 lbs", "duration": "105 min", "verified": false }
         }
       ]
     }

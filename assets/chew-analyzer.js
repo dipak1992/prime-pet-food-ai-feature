@@ -103,7 +103,7 @@ CA._render=function(){
         '<div class="ca-trigger__text"><span class="ca-trigger__title">How Long Will This Last For <em>MY</em> Dog?</span><span class="ca-trigger__subtitle">Get your personalized chew duration estimate</span></div>'+
         '<div class="ca-trigger__arrow"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'+
       '</div>'+
-      '<div class="ca-trigger__badge"><span class="ca-trigger__badge-dot"></span>AI-Powered \u2022 30 seconds</div>'+
+      '<div class="ca-trigger__badge"><span class="ca-trigger__badge-dot"></span>Smart estimate \u2022 30 seconds</div>'+
     '</div>'+
     '<div class="ca-panel" aria-hidden="true">'+
       '<div class="ca-panel__header">'+
@@ -305,6 +305,24 @@ CA._showResults=function(){
   this._animateResults();
   this._bindResultActions(r);
   this._track('completed',{breed:a.breed,weight:a.weight,chewStyle:a.chewStyle,age:a.age,durationMin:r.duration.min,durationMax:r.duration.max,enrichment:r.enrichment,aggressiveChewer:a.chewStyle==='aggressive',recommendedSize:r.product.size});
+  try {
+    window.dispatchEvent(new CustomEvent('prime:analyzer:complete', {
+      detail: {
+        breed: a.breed,
+        weight: a.weight,
+        chewStyle: a.chewStyle,
+        age: a.age,
+        durationMin: r.duration.min,
+        durationMax: r.duration.max,
+        durationRange: r.duration.min + '-' + r.duration.max + ' minutes',
+        enrichment: r.enrichment,
+        recommendedSize: r.product.size,
+        recommendedBundle: r.product.bundle,
+        recommendedVariantId: VARIANT_BY_SIZE[r.product.size] || '',
+        placement: this.el.dataset.placement || 'unknown'
+      }
+    }));
+  } catch(e) {}
   this._track('results_shown',{breed:a.breed,weight:a.weight,chewStyle:a.chewStyle,age:a.age,durationMin:r.duration.min,durationMax:r.duration.max,enrichment:r.enrichment});
 };
 
@@ -374,13 +392,20 @@ CA._track=function(event,data){
 // Sticky CTA
 window.ChewAnalyzerStickyCTA=function(){
   var self=this;this.visible=false;
-  this.el=document.createElement('div');
-  this.el.className='ca-sticky-cta';
-  this.el.innerHTML='<button class="ca-sticky-cta__btn"><span class="ca-sticky-cta__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Analyze Your Dog</span></button>';
-  document.body.appendChild(this.el);
-  this.el.querySelector('.ca-sticky-cta__btn').addEventListener('click',function(){
+  this.el=document.querySelector('.ca-sticky-cta');
+  if(!this.el){
+    this.el=document.createElement('div');
+    this.el.className='ca-sticky-cta';
+    this.el.innerHTML='<a href="/pages/how-long-will-this-last-for-my-dog" class="ca-sticky-cta__btn"><span class="ca-sticky-cta__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Find My Dog\\u0027s Chew</span></a>';
+    document.body.appendChild(this.el);
+  }
+  this.el.querySelector('.ca-sticky-cta__btn').addEventListener('click',function(e){
     var widget=document.querySelector('.ca-widget-container');
-    if(widget){widget.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(function(){if(widget._chewAnalyzer&&!widget._chewAnalyzer.isOpen)widget._chewAnalyzer.open();},500);}
+    if(widget){
+      e.preventDefault();
+      widget.scrollIntoView({behavior:'smooth',block:'center'});
+      setTimeout(function(){if(widget._chewAnalyzer&&!widget._chewAnalyzer.isOpen)widget._chewAnalyzer.open();},500);
+    }
   });
   window.addEventListener('scroll',function(){
     var show=window.scrollY>400;
