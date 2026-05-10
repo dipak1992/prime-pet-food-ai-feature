@@ -1,500 +1,710 @@
 {% comment %}
-  Section: Dog Profile Dashboard
-  Customer-facing "My Dog" page showing profile, personality, session stats,
-  enrichment tips, and smart reorder timing.
+  Prime Pet Food - Dog Profile Dashboard
+  Customer-facing retention hub for profile memory, enrichment history,
+  replenishment cadence, email capture, photo upload readiness, and UGC reports.
 {% endcomment %}
 
 <style>
   .dog-profile {
-    padding: 60px 24px;
-    background: #FDFCF7;
-    font-family: var(--font-body-family, -apple-system, sans-serif);
-    min-height: 60vh;
+    background: #f6f1e9;
+    color: #24130d;
+    min-height: 70vh;
+    padding: clamp(36px, 7vw, 78px) 20px;
   }
 
   .dog-profile__inner {
-    max-width: 800px;
+    display: grid;
+    gap: 20px;
     margin: 0 auto;
+    max-width: 1180px;
   }
 
-  /* Empty state */
+  .dog-profile__empty,
+  .dog-profile__panel {
+    background: #ffffff;
+    border: 1px solid #eadfce;
+    border-radius: 20px;
+    box-shadow: 0 18px 54px rgba(54, 31, 18, 0.08);
+  }
+
   .dog-profile__empty {
+    padding: clamp(34px, 7vw, 72px);
     text-align: center;
-    padding: 80px 24px;
-  }
-
-  .dog-profile__empty-icon {
-    font-size: 48px;
-    margin-bottom: 16px;
   }
 
   .dog-profile__empty-title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin: 0 0 8px;
+    font-size: clamp(30px, 5vw, 54px);
+    line-height: 1.03;
+    margin: 0 0 14px;
   }
 
   .dog-profile__empty-text {
-    font-size: 16px;
-    color: #6b7280;
-    margin: 0 0 24px;
+    color: #6f5a50;
+    font-size: 17px;
+    line-height: 1.65;
+    margin: 0 auto 24px;
+    max-width: 680px;
   }
 
-  .dog-profile__empty-btn {
-    display: inline-flex;
+  .dog-profile__button,
+  .dog-profile__button-secondary,
+  .dog-profile__session-btn {
     align-items: center;
-    gap: 8px;
-    padding: 14px 28px;
-    background: linear-gradient(135deg, #16a34a, #15803d);
-    color: #fff;
-    border-radius: 100px;
-    font-size: 15px;
-    font-weight: 600;
+    border-radius: 999px;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 850;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 18px;
     text-decoration: none;
-    transition: transform 0.2s ease;
   }
 
-  .dog-profile__empty-btn:hover {
-    transform: translateY(-1px);
-    color: #fff;
+  .dog-profile__button {
+    background: #d2632e;
+    border: 0;
+    color: #ffffff;
   }
 
-  /* Profile card */
-  .dog-profile__card {
-    background: #fff;
-    border-radius: 20px;
-    padding: 32px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-    margin-bottom: 24px;
+  .dog-profile__button-secondary {
+    background: #fff8ef;
+    border: 1px solid #eadfce;
+    color: #2b1408;
   }
 
   .dog-profile__hero {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 24px;
-    padding-bottom: 24px;
-    border-bottom: 1px solid #f3f4f6;
+    background: #2b1408;
+    border-radius: 24px;
+    color: #fff8ef;
+    display: grid;
+    gap: 24px;
+    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+    padding: clamp(24px, 5vw, 42px);
+  }
+
+  .dog-profile__eyebrow {
+    color: #f3b27d;
+    font-size: 12px;
+    font-weight: 850;
+    letter-spacing: 0.12em;
+    margin: 0 0 10px;
+    text-transform: uppercase;
+  }
+
+  .dog-profile__hero h1 {
+    font-size: clamp(34px, 5vw, 62px);
+    line-height: 1;
+    margin: 0 0 14px;
+  }
+
+  .dog-profile__hero p {
+    color: rgba(255, 248, 239, 0.75);
+    font-size: 16px;
+    line-height: 1.65;
+    margin: 0;
+    max-width: 720px;
+  }
+
+  .dog-profile__identity {
+    align-content: center;
+    background: rgba(255, 248, 239, 0.08);
+    border: 1px solid rgba(255, 248, 239, 0.14);
+    border-radius: 18px;
+    display: grid;
+    gap: 14px;
+    padding: 18px;
   }
 
   .dog-profile__avatar {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    align-items: center;
+    aspect-ratio: 1;
+    background: #fff8ef;
+    border-radius: 18px;
+    color: #2b1408;
     display: flex;
-    align-items: center;
+    font-size: 42px;
+    font-weight: 900;
     justify-content: center;
-    font-size: 32px;
-    flex-shrink: 0;
+    overflow: hidden;
+    width: 86px;
   }
 
-  .dog-profile__info h2 {
+  .dog-profile__avatar img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .dog-profile__identity strong {
+    display: block;
     font-size: 22px;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin: 0 0 4px;
+    line-height: 1.1;
   }
 
-  .dog-profile__meta {
+  .dog-profile__identity span {
+    color: rgba(255, 248, 239, 0.72);
+    display: block;
+    font-size: 13px;
+    line-height: 1.45;
+    margin-top: 5px;
+  }
+
+  .dog-profile__grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .dog-profile__panel {
+    padding: 22px;
+  }
+
+  .dog-profile__panel--wide {
+    grid-column: span 8;
+  }
+
+  .dog-profile__panel--side {
+    grid-column: span 4;
+  }
+
+  .dog-profile__panel--full {
+    grid-column: 1 / -1;
+  }
+
+  .dog-profile__section-title {
+    font-size: 20px;
+    line-height: 1.15;
+    margin: 0 0 14px;
+  }
+
+  .dog-profile__muted {
+    color: #6f5a50;
     font-size: 14px;
-    color: #6b7280;
+    line-height: 1.55;
+    margin: 0 0 16px;
   }
 
-  .dog-profile__personality-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 8px;
-    padding: 5px 12px;
-    background: #f0fdf4;
-    border: 1px solid #bbf7d0;
-    border-radius: 100px;
-    font-size: 12px;
-    font-weight: 600;
-    color: #15803d;
-  }
-
-  /* Stats grid */
   .dog-profile__stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 16px;
-    margin-bottom: 24px;
+    gap: 12px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .dog-profile__stat {
-    text-align: center;
-    padding: 20px 12px;
-    background: #fafafa;
-    border-radius: 12px;
+    background: #fff8ef;
+    border: 1px solid #eadfce;
+    border-radius: 14px;
+    padding: 16px;
   }
 
-  .dog-profile__stat-value {
-    font-size: 24px;
-    font-weight: 800;
-    color: #1a1a1a;
+  .dog-profile__stat strong {
+    display: block;
+    font-size: clamp(24px, 4vw, 36px);
     line-height: 1;
   }
 
-  .dog-profile__stat-label {
-    font-size: 12px;
-    color: #6b7280;
-    margin-top: 6px;
+  .dog-profile__stat span {
+    color: #6f5a50;
+    display: block;
+    font-size: 11px;
+    font-weight: 850;
+    letter-spacing: 0.08em;
+    margin-top: 8px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
   }
 
-  /* Recommendation */
-  .dog-profile__rec {
-    background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
-    border-radius: 16px;
-    padding: 24px;
-    color: #fff;
-    margin-bottom: 24px;
+  .dog-profile__scorebar {
+    background: #f1e7da;
+    border-radius: 999px;
+    height: 12px;
+    margin-top: 14px;
+    overflow: hidden;
   }
 
-  .dog-profile__rec-title {
-    font-size: 14px;
-    font-weight: 600;
-    color: rgba(255,255,255,0.7);
-    margin: 0 0 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+  .dog-profile__scorebar span {
+    background: linear-gradient(90deg, #d2632e, #2f6f46);
+    display: block;
+    height: 100%;
+    width: var(--score-width, 0%);
   }
 
-  .dog-profile__rec-size {
-    font-size: 20px;
-    font-weight: 700;
-    margin: 0 0 4px;
-  }
-
-  .dog-profile__rec-duration {
-    font-size: 14px;
-    color: #4ade80;
-    margin: 0 0 16px;
-  }
-
-  .dog-profile__rec-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    background: #16a34a;
-    color: #fff;
-    border-radius: 100px;
-    font-size: 14px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: transform 0.2s ease;
-  }
-
-  .dog-profile__rec-btn:hover {
-    transform: translateY(-1px);
-    color: #fff;
-  }
-
-  /* Enrichment tips */
-  .dog-profile__tips {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .dog-profile__tip {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 12px 0;
-    border-bottom: 1px solid #f3f4f6;
-    font-size: 14px;
-    color: #374151;
-    line-height: 1.5;
-  }
-
-  .dog-profile__tip:last-child {
-    border-bottom: none;
-  }
-
-  .dog-profile__tip-icon {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: #dcfce7;
-    color: #16a34a;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  /* Session log */
-  .dog-profile__session-form {
-    display: flex;
-    gap: 10px;
-    margin-top: 16px;
-    flex-wrap: wrap;
-  }
-
-  .dog-profile__session-input {
-    flex: 1;
-    min-width: 120px;
-    padding: 10px 14px;
-    border: 1.5px solid #e5e5e5;
-    border-radius: 8px;
-    font-size: 14px;
-  }
-
-  .dog-profile__session-btn {
-    padding: 10px 20px;
-    background: #1a1a1a;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s ease;
-  }
-
-  .dog-profile__session-btn:hover {
-    background: #374151;
-  }
-
-  /* Reorder section */
-  .dog-profile__reorder {
-    background: linear-gradient(135deg, #eff6ff, #dbeafe);
-    border: 1px solid #bfdbfe;
-    border-radius: 12px;
-    padding: 20px;
-    margin-top: 16px;
-  }
-
-  .dog-profile__reorder-title {
-    font-size: 14px;
-    font-weight: 700;
-    color: #1e40af;
-    margin: 0 0 6px;
-  }
-
-  .dog-profile__reorder-text {
-    font-size: 13px;
-    color: #1d4ed8;
-    margin: 0;
-  }
-
-  /* Section titles */
-  .dog-profile__section-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin: 0 0 16px;
-    display: flex;
-    align-items: center;
+  .dog-profile__timeline {
+    display: grid;
     gap: 8px;
   }
 
+  .dog-profile__timeline-row {
+    align-items: center;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 76px minmax(0, 1fr) 46px;
+  }
+
+  .dog-profile__timeline-track {
+    background: #f1e7da;
+    border-radius: 999px;
+    height: 10px;
+    overflow: hidden;
+  }
+
+  .dog-profile__timeline-track span {
+    background: #d2632e;
+    display: block;
+    height: 100%;
+  }
+
+  .dog-profile__pill-list,
   .dog-profile__actions {
     display: flex;
-    gap: 12px;
-    margin-top: 24px;
     flex-wrap: wrap;
+    gap: 10px;
   }
 
-  .dog-profile__action-btn {
-    padding: 10px 18px;
-    border: 1.5px solid #e5e5e5;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 600;
-    color: #374151;
-    background: #fff;
-    cursor: pointer;
-    text-decoration: none;
-    transition: border-color 0.2s ease;
+  .dog-profile__pill {
+    background: #fff8ef;
+    border: 1px solid #eadfce;
+    border-radius: 999px;
+    color: #4b2a1a;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 8px 11px;
   }
 
-  .dog-profile__action-btn:hover {
-    border-color: #9ca3af;
-    color: #1a1a1a;
+  .dog-profile__list {
+    display: grid;
+    gap: 10px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
-  .dog-profile__action-btn--danger {
-    color: #dc2626;
-    border-color: #fecaca;
+  .dog-profile__list li {
+    background: #fff8ef;
+    border: 1px solid #eadfce;
+    border-radius: 12px;
+    color: #4d382d;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 12px;
   }
 
-  .dog-profile__action-btn--danger:hover {
-    background: #fef2f2;
-    border-color: #dc2626;
+  .dog-profile__form-grid {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  @media (max-width: 600px) {
-    .dog-profile { padding: 40px 16px; }
-    .dog-profile__card { padding: 20px; }
-    .dog-profile__hero { flex-direction: column; text-align: center; }
-    .dog-profile__stats { grid-template-columns: repeat(2, 1fr); }
+  .dog-profile__field,
+  .dog-profile__select,
+  .dog-profile__textarea {
+    background: #fffdf9;
+    border: 1px solid #eadfce;
+    border-radius: 12px;
+    color: #24130d;
+    font: inherit;
+    min-height: 44px;
+    padding: 10px 12px;
+    width: 100%;
+  }
+
+  .dog-profile__textarea {
+    min-height: 86px;
+    resize: vertical;
+  }
+
+  .dog-profile__form-grid .is-full {
+    grid-column: 1 / -1;
+  }
+
+  .dog-profile__photo-preview {
+    align-items: center;
+    aspect-ratio: 16 / 10;
+    background: #fff8ef;
+    border: 1px dashed #d9c6b5;
+    border-radius: 14px;
+    color: #6f5a50;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .dog-profile__photo-preview img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .dog-profile__report-list {
+    display: grid;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .dog-profile__report {
+    align-items: center;
+    background: #fff8ef;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 12px;
+  }
+
+  .dog-profile__report span {
+    color: #6f5a50;
+    font-size: 12px;
+  }
+
+  .dog-profile__email {
+    background: #2b1408;
+    border-color: #2b1408;
+    color: #fff8ef;
+  }
+
+  .dog-profile__email .dog-profile__muted {
+    color: rgba(255, 248, 239, 0.72);
+  }
+
+  .dog-profile__email-form {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .dog-profile__email-form input {
+    background: rgba(255, 248, 239, 0.08);
+    border: 1px solid rgba(255, 248, 239, 0.18);
+    border-radius: 999px;
+    color: #fff8ef;
+    min-height: 44px;
+    padding: 0 16px;
+  }
+
+  .dog-profile__email-form input::placeholder {
+    color: rgba(255, 248, 239, 0.45);
+  }
+
+  @media (max-width: 900px) {
+    .dog-profile__hero,
+    .dog-profile__grid,
+    .dog-profile__stats,
+    .dog-profile__form-grid,
+    .dog-profile__email-form {
+      grid-template-columns: 1fr;
+    }
+
+    .dog-profile__panel,
+    .dog-profile__panel--wide,
+    .dog-profile__panel--side,
+    .dog-profile__panel--full {
+      grid-column: 1 / -1;
+    }
   }
 </style>
 
 <section class="dog-profile">
   <div class="dog-profile__inner" id="dog-profile-app">
-    <!-- Content rendered by JavaScript -->
     <div class="dog-profile__empty" id="dog-profile-empty">
-      <div class="dog-profile__empty-icon">🐾</div>
-      <h1 class="dog-profile__empty-title">Create Your Dog's Profile</h1>
-      <p class="dog-profile__empty-text">Take our quick quiz to get personalized chew recommendations, track enrichment sessions, and know exactly when to reorder.</p>
-      <a href="/pages/how-long-will-this-last-for-my-dog" class="dog-profile__empty-btn">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-        Find My Dog's Chew
-      </a>
+      <h1 class="dog-profile__empty-title">Build your dog's calm-time profile</h1>
+      <p class="dog-profile__empty-text">Answer four questions to unlock chew duration estimates, enrichment tracking, replenishment timing, and a smarter subscription cadence.</p>
+      <a href="/pages/how-long-will-this-last-for-my-dog" class="dog-profile__button">Find My Dog's Chew</a>
     </div>
 
     <div id="dog-profile-content" style="display:none;"></div>
+
+    <div class="dog-profile__panel dog-profile__email" id="dog-profile-email-panel">
+      <h2 class="dog-profile__section-title">Get your dog's chew plan by email</h2>
+      <p class="dog-profile__muted">Capture the profile for reorder reminders, safe nub guidance, enrichment ideas, and future AI dog-profile upgrades.</p>
+      {% form 'customer', class: 'dog-profile__email-form', id: 'DogProfileEmailForm' %}
+        <input type="hidden" name="contact[tags]" value="dog-profile,chew-replenishment,enrichment-education">
+        <input id="DogProfileEmail" type="email" name="contact[email]" placeholder="Email address" autocomplete="email" aria-label="Email address" required>
+        <button class="dog-profile__button" type="submit">Send plan</button>
+      {% endform %}
+    </div>
   </div>
 </section>
 
 <script>
 (function() {
+  var PRODUCT_URL = '/products/himalayan-yak-chews-for-dogs';
+
+  function escapeHtml(value) {
+    return String(value == null ? '' : value).replace(/[&<>"']/g, function(char) {
+      return {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      }[char];
+    });
+  }
+
+  function formatBreed(breed) {
+    return (breed || 'mixed').replace(/[_-]/g, ' ').replace(/\b\w/g, function(letter) {
+      return letter.toUpperCase();
+    });
+  }
+
+  function track(eventName, properties) {
+    properties = properties || {};
+    if (window.posthog && typeof window.posthog.capture === 'function') {
+      window.posthog.capture(eventName, properties);
+    }
+    if (window.gtag) {
+      window.gtag('event', eventName, properties);
+    }
+    if (window.Shopify && window.Shopify.analytics && typeof window.Shopify.analytics.publish === 'function') {
+      window.Shopify.analytics.publish(eventName, properties);
+    }
+  }
+
+  function compactDate(value) {
+    try {
+      return new Date(value).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+    } catch (error) {
+      return '';
+    }
+  }
+
+  function getInitials(name) {
+    return String(name || 'Dog').trim().slice(0, 1).toUpperCase();
+  }
+
+  function renderHistory(history) {
+    if (!history || !history.length) {
+      return '<p class="dog-profile__muted">Log a chew session to start building enrichment score history.</p>';
+    }
+
+    return '<div class="dog-profile__timeline">' + history.slice(-7).map(function(item) {
+      var score = Math.max(0, Math.min(100, item.score || 0));
+      return '<div class="dog-profile__timeline-row"><span>' + compactDate(item.date) + '</span><div class="dog-profile__timeline-track"><span style="width:' + score + '%"></span></div><strong>' + score + '</strong></div>';
+    }).join('') + '</div>';
+  }
+
+  function renderReports(reports) {
+    if (!reports || !reports.length) {
+      return '<p class="dog-profile__muted">No community duration reports saved on this device yet.</p>';
+    }
+
+    return '<div class="dog-profile__report-list">' + reports.slice(-4).reverse().map(function(report) {
+      return '<div class="dog-profile__report"><strong>' + escapeHtml(report.duration || '-') + ' min</strong><span>' + escapeHtml(formatBreed(report.breed)) + ' · ' + escapeHtml(report.size || 'size not set') + '</span></div>';
+    }).join('') + '</div>';
+  }
+
   function renderProfile() {
     if (typeof PrimeDogProfile === 'undefined') return;
-    if (!PrimeDogProfile.hasProfile()) return;
 
-    var profile = PrimeDogProfile.get();
     var emptyEl = document.getElementById('dog-profile-empty');
     var contentEl = document.getElementById('dog-profile-content');
     if (!emptyEl || !contentEl) return;
 
-    emptyEl.style.display = 'none';
-    contentEl.style.display = 'block';
+    if (!PrimeDogProfile.hasProfile()) {
+      emptyEl.style.display = 'block';
+      contentEl.style.display = 'none';
+      return;
+    }
 
+    var profile = PrimeDogProfile.get();
     var rec = PrimeDogProfile.getRecommendation();
     var personality = PrimeDogProfile.getPersonality();
     var stats = PrimeDogProfile.getSessionStats();
-    var reorder = PrimeDogProfile.getReorderTiming();
     var tips = PrimeDogProfile.getEnrichmentTips();
+    var score = PrimeDogProfile.getEnrichmentScore();
+    var history = PrimeDogProfile.getEnrichmentHistory();
+    var cadence = PrimeDogProfile.getSubscriptionCadence();
+    var postPurchase = PrimeDogProfile.getPostPurchasePlan();
+    var reports = PrimeDogProfile.getDurationReports();
+    var reorder = PrimeDogProfile.getReorderTiming();
 
     var dogName = profile.dogName || 'Your Dog';
-    var breedLabel = (profile.breed || 'mixed').replace(/_/g, ' ').replace(/\b\w/g, function(l) { return l.toUpperCase(); });
+    var breedLabel = formatBreed(profile.breed);
     var personalityLabel = personality ? personality.label : 'Unique Chewer';
-    var personalityEmoji = personality ? personality.emoji : '🐾';
+    var personalityDescription = personality ? personality.description : 'Your dog has a custom chew profile based on size and chewing style.';
+    var avatar = profile.photoAnalysis && profile.photoAnalysis.dataUrl
+      ? '<img src="' + profile.photoAnalysis.dataUrl + '" alt="' + escapeHtml(dogName) + '">'
+      : escapeHtml(getInitials(dogName));
+
+    emptyEl.style.display = 'none';
+    contentEl.style.display = 'grid';
+    contentEl.style.gap = '20px';
 
     var html = '';
 
-    // Profile card
-    html += '<div class="dog-profile__card">';
     html += '<div class="dog-profile__hero">';
-    html += '<div class="dog-profile__avatar">' + personalityEmoji + '</div>';
-    html += '<div class="dog-profile__info">';
-    html += '<h2>' + dogName + '</h2>';
-    html += '<div class="dog-profile__meta">' + breedLabel + (profile.weight ? ' · ' + profile.weight + ' lbs' : '') + (profile.age ? ' · ' + profile.age : '') + '</div>';
-    html += '<div class="dog-profile__personality-badge">' + personalityEmoji + ' ' + personalityLabel + '</div>';
-    html += '</div></div>';
+    html += '<div><p class="dog-profile__eyebrow">My Dog Intelligence</p><h1>' + escapeHtml(dogName) + '</h1><p>' + escapeHtml(breedLabel) + (profile.weight ? ' · ' + escapeHtml(profile.weight) + ' lbs' : '') + (profile.age ? ' · ' + escapeHtml(profile.age) : '') + '. ' + escapeHtml(personalityDescription) + '</p></div>';
+    html += '<div class="dog-profile__identity"><div class="dog-profile__avatar">' + avatar + '</div><div><strong>' + escapeHtml(personalityLabel) + '</strong><span>' + escapeHtml(rec ? rec.size : 'Run the estimator to confirm size') + '</span><span>' + escapeHtml(rec ? rec.durationRange : 'No duration estimate yet') + '</span></div></div>';
+    html += '</div>';
 
-    // Stats
+    html += '<div class="dog-profile__grid">';
+
+    html += '<div class="dog-profile__panel dog-profile__panel--wide">';
+    html += '<h2 class="dog-profile__section-title">Enrichment dashboard</h2>';
     html += '<div class="dog-profile__stats">';
-    if (rec) {
-      html += '<div class="dog-profile__stat"><div class="dog-profile__stat-value">' + rec.durationRange.split('-')[0] + '-' + rec.durationRange.split('-')[1].split(' ')[0] + '</div><div class="dog-profile__stat-label">Min Est. Duration</div></div>';
-    }
-    if (stats) {
-      html += '<div class="dog-profile__stat"><div class="dog-profile__stat-value">' + stats.totalSessions + '</div><div class="dog-profile__stat-label">Sessions Logged</div></div>';
-      html += '<div class="dog-profile__stat"><div class="dog-profile__stat-value">' + stats.averageDuration + 'm</div><div class="dog-profile__stat-label">Avg Duration</div></div>';
-      html += '<div class="dog-profile__stat"><div class="dog-profile__stat-value">' + stats.streak + '</div><div class="dog-profile__stat-label">Day Streak</div></div>';
-    } else {
-      html += '<div class="dog-profile__stat"><div class="dog-profile__stat-value">0</div><div class="dog-profile__stat-label">Sessions</div></div>';
-      html += '<div class="dog-profile__stat"><div class="dog-profile__stat-value">—</div><div class="dog-profile__stat-label">Avg Duration</div></div>';
-      html += '<div class="dog-profile__stat"><div class="dog-profile__stat-value">0</div><div class="dog-profile__stat-label">Day Streak</div></div>';
-    }
+    html += '<div class="dog-profile__stat"><strong>' + score + '</strong><span>Enrichment score</span></div>';
+    html += '<div class="dog-profile__stat"><strong>' + escapeHtml(rec ? rec.durationRange.split(" ")[0] : '-') + '</strong><span>Est. minutes</span></div>';
+    html += '<div class="dog-profile__stat"><strong>' + (stats ? stats.totalSessions : 0) + '</strong><span>Sessions</span></div>';
+    html += '<div class="dog-profile__stat"><strong>' + (reorder.daysUntilReorder == null ? cadence.intervalDays : reorder.daysUntilReorder) + '</strong><span>Days to reorder</span></div>';
+    html += '</div>';
+    html += '<div class="dog-profile__scorebar" style="--score-width:' + score + '%"><span></span></div>';
+    html += '</div>';
+
+    html += '<div class="dog-profile__panel dog-profile__panel--side">';
+    html += '<h2 class="dog-profile__section-title">Subscription cadence</h2>';
+    html += '<p class="dog-profile__muted">' + escapeHtml(cadence.reason) + '</p>';
+    html += '<div class="dog-profile__pill-list"><span class="dog-profile__pill">' + escapeHtml(cadence.quantity) + ' chews</span><span class="dog-profile__pill">' + escapeHtml(cadence.label) + '</span><span class="dog-profile__pill">' + escapeHtml(cadence.size) + '</span></div>';
+    html += '<div class="dog-profile__actions" style="margin-top:16px;"><a class="dog-profile__button" href="' + PRODUCT_URL + '">Shop cadence</a></div>';
+    html += '</div>';
+
+    html += '<div class="dog-profile__panel dog-profile__panel--wide">';
+    html += '<h2 class="dog-profile__section-title">Enrichment score history</h2>';
+    html += renderHistory(history);
+    html += '</div>';
+
+    html += '<div class="dog-profile__panel dog-profile__panel--side">';
+    html += '<h2 class="dog-profile__section-title">Post-purchase plan</h2>';
+    html += '<p class="dog-profile__muted">' + escapeHtml(postPurchase.intro) + '</p>';
+    html += '<ul class="dog-profile__list">' + postPurchase.steps.map(function(step) { return '<li>' + escapeHtml(step) + '</li>'; }).join('') + '</ul>';
+    html += '</div>';
+
+    html += '<div class="dog-profile__panel dog-profile__panel--side">';
+    html += '<h2 class="dog-profile__section-title">AI photo profile</h2>';
+    html += '<div class="dog-profile__photo-preview" id="DogPhotoPreview">' + (profile.photoAnalysis && profile.photoAnalysis.dataUrl ? '<img src="' + profile.photoAnalysis.dataUrl + '" alt="Dog profile photo">' : '<span>Upload preview for future AI vision</span>') + '</div>';
+    html += '<input class="dog-profile__field" type="file" id="DogPhotoInput" accept="image/*" aria-label="Upload dog photo">';
+    html += '<p class="dog-profile__muted" id="DogPhotoStatus">' + escapeHtml(profile.photoAnalysis ? 'Photo saved locally for future AI vision upgrade.' : 'No AI API is used yet. This stores a local preview and prepares the profile architecture.') + '</p>';
+    html += '</div>';
+
+    html += '<div class="dog-profile__panel dog-profile__panel--wide">';
+    html += '<h2 class="dog-profile__section-title">Log a chew session</h2>';
+    html += '<p class="dog-profile__muted">Real sessions improve enrichment history, reorder timing, and future subscription cadence.</p>';
+    html += '<div class="dog-profile__form-grid">';
+    html += '<input class="dog-profile__field" type="number" id="session-duration" placeholder="Minutes" aria-label="Chew session duration in minutes" min="1" max="300">';
+    html += '<select class="dog-profile__select" id="session-mood" aria-label="Chew session mood"><option value="focused">Focused</option><option value="relaxed">Relaxed</option><option value="happy">Happy</option><option value="excited">Excited</option></select>';
+    html += '<button class="dog-profile__session-btn dog-profile__button is-full" type="button" id="log-session-btn">Log session</button>';
     html += '</div>';
     html += '</div>';
 
-    // Recommendation
-    if (rec) {
-      html += '<div class="dog-profile__rec">';
-      html += '<div class="dog-profile__rec-title">Recommended For ' + dogName + '</div>';
-      html += '<div class="dog-profile__rec-size">' + rec.size + '</div>';
-      html += '<div class="dog-profile__rec-duration">Estimated chew time: ' + rec.durationRange + '</div>';
-      html += '<a href="/collections/all" class="dog-profile__rec-btn">Shop Recommended Size →</a>';
-      html += '</div>';
-    }
-
-    // Session tracker
-    html += '<div class="dog-profile__card">';
-    html += '<h3 class="dog-profile__section-title">🎯 Log a Chew Session</h3>';
-    html += '<p style="font-size:14px;color:#6b7280;margin:0 0 12px;">Track how long ' + dogName + ' chews to improve recommendations over time.</p>';
-    html += '<div class="dog-profile__session-form">';
-    html += '<input type="number" id="session-duration" class="dog-profile__session-input" placeholder="Minutes" min="1" max="300">';
-    html += '<select id="session-mood" class="dog-profile__session-input" style="min-width:140px;"><option value="happy">😊 Happy</option><option value="focused">🎯 Focused</option><option value="relaxed">😌 Relaxed</option><option value="excited">🤩 Excited</option></select>';
-    html += '<button type="button" id="log-session-btn" class="dog-profile__session-btn">Log Session</button>';
+    html += '<div class="dog-profile__panel dog-profile__panel--wide">';
+    html += '<h2 class="dog-profile__section-title">UGC chew-duration database</h2>';
+    html += '<p class="dog-profile__muted">Collect opt-in chew-duration reports now. This creates the future dataset for breed-duration benchmarks.</p>';
+    html += '<div class="dog-profile__form-grid">';
+    html += '<input class="dog-profile__field" type="number" id="DurationReportMinutes" placeholder="Actual minutes" aria-label="Actual chew duration in minutes" min="1" max="600">';
+    html += '<select class="dog-profile__select" id="DurationReportSize" aria-label="Chew size"><option>Small</option><option>Medium</option><option>Large</option><option>Extra Large</option><option>Jumbo</option></select>';
+    html += '<textarea class="dog-profile__textarea is-full" id="DurationReportNotes" placeholder="Optional note: setting, chew style, or what changed" aria-label="Duration report notes"></textarea>';
+    html += '<button class="dog-profile__session-btn dog-profile__button is-full" type="button" id="duration-report-btn">Contribute duration</button>';
+    html += '</div>';
+    html += renderReports(reports);
     html += '</div>';
 
-    // Reorder timing
-    if (reorder && reorder.lastPurchase) {
-      html += '<div class="dog-profile__reorder">';
-      html += '<div class="dog-profile__reorder-title">📦 Reorder Timing</div>';
-      html += '<div class="dog-profile__reorder-text">' + reorder.suggestion + '</div>';
-      html += '</div>';
-    }
+    html += '<div class="dog-profile__panel dog-profile__panel--side">';
+    html += '<h2 class="dog-profile__section-title">Personalized tips</h2>';
+    html += '<ul class="dog-profile__list">' + (tips || []).map(function(tip) { return '<li>' + escapeHtml(tip) + '</li>'; }).join('') + '</ul>';
     html += '</div>';
 
-    // Enrichment tips
-    if (tips && tips.length > 0) {
-      html += '<div class="dog-profile__card">';
-      html += '<h3 class="dog-profile__section-title">💡 Enrichment Tips for ' + dogName + '</h3>';
-      html += '<ul class="dog-profile__tips">';
-      tips.forEach(function(tip) {
-        html += '<li class="dog-profile__tip"><span class="dog-profile__tip-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>' + tip + '</li>';
-      });
-      html += '</ul></div>';
-    }
+    html += '<div class="dog-profile__panel dog-profile__panel--full">';
+    html += '<div class="dog-profile__actions"><a href="/pages/how-long-will-this-last-for-my-dog" class="dog-profile__button-secondary">Retake estimator</a><button type="button" id="clear-profile-btn" class="dog-profile__button-secondary">Reset profile</button></div>';
+    html += '</div>';
 
-    // Actions
-    html += '<div class="dog-profile__actions">';
-    html += '<a href="/pages/how-long-will-this-last-for-my-dog" class="dog-profile__action-btn">Retake Quiz</a>';
-    html += '<button type="button" id="clear-profile-btn" class="dog-profile__action-btn dog-profile__action-btn--danger">Reset Profile</button>';
     html += '</div>';
 
     contentEl.innerHTML = html;
+    bindDashboardEvents(profile);
+  }
 
-    // Bind events
+  function bindDashboardEvents(profile) {
     var logBtn = document.getElementById('log-session-btn');
     if (logBtn) {
       logBtn.addEventListener('click', function() {
-        var duration = parseInt(document.getElementById('session-duration').value);
+        var duration = parseInt(document.getElementById('session-duration').value, 10);
         var mood = document.getElementById('session-mood').value;
-        if (!duration || duration < 1) { alert('Please enter a valid duration'); return; }
+        if (!duration || duration < 1) return;
+        PrimeDogProfile.trackSession({ duration: duration, mood: mood, source: 'dashboard' });
+        track('dog_profile_session_logged', { duration: duration, mood: mood, breed: profile.breed });
+        renderProfile();
+      });
+    }
 
-        PrimeDogProfile.trackSession({ duration: duration, mood: mood });
-        document.getElementById('session-duration').value = '';
-        logBtn.textContent = 'Logged ✓';
-        setTimeout(function() {
-          logBtn.textContent = 'Log Session';
-          renderProfile(); // Re-render to update stats
-        }, 1000);
+    var reportBtn = document.getElementById('duration-report-btn');
+    if (reportBtn) {
+      reportBtn.addEventListener('click', function() {
+        var duration = parseInt(document.getElementById('DurationReportMinutes').value, 10);
+        if (!duration || duration < 1) return;
+        PrimeDogProfile.submitDurationReport({
+          duration: duration,
+          size: document.getElementById('DurationReportSize').value,
+          notes: document.getElementById('DurationReportNotes').value,
+          source: 'dashboard'
+        });
+        track('dog_duration_report_submitted', { duration: duration, breed: profile.breed });
+        renderProfile();
+      });
+    }
+
+    var photoInput = document.getElementById('DogPhotoInput');
+    if (photoInput) {
+      photoInput.addEventListener('change', function(event) {
+        var file = event.target.files && event.target.files[0];
+        if (!file) return;
+        if (file.size > 1500000) {
+          var status = document.getElementById('DogPhotoStatus');
+          if (status) status.textContent = 'Use an image under 1.5 MB for the local preview. Future AI vision can support server-side uploads.';
+          return;
+        }
+        var reader = new FileReader();
+        reader.onload = function(loadEvent) {
+          PrimeDogProfile.savePhotoAnalysis({
+            fileName: file.name,
+            fileType: file.type,
+            fileSize: file.size,
+            dataUrl: loadEvent.target.result,
+            status: 'local_preview',
+            note: 'Ready for future AI vision scoring.'
+          });
+          track('dog_photo_profile_uploaded', { file_type: file.type, file_size: file.size });
+          renderProfile();
+        };
+        reader.readAsDataURL(file);
       });
     }
 
     var clearBtn = document.getElementById('clear-profile-btn');
     if (clearBtn) {
       clearBtn.addEventListener('click', function() {
-        if (confirm('Are you sure? This will delete your dog profile and all session data.')) {
-          PrimeDogProfile.clear();
-          emptyEl.style.display = 'block';
-          contentEl.style.display = 'none';
-        }
+        if (!confirm('Reset this dog profile and local history?')) return;
+        PrimeDogProfile.clear();
+        renderProfile();
       });
     }
   }
 
+  function bindEmailCapture() {
+    var form = document.getElementById('DogProfileEmailForm');
+    var email = document.getElementById('DogProfileEmail');
+    if (!form || !email) return;
+
+    form.addEventListener('submit', function() {
+      if (typeof PrimeDogProfile !== 'undefined' && email.value) {
+        PrimeDogProfile.captureEmail(email.value, 'dog_profile_dashboard');
+        track('dog_profile_email_capture_submitted', { source: 'dog_profile_dashboard' });
+      }
+    });
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() { setTimeout(renderProfile, 150); });
+    document.addEventListener('DOMContentLoaded', function() {
+      bindEmailCapture();
+      setTimeout(renderProfile, 150);
+    });
   } else {
+    bindEmailCapture();
     setTimeout(renderProfile, 150);
   }
 
   window.addEventListener('prime:profile:ready', renderProfile);
+  window.addEventListener('prime:profile:updated', renderProfile);
 })();
 </script>
 

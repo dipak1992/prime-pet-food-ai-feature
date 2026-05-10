@@ -1,0 +1,189 @@
+{% comment %}
+  Prime Pet Food post-purchase education.
+  Rendered on customer order pages because standard Shopify themes cannot edit
+  the hosted checkout thank-you flow without checkout extensibility access.
+{% endcomment %}
+
+{%- liquid
+  assign prime_line_count = 0
+  assign prime_quantity = 0
+  assign prime_variant = ''
+
+  for line_item in order.line_items
+    assign line_title = line_item.title | downcase
+    if line_title contains 'yak' or line_title contains 'chew'
+      assign prime_line_count = prime_line_count | plus: 1
+      assign prime_quantity = prime_quantity | plus: line_item.quantity
+      if prime_variant == blank
+        assign prime_variant = line_item.variant.title
+      endif
+    endif
+  endfor
+-%}
+
+{%- if prime_line_count > 0 -%}
+<section
+  class="ppf-post-purchase"
+  data-post-purchase-chew
+  data-order-name="{{ order.name | escape }}"
+  data-order-date="{{ order.created_at | date: '%Y-%m-%d' }}"
+  data-quantity="{{ prime_quantity }}"
+  data-variant="{{ prime_variant | escape }}"
+>
+  <div class="ppf-post-purchase__copy">
+    <p class="ppf-post-purchase__eyebrow">Next chew session</p>
+    <h2>Turn this order into a calmer routine</h2>
+    <p>Use the first few sessions to learn your dog's real chew pace. That helps Prime estimate reorder timing, subscription cadence, and future breed-duration guidance.</p>
+  </div>
+
+  <div class="ppf-post-purchase__steps">
+    <article>
+      <span>01</span>
+      <strong>Start short</strong>
+      <p>Begin with a supervised 15-30 minute session, especially for first-time yak chew users.</p>
+    </article>
+    <article>
+      <span>02</span>
+      <strong>Watch the nub</strong>
+      <p>Remove the chew when it gets small enough to swallow. Soak and puff the nub into a crunchy treat.</p>
+    </article>
+    <article>
+      <span>03</span>
+      <strong>Log real duration</strong>
+      <p>Add the session to My Dog so your enrichment score and reorder timing become more accurate.</p>
+    </article>
+  </div>
+
+  <div class="ppf-post-purchase__actions">
+    <a href="/pages/my-dog" class="ppf-post-purchase__button">Open My Dog</a>
+    <a href="/blogs/dog-behavior/how-long-do-yak-chews-last" class="ppf-post-purchase__link">Read duration guide</a>
+  </div>
+</section>
+
+<style>
+  .ppf-post-purchase {
+    background: #fff8ef;
+    border: 1px solid #eadfce;
+    border-radius: 20px;
+    color: #24130d;
+    display: grid;
+    gap: 22px;
+    margin: 28px 0;
+    padding: clamp(20px, 4vw, 32px);
+  }
+
+  .ppf-post-purchase__eyebrow {
+    color: #d2632e;
+    font-size: 12px;
+    font-weight: 850;
+    letter-spacing: 0.12em;
+    margin: 0 0 8px;
+    text-transform: uppercase;
+  }
+
+  .ppf-post-purchase h2 {
+    font-size: clamp(26px, 4vw, 42px);
+    line-height: 1.05;
+    margin: 0 0 12px;
+  }
+
+  .ppf-post-purchase p {
+    color: #6f5a50;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .ppf-post-purchase__steps {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .ppf-post-purchase__steps article {
+    background: #ffffff;
+    border: 1px solid #eadfce;
+    border-radius: 14px;
+    padding: 18px;
+  }
+
+  .ppf-post-purchase__steps span {
+    color: #d2632e;
+    display: block;
+    font-weight: 900;
+    margin-bottom: 20px;
+  }
+
+  .ppf-post-purchase__steps strong {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  .ppf-post-purchase__actions {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .ppf-post-purchase__button,
+  .ppf-post-purchase__link {
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 850;
+    padding: 12px 18px;
+    text-decoration: none;
+  }
+
+  .ppf-post-purchase__button {
+    background: #d2632e;
+    color: #ffffff;
+  }
+
+  .ppf-post-purchase__link {
+    background: #ffffff;
+    border: 1px solid #eadfce;
+    color: #2b1408;
+  }
+
+  @media (max-width: 749px) {
+    .ppf-post-purchase__steps {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    var root = document.querySelector('[data-post-purchase-chew]');
+    if (!root) return;
+
+    function hydratePurchase() {
+      if (!window.PrimeDogProfile || typeof window.PrimeDogProfile.trackPurchase !== 'function') return;
+      var quantity = Number(root.getAttribute('data-quantity') || 0);
+      if (!quantity) return;
+      var orderName = root.getAttribute('data-order-name');
+      var existing = window.PrimeDogProfile.getPurchases ? window.PrimeDogProfile.getPurchases() : [];
+      var duplicate = existing.some(function(item) {
+        return item.orderName === orderName;
+      });
+      if (duplicate) return;
+
+      window.PrimeDogProfile.trackPurchase({
+        orderName: orderName,
+        orderDate: root.getAttribute('data-order-date'),
+        quantity: quantity,
+        variantTitle: root.getAttribute('data-variant'),
+        source: 'customer_order_page'
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', hydratePurchase);
+    } else {
+      hydratePurchase();
+    }
+    window.addEventListener('prime:profile:ready', hydratePurchase);
+  })();
+</script>
+{%- endif -%}

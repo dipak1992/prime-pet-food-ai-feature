@@ -20,6 +20,8 @@
   var STORAGE_KEY = 'prime_dog_profile';
   var SESSIONS_KEY = 'prime_chew_sessions';
   var PURCHASES_KEY = 'prime_purchases';
+  var ENRICHMENT_HISTORY_KEY = 'prime_enrichment_history';
+  var DURATION_REPORTS_KEY = 'prime_duration_reports';
   var listeners = [];
 
   /* ═══════════════════════════════════════
@@ -65,6 +67,14 @@
     'medium': { size: 'Medium (25-50 lbs)', variantTitle: 'Medium' },
     'large': { size: 'Large (50-80 lbs)', variantTitle: 'Large' },
     'xlarge': { size: 'Extra Large (80+ lbs)', variantTitle: 'Extra Large' }
+  };
+
+  var VARIANT_IDS = {
+    'Small': '51744916701504',
+    'Medium': '51744918962496',
+    'Large': '51744918995264',
+    'Extra Large': '51744919028032',
+    'Jumbo': '51744919060800'
   };
 
   /* ═══════════════════════════════════════
@@ -155,6 +165,8 @@
       localStorage.removeItem(STORAGE_KEY);
       localStorage.removeItem(SESSIONS_KEY);
       localStorage.removeItem(PURCHASES_KEY);
+      localStorage.removeItem(ENRICHMENT_HISTORY_KEY);
+      localStorage.removeItem(DURATION_REPORTS_KEY);
       notifyListeners(null);
     } catch (e) {}
   }
@@ -246,10 +258,67 @@
       durationRange: Math.round(duration * 0.75) + '-' + Math.round(duration * 1.25) + ' minutes',
       size: sizeInfo.size,
       variantTitle: sizeInfo.variantTitle,
+      variantId: VARIANT_IDS[sizeInfo.variantTitle] || null,
       personality: profile.personality || calculatePersonality(profile),
       breed: breed,
       confidence: profile.breed !== 'other' ? 'high' : 'moderate'
     };
+  }
+
+  function calculateEnrichmentScore(profile, sessions) {
+    profile = profile || getProfile() || {};
+    sessions = sessions || getSessions();
+
+    var score = 52;
+    var chewStyle = profile.chewStyle || 'moderate';
+    var rec = getRecommendation();
+    var stats = getSessionStats();
+
+    if (rec) score += 10;
+    if (profile.breed && profile.breed !== 'other') score += 8;
+    if (profile.weight) score += 8;
+    if (chewStyle === 'destroyer') score += 8;
+    if (profile.age) score += 4;
+    if (stats) {
+      if (stats.totalSessions >= 1) score += 6;
+      if (stats.totalSessions >= 3) score += 6;
+      if (stats.averageDuration >= 35) score += 4;
+      if (stats.streak >= 3) score += 4;
+    }
+
+    return Math.max(0, Math.min(100, Math.round(score)));
+  }
+
+  function saveEnrichmentSnapshot(source) {
+    try {
+      var history = getEnrichmentHistory();
+      var profile = getProfile();
+      var stats = getSessionStats();
+      var snapshot = {
+        id: Date.now().toString(36),
+        date: new Date().toISOString(),
+        score: calculateEnrichmentScore(profile),
+        source: source || 'profile',
+        totalSessions: stats ? stats.totalSessions : 0,
+        averageDuration: stats ? stats.averageDuration : null
+      };
+
+      history.push(snapshot);
+      if (history.length > 90) history = history.slice(-90);
+      localStorage.setItem(ENRICHMENT_HISTORY_KEY, JSON.stringify(history));
+      return snapshot;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function getEnrichmentHistory() {
+    try {
+      var data = localStorage.getItem(ENRICHMENT_HISTORY_KEY);
+      return data ? JSON.parse(data) : [];
+    } catch (e) {
+      return [];
+    }
   }
 
   /* ═══════════════════════════════════════
@@ -269,6 +338,8 @@
       }
 
       localStorage.setItem(SESSIONS_KEY, JSON.stringify(sessions));
+      saveEnrichmentSnapshot('session');
+      notifyListeners(getProfile());
       return sessions;
     } catch (e) {
       return [];
@@ -345,6 +416,8 @@
         date: new Date().toISOString()
       }));
       localStorage.setItem(PURCHASES_KEY, JSON.stringify(purchases));
+      saveEnrichmentSnapshot('purchase');
+      notifyListeners(getProfile());
       return purchases;
     } catch (e) {
       return [];
@@ -411,6 +484,117 @@
     };
   }
 
+  function getSubscriptionCadence() {
+    var profile = getProfile() || {};
+    var stats = getSessionStats();
+    var rec = getRecommendation();
+    var weight = profile.weight || 30;
+    var chewStyle = profile.chewStyle || 'moderate';
+    var sessionsPerWeek = 4;
+    var avgDuration = rec ? rec.duration : 60;
+
+    if (stats) {
+      sessionsPerWeek = Math.max(2, Math.min(10, Math.round((stats.totalSessions / Math.max(1, Math.min(14, stats.totalSessions))) * 5)));
+      avgDuration = stats.averageDuration || avgDuration;
+    }
+
+    var intervalDays = 30;
+    var quantity = 2;
+
+    if (chewStyle === 'destroyer' || weight >= 60) {
+      intervalDays = 21;
+      quantity = 3;
+    } else if (chewStyle === 'gentle' && weight < 35) {
+      intervalDays = 45;
+      quantity = 2;
+    }
+
+    if (sessionsPerWeek >= 6 || avgDuration < 35) {
+      intervalDays = Math.max(14, intervalDays - 7);
+      quantity += 1;
+    }
+
+    return {
+      intervalDays: intervalDays,
+      quantity: quantity,
+      size: rec ? rec.variantTitle : 'Medium',
+      variantId: rec ? rec.variantId : VARIANT_IDS.Medium,
+      reason: 'Based on dog size, chewing style, and logged session pace.',
+      label: 'Every ' + intervalDays + ' days'
+    };
+  }
+
+  function getPostPurchasePlan() {
+    var rec = getRecommendation();
+    var profile = getProfile() || {};
+    var cadence = getSubscriptionCadence();
+
+    return {
+      intro: 'Start with short supervised sessions and track real chew time to improve future recommendations.',
+      steps: [
+        'Offer the chew after activity or during a calm indoor routine.',
+        'Supervise every session and keep fresh water nearby.',
+        'Remove the chew when it becomes small enough to swallow.',
+        'Log the session in My Dog to tune reorder timing and subscription cadence.'
+      ],
+      recommendedSize: rec ? rec.variantTitle : 'Medium',
+      cadence: cadence.label,
+      dogName: profile.dogName || 'your dog'
+    };
+  }
+
+  function savePhotoAnalysis(data) {
+    try {
+      var profile = getProfile() || {};
+      var payload = Object.assign({}, data, {
+        updatedAt: new Date().toISOString(),
+        status: data && data.status ? data.status : 'local_preview'
+      });
+      return saveProfile({ photoAnalysis: payload });
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function captureEmail(email, source) {
+    if (!email) return null;
+    return saveProfile({
+      email: email,
+      emailCapturedAt: new Date().toISOString(),
+      emailSource: source || 'profile_dashboard'
+    });
+  }
+
+  function submitDurationReport(data) {
+    try {
+      var reports = getDurationReports();
+      var profile = getProfile() || {};
+      var report = Object.assign({}, data, {
+        id: Date.now().toString(36),
+        date: new Date().toISOString(),
+        breed: data.breed || profile.breed || 'mixed',
+        weight: data.weight || profile.weight || null,
+        chewStyle: data.chewStyle || profile.chewStyle || null
+      });
+      reports.push(report);
+      if (reports.length > 40) reports = reports.slice(-40);
+      localStorage.setItem(DURATION_REPORTS_KEY, JSON.stringify(reports));
+      notifyListeners(profile);
+      return report;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function getDurationReports() {
+    try {
+      var data = localStorage.getItem(DURATION_REPORTS_KEY);
+      return data ? JSON.parse(data) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
   /* ═══════════════════════════════════════
      ENRICHMENT RECOMMENDATIONS
      ═══════════════════════════════════════ */
@@ -439,6 +623,11 @@
       if (stats.totalSessions >= 10) {
         tips.push('Your dog has completed ' + stats.totalSessions + ' enrichment sessions!');
       }
+    }
+
+    var cadence = getSubscriptionCadence();
+    if (cadence && cadence.intervalDays <= 21) {
+      tips.push('Keep a backup chew on hand so calm-time routines do not run out.');
     }
 
     return tips.slice(0, 5);
@@ -581,9 +770,18 @@
     trackSession: trackSession,
     getSessions: getSessions,
     getSessionStats: getSessionStats,
+    getEnrichmentScore: function() { return calculateEnrichmentScore(); },
+    getEnrichmentHistory: getEnrichmentHistory,
+    saveEnrichmentSnapshot: saveEnrichmentSnapshot,
     trackPurchase: trackPurchase,
     getPurchases: getPurchases,
     getReorderTiming: getReorderTiming,
+    getSubscriptionCadence: getSubscriptionCadence,
+    getPostPurchasePlan: getPostPurchasePlan,
+    savePhotoAnalysis: savePhotoAnalysis,
+    captureEmail: captureEmail,
+    submitDurationReport: submitDurationReport,
+    getDurationReports: getDurationReports,
     getEnrichmentTips: getEnrichmentTips,
     getBreedMessage: getBreedMessage,
     getBreedData: function(breed) { return BREED_DATA[breed] || null; },
