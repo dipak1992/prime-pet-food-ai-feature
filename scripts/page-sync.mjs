@@ -25,6 +25,7 @@ if (args.check || args.dryRun) {
     if (args.dryRun) {
       console.log(`  title: ${page.title}`);
       console.log(`  published: ${page.published}`);
+      console.log(`  seo title: ${page.seoTitle || '(none)'}`);
       console.log(`  body bytes: ${Buffer.byteLength(page.body || '', 'utf8')}`);
     }
   }
@@ -58,6 +59,12 @@ function validatePage(page) {
   if (!page.templateSuffix) errors.push('templateSuffix is required');
   if (!page.body || page.body.length < 120) errors.push('body must include a unique summary');
   if (typeof page.published !== 'boolean') errors.push('published must be true or false');
+  if (!page.seoTitle) errors.push('seoTitle is required');
+  if (!page.seoDescription) errors.push('seoDescription is required');
+  if (page.seoTitle && page.seoTitle.length > 70) errors.push('seoTitle should stay under 70 characters');
+  if (page.seoDescription && page.seoDescription.length > 170) {
+    errors.push('seoDescription should stay under 170 characters');
+  }
   if (errors.length) throw new Error(`${page.handle || page.title}: ${errors.join('; ')}`);
 }
 
@@ -73,4 +80,3 @@ function parseArgs(argv) {
   }
   return result;
 }
-

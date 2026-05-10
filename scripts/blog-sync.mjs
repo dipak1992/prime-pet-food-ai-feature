@@ -37,6 +37,7 @@ if (args.dryRun) {
     console.log(`  title: ${article.title}`);
     console.log(`  published: ${article.published}`);
     console.log(`  tags: ${article.tags.join(', ') || '(none)'}`);
+    console.log(`  seo title: ${article.seoTitle || '(none)'}`);
     console.log(`  html bytes: ${Buffer.byteLength(article.bodyHtml, 'utf8')}`);
   }
   console.log(`Dry run complete for ${filtered.length} article(s).`);
@@ -103,6 +104,8 @@ function loadArticles(dir) {
       published: Boolean(data.published),
       publishDate: data.publish_date || data.publishDate,
       templateSuffix: normalizeTemplateSuffix(data.template_suffix),
+      seoTitle: data.seo_title,
+      seoDescription: data.seo_description,
       imageUrl: data.image,
       imageAlt: data.image_alt,
       summaryHtml: summarySource ? markdownToHtml(summarySource) : '',
@@ -117,6 +120,10 @@ function validateArticle(article) {
   if (!article.title) errors.push('title is required');
   if (!article.handle) errors.push('handle is required');
   if (!article.bodyHtml || article.bodyHtml.length < 400) errors.push('body is too short for SEO-safe publishing');
+  if (article.seoTitle && article.seoTitle.length > 70) errors.push('seo_title should stay under 70 characters');
+  if (article.seoDescription && article.seoDescription.length > 170) {
+    errors.push('seo_description should stay under 170 characters');
+  }
   if (article.published && article.bodyHtml.length < 1200) {
     errors.push('published articles should be at least 1200 HTML characters to avoid thin content');
   }
@@ -191,4 +198,3 @@ function titleFromHandle(handle) {
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
     .join(' ');
 }
-

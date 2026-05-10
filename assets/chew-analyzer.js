@@ -50,6 +50,13 @@ var BREEDS={
 var WEIGHT_MODS={'under-15':1.6,'15-35':1.2,'35-60':0.9,'60-plus':0.7};
 var CHEW_MODS={'gentle':1.5,'moderate':1.0,'aggressive':0.6};
 var AGE_MODS={'puppy':1.3,'adult':1.0,'senior':1.4};
+var VARIANT_BY_SIZE={
+  'Small':'51744916701504',
+  'Medium':'51744918962496',
+  'Large':'51744918995264',
+  'Extra Large':'51744919028032',
+  'Jumbo':'51744919060800'
+};
 
 function analyze(breed,weight,chewStyle,age){
   var b=BREEDS[breed]||BREEDS['mixed-breed'];
@@ -296,8 +303,8 @@ CA._showResults=function(){
     '<button class="ca-result__restart" data-action="restart">Analyze another dog \u2192</button>';
   this._goTo('results');
   this._animateResults();
-  this._bindResultActions();
-  this._track('completed',{breed:a.breed,weight:a.weight,chewStyle:a.chewStyle,age:a.age,durationMin:r.duration.min,durationMax:r.duration.max,enrichment:r.enrichment,aggressiveChewer:a.chewStyle==='aggressive'});
+  this._bindResultActions(r);
+  this._track('completed',{breed:a.breed,weight:a.weight,chewStyle:a.chewStyle,age:a.age,durationMin:r.duration.min,durationMax:r.duration.max,enrichment:r.enrichment,aggressiveChewer:a.chewStyle==='aggressive',recommendedSize:r.product.size});
   this._track('results_shown',{breed:a.breed,weight:a.weight,chewStyle:a.chewStyle,age:a.age,durationMin:r.duration.min,durationMax:r.duration.max,enrichment:r.enrichment});
 };
 
@@ -314,20 +321,24 @@ CA._animateResults=function(){
   if(bar)setTimeout(function(){bar.style.width=bar.dataset.width+'%';},200);
 };
 
-CA._bindResultActions=function(){
+CA._bindResultActions=function(result){
   var self=this;
   var addBtn=this.el.querySelector('[data-action="add-to-cart"]');
   var subBtn=this.el.querySelector('[data-action="subscribe"]');
   var restart=this.el.querySelector('[data-action="restart"]');
   var emailForm=this.el.querySelector('[data-action="email-capture"]');
   var productUrl=this.el.dataset.productUrl||'/products/himalayan-yak-chews-for-dogs';
+  var variantId=VARIANT_BY_SIZE[result.product.size]||'';
+  var productQueryLink=productUrl+(variantId?(productUrl.indexOf('?')===-1?'?':'&')+'variant='+variantId:'');
+  var productDeepLink=productQueryLink+'#chew-analyzer-widget';
   if(addBtn)addBtn.addEventListener('click',function(){
-    self._track('add_to_cart_clicked',self.answers);
-    window.location.href=productUrl;
+    self._track('add_to_cart_clicked',Object.assign({},self.answers,{recommendedSize:result.product.size,variantId:variantId}));
+    if(variantId)window.location.href='/cart/add?id='+variantId+'&quantity=1&return_to=/cart';
+    else window.location.href=productDeepLink;
   });
   if(subBtn)subBtn.addEventListener('click',function(){
-    self._track('subscribe_clicked',self.answers);
-    window.location.href=productUrl+'?selling_plan=true';
+    self._track('subscribe_clicked',Object.assign({},self.answers,{recommendedSize:result.product.size,variantId:variantId}));
+    window.location.href=productQueryLink+(productQueryLink.indexOf('?')===-1?'?':'&')+'selling_plan=true#subscribe';
   });
   if(emailForm)emailForm.addEventListener('submit',function(e){
     e.preventDefault();

@@ -10,6 +10,8 @@ tags:
   - dog enrichment
   - long-lasting dog chews
 summary: Yak chew duration depends on your dog's size, breed, age, chewing style, and how you structure each chewing session.
+seo_title: How Long Do Yak Chews Last? | Prime Pet Food
+seo_description: Learn how long yak chews last by dog size, breed, chewing style, and supervised session routine.
 published: true
 template_suffix: ""
 ---

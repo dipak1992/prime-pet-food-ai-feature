@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "seo_chew_hub": {
+      "type": "seo-chew-hub",
+      "settings": {
+        "eyebrow": "Prime Pet Food Learning Center",
+        "heading": "Yak Chew Guides",
+        "subheading": "Find the right Himalayan yak cheese chew by dog size, breed, chewing behavior, enrichment goal, and chew duration."
+      }
+    }
+  },
+  "order": [
+    "seo_chew_hub"
+  ]
+}

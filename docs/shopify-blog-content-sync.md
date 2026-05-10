@@ -9,6 +9,8 @@ This repo now has a code-managed content layer for Shopify Admin blogs and artic
 - Converts Markdown to Shopify article HTML.
 - Finds or creates the target Shopify blog by handle.
 - Finds articles by handle and updates them, or creates them when missing.
+- Syncs Shopify page records from `content/pages/seo-pages.json`.
+- Syncs SEO title and description through Shopify's standard `global.title_tag` and `global.description_tag` metafields.
 - Supports safe validation and dry runs before publishing.
 
 The implementation uses Shopify GraphQL Admin API. Shopify's current docs list `articleCreate`, `articleUpdate`, and `blogCreate` under GraphQL Admin, while REST Admin is legacy for new public apps.
@@ -104,8 +106,26 @@ Optional fields:
 - `publish_date`: ISO date string for scheduled publishing.
 - `image`: public image URL Shopify can fetch.
 - `image_alt`: image alt text.
+- `seo_title`: SEO title tag.
+- `seo_description`: SEO meta description.
 - `blog_template_suffix`: alternate blog template suffix.
 - `blog_comment_policy`: `MODERATED`, `CLOSED`, or another Shopify-supported enum value.
+
+## Page Format
+
+SEO pages are listed in `content/pages/seo-pages.json`.
+
+Each page entry supports:
+
+- `title`
+- `handle`
+- `templateSuffix`
+- `published`
+- `seoTitle`
+- `seoDescription`
+- `body`
+
+The page sync creates or updates Shopify pages, assigns the page template suffix, and applies SEO title/description metafields.
 
 ## Publishing Workflow
 

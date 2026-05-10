@@ -210,6 +210,7 @@ export function buildArticleInput(article, blogId) {
     publishDate: article.publishDate,
     tags: article.tags,
     templateSuffix: article.templateSuffix,
+    metafields: seoMetafields(article.seoTitle, article.seoDescription),
     image: article.imageUrl
       ? {
           url: article.imageUrl,
@@ -227,7 +228,29 @@ export function buildPageInput(page) {
     isPublished: page.published,
     publishDate: page.publishDate,
     templateSuffix: page.templateSuffix,
+    metafields: seoMetafields(page.seoTitle, page.seoDescription),
   });
+}
+
+function seoMetafields(title, description) {
+  const metafields = [];
+  if (title) {
+    metafields.push({
+      namespace: 'global',
+      key: 'title_tag',
+      type: 'single_line_text_field',
+      value: title,
+    });
+  }
+  if (description) {
+    metafields.push({
+      namespace: 'global',
+      key: 'description_tag',
+      type: 'single_line_text_field',
+      value: description,
+    });
+  }
+  return metafields.length ? metafields : undefined;
 }
 
 function normalizeStoreDomain(value) {

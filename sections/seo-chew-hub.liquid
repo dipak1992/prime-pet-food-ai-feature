@@ -1,0 +1,98 @@
+{{ 'seo-chew-pages.css' | asset_url | stylesheet_tag }}
+
+<main class="seo-chew seo-hub">
+  <header class="seo-chew__hero">
+    <div class="page-width seo-chew__grid">
+      <div>
+        <p class="seo-chew__eyebrow">{{ section.settings.eyebrow }}</p>
+        <h1>{{ section.settings.heading }}</h1>
+        <p class="seo-chew__lede">{{ section.settings.subheading }}</p>
+        <div class="seo-chew__actions">
+          <a class="seo-chew__button" href="/pages/how-long-will-this-last-for-my-dog">Estimate Chew Duration</a>
+          <a class="seo-chew__button seo-chew__button--secondary" href="/products/himalayan-yak-chews-for-dogs">Shop Yak Chews</a>
+        </div>
+      </div>
+      <aside class="seo-chew__summary" aria-label="Guide categories">
+        <dl>
+          <div><dt>Start Here</dt><dd>Duration estimator</dd></div>
+          <div><dt>Buyer Intent</dt><dd>Rawhide, bully sticks, aggressive chewers</dd></div>
+          <div><dt>Breed Fit</dt><dd>Labs, Goldens, Huskies, Shepherds</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </header>
+
+  <section class="seo-chew__section">
+    <div class="page-width">
+      <div class="seo-hub__group">
+        <h2 class="seo-hub__group-title">Chew Duration and Comparison</h2>
+        <div class="seo-hub__grid">
+          <a class="seo-hub__item" href="/pages/how-long-do-yak-chews-last"><span>Duration</span><strong>How Long Do Yak Chews Last?</strong><p>Estimate chew time by size, breed, chewing style, and routine.</p></a>
+          <a class="seo-hub__item" href="/pages/longest-lasting-dog-chews"><span>Buyer Guide</span><strong>Longest Lasting Dog Chews</strong><p>Compare dense chews for enrichment and boredom reduction.</p></a>
+          <a class="seo-hub__item" href="/pages/yak-chews-vs-bully-sticks"><span>Comparison</span><strong>Yak Chews vs Bully Sticks</strong><p>Understand odor, duration, mess, and ingredient tradeoffs.</p></a>
+        </div>
+      </div>
+
+      <div class="seo-hub__group">
+        <h2 class="seo-hub__group-title">Problem Guides</h2>
+        <div class="seo-hub__grid">
+          <a class="seo-hub__item" href="/pages/best-long-lasting-chew-for-aggressive-chewers"><span>Power Chewers</span><strong>Aggressive Chewer Guide</strong><p>Choose dense, larger chews for dogs that destroy softer toys.</p></a>
+          <a class="seo-hub__item" href="/pages/dog-chews-for-bored-dogs"><span>Enrichment</span><strong>Dog Chews for Bored Dogs</strong><p>Build a chewing routine that redirects destructive boredom.</p></a>
+          <a class="seo-hub__item" href="/pages/best-rawhide-alternative"><span>Alternative</span><strong>Best Rawhide Alternative</strong><p>Move from rawhide to cleaner, simple-ingredient yak chews.</p></a>
+          <a class="seo-hub__item" href="/pages/dog-chews-for-separation-anxiety"><span>Calming</span><strong>Separation Anxiety Routines</strong><p>Use supervised chewing carefully as part of broader training.</p></a>
+          <a class="seo-hub__item" href="/pages/best-chews-for-crate-training"><span>Crate Training</span><strong>Best Chews for Crate Training</strong><p>Create positive crate associations with safe supervised chews.</p></a>
+        </div>
+      </div>
+
+      <div class="seo-hub__group">
+        <h2 class="seo-hub__group-title">Breed Guides</h2>
+        <div class="seo-hub__grid">
+          <a class="seo-hub__item" href="/pages/yak-chews-for-labradors"><span>Breed</span><strong>Yak Chews for Labradors</strong><p>Size and routine guidance for enthusiastic food-driven chewers.</p></a>
+          <a class="seo-hub__item" href="/pages/yak-chews-for-golden-retrievers"><span>Breed</span><strong>Yak Chews for Golden Retrievers</strong><p>Post-walk enrichment for social, persistent chewers.</p></a>
+          <a class="seo-hub__item" href="/pages/yak-chews-for-german-shepherds"><span>Breed</span><strong>Yak Chews for German Shepherds</strong><p>Structured enrichment for strong, high-drive chewing behavior.</p></a>
+          <a class="seo-hub__item" href="/pages/yak-chews-for-huskies"><span>Breed</span><strong>Yak Chews for Huskies</strong><p>Focused chewing for independent, boredom-prone dogs.</p></a>
+          <a class="seo-hub__item" href="/pages/yak-chews-for-french-bulldogs"><span>Breed</span><strong>Yak Chews for French Bulldogs</strong><p>Compact-size recommendations for indoor enrichment routines.</p></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ section.settings.heading | json }},
+  "description": {{ section.settings.subheading | json }},
+  "url": {{ canonical_url | json }}
+}
+</script>
+
+{% schema %}
+{
+  "name": "SEO chew hub",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Prime Pet Food Learning Center"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Yak Chew Guides"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Find the right Himalayan yak cheese chew by dog size, breed, chewing behavior, enrichment goal, and chew duration."
+    }
+  ],
+  "presets": [
+    { "name": "SEO chew hub" }
+  ]
+}
+{% endschema %}

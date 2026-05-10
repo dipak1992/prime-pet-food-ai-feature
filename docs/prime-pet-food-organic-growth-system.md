@@ -30,8 +30,10 @@ Duplicate-content risk:
 Theme files added:
 
 - `sections/seo-chew-page.liquid`: scalable SEO page renderer for breed, problem, duration, and comparison pages.
+- `sections/seo-chew-hub.liquid`: crawlable hub page for the full yak chew guide cluster.
 - `sections/chew-analyzer-landing.liquid`: dedicated SEO landing page for "How Long Will This Last For MY Dog?"
 - `templates/page.seo-chew.json`: assign this template to programmatic SEO pages.
+- `templates/page.seo-hub.json`: assign this template to the yak chew guide hub.
 - `templates/page.chew-duration-tool.json`: assign this template to the analyzer landing page.
 - `assets/seo-chew-pages.css`: mobile-first styles for the SEO content system.
 - `snippets/seo-topic-links.liquid`: internal-link module for existing blog posts.
@@ -43,6 +45,7 @@ Existing files upgraded:
 - `sections/chew-analyzer.liquid`: homepage hero mode now embeds the analyzer instead of only linking away.
 - `snippets/chew-analyzer-widget.liquid`: adds product URL and placement attributes for analytics and routing.
 - `sections/main-article.liquid`: blog posts now automatically link into the SEO cluster.
+- `scripts/page-sync.mjs`: creates and updates Shopify pages from `content/pages/seo-pages.json`, including SEO title and description metadata.
 
 ## Page Handles To Create In Shopify
 
@@ -65,6 +68,10 @@ Assign `page.seo-chew` to these pages:
 Assign `page.chew-duration-tool` to:
 
 - `/pages/how-long-will-this-last-for-my-dog`
+
+Assign `page.seo-hub` to:
+
+- `/pages/yak-chew-guides`
 
 Recommended SEO metadata:
 
