@@ -88,7 +88,7 @@
     border-radius: 16px;
     overflow: hidden;
     aspect-ratio: 1;
-    background: #f3f4f6;
+    background: #1f2933;
     cursor: pointer;
     transition: transform 0.2s ease;
   }
@@ -102,6 +102,20 @@
     height: 100%;
     object-fit: cover;
     display: block;
+  }
+
+  .ugc-card__img--fallback {
+    filter: saturate(0.95) contrast(1.02);
+  }
+
+  .ugc-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0) 36%),
+      linear-gradient(0deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0) 45%);
   }
 
   /* Timer overlay */
@@ -274,7 +288,20 @@
               alt: block.settings.dog_name | append: ' - ' | append: block.settings.breed
             }}
           {% else %}
-            <div class="ugc-card__img" style="background: linear-gradient(135deg, #f3f4f6, #e5e7eb);"></div>
+            <img
+              src="{{ 'prime-ugc-dog-chew-card.jpg' | asset_img_url: '600x' }}"
+              srcset="
+                {{ 'prime-ugc-dog-chew-card.jpg' | asset_img_url: '360x' }} 360w,
+                {{ 'prime-ugc-dog-chew-card.jpg' | asset_img_url: '600x' }} 600w,
+                {{ 'prime-ugc-dog-chew-card.jpg' | asset_url }} 1254w
+              "
+              sizes="(max-width: 768px) 50vw, 300px"
+              class="ugc-card__img ugc-card__img--fallback"
+              loading="lazy"
+              width="1254"
+              height="1254"
+              alt="{{ block.settings.dog_name | append: ' - calm dog chewing a Himalayan yak chew' | escape }}"
+            >
           {% endif %}
 
           <!-- Timer overlay -->

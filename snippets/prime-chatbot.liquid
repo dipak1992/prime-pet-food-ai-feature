@@ -1,0 +1,249 @@
+<style>
+  #shopify-chat,
+  #ShopifyChat,
+  iframe[id*="ShopifyChat"],
+  iframe[src*="inbox.shopify"],
+  .shopify-chat,
+  .shopify-inbox {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  .prime-chatbot {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 2147483000;
+    font-family: var(--font-body-family, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  }
+
+  .prime-chatbot__toggle {
+    width: 62px;
+    height: 62px;
+    border: 0;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    background: #1a1108;
+    color: #fff;
+    box-shadow: 0 14px 34px rgba(26, 17, 8, 0.28);
+    cursor: pointer;
+  }
+
+  .prime-chatbot__toggle svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .prime-chatbot__panel {
+    position: absolute;
+    right: 0;
+    bottom: 78px;
+    width: min(360px, calc(100vw - 32px));
+    max-height: min(620px, calc(100vh - 112px));
+    overflow: hidden;
+    border-radius: 18px;
+    background: #fffaf4;
+    border: 1px solid #eadfce;
+    box-shadow: 0 24px 70px rgba(26, 17, 8, 0.22);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(12px);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+  }
+
+  .prime-chatbot.is-open .prime-chatbot__panel {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .prime-chatbot__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 18px;
+    background: #1a1108;
+    color: #fff;
+  }
+
+  .prime-chatbot__title {
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .prime-chatbot__subtitle {
+    margin-top: 3px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.72);
+  }
+
+  .prime-chatbot__close {
+    width: 34px;
+    height: 34px;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .prime-chatbot__body {
+    padding: 16px;
+    max-height: 460px;
+    overflow-y: auto;
+  }
+
+  .prime-chatbot__message {
+    margin: 0 0 14px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: #ffffff;
+    color: #2b1408;
+    border: 1px solid #efe4d5;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .prime-chatbot__quick {
+    display: grid;
+    gap: 8px;
+  }
+
+  .prime-chatbot__quick button,
+  .prime-chatbot__link {
+    width: 100%;
+    border: 1px solid #eadfce;
+    border-radius: 12px;
+    background: #ffffff;
+    color: #2b1408;
+    padding: 11px 12px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .prime-chatbot__quick button:hover,
+  .prime-chatbot__link:hover {
+    border-color: #e66711;
+    color: #2b1408;
+  }
+
+  .prime-chatbot__answer {
+    margin-top: 12px;
+    padding: 13px 14px;
+    border-radius: 14px;
+    background: #f4eee3;
+    color: #3d2a22;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .prime-chatbot__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .prime-chatbot__actions .prime-chatbot__link {
+    text-align: center;
+    background: #e66711;
+    color: #fff;
+    border-color: #e66711;
+  }
+
+  @media (max-width: 520px) {
+    .prime-chatbot {
+      right: 14px;
+      bottom: 14px;
+    }
+
+    .prime-chatbot__toggle {
+      width: 58px;
+      height: 58px;
+    }
+
+    .prime-chatbot__panel {
+      right: -2px;
+      bottom: 72px;
+    }
+  }
+</style>
+
+<div class="prime-chatbot" data-prime-chatbot>
+  <section class="prime-chatbot__panel" aria-label="Prime Pet Food helper" aria-hidden="true">
+    <div class="prime-chatbot__header">
+      <div>
+        <div class="prime-chatbot__title">Prime Pet Food Helper</div>
+        <div class="prime-chatbot__subtitle">Chew sizing, orders, and product help</div>
+      </div>
+      <button class="prime-chatbot__close" type="button" aria-label="Close chat" data-prime-chat-close>&times;</button>
+    </div>
+    <div class="prime-chatbot__body">
+      <p class="prime-chatbot__message">Hi. Choose a topic and I will point you to the fastest answer.</p>
+      <div class="prime-chatbot__quick" data-prime-chat-options>
+        <button type="button" data-answer="size">Find the right chew size</button>
+        <button type="button" data-answer="duration">How long will a chew last?</button>
+        <button type="button" data-answer="safety">Safety and supervision</button>
+        <button type="button" data-answer="order">Order or shipping help</button>
+      </div>
+      <div class="prime-chatbot__answer" data-prime-chat-answer hidden></div>
+      <div class="prime-chatbot__actions">
+        <a class="prime-chatbot__link" href="/pages/how-long-will-this-last-for-my-dog">Chew finder</a>
+        <a class="prime-chatbot__link" href="/pages/contact-us">Contact us</a>
+      </div>
+    </div>
+  </section>
+  <button class="prime-chatbot__toggle" type="button" aria-label="Open Prime Pet Food helper" aria-expanded="false" data-prime-chat-toggle>
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4 5.5A3.5 3.5 0 0 1 7.5 2h9A3.5 3.5 0 0 1 20 5.5v6A3.5 3.5 0 0 1 16.5 15H11l-5 4v-4.2A3.5 3.5 0 0 1 4 11.5v-6Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M8 8h8M8 11h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </button>
+</div>
+
+<script>
+  (function() {
+    var root = document.querySelector('[data-prime-chatbot]');
+    if (!root) return;
+
+    var panel = root.querySelector('.prime-chatbot__panel');
+    var toggle = root.querySelector('[data-prime-chat-toggle]');
+    var close = root.querySelector('[data-prime-chat-close]');
+    var answer = root.querySelector('[data-prime-chat-answer]');
+    var options = root.querySelector('[data-prime-chat-options]');
+
+    var answers = {
+      size: 'Use the chew finder for the safest match. It looks at weight, breed, age, and chewing style before suggesting a size.',
+      duration: 'Chew time varies by dog. Most guidance on this site is an estimate, so supervise each session and remove small end pieces.',
+      safety: "Choose a chew larger than your dog's mouth, supervise chewing, provide fresh water, and remove the chew when it becomes small enough to swallow.",
+      order: 'For shipping, order status, or product questions, use the contact page so the team can look up your details.'
+    };
+
+    function setOpen(isOpen) {
+      root.classList.toggle('is-open', isOpen);
+      panel.setAttribute('aria-hidden', String(!isOpen));
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    }
+
+    toggle.addEventListener('click', function() {
+      setOpen(!root.classList.contains('is-open'));
+    });
+
+    close.addEventListener('click', function() {
+      setOpen(false);
+    });
+
+    options.addEventListener('click', function(event) {
+      var button = event.target.closest('button[data-answer]');
+      if (!button) return;
+      answer.textContent = answers[button.getAttribute('data-answer')] || '';
+      answer.hidden = false;
+    });
+  })();
+</script>
