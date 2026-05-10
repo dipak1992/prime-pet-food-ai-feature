@@ -10,7 +10,7 @@ tags:
   - dog enrichment
   - long-lasting dog chews
 summary: Yak chew duration depends on your dog's size, breed, age, chewing style, and how you structure each chewing session.
-published: false
+published: true
 template_suffix: ""
 ---
 
@@ -47,4 +47,3 @@ Related guides:
 - [Best long lasting chew for aggressive chewers](/pages/best-long-lasting-chew-for-aggressive-chewers)
 - [Yak chews vs bully sticks](/pages/yak-chews-vs-bully-sticks)
 - [Shop Prime Pet Food yak chews](/products/himalayan-yak-chews-for-dogs)
-

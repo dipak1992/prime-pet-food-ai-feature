@@ -10,7 +10,7 @@ tags:
   - dog chewing
   - natural dog chews
 summary: If you want a cleaner rawhide alternative, Himalayan yak cheese chews offer a dense, simple-ingredient option for supervised chewing.
-published: false
+published: true
 template_suffix: ""
 ---
 
@@ -44,4 +44,3 @@ Related guides:
 - [Best rawhide alternative](/pages/best-rawhide-alternative)
 - [Dog chews for bored dogs](/pages/dog-chews-for-bored-dogs)
 - [Shop Prime Pet Food yak chews](/products/himalayan-yak-chews-for-dogs)
-
