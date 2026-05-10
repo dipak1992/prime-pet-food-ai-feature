@@ -280,6 +280,24 @@
     <!-- UGC Grid -->
     <div class="ugc-gallery__grid">
       {% for block in section.blocks %}
+        {%- liquid
+          assign fallback_image = 'prime-ugc-dog-chew-card.jpg'
+          assign breed_handle = block.settings.breed | handleize
+
+          if breed_handle contains 'labrador'
+            assign fallback_image = 'prime-ugc-labrador-chew-card.jpg'
+          elsif breed_handle contains 'french-bulldog'
+            assign fallback_image = 'prime-ugc-french-bulldog-chew-card.jpg'
+          elsif breed_handle contains 'german-shepherd'
+            assign fallback_image = 'prime-ugc-german-shepherd-chew-card.jpg'
+          elsif breed_handle contains 'golden-retriever'
+            assign fallback_image = 'prime-ugc-golden-retriever-chew-card.jpg'
+          elsif breed_handle contains 'beagle'
+            assign fallback_image = 'prime-ugc-beagle-chew-card.jpg'
+          elsif breed_handle contains 'poodle'
+            assign fallback_image = 'prime-ugc-poodle-chew-card.jpg'
+          endif
+        -%}
         <div class="ugc-card" {{ block.shopify_attributes }}>
           {% if block.settings.image != blank %}
             {{ block.settings.image | image_url: width: 600 | image_tag:
@@ -289,11 +307,11 @@
             }}
           {% else %}
             <img
-              src="{{ 'prime-ugc-dog-chew-card.jpg' | asset_img_url: '600x' }}"
+              src="{{ fallback_image | asset_img_url: '600x' }}"
               srcset="
-                {{ 'prime-ugc-dog-chew-card.jpg' | asset_img_url: '360x' }} 360w,
-                {{ 'prime-ugc-dog-chew-card.jpg' | asset_img_url: '600x' }} 600w,
-                {{ 'prime-ugc-dog-chew-card.jpg' | asset_url }} 1254w
+                {{ fallback_image | asset_img_url: '360x' }} 360w,
+                {{ fallback_image | asset_img_url: '600x' }} 600w,
+                {{ fallback_image | asset_url }} 1254w
               "
               sizes="(max-width: 768px) 50vw, 300px"
               class="ugc-card__img ugc-card__img--fallback"
