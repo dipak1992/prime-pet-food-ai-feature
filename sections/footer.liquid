@@ -43,6 +43,24 @@
   {%- if section.blocks.size > 0 or section.settings.payment_enable -%}
     <div class="color-{{ section.settings.color_scheme }} gradient{% if section.blocks.size > 0 %} section__inner{% else %} pt-s05 pb-s05{% endif %}">
       <div class="page-width">
+        <div class="footer__prime-promise" aria-label="Prime Pet Food shopping promises">
+          <a href="/pages/how-long-will-this-last-for-my-dog" class="footer__promise-card">
+            <span class="footer__promise-kicker">Chew Match</span>
+            <strong>Find the right size before you buy</strong>
+            <small>Estimate duration by breed, weight, age, and chewing style.</small>
+          </a>
+          <div class="footer__promise-card">
+            <span class="footer__promise-kicker">Rawhide-Free</span>
+            <strong>Premium Himalayan yak cheese chews</strong>
+            <small>Simple ingredients for supervised enrichment routines.</small>
+          </div>
+          <div class="footer__promise-card">
+            <span class="footer__promise-kicker">Support</span>
+            <strong>Questions before ordering?</strong>
+            <small>Use the contact link below for help choosing a chew.</small>
+          </div>
+        </div>
+
         {%- if section.blocks.size > 0 -%}
           <div class="footer__blocks-wrapper grid grid--1-col grid--2-col grid--4-col-tablet {{ footer_grid_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
             {%- for block in section.blocks -%}

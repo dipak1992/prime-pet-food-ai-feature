@@ -168,7 +168,7 @@
           {%- comment -%} Expanded Search Box (Desktop) {%- endcomment -%}
           <div class="header__desktop-search-expanded">
             <form action="{{ routes.search_url }}" method="get" role="search" class="header__search-form-desktop">
-              <input type="text" name="q" placeholder="Search our products..." class="header__search-input-desktop">
+              <input type="text" name="q" placeholder="Search yak chews, sizing, rawhide alternatives..." class="header__search-input-desktop">
               <button type="submit" class="header__search-submit-desktop">
                 {% render 'icon', icon: 'search', size: 20 %}
               </button>
@@ -238,10 +238,17 @@
         </div>
       </div>
 
+      <div class="header-mobile__chew-finder">
+        <a href="/pages/how-long-will-this-last-for-my-dog" class="header-mobile__chew-finder-link">
+          <span>Find My Dog's Chew</span>
+          <small>Duration estimate + size match</small>
+        </a>
+      </div>
+
       {%- comment -%} Mobile Search Bar (Reveals on click) {%- endcomment -%}
       <div class="header-mobile__search-bar">
         <form action="{{ routes.search_url }}" method="get" role="search" class="header-mobile__search-form">
-          <input type="text" name="q" placeholder="Search..." class="header-mobile__search-input">
+          <input type="text" name="q" placeholder="Search yak chews, breed guides, chew duration..." class="header-mobile__search-input">
           <button type="button" class="header-mobile__search-close">
             {% render 'icon', icon: 'close', size: 20 %}
           </button>
@@ -256,6 +263,10 @@
       <div class="header__drawer-header">
         <span class="h3">Menu</span>
         <button type="button" class="header__drawer-close" aria-label="Close menu">{% render 'icon', icon: 'close', size: 24 %}</button>
+      </div>
+      <div class="header__drawer-recommendation">
+        <p>Not sure which size will last?</p>
+        <a href="/pages/how-long-will-this-last-for-my-dog">Get a chew recommendation</a>
       </div>
       <nav class="header__drawer-nav">
         <ul class="header__drawer-menu">
