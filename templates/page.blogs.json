@@ -43,11 +43,16 @@
         "top_padding": "pt-0",
         "bottom_padding": "pb-s"
       }
+    },
+    "prime_blog_newsletter": {
+      "type": "prime-blog-newsletter",
+      "settings": {}
     }
   },
   "order": [
     "breadcrumbs",
     "header",
-    "main"
+    "main",
+    "prime_blog_newsletter"
   ]
 }

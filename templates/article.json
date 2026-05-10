@@ -145,9 +145,7 @@
     "product_list_fDetpa": {
       "type": "product-list",
       "settings": {
-        "products": [
-
-        ],
+        "products": [],
         "desktop_layout": "carousel",
         "mobile_layout": "carousel",
         "columns_desktop": "4",
@@ -159,7 +157,7 @@
         "title": "In this article...",
         "italic_convert": "",
         "heading_size": "h2",
-        "text": "<p>These products can be managed by setting up a Product list metafield for articles, and assigning it to the <strong>Products<\/strong> setting at the top.<\/p>",
+        "text": "<p>These products can be managed by setting up a Product list metafield for articles, and assigning it to the <strong>Products</strong> setting at the top.</p>",
         "text_size": "t3",
         "show_view_all_link": false,
         "view_all_link": "",
@@ -174,61 +172,9 @@
         "heading_tag": "h2"
       }
     },
-    "newsletter_biFaRh": {
-      "type": "newsletter",
-      "blocks": {
-        "heading_jNCAWQ": {
-          "type": "heading",
-          "settings": {
-            "visibility": "always",
-            "heading": "Subscribe to our emails",
-            "heading_italic_convert": "",
-            "heading_size": "h3",
-            "heading_size_custom": 2.4,
-            "heading_line_height_custom": 1.2,
-            "heading_tag": "h2"
-          }
-        },
-        "text_XYKFCj": {
-          "type": "text",
-          "settings": {
-            "visibility": "always",
-            "text": "<p>Be the first to know about new collections and exclusive offers.<\/p>",
-            "text_size": "t3"
-          }
-        },
-        "email_form_c4Ywp4": {
-          "type": "email_form",
-          "settings": {
-            "visibility": "always"
-          }
-        }
-      },
-      "block_order": [
-        "heading_jNCAWQ",
-        "text_XYKFCj",
-        "email_form_c4Ywp4"
-      ],
-      "settings": {
-        "preview_success": false,
-        "image_overlay_opacity": 0,
-        "fix_image": false,
-        "image_ratio": "custom",
-        "desktop_section_height": 500,
-        "mobile_section_height": 400,
-        "full_width": true,
-        "desktop_content_position": "md:justify-center md:items-center",
-        "mobile_content_position": "justify-center items-center",
-        "content_max_width": "m",
-        "desktop_content_alignment": "center",
-        "mobile_content_alignment": "center",
-        "show_text_box": "desktop",
-        "show_text_below": true,
-        "color_scheme": "scheme-5",
-        "container_color_scheme": "scheme-5",
-        "line_separator": "",
-        "hide_when_empty": false
-      }
+    "prime_blog_newsletter": {
+      "type": "prime-blog-newsletter",
+      "settings": {}
     }
   },
   "order": [
@@ -237,6 +183,6 @@
     "article_comments",
     "spacer_mT8EFm",
     "product_list_fDetpa",
-    "newsletter_biFaRh"
+    "prime_blog_newsletter"
   ]
 }
