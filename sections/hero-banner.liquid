@@ -385,7 +385,7 @@
         {% for n in (1..2) %}
           {% for block in trust_blocks %}
             <div class="pp-trust-badge" {{ block.shopify_attributes }}>
-              <div class="pp-trust-icon">{{ block.settings.trust_icon }}</div>
+              <div class="pp-trust-icon">{% render 'trust-icon-svg', title: block.settings.trust_title, fallback: block.settings.trust_icon %}</div>
               <div class="pp-trust-text-wrap">
                 <span class="pp-trust-text">{{ block.settings.trust_title }}</span>
                 <span class="pp-trust-subtext">{{ block.settings.trust_subtitle }}</span>

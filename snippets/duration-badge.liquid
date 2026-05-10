@@ -1,0 +1,62 @@
+{% comment %}
+  Duration Badge - Shows estimated chew duration on product pages
+  Answers the #1 purchase hesitation: "Will this actually last?"
+  Usage: {% render 'duration-badge' %}
+{% endcomment %}
+
+<div class="duration-badge">
+  <div class="duration-badge__inner">
+    <span class="duration-badge__icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <polyline points="12 6 12 12 16 14"/>
+      </svg>
+    </span>
+    <span class="duration-badge__text">
+      <strong>Average chew time: 45–90 minutes</strong>
+      <span class="duration-badge__sub">Based on thousands of happy dogs</span>
+    </span>
+  </div>
+</div>
+
+<style>
+  .duration-badge {
+    margin: 16px 0;
+  }
+  .duration-badge__inner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    background: linear-gradient(135deg, #f0f7ec 0%, #e8f5e0 100%);
+    border: 1px solid rgba(45, 80, 22, 0.15);
+    border-radius: 12px;
+  }
+  .duration-badge__icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #2d5016;
+    color: white;
+    border-radius: 50%;
+  }
+  .duration-badge__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 14px;
+    color: #1a1a1a;
+    line-height: 1.4;
+  }
+  .duration-badge__text strong {
+    font-weight: 700;
+    color: #2d5016;
+  }
+  .duration-badge__sub {
+    font-size: 12px;
+    color: #6b7280;
+  }
+</style>

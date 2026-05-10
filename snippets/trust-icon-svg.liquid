@@ -1,0 +1,30 @@
+{%- comment -%}
+  Renders an SVG trust icon based on the trust_title.
+  Falls back to the emoji if no match found.
+  Usage: {% render 'trust-icon-svg', title: block.settings.trust_title, fallback: block.settings.trust_icon %}
+{%- endcomment -%}
+
+{%- case title -%}
+  {%- when 'Vet Approved' -%}
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A2 2 0 0 0 3 4.5v1.1a5 5 0 0 0 2.3 4.2l1.4.9a1 1 0 0 1 .3 1.4l-2.6 4.4a1 1 0 0 0 .9 1.5h2.1a1 1 0 0 0 .9-.5L10 15l1.7 2.9a1 1 0 0 0 .9.5h2.1a1 1 0 0 0 .9-1.5L13 12.5a1 1 0 0 1 .3-1.4l1.4-.9A5 5 0 0 0 17 6V4.5a2 2 0 0 0-1.8-2C12.4 2.1 7.6 2.1 4.8 2.3z"/><path d="M8 6h.01M12 6h.01"/></svg>
+  {%- when '100% Natural' -%}
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c1.3 0 2.5-.2 3.6-.7"/><path d="M7 12.5c0-2.5 2-4.5 5-4.5s5 2 5 4.5"/><path d="M17 8V2h5v5a5 5 0 0 1-5 5"/><path d="M12 22V12"/><path d="M9 15l3-3 3 3"/></svg>
+  {%- when 'Grain Free' -%}
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M4.93 4.93l14.14 14.14"/><path d="M8 12c0-2 1.5-4 4-4s4 2 4 4"/></svg>
+  {%- when 'No Additives' -%}
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>
+  {%- when 'Handcrafted' -%}
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2 2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.9-5.7-2.4L3.2 17a1.7 1.7 0 0 1 .1-2.4 1.7 1.7 0 0 1 2.4.1L7 16.5"/></svg>
+  {%- when 'Ethically Sourced' -%}
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+  {%- when 'Lab Tested' -%}
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v4l4 8H5l4-8V3z"/><path d="M9 3h6"/><path d="M7 19h10"/><path d="M8 15h8"/></svg>
+  {%- when '24-Month Shelf Life' -%}
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+  {%- when 'High Protein' -%}
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5a3.5 3.5 0 1 0 0 7"/><path d="M17.5 6.5a3.5 3.5 0 1 1 0 7"/><path d="M6.5 10h11"/><path d="M3 10h1M20 10h1"/></svg>
+  {%- when 'Long-Lasting' -%}
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+  {%- else -%}
+    {{ fallback }}
+{%- endcase -%}

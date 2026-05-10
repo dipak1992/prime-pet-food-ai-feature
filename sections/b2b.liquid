@@ -69,7 +69,7 @@
       {%- assign tl = 'trust_label_' | append: i -%}
       {%- if section.settings[tl] != blank -%}
         <div class="w-trust__item">
-          <span class="w-trust__icon">{{ section.settings[ti] }}</span>
+          <span class="w-trust__icon">{% render 'trust-icon-svg', title: section.settings[tl], fallback: section.settings[ti] %}</span>
           <span class="w-trust__label">{{ section.settings[tl] }}</span>
         </div>
       {%- endif -%}
