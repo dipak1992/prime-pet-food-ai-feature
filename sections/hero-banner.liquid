@@ -119,6 +119,44 @@
   }
   .pp-sale-badge svg { width: 14px; height: 14px; flex-shrink: 0; }
 
+  /* Social Proof */
+  .pp-social-proof {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 8px 16px 8px 10px;
+    border-radius: var(--radius-full);
+    margin-bottom: 20px;
+    animation: ppFadeUp 0.8s 0.15s ease-out both;
+  }
+  .pp-social-proof__avatars {
+    display: flex;
+    align-items: center;
+  }
+  .pp-social-proof__avatars .pp-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    margin-left: -6px;
+    border: 2px solid rgba(0,0,0,0.3);
+  }
+  .pp-social-proof__avatars .pp-avatar:first-child { margin-left: 0; }
+  .pp-social-proof__text {
+    font-size: 13px;
+    color: rgba(255,255,255,0.9);
+    font-weight: 500;
+    font-family: var(--font-body);
+  }
+
   /* Heading */
   .pp-hero h1 {
     font-family: var(--font-display);
@@ -332,6 +370,17 @@
         </div>
       {% endif %}
 
+      {% if section.settings.social_proof_text != blank %}
+        <div class="pp-social-proof">
+          <div class="pp-social-proof__avatars">
+            <span class="pp-avatar">🐕</span>
+            <span class="pp-avatar">🐶</span>
+            <span class="pp-avatar">🐾</span>
+          </div>
+          <span class="pp-social-proof__text">{{ section.settings.social_proof_text }}</span>
+        </div>
+      {% endif %}
+
       <h1>
         {{ section.settings.heading_line1 }}
         {% if section.settings.heading_italic != blank %}
@@ -503,6 +552,13 @@
       "id": "subtitle",
       "label": "Subtitle",
       "default": "Handcrafted in Nepal. Loved by dogs everywhere."
+    },
+    {
+      "type": "text",
+      "id": "social_proof_text",
+      "label": "Social Proof Text",
+      "default": "Loved by 10,000+ happy dogs across the USA",
+      "info": "Shows above the heading with avatar icons. Leave blank to hide."
     },
     {
       "type": "header",

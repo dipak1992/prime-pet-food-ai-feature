@@ -1,0 +1,352 @@
+{% comment %}
+  Section: Problem Agitation
+  Addresses customer pain points before presenting the solution.
+  Follows the PAS (Problem-Agitate-Solve) copywriting framework.
+{% endcomment %}
+
+<style>
+  .problem-agitation {
+    padding: 80px 24px;
+    background: linear-gradient(180deg, #FDFCF7 0%, #F8F5ED 100%);
+    font-family: var(--font-body-family, -apple-system, sans-serif);
+  }
+
+  .problem-agitation__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .problem-agitation__header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .problem-agitation__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #b45309;
+    margin-bottom: 16px;
+  }
+
+  .problem-agitation__title {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.2;
+    margin: 0 0 16px;
+  }
+
+  .problem-agitation__subtitle {
+    font-size: 18px;
+    color: #5a5a4f;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .problem-agitation__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-bottom: 56px;
+  }
+
+  .problem-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px 28px;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .problem-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  }
+
+  .problem-card__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .problem-card__icon--red {
+    background: #fef2f2;
+    color: #dc2626;
+  }
+
+  .problem-card__icon--amber {
+    background: #fffbeb;
+    color: #d97706;
+  }
+
+  .problem-card__icon--slate {
+    background: #f1f5f9;
+    color: #475569;
+  }
+
+  .problem-card__icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .problem-card__title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 10px;
+  }
+
+  .problem-card__text {
+    font-size: 15px;
+    color: #5a5a4f;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Solution CTA */
+  .problem-agitation__solution {
+    text-align: center;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    border-radius: 20px;
+    padding: 48px 32px;
+    color: #fff;
+  }
+
+  .problem-agitation__solution-title {
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 700;
+    margin: 0 0 12px;
+    color: #fff;
+  }
+
+  .problem-agitation__solution-text {
+    font-size: 16px;
+    color: rgba(255,255,255,0.8);
+    max-width: 500px;
+    margin: 0 auto 28px;
+    line-height: 1.6;
+  }
+
+  .problem-agitation__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 100px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 16px rgba(22, 163, 74, 0.3);
+  }
+
+  .problem-agitation__cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(22, 163, 74, 0.4);
+    color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    .problem-agitation { padding: 56px 20px; }
+    .problem-agitation__grid { grid-template-columns: 1fr; }
+    .problem-agitation__solution { padding: 36px 24px; }
+  }
+</style>
+
+<section class="problem-agitation">
+  <div class="problem-agitation__inner">
+
+    <div class="problem-agitation__header">
+      <div class="problem-agitation__eyebrow">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        {{ section.settings.eyebrow | default: 'Sound Familiar?' }}
+      </div>
+      <h2 class="problem-agitation__title">{{ section.settings.title }}</h2>
+      <p class="problem-agitation__subtitle">{{ section.settings.subtitle }}</p>
+    </div>
+
+    <div class="problem-agitation__grid">
+      {% for block in section.blocks %}
+        <div class="problem-card" {{ block.shopify_attributes }}>
+          <div class="problem-card__icon problem-card__icon--{{ block.settings.icon_color | default: 'red' }}">
+            {% case block.settings.icon %}
+              {% when 'clock' %}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              {% when 'alert' %}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              {% when 'x-circle' %}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+              {% when 'dollar' %}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              {% when 'trash' %}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+              {% when 'frown' %}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 16s-1.5-2-4-2-4 2-4 2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+              {% else %}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            {% endcase %}
+          </div>
+          <h3 class="problem-card__title">{{ block.settings.title }}</h3>
+          <p class="problem-card__text">{{ block.settings.text }}</p>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="problem-agitation__solution">
+      <h3 class="problem-agitation__solution-title">{{ section.settings.solution_title }}</h3>
+      <p class="problem-agitation__solution-text">{{ section.settings.solution_text }}</p>
+      <a href="{{ section.settings.solution_link | default: '/collections/all' }}" class="problem-agitation__cta">
+        {{ section.settings.solution_cta | default: 'Shop Yak Chews' }}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Problem Agitation",
+  "tag": "div",
+  "class": "problem-agitation-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "Sound Familiar?"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Tired of Chews That Last 5 Minutes?"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Most dog chews are gone before you finish your coffee. You deserve better — and so does your dog."
+    },
+    {
+      "type": "header",
+      "content": "Solution CTA"
+    },
+    {
+      "type": "text",
+      "id": "solution_title",
+      "label": "Solution Heading",
+      "default": "There's a Better Way to Keep Your Dog Happy"
+    },
+    {
+      "type": "textarea",
+      "id": "solution_text",
+      "label": "Solution Text",
+      "default": "Our Himalayan Yak Cheese Chews are made from just 4 ingredients and last 10x longer than typical treats. Your dog stays busy. You stay relaxed."
+    },
+    {
+      "type": "text",
+      "id": "solution_cta",
+      "label": "CTA Button Text",
+      "default": "Shop Yak Chews"
+    },
+    {
+      "type": "url",
+      "id": "solution_link",
+      "label": "CTA Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "problem",
+      "name": "Problem Card",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "clock", "label": "Clock (time)" },
+            { "value": "alert", "label": "Alert (warning)" },
+            { "value": "x-circle", "label": "X Circle (bad)" },
+            { "value": "dollar", "label": "Dollar (cost)" },
+            { "value": "trash", "label": "Trash (waste)" },
+            { "value": "frown", "label": "Frown (unhappy)" }
+          ],
+          "default": "clock"
+        },
+        {
+          "type": "select",
+          "id": "icon_color",
+          "label": "Icon Color",
+          "options": [
+            { "value": "red", "label": "Red (danger)" },
+            { "value": "amber", "label": "Amber (warning)" },
+            { "value": "slate", "label": "Slate (neutral)" }
+          ],
+          "default": "red"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Problem Title",
+          "default": "Gone in 5 Minutes"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Problem Description",
+          "default": "You spend $8 on a chew and your dog destroys it before you sit down. That's not a treat — it's a waste."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Problem Agitation",
+      "blocks": [
+        {
+          "type": "problem",
+          "settings": {
+            "icon": "clock",
+            "icon_color": "red",
+            "title": "Gone in 5 Minutes",
+            "text": "You spend $8 on a chew and your dog destroys it before you sit down. That's not a treat — it's a waste of money."
+          }
+        },
+        {
+          "type": "problem",
+          "settings": {
+            "icon": "alert",
+            "icon_color": "amber",
+            "title": "Hidden Chemicals & Fillers",
+            "text": "Most \"natural\" chews contain preservatives, artificial flavors, or rawhide that can cause blockages. You shouldn't need a chemistry degree to read the label."
+          }
+        },
+        {
+          "type": "problem",
+          "settings": {
+            "icon": "frown",
+            "icon_color": "slate",
+            "title": "Bored, Anxious Dogs",
+            "text": "Without proper mental stimulation, dogs get destructive. Chewing shoes, furniture, and everything else — because they have nothing better to do."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
