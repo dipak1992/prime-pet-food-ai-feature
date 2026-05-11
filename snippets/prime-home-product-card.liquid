@@ -2,6 +2,9 @@
   {% if image != blank %}
     <div class="ph-product-card__media">
       <img src="{{ image }}" alt="{{ image_alt | escape }}" loading="lazy" width="1024" height="1024">
+      {% if label != blank %}
+        <span class="ph-product-card__label">{{ label }}</span>
+      {% endif %}
     </div>
   {% endif %}
 
@@ -17,7 +20,9 @@
       <span class="ph-product-card__price">{{ variant.price | money }}</span>
       <form method="post" action="/cart/add">
         <input type="hidden" name="id" value="{{ variant.id }}">
-        <button type="submit">Add to cart</button>
+        <button type="submit"{% unless variant.available %} disabled{% endunless %}>
+          {% if variant.available %}Add to cart{% else %}Sold out{% endif %}
+        </button>
       </form>
     {% elsif product != blank %}
       <a href="{{ product.url }}" class="ph-product-card__link">View product</a>
