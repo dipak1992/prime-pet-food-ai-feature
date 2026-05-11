@@ -1,43 +1,26 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "breadcrumbs": {
-      "type": "breadcrumbs",
+    "prime_collection_hero": {
+      "type": "prime-collection-hero",
       "settings": {
-        "spacing": 0,
-        "color_scheme": "scheme-2",
-        "line_separator": "",
-        "visibility": ""
+        "eyebrow": "Premium Himalayan yak chews",
+        "heading": "Long-lasting chews for calmer dogs.",
+        "subheading": "Rawhide-free yak cheese chews made for safer, longer-lasting supervised chew time. Simple ingredients, better enrichment, less guesswork."
       }
     },
-    "banner-split": {
-      "type": "main-collection-split-banner",
+    "collection_chew_finder": {
+      "type": "collection-chew-finder",
       "settings": {
-        "show_collection_title": true,
-        "heading_size": "h1",
-        "show_collection_title_count": true,
-        "show_collection_description": true,
-        "text_size": "t2",
-        "show_collection_image": true,
-        "show_product_image": false,
-        "collection_image_ratio": "landscape",
-        "stick_collection_info": true,
-        "image_position_desktop": "right",
-        "content_max_width": "xs",
-        "desktop_heading_alignment": "left",
-        "mobile_heading_alignment": "left",
-        "color_scheme": "scheme-2",
-        "top_padding": "pt-s05",
-        "bottom_padding": "pb-s",
-        "heading_tag": "h1"
+        "eyebrow": "Shop by dog need",
+        "title": "Start with your dog's chewing problem",
+        "subtitle": "The fastest path to the right chew is not flavor. It is dog size, chewing intensity, and the calm-time job you need the chew to do."
+      }
+    },
+    "chew_product_comparison": {
+      "type": "chew-product-comparison",
+      "settings": {
+        "eyebrow": "Size guidance",
+        "title": "Compare yak chew sizes before you add to cart"
       }
     },
     "product-grid": {
@@ -46,34 +29,12 @@
         "inline_promo_AtRrpT": {
           "type": "inline_promo",
           "settings": {
-            "position": 3,
+            "position": 4,
             "promo_image": "shopify://shop_images/67d79f7446f7bb9163a28c22.png",
             "promo_image_overlay_opacity": 50,
-            "promo_text": "<h4>Find the right chew</h4><p>Choose by dog size, chewing style, and calm-time routine.</p>",
-            "promo_url": "",
+            "promo_text": "<h4>Not sure which size?</h4><p>Use our free estimator — get a personalized recommendation in under 60 seconds.</p>",
+            "promo_url": "/pages/how-long-will-this-last-for-my-dog",
             "promo_text_size": "h6-size",
-            "promo_text_position": "justify-center items-center",
-            "promo_text_alignment": "center",
-            "promo_text_padding": 1,
-            "promo_text_color": "#ffffff",
-            "visibility": "",
-            "show_at_specific_time_of_day": false,
-            "show_time_morning": true,
-            "show_time_afternoon": true,
-            "show_time_evening": true,
-            "show_time_night": true
-          }
-        },
-        "top_promo_qw3d4n": {
-          "type": "top_promo",
-          "disabled": true,
-          "settings": {
-            "promo_image_min_height": 140,
-            "promo_image": "shopify://shop_images/67d79f6e46f7bb9163a28bda.png",
-            "promo_image_overlay_opacity": 50,
-            "promo_text": "",
-            "promo_url": "",
-            "promo_text_size": "h4-size",
             "promo_text_position": "justify-center items-center",
             "promo_text_alignment": "center",
             "promo_text_padding": 1,
@@ -88,13 +49,12 @@
         }
       },
       "block_order": [
-        "inline_promo_AtRrpT",
-        "top_promo_qw3d4n"
+        "inline_promo_AtRrpT"
       ],
       "settings": {
         "full_width": false,
-        "products_per_page": 15,
-        "columns_desktop": "5",
+        "products_per_page": 12,
+        "columns_desktop": "3",
         "columns_mobile": "2",
         "filter_type": "vertical",
         "enable_filtering": true,
@@ -121,90 +81,13 @@
         "bottom_padding": "pb-s"
       }
     },
-    "banner": {
-      "type": "main-collection-banner",
-      "blocks": {
-        "collection_heading_PrBhyC": {
-          "type": "collection_heading",
-          "settings": {
-            "show_collection_title_count": true,
-            "heading_size": "h2",
-            "heading_tag": "h1"
-          }
-        },
-        "collection_description_NzG3Qj": {
-          "type": "collection_description",
-          "settings": {
-            "max_height": 0,
-            "text_size": "t2"
-          }
-        },
-        "spacer_imp6yn": {
-          "type": "spacer",
-          "settings": {
-            "show_line_separator": true,
-            "spacing_top": 2.4,
-            "spacing_bottom": 2.4,
-            "spacer_visibility": "both",
-            "line_color": ""
-          }
-        },
-        "countdown_McWWj8": {
-          "type": "countdown",
-          "settings": {
-            "end_date": "",
-            "end_time": "",
-            "end_action": "hide",
-            "end_message": "You just missed it!",
-            "abbreviate_units": false,
-            "countdown_size": 26,
-            "separator": ":",
-            "countdown_font_weight": "bold",
-            "text_alignment": "center",
-            "countdown_container": "none",
-            "countdown_color": "",
-            "countdown_background_color": "#ededed",
-            "countdown_background_gradient": ""
-          }
-        }
-      },
-      "block_order": [
-        "collection_heading_PrBhyC",
-        "collection_description_NzG3Qj",
-        "spacer_imp6yn",
-        "countdown_McWWj8"
-      ],
-      "disabled": true,
-      "settings": {
-        "show_collection_image": true,
-        "show_product_image": false,
-        "image_overlay_opacity": 50,
-        "fix_image": true,
-        "image_ratio": "custom",
-        "desktop_section_height": 410,
-        "mobile_section_height": 100,
-        "full_width": true,
-        "full_width_animate": true,
-        "desktop_content_position": "md:justify-start md:items-center",
-        "mobile_content_position": "justify-start items-center",
-        "content_max_width": "s",
-        "desktop_content_alignment": "left",
-        "mobile_content_alignment": "left",
-        "show_text_box": "off",
-        "color_scheme": "scheme-1",
-        "container_color_scheme": "scheme-6",
-        "line_separator": "",
-        "top_padding": "pt-s",
-        "bottom_padding": "pb-s"
-      }
-    },
     "scrolling_text_section_qHMNQd": {
       "type": "scrolling-text-section",
       "blocks": {
         "heading_NJKjbY": {
           "type": "heading",
           "settings": {
-            "heading": "🌿  100% Organic ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎  🍃 Natural Ingredients ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎  🚫 No Additives ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎  🦴 Long-Lasting Chew ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎  🩺 Quality Checked ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎  🌾❌Grain Free ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ 🛠 Hand Crafted‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ 🤝 Ethical Sourcing ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ⭐ Premium Quality Guaranteed ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ 👃 Low Odor ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ 🌱🚫 Soy Free",
+            "heading": "Rawhide-free \u00a0\u00a0 Long-lasting \u00a0\u00a0 4 ingredients only \u00a0\u00a0 No additives \u00a0\u00a0 Grain-free \u00a0\u00a0 Low odor \u00a0\u00a0 Human-grade facility \u00a0\u00a0 Ethical sourcing \u00a0\u00a0 4.9\u2605 rated \u00a0\u00a0 67 min avg chew time \u00a0\u00a0 30-day guarantee",
             "heading_italic_convert": "",
             "heading_size": "h3",
             "heading_size_custom": 2.4,
@@ -246,30 +129,13 @@
         "show_time_evening": true,
         "show_time_night": true
       }
-    },
-    "collection_chew_finder": {
-      "type": "collection-chew-finder",
-      "settings": {
-        "eyebrow": "Shop by dog need",
-        "title": "Start with your dog's chewing problem",
-        "subtitle": "The fastest path to the right chew is not flavor. It is dog size, chewing intensity, and the calm-time job you need the chew to do."
-      }
-    },
-    "chew_product_comparison": {
-      "type": "chew-product-comparison",
-      "settings": {
-        "eyebrow": "Size guidance",
-        "title": "Compare yak chew sizes before you add to cart"
-      }
     }
   },
   "order": [
-    "breadcrumbs",
-    "banner-split",
+    "prime_collection_hero",
     "collection_chew_finder",
     "chew_product_comparison",
     "product-grid",
-    "banner",
     "scrolling_text_section_qHMNQd"
   ]
 }
