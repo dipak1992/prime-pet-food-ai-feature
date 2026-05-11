@@ -52,6 +52,10 @@
     gap: 3rem;
   }
 
+  #shopify-section-{{ section.id }} .main-blog--hub .main-blog__toolbar {
+    display: none;
+  }
+
   #shopify-section-{{ section.id }} .main-blog__toolbar {
     display: flex;
     flex-direction: column;
@@ -118,9 +122,9 @@
   #shopify-section-{{ section.id }} .main-blog__group {
     display: grid;
     gap: 1.6rem;
-    padding: 1.8rem;
+    padding: clamp(1.4rem, 2vw, 2.2rem);
     border: 1px solid rgba(var(--color-foreground), 0.08);
-    border-radius: 2.4rem;
+    border-radius: 1.8rem;
     background:
       linear-gradient(180deg, rgba(var(--color-background), 1), rgba(var(--color-background), 0.96)),
       radial-gradient(circle at top left, rgba(var(--color-foreground), 0.05), transparent 32%);
@@ -154,6 +158,67 @@
     white-space: nowrap;
   }
 
+  #shopify-section-{{ section.id }} .main-blog--hub .main-blog__grid {
+    gap: 1rem;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #shopify-section-{{ section.id }} .main-blog--hub .main-blog__post .article-card {
+    display: grid;
+    grid-template-columns: clamp(8.8rem, 22vw, 12rem) minmax(0, 1fr);
+    min-height: 0;
+    border-radius: 1.2rem;
+    box-shadow: 0 0.8rem 1.8rem rgba(15, 23, 42, 0.045);
+  }
+
+  #shopify-section-{{ section.id }} .main-blog--hub .main-blog__post .article-card > .card__inner,
+  #shopify-section-{{ section.id }} .main-blog--hub .main-blog__post .article-card__image-wrapper,
+  #shopify-section-{{ section.id }} .main-blog--hub .main-blog__post .article-card__image {
+    width: 100%;
+    min-width: 0;
+  }
+
+  #shopify-section-{{ section.id }} .main-blog--hub .main-blog__post .article-card .card__content {
+    min-width: 0;
+  }
+
+  #shopify-section-{{ section.id }} .main-blog--hub .main-blog__post .article-card .card__information {
+    justify-content: center;
+    min-height: 100%;
+    padding: 1.1rem 1.2rem;
+  }
+
+  #shopify-section-{{ section.id }} .main-blog--hub .main-blog__post .article-card__meta-row {
+    gap: 0.7rem;
+    margin-bottom: 0.55rem;
+  }
+
+  #shopify-section-{{ section.id }} .main-blog--hub .main-blog__post .article-card__tag {
+    padding: 0.42rem 0.7rem;
+    font-size: 0.95rem;
+  }
+
+  #shopify-section-{{ section.id }} .main-blog--hub .main-blog__post .card__heading {
+    margin: 0;
+    font-size: 1.55rem;
+    line-height: 1.25;
+  }
+
+  #shopify-section-{{ section.id }} .main-blog--hub .main-blog__post .article-card__excerpt {
+    display: -webkit-box;
+    margin-top: 0.5rem;
+    overflow: hidden;
+    color: rgba(var(--color-foreground), 0.66);
+    font-size: 1.3rem;
+    line-height: 1.45;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  #shopify-section-{{ section.id }} .main-blog--hub .main-blog__post .article-card__footer {
+    margin-top: 0.8rem;
+  }
+
   #shopify-section-{{ section.id }} .main-blog__hub-nav {
     display: grid;
     gap: 0.8rem;
@@ -171,6 +236,12 @@
     background: rgb(var(--color-background));
     color: rgb(var(--color-foreground));
     text-decoration: none;
+    transition: border-color 180ms ease, transform 180ms ease;
+  }
+
+  #shopify-section-{{ section.id }} .main-blog__hub-link:hover {
+    border-color: rgba(var(--color-foreground), 0.2);
+    transform: translateY(-1px);
   }
 
   #shopify-section-{{ section.id }} .main-blog__hub-link span {
@@ -188,6 +259,14 @@
     border: 1px solid rgba(var(--color-foreground), 0.08);
     border-radius: 2rem;
     background: rgba(var(--color-foreground), 0.03);
+  }
+
+  #shopify-section-{{ section.id }} .main-blog--hub .main-blog__keyword-hub {
+    padding: clamp(1.4rem, 2vw, 2rem);
+    border-radius: 1.8rem;
+    background:
+      linear-gradient(135deg, rgba(var(--color-foreground), 0.035), rgba(var(--color-foreground), 0.015)),
+      rgb(var(--color-background));
   }
 
   #shopify-section-{{ section.id }} .main-blog__keyword-copy {
@@ -285,6 +364,10 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    #shopify-section-{{ section.id }} .main-blog--hub .main-blog__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     #shopify-section-{{ section.id }} .main-blog__hub-nav {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
@@ -297,6 +380,10 @@
   @media screen and (min-width: 990px) {
     #shopify-section-{{ section.id }} .main-blog__grid {
       grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    #shopify-section-{{ section.id }} .main-blog--hub .main-blog__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     #shopify-section-{{ section.id }} .main-blog__keyword-grid {
