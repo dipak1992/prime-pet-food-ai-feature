@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "prime_homepage_experience": {
@@ -21,8 +30,77 @@
     },
     "video_carousel": {
       "type": "video-carousel",
+      "blocks": {
+        "video_qg3dfM": {
+          "type": "video",
+          "settings": {
+            "html5_video": "shopify://files/videos/1737008260923.mp4",
+            "product": ""
+          }
+        },
+        "video_3FiDC7": {
+          "type": "video",
+          "settings": {
+            "html5_video": "shopify://files/videos/1737005781491.mp4",
+            "product": ""
+          }
+        },
+        "video_RLbcAF": {
+          "type": "video",
+          "settings": {
+            "html5_video": "shopify://files/videos/[Tiktok] Himalayan Yak Cheese 03.mp4",
+            "product": ""
+          }
+        },
+        "video_BqKy7U": {
+          "type": "video",
+          "settings": {
+            "html5_video": "shopify://files/videos/1737005584344.mp4",
+            "product": ""
+          }
+        },
+        "video_44C8B8": {
+          "type": "video",
+          "settings": {
+            "html5_video": "shopify://files/videos/1736610302090.mp4",
+            "product": ""
+          }
+        },
+        "video_TELc9F": {
+          "type": "video",
+          "settings": {
+            "html5_video": "shopify://files/videos/1737008392265.mp4",
+            "product": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_qg3dfM",
+        "video_3FiDC7",
+        "video_RLbcAF",
+        "video_BqKy7U",
+        "video_44C8B8",
+        "video_TELc9F"
+      ],
       "settings": {
-        "heading": "See Real Dogs Chewing"
+        "heading": "See Real Dogs Chewing",
+        "heading_size": 100,
+        "heading_letter_spacing": 0,
+        "custom_font_url": "",
+        "description": "",
+        "description_size": 100,
+        "heading_description_spacing": 20,
+        "autoplay": 8,
+        "gap": 10,
+        "show_arrows": true,
+        "text_size": 100,
+        "text_color": "#121212",
+        "button_text_color": "#ffffff",
+        "button_bg_color": "#121212",
+        "background_color": "",
+        "top_padding": 40,
+        "bottom_padding": 40,
+        "navigation_spacing": 20
       }
     }
   },
