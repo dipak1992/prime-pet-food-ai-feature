@@ -45,7 +45,7 @@
     "main": {
       "type": "main-blog",
       "settings": {
-        "items_per_page": 15,
+        "items_per_page": 64,
         "columns_desktop": "4",
         "show_tag_filter": true,
         "tab_alignment": "left",
@@ -54,7 +54,7 @@
         "show_socials": true,
         "show_keyword_hub": true,
         "keyword_hub_heading": "Find the right chew advice by main keyword",
-        "keyword_hub_text": "Browse Prime Pet Food guides by the topics dog parents search most: yak chews, rawhide alternatives, aggressive chewers, enrichment, breed sizing, and calming routines.",
+        "keyword_hub_text": "Browse Prime Pet Food guides by the topics dog parents search most: yak chews, chew duration, rawhide alternatives, aggressive chewers, enrichment, breed sizing, and calming routines.",
         "show_image": true,
         "show_date": true,
         "show_author": false,

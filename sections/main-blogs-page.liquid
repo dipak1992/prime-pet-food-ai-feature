@@ -45,6 +45,28 @@
     padding: 0;
   }
 
+  #shopify-section-{{ section.id }} .blogs-page__post .article-card > .card__inner,
+  #shopify-section-{{ section.id }} .blogs-page__post .article-card__image-wrapper,
+  #shopify-section-{{ section.id }} .blogs-page__post .article-card__image {
+    aspect-ratio: 1 / 1;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow: hidden;
+    --ratio-percent: 100% !important;
+  }
+
+  #shopify-section-{{ section.id }} .blogs-page__post .article-card > .card__inner::before,
+  #shopify-section-{{ section.id }} .blogs-page__post .article-card__image::before {
+    padding-bottom: 100% !important;
+  }
+
+  #shopify-section-{{ section.id }} .blogs-page__post .article-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
   #shopify-section-{{ section.id }} .blogs-page__intro {
     max-width: 72rem;
   }
@@ -135,6 +157,10 @@
         <a href="/blogs/dog-behavior/tagged/yak-chews" class="blogs-page__keyword-card">
           <span class="blogs-page__keyword-label">Yak chews</span>
           <span class="blogs-page__keyword-text t4">Core guides for duration, sizing, ingredients, and safe routines.</span>
+        </a>
+        <a href="/blogs/dog-behavior/tagged/chew-duration" class="blogs-page__keyword-card">
+          <span class="blogs-page__keyword-label">Chew duration</span>
+          <span class="blogs-page__keyword-text t4">How long yak chews last by size, breed, and chewing style.</span>
         </a>
         <a href="/blogs/dog-behavior/tagged/rawhide-alternative" class="blogs-page__keyword-card">
           <span class="blogs-page__keyword-label">Rawhide alternative</span>
@@ -260,7 +286,7 @@
       "min": 4,
       "max": 100,
       "step": 1,
-      "default": 24
+      "default": 100
     },
     {
       "type": "select",

@@ -149,6 +149,28 @@
     padding: 0;
   }
 
+  #shopify-section-{{ section.id }} .main-blog__post .article-card > .card__inner,
+  #shopify-section-{{ section.id }} .main-blog__post .article-card__image-wrapper,
+  #shopify-section-{{ section.id }} .main-blog__post .article-card__image {
+    aspect-ratio: 1 / 1;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow: hidden;
+    --ratio-percent: 100% !important;
+  }
+
+  #shopify-section-{{ section.id }} .main-blog__post .article-card > .card__inner::before,
+  #shopify-section-{{ section.id }} .main-blog__post .article-card__image::before {
+    padding-bottom: 100% !important;
+  }
+
+  #shopify-section-{{ section.id }} .main-blog__post .article-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
   #shopify-section-{{ section.id }} .pagination-wrapper {
     margin-top: 1rem;
   }
@@ -231,47 +253,34 @@
       </div>
 
       <div class="main-blog__keyword-grid">
-        {%- if blog.all_tags contains 'yak chews' -%}
-          <a href="{{ 'yak chews' | link_to_tag: 'yak chews' | split: 'href="' | last | split: '"' | first }}" class="main-blog__keyword-card">
-            <span class="main-blog__keyword-label">Yak chews</span>
-            <span class="main-blog__keyword-text t4">Duration, safety, sizing, and everyday chew routines.</span>
-          </a>
-        {%- endif -%}
-
-        {%- if blog.all_tags contains 'rawhide alternative' -%}
-          <a href="{{ 'rawhide alternative' | link_to_tag: 'rawhide alternative' | split: 'href="' | last | split: '"' | first }}" class="main-blog__keyword-card">
-            <span class="main-blog__keyword-label">Rawhide alternative</span>
-            <span class="main-blog__keyword-text t4">Cleaner long-lasting options for dogs that love to chew.</span>
-          </a>
-        {%- endif -%}
-
-        {%- if blog.all_tags contains 'aggressive chewers' -%}
-          <a href="{{ 'aggressive chewers' | link_to_tag: 'aggressive chewers' | split: 'href="' | last | split: '"' | first }}" class="main-blog__keyword-card">
-            <span class="main-blog__keyword-label">Aggressive chewers</span>
-            <span class="main-blog__keyword-text t4">Durable chew guidance for dogs that destroy soft treats.</span>
-          </a>
-        {%- endif -%}
-
-        {%- if blog.all_tags contains 'dog enrichment' -%}
-          <a href="{{ 'dog enrichment' | link_to_tag: 'dog enrichment' | split: 'href="' | last | split: '"' | first }}" class="main-blog__keyword-card">
-            <span class="main-blog__keyword-label">Dog enrichment</span>
-            <span class="main-blog__keyword-text t4">Boredom, calm-time routines, crate practice, and mental work.</span>
-          </a>
-        {%- endif -%}
-
-        {%- if blog.all_tags contains 'breed guide' -%}
-          <a href="{{ 'breed guide' | link_to_tag: 'breed guide' | split: 'href="' | last | split: '"' | first }}" class="main-blog__keyword-card">
-            <span class="main-blog__keyword-label">Breed guides</span>
-            <span class="main-blog__keyword-text t4">Chew sizing and routine advice by dog breed and chewing style.</span>
-          </a>
-        {%- endif -%}
-
-        {%- if blog.all_tags contains 'calming routines' -%}
-          <a href="{{ 'calming routines' | link_to_tag: 'calming routines' | split: 'href="' | last | split: '"' | first }}" class="main-blog__keyword-card">
-            <span class="main-blog__keyword-label">Calming routines</span>
-            <span class="main-blog__keyword-text t4">Structured chewing support for settling, crates, and transitions.</span>
-          </a>
-        {%- endif -%}
+        <a href="/blogs/dog-behavior/tagged/yak-chews" class="main-blog__keyword-card">
+          <span class="main-blog__keyword-label">Yak chews</span>
+          <span class="main-blog__keyword-text t4">Duration, safety, sizing, and everyday chew routines.</span>
+        </a>
+        <a href="/blogs/dog-behavior/tagged/chew-duration" class="main-blog__keyword-card">
+          <span class="main-blog__keyword-label">Chew duration</span>
+          <span class="main-blog__keyword-text t4">How long yak chews last by size, breed, and chewing style.</span>
+        </a>
+        <a href="/blogs/dog-behavior/tagged/rawhide-alternative" class="main-blog__keyword-card">
+          <span class="main-blog__keyword-label">Rawhide alternative</span>
+          <span class="main-blog__keyword-text t4">Cleaner long-lasting options for dogs that love to chew.</span>
+        </a>
+        <a href="/blogs/dog-behavior/tagged/aggressive-chewers" class="main-blog__keyword-card">
+          <span class="main-blog__keyword-label">Aggressive chewers</span>
+          <span class="main-blog__keyword-text t4">Durable chew guidance for dogs that destroy soft treats.</span>
+        </a>
+        <a href="/blogs/dog-behavior/tagged/dog-enrichment" class="main-blog__keyword-card">
+          <span class="main-blog__keyword-label">Dog enrichment</span>
+          <span class="main-blog__keyword-text t4">Boredom, crate practice, separation routines, and calm-time ideas.</span>
+        </a>
+        <a href="/blogs/dog-behavior/tagged/breed-guide" class="main-blog__keyword-card">
+          <span class="main-blog__keyword-label">Breed guides</span>
+          <span class="main-blog__keyword-text t4">Breed-aware chew size and routine recommendations.</span>
+        </a>
+        <a href="/blogs/dog-behavior/tagged/calming-routines" class="main-blog__keyword-card">
+          <span class="main-blog__keyword-label">Calming routines</span>
+          <span class="main-blog__keyword-text t4">Structured chewing support for settling and transitions.</span>
+        </a>
       </div>
     </nav>
   {%- endif -%}
@@ -361,7 +370,7 @@
       "min": 4,
       "max": 64,
       "step": 1,
-      "default": 16
+      "default": 64
     },
     {
       "type": "select",
