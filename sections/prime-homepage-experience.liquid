@@ -1,6 +1,6 @@
 {% liquid
   assign product = all_products['himalayan-yak-chews-for-dogs']
-  assign hero_image = 'prime-calm-dog-yak-chew-hero.jpg' | asset_url
+  assign hero_image = section.settings.hero_image | default: 'prime-calm-dog-yak-chew-hero.jpg' | asset_url
   assign lab_image = 'prime-ugc-labrador-chew-card.jpg' | asset_url
   assign frenchie_image = 'prime-ugc-french-bulldog-chew-card.jpg' | asset_url
   assign golden_image = 'prime-ugc-golden-retriever-chew-card.jpg' | asset_url
@@ -14,6 +14,17 @@
   assign ingredient_salt_image = 'prime-home-ingredient-salt.jpg' | asset_url
   assign founder_image = 'prime-founder.png' | asset_url
   assign calm_cta_image = 'prime-home-calm-cta-bg.jpg' | asset_url
+
+  assign hero_headline = section.settings.hero_headline | default: 'Calmer dogs start with a better chew.'
+  assign hero_subtext = section.settings.hero_subtext | default: 'Long-lasting Himalayan yak cheese chews made with 4 simple ingredients. Built for focused chew time, cleaner enrichment, and fewer destroyed shoes.'
+  assign trust_stat_1_value = section.settings.trust_stat_1_value | default: '20k+'
+  assign trust_stat_1_label = section.settings.trust_stat_1_label | default: 'Dog parents'
+  assign trust_stat_2_value = section.settings.trust_stat_2_value | default: '4'
+  assign trust_stat_2_label = section.settings.trust_stat_2_label | default: 'Ingredients only'
+  assign trust_stat_3_value = section.settings.trust_stat_3_value | default: '67 min'
+  assign trust_stat_3_label = section.settings.trust_stat_3_label | default: 'Avg chew time'
+  assign trust_stat_4_value = section.settings.trust_stat_4_value | default: '30-day'
+  assign trust_stat_4_label = section.settings.trust_stat_4_label | default: 'Guarantee'
 
   assign small_variant = nil
   assign medium_variant = nil
@@ -32,7 +43,22 @@
   endif
 %}
 
-<section class="prime-homepage" aria-label="Prime Pet Food homepage">
+<section class="prime-homepage" aria-label="Prime Pet Food homepage" data-animations="{{ section.settings.enable_animations }}">
+
+  {% if section.settings.show_sticky_bar %}
+  <!-- ═══════════════════════════════════════════════════════════════
+       STICKY SHOP BAR — Appears after scrolling past products
+  ════════════════════════════════════════════════════════════════ -->
+  <div class="ph-sticky-bar" id="ph-sticky-bar" aria-hidden="true">
+    <div class="ph-sticky-bar__inner">
+      <span class="ph-sticky-bar__text">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Rawhide-free &bull; 67 min avg &bull; Free shipping $30+
+      </span>
+      <a href="/collections/all" class="ph-sticky-bar__btn">Shop Now</a>
+    </div>
+  </div>
+  {% endif %}
 
   <!-- ═══════════════════════════════════════════════════════════════
        HERO — Emotional hook with social proof
@@ -46,11 +72,8 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         Trusted by 10,000+ dog parents
       </div>
-      <h1>Calmer dogs start with a better chew.</h1>
-      <p>
-        Long-lasting Himalayan yak cheese chews made with 4 simple ingredients. Built for focused chew time,
-        cleaner enrichment, and fewer destroyed shoes.
-      </p>
+      <h1>{{ hero_headline }}</h1>
+      <p>{{ hero_subtext }}</p>
       <div class="ph-actions" aria-label="Homepage actions">
         <a href="/collections/all" class="ph-button ph-button--primary">Shop yak chews</a>
         <a href="#prime-home-shop" class="ph-button ph-button--secondary">Choose by size</a>
@@ -79,20 +102,20 @@
   <div class="ph-trust-bar" aria-label="Key statistics">
     <div class="ph-shell ph-trust-bar__inner">
       <div class="ph-trust-bar__stat">
-        <strong>20k+</strong>
-        <span>Dog parents</span>
+        <strong>{{ trust_stat_1_value }}</strong>
+        <span>{{ trust_stat_1_label }}</span>
       </div>
       <div class="ph-trust-bar__stat">
-        <strong>4</strong>
-        <span>Ingredients only</span>
+        <strong>{{ trust_stat_2_value }}</strong>
+        <span>{{ trust_stat_2_label }}</span>
       </div>
       <div class="ph-trust-bar__stat">
-        <strong>67 min</strong>
-        <span>Avg chew time</span>
+        <strong>{{ trust_stat_3_value }}</strong>
+        <span>{{ trust_stat_3_label }}</span>
       </div>
       <div class="ph-trust-bar__stat">
-        <strong>30-day</strong>
-        <span>Guarantee</span>
+        <strong>{{ trust_stat_4_value }}</strong>
+        <span>{{ trust_stat_4_label }}</span>
       </div>
     </div>
   </div>
@@ -100,7 +123,7 @@
   <!-- ═══════════════════════════════════════════════════════════════
        OUTCOMES — Why this chew matters
   ════════════════════════════════════════════════════════════════ -->
-  <div class="ph-outcomes">
+  <div class="ph-outcomes ph-reveal">
     <div class="ph-shell ph-outcomes__inner">
       <div class="ph-outcomes__copy">
         <p class="ph-kicker">Built for calmer homes</p>
@@ -132,7 +155,7 @@
   <!-- ═══════════════════════════════════════════════════════════════
        PRODUCTS — Shop by dog size
   ════════════════════════════════════════════════════════════════ -->
-  <div id="prime-home-shop" class="ph-products">
+  <div id="prime-home-shop" class="ph-products ph-reveal">
     <div class="ph-shell">
       <div class="ph-section-head">
         <p class="ph-kicker">Start here</p>
@@ -189,10 +212,117 @@
     </div>
   </div>
 
+  {% if section.settings.show_quiz %}
+  <!-- ═══════════════════════════════════════════════════════════════
+       FIND YOUR CHEW — Interactive 3-question quiz
+  ════════════════════════════════════════════════════════════════ -->
+  <div class="ph-quiz ph-reveal" id="ph-quiz-section">
+    <div class="ph-shell">
+      <div class="ph-section-head ph-section-head--center">
+        <p class="ph-kicker">Not sure which size?</p>
+        <h2>Find your dog&rsquo;s perfect chew in 30 seconds.</h2>
+        <p>Answer 3 quick questions and we&rsquo;ll recommend the right size, quantity, and routine.</p>
+      </div>
+
+      <div class="ph-quiz__widget" id="ph-quiz-widget">
+        <!-- Step 1: Dog weight -->
+        <div class="ph-quiz__step ph-quiz__step--active" data-step="1">
+          <p class="ph-quiz__step-label">Question 1 of 3</p>
+          <h3>How much does your dog weigh?</h3>
+          <div class="ph-quiz__options">
+            <button type="button" class="ph-quiz__option" data-answer="small" data-next="2">
+              <span class="ph-quiz__option-icon">🐕</span>
+              <span class="ph-quiz__option-text">Under 15 lbs</span>
+              <span class="ph-quiz__option-sub">Toy &amp; small breeds</span>
+            </button>
+            <button type="button" class="ph-quiz__option" data-answer="medium" data-next="2">
+              <span class="ph-quiz__option-icon">🐕‍🦺</span>
+              <span class="ph-quiz__option-text">15–35 lbs</span>
+              <span class="ph-quiz__option-sub">Medium breeds</span>
+            </button>
+            <button type="button" class="ph-quiz__option" data-answer="large" data-next="2">
+              <span class="ph-quiz__option-icon">🦮</span>
+              <span class="ph-quiz__option-text">35–55 lbs</span>
+              <span class="ph-quiz__option-sub">Large breeds</span>
+            </button>
+            <button type="button" class="ph-quiz__option" data-answer="xlarge" data-next="2">
+              <span class="ph-quiz__option-icon">🐾</span>
+              <span class="ph-quiz__option-text">55+ lbs</span>
+              <span class="ph-quiz__option-sub">Extra large breeds</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2: Chewing style -->
+        <div class="ph-quiz__step" data-step="2">
+          <p class="ph-quiz__step-label">Question 2 of 3</p>
+          <h3>How does your dog chew?</h3>
+          <div class="ph-quiz__options">
+            <button type="button" class="ph-quiz__option" data-answer="gentle" data-next="3">
+              <span class="ph-quiz__option-icon">😌</span>
+              <span class="ph-quiz__option-text">Gentle nibbler</span>
+              <span class="ph-quiz__option-sub">Takes their time, savors it</span>
+            </button>
+            <button type="button" class="ph-quiz__option" data-answer="moderate" data-next="3">
+              <span class="ph-quiz__option-icon">😊</span>
+              <span class="ph-quiz__option-text">Steady chewer</span>
+              <span class="ph-quiz__option-sub">Consistent pace, focused</span>
+            </button>
+            <button type="button" class="ph-quiz__option" data-answer="aggressive" data-next="3">
+              <span class="ph-quiz__option-icon">💪</span>
+              <span class="ph-quiz__option-text">Power chewer</span>
+              <span class="ph-quiz__option-sub">Destroys toys quickly</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 3: Goal -->
+        <div class="ph-quiz__step" data-step="3">
+          <p class="ph-quiz__step-label">Question 3 of 3</p>
+          <h3>What&rsquo;s your main goal?</h3>
+          <div class="ph-quiz__options">
+            <button type="button" class="ph-quiz__option" data-answer="calm" data-next="result">
+              <span class="ph-quiz__option-icon">🧘</span>
+              <span class="ph-quiz__option-text">Calm &amp; settle</span>
+              <span class="ph-quiz__option-sub">Help my dog relax and decompress</span>
+            </button>
+            <button type="button" class="ph-quiz__option" data-answer="occupy" data-next="result">
+              <span class="ph-quiz__option-icon">⏰</span>
+              <span class="ph-quiz__option-text">Keep busy</span>
+              <span class="ph-quiz__option-sub">Occupy during work calls or crate time</span>
+            </button>
+            <button type="button" class="ph-quiz__option" data-answer="dental" data-next="result">
+              <span class="ph-quiz__option-icon">🦷</span>
+              <span class="ph-quiz__option-text">Dental health</span>
+              <span class="ph-quiz__option-sub">Natural teeth cleaning while chewing</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Result -->
+        <div class="ph-quiz__step ph-quiz__result" data-step="result">
+          <div class="ph-quiz__result-card">
+            <div class="ph-quiz__result-badge">Your perfect match</div>
+            <h3 class="ph-quiz__result-title">Medium Yak Chew</h3>
+            <p class="ph-quiz__result-desc">Based on your answers, we recommend starting with our medium chew for steady, focused enrichment sessions.</p>
+            <div class="ph-quiz__result-stats">
+              <span><strong>~67 min</strong> avg duration</span>
+              <span><strong>4</strong> ingredients</span>
+              <span><strong>100%</strong> digestible</span>
+            </div>
+            <a href="/collections/all" class="ph-button ph-button--primary ph-quiz__result-cta">Shop this size</a>
+            <button type="button" class="ph-quiz__restart">← Retake quiz</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
   <!-- ═══════════════════════════════════════════════════════════════
        SUBSCRIBE & SAVE — Routine builder
   ════════════════════════════════════════════════════════════════ -->
-  <div class="ph-subscribe">
+  <div class="ph-subscribe ph-reveal">
     <div class="ph-shell ph-subscribe__inner">
       <div class="ph-subscribe__media">
         <img src="{{ subscribe_dog_image }}" alt="Happy dog beside a subscription box and yak chew" loading="lazy" width="1024" height="1024">
@@ -221,7 +351,7 @@
   <!-- ═══════════════════════════════════════════════════════════════
        SOCIAL PROOF — Real customer stories
   ════════════════════════════════════════════════════════════════ -->
-  <div class="ph-reviews">
+  <div class="ph-reviews ph-reveal">
     <div class="ph-shell">
       <div class="ph-section-head">
         <p class="ph-kicker">Real results</p>
@@ -262,7 +392,7 @@
   <!-- ═══════════════════════════════════════════════════════════════
        WHY DIFFERENT — Comparison table
   ════════════════════════════════════════════════════════════════ -->
-  <div class="ph-compare">
+  <div class="ph-compare ph-reveal">
     <div class="ph-shell">
       <div class="ph-section-head ph-section-head--center">
         <p class="ph-kicker">Why switch?</p>
@@ -343,7 +473,7 @@
   <!-- ═══════════════════════════════════════════════════════════════
        ROUTINE — How to use the chew safely
   ════════════════════════════════════════════════════════════════ -->
-  <div class="ph-routine">
+  <div class="ph-routine ph-reveal">
     <div class="ph-shell">
       <div class="ph-section-head ph-section-head--center">
         <p class="ph-kicker">Simple routine</p>
@@ -373,7 +503,7 @@
   <!-- ═══════════════════════════════════════════════════════════════
        INGREDIENTS — Transparency section
   ════════════════════════════════════════════════════════════════ -->
-  <div class="ph-ingredients">
+  <div class="ph-ingredients ph-reveal">
     <div class="ph-shell">
       <div class="ph-section-head ph-section-head--center">
         <p class="ph-kicker">Ingredient transparency</p>
@@ -420,7 +550,7 @@
   <!-- ═══════════════════════════════════════════════════════════════
        CRAFT — Brand story and quality signal
   ════════════════════════════════════════════════════════════════ -->
-  <div class="ph-craft">
+  <div class="ph-craft ph-reveal">
     <div class="ph-shell ph-craft__inner">
       <div class="ph-craft__media">
         <img src="{{ founder_image }}" alt="Prime Pet Food founder with a dog" loading="lazy" width="900" height="900">
@@ -444,7 +574,7 @@
   <!-- ═══════════════════════════════════════════════════════════════
        DOG FIT — Breed examples with duration data
   ════════════════════════════════════════════════════════════════ -->
-  <div class="ph-fit">
+  <div class="ph-fit ph-reveal">
     <div class="ph-shell">
       <div class="ph-section-head">
         <p class="ph-kicker">Dog fit examples</p>
@@ -481,7 +611,7 @@
   <!-- ═══════════════════════════════════════════════════════════════
        GUARANTEE — Risk reversal
   ════════════════════════════════════════════════════════════════ -->
-  <div class="ph-guarantee">
+  <div class="ph-guarantee ph-reveal">
     <div class="ph-shell ph-guarantee__inner">
       <div class="ph-guarantee__card">
         <div class="ph-guarantee__icon" aria-hidden="true">
@@ -509,7 +639,7 @@
   <!-- ═══════════════════════════════════════════════════════════════
        FAQ — Buying confidence
   ════════════════════════════════════════════════════════════════ -->
-  <div class="ph-faq">
+  <div class="ph-faq ph-reveal">
     <div class="ph-shell ph-faq__inner">
       <div class="ph-section-head">
         <p class="ph-kicker">Before you buy</p>
@@ -539,7 +669,7 @@
   <!-- ═══════════════════════════════════════════════════════════════
        CLOSING CTA — Final conversion push
   ════════════════════════════════════════════════════════════════ -->
-  <div class="ph-close" style="--ph-close-image: url('{{ calm_cta_image }}');">
+  <div class="ph-close ph-reveal" style="--ph-close-image: url('{{ calm_cta_image }}');">
     <div class="ph-shell ph-close__inner">
       <p class="ph-kicker">Ready for calmer chew time?</p>
       <h2>Give your dog the chew they deserve.</h2>
@@ -1925,6 +2055,336 @@
       border-right: 0;
     }
   }
+
+  /* ═══════════════════════════════════════════════════════════════
+     SCROLL REVEAL ANIMATIONS
+  ════════════════════════════════════════════════════════════════ */
+  .ph-reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .ph-reveal.ph-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Stagger children for grids */
+  .ph-reveal.ph-revealed .ph-product-grid > *,
+  .ph-reveal.ph-revealed .ph-outcomes__grid > *,
+  .ph-reveal.ph-revealed .ph-reviews__grid > *,
+  .ph-reveal.ph-revealed .ph-ingredients__grid > *,
+  .ph-reveal.ph-revealed .ph-routine__grid > *,
+  .ph-reveal.ph-revealed .ph-fit__grid > * {
+    animation: ph-stagger-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .ph-reveal.ph-revealed .ph-product-grid > *:nth-child(1),
+  .ph-reveal.ph-revealed .ph-outcomes__grid > *:nth-child(1),
+  .ph-reveal.ph-revealed .ph-reviews__grid > *:nth-child(1),
+  .ph-reveal.ph-revealed .ph-ingredients__grid > *:nth-child(1),
+  .ph-reveal.ph-revealed .ph-routine__grid > *:nth-child(1),
+  .ph-reveal.ph-revealed .ph-fit__grid > *:nth-child(1) { animation-delay: 0.1s; }
+
+  .ph-reveal.ph-revealed .ph-product-grid > *:nth-child(2),
+  .ph-reveal.ph-revealed .ph-outcomes__grid > *:nth-child(2),
+  .ph-reveal.ph-revealed .ph-reviews__grid > *:nth-child(2),
+  .ph-reveal.ph-revealed .ph-ingredients__grid > *:nth-child(2),
+  .ph-reveal.ph-revealed .ph-routine__grid > *:nth-child(2),
+  .ph-reveal.ph-revealed .ph-fit__grid > *:nth-child(2) { animation-delay: 0.2s; }
+
+  .ph-reveal.ph-revealed .ph-product-grid > *:nth-child(3),
+  .ph-reveal.ph-revealed .ph-outcomes__grid > *:nth-child(3),
+  .ph-reveal.ph-revealed .ph-reviews__grid > *:nth-child(3),
+  .ph-reveal.ph-revealed .ph-ingredients__grid > *:nth-child(3),
+  .ph-reveal.ph-revealed .ph-routine__grid > *:nth-child(3),
+  .ph-reveal.ph-revealed .ph-fit__grid > *:nth-child(3) { animation-delay: 0.3s; }
+
+  .ph-reveal.ph-revealed .ph-ingredients__grid > *:nth-child(4) { animation-delay: 0.4s; }
+
+  @keyframes ph-stagger-in {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .ph-reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .ph-reveal.ph-revealed .ph-product-grid > *,
+    .ph-reveal.ph-revealed .ph-outcomes__grid > *,
+    .ph-reveal.ph-revealed .ph-reviews__grid > *,
+    .ph-reveal.ph-revealed .ph-ingredients__grid > *,
+    .ph-reveal.ph-revealed .ph-routine__grid > *,
+    .ph-reveal.ph-revealed .ph-fit__grid > * {
+      animation: none;
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     STICKY SHOP BAR
+  ════════════════════════════════════════════════════════════════ */
+  .ph-sticky-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    transform: translateY(100%);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+  }
+
+  .ph-sticky-bar.ph-sticky-bar--visible {
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .ph-sticky-bar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 14px 20px;
+    background: var(--ph-ink);
+    border-top: 1px solid rgba(255, 250, 242, 0.12);
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  .ph-sticky-bar__text {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 250, 242, 0.85);
+    font-size: 13px;
+    font-weight: 650;
+  }
+
+  .ph-sticky-bar__text svg {
+    color: var(--ph-clay);
+    flex-shrink: 0;
+  }
+
+  .ph-sticky-bar__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 10px 22px;
+    border-radius: 999px;
+    background: var(--ph-clay);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 780;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+
+  .ph-sticky-bar__btn:hover {
+    background: var(--ph-clay-dark);
+    transform: translateY(-1px);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     FIND YOUR CHEW QUIZ
+  ════════════════════════════════════════════════════════════════ */
+  .ph-quiz {
+    background: var(--ph-soft);
+  }
+
+  .ph-quiz__widget {
+    max-width: 680px;
+    margin: 0 auto;
+    min-height: 320px;
+  }
+
+  .ph-quiz__step {
+    display: none;
+  }
+
+  .ph-quiz__step--active {
+    display: block;
+    animation: ph-quiz-fade 0.35s ease;
+  }
+
+  @keyframes ph-quiz-fade {
+    from { opacity: 0; transform: translateX(12px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .ph-quiz__step-label {
+    margin: 0 0 8px;
+    color: var(--ph-clay);
+    font-size: 12px;
+    font-weight: 780;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-align: center;
+  }
+
+  .ph-quiz__step h3 {
+    text-align: center;
+    margin-bottom: 24px;
+    font-size: 26px;
+  }
+
+  .ph-quiz__options {
+    display: grid;
+    gap: 12px;
+  }
+
+  .ph-quiz__option {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 14px;
+    align-items: center;
+    padding: 18px 20px;
+    border: 1px solid var(--ph-line);
+    border-radius: var(--ph-radius);
+    background: #fff;
+    cursor: pointer;
+    text-align: left;
+    font: inherit;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+  }
+
+  .ph-quiz__option:hover {
+    border-color: var(--ph-clay);
+    box-shadow: 0 4px 16px rgba(184, 95, 50, 0.1);
+    transform: translateY(-1px);
+  }
+
+  .ph-quiz__option-icon {
+    grid-row: 1 / span 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 999px;
+    background: var(--ph-soft);
+    font-size: 20px;
+  }
+
+  .ph-quiz__option-text {
+    color: var(--ph-ink);
+    font-size: 16px;
+    font-weight: 720;
+    line-height: 1.3;
+  }
+
+  .ph-quiz__option-sub {
+    color: var(--ph-muted);
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  /* Quiz result */
+  .ph-quiz__result-card {
+    text-align: center;
+    padding: 36px 28px;
+    border: 1px solid var(--ph-line);
+    border-radius: var(--ph-radius);
+    background: #fff;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.06);
+  }
+
+  .ph-quiz__result-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: rgba(184, 95, 50, 0.1);
+    color: var(--ph-clay);
+    font-size: 12px;
+    font-weight: 780;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 16px;
+  }
+
+  .ph-quiz__result-title {
+    font-size: 32px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .ph-quiz__result-desc {
+    max-width: 480px;
+    margin: 0 auto 24px;
+    font-size: 16px;
+  }
+
+  .ph-quiz__result-stats {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+
+  .ph-quiz__result-stats span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    color: var(--ph-muted);
+  }
+
+  .ph-quiz__result-stats strong {
+    color: var(--ph-ink);
+    font-size: 20px;
+    font-weight: 780;
+  }
+
+  .ph-quiz__result-cta {
+    margin-bottom: 16px;
+  }
+
+  .ph-quiz__restart {
+    background: none;
+    border: none;
+    color: var(--ph-muted);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 650;
+    cursor: pointer;
+    padding: 8px 16px;
+    transition: color 0.15s ease;
+  }
+
+  .ph-quiz__restart:hover {
+    color: var(--ph-clay);
+  }
+
+  @media (max-width: 560px) {
+    .ph-sticky-bar__text {
+      display: none;
+    }
+    .ph-sticky-bar__inner {
+      justify-content: center;
+    }
+    .ph-sticky-bar__btn {
+      width: 100%;
+      max-width: 320px;
+    }
+    .ph-quiz__step h3 {
+      font-size: 22px;
+    }
+    .ph-quiz__option {
+      padding: 14px 16px;
+    }
+    .ph-quiz__result-stats {
+      gap: 16px;
+    }
+  }
 </style>
 
 {% if product != blank %}
@@ -1963,12 +2423,236 @@
   }
 </script>
 
+<!-- ═══════════════════════════════════════════════════════════════
+     JAVASCRIPT — Quiz logic, scroll animations, sticky bar
+════════════════════════════════════════════════════════════════ -->
+<script>
+(function() {
+  'use strict';
+
+  /* ─── SCROLL REVEAL (IntersectionObserver) ─── */
+  const homepage = document.querySelector('.prime-homepage');
+  const animationsEnabled = homepage && homepage.getAttribute('data-animations') !== 'false';
+  const revealEls = document.querySelectorAll('.ph-reveal');
+
+  if (!animationsEnabled) {
+    revealEls.forEach(function(el) { el.classList.add('ph-revealed'); });
+  } else if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('ph-revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    revealEls.forEach(function(el) { revealObserver.observe(el); });
+  } else {
+    revealEls.forEach(function(el) { el.classList.add('ph-revealed'); });
+  }
+
+  /* ─── STICKY SHOP BAR ─── */
+  const stickyBar = document.getElementById('ph-sticky-bar');
+  const productsSection = document.getElementById('prime-home-shop');
+  if (stickyBar && productsSection && 'IntersectionObserver' in window) {
+    const stickyObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+          stickyBar.classList.add('ph-sticky-bar--visible');
+          stickyBar.setAttribute('aria-hidden', 'false');
+        } else {
+          stickyBar.classList.remove('ph-sticky-bar--visible');
+          stickyBar.setAttribute('aria-hidden', 'true');
+        }
+      });
+    }, { threshold: 0 });
+
+    stickyObserver.observe(productsSection);
+  }
+
+  /* ─── FIND YOUR CHEW QUIZ ─── */
+  const quizWidget = document.getElementById('ph-quiz-widget');
+  if (!quizWidget) return;
+
+  const answers = {};
+  const steps = quizWidget.querySelectorAll('.ph-quiz__step');
+
+  function showStep(stepId) {
+    steps.forEach(function(s) { s.classList.remove('ph-quiz__step--active'); });
+    var target = quizWidget.querySelector('[data-step="' + stepId + '"]');
+    if (target) target.classList.add('ph-quiz__step--active');
+  }
+
+  function getRecommendation() {
+    var size = answers.weight || 'medium';
+    var style = answers.chewing || 'moderate';
+
+    // Size up for aggressive chewers
+    if (style === 'aggressive') {
+      if (size === 'small') size = 'medium';
+      else if (size === 'medium') size = 'large';
+      else size = 'xlarge';
+    }
+
+    var recommendations = {
+      small: { title: 'Small Yak Chew', duration: '~45 min', link: '/collections/all', desc: 'A compact chew perfect for smaller breeds. Dense enough for focused enrichment without being overwhelming.' },
+      medium: { title: 'Medium Yak Chew', duration: '~67 min', link: '/collections/all', desc: 'Our most popular size. Ideal for steady chewers who need a reliable calm-time routine.' },
+      large: { title: 'Large Yak Chew', duration: '~85 min', link: '/collections/all', desc: 'Built for bigger jaws and dogs that finish softer treats too quickly. Dense and long-lasting.' },
+      xlarge: { title: 'Large Yak Chew (2-pack)', duration: '~85 min', link: '/collections/all', desc: 'For power chewers over 55 lbs, we recommend our large chew. Consider a 2-pack for extended sessions.' }
+    };
+
+    return recommendations[size] || recommendations.medium;
+  }
+
+  function showResult() {
+    var rec = getRecommendation();
+    var resultCard = quizWidget.querySelector('.ph-quiz__result-card');
+    if (resultCard) {
+      resultCard.querySelector('.ph-quiz__result-title').textContent = rec.title;
+      resultCard.querySelector('.ph-quiz__result-desc').textContent = rec.desc;
+      resultCard.querySelector('.ph-quiz__result-cta').href = rec.link;
+      var stats = resultCard.querySelectorAll('.ph-quiz__result-stats strong');
+      if (stats[0]) stats[0].textContent = rec.duration;
+    }
+    showStep('result');
+  }
+
+  // Option click handlers
+  quizWidget.addEventListener('click', function(e) {
+    var option = e.target.closest('.ph-quiz__option');
+    if (option) {
+      var step = option.closest('.ph-quiz__step');
+      var stepNum = step ? step.getAttribute('data-step') : null;
+      var answer = option.getAttribute('data-answer');
+      var next = option.getAttribute('data-next');
+
+      if (stepNum === '1') answers.weight = answer;
+      else if (stepNum === '2') answers.chewing = answer;
+      else if (stepNum === '3') answers.goal = answer;
+
+      if (next === 'result') {
+        showResult();
+      } else if (next) {
+        showStep(next);
+      }
+    }
+
+    // Restart
+    if (e.target.closest('.ph-quiz__restart')) {
+      answers.weight = null;
+      answers.chewing = null;
+      answers.goal = null;
+      showStep('1');
+    }
+  });
+})();
+</script>
+
 {% schema %}
 {
   "name": "Prime homepage experience",
   "tag": "section",
   "class": "section section-prime-homepage-experience",
-  "settings": [],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Section"
+    },
+    {
+      "type": "text",
+      "id": "hero_headline",
+      "label": "Hero headline",
+      "default": "Calmer dogs start with a better chew."
+    },
+    {
+      "type": "textarea",
+      "id": "hero_subtext",
+      "label": "Hero subtext",
+      "default": "Long-lasting Himalayan yak cheese chews made with 4 simple ingredients. Built for focused chew time, cleaner enrichment, and fewer destroyed shoes."
+    },
+    {
+      "type": "text",
+      "id": "hero_image",
+      "label": "Hero image filename (from assets)",
+      "default": "prime-calm-dog-yak-chew-hero.jpg",
+      "info": "Upload to Files, then enter the filename here"
+    },
+    {
+      "type": "header",
+      "content": "Trust Bar Stats"
+    },
+    {
+      "type": "text",
+      "id": "trust_stat_1_value",
+      "label": "Stat 1 value",
+      "default": "20k+"
+    },
+    {
+      "type": "text",
+      "id": "trust_stat_1_label",
+      "label": "Stat 1 label",
+      "default": "Dog parents"
+    },
+    {
+      "type": "text",
+      "id": "trust_stat_2_value",
+      "label": "Stat 2 value",
+      "default": "4"
+    },
+    {
+      "type": "text",
+      "id": "trust_stat_2_label",
+      "label": "Stat 2 label",
+      "default": "Ingredients only"
+    },
+    {
+      "type": "text",
+      "id": "trust_stat_3_value",
+      "label": "Stat 3 value",
+      "default": "67 min"
+    },
+    {
+      "type": "text",
+      "id": "trust_stat_3_label",
+      "label": "Stat 3 label",
+      "default": "Avg chew time"
+    },
+    {
+      "type": "text",
+      "id": "trust_stat_4_value",
+      "label": "Stat 4 value",
+      "default": "30-day"
+    },
+    {
+      "type": "text",
+      "id": "trust_stat_4_label",
+      "label": "Stat 4 label",
+      "default": "Guarantee"
+    },
+    {
+      "type": "header",
+      "content": "Features"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quiz",
+      "label": "Show Find Your Chew quiz",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sticky_bar",
+      "label": "Show sticky Shop Now bar",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animations",
+      "label": "Enable scroll animations",
+      "default": true
+    }
+  ],
   "presets": [
     {
       "name": "Prime homepage experience"

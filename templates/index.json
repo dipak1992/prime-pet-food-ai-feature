@@ -2,10 +2,32 @@
   "sections": {
     "prime_homepage_experience": {
       "type": "prime-homepage-experience",
-      "settings": {}
+      "settings": {
+        "hero_headline": "Calmer dogs start with a better chew.",
+        "hero_subtext": "Long-lasting Himalayan yak cheese chews made with 4 simple ingredients. Built for focused chew time, cleaner enrichment, and fewer destroyed shoes.",
+        "hero_image": "prime-calm-dog-yak-chew-hero.jpg",
+        "trust_stat_1_value": "20k+",
+        "trust_stat_1_label": "Dog parents",
+        "trust_stat_2_value": "4",
+        "trust_stat_2_label": "Ingredients only",
+        "trust_stat_3_value": "67 min",
+        "trust_stat_3_label": "Avg chew time",
+        "trust_stat_4_value": "30-day",
+        "trust_stat_4_label": "Guarantee",
+        "show_quiz": true,
+        "show_sticky_bar": true,
+        "enable_animations": true
+      }
+    },
+    "video_carousel": {
+      "type": "video-carousel",
+      "settings": {
+        "heading": "See Real Dogs Chewing"
+      }
     }
   },
   "order": [
-    "prime_homepage_experience"
+    "prime_homepage_experience",
+    "video_carousel"
   ]
 }
