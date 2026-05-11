@@ -1,0 +1,565 @@
+{% liquid
+  assign page_handle = page.handle | downcase
+  assign policy_type = 'page'
+
+  if page_handle contains 'privacy'
+    assign policy_type = 'privacy'
+  elsif page_handle contains 'refund' or page_handle contains 'return'
+    assign policy_type = 'refund'
+  elsif page_handle contains 'shipping' or page_handle contains 'delivery'
+    assign policy_type = 'shipping'
+  elsif page_handle contains 'terms'
+    assign policy_type = 'terms'
+  endif
+%}
+
+<article class="ppol" aria-label="{{ page.title }}">
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       POLICY HEADER
+  ════════════════════════════════════════════════════════════════ -->
+  <header class="ppol-header">
+    <div class="ppol-shell">
+      <nav class="ppol-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        <span>{{ page.title }}</span>
+      </nav>
+
+      <div class="ppol-header__inner">
+        <div class="ppol-header__icon" aria-hidden="true">
+          {% if policy_type == 'privacy' %}
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          {% elsif policy_type == 'refund' %}
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          {% elsif policy_type == 'shipping' %}
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          {% elsif policy_type == 'terms' %}
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          {% else %}
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          {% endif %}
+        </div>
+
+        <div>
+          <p class="ppol-header__kicker">
+            {% if policy_type == 'privacy' %}Your privacy matters
+            {% elsif policy_type == 'refund' %}We stand behind every order
+            {% elsif policy_type == 'shipping' %}Fast, safe delivery
+            {% elsif policy_type == 'terms' %}Clear terms, no surprises
+            {% else %}Important information
+            {% endif %}
+          </p>
+          <h1>{{ page.title }}</h1>
+          {% if page.metafields.custom.policy_summary != blank %}
+            <p class="ppol-header__summary">{{ page.metafields.custom.policy_summary }}</p>
+          {% else %}
+            <p class="ppol-header__summary">
+              {% if policy_type == 'privacy' %}We take your privacy seriously. This policy explains what data we collect, how we use it, and your rights as a customer.
+              {% elsif policy_type == 'refund' %}We genuinely want both you and your dog to love Prime Pet Food. If something isn&rsquo;t right, we&rsquo;re here to make it right.
+              {% elsif policy_type == 'shipping' %}We know you&rsquo;re excited to get your dog&rsquo;s chews quickly and safely. Here&rsquo;s everything you need to know about shipping and delivery.
+              {% elsif policy_type == 'terms' %}These terms govern your use of our website and purchases. We&rsquo;ve written them to be clear and fair.
+              {% else %}Please read this information carefully before using our services.
+              {% endif %}
+            </p>
+          {% endif %}
+          {% if page.updated_at %}
+            <p class="ppol-header__date">Last updated: {{ page.updated_at | date: '%B %d, %Y' }}</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Quick trust pills -->
+      <div class="ppol-header__pills">
+        {% if policy_type == 'refund' %}
+          <span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            30-day satisfaction guarantee
+          </span>
+          <span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            No questions asked
+          </span>
+          <span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Full refund available
+          </span>
+        {% elsif policy_type == 'shipping' %}
+          <span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Free shipping over $50
+          </span>
+          <span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Ships within 1-2 business days
+          </span>
+          <span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Order tracking included
+          </span>
+        {% elsif policy_type == 'privacy' %}
+          <span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            We never sell your data
+          </span>
+          <span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Secure checkout
+          </span>
+          <span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Unsubscribe anytime
+          </span>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       POLICY CONTENT
+  ════════════════════════════════════════════════════════════════ -->
+  <div class="ppol-body">
+    <div class="ppol-shell ppol-body__inner">
+      <div class="ppol-content rte">
+        {{ page.content }}
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="ppol-sidebar" aria-label="Quick links">
+        <div class="ppol-sidebar__card">
+          <h3>Need help?</h3>
+          <p>Our team is happy to answer any questions about our policies.</p>
+          <a href="/pages/contact" class="ppol-sidebar__btn">Contact us</a>
+        </div>
+
+        <div class="ppol-sidebar__card ppol-sidebar__card--light">
+          <h3>Other policies</h3>
+          <ul>
+            {% unless policy_type == 'privacy' %}
+              <li><a href="/policies/privacy-policy">Privacy policy</a></li>
+            {% endunless %}
+            {% unless policy_type == 'refund' %}
+              <li><a href="/policies/refund-policy">Refund policy</a></li>
+            {% endunless %}
+            {% unless policy_type == 'shipping' %}
+              <li><a href="/policies/shipping-policy">Shipping policy</a></li>
+            {% endunless %}
+            {% unless policy_type == 'terms' %}
+              <li><a href="/policies/terms-of-service">Terms of service</a></li>
+            {% endunless %}
+          </ul>
+        </div>
+
+        <div class="ppol-sidebar__card ppol-sidebar__card--dark">
+          <p class="ppol-sidebar__kicker">30-day guarantee</p>
+          <strong>Not happy? We&rsquo;ll make it right.</strong>
+          <p>Every order is backed by our satisfaction promise.</p>
+          <a href="/pages/contact">Get help &rarr;</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+</article>
+
+<style>
+  /* ═══════════════════════════════════════════════════════════════
+     PRIME POLICY PAGE — Variables & base
+  ════════════════════════════════════════════════════════════════ */
+  .ppol {
+    --ppol-ink: #171512;
+    --ppol-muted: #5f574e;
+    --ppol-cream: #fffaf2;
+    --ppol-soft: #f8f1e7;
+    --ppol-clay: #b85f32;
+    --ppol-clay-dark: #94451f;
+    --ppol-line: rgba(55, 43, 31, 0.12);
+    --ppol-green: #16a34a;
+    font-family: var(--prime-font-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+    color: var(--ppol-ink);
+    background: var(--ppol-cream);
+  }
+
+  .ppol * { box-sizing: border-box; }
+
+  .ppol-shell {
+    width: min(1100px, calc(100% - 32px));
+    margin: 0 auto;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     HEADER
+  ════════════════════════════════════════════════════════════════ */
+  .ppol-header {
+    background: var(--ppol-soft);
+    border-bottom: 1px solid var(--ppol-line);
+    padding: 40px 0 36px;
+  }
+
+  .ppol-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 28px;
+    font-size: 13px;
+  }
+
+  .ppol-breadcrumb a {
+    color: var(--ppol-muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .ppol-breadcrumb a:hover {
+    color: var(--ppol-clay);
+  }
+
+  .ppol-breadcrumb span {
+    color: var(--ppol-ink);
+    font-weight: 600;
+  }
+
+  .ppol-breadcrumb svg {
+    color: var(--ppol-line);
+    flex-shrink: 0;
+  }
+
+  .ppol-header__inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .ppol-header__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    background: #fff;
+    border: 1px solid var(--ppol-line);
+    color: var(--ppol-clay);
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  .ppol-header__kicker {
+    margin: 0 0 6px;
+    color: var(--ppol-clay);
+    font-size: 11px;
+    font-weight: 780;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .ppol-header h1 {
+    margin: 0;
+    font-family: var(--prime-font-display, var(--prime-font-sans, inherit));
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 760;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .ppol-header__summary {
+    margin: 12px 0 0;
+    color: var(--ppol-muted);
+    font-size: 16px;
+    line-height: 1.65;
+    max-width: 680px;
+  }
+
+  .ppol-header__date {
+    margin: 10px 0 0;
+    color: var(--ppol-muted);
+    font-size: 13px;
+  }
+
+  .ppol-header__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  .ppol-header__pills span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 13px;
+    border-radius: 999px;
+    background: #fff;
+    border: 1px solid var(--ppol-line);
+    color: var(--ppol-ink);
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .ppol-header__pills svg {
+    color: var(--ppol-green);
+    flex-shrink: 0;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     BODY LAYOUT
+  ════════════════════════════════════════════════════════════════ */
+  .ppol-body {
+    padding: 52px 0 72px;
+  }
+
+  .ppol-body__inner {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 48px;
+    align-items: start;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     POLICY CONTENT (RTE)
+  ════════════════════════════════════════════════════════════════ */
+  .ppol-content {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--ppol-ink);
+  }
+
+  .ppol-content h2 {
+    margin: 40px 0 14px;
+    font-size: 22px;
+    font-weight: 760;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    padding-top: 8px;
+    border-top: 1px solid var(--ppol-line);
+  }
+
+  .ppol-content h2:first-child {
+    margin-top: 0;
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .ppol-content h3 {
+    margin: 28px 0 10px;
+    font-size: 18px;
+    font-weight: 720;
+    line-height: 1.25;
+  }
+
+  .ppol-content p {
+    margin: 0 0 16px;
+    color: var(--ppol-muted);
+  }
+
+  .ppol-content ul,
+  .ppol-content ol {
+    margin: 0 0 16px;
+    padding-left: 20px;
+    color: var(--ppol-muted);
+  }
+
+  .ppol-content li {
+    margin-bottom: 8px;
+    line-height: 1.65;
+  }
+
+  .ppol-content a {
+    color: var(--ppol-clay);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .ppol-content a:hover {
+    color: var(--ppol-clay-dark);
+  }
+
+  .ppol-content strong {
+    color: var(--ppol-ink);
+    font-weight: 720;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     SIDEBAR
+  ════════════════════════════════════════════════════════════════ */
+  .ppol-sidebar {
+    position: sticky;
+    top: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .ppol-sidebar__card {
+    border-radius: 12px;
+    border: 1px solid var(--ppol-line);
+    background: #fff;
+    padding: 22px;
+  }
+
+  .ppol-sidebar__card h3 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    font-weight: 760;
+    line-height: 1.2;
+  }
+
+  .ppol-sidebar__card p {
+    margin: 0 0 14px;
+    color: var(--ppol-muted);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .ppol-sidebar__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 44px;
+    border-radius: 999px;
+    background: var(--ppol-ink);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 780;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: background 0.15s ease;
+  }
+
+  .ppol-sidebar__btn:hover {
+    background: #2d2820;
+  }
+
+  .ppol-sidebar__card--light {
+    background: var(--ppol-soft);
+  }
+
+  .ppol-sidebar__card--light ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ppol-sidebar__card--light a {
+    color: var(--ppol-muted);
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .ppol-sidebar__card--light a:hover {
+    color: var(--ppol-clay);
+  }
+
+  .ppol-sidebar__card--dark {
+    background: var(--ppol-ink);
+    border-color: transparent;
+  }
+
+  .ppol-sidebar__kicker {
+    margin: 0 0 6px;
+    color: #f3b27d;
+    font-size: 11px;
+    font-weight: 780;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .ppol-sidebar__card--dark strong {
+    display: block;
+    color: #fffaf2;
+    font-size: 16px;
+    font-weight: 760;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .ppol-sidebar__card--dark p {
+    color: rgba(255, 250, 242, 0.7);
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .ppol-sidebar__card--dark a {
+    color: #f3b27d;
+    font-size: 14px;
+    font-weight: 680;
+    text-decoration: none;
+  }
+
+  .ppol-sidebar__card--dark a:hover {
+    color: #fffaf2;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     RESPONSIVE — Tablet
+  ════════════════════════════════════════════════════════════════ */
+  @media (max-width: 860px) {
+    .ppol-body__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .ppol-sidebar {
+      position: static;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .ppol-sidebar__card--dark {
+      grid-column: 1 / -1;
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     RESPONSIVE — Mobile
+  ════════════════════════════════════════════════════════════════ */
+  @media (max-width: 560px) {
+    .ppol-shell {
+      width: calc(100% - 24px);
+    }
+
+    .ppol-header {
+      padding: 28px 0 24px;
+    }
+
+    .ppol-header__inner {
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .ppol-header__icon {
+      width: 48px;
+      height: 48px;
+    }
+
+    .ppol-sidebar {
+      grid-template-columns: 1fr;
+    }
+
+    .ppol-content h2 {
+      font-size: 19px;
+    }
+
+    .ppol-content {
+      font-size: 15px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Prime policy page",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Prime policy page"
+    }
+  ]
+}
+{% endschema %}

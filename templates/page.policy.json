@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "prime_policy_page": {
+      "type": "prime-policy-page",
+      "settings": {}
+    }
+  },
+  "order": [
+    "prime_policy_page"
+  ]
+}

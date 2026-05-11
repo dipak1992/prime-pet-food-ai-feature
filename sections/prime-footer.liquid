@@ -1,0 +1,608 @@
+<footer class="pf" aria-label="Site footer">
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       NEWSLETTER STRIP
+  ════════════════════════════════════════════════════════════════ -->
+  {% if section.settings.show_newsletter %}
+  <div class="pf-newsletter">
+    <div class="pf-shell pf-newsletter__inner">
+      <div class="pf-newsletter__copy">
+        <p class="pf-newsletter__kicker">{{ section.settings.newsletter_eyebrow | default: 'Dog parent tips' }}</p>
+        <h2>{{ section.settings.newsletter_heading | default: 'Get chew guides, enrichment tips, and early access.' }}</h2>
+      </div>
+      <form class="pf-newsletter__form" action="/contact#contact_form" method="post" accept-charset="UTF-8">
+        <input type="hidden" name="form_type" value="customer">
+        <input type="hidden" name="utf8" value="✓">
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="pf-newsletter__field">
+          <label for="pf-email" class="visually-hidden">Email address</label>
+          <input
+            id="pf-email"
+            type="email"
+            name="contact[email]"
+            placeholder="Your email address"
+            required
+            autocomplete="email"
+            aria-label="Email address"
+          >
+          <button type="submit" aria-label="Subscribe">
+            Subscribe
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+        <p class="pf-newsletter__disclaimer">No spam. Unsubscribe anytime. We respect your inbox.</p>
+      </form>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       MAIN FOOTER GRID
+  ════════════════════════════════════════════════════════════════ -->
+  <div class="pf-main">
+    <div class="pf-shell pf-main__inner">
+
+      <!-- Brand column -->
+      <div class="pf-brand">
+        {% if shop.brand.logo %}
+          <a href="/" class="pf-brand__logo" aria-label="{{ shop.name }} home">
+            <img
+              src="{{ shop.brand.logo | image_url: width: 160 }}"
+              alt="{{ shop.name }}"
+              width="120"
+              height="40"
+              loading="lazy"
+            >
+          </a>
+        {% else %}
+          <a href="/" class="pf-brand__name" aria-label="{{ shop.name }} home">{{ shop.name }}</a>
+        {% endif %}
+        <p class="pf-brand__tagline">{{ section.settings.brand_tagline | default: 'Premium Himalayan yak chews made for calmer, happier dogs.' }}</p>
+        <div class="pf-brand__trust">
+          <span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            Rawhide-free
+          </span>
+          <span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            4.9&#9733; rated
+          </span>
+          <span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+            30-day guarantee
+          </span>
+        </div>
+        {% if section.settings.show_social %}
+        <div class="pf-brand__social" aria-label="Social media links">
+          {% if shop.brand.metafields.social_links.instagram.value != blank %}
+            <a href="{{ shop.brand.metafields.social_links.instagram.value }}" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+          {% endif %}
+          {% if shop.brand.metafields.social_links.tiktok.value != blank %}
+            <a href="{{ shop.brand.metafields.social_links.tiktok.value }}" target="_blank" rel="noopener" aria-label="TikTok">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
+            </a>
+          {% endif %}
+          {% if shop.brand.metafields.social_links.facebook.value != blank %}
+            <a href="{{ shop.brand.metafields.social_links.facebook.value }}" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+          {% endif %}
+          {% if shop.brand.metafields.social_links.pinterest.value != blank %}
+            <a href="{{ shop.brand.metafields.social_links.pinterest.value }}" target="_blank" rel="noopener" aria-label="Pinterest">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.65 7.86 6.39 9.29-.09-.78-.17-1.98.04-2.83.18-.77 1.22-5.17 1.22-5.17s-.31-.62-.31-1.54c0-1.45.84-2.53 1.88-2.53.89 0 1.32.67 1.32 1.47 0 .9-.57 2.24-.87 3.48-.25 1.04.52 1.88 1.54 1.88 1.85 0 3.09-2.36 3.09-5.15 0-2.13-1.44-3.62-3.5-3.62-2.38 0-3.78 1.79-3.78 3.63 0 .72.28 1.49.62 1.91.07.08.08.15.06.23-.06.26-.2.82-.23.94-.04.15-.13.18-.3.11-1.12-.52-1.82-2.17-1.82-3.49 0-2.84 2.06-5.44 5.94-5.44 3.12 0 5.55 2.22 5.55 5.19 0 3.1-1.95 5.59-4.66 5.59-.91 0-1.77-.47-2.06-1.03l-.56 2.09c-.2.78-.75 1.76-1.12 2.35.85.26 1.75.4 2.68.4 5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+            </a>
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- Shop links -->
+      <div class="pf-col">
+        <h3 class="pf-col__heading">Shop</h3>
+        <ul class="pf-col__list">
+          <li><a href="/collections/all">All chews</a></li>
+          <li><a href="/collections/all?sort_by=best-selling">Best sellers</a></li>
+          <li><a href="/pages/how-long-will-this-last-for-my-dog?intent=aggressive-chewer">Aggressive chewers</a></li>
+          <li><a href="/pages/how-long-will-this-last-for-my-dog">Find my dog&rsquo;s size</a></li>
+        </ul>
+      </div>
+
+      <!-- Support links -->
+      <div class="pf-col">
+        <h3 class="pf-col__heading">Support</h3>
+        <ul class="pf-col__list">
+          <li><a href="/pages/faq">FAQ</a></li>
+          <li><a href="/pages/contact">Contact us</a></li>
+          <li><a href="/policies/shipping-policy">Shipping info</a></li>
+          <li><a href="/policies/refund-policy">Returns &amp; refunds</a></li>
+        </ul>
+      </div>
+
+      <!-- Learn links -->
+      <div class="pf-col">
+        <h3 class="pf-col__heading">Learn</h3>
+        <ul class="pf-col__list">
+          <li><a href="/blogs/dog-behavior/how-long-do-yak-chews-last">Chew duration guide</a></li>
+          <li><a href="/blogs/dog-behavior/best-rawhide-alternative">Rawhide alternatives</a></li>
+          <li><a href="/blogs/dog-behavior">Dog enrichment blog</a></li>
+          <li><a href="/pages/about-us">Our story</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       BOTTOM BAR
+  ════════════════════════════════════════════════════════════════ -->
+  <div class="pf-bottom">
+    <div class="pf-shell pf-bottom__inner">
+      <p class="pf-bottom__copy">
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.
+      </p>
+      <nav class="pf-bottom__legal" aria-label="Legal links">
+        <a href="/policies/privacy-policy">Privacy policy</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="/policies/refund-policy">Refund policy</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="/policies/shipping-policy">Shipping policy</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="/policies/terms-of-service">Terms of service</a>
+      </nav>
+      {% if section.settings.show_payment_icons %}
+      <div class="pf-bottom__payments" aria-label="Accepted payment methods">
+        {% render 'icon-visa' %}
+        {% render 'icon-mastercard' %}
+        {% render 'icon-amex' %}
+        {% render 'icon-paypal' %}
+        {% render 'icon-apple-pay' %}
+        {% render 'icon-shop-pay' %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+</footer>
+
+<style>
+  /* ═══════════════════════════════════════════════════════════════
+     PRIME FOOTER — Variables & base
+  ════════════════════════════════════════════════════════════════ */
+  .pf {
+    --pf-ink: #171512;
+    --pf-muted: #5f574e;
+    --pf-cream: #fffaf2;
+    --pf-soft: #f8f1e7;
+    --pf-clay: #b85f32;
+    --pf-clay-dark: #94451f;
+    --pf-line: rgba(55, 43, 31, 0.12);
+    --pf-dark: #1e1a15;
+    font-family: var(--prime-font-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+    color: var(--pf-ink);
+  }
+
+  .pf * { box-sizing: border-box; }
+
+  .pf-shell {
+    width: min(1160px, calc(100% - 32px));
+    margin: 0 auto;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     NEWSLETTER STRIP
+  ════════════════════════════════════════════════════════════════ */
+  .pf-newsletter {
+    background: var(--pf-dark);
+    padding: 52px 0;
+  }
+
+  .pf-newsletter__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .pf-newsletter__kicker {
+    margin: 0 0 8px;
+    color: #f3b27d;
+    font-size: 11px;
+    font-weight: 780;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .pf-newsletter__copy h2 {
+    margin: 0;
+    color: #fffaf2;
+    font-family: var(--prime-font-display, var(--prime-font-sans, inherit));
+    font-size: clamp(22px, 2.8vw, 34px);
+    font-weight: 735;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .pf-newsletter__field {
+    display: flex;
+    gap: 0;
+    border-radius: 999px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 250, 242, 0.2);
+    background: rgba(255, 250, 242, 0.06);
+  }
+
+  .pf-newsletter__field input {
+    flex: 1;
+    min-width: 0;
+    padding: 14px 20px;
+    background: transparent;
+    border: 0;
+    color: #fffaf2;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+  }
+
+  .pf-newsletter__field input::placeholder {
+    color: rgba(255, 250, 242, 0.45);
+  }
+
+  .pf-newsletter__field button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 22px;
+    background: var(--pf-clay);
+    color: #fff;
+    border: 0;
+    font-size: 13px;
+    font-weight: 780;
+    font-family: inherit;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s ease;
+    flex-shrink: 0;
+  }
+
+  .pf-newsletter__field button:hover {
+    background: var(--pf-clay-dark);
+  }
+
+  .pf-newsletter__disclaimer {
+    margin: 10px 0 0;
+    color: rgba(255, 250, 242, 0.45);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     MAIN FOOTER GRID
+  ════════════════════════════════════════════════════════════════ */
+  .pf-main {
+    background: var(--pf-soft);
+    padding: 60px 0 48px;
+    border-top: 1px solid var(--pf-line);
+  }
+
+  .pf-main__inner {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    gap: 40px;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     BRAND COLUMN
+  ════════════════════════════════════════════════════════════════ */
+  .pf-brand__logo img {
+    display: block;
+    height: 36px;
+    width: auto;
+  }
+
+  .pf-brand__name {
+    display: block;
+    color: var(--pf-ink);
+    font-size: 20px;
+    font-weight: 780;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .pf-brand__tagline {
+    margin: 14px 0 0;
+    color: var(--pf-muted);
+    font-size: 14px;
+    line-height: 1.65;
+    max-width: 280px;
+  }
+
+  .pf-brand__trust {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 18px;
+  }
+
+  .pf-brand__trust span {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--pf-muted);
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .pf-brand__trust svg {
+    color: var(--pf-clay);
+    flex-shrink: 0;
+  }
+
+  .pf-brand__social {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .pf-brand__social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--pf-line);
+    background: #fff;
+    color: var(--pf-ink);
+    text-decoration: none;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .pf-brand__social a:hover {
+    border-color: var(--pf-clay);
+    color: var(--pf-clay);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     LINK COLUMNS
+  ════════════════════════════════════════════════════════════════ */
+  .pf-col__heading {
+    margin: 0 0 16px;
+    color: var(--pf-ink);
+    font-size: 13px;
+    font-weight: 780;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .pf-col__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .pf-col__list a {
+    color: var(--pf-muted);
+    font-size: 14px;
+    text-decoration: none;
+    line-height: 1.4;
+    transition: color 0.15s ease;
+  }
+
+  .pf-col__list a:hover {
+    color: var(--pf-clay);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     BOTTOM BAR
+  ════════════════════════════════════════════════════════════════ */
+  .pf-bottom {
+    background: var(--pf-soft);
+    border-top: 1px solid var(--pf-line);
+    padding: 18px 0;
+  }
+
+  .pf-bottom__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .pf-bottom__copy {
+    margin: 0;
+    color: var(--pf-muted);
+    font-size: 13px;
+  }
+
+  .pf-bottom__legal {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .pf-bottom__legal a {
+    color: var(--pf-muted);
+    font-size: 13px;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .pf-bottom__legal a:hover {
+    color: var(--pf-clay);
+  }
+
+  .pf-bottom__legal span {
+    color: var(--pf-line);
+  }
+
+  .pf-bottom__payments {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .pf-bottom__payments svg,
+  .pf-bottom__payments img {
+    height: 22px;
+    width: auto;
+    opacity: 0.65;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     RESPONSIVE — Tablet
+  ════════════════════════════════════════════════════════════════ */
+  @media (max-width: 860px) {
+    .pf-newsletter__inner {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .pf-main__inner {
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .pf-brand {
+      grid-column: 1 / -1;
+    }
+
+    .pf-brand__tagline {
+      max-width: 100%;
+    }
+
+    .pf-brand__trust {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .pf-bottom__inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     RESPONSIVE — Mobile
+  ════════════════════════════════════════════════════════════════ */
+  @media (max-width: 560px) {
+    .pf-shell {
+      width: calc(100% - 24px);
+    }
+
+    .pf-newsletter {
+      padding: 40px 0;
+    }
+
+    .pf-newsletter__field {
+      flex-direction: column;
+      border-radius: 12px;
+    }
+
+    .pf-newsletter__field input {
+      padding: 14px 16px;
+    }
+
+    .pf-newsletter__field button {
+      border-radius: 0 0 10px 10px;
+      justify-content: center;
+      padding: 14px 16px;
+    }
+
+    .pf-main {
+      padding: 40px 0 32px;
+    }
+
+    .pf-main__inner {
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    .pf-brand {
+      grid-column: 1 / -1;
+    }
+
+    .pf-bottom__legal {
+      gap: 6px;
+    }
+
+    .pf-bottom__legal a {
+      font-size: 12px;
+    }
+
+    .pf-bottom__payments {
+      display: none;
+    }
+  }
+
+  /* Visually hidden utility */
+  .pf .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Prime footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_tagline",
+      "label": "Brand tagline",
+      "default": "Premium Himalayan yak chews made for calmer, happier dogs."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_newsletter",
+      "label": "Show newsletter section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "newsletter_eyebrow",
+      "label": "Newsletter eyebrow",
+      "default": "Dog parent tips"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter heading",
+      "default": "Get chew guides, enrichment tips, and early access."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "label": "Show social icons",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Prime footer"
+    }
+  ]
+}
+{% endschema %}
