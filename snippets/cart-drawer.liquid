@@ -13,14 +13,22 @@
   }
 
   .cart-drawer-subscribe-note {
-    display: grid;
-    gap: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
     margin: 0 0 14px;
     padding: 14px;
     border: 1px solid rgba(210, 99, 46, 0.2);
     border-radius: 16px;
     background: #fff7ec;
     color: #2b1408;
+  }
+
+  .cart-drawer-subscribe-note__body {
+    display: grid;
+    gap: 4px;
+    min-width: 0;
   }
 
   .cart-drawer-subscribe-note strong {
@@ -33,17 +41,31 @@
   .cart-drawer-subscribe-note p {
     margin: 0;
     color: #6a5547;
-    font-size: 13px;
-    line-height: 1.45;
+    font-size: 12px;
+    line-height: 1.4;
     letter-spacing: 0;
   }
 
-  .cart-drawer-subscribe-note a {
-    color: #c75c28;
-    font-size: 13px;
+  .cart-drawer-subscribe-note__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 9px 14px;
+    border-radius: 999px;
+    background: #eb7300;
+    color: #fff;
+    font-size: 12px;
     font-weight: 800;
-    letter-spacing: 0;
+    letter-spacing: 0.01em;
     text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.18s, transform 0.18s;
+  }
+
+  .cart-drawer-subscribe-note__cta:hover {
+    background: #c75c00;
+    transform: translateY(-1px);
   }
 </style>
 
@@ -611,9 +633,13 @@
         <div class="cart-drawer__footer pl-2 pr-2" {{ block.shopify_attributes }}>
           {%- if cart != empty -%}
             <div class="cart-drawer-subscribe-note">
-              <strong>Make chew time automatic.</strong>
-              <p>Subscribe &amp; Save keeps your dog&rsquo;s favorite yak chews on schedule with flexible delivery controls.</p>
-              <a href="/pages/subscribe-and-save">See subscription options</a>
+              <div class="cart-drawer-subscribe-note__body">
+                <strong>Make chew time automatic.</strong>
+                <p>Subscribe &amp; Save keeps your dog&rsquo;s favorite yak chews on schedule with flexible delivery controls.</p>
+              </div>
+              <a href="/pages/subscribe-and-save" class="cart-drawer-subscribe-note__cta">
+                Subscribe &amp; Save 15% →
+              </a>
             </div>
           {%- endif -%}
 

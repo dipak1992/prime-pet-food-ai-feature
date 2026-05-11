@@ -3,7 +3,7 @@
   Reuses the local dog profile / analyzer recommendation in cart and cart drawer.
 {% endcomment %}
 
-<div class="cart-chew-plan cart-chew-plan--{{ context | default: 'cart' }}" data-cart-chew-plan>
+<div class="cart-chew-plan cart-chew-plan--{{ context | default: 'cart' }}" data-cart-chew-plan style="display:none">
   <div class="cart-chew-plan__content">
     <p class="cart-chew-plan__eyebrow">Dog-matched cart</p>
     <h3 class="cart-chew-plan__title" data-cart-chew-title>Your calm-time plan is ready</h3>
@@ -134,6 +134,26 @@
     transform: none;
   }
 
+  /* Compact teaser when no dog profile is saved */
+  .cart-chew-plan--no-profile {
+    background: #f6f1e9;
+    border-color: rgba(23, 59, 43, 0.1);
+    box-shadow: none;
+    padding: 14px 16px;
+    gap: 10px;
+  }
+
+  .cart-chew-plan--no-profile .cart-chew-plan__title {
+    font-size: 15px;
+    font-family: inherit;
+    font-weight: 700;
+    color: #173b2b;
+  }
+
+  .cart-chew-plan--no-profile .cart-chew-plan__copy {
+    font-size: 13px;
+  }
+
   @media (min-width: 750px) {
     .cart-chew-plan:not(.cart-chew-plan--cart_drawer) {
       align-items: center;
@@ -257,11 +277,14 @@
             };
           }
         } else {
+          /* No profile — show compact quiz teaser instead of full widget */
           title.textContent = 'Match the chew before checkout';
           copy.textContent = 'Answer four questions to estimate chew duration, size fit, and calm-time usefulness for your dog.';
           facts.hidden = true;
           if (addButton) addButton.hidden = true;
+          root.classList.add('cart-chew-plan--no-profile');
         }
+        root.style.display = '';
       });
     }
 

@@ -103,6 +103,11 @@
 
                             <a href="{{ item.url }}" class="ypc-cart-item__name">{{ item.product.title | escape }}</a>
 
+                            {%- assign item_inventory = item.variant.inventory_quantity -%}
+                            {%- if item.variant.inventory_management == 'shopify' and item_inventory > 0 and item_inventory <= 10 -%}
+                              <p class="ypc-cart-item__low-stock">🔥 Only {{ item_inventory }} left</p>
+                            {%- endif -%}
+
                             {%- if item.original_price != item.final_price -%}
                               <div class="ypc-cart-item__unit-prices">
                                 <s class="ypc-cart-item__unit-old">
@@ -468,6 +473,28 @@
             {%- endif -%}
           </div>
 
+          {%- if cart != empty -%}
+            <div class="ypc-cart-summary__discount">
+              <label class="ypc-cart-summary__discount-label" for="ypc-discount-code">
+                🏷 Promo / Discount Code
+              </label>
+              <div class="ypc-cart-summary__discount-row">
+                <input
+                  type="text"
+                  id="ypc-discount-code"
+                  class="ypc-cart-summary__discount-input"
+                  placeholder="Enter code"
+                  autocomplete="off"
+                  autocapitalize="characters"
+                />
+                <button type="button" class="ypc-cart-summary__discount-btn" id="ypc-apply-discount">
+                  Apply
+                </button>
+              </div>
+              <p class="ypc-cart-summary__discount-msg" id="ypc-discount-msg" hidden></p>
+            </div>
+          {%- endif -%}
+
           <div class="ypc-cart-summary__subscribe">
             <p class="ypc-cart-summary__subscribe-kicker">Subscribe &amp; Save</p>
             <h3>Keep yak chews ready for calm-time routines.</h3>
@@ -561,6 +588,11 @@
                 {{ content_for_additional_checkout_buttons }}
               </div>
             {%- endif -%}
+
+            <div class="ypc-cart-summary__social-proof">
+              <span class="ypc-cart-summary__stars">★★★★★</span>
+              <span class="ypc-cart-summary__proof-text">4.9 · Loved by 1,200+ dogs</span>
+            </div>
 
             <div class="ypc-cart-summary__trust">
               <span>🛡 Secure checkout</span>
@@ -1149,7 +1181,183 @@
       font-size: 26px;
     }
   }
+
+  /* ── Low-stock urgency badge ── */
+  .ypc-cart-item__low-stock {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin: 4px 0 8px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: #fff3e0;
+    border: 1px solid rgba(235, 115, 0, 0.28);
+    color: #c75c00;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    line-height: 1.2;
+  }
+
+  /* ── Discount code field ── */
+  .ypc-cart-summary__discount {
+    margin: 16px 0 4px;
+    padding: 14px 16px;
+    border: 1px solid rgba(23, 59, 43, 0.1);
+    border-radius: 16px;
+    background: rgba(255,255,255,0.6);
+  }
+
+  .ypc-cart-summary__discount-label {
+    display: block;
+    margin-bottom: 8px;
+    color: #173b2b;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .ypc-cart-summary__discount-row {
+    display: flex;
+    gap: 8px;
+  }
+
+  .ypc-cart-summary__discount-input {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 14px;
+    border: 1.5px solid rgba(23, 59, 43, 0.18);
+    border-radius: 10px;
+    background: #fff;
+    color: #173b2b;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.18s;
+  }
+
+  .ypc-cart-summary__discount-input:focus {
+    border-color: #eb7300;
+  }
+
+  .ypc-cart-summary__discount-btn {
+    padding: 10px 18px;
+    border-radius: 10px;
+    background: #173b2b;
+    border: none;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.18s;
+  }
+
+  .ypc-cart-summary__discount-btn:hover {
+    background: #0f2a1e;
+  }
+
+  .ypc-cart-summary__discount-msg {
+    margin: 8px 0 0;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .ypc-cart-summary__discount-msg--success {
+    color: #1a7a3c;
+    font-weight: 700;
+  }
+
+  .ypc-cart-summary__discount-msg--error {
+    color: #c0392b;
+    font-weight: 600;
+  }
+
+  /* ── Social proof row ── */
+  .ypc-cart-summary__social-proof {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 0 0 10px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: #f6f1e9;
+    border: 1px solid rgba(23, 59, 43, 0.07);
+  }
+
+  .ypc-cart-summary__stars {
+    color: #f5a623;
+    font-size: 15px;
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+
+  .ypc-cart-summary__proof-text {
+    color: #3d3a35;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
 </style>
+
+<script>
+  (function () {
+    var btn = document.getElementById('ypc-apply-discount');
+    if (!btn) return;
+    var input = document.getElementById('ypc-discount-code');
+    var msg = document.getElementById('ypc-discount-msg');
+
+    function showMsg(text, type) {
+      msg.textContent = text;
+      msg.className = 'ypc-cart-summary__discount-msg ypc-cart-summary__discount-msg--' + type;
+      msg.hidden = false;
+    }
+
+    btn.addEventListener('click', function () {
+      var code = (input.value || '').trim();
+      if (!code) {
+        showMsg('Please enter a discount code.', 'error');
+        return;
+      }
+      btn.disabled = true;
+      btn.textContent = 'Applying…';
+      msg.hidden = true;
+
+      fetch('/discount/' + encodeURIComponent(code), {
+        method: 'GET',
+        headers: { 'Accept': 'application/json' }
+      }).then(function () {
+        /* Shopify applies the discount via cookie on the /discount/ route.
+           We then update the cart to reflect the new price. */
+        return fetch('/cart/update.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({})
+        });
+      }).then(function (res) { return res.json(); })
+        .then(function (cart) {
+          if (cart.cart_level_discount_applications && cart.cart_level_discount_applications.length > 0) {
+            showMsg('✓ Discount applied!', 'success');
+            setTimeout(function () { window.location.reload(); }, 800);
+          } else {
+            showMsg('Code applied — refresh to see savings.', 'success');
+            setTimeout(function () { window.location.reload(); }, 1200);
+          }
+        })
+        .catch(function () {
+          showMsg('Could not apply code. Please try again.', 'error');
+          btn.disabled = false;
+          btn.textContent = 'Apply';
+        });
+    });
+
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') btn.click();
+    });
+  })();
+</script>
 
 {% schema %}
 {
