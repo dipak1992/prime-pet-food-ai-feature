@@ -48,6 +48,10 @@
     gap: 2.4rem;
   }
 
+  #shopify-section-{{ section.id }} .main-blog--hub {
+    gap: 3rem;
+  }
+
   #shopify-section-{{ section.id }} .main-blog__toolbar {
     display: flex;
     flex-direction: column;
@@ -113,7 +117,13 @@
 
   #shopify-section-{{ section.id }} .main-blog__group {
     display: grid;
-    gap: 1.4rem;
+    gap: 1.6rem;
+    padding: 1.8rem;
+    border: 1px solid rgba(var(--color-foreground), 0.08);
+    border-radius: 2.4rem;
+    background:
+      linear-gradient(180deg, rgba(var(--color-background), 1), rgba(var(--color-background), 0.96)),
+      radial-gradient(circle at top left, rgba(var(--color-foreground), 0.05), transparent 32%);
   }
 
   #shopify-section-{{ section.id }} .main-blog__group-header {
@@ -125,12 +135,50 @@
     border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
   }
 
+  #shopify-section-{{ section.id }} .main-blog__group-kicker {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: rgba(var(--color-foreground), 0.58);
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
   #shopify-section-{{ section.id }} .main-blog__group-title {
     margin: 0;
   }
 
   #shopify-section-{{ section.id }} .main-blog__group-link {
     white-space: nowrap;
+  }
+
+  #shopify-section-{{ section.id }} .main-blog__hub-nav {
+    display: grid;
+    gap: 0.8rem;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #shopify-section-{{ section.id }} .main-blog__hub-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.2rem 1.4rem;
+    border: 1px solid rgba(var(--color-foreground), 0.08);
+    border-radius: 999px;
+    background: rgb(var(--color-background));
+    color: rgb(var(--color-foreground));
+    text-decoration: none;
+  }
+
+  #shopify-section-{{ section.id }} .main-blog__hub-link span {
+    color: rgba(var(--color-foreground), 0.62);
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   #shopify-section-{{ section.id }} .main-blog__keyword-hub {
@@ -237,6 +285,10 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    #shopify-section-{{ section.id }} .main-blog__hub-nav {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
     #shopify-section-{{ section.id }} .main-blog__keyword-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -259,7 +311,7 @@
   }
 </style>
 
-<div class="main-blog page-width section__inner {{ section.settings.top_padding }} {{ section.settings.bottom_padding }}">
+<div class="main-blog{% if use_all_blog_hub %} main-blog--hub{% endif %} page-width section__inner {{ section.settings.top_padding }} {{ section.settings.bottom_padding }}">
   {%- if show_blog_toolbar -%}
     {{ 'component-section-tabs.css' | asset_url | stylesheet_tag }}
 
@@ -331,10 +383,25 @@
   {%- endif -%}
 
   {%- if use_all_blog_hub -%}
+    <nav class="main-blog__hub-nav" aria-label="Blog sections">
+      {%- if yak_chews_blog != blank -%}
+        <a href="#main-blog-yak-chews" class="main-blog__hub-link">Yak Chews <span>{{ yak_chews_blog.articles.size }} posts</span></a>
+      {%- endif -%}
+      {%- if dog_health_blog != blank -%}
+        <a href="#main-blog-dog-health" class="main-blog__hub-link">Dog Health <span>{{ dog_health_blog.articles.size }} posts</span></a>
+      {%- endif -%}
+      {%- if dog_behavior_blog != blank -%}
+        <a href="#main-blog-dog-behavior" class="main-blog__hub-link">Dog Behavior <span>{{ dog_behavior_blog.articles.size }} posts</span></a>
+      {%- endif -%}
+    </nav>
+
     {%- if yak_chews_blog != blank and yak_chews_blog.articles.size > 0 -%}
       <section class="main-blog__group" aria-labelledby="main-blog-yak-chews">
         <div class="main-blog__group-header">
-          <h2 id="main-blog-yak-chews" class="main-blog__group-title h3">{{ yak_chews_blog.title }}</h2>
+          <div>
+            <span class="main-blog__group-kicker">Yak chew education</span>
+            <h2 id="main-blog-yak-chews" class="main-blog__group-title h3">{{ yak_chews_blog.title }}</h2>
+          </div>
           <a href="{{ yak_chews_blog.url }}" class="main-blog__group-link link">View all {{ yak_chews_blog.title }}</a>
         </div>
         <div class="blog-articles main-blog__grid section-grid grid articles-wrapper contains-card contains-card--article{% if settings.blog_card_style == 'standard' %} contains-card--standard{% endif %} grid--{{ section.settings.columns_desktop }}-col-desktop grid--scaled grid--1-col-tablet-down">
@@ -363,7 +430,10 @@
     {%- if dog_health_blog != blank and dog_health_blog.articles.size > 0 -%}
       <section class="main-blog__group" aria-labelledby="main-blog-dog-health">
         <div class="main-blog__group-header">
-          <h2 id="main-blog-dog-health" class="main-blog__group-title h3">{{ dog_health_blog.title }}</h2>
+          <div>
+            <span class="main-blog__group-kicker">Wellness and safety</span>
+            <h2 id="main-blog-dog-health" class="main-blog__group-title h3">{{ dog_health_blog.title }}</h2>
+          </div>
           <a href="{{ dog_health_blog.url }}" class="main-blog__group-link link">View all {{ dog_health_blog.title }}</a>
         </div>
         <div class="blog-articles main-blog__grid section-grid grid articles-wrapper contains-card contains-card--article{% if settings.blog_card_style == 'standard' %} contains-card--standard{% endif %} grid--{{ section.settings.columns_desktop }}-col-desktop grid--scaled grid--1-col-tablet-down">
@@ -392,7 +462,10 @@
     {%- if dog_behavior_blog != blank and dog_behavior_blog.articles.size > 0 -%}
       <section class="main-blog__group" aria-labelledby="main-blog-dog-behavior">
         <div class="main-blog__group-header">
-          <h2 id="main-blog-dog-behavior" class="main-blog__group-title h3">{{ dog_behavior_blog.title }}</h2>
+          <div>
+            <span class="main-blog__group-kicker">Training and enrichment</span>
+            <h2 id="main-blog-dog-behavior" class="main-blog__group-title h3">{{ dog_behavior_blog.title }}</h2>
+          </div>
           <a href="{{ dog_behavior_blog.url }}" class="main-blog__group-link link">View all {{ dog_behavior_blog.title }}</a>
         </div>
         <div class="blog-articles main-blog__grid section-grid grid articles-wrapper contains-card contains-card--article{% if settings.blog_card_style == 'standard' %} contains-card--standard{% endif %} grid--{{ section.settings.columns_desktop }}-col-desktop grid--scaled grid--1-col-tablet-down">
