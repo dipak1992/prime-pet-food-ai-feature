@@ -1,35 +1,5 @@
-{% liquid
-  assign hero_image = collection.image
-  assign product_count = collection.all_products_count
-  assign fallback_hero_image = 'prime-calm-dog-yak-chew-hero.jpg' | asset_url
-%}
-
 <section class="pch-hero" aria-label="{{ collection.title }} collection">
   <div class="pch-hero__inner">
-
-    {% if hero_image %}
-      <div class="pch-hero__media" aria-hidden="true">
-        <img
-          src="{{ hero_image | image_url: width: 1400 }}"
-          alt="{{ hero_image.alt | default: collection.title | escape }}"
-          width="{{ hero_image.width }}"
-          height="{{ hero_image.height }}"
-          loading="eager"
-          fetchpriority="high"
-        >
-      </div>
-    {% else %}
-      <div class="pch-hero__media pch-hero__media--fallback" aria-hidden="true">
-        <img
-          src="{{ fallback_hero_image }}"
-          alt=""
-          width="1536"
-          height="1024"
-          loading="eager"
-          fetchpriority="high"
-        >
-      </div>
-    {% endif %}
 
     <div class="pch-shell pch-hero__content">
       <div class="pch-hero__text">
@@ -59,19 +29,10 @@
           </span>
         </div>
       </div>
-
-      <div class="pch-hero__cta-group">
-        <a href="#product-grid" class="pch-btn pch-btn--primary">
-          Shop all chews
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-        </a>
-        <a href="/pages/how-long-will-this-last-for-my-dog" class="pch-btn pch-btn--ghost">Find my dog&rsquo;s size</a>
-      </div>
     </div>
 
   </div>
 
-  <!-- Trust bar below hero -->
   <div class="pch-trust-bar" aria-label="Trust signals">
     <div class="pch-shell pch-trust-bar__inner">
       <div class="pch-trust-bar__item">
@@ -99,7 +60,7 @@
 
 <style>
   /* ═══════════════════════════════════════════════════════════════
-     PRIME COLLECTION HERO — Variables & base
+     PRIME COLLECTION HERO
   ════════════════════════════════════════════════════════════════ */
   .pch-hero {
     --pch-ink: #171512;
@@ -123,51 +84,19 @@
   ════════════════════════════════════════════════════════════════ */
   .pch-hero__inner {
     position: relative;
-    min-height: 480px;
+    min-height: 0;
     display: grid;
-    align-items: end;
     overflow: hidden;
     isolation: isolate;
-    background: #1e1a15;
-  }
-
-  .pch-hero__media {
-    position: absolute;
-    inset: 0;
-    z-index: -2;
-  }
-
-  .pch-hero__media::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(
-      90deg,
-      rgba(19, 16, 12, 0.9) 0%,
-      rgba(19, 16, 12, 0.65) 45%,
-      rgba(19, 16, 12, 0.2) 100%
-    );
-  }
-
-  .pch-hero__media--fallback {
-    background: linear-gradient(135deg, #2b1408 0%, #4a2010 100%);
-  }
-
-  .pch-hero__media img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-    object-position: center 30%;
+    background:
+      linear-gradient(135deg, rgba(184, 95, 50, 0.08), rgba(255, 250, 242, 0) 48%),
+      var(--pch-cream);
+    border-bottom: 1px solid var(--pch-line);
   }
 
   .pch-hero__content {
-    padding: 64px 0 52px;
-    display: grid;
-    gap: 28px;
-    align-items: end;
-    grid-template-columns: 1fr auto;
+    padding: 42px 0 34px;
+    display: block;
   }
 
   /* ═══════════════════════════════════════════════════════════════
@@ -175,7 +104,7 @@
   ════════════════════════════════════════════════════════════════ */
   .pch-kicker {
     margin: 0 0 10px;
-    color: #f3b27d;
+    color: var(--pch-clay);
     font-size: 11px;
     font-weight: 780;
     letter-spacing: 0.1em;
@@ -184,21 +113,21 @@
 
   .pch-hero__text h1 {
     margin: 0;
-    color: #fffaf2;
+    color: var(--pch-ink);
     font-family: var(--prime-font-display, var(--prime-font-sans, inherit));
-    font-size: clamp(36px, 5vw, 62px);
+    font-size: clamp(32px, 4.2vw, 52px);
     font-weight: 760;
-    line-height: 1.0;
-    letter-spacing: -0.02em;
-    max-width: 640px;
+    line-height: 1.04;
+    letter-spacing: 0;
+    max-width: 760px;
   }
 
   .pch-hero__sub {
     margin: 14px 0 0;
-    color: rgba(255, 250, 242, 0.78);
+    color: var(--pch-muted);
     font-size: 16px;
-    line-height: 1.65;
-    max-width: 520px;
+    line-height: 1.6;
+    max-width: 660px;
   }
 
   .pch-hero__pills {
@@ -214,9 +143,9 @@
     gap: 6px;
     padding: 8px 13px;
     border-radius: 999px;
-    border: 1px solid rgba(255, 250, 242, 0.22);
-    background: rgba(255, 250, 242, 0.08);
-    color: rgba(255, 250, 242, 0.88);
+    border: 1px solid rgba(55, 43, 31, 0.12);
+    background: #ffffff;
+    color: var(--pch-ink);
     font-size: 12px;
     font-weight: 600;
     line-height: 1;
@@ -228,62 +157,12 @@
   }
 
   /* ═══════════════════════════════════════════════════════════════
-     HERO CTA GROUP
-  ════════════════════════════════════════════════════════════════ */
-  .pch-hero__cta-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-self: end;
-    flex-shrink: 0;
-  }
-
-  .pch-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    min-height: 50px;
-    padding: 14px 24px;
-    border-radius: 999px;
-    font-size: 13px;
-    font-weight: 780;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    text-decoration: none;
-    white-space: nowrap;
-    border: 0;
-    cursor: pointer;
-    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-  }
-
-  .pch-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  }
-
-  .pch-btn--primary {
-    background: var(--pch-clay);
-    color: #fff;
-  }
-
-  .pch-btn--primary:hover {
-    background: var(--pch-clay-dark);
-  }
-
-  .pch-btn--ghost {
-    border: 1px solid rgba(255, 250, 242, 0.35);
-    background: rgba(255, 250, 242, 0.08);
-    color: #fffaf2;
-  }
-
-  /* ═══════════════════════════════════════════════════════════════
      TRUST BAR
   ════════════════════════════════════════════════════════════════ */
   .pch-trust-bar {
     background: #fff;
     border-bottom: 1px solid var(--pch-line);
-    padding: 14px 0;
+    padding: 10px 0;
   }
 
   .pch-trust-bar__inner {
@@ -298,7 +177,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 6px 20px;
+    padding: 6px 16px;
     color: var(--pch-ink);
     font-size: 13px;
     font-weight: 600;
@@ -320,16 +199,6 @@
      RESPONSIVE — Tablet
   ════════════════════════════════════════════════════════════════ */
   @media (max-width: 860px) {
-    .pch-hero__content {
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
-
-    .pch-hero__cta-group {
-      flex-direction: row;
-      flex-wrap: wrap;
-    }
-
     .pch-trust-bar__divider {
       display: none;
     }
@@ -353,37 +222,16 @@
       width: calc(100% - 24px);
     }
 
-    .pch-hero__inner {
-      min-height: 420px;
-    }
-
-    .pch-hero__media::after {
-      background: linear-gradient(
-        180deg,
-        rgba(19, 16, 12, 0.2) 0%,
-        rgba(19, 16, 12, 0.65) 40%,
-        rgba(19, 16, 12, 0.92) 100%
-      );
-    }
-
     .pch-hero__content {
-      padding: 220px 0 40px;
+      padding: 32px 0 26px;
     }
 
     .pch-hero__text h1 {
-      font-size: 34px;
+      font-size: 31px;
     }
 
     .pch-hero__sub {
       font-size: 15px;
-    }
-
-    .pch-btn {
-      width: 100%;
-    }
-
-    .pch-hero__cta-group {
-      flex-direction: column;
     }
 
     .pch-trust-bar__inner {

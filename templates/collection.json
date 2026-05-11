@@ -8,56 +8,16 @@
         "subheading": "Rawhide-free yak cheese chews made for safer, longer-lasting supervised chew time. Simple ingredients, better enrichment, less guesswork."
       }
     },
-    "collection_chew_finder": {
-      "type": "collection-chew-finder",
-      "settings": {
-        "eyebrow": "Shop by dog need",
-        "title": "Read this page like a fit guide",
-        "subtitle": "Start with your dog's weight, adjust for chewing intensity, then choose the calm-time job you need the chew to do."
-      }
-    },
-    "chew_product_comparison": {
-      "type": "chew-product-comparison",
-      "settings": {
-        "eyebrow": "Size guidance",
-        "title": "Compare yak chew sizes before you add to cart",
-        "subtitle": "Each card gives the best starting point by weight. If your dog is near the top of a range or finishes soft chews quickly, consider the next size up."
-      }
-    },
     "product-grid": {
       "type": "main-collection-product-grid",
-      "blocks": {
-        "inline_promo_AtRrpT": {
-          "type": "inline_promo",
-          "settings": {
-            "position": 4,
-            "promo_image": "shopify://shop_images/67d79f7446f7bb9163a28c22.png",
-            "promo_image_overlay_opacity": 50,
-            "promo_text": "<h4>Not sure which size?</h4><p>Use our free estimator — get a personalized recommendation in under 60 seconds.</p>",
-            "promo_url": "/pages/how-long-will-this-last-for-my-dog",
-            "promo_text_size": "h6-size",
-            "promo_text_position": "justify-center items-center",
-            "promo_text_alignment": "center",
-            "promo_text_padding": 1,
-            "promo_text_color": "#ffffff",
-            "visibility": "",
-            "show_at_specific_time_of_day": false,
-            "show_time_morning": true,
-            "show_time_afternoon": true,
-            "show_time_evening": true,
-            "show_time_night": true
-          }
-        }
-      },
-      "block_order": [
-        "inline_promo_AtRrpT"
-      ],
+      "blocks": {},
+      "block_order": [],
       "settings": {
         "full_width": false,
-        "products_per_page": 12,
-        "columns_desktop": "3",
+        "products_per_page": 16,
+        "columns_desktop": "4",
         "columns_mobile": "2",
-        "filter_type": "vertical",
+        "filter_type": "drawer",
         "enable_filtering": true,
         "enable_sorting": true,
         "show_filter_count": true,
@@ -77,66 +37,14 @@
         "color_scheme_drawer": "",
         "color_scheme_filter": "",
         "color_scheme_filter_bar": "",
-        "card_shadow": true,
-        "top_padding": "pt-s",
-        "bottom_padding": "pb-s"
-      }
-    },
-    "scrolling_text_section_qHMNQd": {
-      "type": "scrolling-text-section",
-      "blocks": {
-        "heading_NJKjbY": {
-          "type": "heading",
-          "settings": {
-            "heading": "Rawhide-free \u00a0\u00a0 Long-lasting \u00a0\u00a0 4 ingredients only \u00a0\u00a0 No additives \u00a0\u00a0 Grain-free \u00a0\u00a0 Low odor \u00a0\u00a0 Human-grade facility \u00a0\u00a0 Ethical sourcing \u00a0\u00a0 4.9\u2605 rated \u00a0\u00a0 67 min avg chew time \u00a0\u00a0 30-day guarantee",
-            "heading_italic_convert": "",
-            "heading_size": "h3",
-            "heading_size_custom": 2.4,
-            "heading_line_height_custom": 1.2,
-            "heading_tag": "h2"
-          }
-        }
-      },
-      "block_order": [
-        "heading_NJKjbY"
-      ],
-      "name": "Scrolling Text Section",
-      "settings": {
-        "full_width": true,
-        "spacing": 2.4,
-        "gap": 3,
-        "speed": 1,
-        "direction": "normal",
-        "pause_on_hover": false,
-        "content_max_width": "m",
-        "desktop_heading_alignment": "left",
-        "mobile_heading_alignment": "left",
-        "title": "",
-        "italic_convert": "",
-        "heading_size": "h2",
-        "text": "",
-        "text_size": "t3",
-        "view_all_link": "",
-        "view_all_text": "",
-        "view_all_text_size": "t3",
-        "color_scheme": "scheme-7",
-        "top_padding": "pt-0",
-        "bottom_padding": "pb-0",
-        "visibility": "",
-        "hide_when_empty": false,
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true
+        "card_shadow": false,
+        "top_padding": "pt-xs",
+        "bottom_padding": "pb-m"
       }
     }
   },
   "order": [
     "prime_collection_hero",
-    "collection_chew_finder",
-    "chew_product_comparison",
-    "product-grid",
-    "scrolling_text_section_qHMNQd"
+    "product-grid"
   ]
 }
