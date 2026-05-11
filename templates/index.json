@@ -114,11 +114,11 @@
     "prime_video_cta": {
       "type": "prime-video-cta",
       "settings": {
-        "kicker": "Ready to try it?",
-        "heading": "Give your dog the chew they deserve.",
-        "subtext": "Join 20,000+ dog parents who switched to safer, longer-lasting enrichment. Free shipping over $30.",
+        "kicker": "Real dogs. Real chew time.",
+        "heading": "Ready to give your dog a better chew?",
+        "subtext": "Choose the 4-ingredient Himalayan yak chew built for longer calm-time enrichment.",
         "cta_text": "Buy Yak Chews",
-        "cta_link": "",
+        "cta_link": "/products/himalayan-yak-chews-for-dogs",
         "secondary_text": "View all chews",
         "secondary_link": ""
       }
