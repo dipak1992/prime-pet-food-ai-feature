@@ -8,6 +8,17 @@
         "subheading": "Rawhide-free yak cheese chews made for safer, longer-lasting supervised chew time. Simple ingredients, better enrichment, less guesswork."
       }
     },
+    "prime_subscribe_strip": {
+      "type": "prime-subscribe-strip",
+      "settings": {
+        "eyebrow": "Subscribe & Save",
+        "heading": "Keep your dog&rsquo;s chew routine stocked.",
+        "text": "Set up automatic yak chew deliveries for calmer enrichment time, easy savings, and fewer last-minute restocks.",
+        "offer": "20% off first month, then routine-based savings.",
+        "cta_label": "Explore subscriptions",
+        "cta_link": "/pages/subscribe-and-save"
+      }
+    },
     "product-grid": {
       "type": "main-collection-product-grid",
       "blocks": {},
@@ -45,6 +56,7 @@
   },
   "order": [
     "prime_collection_hero",
+    "prime_subscribe_strip",
     "product-grid"
   ]
 }

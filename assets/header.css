@@ -317,6 +317,32 @@
   color: var(--header-accent);
 }
 
+.header__subscribe-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 4.2rem;
+  padding: 0 1.8rem;
+  border: 1px solid rgba(210, 99, 46, 0.28);
+  border-radius: 999px;
+  background: #fff7ec;
+  color: #2b1408;
+  font-size: 1.32rem;
+  font-weight: 780;
+  line-height: 1;
+  letter-spacing: 0;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 0.8rem 2rem rgba(210, 99, 46, 0.08);
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.header__subscribe-cta:hover {
+  transform: translateY(-1px);
+  border-color: rgba(210, 99, 46, 0.5);
+  background: #fff0df;
+}
+
 /* Desktop Search Expansion */
 .header__desktop-search-expanded {
   position: absolute;
@@ -419,6 +445,9 @@
 
 .header-mobile__chew-finder {
   padding: 0.4rem 1.6rem 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.8rem;
 }
 
 .header-mobile__chew-finder-link {
@@ -433,6 +462,45 @@
   color: #fff7ec;
   text-decoration: none;
   box-shadow: 0 1rem 2.4rem rgba(36, 19, 13, 0.14);
+}
+
+.header-mobile__subscribe-link {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 11.2rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(210, 99, 46, 0.24);
+  border-radius: 1.4rem;
+  background: #fff7ec;
+  color: #2b1408;
+  text-decoration: none;
+}
+
+.header-mobile__subscribe-link span {
+  font-size: 1.26rem;
+  font-weight: 780;
+  line-height: 1.15;
+  letter-spacing: 0;
+}
+
+.header-mobile__subscribe-link small {
+  margin-top: 0.2rem;
+  color: #7d6554;
+  font-size: 1.05rem;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+@media screen and (max-width: 420px) {
+  .header-mobile__chew-finder {
+    grid-template-columns: 1fr;
+  }
+
+  .header-mobile__subscribe-link {
+    min-width: 0;
+    align-items: center;
+  }
 }
 
 .header-mobile__chew-finder-link span {
@@ -615,6 +683,12 @@ body.header-drawer-open .header__drawer-content * {
   font-weight: 760;
   letter-spacing: 0;
   text-decoration: none;
+}
+
+.header__drawer-recommendation .header__drawer-subscribe-link {
+  margin-top: 0.8rem;
+  background: #2b1408;
+  color: #fff7ec;
 }
 
 .header__drawer-header .h3 {

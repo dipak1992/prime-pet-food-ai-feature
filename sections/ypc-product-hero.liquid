@@ -233,6 +233,12 @@
                 {% endfor %}
               </select>
             </div>
+
+            <div class="ypc-subscription-proof" aria-label="Subscribe and Save benefits">
+              <span>Never run out</span>
+              <span>Skip or cancel anytime</span>
+              <span>Built for steady chew routines</span>
+            </div>
           </div>
         {% endif %}
 
@@ -1036,6 +1042,27 @@
     background: #fff;
     font-size: 14px;
     color: #2b1408;
+  }
+
+  .ypc-subscription-proof {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .ypc-subscription-proof span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 0 10px;
+    border-radius: 999px;
+    background: rgba(43, 20, 8, 0.06);
+    color: #5f4b42;
+    font-size: 12px;
+    font-weight: 750;
+    letter-spacing: 0;
+    line-height: 1.2;
   }
 
   .ypc-cart-row {

@@ -11,6 +11,40 @@
   .drawer {
     visibility: hidden;
   }
+
+  .cart-drawer-subscribe-note {
+    display: grid;
+    gap: 8px;
+    margin: 0 0 14px;
+    padding: 14px;
+    border: 1px solid rgba(210, 99, 46, 0.2);
+    border-radius: 16px;
+    background: #fff7ec;
+    color: #2b1408;
+  }
+
+  .cart-drawer-subscribe-note strong {
+    font-size: 14px;
+    line-height: 1.25;
+    font-weight: 800;
+    letter-spacing: 0;
+  }
+
+  .cart-drawer-subscribe-note p {
+    margin: 0;
+    color: #6a5547;
+    font-size: 13px;
+    line-height: 1.45;
+    letter-spacing: 0;
+  }
+
+  .cart-drawer-subscribe-note a {
+    color: #c75c28;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0;
+    text-decoration: none;
+  }
 </style>
 
 <cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %} motion-reduce">
@@ -575,6 +609,14 @@
         <!-- Subtotals -->
 
         <div class="cart-drawer__footer pl-2 pr-2" {{ block.shopify_attributes }}>
+          {%- if cart != empty -%}
+            <div class="cart-drawer-subscribe-note">
+              <strong>Make chew time automatic.</strong>
+              <p>Subscribe &amp; Save keeps your dog&rsquo;s favorite yak chews on schedule with flexible delivery controls.</p>
+              <a href="/pages/subscribe-and-save">See subscription options</a>
+            </div>
+          {%- endif -%}
+
           <div class="pb-1">
             {%- if cart.cart_level_discount_applications.size > 0 -%}
               <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
