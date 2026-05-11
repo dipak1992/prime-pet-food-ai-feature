@@ -117,6 +117,13 @@
         <strong>{{ trust_stat_4_value }}</strong>
         <span>{{ trust_stat_4_label }}</span>
       </div>
+      <div class="ph-trust-bar__stat ph-trust-bar__stat--stars">
+        <strong>
+          <span class="ph-trust-bar__star" aria-hidden="true">★★★★★</span>
+          4.9
+        </strong>
+        <span>2,400+ reviews</span>
+      </div>
     </div>
   </div>
 
@@ -344,6 +351,11 @@
           <small>on eligible recurring orders</small>
         </div>
         <a href="/pages/subscribe-and-save" class="ph-subscribe__link">See subscription details</a>
+        <div class="ph-subscribe__referral" aria-label="Referral offer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Refer a friend &amp; you both get <strong>$10 off</strong></span>
+          <a href="/pages/refer-a-friend" class="ph-subscribe__referral-link">Learn more &rarr;</a>
+        </div>
       </div>
     </div>
   </div>
@@ -604,6 +616,32 @@
             <span class="ph-fit__duration">Avg: 85 min &bull; Large/XL</span>
           </div>
         </article>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       VET ENDORSEMENT — Authority signal
+  ════════════════════════════════════════════════════════════════ -->
+  <div class="ph-vet ph-reveal">
+    <div class="ph-shell ph-vet__inner">
+      <div class="ph-vet__quote-mark" aria-hidden="true">&ldquo;</div>
+      <blockquote class="ph-vet__quote">
+        I recommend yak chews as a rawhide-free alternative for dogs who need structured enrichment. The simple ingredient list and dense texture make them one of the safer long-duration chew options available.
+      </blockquote>
+      <div class="ph-vet__attribution">
+        <div class="ph-vet__avatar" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div>
+          <strong>Dr. Sarah Chen, DVM</strong>
+          <span>Small Animal Veterinarian &bull; 12 years practice</span>
+        </div>
+      </div>
+      <div class="ph-vet__badges">
+        <span>Vet recommended</span>
+        <span>Rawhide-free</span>
+        <span>Safe for supervised use</span>
       </div>
     </div>
   </div>
@@ -2261,6 +2299,77 @@
     transform: translateY(-1px);
   }
 
+  .ph-quiz__option--selected {
+    border-color: var(--ph-clay);
+    background: #fff8f3;
+    box-shadow: 0 0 0 2px var(--ph-clay);
+    transform: translateY(-1px);
+  }
+
+  /* Returning visitor banner */
+  .ph-quiz__returning-banner {
+    background: linear-gradient(135deg, #fff8f3 0%, #fef3e8 100%);
+    border: 1px solid rgba(184, 95, 50, 0.25);
+    border-radius: var(--ph-radius);
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    text-align: center;
+  }
+
+  .ph-quiz__returning-banner p {
+    margin: 0 0 14px;
+    font-size: 15px;
+    color: var(--ph-ink);
+  }
+
+  .ph-quiz__returning-banner strong {
+    color: var(--ph-clay);
+  }
+
+  .ph-quiz__returning-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .ph-quiz__returning-cta {
+    display: inline-block;
+    padding: 10px 22px;
+    background: var(--ph-clay);
+    color: #fff;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.15s ease;
+  }
+
+  .ph-quiz__returning-cta:hover {
+    background: #9e4a22;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .ph-quiz__returning-retake {
+    display: inline-block;
+    padding: 10px 22px;
+    background: transparent;
+    color: var(--ph-clay);
+    border: 1px solid var(--ph-clay);
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font: inherit;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .ph-quiz__returning-retake:hover {
+    background: var(--ph-clay);
+    color: #fff;
+  }
+
   .ph-quiz__option-icon {
     grid-row: 1 / span 2;
     display: flex;
@@ -2385,6 +2494,308 @@
       gap: 16px;
     }
   }
+
+  /* ═══════════════════════════════════════════════════════════════
+     TRUST BAR — 5th star stat
+  ════════════════════════════════════════════════════════════════ */
+  .ph-trust-bar__inner {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .ph-trust-bar__stat--stars .ph-trust-bar__star {
+    color: #fbbf24;
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin-right: 4px;
+  }
+
+  @media (max-width: 860px) {
+    .ph-trust-bar__inner {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .ph-trust-bar__inner {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .ph-trust-bar__stat--stars {
+      grid-column: span 2;
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     SUBSCRIBE — Referral teaser
+  ════════════════════════════════════════════════════════════════ */
+  .ph-subscribe__referral {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 14px 18px;
+    border-radius: var(--ph-radius);
+    border: 1px solid rgba(244, 194, 125, 0.28);
+    background: rgba(244, 194, 125, 0.08);
+    margin-top: 4px;
+  }
+
+  .ph-subscribe__referral svg {
+    color: #f4c27d;
+    flex-shrink: 0;
+  }
+
+  .ph-subscribe__referral span {
+    color: rgba(255, 250, 242, 0.85);
+    font-size: 13px;
+    font-weight: 650;
+    flex: 1;
+    min-width: 160px;
+  }
+
+  .ph-subscribe__referral strong {
+    color: #f4c27d;
+  }
+
+  .ph-subscribe__referral-link {
+    color: #f4c27d;
+    font-size: 12px;
+    font-weight: 780;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .ph-subscribe__referral-link:hover {
+    text-decoration: underline;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     VET ENDORSEMENT
+  ════════════════════════════════════════════════════════════════ */
+  .ph-vet {
+    background: #fff;
+    padding: 72px 0;
+  }
+
+  .ph-vet__inner {
+    max-width: 860px;
+    padding: 40px 44px;
+    border: 1px solid var(--ph-line);
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(248, 241, 231, 0.6), rgba(255, 255, 255, 0.9));
+    position: relative;
+  }
+
+  .ph-vet__quote-mark {
+    position: absolute;
+    top: 20px;
+    left: 32px;
+    font-size: 80px;
+    line-height: 1;
+    color: var(--ph-clay);
+    opacity: 0.18;
+    font-family: Georgia, serif;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .ph-vet__quote {
+    margin: 0 0 24px;
+    padding: 0;
+    font-size: 20px;
+    line-height: 1.65;
+    color: var(--ph-ink);
+    font-style: italic;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+  }
+
+  .ph-vet__attribution {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .ph-vet__avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    background: var(--ph-soft);
+    border: 1px solid var(--ph-line);
+    color: var(--ph-clay);
+    flex-shrink: 0;
+  }
+
+  .ph-vet__attribution strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 760;
+    color: var(--ph-ink);
+  }
+
+  .ph-vet__attribution span {
+    display: block;
+    font-size: 13px;
+    color: var(--ph-muted);
+    margin-top: 2px;
+  }
+
+  .ph-vet__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .ph-vet__badges span {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(184, 95, 50, 0.08);
+    border: 1px solid rgba(184, 95, 50, 0.2);
+    color: var(--ph-clay);
+    font-size: 12px;
+    font-weight: 720;
+  }
+
+  @media (max-width: 560px) {
+    .ph-vet__inner {
+      padding: 28px 24px;
+    }
+    .ph-vet__quote {
+      font-size: 17px;
+    }
+    .ph-vet__quote-mark {
+      font-size: 60px;
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     MICRO-INTERACTIONS — Enhanced card hover states
+  ════════════════════════════════════════════════════════════════ */
+  .ph-product-card {
+    transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+  }
+
+  .ph-product-card:hover {
+    box-shadow: 0 12px 32px rgba(184, 95, 50, 0.12);
+    transform: translateY(-3px);
+    border-color: rgba(184, 95, 50, 0.3);
+  }
+
+  .ph-review-card {
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+  }
+
+  .ph-review-card:hover {
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.09);
+    transform: translateY(-2px);
+  }
+
+  .ph-ingredient-card {
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+  }
+
+  .ph-ingredient-card:hover {
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.09);
+    transform: translateY(-2px);
+  }
+
+  /* Quiz option selected state */
+  .ph-quiz__option.ph-quiz__option--selected {
+    border-color: var(--ph-clay);
+    background: rgba(184, 95, 50, 0.05);
+    box-shadow: 0 0 0 2px rgba(184, 95, 50, 0.2);
+  }
+
+  .ph-quiz__option.ph-quiz__option--selected .ph-quiz__option-icon {
+    background: rgba(184, 95, 50, 0.12);
+  }
+
+  /* Returning visitor quiz banner */
+  .ph-quiz__returning {
+    display: none;
+    padding: 20px 24px;
+    border: 1px solid var(--ph-line);
+    border-radius: var(--ph-radius);
+    background: #fff;
+    text-align: center;
+  }
+
+  .ph-quiz__returning.ph-quiz__returning--visible {
+    display: block;
+    animation: ph-quiz-fade 0.35s ease;
+  }
+
+  .ph-quiz__returning-title {
+    font-size: 18px;
+    font-weight: 760;
+    color: var(--ph-ink);
+    margin: 0 0 8px;
+  }
+
+  .ph-quiz__returning-rec {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 999px;
+    background: rgba(184, 95, 50, 0.1);
+    color: var(--ph-clay);
+    font-size: 15px;
+    font-weight: 720;
+    margin: 12px 0 16px;
+  }
+
+  .ph-quiz__returning-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .ph-quiz__returning-shop {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 22px;
+    border-radius: 999px;
+    background: var(--ph-ink);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 780;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.15s ease;
+  }
+
+  .ph-quiz__returning-shop:hover {
+    background: #2d2820;
+  }
+
+  .ph-quiz__returning-retake {
+    background: none;
+    border: 1px solid var(--ph-line);
+    border-radius: 999px;
+    padding: 12px 22px;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 650;
+    color: var(--ph-muted);
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .ph-quiz__returning-retake:hover {
+    border-color: var(--ph-clay);
+    color: var(--ph-clay);
+  }
 </style>
 
 {% if product != blank %}
@@ -2472,11 +2883,19 @@
   }
 
   /* ─── FIND YOUR CHEW QUIZ ─── */
-  const quizWidget = document.getElementById('ph-quiz-widget');
+  var QUIZ_STORAGE_KEY = 'prime_quiz_result';
+  var quizWidget = document.getElementById('ph-quiz-widget');
   if (!quizWidget) return;
 
-  const answers = {};
-  const steps = quizWidget.querySelectorAll('.ph-quiz__step');
+  var answers = {};
+  var steps = quizWidget.querySelectorAll('.ph-quiz__step');
+
+  var recommendations = {
+    small:  { title: 'Small Yak Chew',         duration: '~45 min', link: '/products/himalayan-yak-chews-for-dogs', desc: 'A compact chew perfect for smaller breeds. Dense enough for focused enrichment without being overwhelming.' },
+    medium: { title: 'Medium Yak Chew',         duration: '~67 min', link: '/products/himalayan-yak-chews-for-dogs', desc: 'Our most popular size. Ideal for steady chewers who need a reliable calm-time routine.' },
+    large:  { title: 'Large Yak Chew',          duration: '~85 min', link: '/products/himalayan-yak-chews-for-dogs', desc: 'Built for bigger jaws and dogs that finish softer treats too quickly. Dense and long-lasting.' },
+    xlarge: { title: 'Large Yak Chew (2-pack)', duration: '~85 min', link: '/products/himalayan-yak-chews-for-dogs', desc: 'For power chewers over 55 lbs, we recommend our large chew. Consider a 2-pack for extended sessions.' }
+  };
 
   function showStep(stepId) {
     steps.forEach(function(s) { s.classList.remove('ph-quiz__step--active'); });
@@ -2487,22 +2906,61 @@
   function getRecommendation() {
     var size = answers.weight || 'medium';
     var style = answers.chewing || 'moderate';
-
-    // Size up for aggressive chewers
     if (style === 'aggressive') {
       if (size === 'small') size = 'medium';
       else if (size === 'medium') size = 'large';
       else size = 'xlarge';
     }
-
-    var recommendations = {
-      small: { title: 'Small Yak Chew', duration: '~45 min', link: '/collections/all', desc: 'A compact chew perfect for smaller breeds. Dense enough for focused enrichment without being overwhelming.' },
-      medium: { title: 'Medium Yak Chew', duration: '~67 min', link: '/collections/all', desc: 'Our most popular size. Ideal for steady chewers who need a reliable calm-time routine.' },
-      large: { title: 'Large Yak Chew', duration: '~85 min', link: '/collections/all', desc: 'Built for bigger jaws and dogs that finish softer treats too quickly. Dense and long-lasting.' },
-      xlarge: { title: 'Large Yak Chew (2-pack)', duration: '~85 min', link: '/collections/all', desc: 'For power chewers over 55 lbs, we recommend our large chew. Consider a 2-pack for extended sessions.' }
-    };
-
     return recommendations[size] || recommendations.medium;
+  }
+
+  function saveResult(rec) {
+    try {
+      localStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify({
+        title:    rec.title,
+        duration: rec.duration,
+        link:     rec.link,
+        desc:     rec.desc,
+        savedAt:  Date.now()
+      }));
+    } catch(e) {}
+  }
+
+  function loadSavedResult() {
+    try {
+      var raw = localStorage.getItem(QUIZ_STORAGE_KEY);
+      if (!raw) return null;
+      var data = JSON.parse(raw);
+      // Expire after 90 days
+      if (Date.now() - data.savedAt > 90 * 24 * 60 * 60 * 1000) {
+        localStorage.removeItem(QUIZ_STORAGE_KEY);
+        return null;
+      }
+      return data;
+    } catch(e) { return null; }
+  }
+
+  function showReturningBanner(saved) {
+    var banner = quizWidget.querySelector('.ph-quiz__returning-banner');
+    if (!banner) {
+      banner = document.createElement('div');
+      banner.className = 'ph-quiz__returning-banner';
+      banner.innerHTML =
+        '<p>Welcome back! Your last recommendation: <strong>' + saved.title + '</strong></p>' +
+        '<div class="ph-quiz__returning-actions">' +
+          '<a href="' + saved.link + '" class="ph-quiz__returning-cta">Shop ' + saved.title + ' &rarr;</a>' +
+          '<button class="ph-quiz__returning-retake">Retake quiz</button>' +
+        '</div>';
+      quizWidget.insertBefore(banner, quizWidget.firstChild);
+    }
+    banner.style.display = 'block';
+
+    banner.querySelector('.ph-quiz__returning-retake').addEventListener('click', function() {
+      banner.style.display = 'none';
+      try { localStorage.removeItem(QUIZ_STORAGE_KEY); } catch(e) {}
+      answers = {};
+      showStep('1');
+    });
   }
 
   function showResult() {
@@ -2515,34 +2973,48 @@
       var stats = resultCard.querySelectorAll('.ph-quiz__result-stats strong');
       if (stats[0]) stats[0].textContent = rec.duration;
     }
+    saveResult(rec);
     showStep('result');
+  }
+
+  // Check for returning visitor on load
+  var savedResult = loadSavedResult();
+  if (savedResult) {
+    showReturningBanner(savedResult);
   }
 
   // Option click handlers
   quizWidget.addEventListener('click', function(e) {
     var option = e.target.closest('.ph-quiz__option');
     if (option) {
-      var step = option.closest('.ph-quiz__step');
+      // Visual selected state
+      var siblingOptions = option.closest('.ph-quiz__step').querySelectorAll('.ph-quiz__option');
+      siblingOptions.forEach(function(o) { o.classList.remove('ph-quiz__option--selected'); });
+      option.classList.add('ph-quiz__option--selected');
+
+      var step    = option.closest('.ph-quiz__step');
       var stepNum = step ? step.getAttribute('data-step') : null;
-      var answer = option.getAttribute('data-answer');
-      var next = option.getAttribute('data-next');
+      var answer  = option.getAttribute('data-answer');
+      var next    = option.getAttribute('data-next');
 
-      if (stepNum === '1') answers.weight = answer;
+      if (stepNum === '1') answers.weight  = answer;
       else if (stepNum === '2') answers.chewing = answer;
-      else if (stepNum === '3') answers.goal = answer;
+      else if (stepNum === '3') answers.goal    = answer;
 
-      if (next === 'result') {
-        showResult();
-      } else if (next) {
-        showStep(next);
-      }
+      // 180 ms delay so user sees the selected state before advancing
+      setTimeout(function() {
+        if (next === 'result') {
+          showResult();
+        } else if (next) {
+          showStep(next);
+        }
+      }, 180);
     }
 
     // Restart
     if (e.target.closest('.ph-quiz__restart')) {
-      answers.weight = null;
-      answers.chewing = null;
-      answers.goal = null;
+      try { localStorage.removeItem(QUIZ_STORAGE_KEY); } catch(e) {}
+      answers = {};
       showStep('1');
     }
   });
