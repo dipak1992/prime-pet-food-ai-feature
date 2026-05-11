@@ -7,7 +7,6 @@
   assign small_dog_chew_image = 'prime-home-small-dog-chew.jpg' | asset_url
   assign medium_dog_chew_image = 'prime-home-medium-dog-chew.jpg' | asset_url
   assign large_dog_chew_image = 'prime-home-large-dog-chew.jpg' | asset_url
-  assign subscribe_dog_image = 'prime-home-subscribe-dog-box.jpg' | asset_url
   assign ingredient_yak_milk_image = 'prime-home-ingredient-yak-milk.jpg' | asset_url
   assign ingredient_cow_milk_image = 'prime-home-ingredient-cow-milk.jpg' | asset_url
   assign ingredient_lime_image = 'prime-home-ingredient-lime.jpg' | asset_url
@@ -52,7 +51,6 @@
       </p>
       <div class="ph-actions" aria-label="Homepage actions">
         <a href="/collections/all" class="ph-button ph-button--primary">Shop yak chews</a>
-        <a href="/pages/how-long-will-this-last-for-my-dog" class="ph-button ph-button--secondary">Find my dog&rsquo;s size</a>
       </div>
       <div class="ph-hero__proof" aria-label="Trust signals">
         <span>
@@ -146,37 +144,6 @@
 
       <div class="ph-products__link">
         <a href="/collections/all">View all sizes &rarr;</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════════════════════
-       SUBSCRIBE & SAVE — Routine builder
-  ════════════════════════════════════════════════════════════════ -->
-  <div class="ph-subscribe">
-    <div class="ph-shell ph-subscribe__inner">
-      <div class="ph-subscribe__media">
-        <img src="{{ subscribe_dog_image }}" alt="Happy dog beside a subscription box and yak chew" loading="lazy" width="1024" height="1024">
-      </div>
-      <div class="ph-subscribe__copy">
-        <p class="ph-kicker">Subscribe &amp; Save</p>
-        <h2>Keep calm chew time on schedule.</h2>
-        <p>
-          Build a steady enrichment routine with automatic yak chew deliveries, first-month savings,
-          and simple account controls when your dog needs a pause.
-        </p>
-      </div>
-      <div class="ph-subscribe__panel">
-        <div class="ph-subscribe__offer">
-          <span>First month</span>
-          <strong>20% off</strong>
-        </div>
-        <ul aria-label="Subscribe and Save benefits">
-          <li>Up to 30% off based on your routine</li>
-          <li>Flexible delivery frequency</li>
-          <li>Skip, pause, or cancel anytime</li>
-        </ul>
-        <a href="/pages/subscribe-and-save" class="ph-button ph-button--primary">Start subscription</a>
       </div>
     </div>
   </div>
@@ -320,7 +287,6 @@
           <span><strong>94%</strong> accuracy rate</span>
         </div>
       </div>
-      <a href="/pages/how-long-will-this-last-for-my-dog" class="ph-button ph-button--primary">Find my dog&rsquo;s size</a>
     </div>
   </div>
 
@@ -442,7 +408,6 @@
       <p>Join 10,000+ dog parents who switched to safer, longer-lasting enrichment.</p>
       <div class="ph-actions ph-actions--center">
         <a href="/collections/all" class="ph-button ph-button--primary">Shop yak chews</a>
-        <a href="/pages/how-long-will-this-last-for-my-dog" class="ph-button ph-button--secondary ph-button--dark">Estimate duration</a>
       </div>
     </div>
   </div>
@@ -713,7 +678,6 @@
      SECTION SPACING
   ════════════════════════════════════════════════════════════════ */
   .ph-products,
-  .ph-subscribe,
   .ph-reviews,
   .ph-compare,
   .ph-estimator,
@@ -886,115 +850,6 @@
 
   .ph-products__link a:hover {
     border-color: var(--ph-clay);
-  }
-
-  /* ═══════════════════════════════════════════════════════════════
-     SUBSCRIBE & SAVE
-  ════════════════════════════════════════════════════════════════ */
-  .ph-subscribe {
-    background: linear-gradient(135deg, #21150f 0%, #3a2115 58%, #f4e2ca 58%, #fff6e8 100%);
-    color: #fffaf2;
-  }
-
-  .ph-subscribe__inner {
-    display: grid;
-    grid-template-columns: minmax(300px, 0.86fr) minmax(0, 1fr) minmax(320px, 0.48fr);
-    align-items: center;
-    gap: 34px;
-  }
-
-  .ph-subscribe__media {
-    overflow: hidden;
-    border: 1px solid rgba(255, 250, 242, 0.22);
-    border-radius: 22px;
-    background: rgba(255, 250, 242, 0.08);
-    box-shadow: 0 22px 54px rgba(30, 15, 8, 0.26);
-  }
-
-  .ph-subscribe__media img {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    display: block;
-    object-fit: cover;
-  }
-
-  .ph-subscribe__copy {
-    max-width: 660px;
-  }
-
-  .ph-subscribe__copy .ph-kicker {
-    color: #f4c27d;
-  }
-
-  .ph-subscribe__copy h2,
-  .ph-subscribe__copy p {
-    color: #fffaf2;
-  }
-
-  .ph-subscribe__copy p {
-    margin-top: 14px;
-    max-width: 600px;
-    color: rgba(255, 250, 242, 0.78);
-  }
-
-  .ph-subscribe__panel {
-    display: grid;
-    gap: 18px;
-    padding: 26px;
-    border: 1px solid rgba(255, 255, 255, 0.36);
-    border-radius: 22px;
-    background: rgba(255, 250, 242, 0.94);
-    color: var(--ph-ink);
-    box-shadow: 0 22px 50px rgba(30, 15, 8, 0.22);
-  }
-
-  .ph-subscribe__offer {
-    display: grid;
-    gap: 6px;
-  }
-
-  .ph-subscribe__offer span {
-    color: var(--ph-muted);
-    font-size: 12px;
-    font-weight: 780;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .ph-subscribe__offer strong {
-    color: var(--ph-ink);
-    font-size: 44px;
-    line-height: 0.95;
-    font-weight: 820;
-  }
-
-  .ph-subscribe__panel ul {
-    display: grid;
-    gap: 10px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .ph-subscribe__panel li {
-    position: relative;
-    padding-left: 22px;
-    color: #5f4b42;
-    font-size: 15px;
-    line-height: 1.45;
-    font-weight: 650;
-  }
-
-  .ph-subscribe__panel li::before {
-    content: "";
-    position: absolute;
-    top: 0.7em;
-    left: 0;
-    width: 8px;
-    height: 8px;
-    border-radius: 999px;
-    background: var(--ph-clay);
-    transform: translateY(-50%);
   }
 
   /* ═══════════════════════════════════════════════════════════════
@@ -1352,14 +1207,6 @@
       display: grid;
     }
 
-    .ph-subscribe {
-      background: #21150f;
-    }
-
-    .ph-subscribe__inner {
-      grid-template-columns: 1fr;
-    }
-
     .ph-compare__table {
       font-size: 14px;
     }
@@ -1417,7 +1264,6 @@
     }
 
     .ph-products,
-    .ph-subscribe,
     .ph-reviews,
     .ph-compare,
     .ph-estimator,
@@ -1430,15 +1276,6 @@
 
     .ph-ingredients__grid {
       grid-template-columns: 1fr;
-    }
-
-    .ph-subscribe__panel {
-      padding: 22px;
-      border-radius: 18px;
-    }
-
-    .ph-subscribe__offer strong {
-      font-size: 34px;
     }
 
     .ph-estimator__inner {
