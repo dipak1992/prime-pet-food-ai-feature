@@ -12,6 +12,7 @@
   assign ingredient_cow_milk_image = 'prime-home-ingredient-cow-milk.jpg' | asset_url
   assign ingredient_lime_image = 'prime-home-ingredient-lime.jpg' | asset_url
   assign ingredient_salt_image = 'prime-home-ingredient-salt.jpg' | asset_url
+  assign founder_image = 'prime-founder.png' | asset_url
   assign calm_cta_image = 'prime-home-calm-cta-bg.jpg' | asset_url
 
   assign small_variant = nil
@@ -54,6 +55,7 @@
         <a href="/collections/all" class="ph-button ph-button--primary">Shop yak chews</a>
         <a href="#prime-home-shop" class="ph-button ph-button--secondary">Choose by size</a>
       </div>
+      <p class="ph-hero__micro">Free shipping over $30. Backed by a 30-day satisfaction guarantee.</p>
       <div class="ph-hero__proof" aria-label="Trust signals">
         <span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -416,6 +418,30 @@
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════
+       CRAFT — Brand story and quality signal
+  ════════════════════════════════════════════════════════════════ -->
+  <div class="ph-craft">
+    <div class="ph-shell ph-craft__inner">
+      <div class="ph-craft__media">
+        <img src="{{ founder_image }}" alt="Prime Pet Food founder with a dog" loading="lazy" width="900" height="900">
+      </div>
+      <div class="ph-craft__copy">
+        <p class="ph-kicker">Made with intention</p>
+        <h2>Simple chews, held to a higher standard.</h2>
+        <p>
+          Prime was built for dog parents who read ingredient labels and want chew time to feel calm, clean, and trustworthy.
+          Every detail is designed around a simple idea: give dogs something satisfying without giving parents another thing to worry about.
+        </p>
+        <div class="ph-craft__marks" aria-label="Prime quality standards">
+          <span>Rawhide-free</span>
+          <span>Supervised enrichment</span>
+          <span>Ingredient-first</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
        DOG FIT — Breed examples with duration data
   ════════════════════════════════════════════════════════════════ -->
   <div class="ph-fit">
@@ -749,6 +775,14 @@
     opacity: 0.85;
   }
 
+  .ph-hero__micro {
+    margin: 14px 0 0;
+    color: rgba(255, 250, 242, 0.7);
+    font-size: 13px;
+    line-height: 1.35;
+    font-weight: 650;
+  }
+
   /* ═══════════════════════════════════════════════════════════════
      TRUST BAR
   ════════════════════════════════════════════════════════════════ */
@@ -796,6 +830,7 @@
   .ph-compare,
   .ph-routine,
   .ph-ingredients,
+  .ph-craft,
   .ph-fit,
   .ph-guarantee,
   .ph-faq,
@@ -1417,6 +1452,66 @@
   }
 
   /* ═══════════════════════════════════════════════════════════════
+     CRAFT
+  ════════════════════════════════════════════════════════════════ */
+  .ph-craft {
+    background: #fff;
+  }
+
+  .ph-craft__inner {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.56fr) minmax(0, 1fr);
+    gap: 46px;
+    align-items: center;
+    padding: 34px;
+    border: 1px solid var(--ph-line);
+    border-radius: var(--ph-radius);
+    background:
+      linear-gradient(135deg, rgba(248, 241, 231, 0.72), rgba(255, 255, 255, 0.92)),
+      #fff;
+  }
+
+  .ph-craft__media {
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--ph-radius);
+    background: var(--ph-soft);
+  }
+
+  .ph-craft__media img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .ph-craft__copy p:not(.ph-kicker) {
+    max-width: 640px;
+    margin: 18px 0 0;
+  }
+
+  .ph-craft__marks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .ph-craft__marks span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    padding: 8px 14px;
+    border: 1px solid var(--ph-line);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--ph-ink);
+    font-size: 13px;
+    line-height: 1.2;
+    font-weight: 720;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
      DOG FIT
   ════════════════════════════════════════════════════════════════ */
   .ph-fit {
@@ -1640,7 +1735,8 @@
     .ph-fit__grid,
     .ph-reviews__grid,
     .ph-outcomes__inner,
-    .ph-faq__inner {
+    .ph-faq__inner,
+    .ph-craft__inner {
       grid-template-columns: 1fr;
     }
 
@@ -1763,6 +1859,7 @@
     .ph-compare,
     .ph-routine,
     .ph-ingredients,
+    .ph-craft,
     .ph-fit,
     .ph-guarantee,
     .ph-faq,
@@ -1780,6 +1877,10 @@
 
     .ph-outcomes__grid span {
       grid-row: auto;
+    }
+
+    .ph-craft__inner {
+      padding: 22px;
     }
 
     .ph-subscribe__benefits {
