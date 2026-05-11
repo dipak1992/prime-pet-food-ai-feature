@@ -349,34 +349,6 @@
   font-size: 14px;
 }
 
-#DP--{{ section_id }} .onhow__carousel-cta {
-  display: flex;
-  justify-content: center;
-  margin-top: 18px;
-}
-
-#DP--{{ section_id }} .onhow__carousel-cta-button {
-  align-items: center;
-  background: {{ section.settings.button_bg_color }};
-  border: 1px solid {{ section.settings.button_bg_color }};
-  border-radius: 999px;
-  color: {{ section.settings.button_text_color }};
-  display: inline-flex;
-  font-size: 15px;
-  font-weight: 800;
-  gap: 8px;
-  justify-content: center;
-  min-height: 48px;
-  padding: 13px 22px;
-  text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-#DP--{{ section_id }} .onhow__carousel-cta-button:hover {
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
-  transform: translateY(-1px);
-}
-
 #DP--{{ section_id }} .onhow__videos-nav {
   width: fit-content;
   margin: 0 auto;
@@ -553,16 +525,6 @@
         {%- endif -%}
       </div>
     </div>
-    {%- assign carousel_cta_label = section.settings.cta_label | default: 'Buy Yak Chews' -%}
-    {%- assign carousel_cta_link = section.settings.cta_link | default: '/products/himalayan-yak-chews-for-dogs' -%}
-    {%- if carousel_cta_label != blank and carousel_cta_link != blank -%}
-      <div class="onhow__carousel-cta">
-        <a href="{{ carousel_cta_link }}" class="onhow__carousel-cta-button">
-          {{ carousel_cta_label }}
-          <span aria-hidden="true">&rarr;</span>
-        </a>
-      </div>
-    {%- endif -%}
   </div>
 </section>
 {%- endcapture -%}
@@ -731,17 +693,6 @@
       "step": 5,
       "unit": "px",
       "info": "Space between carousel and navigation arrows"
-    },
-    {
-      "type": "text",
-      "id": "cta_label",
-      "label": "CTA label",
-      "default": "Buy Yak Chews"
-    },
-    {
-      "type": "url",
-      "id": "cta_link",
-      "label": "CTA link"
     }
   ],
   "blocks": [
