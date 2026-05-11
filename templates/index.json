@@ -6,50 +6,57 @@
         "feature_Ah6pJ6": {
           "type": "feature",
           "settings": {
-            "feature_text": "Long-Lasting Enrichment"
-          }
+            "feature_text": "Long-lasting enrichment"
+          },
+          "disabled": false
         },
         "feature_xE84hp": {
           "type": "feature",
           "settings": {
-            "feature_text": "Simple Ingredients"
-          }
+            "feature_text": "Simple ingredients"
+          },
+          "disabled": false
         },
         "feature_L7fafA": {
           "type": "feature",
           "settings": {
-            "feature_text": "Rawhide-Free"
-          }
+            "feature_text": "Rawhide-free"
+          },
+          "disabled": false
         },
         "feature_e4yjkm": {
           "type": "feature",
           "settings": {
             "feature_text": "Supervised Calm Time"
-          }
+          },
+          "disabled": true
         },
         "trust_badge_qW7UTF": {
           "type": "trust_badge",
           "settings": {
-            "trust_icon": "🦴",
-            "trust_title": "Lasts Longer",
-            "trust_subtitle": "Dense yak cheese texture"
-          }
+            "trust_icon": "",
+            "trust_title": "Size matched",
+            "trust_subtitle": "Choose by dog weight"
+          },
+          "disabled": false
         },
         "trust_badge_cd8ebR": {
           "type": "trust_badge",
           "settings": {
-            "trust_icon": "🌿",
-            "trust_title": "Simple Ingredients",
+            "trust_icon": "",
+            "trust_title": "Cleaner chew",
             "trust_subtitle": "No artificial fillers"
-          }
+          },
+          "disabled": false
         },
         "trust_badge_DLkHXk": {
           "type": "trust_badge",
           "settings": {
-            "trust_icon": "🛡️",
-            "trust_title": "Rawhide-Free",
-            "trust_subtitle": "For supervised chewing"
-          }
+            "trust_icon": "",
+            "trust_title": "Calm routine",
+            "trust_subtitle": "For supervised sessions"
+          },
+          "disabled": false
         },
         "trust_badge_kgfwDC": {
           "type": "trust_badge",
@@ -57,7 +64,8 @@
             "trust_icon": "🏔️",
             "trust_title": "Himalayan Source",
             "trust_subtitle": "Authentic chew heritage"
-          }
+          },
+          "disabled": true
         },
         "trust_badge_bjMCJY": {
           "type": "trust_badge",
@@ -65,24 +73,22 @@
             "trust_icon": "🐾",
             "trust_title": "Dog-Matched",
             "trust_subtitle": "Choose by size and style"
-          }
+          },
+          "disabled": true
         }
       },
       "block_order": [
         "feature_Ah6pJ6",
         "feature_xE84hp",
         "feature_L7fafA",
-        "feature_e4yjkm",
         "trust_badge_qW7UTF",
         "trust_badge_cd8ebR",
-        "trust_badge_DLkHXk",
-        "trust_badge_kgfwDC",
-        "trust_badge_bjMCJY"
+        "trust_badge_DLkHXk"
       ],
       "disabled": false,
       "name": "Hero Banner",
       "settings": {
-        "min_height": 78,
+        "min_height": 72,
         "use_generated_hero_image": true,
         "hero_image": "shopify://shop_images/DOG_EATING__HOMEPAGE.webp",
         "hero_image_alt": "Happy dog enjoying Premium Himalayan Yak Cheese Chew",
@@ -91,16 +97,16 @@
         "show_sale_badge": false,
         "sale_badge_text": "",
         "heading_line1": "Long-lasting yak chews for",
-        "heading_italic": "calmer, happier dogs",
+        "heading_italic": "calmer dogs",
         "heading_line2": "",
-        "subtitle": "Rawhide-free Himalayan yak cheese chews made for safer chewing, boredom relief, and supervised calm-time routines.",
+        "subtitle": "Rawhide-free Himalayan yak cheese chews for safer, longer-lasting supervised chew time.",
         "primary_btn_label": "Shop Yak Chews",
         "primary_btn_link": "/collections/all",
-        "secondary_btn_label": "Estimate Chew Duration",
+        "secondary_btn_label": "Find My Dog's Size",
         "secondary_btn_link": "/pages/how-long-will-this-last-for-my-dog",
         "show_trust_bar": true,
         "trust_scroll_speed": 30,
-        "social_proof_text": "Simple ingredients. Long-lasting enrichment. Trusted calm-time chewing."
+        "social_proof_text": "Simple ingredients. Rawhide-free. Built for calm-time routines."
       }
     },
     "ypc_hero_slider_bxtUGx": {
@@ -315,7 +321,8 @@
             "card_gradient": "linear-gradient(135deg,#eadcc8 0%,#ddaa71 68%,#6d350f 100%)",
             "badge_bg": "#d2632e",
             "badge_text_color": "#ffffff"
-          }
+          },
+          "disabled": false
         },
         "variant_card_HqwDCN": {
           "type": "variant_card",
@@ -329,7 +336,8 @@
             "card_gradient": "linear-gradient(135deg,#eadcc8 0%,#ddaa71 68%,#6d350f 100%)",
             "badge_bg": "#d2632e",
             "badge_text_color": "#ffffff"
-          }
+          },
+          "disabled": false
         },
         "variant_card_i9MGjp": {
           "type": "variant_card",
@@ -343,7 +351,8 @@
             "card_gradient": "linear-gradient(135deg,#eadcc8 0%,#ddaa71 68%,#6d350f 100%)",
             "badge_bg": "#d2632e",
             "badge_text_color": "#ffffff"
-          }
+          },
+          "disabled": false
         },
         "variant_card_kMBNKW": {
           "type": "variant_card",
@@ -357,7 +366,8 @@
             "card_gradient": "linear-gradient(135deg,#eadcc8 0%,#ddaa71 68%,#6d350f 100%)",
             "badge_bg": "#d2632e",
             "badge_text_color": "#ffffff"
-          }
+          },
+          "disabled": true
         },
         "variant_card_Ngjttz": {
           "type": "variant_card",
@@ -371,33 +381,30 @@
             "card_gradient": "linear-gradient(135deg,#eadcc8 0%,#ddaa71 68%,#6d350f 100%)",
             "badge_bg": "#d2632e",
             "badge_text_color": "#ffffff"
-          }
+          },
+          "disabled": true
         }
       },
       "block_order": [
-        "variant_card_HXRRGx",
-        "variant_card_mYijEj",
         "variant_card_QN3bRj",
         "variant_card_HqwDCN",
-        "variant_card_i9MGjp",
-        "variant_card_kMBNKW",
-        "variant_card_Ngjttz"
+        "variant_card_i9MGjp"
       ],
       "name": "Variant bestsellers",
       "settings": {
         "product": "himalayan-yak-chews-for-dogs",
         "section_label": "Best-selling yak chews",
-        "heading": "Start with the chew that fits your dog.",
-        "description": "Choose by weight and chewing style. Not sure where to start? Use the duration estimator before you buy.",
-        "button_text": "Shop all yak chews",
+        "heading": "Shop by dog size.",
+        "description": "Start with your dog's weight. Use the estimator if you are unsure.",
+        "button_text": "Shop all sizes",
         "button_link": "/collections/all",
         "cart_button_text": "Add to Cart",
         "default_review_text": "Dog-matched size guidance",
         "page_width": 1340,
-        "grid_gap": 24,
-        "media_height": 260,
-        "padding_top": 44,
-        "padding_bottom": 38,
+        "grid_gap": 18,
+        "media_height": 220,
+        "padding_top": 32,
+        "padding_bottom": 30,
         "section_radius": 20,
         "card_radius": 18,
         "button_radius": 10,
@@ -429,7 +436,8 @@
         "badge_text_color": "#ffffff",
         "media_text_color": "#fff3e5",
         "default_card_gradient": "linear-gradient(135deg,#eadbc7 0%,#e1a86d 65%,#7f4214 100%)"
-      }
+      },
+      "disabled": false
     },
     "icons_with_text_VbFdBf": {
       "type": "icons-with-text",
@@ -446,7 +454,8 @@
             "title": "<strong>LONG-LASTING ENRICHMENT</strong>",
             "text": "Helps turn restless energy into focused calm time.",
             "card_link": ""
-          }
+          },
+          "disabled": false
         },
         "icon_with_text_aWGyGy": {
           "type": "icon_with_text",
@@ -460,7 +469,8 @@
             "title": "<strong>SIMPLE NATURAL INGREDIENTS</strong>",
             "text": "No rawhide, no artificial fillers, no mystery chew routine.",
             "card_link": ""
-          }
+          },
+          "disabled": false
         },
         "icon_with_text_yFiqWV": {
           "type": "icon_with_text",
@@ -474,7 +484,8 @@
             "title": "<strong>RAWHIDE-FREE PEACE OF MIND</strong>",
             "text": "Made for supervised chewing and modern dog parents.",
             "card_link": ""
-          }
+          },
+          "disabled": false
         },
         "icon_with_text_ftKnzA": {
           "type": "icon_with_text",
@@ -495,22 +506,21 @@
       "block_order": [
         "icon_with_text_zKEyVw",
         "icon_with_text_aWGyGy",
-        "icon_with_text_yFiqWV",
-        "icon_with_text_ftKnzA"
+        "icon_with_text_yFiqWV"
       ],
       "name": "Social Proof Section 1",
       "settings": {
         "placement": "beside",
         "content_vertical_alignment": "items-center",
         "column_alignment": "left",
-        "vertical_padding": 1.3,
+        "vertical_padding": 1,
         "icon_size": 2.8,
         "heading_size": "t6",
         "text_size": "t6",
         "mobile_layout": "grid",
         "columns_mobile": "1",
         "color_scheme": "scheme-7",
-        "line_separator": "",
+        "line_separator": "border-top border-bottom",
         "visibility": "",
         "hide_when_empty": false,
         "show_at_specific_time_of_day": false,
@@ -518,7 +528,8 @@
         "show_time_afternoon": true,
         "show_time_evening": true,
         "show_time_night": true
-      }
+      },
+      "disabled": false
     },
     "manufacturing_process_6jhGF6": {
       "type": "manufacturing-process",
@@ -802,7 +813,8 @@
         "card_bg": "#fbf8f3",
         "card_number_color": "#d2632e",
         "card_label_color": "#5e4738"
-      }
+      },
+      "disabled": true
     },
     "comparison_table_zn368V": {
       "type": "comparison-table",
@@ -944,7 +956,8 @@
         "padding_bottom": 48,
         "mobile_padding_top": 36,
         "mobile_padding_bottom": 36
-      }
+      },
+      "disabled": true
     },
     "comparison_C3zMAU": {
       "type": "comparison",
@@ -1144,7 +1157,8 @@
         "show_time_evening": true,
         "show_time_night": true,
         "heading_tag": "h2"
-      }
+      },
+      "disabled": true
     },
     "faqs_KDWjwK": {
       "type": "faqs",
@@ -1234,13 +1248,14 @@
       "settings": {
         "display_mode": "hero",
         "show_section_heading": true,
-        "heading": "How long will this last for my dog?",
-        "subtitle": "Answer four quick questions to estimate chew duration and find the right size before you order.",
-        "cta_text": "Estimate Chew Duration",
+        "heading": "Not sure which size to buy?",
+        "subtitle": "Estimate chew duration and size fit in under a minute.",
+        "cta_text": "Find My Dog's Size",
         "cta_link": "/pages/how-long-will-this-last-for-my-dog",
-        "top_padding": "pt-s",
-        "bottom_padding": "pb-s"
-      }
+        "top_padding": "pt-s05",
+        "bottom_padding": "pb-s05"
+      },
+      "disabled": false
     },
     "problem_agitation": {
       "type": "problem-agitation",
@@ -1311,7 +1326,8 @@
             "weight": "60-80 lbs",
             "duration": "45-75 min",
             "verified": false
-          }
+          },
+          "disabled": false
         },
         "ugc_2": {
           "type": "ugc_photo",
@@ -1321,7 +1337,8 @@
             "weight": "18-28 lbs",
             "duration": "60-90 min",
             "verified": false
-          }
+          },
+          "disabled": false
         },
         "ugc_3": {
           "type": "ugc_photo",
@@ -1331,7 +1348,8 @@
             "weight": "65-90 lbs",
             "duration": "35-65 min",
             "verified": false
-          }
+          },
+          "disabled": true
         },
         "ugc_4": {
           "type": "ugc_photo",
@@ -1341,7 +1359,8 @@
             "weight": "55-75 lbs",
             "duration": "50-80 min",
             "verified": false
-          }
+          },
+          "disabled": false
         },
         "ugc_5": {
           "type": "ugc_photo",
@@ -1351,7 +1370,8 @@
             "weight": "20-30 lbs",
             "duration": "60-95 min",
             "verified": false
-          }
+          },
+          "disabled": true
         },
         "ugc_6": {
           "type": "ugc_photo",
@@ -1361,28 +1381,27 @@
             "weight": "25-50 lbs",
             "duration": "70-105 min",
             "verified": false
-          }
+          },
+          "disabled": true
         }
       },
       "block_order": [
         "ugc_1",
         "ugc_2",
-        "ugc_3",
-        "ugc_4",
-        "ugc_5",
-        "ugc_6"
+        "ugc_4"
       ],
       "settings": {
-        "eyebrow": "Real dog fit examples",
-        "title": "See what may fit dogs like yours.",
-        "subtitle": "Quick sizing examples from common breeds. Use the estimator for your dog before choosing a size.",
-        "stat_dogs": "Personalized",
-        "stat_minutes": "Estimator",
-        "stat_rating": "Breed-aware",
-        "cta_text": "Find the right chew in under a minute.",
-        "cta_btn": "Estimate Chew Duration",
+        "eyebrow": "Dog fit examples",
+        "title": "A quick look at common sizes.",
+        "subtitle": "Three examples to orient you. For your dog, use the estimator.",
+        "stat_dogs": "3",
+        "stat_minutes": "Quick",
+        "stat_rating": "Size fit",
+        "cta_text": "Get a better recommendation for your dog.",
+        "cta_btn": "Find My Dog's Size",
         "cta_link": "/pages/how-long-will-this-last-for-my-dog"
-      }
+      },
+      "disabled": false
     },
     "community_chew_board": {
       "type": "community-chew-board",
@@ -1416,7 +1435,8 @@
     },
     "prime_home_final_cta": {
       "type": "prime-home-final-cta",
-      "settings": {}
+      "settings": {},
+      "disabled": false
     }
   },
   "order": [
@@ -1425,9 +1445,6 @@
     "chew_analyzer_hero",
     "icons_with_text_VbFdBf",
     "ugc_gallery",
-    "comparison_table_zn368V",
-    "our_story_taxeQz",
-    "featured_blog_fzWQaG",
     "prime_home_final_cta"
   ]
 }
