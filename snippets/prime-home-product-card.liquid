@@ -17,7 +17,10 @@
 
   <div class="ph-product-card__footer">
     {% if variant != blank %}
-      <span class="ph-product-card__price">{{ variant.price | money }}</span>
+      <div class="ph-product-card__buy-meta">
+        <span class="ph-product-card__price">From {{ variant.price | money }}</span>
+        <span class="ph-product-card__note">Ships fast from Prime Pet Food</span>
+      </div>
       <form method="post" action="/cart/add">
         <input type="hidden" name="id" value="{{ variant.id }}">
         <button type="submit"{% unless variant.available %} disabled{% endunless %}>

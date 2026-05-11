@@ -179,6 +179,11 @@
       <div class="ph-products__link">
         <a href="/collections/all">Shop the full collection &rarr;</a>
       </div>
+      <div class="ph-confidence" aria-label="Shopping confidence">
+        <span>Free shipping over $30</span>
+        <span>30-day satisfaction guarantee</span>
+        <span>Rawhide-free, 4-ingredient chews</span>
+      </div>
     </div>
   </div>
 
@@ -201,11 +206,12 @@
           <span>Flexible delivery</span>
           <span>Skip or pause anytime</span>
         </div>
-      </div>
-      <div class="ph-subscribe__offer" aria-label="Subscribe and Save offer">
-        <span>Save up to</span>
-        <strong>30%</strong>
-        <small>on eligible recurring orders</small>
+        <div class="ph-subscribe__offer" aria-label="Subscribe and Save offer">
+          <span>Save up to</span>
+          <strong>30%</strong>
+          <small>on eligible recurring orders</small>
+        </div>
+        <a href="/pages/subscribe-and-save" class="ph-subscribe__link">See subscription details</a>
       </div>
     </div>
   </div>
@@ -983,10 +989,22 @@
     padding: 20px 22px 22px;
   }
 
+  .ph-product-card__buy-meta {
+    display: grid;
+    gap: 4px;
+  }
+
   .ph-product-card__price {
     color: var(--ph-ink);
     font-size: 20px;
     font-weight: 780;
+  }
+
+  .ph-product-card__note {
+    color: var(--ph-muted);
+    font-size: 12px;
+    line-height: 1.35;
+    font-weight: 650;
   }
 
   .ph-product-card button,
@@ -1044,6 +1062,28 @@
 
   .ph-products__link a:hover {
     border-color: var(--ph-clay);
+  }
+
+  .ph-confidence {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .ph-confidence span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    padding: 8px 14px;
+    border: 1px solid var(--ph-line);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--ph-muted);
+    font-size: 13px;
+    line-height: 1.2;
+    font-weight: 700;
   }
 
   /* ═══════════════════════════════════════════════════════════════
@@ -1155,6 +1195,16 @@
     font-size: 52px;
     line-height: 0.92;
     font-weight: 820;
+  }
+
+  .ph-subscribe__link {
+    color: #f4c27d;
+    font-size: 13px;
+    line-height: 1;
+    font-weight: 780;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
 
   /* ═══════════════════════════════════════════════════════════════
@@ -1775,6 +1825,42 @@
     }
   }
 </style>
+
+{% if product != blank %}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": {{ product.title | json }},
+      "brand": {
+        "@type": "Brand",
+        "name": {{ shop.name | json }}
+      },
+      "description": {{ product.description | strip_html | truncate: 240 | json }},
+      "image": [
+        {{ hero_image | prepend: 'https:' | json }}
+      ],
+      "url": {{ shop.url | append: product.url | json }},
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": {{ cart.currency.iso_code | json }},
+        "lowPrice": {{ product.price_min | divided_by: 100.0 | json }},
+        "highPrice": {{ product.price_max | divided_by: 100.0 | json }},
+        "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+        "url": {{ shop.url | append: product.url | json }}
+      }
+    }
+  </script>
+{% endif %}
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    "url": {{ shop.url | json }}
+  }
+</script>
 
 {% schema %}
 {
