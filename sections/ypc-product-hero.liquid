@@ -167,6 +167,12 @@
           {% endfor %}
         {% endunless %}
 
+        <div class="ypc-size-hint">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Not sure which size?
+          <a href="#chew-analyzer" class="ypc-size-hint__link" id="ypc-size-hint-link">Find the right fit for your dog &rarr;</a>
+        </div>
+
         <input type="hidden" name="id" id="ypc-variant-id" value="{{ current_variant.id }}">
 
         <div class="ypc-product-hero__price-wrap">
@@ -619,6 +625,18 @@
 
     updateVariantUI(getCurrentVariant());
   })();
+
+  /* ─── Size hint smooth scroll ─── */
+  var sizeHintLink = document.getElementById('ypc-size-hint-link');
+  if (sizeHintLink) {
+    sizeHintLink.addEventListener('click', function(e) {
+      var target = document.getElementById('chew-analyzer');
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }
 </script>
 
 <style>
@@ -955,6 +973,34 @@
 
   .ypc-dot {
     opacity: 0.65;
+  }
+
+  /* ─── Size hint ─── */
+  .ypc-size-hint {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #6f5a4b;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .ypc-size-hint svg {
+    flex-shrink: 0;
+    color: #d2632e;
+  }
+
+  .ypc-size-hint__link {
+    color: #d2632e;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .ypc-size-hint__link:hover {
+    color: #b85228;
+    text-decoration: underline;
   }
 
   .sealsubs-target-element,

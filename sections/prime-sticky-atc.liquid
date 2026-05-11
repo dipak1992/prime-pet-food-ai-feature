@@ -1,0 +1,307 @@
+{% comment %}
+  PRIME STICKY ATC — Persistent Add-to-Cart bar for product pages
+  Appears after user scrolls past the main product hero.
+  Mirrors the selected variant from ypc-product-form.
+{% endcomment %}
+
+<div class="psatc" id="prime-sticky-atc" aria-label="Sticky add to cart" hidden>
+  <div class="psatc__inner page-width">
+    <div class="psatc__product">
+      {%- if product.featured_image -%}
+        <img
+          src="{{ product.featured_image | image_url: width: 64 }}"
+          alt="{{ product.title | escape }}"
+          width="48"
+          height="48"
+          loading="lazy"
+          class="psatc__img"
+        >
+      {%- endif -%}
+      <div class="psatc__info">
+        <span class="psatc__title">{{ product.title }}</span>
+        <span class="psatc__variant" id="psatc-variant-label">
+          {%- assign cv = product.selected_or_first_available_variant -%}
+          {{ cv.title }}
+        </span>
+      </div>
+    </div>
+
+    <div class="psatc__price-wrap">
+      <span class="psatc__price" id="psatc-price">{{ product.selected_or_first_available_variant.price | money }}</span>
+      {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price -%}
+        <span class="psatc__compare" id="psatc-compare">{{ product.selected_or_first_available_variant.compare_at_price | money }}</span>
+      {%- else -%}
+        <span class="psatc__compare" id="psatc-compare" style="display:none;"></span>
+      {%- endif -%}
+    </div>
+
+    <button type="button" class="psatc__btn" id="psatc-btn" aria-label="Add to cart">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      {{ section.settings.btn_text | default: 'Add to Cart' }}
+    </button>
+  </div>
+</div>
+
+<style>
+  .psatc {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    background: #fff;
+    border-top: 1px solid rgba(55, 43, 31, 0.12);
+    box-shadow: 0 -4px 24px rgba(23, 21, 18, 0.1);
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .psatc:not([hidden]) {
+    display: block;
+  }
+
+  .psatc--visible {
+    transform: translateY(0);
+  }
+
+  .psatc__inner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .psatc__product {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .psatc__img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+    border: 1px solid rgba(55, 43, 31, 0.1);
+  }
+
+  .psatc__info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .psatc__title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #171512;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .psatc__variant {
+    font-size: 12px;
+    color: #5f574e;
+  }
+
+  .psatc__price-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .psatc__price {
+    font-size: 16px;
+    font-weight: 780;
+    color: #171512;
+  }
+
+  .psatc__compare {
+    font-size: 13px;
+    color: #9e9187;
+    text-decoration: line-through;
+  }
+
+  .psatc__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: #b85f32;
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.15s ease;
+    flex-shrink: 0;
+    font-family: inherit;
+  }
+
+  .psatc__btn:hover {
+    background: #94451f;
+    transform: translateY(-1px);
+  }
+
+  .psatc__btn:active {
+    transform: translateY(0);
+  }
+
+  .psatc__btn--loading {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  /* Mobile: hide product info, show only price + button */
+  @media (max-width: 640px) {
+    .psatc__product { display: none; }
+    .psatc__inner { justify-content: space-between; }
+    .psatc__btn { flex: 1; justify-content: center; }
+  }
+
+  /* Safe area for iOS home indicator */
+  @supports (padding-bottom: env(safe-area-inset-bottom)) {
+    .psatc {
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+  }
+</style>
+
+<script>
+(function() {
+  var bar = document.getElementById('prime-sticky-atc');
+  if (!bar) return;
+
+  var psatcBtn     = document.getElementById('psatc-btn');
+  var psatcPrice   = document.getElementById('psatc-price');
+  var psatcCompare = document.getElementById('psatc-compare');
+  var psatcVariant = document.getElementById('psatc-variant-label');
+
+  /* ── Show/hide on scroll ── */
+  var heroForm = document.getElementById('ypc-product-form');
+  var heroBtn  = document.getElementById('ypc-add-to-cart-btn');
+
+  function updateVisibility() {
+    if (!heroBtn) return;
+    var rect = heroBtn.getBoundingClientRect();
+    var isHeroVisible = rect.bottom > 0 && rect.top < window.innerHeight;
+    bar.removeAttribute('hidden');
+    if (isHeroVisible) {
+      bar.classList.remove('psatc--visible');
+    } else {
+      bar.classList.add('psatc--visible');
+    }
+  }
+
+  window.addEventListener('scroll', updateVisibility, { passive: true });
+  updateVisibility();
+
+  /* ── Sync variant from ypc-product-hero ── */
+  function syncVariant() {
+    var variantInput = document.getElementById('ypc-variant-id');
+    var priceEl      = document.getElementById('ypc-price');
+    var compareEl    = document.getElementById('ypc-compare-price');
+
+    if (variantInput && psatcVariant) {
+      // Get active option buttons
+      var activeBtns = document.querySelectorAll('.ypc-product-hero__option-btn.is-active');
+      var labels = [];
+      activeBtns.forEach(function(b) { labels.push(b.textContent.trim()); });
+      if (labels.length) psatcVariant.textContent = labels.join(' / ');
+    }
+
+    if (priceEl && psatcPrice) {
+      psatcPrice.textContent = priceEl.textContent;
+    }
+
+    if (compareEl && psatcCompare) {
+      if (compareEl.style.display === 'none' || compareEl.textContent.trim() === '') {
+        psatcCompare.style.display = 'none';
+      } else {
+        psatcCompare.style.display = '';
+        psatcCompare.textContent = compareEl.textContent;
+      }
+    }
+  }
+
+  // Observe option button clicks on the hero
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('.ypc-product-hero__option-btn')) {
+      setTimeout(syncVariant, 50);
+    }
+  });
+
+  // Initial sync
+  setTimeout(syncVariant, 300);
+
+  /* ── Add to cart ── */
+  psatcBtn.addEventListener('click', function() {
+    var variantInput = document.getElementById('ypc-variant-id');
+    var qtyInput     = document.getElementById('ypc-quantity-input');
+    var sellingPlan  = document.getElementById('ypc-selling-plan');
+
+    if (!variantInput) return;
+
+    psatcBtn.classList.add('psatc__btn--loading');
+    psatcBtn.textContent = 'Adding…';
+
+    var body = {
+      items: [{
+        id: parseInt(variantInput.value, 10),
+        quantity: qtyInput ? parseInt(qtyInput.value, 10) || 1 : 1
+      }]
+    };
+
+    // Include selling plan if subscription is selected
+    var purchaseType = document.querySelector('input[name="purchase_type"]:checked');
+    if (purchaseType && purchaseType.value === 'subscription' && sellingPlan && sellingPlan.value) {
+      body.items[0].selling_plan = parseInt(sellingPlan.value, 10);
+    }
+
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+      body: JSON.stringify(body)
+    })
+    .then(function(r) { return r.json(); })
+    .then(function() {
+      psatcBtn.classList.remove('psatc__btn--loading');
+      psatcBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Added!';
+      setTimeout(function() {
+        psatcBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> {{ section.settings.btn_text | default: "Add to Cart" }}';
+        // Trigger cart drawer/notification if available
+        document.dispatchEvent(new CustomEvent('cart:refresh'));
+      }, 1800);
+    })
+    .catch(function() {
+      psatcBtn.classList.remove('psatc__btn--loading');
+      psatcBtn.textContent = '{{ section.settings.btn_text | default: "Add to Cart" }}';
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Prime Sticky ATC",
+  "tag": "div",
+  "class": "section-prime-sticky-atc",
+  "settings": [
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button text",
+      "default": "Add to Cart"
+    }
+  ]
+}
+{% endschema %}

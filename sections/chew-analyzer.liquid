@@ -8,7 +8,7 @@
 
 {% if section.settings.display_mode == 'hero' %}
   {%- comment -%} HOMEPAGE HERO HOOK MODE {%- endcomment -%}
-  <div class="ca-section ca-section--hero page-width {{ section.settings.top_padding }} {{ section.settings.bottom_padding }}">
+  <div id="chew-analyzer" class="ca-section ca-section--hero page-width {{ section.settings.top_padding }} {{ section.settings.bottom_padding }}">
     <div class="ca-hero-hook">
       <h2 class="ca-hero-hook__title">
         {{ section.settings.heading | default: 'How Long Will This Last For YOUR Dog?' }}
@@ -52,7 +52,7 @@
 
 {% else %}
   {%- comment -%} FULL WIDGET MODE {%- endcomment -%}
-  <div class="ca-section ca-section--full page-width {{ section.settings.top_padding }} {{ section.settings.bottom_padding }}">
+  <div id="chew-analyzer" class="ca-section ca-section--full page-width {{ section.settings.top_padding }} {{ section.settings.bottom_padding }}">
     {% if section.settings.show_section_heading %}
       <div class="ca-section__header">
         <h2 class="ca-section__title">{{ section.settings.heading | default: 'How Long Will This Last For YOUR Dog?' }}</h2>
