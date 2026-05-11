@@ -1,0 +1,505 @@
+{% comment %}
+  PRIME WHOLESALE — Premium B2B Landing Page
+{% endcomment %}
+
+<div class="pw" id="prime-wholesale">
+
+  <!-- HERO -->
+  <section class="pw-hero">
+    <div class="pw-hero__bg" aria-hidden="true"></div>
+    <div class="pw-shell pw-hero__inner">
+      <div class="pw-hero__badge">{{ section.settings.hero_badge | default: 'Now Accepting Wholesale Partners' }}</div>
+      <h1 class="pw-hero__headline">{{ section.settings.hero_headline | default: 'Premium Himalayan Dog Chews for Modern Pet Retailers' }}</h1>
+      <p class="pw-hero__subtext">{{ section.settings.hero_subtext | default: 'Long-lasting yak chews that drive repeat purchases, delight dog parents, and position your store as a premium enrichment destination.' }}</p>
+      <div class="pw-hero__ctas">
+        <a href="{{ section.settings.apply_url | default: '#pw-apply' }}" class="pw-btn pw-btn--primary">{{ section.settings.hero_cta_primary | default: 'Apply for Wholesale' }}</a>
+        <a href="{{ section.settings.portal_url | default: 'https://wholesale.theprimepetfood.com' }}" class="pw-btn pw-btn--secondary" target="_blank" rel="noopener">{{ section.settings.hero_cta_secondary | default: 'Access Wholesale Portal' }}</a>
+      </div>
+      <div class="pw-hero__stats">
+        <div class="pw-hero__stat"><strong>20k+</strong><span>Dog parents served</span></div>
+        <div class="pw-hero__stat"><strong>4.9★</strong><span>Average rating</span></div>
+        <div class="pw-hero__stat"><strong>67 min</strong><span>Avg chew time</span></div>
+        <div class="pw-hero__stat"><strong>85%</strong><span>Repeat purchase rate</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY RETAILERS CHOOSE PRIME -->
+  <section class="pw-why">
+    <div class="pw-shell">
+      <div class="pw-section-header">
+        <p class="pw-kicker">Why retailers choose us</p>
+        <h2>Built for the Modern Pet Enrichment Market</h2>
+        <p class="pw-section-sub">Dog parents are actively seeking premium, long-lasting alternatives to rawhide. Prime Pet Food gives your store a competitive edge in the fastest-growing pet category.</p>
+      </div>
+      <div class="pw-why__grid">
+        <div class="pw-why__card"><div class="pw-why__icon">📈</div><h3>High Repeat Purchase Rate</h3><p>85% of customers reorder within 30 days. Yak chews are a consumable — not a one-time purchase.</p></div>
+        <div class="pw-why__card"><div class="pw-why__icon">🦴</div><h3>Rawhide-Free Positioning</h3><p>Pet parents are actively searching for safer alternatives. Position your store as the go-to for premium enrichment.</p></div>
+        <div class="pw-why__card"><div class="pw-why__icon">⏱️</div><h3>Long-Lasting Enrichment</h3><p>Average chew time of 67 minutes means happier dogs and satisfied customers who come back for more.</p></div>
+        <div class="pw-why__card"><div class="pw-why__icon">🧘</div><h3>Dog Wellness Trend</h3><p>Enrichment and calm-time products are the #1 growth category in pet retail. Be ahead of the curve.</p></div>
+        <div class="pw-why__card"><div class="pw-why__icon">🌿</div><h3>4 Simple Ingredients</h3><p>Yak milk, cow milk, lime juice, salt. Clean-label products that today's conscious pet parents demand.</p></div>
+        <div class="pw-why__card"><div class="pw-why__icon">💬</div><h3>Strong Customer Demand</h3><p>2,400+ five-star reviews and growing social proof. Your customers already want this product.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHOLESALE BENEFITS -->
+  <section class="pw-benefits">
+    <div class="pw-shell">
+      <div class="pw-section-header">
+        <p class="pw-kicker">Partner benefits</p>
+        <h2>Everything You Need to Succeed</h2>
+      </div>
+      <div class="pw-benefits__grid">
+        <div class="pw-benefits__card">
+          <div class="pw-benefits__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <h3>Competitive Wholesale Pricing</h3>
+          <p>Volume-based tiered pricing with margins up to 50%. The more you order, the more you save.</p>
+        </div>
+        <div class="pw-benefits__card">
+          <div class="pw-benefits__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+          <h3>Flexible Order Quantities</h3>
+          <p>Start with just 1 case pack per size. No massive minimums — scale at your own pace.</p>
+        </div>
+        <div class="pw-benefits__card">
+          <div class="pw-benefits__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+          <h3>Fast & Free Shipping</h3>
+          <p>Free shipping on orders over $300. Ships within 24–48 hours from our US warehouse.</p>
+        </div>
+        <div class="pw-benefits__card">
+          <div class="pw-benefits__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></div>
+          <h3>Retail-Ready Packaging</h3>
+          <p>UPC-labeled, shelf-ready case packs with premium branding that sells itself on display.</p>
+        </div>
+        <div class="pw-benefits__card">
+          <div class="pw-benefits__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h3>Dedicated Account Support</h3>
+          <p>Personal account manager, priority support, and marketing materials to help you sell.</p>
+        </div>
+        <div class="pw-benefits__card">
+          <div class="pw-benefits__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></div>
+          <h3>High Repeat-Purchase Category</h3>
+          <p>Chews are consumable — customers come back monthly. Build predictable recurring revenue.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT SHOWCASE -->
+  <section class="pw-products">
+    <div class="pw-shell">
+      <div class="pw-section-header">
+        <p class="pw-kicker">Our products</p>
+        <h2>What Sells in Your Store</h2>
+        <p class="pw-section-sub">Three sizes to cover every breed. Hand-crafted from authentic Himalayan yak milk using traditional methods.</p>
+      </div>
+      <div class="pw-products__grid">
+        <div class="pw-products__card">
+          <div class="pw-products__img-wrap"><img src="{{ 'prime-home-small-dog-chew.jpg' | asset_url }}" alt="Small Yak Chew" loading="lazy" width="320" height="320"></div>
+          <div class="pw-products__info"><h3>Small Yak Chew</h3><p class="pw-products__meta">Dogs under 20 lbs &bull; ~45 min chew time</p><p>Perfect for Yorkies, Chihuahuas, Dachshunds, and small breed puppies.</p></div>
+        </div>
+        <div class="pw-products__card">
+          <div class="pw-products__img-wrap"><img src="{{ 'prime-home-medium-dog-chew.jpg' | asset_url }}" alt="Medium Yak Chew" loading="lazy" width="320" height="320"></div>
+          <div class="pw-products__info"><span class="pw-products__badge">Best Seller</span><h3>Medium Yak Chew</h3><p class="pw-products__meta">Dogs 20–55 lbs &bull; ~67 min chew time</p><p>Our #1 seller. Ideal for Beagles, Bulldogs, Corgis, and medium breeds.</p></div>
+        </div>
+        <div class="pw-products__card">
+          <div class="pw-products__img-wrap"><img src="{{ 'prime-home-large-dog-chew.jpg' | asset_url }}" alt="Large Yak Chew" loading="lazy" width="320" height="320"></div>
+          <div class="pw-products__info"><h3>Large Yak Chew</h3><p class="pw-products__meta">Dogs 55+ lbs &bull; ~85 min chew time</p><p>Built for Labs, German Shepherds, and power chewers who destroy softer treats.</p></div>
+        </div>
+      </div>
+      <div class="pw-products__cta-wrap">
+        <a href="{{ section.settings.portal_url | default: 'https://wholesale.theprimepetfood.com' }}" class="pw-btn pw-btn--primary" target="_blank" rel="noopener">View Full Wholesale Catalog</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUILT FOR MODERN PET STORES -->
+  <section class="pw-audience">
+    <div class="pw-shell">
+      <div class="pw-section-header">
+        <p class="pw-kicker">Who we serve</p>
+        <h2>Built for Modern Pet Businesses</h2>
+        <p class="pw-section-sub">Whether you run a boutique pet shop or a growing ecommerce brand, Prime Pet Food elevates your product offering.</p>
+      </div>
+      <div class="pw-audience__grid">
+        <div class="pw-audience__item"><span class="pw-audience__emoji">🏪</span><h4>Boutique Pet Stores</h4></div>
+        <div class="pw-audience__item"><span class="pw-audience__emoji">🛒</span><h4>Pet Supply Retailers</h4></div>
+        <div class="pw-audience__item"><span class="pw-audience__emoji">✂️</span><h4>Groomers & Salons</h4></div>
+        <div class="pw-audience__item"><span class="pw-audience__emoji">🐕</span><h4>Dog Trainers</h4></div>
+        <div class="pw-audience__item"><span class="pw-audience__emoji">🏠</span><h4>Dog Daycares</h4></div>
+        <div class="pw-audience__item"><span class="pw-audience__emoji">📦</span><h4>Subscription Box Companies</h4></div>
+        <div class="pw-audience__item"><span class="pw-audience__emoji">🌿</span><h4>Pet Wellness Stores</h4></div>
+        <div class="pw-audience__item"><span class="pw-audience__emoji">💻</span><h4>Ecommerce Resellers</h4></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER -->
+  <section class="pw-founder">
+    <div class="pw-shell pw-founder__inner">
+      <div class="pw-founder__image"><img src="{{ 'prime-founder.png' | asset_url }}" alt="Founder of Prime Pet Food" loading="lazy" width="280" height="280"></div>
+      <div class="pw-founder__content">
+        <p class="pw-kicker">Our story</p>
+        <h2>From the Himalayas to Your Shelves</h2>
+        <p>Growing up in Nepal, I watched local farmers craft yak cheese chews using centuries-old techniques. When I moved to the US and got my first dog, I realized American pet parents deserved access to these incredible, all-natural chews.</p>
+        <p>Prime Pet Food was born from a simple mission: bring authentic Himalayan yak chews to dogs everywhere — made with just 4 ingredients, no chemicals, no shortcuts.</p>
+        <div class="pw-founder__sig"><strong>{{ section.settings.founder_name | default: 'Dipak Regmi' }}</strong><span>Founder, Prime Pet Food</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW WHOLESALE WORKS -->
+  <section class="pw-process">
+    <div class="pw-shell">
+      <div class="pw-section-header">
+        <p class="pw-kicker">Getting started</p>
+        <h2>How Wholesale Works</h2>
+        <p class="pw-section-sub">From application to first order in as little as 48 hours.</p>
+      </div>
+      <div class="pw-process__steps">
+        <div class="pw-process__step"><div class="pw-process__num">1</div><h3>Apply</h3><p>Fill out our quick wholesale application. Tell us about your business.</p></div>
+        <div class="pw-process__connector" aria-hidden="true"></div>
+        <div class="pw-process__step"><div class="pw-process__num">2</div><h3>Get Approved</h3><p>Our team reviews within 24–48 hours. Most retailers approved same day.</p></div>
+        <div class="pw-process__connector" aria-hidden="true"></div>
+        <div class="pw-process__step"><div class="pw-process__num">3</div><h3>Access Pricing</h3><p>Unlock exclusive wholesale pricing and your dedicated account dashboard.</p></div>
+        <div class="pw-process__connector" aria-hidden="true"></div>
+        <div class="pw-process__step"><div class="pw-process__num">4</div><h3>Place Orders</h3><p>Order online anytime or request custom quotes for large orders.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="pw-faq" id="pw-faq">
+    <div class="pw-shell">
+      <div class="pw-section-header">
+        <p class="pw-kicker">Questions & answers</p>
+        <h2>Wholesale FAQ</h2>
+      </div>
+      <div class="pw-faq__list">
+        <details class="pw-faq__item"><summary class="pw-faq__question">What is the minimum order quantity (MOQ)?</summary><div class="pw-faq__answer"><p>Our minimum order is just 1 case pack per size (12 units per case). No large upfront commitment — start small and scale as demand grows.</p></div></details>
+        <details class="pw-faq__item"><summary class="pw-faq__question">What are the shipping timelines?</summary><div class="pw-faq__answer"><p>Orders ship within 24–48 hours from our US warehouse. Standard delivery takes 3–5 business days.</p></div></details>
+        <details class="pw-faq__item"><summary class="pw-faq__question">Do you offer custom or bulk orders?</summary><div class="pw-faq__answer"><p>Yes! We accommodate custom case configurations, bulk orders, and special packaging requests. Contact us for a custom quote on orders over 100 units.</p></div></details>
+        <details class="pw-faq__item"><summary class="pw-faq__question">How does wholesale pricing work?</summary><div class="pw-faq__answer"><p>We offer tiered volume-based pricing. Typical wholesale margins range from 40–50% off retail. Exact pricing available after approval.</p></div></details>
+        <details class="pw-faq__item"><summary class="pw-faq__question">Do you offer private label options?</summary><div class="pw-faq__answer"><p>We offer private label and co-branding for qualified partners with minimum commitments. Contact our team to discuss.</p></div></details>
+        <details class="pw-faq__item"><summary class="pw-faq__question">What payment methods do you accept?</summary><div class="pw-faq__answer"><p>Credit cards, ACH bank transfers, and NET-30 terms for established accounts. Manual invoicing available for large orders.</p></div></details>
+        <details class="pw-faq__item"><summary class="pw-faq__question">What are the lead times for large orders?</summary><div class="pw-faq__answer"><p>Standard orders ship within 48 hours. Large custom orders (500+ units) require 1–2 weeks lead time.</p></div></details>
+        <details class="pw-faq__item"><summary class="pw-faq__question">Do you ship internationally?</summary><div class="pw-faq__answer"><p>Currently we ship within the US and Canada. International inquiries welcome — contact us to discuss logistics.</p></div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLICATION FORM -->
+  <section class="pw-apply" id="pw-apply">
+    <div class="pw-shell">
+      <div class="pw-section-header">
+        <p class="pw-kicker">Get started</p>
+        <h2>Apply for Wholesale Access</h2>
+        <p class="pw-section-sub">Fill out the form below and our team will review your application within 24–48 hours.</p>
+      </div>
+      <form class="pw-apply__form" action="/contact#contact_form" method="post" accept-charset="UTF-8">
+        <input type="hidden" name="form_type" value="contact">
+        <input type="hidden" name="utf8" value="✓">
+        <input type="hidden" name="contact[tags]" value="wholesale-application">
+        <div class="pw-apply__row">
+          <div class="pw-apply__field"><label for="pw-name">Full Name *</label><input type="text" id="pw-name" name="contact[name]" required placeholder="Your full name"></div>
+          <div class="pw-apply__field"><label for="pw-email">Email Address *</label><input type="email" id="pw-email" name="contact[email]" required placeholder="you@business.com"></div>
+        </div>
+        <div class="pw-apply__row">
+          <div class="pw-apply__field"><label for="pw-business">Business Name *</label><input type="text" id="pw-business" name="contact[business_name]" required placeholder="Your store or business name"></div>
+          <div class="pw-apply__field"><label for="pw-phone">Phone Number</label><input type="tel" id="pw-phone" name="contact[phone]" placeholder="(555) 123-4567"></div>
+        </div>
+        <div class="pw-apply__row">
+          <div class="pw-apply__field">
+            <label for="pw-type">Business Type *</label>
+            <select id="pw-type" name="contact[business_type]" required>
+              <option value="" disabled selected>Select your business type</option>
+              <option value="Boutique Pet Store">Boutique Pet Store</option>
+              <option value="Pet Supply Retailer">Pet Supply Retailer</option>
+              <option value="Groomer / Salon">Groomer / Salon</option>
+              <option value="Dog Trainer">Dog Trainer</option>
+              <option value="Dog Daycare">Dog Daycare</option>
+              <option value="Subscription Box">Subscription Box Company</option>
+              <option value="Pet Wellness Store">Pet Wellness Store</option>
+              <option value="Ecommerce Reseller">Ecommerce Reseller</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="pw-apply__field"><label for="pw-website">Website URL</label><input type="url" id="pw-website" name="contact[website]" placeholder="https://yourstore.com"></div>
+        </div>
+        <div class="pw-apply__field pw-apply__field--full">
+          <label for="pw-message">Tell us about your business</label>
+          <textarea id="pw-message" name="contact[body]" rows="4" placeholder="How many locations do you have? What products do you currently carry? Estimated monthly volume?"></textarea>
+        </div>
+        <div class="pw-apply__submit">
+          <button type="submit" class="pw-btn pw-btn--primary pw-btn--lg">Submit Wholesale Application</button>
+          <p class="pw-apply__note">We typically respond within 24–48 hours. No commitment required.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="pw-final-cta">
+    <div class="pw-shell pw-final-cta__inner">
+      <h2>{{ section.settings.final_cta_heading | default: 'Ready to Bring Premium Dog Enrichment to Your Customers?' }}</h2>
+      <p>{{ section.settings.final_cta_subtext | default: 'Join 200+ retailers already stocking Prime Pet Food. Apply today and start offering the chews that dogs love and owners trust.' }}</p>
+      <div class="pw-final-cta__buttons">
+        <a href="#pw-apply" class="pw-btn pw-btn--primary pw-btn--lg">Apply Now</a>
+        <a href="{{ section.settings.portal_url | default: 'https://wholesale.theprimepetfood.com' }}" class="pw-btn pw-btn--secondary" target="_blank" rel="noopener">Access Wholesale Portal</a>
+        <a href="{{ section.settings.quote_url | default: '/pages/contact' }}" class="pw-btn pw-btn--ghost">Request Custom Quote</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<style>
+  .pw{--pw-ink:#171512;--pw-muted:#5f574e;--pw-cream:#fffaf2;--pw-soft:#f8f1e7;--pw-clay:#b85f32;--pw-clay-dark:#94451f;--pw-line:rgba(55,43,31,0.1);--pw-radius:12px;--pw-radius-lg:20px;--pw-shadow:0 4px 24px rgba(23,21,18,0.06);--pw-shadow-lg:0 12px 48px rgba(23,21,18,0.1);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--pw-ink);line-height:1.6}
+  .pw *,.pw *::before,.pw *::after{box-sizing:border-box}
+  .pw-shell{max-width:1200px;margin:0 auto;padding:0 24px}
+  .pw h1,.pw h2,.pw h3,.pw h4{line-height:1.2;font-weight:780;letter-spacing:-0.02em}
+  .pw h2{font-size:clamp(28px,4vw,42px);margin:0 0 16px}
+  .pw h3{font-size:clamp(18px,2.5vw,22px);margin:0 0 8px}
+  .pw p{margin:0 0 12px;color:var(--pw-muted)}
+  .pw-kicker{display:inline-block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--pw-clay);margin-bottom:8px}
+  .pw-section-header{text-align:center;max-width:720px;margin:0 auto 48px}
+  .pw-section-sub{font-size:17px;color:var(--pw-muted);max-width:600px;margin:0 auto}
+
+  /* Buttons */
+  .pw-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 32px;border-radius:999px;font-size:15px;font-weight:700;text-decoration:none;transition:all 0.2s ease;cursor:pointer;border:none}
+  .pw-btn--primary{background:var(--pw-clay);color:#fff}
+  .pw-btn--primary:hover{background:var(--pw-clay-dark);color:#fff;transform:translateY(-1px);box-shadow:0 8px 24px rgba(184,95,50,0.3)}
+  .pw-btn--secondary{background:transparent;color:var(--pw-clay);border:2px solid var(--pw-clay)}
+  .pw-btn--secondary:hover{background:var(--pw-clay);color:#fff}
+  .pw-btn--ghost{background:transparent;color:var(--pw-ink);border:1px solid var(--pw-line);padding:12px 28px}
+  .pw-btn--ghost:hover{border-color:var(--pw-clay);color:var(--pw-clay)}
+  .pw-btn--lg{padding:18px 40px;font-size:16px}
+
+  /* Hero */
+  .pw-hero{position:relative;padding:100px 0 80px;background:linear-gradient(135deg,#1e1a15 0%,#2d2520 50%,#1e1a15 100%);overflow:hidden}
+  .pw-hero__bg{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 30%,rgba(184,95,50,0.15) 0%,transparent 60%)}
+  .pw-hero__inner{position:relative;text-align:center;max-width:800px}
+  .pw-hero__badge{display:inline-block;padding:8px 20px;background:rgba(184,95,50,0.15);border:1px solid rgba(184,95,50,0.3);border-radius:999px;color:#f4c27d;font-size:13px;font-weight:600;margin-bottom:24px}
+  .pw-hero__headline{color:#fff;font-size:clamp(32px,5vw,56px);margin-bottom:20px}
+  .pw-hero__subtext{color:rgba(255,250,242,0.8);font-size:clamp(16px,2vw,20px);max-width:640px;margin:0 auto 36px}
+  .pw-hero__ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:56px}
+  .pw-hero__stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding-top:40px;border-top:1px solid rgba(255,255,255,0.1)}
+  .pw-hero__stat{text-align:center}
+  .pw-hero__stat strong{display:block;font-size:24px;color:#fff;font-weight:780}
+  .pw-hero__stat span{font-size:13px;color:rgba(255,250,242,0.6)}
+
+  /* Why section */
+  .pw-why{padding:96px 0;background:var(--pw-cream)}
+  .pw-why__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .pw-why__card{background:#fff;border-radius:var(--pw-radius);padding:32px 28px;border:1px solid var(--pw-line);transition:transform 0.2s ease,box-shadow 0.2s ease}
+  .pw-why__card:hover{transform:translateY(-4px);box-shadow:var(--pw-shadow-lg)}
+  .pw-why__icon{font-size:32px;margin-bottom:16px}
+
+  /* Benefits */
+  .pw-benefits{padding:96px 0}
+  .pw-benefits__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .pw-benefits__card{background:var(--pw-soft);border-radius:var(--pw-radius);padding:32px 28px;transition:transform 0.2s ease,box-shadow 0.2s ease}
+  .pw-benefits__card:hover{transform:translateY(-4px);box-shadow:var(--pw-shadow-lg)}
+  .pw-benefits__icon{width:56px;height:56px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:20px;color:var(
+--pw-clay)}
+
+  /* Products */
+  .pw-products{padding:96px 0;background:var(--pw-cream)}
+  .pw-products__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+  .pw-products__card{background:#fff;border-radius:var(--pw-radius-lg);overflow:hidden;border:1px solid var(--pw-line);transition:transform 0.2s ease,box-shadow 0.2s ease}
+  .pw-products__card:hover{transform:translateY(-4px);box-shadow:var(--pw-shadow-lg)}
+  .pw-products__img-wrap{padding:24px;background:var(--pw-soft);display:flex;align-items:center;justify-content:center}
+  .pw-products__img-wrap img{width:100%;max-width:240px;height:auto;object-fit:contain}
+  .pw-products__info{padding:24px 28px}
+  .pw-products__badge{display:inline-block;padding:4px 12px;background:rgba(184,95,50,0.1);color:var(--pw-clay);border-radius:999px;font-size:11px;font-weight:700;text-transform:uppercase;margin-bottom:8px}
+  .pw-products__meta{font-size:13px;color:var(--pw-clay);font-weight:600;margin-bottom:8px}
+  .pw-products__cta-wrap{text-align:center;margin-top:48px}
+
+  /* Audience */
+  .pw-audience{padding:96px 0}
+  .pw-audience__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .pw-audience__item{text-align:center;padding:28px 20px;background:var(--pw-soft);border-radius:var(--pw-radius);transition:transform 0.2s ease}
+  .pw-audience__item:hover{transform:translateY(-3px)}
+  .pw-audience__emoji{font-size:36px;display:block;margin-bottom:12px}
+  .pw-audience__item h4{font-size:14px;font-weight:700;margin:0;color:var(--pw-ink)}
+
+  /* Founder */
+  .pw-founder{padding:96px 0;background:var(--pw-cream)}
+  .pw-founder__inner{display:grid;grid-template-columns:280px 1fr;gap:56px;align-items:center}
+  .pw-founder__image img{width:100%;border-radius:var(--pw-radius-lg);object-fit:cover}
+  .pw-founder__sig{margin-top:24px;padding-top:16px;border-top:1px solid var(--pw-line)}
+  .pw-founder__sig strong{display:block;font-size:16px;color:var(--pw-ink)}
+  .pw-founder__sig span{font-size:13px;color:var(--pw-muted)}
+
+  /* Process */
+  .pw-process{padding:96px 0}
+  .pw-process__steps{display:flex;align-items:flex-start;justify-content:center;gap:0}
+  .pw-process__step{text-align:center;flex:1;max-width:220px}
+  .pw-process__num{width:48px;height:48px;border-radius:50%;background:var(--pw-clay);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:780;margin:0 auto 16px}
+  .pw-process__connector{width:48px;height:2px;background:var(--pw-line);margin-top:24px;flex-shrink:0}
+
+  /* FAQ */
+  .pw-faq{padding:96px 0;background:var(--pw-cream)}
+  .pw-faq__list{max-width:720px;margin:0 auto}
+  .pw-faq__item{border-bottom:1px solid var(--pw-line);padding:0}
+  .pw-faq__question{padding:20px 0;font-size:16px;font-weight:700;cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;color:var(--pw-ink)}
+  .pw-faq__question::-webkit-details-marker{display:none}
+  .pw-faq__question::after{content:'+';font-size:20px;color:var(--pw-clay);font-weight:400;transition:transform 0.2s ease}
+  details[open] .pw-faq__question::after{content:'−'}
+  .pw-faq__answer{padding:0 0 20px;color:var(--pw-muted);font-size:15px}
+  .pw-faq__answer p{margin:0}
+
+  /* Apply form */
+  .pw-apply{padding:96px 0}
+  .pw-apply__form{max-width:720px;margin:0 auto;background:#fff;border-radius:var(--pw-radius-lg);padding:48px;border:1px solid var(--pw-line);box-shadow:var(--pw-shadow)}
+  .pw-apply__row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+  .pw-apply__field label{display:block;font-size:13px;font-weight:700;color:var(--pw-ink);margin-bottom:6px}
+  .pw-apply__field input,.pw-apply__field select,.pw-apply__field textarea{width:100%;padding:12px 16px;border:1px solid var(--pw-line);border-radius:8px;font-size:15px;font-family:inherit;transition:border-color 0.15s ease;background:#fff}
+  .pw-apply__field input:focus,.pw-apply__field select:focus,.pw-apply__field textarea:focus{outline:none;border-color:var(--pw-clay);box-shadow:0 0 0 3px rgba(184,95,50,0.1)}
+  .pw-apply__field--full{margin-bottom:24px}
+  .pw-apply__submit{text-align:center}
+  .pw-apply__note{font-size:13px;color:var(--pw-muted);margin-top:12px}
+
+  /* Final CTA */
+  .pw-final-cta{padding:96px 0;background:linear-gradient(135deg,#1e1a15 0%,#2d2520 100%);text-align:center}
+  .pw-final-cta__inner{max-width:700px}
+  .pw-final-cta h2{color:#fff}
+  .pw-final-cta p{color:rgba(255,250,242,0.75);font-size:18px;margin-bottom:32px}
+  .pw-final-cta__buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+  /* Responsive */
+  @media(max-width:900px){
+    .pw-why__grid,.pw-benefits__grid{grid-template-columns:repeat(2,1fr)}
+    .pw-products__grid{grid-template-columns:1fr}
+    .pw-audience__grid{grid-template-columns:repeat(2,1fr)}
+    .pw-founder__inner{grid-template-columns:1fr;text-align:center}
+    .pw-founder__image{max-width:200px;margin:0 auto}
+    .pw-process__steps{flex-direction:column;align-items:center}
+    .pw-process__connector{width:2px;height:32px;margin:0}
+    .pw-hero__stats{grid-template-columns:repeat(2,1fr)}
+  }
+  @media(max-width:640px){
+    .pw-hero{padding:72px 0 56px}
+    .pw-why,.pw-benefits,.pw-products,.pw-audience,.pw-founder,.pw-process,.pw-faq,.pw-apply,.pw-final-cta{padding:64px 0}
+    .pw-why__grid,.pw-benefits__grid{grid-template-columns:1fr}
+    .pw-audience__grid{grid-template-columns:repeat(2,1fr)}
+    .pw-apply__form{padding:28px 20px}
+    .pw-apply__row{grid-template-columns:1fr}
+    .pw-hero__ctas{flex-direction:column;align-items:center}
+    .pw-final-cta__buttons{flex-direction:column;align-items:center}
+  }
+</style>
+
+<script>
+(function(){
+  /* Smooth scroll for anchor links */
+  document.querySelectorAll('.pw a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var target=document.querySelector(this.getAttribute('href'));
+      if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'})}
+    });
+  });
+
+  /* Scroll reveal */
+  var sections=document.querySelectorAll('.pw-why,.pw-benefits,.pw-products,.pw-audience,.pw-founder,.pw-process,.pw-faq,.pw-apply,.pw-final-cta');
+  sections.forEach(function(s){s.style.opacity='0';s.style.transform='translateY(24px)';s.style.transition='opacity 0.6s ease,transform 0.6s ease'});
+  var observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){entry.target.style.opacity='1';entry.target.style.transform='translateY(0)';observer.unobserve(entry.target)}
+    });
+  },{threshold:0.1});
+  sections.forEach(function(s){observer.observe(s)});
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Prime Wholesale",
+  "tag": "section",
+  "class": "section section-prime-wholesale",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Section"
+    },
+    {
+      "type": "text",
+      "id": "hero_badge",
+      "label": "Hero badge text",
+      "default": "Now Accepting Wholesale Partners"
+    },
+    {
+      "type": "text",
+      "id": "hero_headline",
+      "label": "Hero headline",
+      "default": "Premium Himalayan Dog Chews for Modern Pet Retailers"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_subtext",
+      "label": "Hero subtext",
+      "default": "Long-lasting yak chews that drive repeat purchases, delight dog parents, and position your store as a premium enrichment destination."
+    },
+    {
+      "type": "text",
+      "id": "hero_cta_primary",
+      "label": "Primary CTA text",
+      "default": "Apply for Wholesale"
+    },
+    {
+      "type": "text",
+      "id": "hero_cta_secondary",
+      "label": "Secondary CTA text",
+      "default": "Access Wholesale Portal"
+    },
+    {
+      "type": "header",
+      "content": "URLs"
+    },
+    {
+      "type": "text",
+      "id": "apply_url",
+      "label": "Apply form URL (anchor or page)",
+      "default": "#pw-apply"
+    },
+    {
+      "type": "text",
+      "id": "portal_url",
+      "label": "Wholesale portal URL",
+      "default": "https://wholesale.theprimepetfood.com"
+    },
+    {
+      "type": "text",
+      "id": "quote_url",
+      "label": "Custom quote URL",
+      "default": "/pages/contact"
+    },
+    {
+      "type": "header",
+      "content": "Founder Section"
+    },
+    {
+      "type": "text",
+      "id": "founder_name",
+      "label": "Founder name",
+      "default": "Dipak Regmi"
+    },
+    {
+      "type": "header",
+      "content": "Final CTA"
+    },
+    {
+      "type": "text",
+      "id": "final_cta_heading",
+      "label": "Final CTA heading",
+      "default": "Ready to Bring Premium Dog Enrichment to Your Customers?"
+    },
+    {
+      "type": "textarea",
+      "id": "final_cta_subtext",
+      "label": "Final CTA subtext",
+      "default": "Join 200+ retailers already stocking Prime Pet Food. Apply today and start offering the chews that dogs love and owners trust."
+    }
+  ]
+}
+{% endschema %}
