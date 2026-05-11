@@ -1,4 +1,10 @@
 <article class="ph-product-card">
+  {% if image != blank %}
+    <div class="ph-product-card__media">
+      <img src="{{ image }}" alt="{{ image_alt | escape }}" loading="lazy" width="1024" height="1024">
+    </div>
+  {% endif %}
+
   <div>
     <span class="ph-product-card__badge">{{ badge }}</span>
     <h3>{{ title }}</h3>

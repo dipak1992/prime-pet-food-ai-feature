@@ -4,6 +4,15 @@
   assign lab_image = 'prime-ugc-labrador-chew-card.jpg' | asset_url
   assign frenchie_image = 'prime-ugc-french-bulldog-chew-card.jpg' | asset_url
   assign golden_image = 'prime-ugc-golden-retriever-chew-card.jpg' | asset_url
+  assign small_dog_chew_image = 'prime-home-small-dog-chew.jpg' | asset_url
+  assign medium_dog_chew_image = 'prime-home-medium-dog-chew.jpg' | asset_url
+  assign large_dog_chew_image = 'prime-home-large-dog-chew.jpg' | asset_url
+  assign subscribe_dog_image = 'prime-home-subscribe-dog-box.jpg' | asset_url
+  assign ingredient_yak_milk_image = 'prime-home-ingredient-yak-milk.jpg' | asset_url
+  assign ingredient_cow_milk_image = 'prime-home-ingredient-cow-milk.jpg' | asset_url
+  assign ingredient_lime_image = 'prime-home-ingredient-lime.jpg' | asset_url
+  assign ingredient_salt_image = 'prime-home-ingredient-salt.jpg' | asset_url
+  assign calm_cta_image = 'prime-home-calm-cta-bg.jpg' | asset_url
 
   assign small_variant = nil
   assign medium_variant = nil
@@ -101,6 +110,8 @@
         {% render 'prime-home-product-card',
           product: product,
           variant: small_variant,
+          image: small_dog_chew_image,
+          image_alt: 'Small dog calmly chewing a small Himalayan yak chew',
           label: 'Small dogs',
           title: 'Puppy Starter Chew',
           fit: '1-15 lbs',
@@ -111,6 +122,8 @@
         {% render 'prime-home-product-card',
           product: product,
           variant: medium_variant,
+          image: medium_dog_chew_image,
+          image_alt: 'Medium dog enjoying a medium Himalayan yak chew',
           label: 'Most popular',
           title: 'Classic Yak Chew',
           fit: '15-35 lbs',
@@ -121,6 +134,8 @@
         {% render 'prime-home-product-card',
           product: product,
           variant: large_variant,
+          image: large_dog_chew_image,
+          image_alt: 'Large dog chewing a large Himalayan yak chew',
           label: 'Power chewers',
           title: 'Power Chewer',
           fit: '35-55 lbs',
@@ -140,6 +155,9 @@
   ════════════════════════════════════════════════════════════════ -->
   <div class="ph-subscribe">
     <div class="ph-shell ph-subscribe__inner">
+      <div class="ph-subscribe__media">
+        <img src="{{ subscribe_dog_image }}" alt="Happy dog beside a subscription box and yak chew" loading="lazy" width="1024" height="1024">
+      </div>
       <div class="ph-subscribe__copy">
         <p class="ph-kicker">Subscribe &amp; Save</p>
         <h2>Keep calm chew time on schedule.</h2>
@@ -319,21 +337,25 @@
 
       <div class="ph-ingredients__grid">
         <article class="ph-ingredient-card">
+          <img src="{{ ingredient_yak_milk_image }}" alt="Fresh yak milk in a simple ceramic bowl" loading="lazy" width="768" height="768">
           <span class="ph-ingredient-card__num">01</span>
           <h3>Yak milk</h3>
           <p>Protein-rich base from free-grazing Himalayan yaks. The foundation of every chew.</p>
         </article>
         <article class="ph-ingredient-card">
+          <img src="{{ ingredient_cow_milk_image }}" alt="Cow milk in a clean ceramic pitcher" loading="lazy" width="768" height="768">
           <span class="ph-ingredient-card__num">02</span>
           <h3>Cow milk</h3>
           <p>Blended for texture and consistency. Creates the dense, long-lasting structure.</p>
         </article>
         <article class="ph-ingredient-card">
+          <img src="{{ ingredient_lime_image }}" alt="Fresh lime halves and lime juice on stone" loading="lazy" width="768" height="768">
           <span class="ph-ingredient-card__num">03</span>
           <h3>Lime juice</h3>
           <p>Natural coagulant that hardens the cheese. No synthetic binding agents needed.</p>
         </article>
         <article class="ph-ingredient-card">
+          <img src="{{ ingredient_salt_image }}" alt="Natural salt crystals in a small ceramic bowl" loading="lazy" width="768" height="768">
           <span class="ph-ingredient-card__num">04</span>
           <h3>Salt</h3>
           <p>A trace amount for preservation and flavor. Less than 1% of total composition.</p>
@@ -413,7 +435,7 @@
   <!-- ═══════════════════════════════════════════════════════════════
        CLOSING CTA — Final conversion push
   ════════════════════════════════════════════════════════════════ -->
-  <div class="ph-close">
+  <div class="ph-close" style="--ph-close-image: url('{{ calm_cta_image }}');">
     <div class="ph-shell ph-close__inner">
       <p class="ph-kicker">Ready for calmer chew time?</p>
       <h2>Give your dog the chew they deserve.</h2>
@@ -754,8 +776,25 @@
 
   .ph-product-card {
     display: grid;
-    padding: 22px;
-    min-height: 340px;
+    grid-template-rows: auto 1fr auto;
+    min-height: 420px;
+  }
+
+  .ph-product-card > div:not(.ph-product-card__media) {
+    padding: 22px 22px 0;
+  }
+
+  .ph-product-card__media {
+    position: relative;
+    overflow: hidden;
+    background: var(--ph-soft);
+  }
+
+  .ph-product-card__media img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    display: block;
+    object-fit: cover;
   }
 
   .ph-product-card__badge {
@@ -787,7 +826,8 @@
     align-self: end;
     display: grid;
     gap: 12px;
-    margin-top: 24px;
+    margin-top: 0;
+    padding: 20px 22px 22px;
   }
 
   .ph-product-card__price {
@@ -858,9 +898,24 @@
 
   .ph-subscribe__inner {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.48fr);
+    grid-template-columns: minmax(300px, 0.86fr) minmax(0, 1fr) minmax(320px, 0.48fr);
     align-items: center;
     gap: 34px;
+  }
+
+  .ph-subscribe__media {
+    overflow: hidden;
+    border: 1px solid rgba(255, 250, 242, 0.22);
+    border-radius: 22px;
+    background: rgba(255, 250, 242, 0.08);
+    box-shadow: 0 22px 54px rgba(30, 15, 8, 0.26);
+  }
+
+  .ph-subscribe__media img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    display: block;
+    object-fit: cover;
   }
 
   .ph-subscribe__copy {
@@ -1091,7 +1146,15 @@
      INGREDIENTS
   ════════════════════════════════════════════════════════════════ */
   .ph-ingredient-card {
-    padding: 26px;
+    padding: 0 0 24px;
+  }
+
+  .ph-ingredient-card img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    display: block;
+    object-fit: cover;
+    background: var(--ph-soft);
   }
 
   .ph-ingredient-card__num {
@@ -1105,15 +1168,16 @@
     color: var(--ph-clay);
     font-size: 13px;
     font-weight: 780;
+    margin: 20px 24px 0;
   }
 
   .ph-ingredient-card h3 {
-    margin-top: 16px;
+    margin: 16px 24px 0;
     font-size: 19px;
   }
 
   .ph-ingredient-card p {
-    margin: 10px 0 0;
+    margin: 10px 24px 0;
     font-size: 14px;
     line-height: 1.6;
   }
@@ -1225,16 +1289,36 @@
      CLOSING CTA
   ════════════════════════════════════════════════════════════════ */
   .ph-close {
+    position: relative;
+    overflow: hidden;
     text-align: center;
+    background:
+      linear-gradient(90deg, rgba(23, 21, 18, 0.9), rgba(23, 21, 18, 0.58)),
+      var(--ph-close-image) center / cover no-repeat,
+      var(--ph-ink);
   }
 
   .ph-close__inner {
+    position: relative;
     max-width: 760px;
+    padding: 28px;
+    border: 1px solid rgba(255, 250, 242, 0.18);
+    border-radius: 24px;
+    background: rgba(23, 21, 18, 0.44);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .ph-close .ph-kicker,
+  .ph-close h2,
+  .ph-close p {
+    color: #fffaf2;
   }
 
   .ph-close p:not(.ph-kicker) {
     max-width: 560px;
     margin: 16px auto 0;
+    color: rgba(255, 250, 242, 0.82);
   }
 
   /* ═══════════════════════════════════════════════════════════════
