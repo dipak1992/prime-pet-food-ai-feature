@@ -32,6 +32,9 @@
       "settings": {
         "blog_menu": "",
         "intro": "<p>Browse all of our latest blog posts in one place.</p>",
+        "show_keyword_hub": true,
+        "keyword_hub_heading": "Browse by main dog chew keyword",
+        "keyword_hub_text": "Use these topic clusters to find Prime Pet Food guidance on yak chews, rawhide alternatives, aggressive chewers, dog enrichment, breed sizing, and calming routines.",
         "items_to_show": 24,
         "columns_desktop": "4",
         "show_image": true,

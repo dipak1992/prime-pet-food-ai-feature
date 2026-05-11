@@ -3,6 +3,7 @@
 
 {%- liquid
   assign selected_menu = linklists[section.settings.blog_menu]
+  assign fallback_blog = blogs['dog-behavior']
   assign aggregated_articles = '' | split: ''
 
   if selected_menu != blank
@@ -11,6 +12,10 @@
         assign aggregated_articles = aggregated_articles | concat: link.object.articles
       endif
     endfor
+  endif
+
+  if aggregated_articles.size == 0 and fallback_blog != blank
+    assign aggregated_articles = aggregated_articles | concat: fallback_blog.articles
   endif
 
   assign aggregated_articles = aggregated_articles | sort: 'published_at' | reverse
@@ -44,6 +49,46 @@
     max-width: 72rem;
   }
 
+  #shopify-section-{{ section.id }} .blogs-page__keyword-hub {
+    display: grid;
+    gap: 1rem;
+    padding: 1.6rem;
+    border: 1px solid rgba(var(--color-foreground), 0.08);
+    border-radius: 2rem;
+    background: rgba(var(--color-foreground), 0.03);
+  }
+
+  #shopify-section-{{ section.id }} .blogs-page__keyword-grid {
+    display: grid;
+    gap: 0.8rem;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #shopify-section-{{ section.id }} .blogs-page__keyword-card {
+    display: grid;
+    gap: 0.35rem;
+    padding: 1.2rem;
+    border: 1px solid rgba(var(--color-foreground), 0.08);
+    border-radius: 1.4rem;
+    background: rgb(var(--color-background));
+    text-decoration: none;
+    transition: border-color 180ms ease, transform 180ms ease;
+  }
+
+  #shopify-section-{{ section.id }} .blogs-page__keyword-card:hover {
+    border-color: rgba(var(--color-foreground), 0.22);
+    transform: translateY(-1px);
+  }
+
+  #shopify-section-{{ section.id }} .blogs-page__keyword-label {
+    color: rgb(var(--color-foreground));
+    font-weight: 700;
+  }
+
+  #shopify-section-{{ section.id }} .blogs-page__keyword-text {
+    color: rgba(var(--color-foreground), 0.72);
+  }
+
   #shopify-section-{{ section.id }} .blogs-page__empty {
     padding: 2.4rem;
     border: 1px solid rgba(var(--color-foreground), 0.08);
@@ -55,11 +100,19 @@
     #shopify-section-{{ section.id }} .blogs-page__grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
+    #shopify-section-{{ section.id }} .blogs-page__keyword-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
   @media screen and (min-width: 990px) {
     #shopify-section-{{ section.id }} .blogs-page__grid {
       grid-template-columns: repeat({{ section.settings.columns_desktop }}, minmax(0, 1fr));
+    }
+
+    #shopify-section-{{ section.id }} .blogs-page__keyword-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 </style>
@@ -69,6 +122,42 @@
     <div class="blogs-page__intro rte">
       {{ section.settings.intro }}
     </div>
+  {%- endif -%}
+
+  {%- if section.settings.show_keyword_hub -%}
+    <nav class="blogs-page__keyword-hub" aria-label="Blog keyword categories">
+      <div class="blogs-page__intro rte">
+        <h2>{{ section.settings.keyword_hub_heading }}</h2>
+        <p>{{ section.settings.keyword_hub_text }}</p>
+      </div>
+
+      <div class="blogs-page__keyword-grid">
+        <a href="/blogs/dog-behavior/tagged/yak-chews" class="blogs-page__keyword-card">
+          <span class="blogs-page__keyword-label">Yak chews</span>
+          <span class="blogs-page__keyword-text t4">Core guides for duration, sizing, ingredients, and safe routines.</span>
+        </a>
+        <a href="/blogs/dog-behavior/tagged/rawhide-alternative" class="blogs-page__keyword-card">
+          <span class="blogs-page__keyword-label">Rawhide alternative</span>
+          <span class="blogs-page__keyword-text t4">Comparison content for dog parents switching from rawhide.</span>
+        </a>
+        <a href="/blogs/dog-behavior/tagged/aggressive-chewers" class="blogs-page__keyword-card">
+          <span class="blogs-page__keyword-label">Aggressive chewers</span>
+          <span class="blogs-page__keyword-text t4">Durable chew advice for persistent and powerful chewing styles.</span>
+        </a>
+        <a href="/blogs/dog-behavior/tagged/dog-enrichment" class="blogs-page__keyword-card">
+          <span class="blogs-page__keyword-label">Dog enrichment</span>
+          <span class="blogs-page__keyword-text t4">Boredom, crate practice, separation routines, and calm-time ideas.</span>
+        </a>
+        <a href="/blogs/dog-behavior/tagged/breed-guide" class="blogs-page__keyword-card">
+          <span class="blogs-page__keyword-label">Breed guides</span>
+          <span class="blogs-page__keyword-text t4">Breed-aware chew size and routine recommendations.</span>
+        </a>
+        <a href="/blogs/dog-behavior/tagged/calming-routines" class="blogs-page__keyword-card">
+          <span class="blogs-page__keyword-label">Calming routines</span>
+          <span class="blogs-page__keyword-text t4">Structured chewing support for settling and transitions.</span>
+        </a>
+      </div>
+    </nav>
   {%- endif -%}
 
   {%- if aggregated_articles.size > 0 -%}
@@ -89,6 +178,8 @@
             excerpt_mode: section.settings.excerpt_mode,
             show_reading_estimate: section.settings.show_reading_estimate,
             show_first_tag: section.settings.show_first_tag,
+            media_aspect_ratio: 'square',
+            image_cover: true,
             columns_desktop: section.settings.columns_desktop
           -%}
         </div>
@@ -100,6 +191,28 @@
     </div>
   {%- endif -%}
 </div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ page.title | default: 'Prime Pet Food Blog' | json }},
+  "description": {{ section.settings.keyword_hub_text | json }},
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {%- for article in aggregated_articles limit: section.settings.items_to_show -%}
+        {
+          "@type": "ListItem",
+          "position": {{ forloop.index }},
+          "url": {{ shop.url | append: article.url | json }},
+          "name": {{ article.title | json }}
+        }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+  }
+}
+</script>
 
 {% schema %}
 {
@@ -117,6 +230,28 @@
       "id": "intro",
       "label": "Intro text",
       "default": "<p>Browse all of our latest blog posts in one place.</p>"
+    },
+    {
+      "type": "header",
+      "content": "SEO keyword hub"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_keyword_hub",
+      "label": "Show keyword category hub",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "keyword_hub_heading",
+      "label": "Keyword hub heading",
+      "default": "Browse by main dog chew keyword"
+    },
+    {
+      "type": "text",
+      "id": "keyword_hub_text",
+      "label": "Keyword hub text",
+      "default": "Use these topic clusters to find Prime Pet Food guidance on yak chews, rawhide alternatives, aggressive chewers, dog enrichment, breed sizing, and calming routines."
     },
     {
       "type": "range",
