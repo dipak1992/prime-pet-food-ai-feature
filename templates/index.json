@@ -102,10 +102,21 @@
         "bottom_padding": 40,
         "navigation_spacing": 20
       }
+    },
+    "prime_video_cta": {
+      "type": "prime-video-cta",
+      "settings": {
+        "kicker": "Ready to try it?",
+        "heading": "Give your dog the chew they deserve.",
+        "subtext": "Join 20,000+ dog parents who switched to safer, longer-lasting enrichment. Free shipping over $30.",
+        "cta_text": "Buy Yak Chews",
+        "secondary_text": "View all chews"
+      }
     }
   },
   "order": [
     "prime_homepage_experience",
-    "video_carousel"
+    "video_carousel",
+    "prime_video_cta"
   ]
 }
