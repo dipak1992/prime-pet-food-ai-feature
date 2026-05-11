@@ -1,0 +1,939 @@
+{% liquid
+  assign hero_image = 'prime-subscribe-save-hero.jpg' | asset_url
+  assign product_url = section.settings.product_url | default: '/products/himalayan-yak-chews-for-dogs'
+%}
+
+<main class="pss" aria-labelledby="SubscribeSaveTitle">
+  <section class="pss-hero">
+    <div class="pss-hero__media" aria-hidden="true">
+      <img src="{{ hero_image }}" alt="" width="1717" height="916" loading="eager" fetchpriority="high">
+    </div>
+    <div class="pss-hero__overlay" aria-hidden="true"></div>
+
+    <div class="pss-shell pss-hero__content">
+      <p class="pss-kicker">Subscribe &amp; Save</p>
+      <h1 id="SubscribeSaveTitle">{{ section.settings.hero_heading }}</h1>
+      <p class="pss-hero__sub">{{ section.settings.hero_subheading }}</p>
+
+      <div class="pss-hero__actions" aria-label="Subscribe and Save actions">
+        <a href="{{ product_url }}" class="pss-btn pss-btn--primary">Start Subscription</a>
+        <a href="#subscribe-how" class="pss-btn pss-btn--secondary">How It Works</a>
+      </div>
+
+      <div class="pss-hero__proof" aria-label="Subscription highlights">
+        <span>20% off first month</span>
+        <span>Up to 30% off by plan</span>
+        <span>Skip, pause, or cancel anytime</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="pss-benefits" aria-labelledby="PssBenefitsTitle">
+    <div class="pss-shell">
+      <div class="pss-section-head">
+        <p class="pss-kicker">Better routine, less reordering</p>
+        <h2 id="PssBenefitsTitle">A calmer chew rhythm, delivered automatically.</h2>
+        <p>Subscribe &amp; Save is built for dog parents who use chews as a real enrichment routine, not a one-off treat.</p>
+      </div>
+
+      <div class="pss-benefit-grid">
+        <article class="pss-benefit">
+          <span class="pss-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.3 7 12 12l8.7-5"/><path d="M12 22V12"/></svg>
+          </span>
+          <h3>Automatic deliveries</h3>
+          <p>Your dog&rsquo;s chews arrive on a rhythm, so calm-time routines do not depend on last-minute shopping.</p>
+        </article>
+
+        <article class="pss-benefit">
+          <span class="pss-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M20 12v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7z"/></svg>
+          </span>
+          <h3>Premium savings</h3>
+          <p>Start with 20% off your first month, then unlock recurring value based on the routine your dog needs.</p>
+        </article>
+
+        <article class="pss-benefit">
+          <span class="pss-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+          </span>
+          <h3>Flexible schedule</h3>
+          <p>Choose a cadence that fits your household, then adjust as your dog&rsquo;s real chew pace changes.</p>
+        </article>
+
+        <article class="pss-benefit">
+          <span class="pss-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.74V17h8v-2.26A7 7 0 0 0 12 2z"/></svg>
+          </span>
+          <h3>Smarter enrichment</h3>
+          <p>Use Prime yak chews to create a consistent evening, crate, work-call, or boredom-relief routine.</p>
+        </article>
+
+        <article class="pss-benefit">
+          <span class="pss-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
+          </span>
+          <h3>Manage anytime</h3>
+          <p>Skip, pause, change frequency, or cancel from your account. No hidden commitment language.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="pss-how" id="subscribe-how" aria-labelledby="PssHowTitle">
+    <div class="pss-shell">
+      <div class="pss-section-head pss-section-head--center">
+        <p class="pss-kicker">How it works</p>
+        <h2 id="PssHowTitle">Four simple steps to a better chew routine.</h2>
+      </div>
+
+      <div class="pss-steps">
+        <article class="pss-step">
+          <span>1</span>
+          <h3>Choose your chew</h3>
+          <p>Select the Prime yak chew size that matches your dog&rsquo;s weight and chewing style.</p>
+        </article>
+        <article class="pss-step">
+          <span>2</span>
+          <h3>Pick your frequency</h3>
+          <p>Set a delivery rhythm that fits your enrichment routine and household pace.</p>
+        </article>
+        <article class="pss-step">
+          <span>3</span>
+          <h3>Save automatically</h3>
+          <p>Enjoy 20% off your first month, then recurring savings based on your plan.</p>
+        </article>
+        <article class="pss-step">
+          <span>4</span>
+          <h3>Manage anytime</h3>
+          <p>Skip, pause, cancel, or adjust before your next order from your account.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="pss-tiers" aria-labelledby="PssTiersTitle">
+    <div class="pss-shell">
+      <div class="pss-section-head">
+        <p class="pss-kicker">Choose your rhythm</p>
+        <h2 id="PssTiersTitle">Subscription plans built around dog lifestyle, not coupon math.</h2>
+        <p>Start with 20% off your first month. Then keep saving as your enrichment needs grow.</p>
+      </div>
+
+      <div class="pss-tier-grid">
+        <article class="pss-tier">
+          <p class="pss-tier__label">Monthly Plan</p>
+          <h3>One-dog routine</h3>
+          <p>For steady enrichment and households that want a reliable chew on hand.</p>
+          <strong>20% off first month</strong>
+          <span>10% recurring savings</span>
+          <a href="{{ product_url }}">Start Monthly</a>
+        </article>
+
+        <article class="pss-tier pss-tier--featured">
+          <p class="pss-tier__label">Most Flexible</p>
+          <h3>Multi-Dog Plan</h3>
+          <p>For households with multiple dogs or a more frequent calm-time routine.</p>
+          <strong>20% off first month</strong>
+          <span>Up to 20% recurring savings</span>
+          <a href="{{ product_url }}">Build My Routine</a>
+        </article>
+
+        <article class="pss-tier">
+          <p class="pss-tier__label">Heavy Chewer Plan</p>
+          <h3>Always stocked</h3>
+          <p>For power chewers, larger dogs, and families who rely on daily enrichment.</p>
+          <strong>20% off first month</strong>
+          <span>Up to 30% recurring savings</span>
+          <a href="{{ product_url }}">Choose Heavy Chewer</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="pss-love" aria-labelledby="PssLoveTitle">
+    <div class="pss-shell pss-love__inner">
+      <div>
+        <p class="pss-kicker">Why customers subscribe</p>
+        <h2 id="PssLoveTitle">It feels less like reordering, and more like having a calmer household system.</h2>
+      </div>
+      <div class="pss-stories">
+        <blockquote>
+          <p>&ldquo;No more realizing we are out right when my dog needs his evening chew routine.&rdquo;</p>
+          <cite>Nightly calm-time routine</cite>
+        </blockquote>
+        <blockquote>
+          <p>&ldquo;Perfect for our aggressive chewer. We can plan ahead instead of constantly shopping around.&rdquo;</p>
+          <cite>Strong chewer household</cite>
+        </blockquote>
+        <blockquote>
+          <p>&ldquo;Our dog expects his chew after dinner now. It helps the whole house wind down.&rdquo;</p>
+          <cite>Modern dog-parent routine</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="pss-trust" aria-labelledby="PssTrustTitle">
+    <div class="pss-shell pss-trust__inner">
+      <div>
+        <p class="pss-kicker">Subscription without pressure</p>
+        <h2 id="PssTrustTitle">You stay in control.</h2>
+        <p>Subscriptions only work when they feel easy to manage. Prime keeps the routine simple, flexible, and transparent.</p>
+      </div>
+      <div class="pss-trust__grid">
+        <div><strong>Skip anytime</strong><span>Need a break? Skip the next shipment.</span></div>
+        <div><strong>Pause anytime</strong><span>Hold deliveries while you catch up.</span></div>
+        <div><strong>Cancel anytime</strong><span>No hidden fees or awkward hoops.</span></div>
+        <div><strong>Change frequency</strong><span>Adjust cadence as your dog&rsquo;s chew pace changes.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pss-faq" aria-labelledby="PssFaqTitle">
+    <div class="pss-shell pss-faq__inner">
+      <div class="pss-section-head">
+        <p class="pss-kicker">Questions before you subscribe</p>
+        <h2 id="PssFaqTitle">Everything should feel clear before the first box ships.</h2>
+      </div>
+
+      <div class="pss-accordion">
+        <details open>
+          <summary>How does Subscribe &amp; Save work?</summary>
+          <p>Choose your Prime yak chew, select a delivery frequency, and checkout with a subscription option. Your future orders renew automatically on the schedule you choose.</p>
+        </details>
+        <details>
+          <summary>Can I cancel anytime?</summary>
+          <p>Yes. You can cancel from your account before the next order processes. The goal is a helpful routine, not a locked-in commitment.</p>
+        </details>
+        <details>
+          <summary>How do I change delivery frequency?</summary>
+          <p>Manage your subscription from your account to adjust cadence, skip an upcoming order, pause, or update shipping details.</p>
+        </details>
+        <details>
+          <summary>When will I be charged?</summary>
+          <p>You are charged when each subscription order is created according to your selected delivery schedule. You can review upcoming orders in your account.</p>
+        </details>
+        <details>
+          <summary>Can I skip a shipment?</summary>
+          <p>Yes. Skip an upcoming shipment if your dog is still stocked, if you are traveling, or if your routine changes.</p>
+        </details>
+        <details>
+          <summary>How do subscription discounts work?</summary>
+          <p>Your first month starts at 20% off. Recurring savings can reach up to 30% depending on subscription type, order mix, and eligible subscription settings shown at checkout.</p>
+        </details>
+        <details>
+          <summary>Can I manage multiple dogs?</summary>
+          <p>Yes. Multi-dog households can subscribe around size, chewing intensity, and usage cadence. If you are unsure, start with the chew duration estimator.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="pss-terms" aria-labelledby="PssTermsTitle">
+    <div class="pss-shell pss-terms__inner">
+      <div>
+        <p class="pss-kicker">Simple terms</p>
+        <h2 id="PssTermsTitle">The practical details.</h2>
+      </div>
+      <div class="pss-terms__copy">
+        <p>Subscriptions renew automatically according to the frequency selected at checkout. Your payment method is charged when each subscription order is processed.</p>
+        <p>You can skip, pause, change frequency, update payment details, or cancel before the next order processes through your account or by contacting support.</p>
+        <p>Introductory and recurring discounts apply only to eligible subscription products and may vary by plan, bundle, product availability, or promotional rules. Prime Pet Food may update, modify, or discontinue subscription offers as needed while honoring orders already processed.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="pss-mobile-cta" aria-label="Subscribe and Save mobile action">
+    <a href="{{ product_url }}">Start Subscription</a>
+  </div>
+</main>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does Subscribe & Save work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Choose your Prime yak chew, select a delivery frequency, and checkout with a subscription option. Future orders renew automatically on the schedule you choose."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I cancel anytime?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. You can cancel from your account before the next order processes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I skip a shipment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. You can skip an upcoming subscription shipment if your dog is still stocked or your routine changes."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  .pss {
+    --pss-ink: #171512;
+    --pss-muted: #64564a;
+    --pss-cream: #fffaf2;
+    --pss-soft: #f6efe5;
+    --pss-white: #ffffff;
+    --pss-clay: #b85f32;
+    --pss-clay-dark: #8e421f;
+    --pss-green: #314f40;
+    --pss-sage: #dfe8dc;
+    --pss-line: rgba(55, 43, 31, 0.13);
+    color: var(--pss-ink);
+    background: var(--pss-cream);
+    font-family: var(--prime-font-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  }
+
+  .pss * {
+    box-sizing: border-box;
+  }
+
+  .pss-shell {
+    width: min(1160px, calc(100% - 32px));
+    margin: 0 auto;
+  }
+
+  .pss-kicker {
+    margin: 0 0 12px;
+    color: var(--pss-clay);
+    font-size: 12px;
+    font-weight: 820;
+    letter-spacing: 0.1em;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  .pss h1,
+  .pss h2,
+  .pss h3,
+  .pss p {
+    letter-spacing: 0;
+  }
+
+  .pss-hero {
+    position: relative;
+    min-height: min(760px, 86vh);
+    display: grid;
+    align-items: center;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .pss-hero__media,
+  .pss-hero__overlay {
+    position: absolute;
+    inset: 0;
+  }
+
+  .pss-hero__media {
+    z-index: -2;
+  }
+
+  .pss-hero__media img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .pss-hero__overlay {
+    z-index: -1;
+    background:
+      linear-gradient(90deg, rgba(255, 250, 242, 0.96) 0%, rgba(255, 250, 242, 0.86) 34%, rgba(255, 250, 242, 0.24) 68%, rgba(255, 250, 242, 0.08) 100%),
+      linear-gradient(0deg, rgba(23, 21, 18, 0.2), rgba(23, 21, 18, 0));
+  }
+
+  .pss-hero__content {
+    padding: 92px 0 104px;
+    max-width: 650px;
+  }
+
+  .pss-hero h1 {
+    margin: 0;
+    max-width: 620px;
+    font-family: var(--prime-font-display, var(--prime-font-sans, inherit));
+    font-size: 70px;
+    font-weight: 760;
+    line-height: 0.98;
+  }
+
+  .pss-hero__sub {
+    max-width: 560px;
+    margin: 20px 0 0;
+    color: var(--pss-muted);
+    font-size: 18px;
+    line-height: 1.66;
+  }
+
+  .pss-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+  }
+
+  .pss-btn {
+    display: inline-flex;
+    min-height: 52px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 15px 24px;
+    font-size: 13px;
+    font-weight: 820;
+    line-height: 1;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+  }
+
+  .pss-btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .pss-btn--primary {
+    background: var(--pss-clay);
+    color: var(--pss-white);
+  }
+
+  .pss-btn--primary:hover {
+    background: var(--pss-clay-dark);
+  }
+
+  .pss-btn--secondary {
+    border: 1px solid var(--pss-line);
+    background: rgba(255, 255, 255, 0.72);
+    color: var(--pss-ink);
+  }
+
+  .pss-hero__proof {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  .pss-hero__proof span {
+    border: 1px solid rgba(49, 79, 64, 0.18);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.72);
+    color: var(--pss-green);
+    font-size: 12px;
+    font-weight: 760;
+    line-height: 1;
+    padding: 9px 12px;
+  }
+
+  .pss-section-head {
+    max-width: 720px;
+    margin-bottom: 34px;
+  }
+
+  .pss-section-head--center {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .pss-section-head h2,
+  .pss-love h2,
+  .pss-trust h2,
+  .pss-terms h2 {
+    margin: 0;
+    font-family: var(--prime-font-display, var(--prime-font-sans, inherit));
+    font-size: 50px;
+    font-weight: 745;
+    line-height: 1.04;
+  }
+
+  .pss-section-head p:not(.pss-kicker),
+  .pss-trust p {
+    margin: 14px 0 0;
+    color: var(--pss-muted);
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  .pss-benefits,
+  .pss-how,
+  .pss-tiers,
+  .pss-love,
+  .pss-trust,
+  .pss-faq,
+  .pss-terms {
+    padding: clamp(58px, 8vw, 96px) 0;
+  }
+
+  .pss-benefits,
+  .pss-tiers,
+  .pss-faq {
+    background: var(--pss-cream);
+  }
+
+  .pss-how,
+  .pss-trust {
+    background: var(--pss-white);
+  }
+
+  .pss-benefit-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .pss-benefit,
+  .pss-step,
+  .pss-tier,
+  .pss-stories blockquote,
+  .pss-trust__grid div,
+  .pss-accordion details {
+    border: 1px solid var(--pss-line);
+    border-radius: 8px;
+    background: var(--pss-white);
+  }
+
+  .pss-benefit {
+    min-height: 240px;
+    padding: 22px;
+  }
+
+  .pss-icon {
+    display: inline-flex;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: var(--pss-sage);
+    color: var(--pss-green);
+  }
+
+  .pss-icon svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .pss-benefit h3,
+  .pss-step h3,
+  .pss-tier h3 {
+    margin: 18px 0 8px;
+    font-size: 18px;
+    font-weight: 760;
+    line-height: 1.18;
+  }
+
+  .pss-benefit p,
+  .pss-step p,
+  .pss-tier p,
+  .pss-stories p,
+  .pss-trust__grid span,
+  .pss-accordion p,
+  .pss-terms__copy p {
+    margin: 0;
+    color: var(--pss-muted);
+    font-size: 14px;
+    line-height: 1.58;
+  }
+
+  .pss-steps {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    counter-reset: step;
+  }
+
+  .pss-step {
+    position: relative;
+    padding: 24px;
+    background: var(--pss-soft);
+  }
+
+  .pss-step span {
+    display: inline-flex;
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: var(--pss-green);
+    color: var(--pss-white);
+    font-size: 14px;
+    font-weight: 850;
+  }
+
+  .pss-tier-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .pss-tier {
+    display: flex;
+    min-height: 360px;
+    flex-direction: column;
+    padding: 28px;
+  }
+
+  .pss-tier--featured {
+    background: var(--pss-green);
+    color: var(--pss-white);
+    border-color: var(--pss-green);
+    box-shadow: 0 24px 60px rgba(49, 79, 64, 0.18);
+  }
+
+  .pss-tier__label {
+    margin: 0;
+    color: var(--pss-clay);
+    font-size: 12px;
+    font-weight: 820;
+    text-transform: uppercase;
+  }
+
+  .pss-tier--featured .pss-tier__label,
+  .pss-tier--featured p,
+  .pss-tier--featured span {
+    color: rgba(255, 250, 242, 0.78);
+  }
+
+  .pss-tier h3 {
+    font-size: 28px;
+  }
+
+  .pss-tier strong {
+    display: block;
+    margin-top: auto;
+    color: inherit;
+    font-size: 18px;
+    line-height: 1.2;
+  }
+
+  .pss-tier span {
+    display: block;
+    margin-top: 8px;
+    color: var(--pss-muted);
+    font-size: 14px;
+    font-weight: 720;
+  }
+
+  .pss-tier a {
+    display: inline-flex;
+    width: fit-content;
+    min-height: 46px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 24px;
+    border-radius: 999px;
+    background: var(--pss-clay);
+    color: var(--pss-white);
+    padding: 13px 18px;
+    font-size: 12px;
+    font-weight: 820;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .pss-tier--featured a {
+    background: var(--pss-white);
+    color: var(--pss-green);
+  }
+
+  .pss-love {
+    background: #1d211c;
+    color: var(--pss-white);
+  }
+
+  .pss-love .pss-kicker {
+    color: #d9b887;
+  }
+
+  .pss-love__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 44px;
+    align-items: start;
+  }
+
+  .pss-stories {
+    display: grid;
+    gap: 12px;
+  }
+
+  .pss-stories blockquote {
+    margin: 0;
+    background: rgba(255, 250, 242, 0.08);
+    border-color: rgba(255, 250, 242, 0.14);
+    padding: 22px;
+  }
+
+  .pss-stories p {
+    color: rgba(255, 250, 242, 0.86);
+    font-size: 17px;
+  }
+
+  .pss-stories cite {
+    display: block;
+    margin-top: 12px;
+    color: #d9b887;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 760;
+  }
+
+  .pss-trust__inner,
+  .pss-terms__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 42px;
+    align-items: start;
+  }
+
+  .pss-trust__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .pss-trust__grid div {
+    background: var(--pss-soft);
+    padding: 20px;
+  }
+
+  .pss-trust__grid strong {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--pss-green);
+    font-size: 17px;
+    line-height: 1.2;
+  }
+
+  .pss-faq__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: 42px;
+    align-items: start;
+  }
+
+  .pss-accordion {
+    display: grid;
+    gap: 10px;
+  }
+
+  .pss-accordion details {
+    overflow: hidden;
+  }
+
+  .pss-accordion summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 20px 22px;
+    color: var(--pss-ink);
+    font-size: 17px;
+    font-weight: 760;
+    line-height: 1.3;
+  }
+
+  .pss-accordion summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .pss-accordion p {
+    padding: 0 22px 20px;
+  }
+
+  .pss-terms {
+    background: var(--pss-soft);
+    padding-bottom: 120px;
+  }
+
+  .pss-terms__copy {
+    display: grid;
+    gap: 14px;
+    border-left: 2px solid rgba(184, 95, 50, 0.32);
+    padding-left: 24px;
+  }
+
+  .pss-mobile-cta {
+    display: none;
+  }
+
+  @media (max-width: 990px) {
+    .pss-hero h1 {
+      font-size: 58px;
+    }
+
+    .pss-section-head h2,
+    .pss-love h2,
+    .pss-trust h2,
+    .pss-terms h2 {
+      font-size: 42px;
+    }
+
+    .pss-benefit-grid,
+    .pss-steps {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .pss-tier-grid,
+    .pss-love__inner,
+    .pss-trust__inner,
+    .pss-faq__inner,
+    .pss-terms__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .pss-shell {
+      width: calc(100% - 24px);
+    }
+
+    .pss-hero {
+      min-height: 720px;
+      align-items: end;
+    }
+
+    .pss-hero__media img {
+      object-position: 58% center;
+    }
+
+    .pss-hero__overlay {
+      background:
+        linear-gradient(180deg, rgba(255, 250, 242, 0.18) 0%, rgba(255, 250, 242, 0.68) 38%, rgba(255, 250, 242, 0.98) 68%, rgba(255, 250, 242, 1) 100%),
+        linear-gradient(0deg, rgba(23, 21, 18, 0.16), rgba(23, 21, 18, 0));
+    }
+
+    .pss-hero__content {
+      padding: 260px 0 34px;
+    }
+
+    .pss-hero h1 {
+      font-size: 42px;
+    }
+
+    .pss-hero__sub {
+      font-size: 16px;
+    }
+
+    .pss-section-head h2,
+    .pss-love h2,
+    .pss-trust h2,
+    .pss-terms h2 {
+      font-size: 32px;
+    }
+
+    .pss-hero__actions {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .pss-btn {
+      width: 100%;
+    }
+
+    .pss-benefits,
+    .pss-how,
+    .pss-tiers,
+    .pss-love,
+    .pss-trust,
+    .pss-faq,
+    .pss-terms {
+      padding: 52px 0;
+    }
+
+    .pss-benefit-grid,
+    .pss-steps,
+    .pss-tier-grid,
+    .pss-trust__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .pss-benefit {
+      min-height: 0;
+    }
+
+    .pss-tier {
+      min-height: 0;
+    }
+
+    .pss-terms {
+      padding-bottom: 104px;
+    }
+
+    .pss-mobile-cta {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 20;
+      display: block;
+      padding: 10px 12px;
+      background: rgba(255, 250, 242, 0.94);
+      border-top: 1px solid var(--pss-line);
+      backdrop-filter: blur(10px);
+    }
+
+    .pss-mobile-cta a {
+      display: flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: var(--pss-clay);
+      color: var(--pss-white);
+      font-size: 13px;
+      font-weight: 850;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Prime Subscribe & Save",
+  "settings": [
+    {
+      "type": "text",
+      "id": "hero_heading",
+      "label": "Hero heading",
+      "default": "Never run out of your dog&rsquo;s favorite chew."
+    },
+    {
+      "type": "textarea",
+      "id": "hero_subheading",
+      "label": "Hero subheading",
+      "default": "Long-lasting Himalayan yak cheese chews delivered on your schedule, so your dog&rsquo;s calm enrichment routine stays consistent and you save automatically."
+    },
+    {
+      "type": "url",
+      "id": "product_url",
+      "label": "Subscription product URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Prime Subscribe & Save"
+    }
+  ]
+}
+{% endschema %}
