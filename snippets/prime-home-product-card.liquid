@@ -1,0 +1,22 @@
+<article class="ph-product-card">
+  <div>
+    <span class="ph-product-card__badge">{{ badge }}</span>
+    <h3>{{ title }}</h3>
+    <span class="ph-product-card__fit">{{ fit }}</span>
+    <p>{{ text }}</p>
+  </div>
+
+  <div class="ph-product-card__footer">
+    {% if variant != blank %}
+      <span class="ph-product-card__price">{{ variant.price | money }}</span>
+      <form method="post" action="/cart/add">
+        <input type="hidden" name="id" value="{{ variant.id }}">
+        <button type="submit">Add to cart</button>
+      </form>
+    {% elsif product != blank %}
+      <a href="{{ product.url }}" class="ph-product-card__link">View product</a>
+    {% else %}
+      <a href="/collections/all" class="ph-product-card__link">Shop chews</a>
+    {% endif %}
+  </div>
+</article>

@@ -1,0 +1,632 @@
+{% liquid
+  assign product = all_products['himalayan-yak-chews-for-dogs']
+  assign hero_image = 'prime-calm-dog-yak-chew-hero.jpg' | asset_url
+  assign lab_image = 'prime-ugc-labrador-chew-card.jpg' | asset_url
+  assign frenchie_image = 'prime-ugc-french-bulldog-chew-card.jpg' | asset_url
+  assign golden_image = 'prime-ugc-golden-retriever-chew-card.jpg' | asset_url
+
+  assign small_variant = nil
+  assign medium_variant = nil
+  assign large_variant = nil
+
+  if product != blank
+    for variant in product.variants
+      if variant.id == 51744916701504
+        assign small_variant = variant
+      elsif variant.id == 51744918962496
+        assign medium_variant = variant
+      elsif variant.id == 51744918995264
+        assign large_variant = variant
+      endif
+    endfor
+  endif
+%}
+
+<section class="prime-homepage" aria-label="Prime Pet Food homepage">
+  <div class="ph-hero">
+    <div class="ph-hero__media" aria-hidden="true">
+      <img src="{{ hero_image }}" alt="" width="1536" height="1024" loading="eager">
+    </div>
+    <div class="ph-shell ph-hero__content">
+      <p class="ph-kicker">Premium Himalayan yak cheese chews</p>
+      <h1>Long-lasting chews for calmer dogs.</h1>
+      <p>
+        Rawhide-free Himalayan yak cheese chews made for safer, longer-lasting supervised chew time.
+        Simple ingredients, better enrichment, less guesswork.
+      </p>
+      <div class="ph-actions" aria-label="Homepage actions">
+        <a href="/collections/all" class="ph-button ph-button--primary">Shop yak chews</a>
+        <a href="/pages/how-long-will-this-last-for-my-dog" class="ph-button ph-button--secondary">Find my dog's size</a>
+      </div>
+      <div class="ph-hero__proof" aria-label="Key benefits">
+        <span>Rawhide-free</span>
+        <span>Long-lasting</span>
+        <span>Simple ingredients</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ph-products">
+    <div class="ph-shell">
+      <div class="ph-section-head">
+        <p class="ph-kicker">Start here</p>
+        <h2>Shop by dog size.</h2>
+        <p>Choose the closest fit by weight. If you are unsure, use the estimator before buying.</p>
+      </div>
+
+      <div class="ph-product-grid">
+        {% render 'prime-home-product-card',
+          product: product,
+          variant: small_variant,
+          label: 'Small dogs',
+          title: 'Puppy Starter Chew',
+          fit: '1-15 lbs',
+          text: 'A smaller chew for pups and small breeds that need a calm starter routine.',
+          badge: 'Small'
+        %}
+
+        {% render 'prime-home-product-card',
+          product: product,
+          variant: medium_variant,
+          label: 'Most popular',
+          title: 'Classic Yak Chew',
+          fit: '15-35 lbs',
+          text: 'The everyday best fit for many medium dogs and steady chewers.',
+          badge: 'Medium'
+        %}
+
+        {% render 'prime-home-product-card',
+          product: product,
+          variant: large_variant,
+          label: 'Power chewers',
+          title: 'Power Chewer',
+          fit: '35-55 lbs',
+          text: 'A denser choice for dogs that move through softer chews too quickly.',
+          badge: 'Large'
+        %}
+      </div>
+
+      <div class="ph-products__link">
+        <a href="/collections/all">View all sizes</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ph-estimator">
+    <div class="ph-shell ph-estimator__inner">
+      <div>
+        <p class="ph-kicker">Not sure what to buy?</p>
+        <h2>Estimate chew duration before you order.</h2>
+        <p>
+          Answer a few quick questions about your dog's size and chewing style. Get a smarter
+          starting point in under a minute.
+        </p>
+      </div>
+      <a href="/pages/how-long-will-this-last-for-my-dog" class="ph-button ph-button--primary">Find my dog's size</a>
+    </div>
+  </div>
+
+  <div class="ph-benefits">
+    <div class="ph-shell ph-benefits__grid">
+      <article>
+        <span>01</span>
+        <h3>Long-lasting enrichment</h3>
+        <p>Designed to help dogs settle into focused supervised chew sessions.</p>
+      </article>
+      <article>
+        <span>02</span>
+        <h3>Rawhide-free peace of mind</h3>
+        <p>A cleaner alternative for dog parents who want a simpler chew routine.</p>
+      </article>
+      <article>
+        <span>03</span>
+        <h3>Himalayan authenticity</h3>
+        <p>Rooted in traditional yak cheese heritage and built for modern dog homes.</p>
+      </article>
+    </div>
+  </div>
+
+  <div class="ph-fit">
+    <div class="ph-shell">
+      <div class="ph-section-head">
+        <p class="ph-kicker">Dog fit examples</p>
+        <h2>Quick sizing cues for common dogs.</h2>
+        <p>These examples are directional. Use the estimator for your dog's exact profile.</p>
+      </div>
+
+      <div class="ph-fit__grid">
+        <article>
+          <img src="{{ frenchie_image }}" alt="French Bulldog with Prime Pet Food yak chew" loading="lazy" width="768" height="960">
+          <div>
+            <strong>French Bulldog</strong>
+            <span>Often starts around small to medium.</span>
+          </div>
+        </article>
+        <article>
+          <img src="{{ golden_image }}" alt="Golden Retriever with Prime Pet Food yak chew" loading="lazy" width="768" height="960">
+          <div>
+            <strong>Golden Retriever</strong>
+            <span>Often starts around large.</span>
+          </div>
+        </article>
+        <article>
+          <img src="{{ lab_image }}" alt="Labrador with Prime Pet Food yak chew" loading="lazy" width="768" height="960">
+          <div>
+            <strong>Labrador</strong>
+            <span>Often starts around large to XL.</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="ph-close">
+    <div class="ph-shell ph-close__inner">
+      <p class="ph-kicker">Ready for calmer chew time?</p>
+      <h2>Choose the yak chew that fits your dog.</h2>
+      <p>Start with the best-selling sizes or estimate your dog's chew duration first.</p>
+      <div class="ph-actions ph-actions--center">
+        <a href="/collections/all" class="ph-button ph-button--primary">Shop yak chews</a>
+        <a href="/pages/how-long-will-this-last-for-my-dog" class="ph-button ph-button--secondary">Estimate duration</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .prime-homepage {
+    --ph-ink: #171512;
+    --ph-muted: #5f574e;
+    --ph-cream: #fffaf2;
+    --ph-soft: #f8f1e7;
+    --ph-clay: #b85f32;
+    --ph-clay-dark: #94451f;
+    --ph-line: rgba(55, 43, 31, 0.13);
+    color: var(--ph-ink);
+    background: var(--ph-cream);
+    font-family: var(--prime-font-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  }
+
+  .prime-homepage * { box-sizing: border-box; }
+
+  .ph-shell {
+    width: min(1160px, calc(100% - 32px));
+    margin: 0 auto;
+  }
+
+  .ph-kicker {
+    margin: 0 0 12px;
+    color: var(--ph-clay);
+    font-size: 12px;
+    line-height: 1.25;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    font-weight: 780;
+  }
+
+  .prime-homepage h1,
+  .prime-homepage h2,
+  .prime-homepage h3 {
+    margin: 0;
+    color: inherit;
+    font-family: var(--prime-font-display, var(--prime-font-sans, inherit));
+    letter-spacing: 0;
+  }
+
+  .prime-homepage h1 {
+    max-width: 760px;
+    font-size: 72px;
+    line-height: 0.98;
+    font-weight: 760;
+  }
+
+  .prime-homepage h2 {
+    font-size: 44px;
+    line-height: 1.08;
+    font-weight: 735;
+  }
+
+  .prime-homepage h3 {
+    font-size: 22px;
+    line-height: 1.16;
+    font-weight: 735;
+  }
+
+  .prime-homepage p {
+    color: var(--ph-muted);
+    font-size: 17px;
+    line-height: 1.68;
+  }
+
+  .ph-hero {
+    position: relative;
+    min-height: 680px;
+    display: grid;
+    align-items: end;
+    overflow: hidden;
+    isolation: isolate;
+    background: #1e1a15;
+  }
+
+  .ph-hero__media,
+  .ph-hero__media::after {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+  }
+
+  .ph-hero__media::after {
+    content: "";
+    z-index: 1;
+    background: linear-gradient(90deg, rgba(19, 16, 12, 0.86) 0%, rgba(19, 16, 12, 0.56) 48%, rgba(19, 16, 12, 0.12) 100%);
+  }
+
+  .ph-hero__media img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .ph-hero__content {
+    padding: 108px 0 82px;
+  }
+
+  .ph-hero .ph-kicker,
+  .ph-hero h1,
+  .ph-hero p {
+    color: #fffaf2;
+  }
+
+  .ph-hero p {
+    max-width: 620px;
+    margin: 22px 0 0;
+    color: rgba(255, 250, 242, 0.84);
+  }
+
+  .ph-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+  }
+
+  .ph-actions--center {
+    justify-content: center;
+  }
+
+  .ph-button {
+    display: inline-flex;
+    min-height: 52px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 15px 25px;
+    font-size: 13px;
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    font-weight: 780;
+    text-decoration: none;
+  }
+
+  .ph-button--primary {
+    background: var(--ph-clay);
+    color: #fff;
+  }
+
+  .ph-button--secondary {
+    border: 1px solid rgba(255, 250, 242, 0.44);
+    background: rgba(255, 250, 242, 0.08);
+    color: #fffaf2;
+  }
+
+  .ph-close .ph-button--secondary,
+  .ph-products__link a {
+    border-color: var(--ph-line);
+    background: #fff;
+    color: var(--ph-ink);
+  }
+
+  .ph-hero__proof {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 26px;
+  }
+
+  .ph-hero__proof span {
+    border: 1px solid rgba(255, 250, 242, 0.28);
+    border-radius: 999px;
+    background: rgba(255, 250, 242, 0.08);
+    color: rgba(255, 250, 242, 0.9);
+    font-size: 13px;
+    line-height: 1;
+    padding: 10px 13px;
+  }
+
+  .ph-products,
+  .ph-estimator,
+  .ph-benefits,
+  .ph-fit,
+  .ph-close {
+    padding: 68px 0;
+  }
+
+  .ph-section-head {
+    max-width: 720px;
+    margin-bottom: 30px;
+  }
+
+  .ph-section-head p:not(.ph-kicker) {
+    margin: 14px 0 0;
+  }
+
+  .ph-product-grid,
+  .ph-fit__grid,
+  .ph-benefits__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .ph-product-card,
+  .ph-benefits article,
+  .ph-fit article {
+    border: 1px solid var(--ph-line);
+    border-radius: 8px;
+    background: #fff;
+    overflow: hidden;
+  }
+
+  .ph-product-card {
+    display: grid;
+    padding: 22px;
+    min-height: 340px;
+  }
+
+  .ph-product-card__badge {
+    color: var(--ph-clay);
+    font-size: 12px;
+    line-height: 1.2;
+    font-weight: 780;
+    text-transform: uppercase;
+  }
+
+  .ph-product-card h3 {
+    margin-top: 14px;
+  }
+
+  .ph-product-card p {
+    margin: 12px 0 0;
+    font-size: 15px;
+  }
+
+  .ph-product-card__fit {
+    display: block;
+    margin-top: 8px;
+    color: var(--ph-muted);
+    font-size: 14px;
+    font-weight: 720;
+  }
+
+  .ph-product-card__footer {
+    align-self: end;
+    display: grid;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .ph-product-card__price {
+    color: var(--ph-ink);
+    font-size: 20px;
+    font-weight: 780;
+  }
+
+  .ph-product-card button,
+  .ph-product-card__link {
+    width: 100%;
+    min-height: 48px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--ph-ink);
+    color: #fff;
+    cursor: pointer;
+    font: inherit;
+    font-size: 13px;
+    line-height: 1;
+    font-weight: 780;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ph-products__link {
+    margin-top: 22px;
+    text-align: center;
+  }
+
+  .ph-products__link a {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ph-line);
+    border-radius: 999px;
+    padding: 0 22px;
+    font-size: 13px;
+    font-weight: 780;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .ph-estimator,
+  .ph-fit {
+    background: var(--ph-soft);
+  }
+
+  .ph-estimator__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    border: 1px solid var(--ph-line);
+    border-radius: 8px;
+    background: #fff;
+    padding: 34px;
+  }
+
+  .ph-estimator p {
+    max-width: 640px;
+    margin: 14px 0 0;
+  }
+
+  .ph-benefits article {
+    padding: 26px;
+  }
+
+  .ph-benefits span {
+    color: var(--ph-clay);
+    font-size: 13px;
+    font-weight: 780;
+  }
+
+  .ph-benefits h3 {
+    margin-top: 18px;
+  }
+
+  .ph-benefits p {
+    margin: 12px 0 0;
+    font-size: 15px;
+  }
+
+  .ph-fit article img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    display: block;
+    object-fit: cover;
+  }
+
+  .ph-fit article div {
+    padding: 18px;
+  }
+
+  .ph-fit strong,
+  .ph-fit span {
+    display: block;
+  }
+
+  .ph-fit strong {
+    font-size: 18px;
+    line-height: 1.2;
+    font-weight: 760;
+  }
+
+  .ph-fit span {
+    margin-top: 6px;
+    color: var(--ph-muted);
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .ph-close {
+    text-align: center;
+  }
+
+  .ph-close__inner {
+    max-width: 760px;
+  }
+
+  .ph-close p:not(.ph-kicker) {
+    max-width: 560px;
+    margin: 16px auto 0;
+  }
+
+  @media (max-width: 860px) {
+    .prime-homepage h1 {
+      font-size: 52px;
+    }
+
+    .prime-homepage h2 {
+      font-size: 36px;
+    }
+
+    .ph-product-grid,
+    .ph-fit__grid,
+    .ph-benefits__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .ph-estimator__inner {
+      display: grid;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .ph-shell {
+      width: min(100% - 24px, 1160px);
+    }
+
+    .ph-hero {
+      min-height: 640px;
+    }
+
+    .ph-hero__media::after {
+      background: linear-gradient(180deg, rgba(19, 16, 12, 0.18) 0%, rgba(19, 16, 12, 0.56) 38%, rgba(19, 16, 12, 0.92) 100%);
+    }
+
+    .ph-hero__content {
+      padding: 260px 0 52px;
+    }
+
+    .prime-homepage h1 {
+      font-size: 42px;
+      line-height: 1.02;
+    }
+
+    .prime-homepage h2 {
+      font-size: 31px;
+    }
+
+    .prime-homepage p {
+      font-size: 16px;
+    }
+
+    .ph-actions {
+      flex-direction: column;
+    }
+
+    .ph-button {
+      width: 100%;
+    }
+
+    .ph-products,
+    .ph-estimator,
+    .ph-benefits,
+    .ph-fit,
+    .ph-close {
+      padding: 52px 0;
+    }
+
+    .ph-estimator__inner {
+      padding: 24px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Prime homepage experience",
+  "tag": "section",
+  "class": "section section-prime-homepage-experience",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Prime homepage experience"
+    }
+  ]
+}
+{% endschema %}
