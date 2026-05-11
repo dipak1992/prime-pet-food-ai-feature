@@ -100,7 +100,9 @@
         "background_color": "",
         "top_padding": 40,
         "bottom_padding": 40,
-        "navigation_spacing": 20
+        "navigation_spacing": 20,
+        "cta_label": "Buy Yak Chews",
+        "cta_link": "/products/himalayan-yak-chews-for-dogs"
       }
     },
     "prime_video_cta": {

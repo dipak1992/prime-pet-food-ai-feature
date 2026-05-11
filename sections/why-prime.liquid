@@ -1,3 +1,8 @@
+{%- liquid
+  assign cta_text = section.settings.cta_text | default: 'Buy Yak Chews'
+  assign cta_link = section.settings.cta_link | default: '/products/himalayan-yak-chews-for-dogs'
+-%}
+
 <section class="why-prime" aria-label="Why choose Prime Pet Food">
   <div class="why-prime__inner page-width">
 
@@ -67,8 +72,8 @@
     </div>
 
     <div class="why-prime__cta">
-      <a href="/products/himalayan-yak-chews-for-dogs" class="why-prime__btn">
-        Shop Now — Get Your Yak Chew
+      <a href="{{ cta_link }}" class="why-prime__btn">
+        {{ cta_text }}
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
       <p class="why-prime__cta-note">Free shipping over $30 &mdash; 30-day satisfaction guarantee</p>
@@ -300,6 +305,17 @@
       "id": "subtext",
       "label": "Subtext",
       "default": "Most chews are gone in minutes. Prime yak chews are built to last — giving your dog a focused, satisfying job that keeps them calm and you at peace."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "Buy Yak Chews"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
     }
   ],
   "presets": [

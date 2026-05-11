@@ -396,16 +396,11 @@ window.ChewAnalyzerStickyCTA=function(){
   if(!this.el){
     this.el=document.createElement('div');
     this.el.className='ca-sticky-cta';
-    this.el.innerHTML='<a href="/pages/how-long-will-this-last-for-my-dog" class="ca-sticky-cta__btn"><span class="ca-sticky-cta__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Find My Dog\\u0027s Chew</span></a>';
+    this.el.innerHTML='<a href="/products/himalayan-yak-chews-for-dogs" class="ca-sticky-cta__btn"><span class="ca-sticky-cta__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Buy Yak Chews</span></a>';
     document.body.appendChild(this.el);
   }
   this.el.querySelector('.ca-sticky-cta__btn').addEventListener('click',function(e){
-    var widget=document.querySelector('.ca-widget-container');
-    if(widget){
-      e.preventDefault();
-      widget.scrollIntoView({behavior:'smooth',block:'center'});
-      setTimeout(function(){if(widget._chewAnalyzer&&!widget._chewAnalyzer.isOpen)widget._chewAnalyzer.open();},500);
-    }
+    e.currentTarget.blur();
   });
   window.addEventListener('scroll',function(){
     var show=window.scrollY>400;
