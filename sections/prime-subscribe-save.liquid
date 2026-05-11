@@ -285,7 +285,7 @@
 <style>
   .pss {
     --pss-ink: #171512;
-    --pss-muted: #64564a;
+    --pss-muted: #4f4037;
     --pss-cream: #fffaf2;
     --pss-soft: #f6efe5;
     --pss-white: #ffffff;
@@ -327,7 +327,7 @@
 
   .pss-hero {
     position: relative;
-    min-height: min(760px, 86vh);
+    min-height: 700px;
     display: grid;
     align-items: center;
     overflow: hidden;
@@ -355,30 +355,41 @@
   .pss-hero__overlay {
     z-index: -1;
     background:
-      linear-gradient(90deg, rgba(255, 250, 242, 0.96) 0%, rgba(255, 250, 242, 0.86) 34%, rgba(255, 250, 242, 0.24) 68%, rgba(255, 250, 242, 0.08) 100%),
-      linear-gradient(0deg, rgba(23, 21, 18, 0.2), rgba(23, 21, 18, 0));
+      linear-gradient(90deg, rgba(255, 250, 242, 0.98) 0%, rgba(255, 250, 242, 0.94) 42%, rgba(255, 250, 242, 0.56) 72%, rgba(255, 250, 242, 0.22) 100%),
+      linear-gradient(0deg, rgba(23, 21, 18, 0.28), rgba(23, 21, 18, 0.02));
   }
 
   .pss-hero__content {
-    padding: 92px 0 104px;
+    max-width: 680px;
+    padding: 46px;
+    border: 1px solid rgba(255, 255, 255, 0.72);
+    border-radius: 24px;
+    background: rgba(255, 250, 242, 0.9);
+    box-shadow: 0 26px 70px rgba(23, 21, 18, 0.14);
+    backdrop-filter: blur(8px);
+  }
+
+  .pss-hero .pss-shell {
     max-width: 650px;
+    margin-left: max(24px, calc((100vw - 1160px) / 2));
   }
 
   .pss-hero h1 {
     margin: 0;
     max-width: 620px;
     font-family: var(--prime-font-display, var(--prime-font-sans, inherit));
-    font-size: 70px;
+    color: #171512;
+    font-size: 62px;
     font-weight: 760;
-    line-height: 0.98;
+    line-height: 1.02;
   }
 
   .pss-hero__sub {
     max-width: 560px;
     margin: 20px 0 0;
-    color: var(--pss-muted);
+    color: #42362f;
     font-size: 18px;
-    line-height: 1.66;
+    line-height: 1.72;
   }
 
   .pss-hero__actions {
@@ -458,15 +469,15 @@
     font-family: var(--prime-font-display, var(--prime-font-sans, inherit));
     font-size: 50px;
     font-weight: 745;
-    line-height: 1.04;
+    line-height: 1.08;
   }
 
   .pss-section-head p:not(.pss-kicker),
   .pss-trust p {
     margin: 14px 0 0;
     color: var(--pss-muted);
-    font-size: 16px;
-    line-height: 1.65;
+    font-size: 17px;
+    line-height: 1.7;
   }
 
   .pss-benefits,
@@ -492,8 +503,8 @@
 
   .pss-benefit-grid {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
   }
 
   .pss-benefit,
@@ -508,8 +519,10 @@
   }
 
   .pss-benefit {
-    min-height: 240px;
-    padding: 22px;
+    min-height: 260px;
+    padding: 26px;
+    background: #fffdf9;
+    box-shadow: 0 12px 30px rgba(55, 43, 31, 0.05);
   }
 
   .pss-icon {
@@ -537,9 +550,10 @@
   .pss-step h3,
   .pss-tier h3 {
     margin: 18px 0 8px;
-    font-size: 18px;
+    color: var(--pss-ink);
+    font-size: 20px;
     font-weight: 760;
-    line-height: 1.18;
+    line-height: 1.25;
   }
 
   .pss-benefit p,
@@ -551,8 +565,8 @@
   .pss-terms__copy p {
     margin: 0;
     color: var(--pss-muted);
-    font-size: 14px;
-    line-height: 1.58;
+    font-size: 15px;
+    line-height: 1.72;
   }
 
   .pss-steps {
@@ -564,7 +578,7 @@
 
   .pss-step {
     position: relative;
-    padding: 24px;
+    padding: 26px;
     background: var(--pss-soft);
   }
 
@@ -591,7 +605,9 @@
     display: flex;
     min-height: 360px;
     flex-direction: column;
-    padding: 28px;
+    padding: 30px;
+    background: #fffdf9;
+    box-shadow: 0 14px 34px rgba(55, 43, 31, 0.06);
   }
 
   .pss-tier--featured {
@@ -613,6 +629,11 @@
   .pss-tier--featured p,
   .pss-tier--featured span {
     color: rgba(255, 250, 242, 0.78);
+  }
+
+  .pss-tier--featured h3,
+  .pss-tier--featured strong {
+    color: var(--pss-white);
   }
 
   .pss-tier h3 {
@@ -662,6 +683,10 @@
     color: var(--pss-white);
   }
 
+  .pss-love h2 {
+    color: var(--pss-white);
+  }
+
   .pss-love .pss-kicker {
     color: #d9b887;
   }
@@ -680,13 +705,13 @@
 
   .pss-stories blockquote {
     margin: 0;
-    background: rgba(255, 250, 242, 0.08);
-    border-color: rgba(255, 250, 242, 0.14);
-    padding: 22px;
+    background: rgba(255, 250, 242, 0.11);
+    border-color: rgba(255, 250, 242, 0.2);
+    padding: 24px;
   }
 
   .pss-stories p {
-    color: rgba(255, 250, 242, 0.86);
+    color: rgba(255, 250, 242, 0.94);
     font-size: 17px;
   }
 
@@ -714,8 +739,9 @@
   }
 
   .pss-trust__grid div {
-    background: var(--pss-soft);
-    padding: 20px;
+    background: #fffdf9;
+    padding: 22px;
+    box-shadow: 0 10px 26px rgba(55, 43, 31, 0.05);
   }
 
   .pss-trust__grid strong {
@@ -745,7 +771,7 @@
   .pss-accordion summary {
     cursor: pointer;
     list-style: none;
-    padding: 20px 22px;
+    padding: 22px 24px;
     color: var(--pss-ink);
     font-size: 17px;
     font-weight: 760;
@@ -757,7 +783,7 @@
   }
 
   .pss-accordion p {
-    padding: 0 22px 20px;
+    padding: 0 24px 22px;
   }
 
   .pss-terms {
@@ -769,7 +795,8 @@
     display: grid;
     gap: 14px;
     border-left: 2px solid rgba(184, 95, 50, 0.32);
-    padding-left: 24px;
+    padding: 22px 0 22px 24px;
+    background: rgba(255, 255, 255, 0.32);
   }
 
   .pss-mobile-cta {
@@ -777,8 +804,20 @@
   }
 
   @media (max-width: 990px) {
+    .pss-hero {
+      min-height: 660px;
+    }
+
+    .pss-hero .pss-shell {
+      margin-left: auto;
+    }
+
+    .pss-hero__content {
+      padding: 38px;
+    }
+
     .pss-hero h1 {
-      font-size: 58px;
+      font-size: 50px;
     }
 
     .pss-section-head h2,
@@ -808,7 +847,7 @@
     }
 
     .pss-hero {
-      min-height: 720px;
+      min-height: 690px;
       align-items: end;
     }
 
@@ -818,20 +857,24 @@
 
     .pss-hero__overlay {
       background:
-        linear-gradient(180deg, rgba(255, 250, 242, 0.18) 0%, rgba(255, 250, 242, 0.68) 38%, rgba(255, 250, 242, 0.98) 68%, rgba(255, 250, 242, 1) 100%),
-        linear-gradient(0deg, rgba(23, 21, 18, 0.16), rgba(23, 21, 18, 0));
+        linear-gradient(180deg, rgba(255, 250, 242, 0.12) 0%, rgba(255, 250, 242, 0.72) 32%, rgba(255, 250, 242, 0.98) 58%, rgba(255, 250, 242, 1) 100%),
+        linear-gradient(0deg, rgba(23, 21, 18, 0.22), rgba(23, 21, 18, 0));
     }
 
     .pss-hero__content {
-      padding: 260px 0 34px;
+      margin-bottom: 18px;
+      padding: 24px;
+      border-radius: 20px;
     }
 
     .pss-hero h1 {
-      font-size: 42px;
+      font-size: 36px;
+      line-height: 1.08;
     }
 
     .pss-hero__sub {
       font-size: 16px;
+      line-height: 1.62;
     }
 
     .pss-section-head h2,
@@ -844,6 +887,7 @@
     .pss-hero__actions {
       display: grid;
       grid-template-columns: 1fr;
+      gap: 10px;
     }
 
     .pss-btn {
@@ -869,6 +913,7 @@
 
     .pss-benefit {
       min-height: 0;
+      padding: 22px;
     }
 
     .pss-tier {
@@ -916,7 +961,7 @@
       "type": "text",
       "id": "hero_heading",
       "label": "Hero heading",
-      "default": "Never run out of your dog&rsquo;s favorite chew."
+      "default": "Never run out of your dog's favorite chew."
     },
     {
       "type": "textarea",
