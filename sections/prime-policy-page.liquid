@@ -100,7 +100,7 @@
         {% elsif policy_type == 'privacy' %}
           <span>
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            We never sell your data
+            Clear privacy choices
           </span>
           <span>
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -136,16 +136,16 @@
           <h3>Other policies</h3>
           <ul>
             {% unless policy_type == 'privacy' %}
-              <li><a href="/policies/privacy-policy">Privacy policy</a></li>
+              <li><a href="/pages/privacy-policy">Privacy policy</a></li>
             {% endunless %}
             {% unless policy_type == 'refund' %}
-              <li><a href="/policies/refund-policy">Refund policy</a></li>
+              <li><a href="/pages/refund-policy">Refund policy</a></li>
             {% endunless %}
             {% unless policy_type == 'shipping' %}
-              <li><a href="/policies/shipping-policy">Shipping policy</a></li>
+              <li><a href="/pages/shipping-policy">Shipping policy</a></li>
             {% endunless %}
             {% unless policy_type == 'terms' %}
-              <li><a href="/policies/terms-of-service">Terms of service</a></li>
+              <li><a href="/pages/terms-of-service">Terms of service</a></li>
             {% endunless %}
           </ul>
         </div>

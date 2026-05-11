@@ -115,8 +115,19 @@
         <ul class="pf-col__list">
           <li><a href="/pages/faq">FAQ</a></li>
           <li><a href="/pages/contact">Contact us</a></li>
-          <li><a href="/policies/shipping-policy">Shipping info</a></li>
-          <li><a href="/policies/refund-policy">Returns &amp; refunds</a></li>
+          <li><a href="/pages/shipping-policy">Shipping info</a></li>
+          <li><a href="/pages/refund-policy">Returns &amp; refunds</a></li>
+        </ul>
+      </div>
+
+      <!-- Policy links -->
+      <div class="pf-col">
+        <h3 class="pf-col__heading">Our Policies</h3>
+        <ul class="pf-col__list">
+          <li><a href="/pages/privacy-policy">Privacy Policy</a></li>
+          <li><a href="/pages/refund-policy">Refund Policy</a></li>
+          <li><a href="/pages/shipping-policy">Shipping Policy</a></li>
+          <li><a href="/pages/terms-of-service">Terms of Service</a></li>
         </ul>
       </div>
 
@@ -143,13 +154,13 @@
         &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.
       </p>
       <nav class="pf-bottom__legal" aria-label="Legal links">
-        <a href="/policies/privacy-policy">Privacy policy</a>
+        <a href="/pages/privacy-policy">Privacy policy</a>
         <span aria-hidden="true">&middot;</span>
-        <a href="/policies/refund-policy">Refund policy</a>
+        <a href="/pages/refund-policy">Refund policy</a>
         <span aria-hidden="true">&middot;</span>
-        <a href="/policies/shipping-policy">Shipping policy</a>
+        <a href="/pages/shipping-policy">Shipping policy</a>
         <span aria-hidden="true">&middot;</span>
-        <a href="/policies/terms-of-service">Terms of service</a>
+        <a href="/pages/terms-of-service">Terms of service</a>
       </nav>
       {% if section.settings.show_payment_icons %}
       <div class="pf-bottom__payments" aria-label="Accepted payment methods">
@@ -290,8 +301,8 @@
 
   .pf-main__inner {
     display: grid;
-    grid-template-columns: 1.6fr 1fr 1fr 1fr;
-    gap: 40px;
+    grid-template-columns: minmax(240px, 1.45fr) repeat(4, minmax(140px, 1fr));
+    gap: 34px;
   }
 
   /* ═══════════════════════════════════════════════════════════════
