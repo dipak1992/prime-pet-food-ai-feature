@@ -7,6 +7,7 @@
   assign small_dog_chew_image = 'prime-home-small-dog-chew.jpg' | asset_url
   assign medium_dog_chew_image = 'prime-home-medium-dog-chew.jpg' | asset_url
   assign large_dog_chew_image = 'prime-home-large-dog-chew.jpg' | asset_url
+  assign subscribe_dog_image = 'prime-home-subscribe-dog-box.jpg' | asset_url
   assign ingredient_yak_milk_image = 'prime-home-ingredient-yak-milk.jpg' | asset_url
   assign ingredient_cow_milk_image = 'prime-home-ingredient-cow-milk.jpg' | asset_url
   assign ingredient_lime_image = 'prime-home-ingredient-lime.jpg' | asset_url
@@ -144,6 +145,34 @@
 
       <div class="ph-products__link">
         <a href="/collections/all">View all sizes &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SUBSCRIBE & SAVE — Routine builder
+  ════════════════════════════════════════════════════════════════ -->
+  <div class="ph-subscribe">
+    <div class="ph-shell ph-subscribe__inner">
+      <div class="ph-subscribe__media">
+        <img src="{{ subscribe_dog_image }}" alt="Happy dog beside a subscription box and yak chew" loading="lazy" width="1024" height="1024">
+      </div>
+      <div class="ph-subscribe__copy">
+        <p class="ph-kicker">Subscribe &amp; Save</p>
+        <h2>Keep calm chew time stocked.</h2>
+        <p>
+          Automatic yak chew deliveries for steady enrichment routines, with flexible timing when your dog needs more or less.
+        </p>
+        <div class="ph-subscribe__benefits" aria-label="Subscribe and Save benefits">
+          <span>First-month savings</span>
+          <span>Flexible delivery</span>
+          <span>Skip or pause anytime</span>
+        </div>
+      </div>
+      <div class="ph-subscribe__offer" aria-label="Subscribe and Save offer">
+        <span>Save up to</span>
+        <strong>30%</strong>
+        <small>on eligible recurring chew orders</small>
       </div>
     </div>
   </div>
@@ -379,21 +408,25 @@
   ════════════════════════════════════════════════════════════════ -->
   <div class="ph-guarantee">
     <div class="ph-shell ph-guarantee__inner">
-      <div class="ph-guarantee__icon" aria-hidden="true">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          <polyline points="9 12 11 14 15 10"/>
-        </svg>
-      </div>
-      <h2>30-day satisfaction guarantee.</h2>
-      <p>
-        If your dog doesn&rsquo;t love it, we&rsquo;ll make it right. No questions asked.
-        Every order is backed by our promise &mdash; because we know your dog will be obsessed.
-      </p>
-      <div class="ph-guarantee__pills">
-        <span>Free returns</span>
-        <span>Full refund</span>
-        <span>No risk</span>
+      <div class="ph-guarantee__card">
+        <div class="ph-guarantee__icon" aria-hidden="true">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <polyline points="9 12 11 14 15 10"/>
+          </svg>
+        </div>
+        <div class="ph-guarantee__copy">
+          <p class="ph-kicker">Risk-free trial</p>
+          <h2>30-day satisfaction guarantee.</h2>
+          <p>
+            If your dog doesn&rsquo;t love it, we&rsquo;ll make it right. Every order is backed by a clear, no-stress promise.
+          </p>
+        </div>
+        <div class="ph-guarantee__pills">
+          <span>Free returns</span>
+          <span>Full refund</span>
+          <span>No risk</span>
+        </div>
       </div>
     </div>
   </div>
@@ -678,6 +711,7 @@
      SECTION SPACING
   ════════════════════════════════════════════════════════════════ */
   .ph-products,
+  .ph-subscribe,
   .ph-reviews,
   .ph-compare,
   .ph-estimator,
@@ -756,7 +790,7 @@
 
   .ph-product-card__media img {
     width: 100%;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 1 / 1;
     display: block;
     object-fit: cover;
   }
@@ -850,6 +884,107 @@
 
   .ph-products__link a:hover {
     border-color: var(--ph-clay);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     SUBSCRIBE & SAVE
+  ════════════════════════════════════════════════════════════════ */
+  .ph-subscribe {
+    background:
+      radial-gradient(circle at top left, rgba(184, 95, 50, 0.18), transparent 34%),
+      linear-gradient(135deg, #1f1914 0%, #2e2119 58%, #fff4e3 58%, #fff9ef 100%);
+    color: #fffaf2;
+  }
+
+  .ph-subscribe__inner {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.76fr) minmax(0, 1fr) minmax(220px, 0.38fr);
+    align-items: center;
+    gap: 28px;
+  }
+
+  .ph-subscribe__media {
+    overflow: hidden;
+    border: 1px solid rgba(255, 250, 242, 0.22);
+    border-radius: var(--ph-radius);
+    background: rgba(255, 250, 242, 0.08);
+    box-shadow: 0 18px 48px rgba(20, 10, 4, 0.24);
+  }
+
+  .ph-subscribe__media img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    display: block;
+    object-fit: cover;
+  }
+
+  .ph-subscribe__copy {
+    max-width: 620px;
+  }
+
+  .ph-subscribe__copy .ph-kicker {
+    color: #f4c27d;
+  }
+
+  .ph-subscribe__copy h2,
+  .ph-subscribe__copy p {
+    color: #fffaf2;
+  }
+
+  .ph-subscribe__copy p {
+    max-width: 560px;
+    margin: 14px 0 0;
+    color: rgba(255, 250, 242, 0.8);
+  }
+
+  .ph-subscribe__benefits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .ph-subscribe__benefits span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 38px;
+    padding: 8px 14px;
+    border: 1px solid rgba(255, 250, 242, 0.2);
+    border-radius: 999px;
+    background: rgba(255, 250, 242, 0.08);
+    color: rgba(255, 250, 242, 0.9);
+    font-size: 13px;
+    line-height: 1.2;
+    font-weight: 680;
+  }
+
+  .ph-subscribe__offer {
+    display: grid;
+    gap: 8px;
+    justify-items: start;
+    padding: 28px;
+    border: 1px solid rgba(184, 95, 50, 0.18);
+    border-radius: var(--ph-radius);
+    background: rgba(255, 250, 242, 0.96);
+    color: var(--ph-ink);
+    box-shadow: 0 18px 44px rgba(30, 15, 8, 0.14);
+  }
+
+  .ph-subscribe__offer span,
+  .ph-subscribe__offer small {
+    color: var(--ph-muted);
+    font-size: 12px;
+    line-height: 1.35;
+    font-weight: 760;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .ph-subscribe__offer strong {
+    color: var(--ph-clay);
+    font-size: 58px;
+    line-height: 0.92;
+    font-weight: 820;
   }
 
   /* ═══════════════════════════════════════════════════════════════
@@ -1066,7 +1201,7 @@
 
   .ph-fit article img {
     width: 100%;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 1 / 1;
     display: block;
     object-fit: cover;
   }
@@ -1097,17 +1232,44 @@
      GUARANTEE
   ════════════════════════════════════════════════════════════════ */
   .ph-guarantee {
-    background: var(--ph-ink);
-    text-align: center;
+    background:
+      linear-gradient(135deg, rgba(23, 21, 18, 0.96), rgba(46, 33, 25, 0.96)),
+      var(--ph-ink);
   }
 
   .ph-guarantee__inner {
-    max-width: 680px;
+    max-width: 980px;
+  }
+
+  .ph-guarantee__card {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 28px;
+    padding: 34px;
+    border: 1px solid rgba(255, 250, 242, 0.16);
+    border-radius: var(--ph-radius);
+    background: rgba(255, 250, 242, 0.07);
+    box-shadow: inset 0 1px 0 rgba(255, 250, 242, 0.08), 0 18px 46px rgba(0, 0, 0, 0.18);
   }
 
   .ph-guarantee__icon {
-    margin-bottom: 20px;
+    display: grid;
+    width: 82px;
+    height: 82px;
+    place-items: center;
+    border: 1px solid rgba(244, 194, 125, 0.32);
+    border-radius: 999px;
+    background: rgba(244, 194, 125, 0.12);
     color: var(--ph-clay);
+  }
+
+  .ph-guarantee__copy {
+    text-align: left;
+  }
+
+  .ph-guarantee .ph-kicker {
+    color: #f4c27d;
   }
 
   .ph-guarantee h2 {
@@ -1117,15 +1279,13 @@
   .ph-guarantee p {
     color: rgba(255, 250, 242, 0.75);
     max-width: 540px;
-    margin: 16px auto 0;
+    margin: 12px 0 0;
   }
 
   .ph-guarantee__pills {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    display: grid;
     gap: 10px;
-    margin-top: 24px;
+    min-width: 160px;
   }
 
   .ph-guarantee__pills span {
@@ -1207,6 +1367,44 @@
       display: grid;
     }
 
+    .ph-subscribe {
+      background: #1f1914;
+    }
+
+    .ph-subscribe__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .ph-subscribe__media {
+      max-width: 520px;
+    }
+
+    .ph-subscribe__offer {
+      justify-items: start;
+      max-width: 360px;
+    }
+
+    .ph-guarantee__card {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .ph-guarantee__copy {
+      text-align: center;
+    }
+
+    .ph-guarantee p {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .ph-guarantee__pills {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
     .ph-compare__table {
       font-size: 14px;
     }
@@ -1264,6 +1462,7 @@
     }
 
     .ph-products,
+    .ph-subscribe,
     .ph-reviews,
     .ph-compare,
     .ph-estimator,
@@ -1276,6 +1475,30 @@
 
     .ph-ingredients__grid {
       grid-template-columns: 1fr;
+    }
+
+    .ph-subscribe__benefits {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .ph-subscribe__benefits span {
+      justify-content: center;
+    }
+
+    .ph-subscribe__offer {
+      max-width: none;
+      justify-items: center;
+      text-align: center;
+      padding: 24px;
+    }
+
+    .ph-subscribe__offer strong {
+      font-size: 46px;
+    }
+
+    .ph-guarantee__card {
+      padding: 26px 20px;
     }
 
     .ph-estimator__inner {
