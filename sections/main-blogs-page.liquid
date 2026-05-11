@@ -2,20 +2,21 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
-  assign selected_menu = linklists[section.settings.blog_menu]
-  assign fallback_blog = blogs['dog-behavior']
+  assign yak_chews_blog = blogs['yak-chews']
+  assign dog_health_blog = blogs['dog-health']
+  assign dog_behavior_blog = blogs['dog-behavior']
   assign aggregated_articles = '' | split: ''
 
-  if selected_menu != blank
-    for link in selected_menu.links
-      if link.type == 'blog_link' and link.object != blank
-        assign aggregated_articles = aggregated_articles | concat: link.object.articles
-      endif
-    endfor
+  if yak_chews_blog != blank
+    assign aggregated_articles = aggregated_articles | concat: yak_chews_blog.articles
   endif
 
-  if aggregated_articles.size == 0 and fallback_blog != blank
-    assign aggregated_articles = aggregated_articles | concat: fallback_blog.articles
+  if dog_health_blog != blank
+    assign aggregated_articles = aggregated_articles | concat: dog_health_blog.articles
+  endif
+
+  if dog_behavior_blog != blank
+    assign aggregated_articles = aggregated_articles | concat: dog_behavior_blog.articles
   endif
 
   assign aggregated_articles = aggregated_articles | sort: 'published_at' | reverse
@@ -32,6 +33,28 @@
     gap: 2rem;
     align-items: stretch;
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  #shopify-section-{{ section.id }} .blogs-page__group {
+    display: grid;
+    gap: 1.4rem;
+  }
+
+  #shopify-section-{{ section.id }} .blogs-page__group-header {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
+  }
+
+  #shopify-section-{{ section.id }} .blogs-page__group-title {
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .blogs-page__group-link {
+    white-space: nowrap;
   }
 
   #shopify-section-{{ section.id }} .blogs-page__post,
@@ -187,33 +210,89 @@
   {%- endif -%}
 
   {%- if aggregated_articles.size > 0 -%}
-    <div class="blogs-page__grid section-grid grid articles-wrapper contains-card contains-card--article{% if settings.blog_card_style == 'standard' %} contains-card--standard{% endif %}">
-      {%- for article in aggregated_articles limit: section.settings.items_to_show -%}
-        <div
-          class="blogs-page__post grid__item article{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-          {% if settings.animations_reveal_on_scroll %}
-            data-cascade
-            style="--animation-order: {{ forloop.index }};"
-          {% endif %}
-        >
-          {%- render 'article-card',
-            article: article,
-            show_image: section.settings.show_image,
-            show_date: section.settings.show_date,
-            show_author: section.settings.show_author,
-            excerpt_mode: section.settings.excerpt_mode,
-            show_reading_estimate: section.settings.show_reading_estimate,
-            show_first_tag: section.settings.show_first_tag,
-            media_aspect_ratio: 'square',
-            image_cover: true,
-            columns_desktop: section.settings.columns_desktop
-          -%}
+    {%- if yak_chews_blog != blank and yak_chews_blog.articles.size > 0 -%}
+      <section class="blogs-page__group" aria-labelledby="blogs-page-yak-chews">
+        <div class="blogs-page__group-header">
+          <h2 id="blogs-page-yak-chews" class="blogs-page__group-title h3">{{ yak_chews_blog.title }}</h2>
+          <a href="{{ yak_chews_blog.url }}" class="blogs-page__group-link link">View all {{ yak_chews_blog.title }}</a>
         </div>
-      {%- endfor -%}
-    </div>
+        <div class="blogs-page__grid section-grid grid articles-wrapper contains-card contains-card--article{% if settings.blog_card_style == 'standard' %} contains-card--standard{% endif %}">
+          {%- for article in yak_chews_blog.articles limit: section.settings.items_to_show -%}
+            <div class="blogs-page__post grid__item article{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"{% if settings.animations_reveal_on_scroll %} data-cascade style="--animation-order: {{ forloop.index }};"{% endif %}>
+              {%- render 'article-card',
+                article: article,
+                show_image: section.settings.show_image,
+                show_date: section.settings.show_date,
+                show_author: section.settings.show_author,
+                excerpt_mode: section.settings.excerpt_mode,
+                show_reading_estimate: section.settings.show_reading_estimate,
+                show_first_tag: section.settings.show_first_tag,
+                media_aspect_ratio: 'square',
+                image_cover: true,
+                columns_desktop: section.settings.columns_desktop
+              -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- if dog_health_blog != blank and dog_health_blog.articles.size > 0 -%}
+      <section class="blogs-page__group" aria-labelledby="blogs-page-dog-health">
+        <div class="blogs-page__group-header">
+          <h2 id="blogs-page-dog-health" class="blogs-page__group-title h3">{{ dog_health_blog.title }}</h2>
+          <a href="{{ dog_health_blog.url }}" class="blogs-page__group-link link">View all {{ dog_health_blog.title }}</a>
+        </div>
+        <div class="blogs-page__grid section-grid grid articles-wrapper contains-card contains-card--article{% if settings.blog_card_style == 'standard' %} contains-card--standard{% endif %}">
+          {%- for article in dog_health_blog.articles limit: section.settings.items_to_show -%}
+            <div class="blogs-page__post grid__item article{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"{% if settings.animations_reveal_on_scroll %} data-cascade style="--animation-order: {{ forloop.index }};"{% endif %}>
+              {%- render 'article-card',
+                article: article,
+                show_image: section.settings.show_image,
+                show_date: section.settings.show_date,
+                show_author: section.settings.show_author,
+                excerpt_mode: section.settings.excerpt_mode,
+                show_reading_estimate: section.settings.show_reading_estimate,
+                show_first_tag: section.settings.show_first_tag,
+                media_aspect_ratio: 'square',
+                image_cover: true,
+                columns_desktop: section.settings.columns_desktop
+              -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- if dog_behavior_blog != blank and dog_behavior_blog.articles.size > 0 -%}
+      <section class="blogs-page__group" aria-labelledby="blogs-page-dog-behavior">
+        <div class="blogs-page__group-header">
+          <h2 id="blogs-page-dog-behavior" class="blogs-page__group-title h3">{{ dog_behavior_blog.title }}</h2>
+          <a href="{{ dog_behavior_blog.url }}" class="blogs-page__group-link link">View all {{ dog_behavior_blog.title }}</a>
+        </div>
+        <div class="blogs-page__grid section-grid grid articles-wrapper contains-card contains-card--article{% if settings.blog_card_style == 'standard' %} contains-card--standard{% endif %}">
+          {%- for article in dog_behavior_blog.articles limit: section.settings.items_to_show -%}
+            <div class="blogs-page__post grid__item article{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"{% if settings.animations_reveal_on_scroll %} data-cascade style="--animation-order: {{ forloop.index }};"{% endif %}>
+              {%- render 'article-card',
+                article: article,
+                show_image: section.settings.show_image,
+                show_date: section.settings.show_date,
+                show_author: section.settings.show_author,
+                excerpt_mode: section.settings.excerpt_mode,
+                show_reading_estimate: section.settings.show_reading_estimate,
+                show_first_tag: section.settings.show_first_tag,
+                media_aspect_ratio: 'square',
+                image_cover: true,
+                columns_desktop: section.settings.columns_desktop
+              -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </section>
+    {%- endif -%}
   {%- else -%}
     <div class="blogs-page__empty rte">
-      <p>Select a menu with blog links in this section’s settings to populate the blogs page.</p>
+      <p>Create or publish posts in the Yak Chews, Dog Health, or Dog Behavior blogs to populate this page.</p>
     </div>
   {%- endif -%}
 </div>
@@ -246,11 +325,6 @@
   "tag": "section",
   "class": "section section-main-blogs-page",
   "settings": [
-    {
-      "type": "link_list",
-      "id": "blog_menu",
-      "label": "Menu with blog links"
-    },
     {
       "type": "richtext",
       "id": "intro",

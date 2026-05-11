@@ -121,6 +121,7 @@
       class="
         card article-card card--{{ blog_card_style }}
         {% if is_featured %} article-card--featured{% endif %}
+        {% if media_aspect_ratio == 'square' %} article-card--square-media{% endif %}
         {% if has_article_visual and show_image %} card--media{% else %} card--text{% endif %}
         {% if blog_card_style == 'card' and settings.blog_card_shadow %} card--shadow{% endif %}
         {% if blog_card_style == 'card' %} color-{{ settings.blog_card_color_scheme }} gradient{% endif %}

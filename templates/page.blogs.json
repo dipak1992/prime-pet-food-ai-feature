@@ -11,11 +11,11 @@
         "desktop_heading_alignment": "left",
         "mobile_heading_alignment": "left",
         "custom_page_header": false,
-        "title": "Blogs",
+        "title": "Prime Pet Food Blog",
         "italic_convert": "",
         "heading_size": "h1",
         "custom_page_text": false,
-        "text": "<p>Browse all of our latest blog posts in one place.</p>",
+        "text": "<p>Browse yak chew, dog health, and dog behavior guides in one place.</p>",
         "text_size": "t2",
         "show_view_all_link": false,
         "view_all_link": "",
@@ -30,8 +30,7 @@
     "main": {
       "type": "main-blogs-page",
       "settings": {
-        "blog_menu": "",
-        "intro": "<p>Browse all of our latest blog posts in one place.</p>",
+        "intro": "<p>Explore Prime Pet Food articles by blog: Yak Chews, Dog Health, and Dog Behavior.</p>",
         "show_keyword_hub": true,
         "keyword_hub_heading": "Browse by main dog chew keyword",
         "keyword_hub_text": "Use these topic clusters to find Prime Pet Food guidance on yak chews, chew duration, rawhide alternatives, aggressive chewers, dog enrichment, breed sizing, and calming routines.",

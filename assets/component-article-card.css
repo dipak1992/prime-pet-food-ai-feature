@@ -47,6 +47,28 @@
   background-color: rgba(var(--blog-card-image-background, '0,0,0,0'));
 }
 
+.article-card--square-media > .card__inner,
+.article-card--square-media .article-card__image-wrapper,
+.article-card--square-media .article-card__image {
+  aspect-ratio: 1 / 1;
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  overflow: hidden;
+  --ratio-percent: 100% !important;
+}
+
+.article-card--square-media > .card__inner::before,
+.article-card--square-media .article-card__image::before {
+  padding-bottom: 100% !important;
+}
+
+.article-card--square-media .article-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .article-card__image-relative {
   position: relative !important;
 }
