@@ -1,9 +1,28 @@
 {% comment %}
   Prime Pet Food - Chew Analyzer Mobile Sticky CTA
-  Renders a fixed bottom CTA on mobile that scrolls user to the analyzer widget.
+  Renders a fixed bottom CTA on mobile for low-friction public content pages.
   Include in theme.liquid before </body>
 {% endcomment %}
 
+{%- liquid
+  assign show_global_chew_cta = false
+  assign global_chew_cta_page_types = 'index,blog,article,page' | split: ','
+  assign global_chew_cta_blocked_page_suffixes = 'contact,product-finder,my-dog,chew-duration-tool,subscribe-and-save,b2b,wholesale' | split: ','
+
+  if global_chew_cta_page_types contains request.page_type
+    assign show_global_chew_cta = true
+  endif
+
+  if request.page_type == 'page'
+    if template.suffix != blank
+      if global_chew_cta_blocked_page_suffixes contains template.suffix
+        assign show_global_chew_cta = false
+      endif
+    endif
+  endif
+-%}
+
+{%- if show_global_chew_cta -%}
 <style>
   .ca-sticky-cta {
     position: fixed;
@@ -83,3 +102,4 @@
     updateVisibility();
   })();
 </script>
+{%- endif -%}
