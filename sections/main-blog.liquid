@@ -5,6 +5,29 @@
   assign has_manual_featured = false
   assign show_blog_filters = false
   assign show_blog_toolbar = false
+  assign yak_chews_blog = blogs['yak-chews']
+  assign dog_health_blog = blogs['dog-health']
+  assign dog_behavior_blog = blogs['dog-behavior']
+  assign use_all_blog_hub = false
+  assign hub_articles = '' | split: ''
+
+  if blog.handle == 'dog-behavior' and current_tags == blank
+    assign use_all_blog_hub = true
+  endif
+
+  if yak_chews_blog != blank
+    assign hub_articles = hub_articles | concat: yak_chews_blog.articles
+  endif
+
+  if dog_health_blog != blank
+    assign hub_articles = hub_articles | concat: dog_health_blog.articles
+  endif
+
+  if dog_behavior_blog != blank
+    assign hub_articles = hub_articles | concat: dog_behavior_blog.articles
+  endif
+
+  assign hub_articles = hub_articles | sort: 'published_at' | reverse
 
   if section.settings.blog_card_featured_1 != blank or section.settings.blog_card_featured_2 != blank or section.settings.blog_card_featured_3 != blank
     assign has_manual_featured = true
@@ -86,6 +109,28 @@
     gap: 2rem;
     align-items: stretch;
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  #shopify-section-{{ section.id }} .main-blog__group {
+    display: grid;
+    gap: 1.4rem;
+  }
+
+  #shopify-section-{{ section.id }} .main-blog__group-header {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
+  }
+
+  #shopify-section-{{ section.id }} .main-blog__group-title {
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .main-blog__group-link {
+    white-space: nowrap;
   }
 
   #shopify-section-{{ section.id }} .main-blog__keyword-hub {
@@ -285,31 +330,16 @@
     </nav>
   {%- endif -%}
 
-  {%- paginate blog.articles by section.settings.items_per_page -%}
-    <infinite-scroll data-infinite-scroll-enabled="{% if settings.pagination_style == 'infinite' %}true{% else %}false{% endif %}">
-      <div class="blog-articles main-blog__grid section-grid grid articles-wrapper contains-card contains-card--article
-        {% if settings.blog_card_style == 'standard' %} contains-card--standard{% endif %}
-        grid--{{ section.settings.columns_desktop }}-col-desktop
-        grid--scaled
-        grid--1-col-tablet-down"
-     >
-        {%- for article in blog.articles -%}
-          {%- if section.settings.blog_card_omit == blank or article.id != section.settings.blog_card_omit.id -%}
-            {%- liquid
-              if article.id == section.settings.blog_card_featured_1.id or article.id == section.settings.blog_card_featured_2.id or article.id == section.settings.blog_card_featured_3.id
-                assign is_featured = true
-              else
-                assign is_featured = false
-              endif
-            -%}
-            <div
-              class="blog__post main-blog__post grid__item article js-pagination__item{% if is_featured %} main-blog__post--featured{% endif %}
-                {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-              {% if settings.animations_reveal_on_scroll %}
-                data-cascade
-                style="--animation-order: {{ forloop.index }};"
-              {% endif %}
-            >
+  {%- if use_all_blog_hub -%}
+    {%- if yak_chews_blog != blank and yak_chews_blog.articles.size > 0 -%}
+      <section class="main-blog__group" aria-labelledby="main-blog-yak-chews">
+        <div class="main-blog__group-header">
+          <h2 id="main-blog-yak-chews" class="main-blog__group-title h3">{{ yak_chews_blog.title }}</h2>
+          <a href="{{ yak_chews_blog.url }}" class="main-blog__group-link link">View all {{ yak_chews_blog.title }}</a>
+        </div>
+        <div class="blog-articles main-blog__grid section-grid grid articles-wrapper contains-card contains-card--article{% if settings.blog_card_style == 'standard' %} contains-card--standard{% endif %} grid--{{ section.settings.columns_desktop }}-col-desktop grid--scaled grid--1-col-tablet-down">
+          {%- for article in yak_chews_blog.articles limit: section.settings.items_per_page -%}
+            <div class="blog__post main-blog__post grid__item article js-pagination__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"{% if settings.animations_reveal_on_scroll %} data-cascade style="--animation-order: {{ forloop.index }};"{% endif %}>
               {%- render 'article-card',
                 article: article,
                 show_image: section.settings.show_image,
@@ -320,20 +350,124 @@
                 show_first_tag: section.settings.show_first_tag,
                 media_aspect_ratio: 'square',
                 image_cover: true,
-                is_featured: is_featured,
+                is_featured: false,
                 featured_excerpt_mode: section.settings.featured_excerpt_mode,
                 columns_desktop: section.settings.columns_desktop
               -%}
             </div>
-          {%- endif -%}
-        {%- endfor -%}
-      </div>
+          {%- endfor -%}
+        </div>
+      </section>
+    {%- endif -%}
 
-      {%- if paginate.pages > 1 -%}
-        {%- render 'pagination', paginate: paginate -%}
-      {%- endif -%}
-    </infinite-scroll>
-  {%- endpaginate -%}
+    {%- if dog_health_blog != blank and dog_health_blog.articles.size > 0 -%}
+      <section class="main-blog__group" aria-labelledby="main-blog-dog-health">
+        <div class="main-blog__group-header">
+          <h2 id="main-blog-dog-health" class="main-blog__group-title h3">{{ dog_health_blog.title }}</h2>
+          <a href="{{ dog_health_blog.url }}" class="main-blog__group-link link">View all {{ dog_health_blog.title }}</a>
+        </div>
+        <div class="blog-articles main-blog__grid section-grid grid articles-wrapper contains-card contains-card--article{% if settings.blog_card_style == 'standard' %} contains-card--standard{% endif %} grid--{{ section.settings.columns_desktop }}-col-desktop grid--scaled grid--1-col-tablet-down">
+          {%- for article in dog_health_blog.articles limit: section.settings.items_per_page -%}
+            <div class="blog__post main-blog__post grid__item article js-pagination__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"{% if settings.animations_reveal_on_scroll %} data-cascade style="--animation-order: {{ forloop.index }};"{% endif %}>
+              {%- render 'article-card',
+                article: article,
+                show_image: section.settings.show_image,
+                show_date: section.settings.show_date,
+                show_author: section.settings.show_author,
+                excerpt_mode: section.settings.excerpt_mode,
+                show_reading_estimate: section.settings.show_reading_estimate,
+                show_first_tag: section.settings.show_first_tag,
+                media_aspect_ratio: 'square',
+                image_cover: true,
+                is_featured: false,
+                featured_excerpt_mode: section.settings.featured_excerpt_mode,
+                columns_desktop: section.settings.columns_desktop
+              -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- if dog_behavior_blog != blank and dog_behavior_blog.articles.size > 0 -%}
+      <section class="main-blog__group" aria-labelledby="main-blog-dog-behavior">
+        <div class="main-blog__group-header">
+          <h2 id="main-blog-dog-behavior" class="main-blog__group-title h3">{{ dog_behavior_blog.title }}</h2>
+          <a href="{{ dog_behavior_blog.url }}" class="main-blog__group-link link">View all {{ dog_behavior_blog.title }}</a>
+        </div>
+        <div class="blog-articles main-blog__grid section-grid grid articles-wrapper contains-card contains-card--article{% if settings.blog_card_style == 'standard' %} contains-card--standard{% endif %} grid--{{ section.settings.columns_desktop }}-col-desktop grid--scaled grid--1-col-tablet-down">
+          {%- for article in dog_behavior_blog.articles limit: section.settings.items_per_page -%}
+            <div class="blog__post main-blog__post grid__item article js-pagination__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"{% if settings.animations_reveal_on_scroll %} data-cascade style="--animation-order: {{ forloop.index }};"{% endif %}>
+              {%- render 'article-card',
+                article: article,
+                show_image: section.settings.show_image,
+                show_date: section.settings.show_date,
+                show_author: section.settings.show_author,
+                excerpt_mode: section.settings.excerpt_mode,
+                show_reading_estimate: section.settings.show_reading_estimate,
+                show_first_tag: section.settings.show_first_tag,
+                media_aspect_ratio: 'square',
+                image_cover: true,
+                is_featured: false,
+                featured_excerpt_mode: section.settings.featured_excerpt_mode,
+                columns_desktop: section.settings.columns_desktop
+              -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </section>
+    {%- endif -%}
+  {%- else -%}
+    {%- paginate blog.articles by section.settings.items_per_page -%}
+      <infinite-scroll data-infinite-scroll-enabled="{% if settings.pagination_style == 'infinite' %}true{% else %}false{% endif %}">
+        <div class="blog-articles main-blog__grid section-grid grid articles-wrapper contains-card contains-card--article
+          {% if settings.blog_card_style == 'standard' %} contains-card--standard{% endif %}
+          grid--{{ section.settings.columns_desktop }}-col-desktop
+          grid--scaled
+          grid--1-col-tablet-down"
+       >
+          {%- for article in blog.articles -%}
+            {%- if section.settings.blog_card_omit == blank or article.id != section.settings.blog_card_omit.id -%}
+              {%- liquid
+                if article.id == section.settings.blog_card_featured_1.id or article.id == section.settings.blog_card_featured_2.id or article.id == section.settings.blog_card_featured_3.id
+                  assign is_featured = true
+                else
+                  assign is_featured = false
+                endif
+              -%}
+              <div
+                class="blog__post main-blog__post grid__item article js-pagination__item{% if is_featured %} main-blog__post--featured{% endif %}
+                  {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                {% if settings.animations_reveal_on_scroll %}
+                  data-cascade
+                  style="--animation-order: {{ forloop.index }};"
+                {% endif %}
+              >
+                {%- render 'article-card',
+                  article: article,
+                  show_image: section.settings.show_image,
+                  show_date: section.settings.show_date,
+                  show_author: section.settings.show_author,
+                  excerpt_mode: section.settings.excerpt_mode,
+                  show_reading_estimate: section.settings.show_reading_estimate,
+                  show_first_tag: section.settings.show_first_tag,
+                  media_aspect_ratio: 'square',
+                  image_cover: true,
+                  is_featured: is_featured,
+                  featured_excerpt_mode: section.settings.featured_excerpt_mode,
+                  columns_desktop: section.settings.columns_desktop
+                -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        {%- if paginate.pages > 1 -%}
+          {%- render 'pagination', paginate: paginate -%}
+        {%- endif -%}
+      </infinite-scroll>
+    {%- endpaginate -%}
+  {%- endif -%}
 </div>
 
 <script type="application/ld+json">
@@ -344,7 +478,19 @@
   "url": {{ shop.url | append: blog.url | json }},
   "description": {{ section.settings.keyword_hub_text | json }},
   "blogPost": [
-    {%- for article in blog.articles limit: section.settings.items_per_page -%}
+    {%- if use_all_blog_hub -%}
+      {%- for article in hub_articles limit: section.settings.items_per_page -%}
+        {
+          "@type": "BlogPosting",
+          "headline": {{ article.title | json }},
+          "url": {{ shop.url | append: article.url | json }},
+          "description": {{ article.excerpt_or_content | strip_html | truncate: 160 | json }},
+          "keywords": {{ article.tags | join: ', ' | json }},
+          "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }}
+        }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    {%- else -%}
+      {%- for article in blog.articles limit: section.settings.items_per_page -%}
       {
         "@type": "BlogPosting",
         "headline": {{ article.title | json }},
@@ -353,7 +499,8 @@
         "keywords": {{ article.tags | join: ', ' | json }},
         "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }}
       }{% unless forloop.last %},{% endunless %}
-    {%- endfor -%}
+      {%- endfor -%}
+    {%- endif -%}
   ]
 }
 </script>
