@@ -12,15 +12,16 @@
       "type": "collection-chew-finder",
       "settings": {
         "eyebrow": "Shop by dog need",
-        "title": "Start with your dog's chewing problem",
-        "subtitle": "The fastest path to the right chew is not flavor. It is dog size, chewing intensity, and the calm-time job you need the chew to do."
+        "title": "Read this page like a fit guide",
+        "subtitle": "Start with your dog's weight, adjust for chewing intensity, then choose the calm-time job you need the chew to do."
       }
     },
     "chew_product_comparison": {
       "type": "chew-product-comparison",
       "settings": {
         "eyebrow": "Size guidance",
-        "title": "Compare yak chew sizes before you add to cart"
+        "title": "Compare yak chew sizes before you add to cart",
+        "subtitle": "Each card gives the best starting point by weight. If your dog is near the top of a range or finishes soft chews quickly, consider the next size up."
       }
     },
     "product-grid": {

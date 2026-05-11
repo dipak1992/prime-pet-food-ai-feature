@@ -4,14 +4,50 @@
       <p>{{ section.settings.eyebrow }}</p>
       <h2>{{ section.settings.title }}</h2>
       <span>{{ section.settings.subtitle }}</span>
+
+      <div class="collection-chew-finder__note" role="note">
+        <strong>Quick rule:</strong>
+        choose the largest size your dog can safely carry and chew under supervision. Remove the final small piece before it becomes a choking risk.
+      </div>
     </div>
 
-    <div class="collection-chew-finder__routes" aria-label="Shop by dog need">
-      <a href="/pages/how-long-will-this-last-for-my-dog?intent=aggressive-chewer">Aggressive chewer</a>
-      <a href="/pages/how-long-will-this-last-for-my-dog?intent=bored-dog">Bored dog</a>
-      <a href="/pages/how-long-will-this-last-for-my-dog?intent=crate-training">Crate calming</a>
-      <a href="/blogs/dog-behavior/best-rawhide-alternative">Rawhide alternative</a>
-      <a href="/blogs/dog-behavior/how-long-do-yak-chews-last">How long will it last?</a>
+    <div class="collection-chew-finder__panel" aria-label="Collection shopping guide">
+      <div class="collection-chew-finder__steps" role="list">
+        <div class="collection-chew-finder__step" role="listitem">
+          <span>1</span>
+          <strong>Start with weight</strong>
+          <small>Use the size guide below to match your dog's current weight range.</small>
+        </div>
+        <div class="collection-chew-finder__step" role="listitem">
+          <span>2</span>
+          <strong>Adjust for intensity</strong>
+          <small>Strong chewers usually do better sizing up when they are between ranges.</small>
+        </div>
+        <div class="collection-chew-finder__step" role="listitem">
+          <span>3</span>
+          <strong>Pick the job</strong>
+          <small>Choose calmer crate time, boredom relief, or a rawhide-free swap.</small>
+        </div>
+      </div>
+
+      <div class="collection-chew-finder__routes" aria-label="Shop by dog need">
+        <a href="/pages/how-long-will-this-last-for-my-dog?intent=aggressive-chewer">
+          <strong>Aggressive chewer</strong>
+          <span>Needs more lasting resistance</span>
+        </a>
+        <a href="/pages/how-long-will-this-last-for-my-dog?intent=bored-dog">
+          <strong>Bored dog</strong>
+          <span>Needs focused enrichment</span>
+        </a>
+        <a href="/pages/how-long-will-this-last-for-my-dog?intent=crate-training">
+          <strong>Crate calming</strong>
+          <span>Needs a settled routine</span>
+        </a>
+        <a href="/blogs/dog-behavior/best-rawhide-alternative">
+          <strong>Rawhide alternative</strong>
+          <span>Needs a simpler chew</span>
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -24,10 +60,10 @@
   }
 
   .collection-chew-finder__inner {
-    align-items: center;
+    align-items: start;
     display: grid;
-    gap: 24px;
-    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    gap: 28px;
+    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
   }
 
   .collection-chew-finder__copy p {
@@ -52,21 +88,82 @@
     max-width: 560px;
   }
 
-  .collection-chew-finder__routes {
-    display: flex;
-    flex-wrap: wrap;
+  .collection-chew-finder__note {
+    background: rgba(255, 248, 239, 0.08);
+    border: 1px solid rgba(255, 248, 239, 0.16);
+    border-radius: 8px;
+    color: rgba(255, 248, 239, 0.8);
+    font-size: 13px;
+    line-height: 1.55;
+    margin-top: 18px;
+    max-width: 560px;
+    padding: 14px 16px;
+  }
+
+  .collection-chew-finder__note strong {
+    color: #fff8ef;
+  }
+
+  .collection-chew-finder__panel {
+    display: grid;
+    gap: 14px;
+  }
+
+  .collection-chew-finder__steps {
+    display: grid;
     gap: 10px;
-    justify-content: flex-end;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .collection-chew-finder__step {
+    background: #fff8ef;
+    border-radius: 8px;
+    color: #24130d;
+    display: grid;
+    gap: 7px;
+    min-height: 138px;
+    padding: 16px;
+  }
+
+  .collection-chew-finder__step > span {
+    align-items: center;
+    background: #d2632e;
+    border-radius: 999px;
+    color: #ffffff;
+    display: inline-flex;
+    font-size: 12px;
+    font-weight: 900;
+    height: 26px;
+    justify-content: center;
+    width: 26px;
+  }
+
+  .collection-chew-finder__step strong {
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+  .collection-chew-finder__step small {
+    color: #6f5a50;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .collection-chew-finder__routes {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .collection-chew-finder__routes a {
     background: rgba(255, 248, 239, 0.1);
     border: 1px solid rgba(255, 248, 239, 0.18);
-    border-radius: 999px;
+    border-radius: 8px;
     color: #fff8ef;
-    font-size: 13px;
-    font-weight: 800;
-    padding: 11px 14px;
+    display: grid;
+    gap: 4px;
+    min-height: 76px;
+    padding: 14px 16px;
     text-decoration: none;
   }
 
@@ -75,18 +172,29 @@
     border-color: #d2632e;
   }
 
+  .collection-chew-finder__routes strong {
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+  .collection-chew-finder__routes span {
+    color: rgba(255, 248, 239, 0.68);
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
   @media (max-width: 749px) {
     .collection-chew-finder__inner {
       grid-template-columns: 1fr;
     }
 
+    .collection-chew-finder__steps,
     .collection-chew-finder__routes {
-      justify-content: flex-start;
+      grid-template-columns: 1fr;
     }
 
     .collection-chew-finder__routes a {
-      flex: 1 1 calc(50% - 10px);
-      text-align: center;
+      min-height: 0;
     }
   }
 </style>

@@ -1,6 +1,7 @@
 {% liquid
   assign hero_image = collection.image
   assign product_count = collection.all_products_count
+  assign fallback_hero_image = 'prime-calm-dog-yak-chew-hero.jpg' | asset_url
 %}
 
 <section class="pch-hero" aria-label="{{ collection.title }} collection">
@@ -18,7 +19,16 @@
         >
       </div>
     {% else %}
-      <div class="pch-hero__media pch-hero__media--fallback" aria-hidden="true"></div>
+      <div class="pch-hero__media pch-hero__media--fallback" aria-hidden="true">
+        <img
+          src="{{ fallback_hero_image }}"
+          alt=""
+          width="1536"
+          height="1024"
+          loading="eager"
+          fetchpriority="high"
+        >
+      </div>
     {% endif %}
 
     <div class="pch-shell pch-hero__content">
@@ -51,7 +61,7 @@
       </div>
 
       <div class="pch-hero__cta-group">
-        <a href="#collection-grid" class="pch-btn pch-btn--primary">
+        <a href="#product-grid" class="pch-btn pch-btn--primary">
           Shop all chews
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
         </a>

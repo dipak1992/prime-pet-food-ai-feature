@@ -1,8 +1,13 @@
 <section class="chew-size-compare" data-chew-size-compare>
   <div class="chew-size-compare__inner page-width">
     <div class="chew-size-compare__head">
-      <p>{{ section.settings.eyebrow }}</p>
-      <h2>{{ section.settings.title }}</h2>
+      <div>
+        <p>{{ section.settings.eyebrow }}</p>
+        <h2>{{ section.settings.title }}</h2>
+        {% if section.settings.subtitle != blank %}
+          <span>{{ section.settings.subtitle }}</span>
+        {% endif %}
+      </div>
       <a href="/pages/how-long-will-this-last-for-my-dog">Find My Dog's Chew</a>
     </div>
 
@@ -38,6 +43,11 @@
         <small>Power chewers</small>
       </article>
     </div>
+
+    <div class="chew-size-compare__footnote">
+      <strong>Safety check:</strong>
+      yak chews are long-lasting enrichment chews, not unsupervised treats. Always provide fresh water, watch the first session, and discard the final small end piece.
+    </div>
   </div>
 </section>
 
@@ -64,9 +74,8 @@
     color: #d2632e;
     font-size: 12px;
     font-weight: 850;
-    grid-column: 1 / -1;
     letter-spacing: 0.12em;
-    margin: 0;
+    margin: 0 0 8px;
     text-transform: uppercase;
   }
 
@@ -74,6 +83,15 @@
     font-size: clamp(30px, 4vw, 48px);
     line-height: 1.05;
     margin: 0;
+  }
+
+  .chew-size-compare__head span {
+    color: #6f5a50;
+    display: block;
+    font-size: 15px;
+    line-height: 1.55;
+    margin-top: 10px;
+    max-width: 680px;
   }
 
   .chew-size-compare__head a {
@@ -96,7 +114,7 @@
   .chew-size-compare__card {
     background: #ffffff;
     border: 1px solid #eadfce;
-    border-radius: 16px;
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -133,6 +151,20 @@
     color: #2b1408;
     font-weight: 850;
     margin-top: auto;
+  }
+
+  .chew-size-compare__footnote {
+    background: #ffffff;
+    border: 1px solid #eadfce;
+    border-radius: 8px;
+    color: #6f5a50;
+    font-size: 14px;
+    line-height: 1.55;
+    padding: 14px 16px;
+  }
+
+  .chew-size-compare__footnote strong {
+    color: #24130d;
   }
 
   @media (max-width: 989px) {
@@ -185,6 +217,12 @@
       "id": "title",
       "label": "Title",
       "default": "Choose by size, chewing style, and calm-time goal"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Use weight as the baseline, then size up if your dog is between ranges and has a stronger chewing style."
     }
   ],
   "presets": [
