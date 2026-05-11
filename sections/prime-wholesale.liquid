@@ -12,7 +12,7 @@
       <h1 class="pw-hero__headline">{{ section.settings.hero_headline | default: 'Premium Himalayan Dog Chews for Modern Pet Retailers' }}</h1>
       <p class="pw-hero__subtext">{{ section.settings.hero_subtext | default: 'Long-lasting yak chews that drive repeat purchases, delight dog parents, and position your store as a premium enrichment destination.' }}</p>
       <div class="pw-hero__ctas">
-        <a href="{{ section.settings.apply_url | default: '#pw-apply' }}" class="pw-btn pw-btn--primary">{{ section.settings.hero_cta_primary | default: 'Apply for Wholesale' }}</a>
+        <a href="{{ section.settings.apply_url | default: 'https://wholesale.theprimepetfood.com/apply' }}" class="pw-btn pw-btn--primary" target="_blank" rel="noopener">{{ section.settings.hero_cta_primary | default: 'Apply for Wholesale' }}</a>
         <a href="{{ section.settings.portal_url | default: 'https://wholesale.theprimepetfood.com' }}" class="pw-btn pw-btn--secondary" target="_blank" rel="noopener">{{ section.settings.hero_cta_secondary | default: 'Access Wholesale Portal' }}</a>
       </div>
       <div class="pw-hero__stats">
@@ -188,53 +188,36 @@
     </div>
   </section>
 
-  <!-- APPLICATION FORM -->
+  <!-- APPLICATION CTA — redirects to wholesale webapp -->
   <section class="pw-apply" id="pw-apply">
     <div class="pw-shell">
       <div class="pw-section-header">
         <p class="pw-kicker">Get started</p>
         <h2>Apply for Wholesale Access</h2>
-        <p class="pw-section-sub">Fill out the form below and our team will review your application within 24–48 hours.</p>
+        <p class="pw-section-sub">Complete your application on our wholesale portal. Our team reviews every application within 24–48 hours.</p>
       </div>
-      <form class="pw-apply__form" action="/contact#contact_form" method="post" accept-charset="UTF-8">
-        <input type="hidden" name="form_type" value="contact">
-        <input type="hidden" name="utf8" value="✓">
-        <input type="hidden" name="contact[tags]" value="wholesale-application">
-        <div class="pw-apply__row">
-          <div class="pw-apply__field"><label for="pw-name">Full Name *</label><input type="text" id="pw-name" name="contact[name]" required placeholder="Your full name"></div>
-          <div class="pw-apply__field"><label for="pw-email">Email Address *</label><input type="email" id="pw-email" name="contact[email]" required placeholder="you@business.com"></div>
-        </div>
-        <div class="pw-apply__row">
-          <div class="pw-apply__field"><label for="pw-business">Business Name *</label><input type="text" id="pw-business" name="contact[business_name]" required placeholder="Your store or business name"></div>
-          <div class="pw-apply__field"><label for="pw-phone">Phone Number</label><input type="tel" id="pw-phone" name="contact[phone]" placeholder="(555) 123-4567"></div>
-        </div>
-        <div class="pw-apply__row">
-          <div class="pw-apply__field">
-            <label for="pw-type">Business Type *</label>
-            <select id="pw-type" name="contact[business_type]" required>
-              <option value="" disabled selected>Select your business type</option>
-              <option value="Boutique Pet Store">Boutique Pet Store</option>
-              <option value="Pet Supply Retailer">Pet Supply Retailer</option>
-              <option value="Groomer / Salon">Groomer / Salon</option>
-              <option value="Dog Trainer">Dog Trainer</option>
-              <option value="Dog Daycare">Dog Daycare</option>
-              <option value="Subscription Box">Subscription Box Company</option>
-              <option value="Pet Wellness Store">Pet Wellness Store</option>
-              <option value="Ecommerce Reseller">Ecommerce Reseller</option>
-              <option value="Other">Other</option>
-            </select>
+      <div class="pw-apply__redirect">
+        <div class="pw-apply__redirect-card">
+          <div class="pw-apply__redirect-steps">
+            <div class="pw-apply__redirect-step">
+              <span class="pw-apply__redirect-num">1</span>
+              <span>Create your wholesale account</span>
+            </div>
+            <div class="pw-apply__redirect-step">
+              <span class="pw-apply__redirect-num">2</span>
+              <span>Fill out the short application form</span>
+            </div>
+            <div class="pw-apply__redirect-step">
+              <span class="pw-apply__redirect-num">3</span>
+              <span>Get approved &amp; access wholesale pricing</span>
+            </div>
           </div>
-          <div class="pw-apply__field"><label for="pw-website">Website URL</label><input type="url" id="pw-website" name="contact[website]" placeholder="https://yourstore.com"></div>
+          <a href="{{ section.settings.apply_url | default: 'https://wholesale.theprimepetfood.com/apply' }}" class="pw-btn pw-btn--primary pw-btn--lg" target="_blank" rel="noopener">
+            Start Your Application &rarr;
+          </a>
+          <p class="pw-apply__note">Takes less than 5 minutes &bull; No commitment required &bull; Approval within 24–48 hours</p>
         </div>
-        <div class="pw-apply__field pw-apply__field--full">
-          <label for="pw-message">Tell us about your business</label>
-          <textarea id="pw-message" name="contact[body]" rows="4" placeholder="How many locations do you have? What products do you currently carry? Estimated monthly volume?"></textarea>
-        </div>
-        <div class="pw-apply__submit">
-          <button type="submit" class="pw-btn pw-btn--primary pw-btn--lg">Submit Wholesale Application</button>
-          <p class="pw-apply__note">We typically respond within 24–48 hours. No commitment required.</p>
-        </div>
-      </form>
+      </div>
     </div>
   </section>
 
@@ -244,7 +227,7 @@
       <h2>{{ section.settings.final_cta_heading | default: 'Ready to Bring Premium Dog Enrichment to Your Customers?' }}</h2>
       <p>{{ section.settings.final_cta_subtext | default: 'Join 200+ retailers already stocking Prime Pet Food. Apply today and start offering the chews that dogs love and owners trust.' }}</p>
       <div class="pw-final-cta__buttons">
-        <a href="#pw-apply" class="pw-btn pw-btn--primary pw-btn--lg">Apply Now</a>
+        <a href="{{ section.settings.apply_url | default: 'https://wholesale.theprimepetfood.com/apply' }}" class="pw-btn pw-btn--primary pw-btn--lg" target="_blank" rel="noopener">Apply Now</a>
         <a href="{{ section.settings.portal_url | default: 'https://wholesale.theprimepetfood.com' }}" class="pw-btn pw-btn--secondary" target="_blank" rel="noopener">Access Wholesale Portal</a>
         <a href="{{ section.settings.quote_url | default: '/pages/contact' }}" class="pw-btn pw-btn--ghost">Request Custom Quote</a>
       </div>
@@ -349,16 +332,14 @@
   .pw-faq__answer{padding:0 0 20px;color:var(--pw-muted);font-size:15px}
   .pw-faq__answer p{margin:0}
 
-  /* Apply form */
-  .pw-apply{padding:96px 0}
-  .pw-apply__form{max-width:720px;margin:0 auto;background:#fff;border-radius:var(--pw-radius-lg);padding:48px;border:1px solid var(--pw-line);box-shadow:var(--pw-shadow)}
-  .pw-apply__row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
-  .pw-apply__field label{display:block;font-size:13px;font-weight:700;color:var(--pw-ink);margin-bottom:6px}
-  .pw-apply__field input,.pw-apply__field select,.pw-apply__field textarea{width:100%;padding:12px 16px;border:1px solid var(--pw-line);border-radius:8px;font-size:15px;font-family:inherit;transition:border-color 0.15s ease;background:#fff}
-  .pw-apply__field input:focus,.pw-apply__field select:focus,.pw-apply__field textarea:focus{outline:none;border-color:var(--pw-clay);box-shadow:0 0 0 3px rgba(184,95,50,0.1)}
-  .pw-apply__field--full{margin-bottom:24px}
-  .pw-apply__submit{text-align:center}
-  .pw-apply__note{font-size:13px;color:var(--pw-muted);margin-top:12px}
+  /* Apply redirect */
+  .pw-apply{padding:96px 0;background:var(--pw-soft)}
+  .pw-apply__redirect{max-width:560px;margin:0 auto}
+  .pw-apply__redirect-card{background:#fff;border-radius:var(--pw-radius-lg);padding:48px;border:1px solid var(--pw-line);box-shadow:var(--pw-shadow);text-align:center}
+  .pw-apply__redirect-steps{display:flex;flex-direction:column;gap:16px;margin-bottom:36px;text-align:left}
+  .pw-apply__redirect-step{display:flex;align-items:center;gap:16px;font-size:15px;color:var(--pw-ink);font-weight:500}
+  .pw-apply__redirect-num{width:32px;height:32px;border-radius:50%;background:var(--pw-clay);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:780;flex-shrink:0}
+  .pw-apply__note{font-size:13px;color:var(--pw-muted);margin-top:16px}
 
   /* Final CTA */
   .pw-final-cta{padding:96px 0;background:linear-gradient(135deg,#1e1a15 0%,#2d2520 100%);text-align:center}
@@ -459,8 +440,8 @@
     {
       "type": "text",
       "id": "apply_url",
-      "label": "Apply form URL (anchor or page)",
-      "default": "#pw-apply"
+      "label": "Apply URL (wholesale webapp)",
+      "default": "https://wholesale.theprimepetfood.com/apply"
     },
     {
       "type": "text",
