@@ -4,6 +4,18 @@
   Mirrors the selected variant from ypc-product-form.
 {% endcomment %}
 
+{% liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign urgency_threshold = section.settings.low_stock_threshold | default: 8
+  assign sticky_urgency_text = section.settings.urgency_fallback_text | default: "Selling fast today"
+
+  if current_variant.inventory_management != blank and current_variant.inventory_policy != 'continue' and current_variant.inventory_quantity > 0 and current_variant.inventory_quantity <= urgency_threshold
+    assign sticky_urgency_text = 'Only ' | append: current_variant.inventory_quantity | append: ' left'
+  elsif current_variant.available == false
+    assign sticky_urgency_text = 'Out of stock'
+  endif
+%}
+
 <div class="psatc" id="prime-sticky-atc" aria-label="Sticky add to cart" hidden>
   <div class="psatc__inner page-width">
     <div class="psatc__product">
@@ -23,6 +35,9 @@
           {%- assign cv = product.selected_or_first_available_variant -%}
           {{ cv.title }}
         </span>
+        {% if section.settings.show_urgency_signal != false %}
+          <span class="psatc__urgency" id="psatc-urgency">{{ sticky_urgency_text }}</span>
+        {% endif %}
       </div>
     </div>
 
@@ -111,6 +126,20 @@
     color: #5f574e;
   }
 
+  .psatc__urgency {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    margin-top: 3px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: #fff2e8;
+    color: #9a4318;
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1.1;
+  }
+
   .psatc__price-wrap {
     display: flex;
     align-items: center;
@@ -185,6 +214,7 @@
   var psatcPrice   = document.getElementById('psatc-price');
   var psatcCompare = document.getElementById('psatc-compare');
   var psatcVariant = document.getElementById('psatc-variant-label');
+  var psatcUrgency = document.getElementById('psatc-urgency');
 
   /* ── Show/hide on scroll ── */
   var heroForm = document.getElementById('ypc-product-form');
@@ -237,6 +267,12 @@
   document.addEventListener('click', function(e) {
     if (e.target.closest('.ypc-product-hero__option-btn')) {
       setTimeout(syncVariant, 50);
+    }
+  });
+
+  document.addEventListener('ypc:urgency:update', function(e) {
+    if (psatcUrgency && e.detail && e.detail.text) {
+      psatcUrgency.textContent = e.detail.text.replace(' in this size', '');
     }
   });
 
@@ -301,6 +337,27 @@
       "id": "btn_text",
       "label": "Button text",
       "default": "Add to Cart"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_urgency_signal",
+      "label": "Show urgency signal",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "low_stock_threshold",
+      "label": "Low stock threshold",
+      "min": 1,
+      "max": 25,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "text",
+      "id": "urgency_fallback_text",
+      "label": "Fallback urgency text",
+      "default": "Selling fast today"
     }
   ]
 }

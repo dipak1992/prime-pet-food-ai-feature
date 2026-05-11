@@ -64,6 +64,14 @@
   if hero_benefit_6 == blank
     assign hero_benefit_6 = section.settings.hero_benefit_6
   endif
+
+  assign urgency_threshold = section.settings.low_stock_threshold | default: 8
+  assign current_urgency_text = section.settings.urgency_fallback_text | default: "Popular size - ships fast while today's batch lasts."
+  if current_variant.inventory_management != blank and current_variant.inventory_policy != 'continue' and current_variant.inventory_quantity > 0 and current_variant.inventory_quantity <= urgency_threshold
+    assign current_urgency_text = 'Only ' | append: current_variant.inventory_quantity | append: ' left in this size'
+  elsif current_variant.available == false
+    assign current_urgency_text = 'This size is currently out of stock'
+  endif
 %}
 
 <section class="ypc-product-hero">
@@ -207,6 +215,19 @@
           </div>
         {% endif %}
 
+        {% if section.settings.show_urgency_signals != false %}
+          <div class="ypc-urgency" id="ypc-urgency" aria-live="polite">
+            <span class="ypc-urgency__item ypc-urgency__item--stock">
+              <span class="ypc-urgency__dot" aria-hidden="true"></span>
+              <span id="ypc-urgency-stock">{{ current_urgency_text }}</span>
+            </span>
+            <span class="ypc-urgency__item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              <span>{{ section.settings.urgency_shipping_text | default: 'Ships quickly from current inventory' }}</span>
+            </span>
+          </div>
+        {% endif %}
+
         {% if product.selling_plan_groups.size > 0 %}
           <div class="ypc-subscription">
             <div class="ypc-sub-toggle">
@@ -318,6 +339,16 @@
 <script>
   (function() {
     const variants = {{ product.variants | json }};
+    const variantInventory = {
+      {% for variant in product.variants %}
+        "{{ variant.id }}": {
+          "available": {{ variant.available | json }},
+          "inventory_quantity": {{ variant.inventory_quantity | json }},
+          "inventory_management": {{ variant.inventory_management | json }},
+          "inventory_policy": {{ variant.inventory_policy | json }}
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    };
     const mainImage = document.getElementById('ypc-main-image');
     const variantIdInput = document.getElementById('ypc-variant-id');
     const priceEl = document.getElementById('ypc-price');
@@ -335,6 +366,7 @@
     const ctaPriceEl = document.getElementById('ypc-cta-price');
     const ctaCompareEl = document.getElementById('ypc-cta-compare');
     const perChewEl = document.getElementById('ypc-per-chew');
+    const urgencyStockEl = document.getElementById('ypc-urgency-stock');
 
     const qtyInput = document.getElementById('ypc-quantity-input');
     const qtyMinus = document.getElementById('ypc-qty-minus');
@@ -509,6 +541,28 @@
       }
     }
 
+    function updateUrgency(variant) {
+      if (!urgencyStockEl || !variant) return;
+
+      const inventory = variantInventory[String(variant.id)] || variant;
+      const threshold = {{ section.settings.low_stock_threshold | default: 8 | json }};
+      const fallbackText = {{ section.settings.urgency_fallback_text | default: "Popular size - ships fast while today's batch lasts." | json }};
+      const inventoryManaged = inventory.inventory_management && inventory.inventory_policy !== 'continue';
+      const inventoryQuantity = Number(inventory.inventory_quantity);
+
+      if (inventory.available === false) {
+        urgencyStockEl.textContent = 'This size is currently out of stock';
+      } else if (inventoryManaged && inventoryQuantity > 0 && inventoryQuantity <= threshold) {
+        urgencyStockEl.textContent = 'Only ' + inventoryQuantity + ' left in this size';
+      } else {
+        urgencyStockEl.textContent = fallbackText;
+      }
+
+      document.dispatchEvent(new CustomEvent('ypc:urgency:update', {
+        detail: { text: urgencyStockEl.textContent }
+      }));
+    }
+
     function updateVariantUI(variant) {
       if (!variant) return;
 
@@ -529,6 +583,7 @@
       updateMainPriceArea(activePrice, activeComparePrice);
       updateAddToCartButton(activePrice, activeComparePrice);
       updatePerChew(variant, activePrice);
+      updateUrgency(variant);
 
       if (variant.featured_image && mainImage) {
         const newUrl = variant.featured_image.src + '&width=900';
@@ -973,6 +1028,45 @@
 
   .ypc-dot {
     opacity: 0.65;
+  }
+
+  .ypc-urgency {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .ypc-urgency__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 11px;
+    border-radius: 999px;
+    background: #fff7ed;
+    border: 1px solid #f0d0b8;
+    color: #724025;
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .ypc-urgency__item--stock {
+    background: #fff2e8;
+    color: #9a4318;
+  }
+
+  .ypc-urgency__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #e66711;
+    box-shadow: 0 0 0 4px rgba(230, 103, 17, 0.14);
+    flex-shrink: 0;
+  }
+
+  .ypc-urgency__item svg {
+    flex-shrink: 0;
   }
 
   /* ─── Size hint ─── */
@@ -1481,6 +1575,33 @@
       "id": "shipping_text",
       "label": "Shipping text",
       "default": "Free shipping over $49"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_urgency_signals",
+      "label": "Show urgency signals near add to cart",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "low_stock_threshold",
+      "label": "Low stock threshold",
+      "min": 1,
+      "max": 25,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "text",
+      "id": "urgency_fallback_text",
+      "label": "Fallback urgency text",
+      "default": "Popular size - ships fast while today's batch lasts."
+    },
+    {
+      "type": "text",
+      "id": "urgency_shipping_text",
+      "label": "Shipping urgency text",
+      "default": "Ships quickly from current inventory"
     },
     {
       "type": "text",
