@@ -5,6 +5,7 @@
   assign whatsapp_contact_link = shop.brand.metafields.social_links.whatsapp.value
   assign whatsapp_contact_number = ''
   assign whatsapp_contact_number_display = ''
+  assign prime_shop_collection_url = section.settings.shop_collection_url | default: '/collections/himalayan-yak-chews-for-dogs'
 
   if whatsapp_contact_link != blank
     assign whatsapp_contact_number = whatsapp_contact_link | replace: 'https://wa.me/', '' | replace: 'http://wa.me/', '' | replace: 'https://api.whatsapp.com/send?phone=', '' | replace: 'http://api.whatsapp.com/send?phone=', '' | replace: 'https://web.whatsapp.com/send?phone=', '' | replace: 'http://web.whatsapp.com/send?phone=', '' | split: '&' | first | replace: '%2B', '+' | replace: '%20', '' | replace: ' ', ''
@@ -69,8 +70,15 @@
           <ul class="header__menu">
             {%- if section.settings.menu != blank -%}
               {%- for link in section.settings.menu.links -%}
+                {%- liquid
+                  assign link_url = link.url
+                  assign link_title = link.title | downcase | strip
+                  if link_title == 'shop' and link.url contains '/collections/all'
+                    assign link_url = prime_shop_collection_url
+                  endif
+                -%}
                 <li class="header__menu-item{% if link.links != blank %} has-dropdown{% endif %}">
-                  <a href="{{ link.url }}" class="header__link{% if link.current %} header__link--active{% endif %}">
+                  <a href="{{ link_url }}" class="header__link{% if link.current %} header__link--active{% endif %}">
                     {{ link.title | escape }}
                     {%- if link.links != blank -%}
                       {% render 'icon', icon: 'chevron_down', size: 12 %}
@@ -260,9 +268,16 @@
         <ul class="header__drawer-menu">
           {%- if section.settings.menu != blank -%}
             {%- for link in section.settings.menu.links -%}
+              {%- liquid
+                assign link_url = link.url
+                assign link_title = link.title | downcase | strip
+                if link_title == 'shop' and link.url contains '/collections/all'
+                  assign link_url = prime_shop_collection_url
+                endif
+              -%}
               <li class="header__drawer-item{% if link.links != blank %} has-submenu{% endif %}">
                 <div class="header__drawer-item-header">
-                  <a href="{{ link.url }}" class="header__drawer-link">{{ link.title }}</a>
+                  <a href="{{ link_url }}" class="header__drawer-link">{{ link.title }}</a>
                   {%- if link.links != blank -%}
                     <button class="header__drawer-toggle" aria-expanded="false">
                       {% render 'icon', icon: 'chevron_down', size: 16 %}
@@ -318,6 +333,12 @@
       "id": "menu",
       "default": "main-menu",
       "label": "Menu"
+    },
+    {
+      "type": "url",
+      "id": "shop_collection_url",
+      "label": "Shop collection link",
+      "default": "/collections/himalayan-yak-chews-for-dogs"
     },
     {
       "type": "url",
