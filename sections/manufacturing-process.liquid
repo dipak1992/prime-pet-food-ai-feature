@@ -1,6 +1,6 @@
 <section
   id="shopify-section-{{ section.id }}"
-  class="mpt-section"
+  class="mpt-section mpt-layout--{{ section.settings.layout }}"
   style="
     --mpt-bg: {{ section.settings.bg_color }};
     --mpt-heading: {{ section.settings.heading_color }};
@@ -31,65 +31,107 @@
     </div>
 
     {% if section.blocks.size > 0 %}
-      <div class="mpt-desktop-timeline">
-        <div class="mpt-steps-row">
+      {% if section.settings.layout == 'zigzag' %}
+        <div class="mpt-desktop-timeline mpt-zigzag">
+          <div class="mpt-zigzag-spine"></div>
           {% for block in section.blocks %}
-            <div class="mpt-step" {{ block.shopify_attributes }}>
-              <div class="mpt-top-card">
-                <div class="mpt-image-wrap">
+            <div class="mpt-zigzag-step {% cycle 'is-left', 'is-right' %}" {{ block.shopify_attributes }}>
+              <div class="mpt-zigzag-media">
+                <div class="mpt-zigzag-image-wrap">
                   {% if block.settings.image != blank %}
                     {{
                       block.settings.image
-                      | image_url: width: 360
+                      | image_url: width: 600
                       | image_tag:
                         loading: 'lazy',
-                        widths: '160,240,320,360',
-                        class: 'mpt-icon-image',
+                        widths: '240,360,480,600',
+                        class: 'mpt-zigzag-image',
                         alt: block.settings.title
                     }}
                   {% else %}
-                    <div class="mpt-fallback-icon">
+                    <div class="mpt-fallback-icon mpt-fallback-icon--lg">
                       {% case block.settings.icon %}
-                        {% when 'collection' %}
-                          <span>🏔️</span>
-                        {% when 'pasteurization' %}
-                          <span>🥛</span>
-                        {% when 'aging' %}
-                          <span>🧀</span>
-                        {% when 'cut' %}
-                          <span>📏</span>
-                        {% when 'dry' %}
-                          <span>☀️</span>
-                        {% else %}
-                          <span>✨</span>
+                        {% when 'collection' %}<span>🏔️</span>
+                        {% when 'pasteurization' %}<span>🥛</span>
+                        {% when 'aging' %}<span>🧀</span>
+                        {% when 'cut' %}<span>📏</span>
+                        {% when 'dry' %}<span>☀️</span>
+                        {% else %}<span>✨</span>
                       {% endcase %}
                     </div>
                   {% endif %}
+                </div>
+              </div>
+
+              <div class="mpt-zigzag-dot">
+                <span class="mpt-zigzag-dot-inner"></span>
+              </div>
+
+              <div class="mpt-zigzag-content">
+                <span class="mpt-zigzag-number">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+                {% if block.settings.title != blank %}
+                  <h3 class="mpt-zigzag-title">{{ block.settings.title }}</h3>
+                {% endif %}
+                {% if block.settings.text != blank %}
+                  <p class="mpt-zigzag-text">{{ block.settings.text }}</p>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="mpt-desktop-timeline mpt-horizontal">
+          <div class="mpt-steps-row">
+            {% for block in section.blocks %}
+              <div class="mpt-step" {{ block.shopify_attributes }}>
+                <div class="mpt-step-media">
+                  <span class="mpt-step-number">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+                  <div class="mpt-image-wrap">
+                    {% if block.settings.image != blank %}
+                      {{
+                        block.settings.image
+                        | image_url: width: 360
+                        | image_tag:
+                          loading: 'lazy',
+                          widths: '160,240,320,360',
+                          class: 'mpt-icon-image',
+                          alt: block.settings.title
+                      }}
+                    {% else %}
+                      <div class="mpt-fallback-icon">
+                        {% case block.settings.icon %}
+                          {% when 'collection' %}<span>🏔️</span>
+                          {% when 'pasteurization' %}<span>🥛</span>
+                          {% when 'aging' %}<span>🧀</span>
+                          {% when 'cut' %}<span>📏</span>
+                          {% when 'dry' %}<span>☀️</span>
+                          {% else %}<span>✨</span>
+                        {% endcase %}
+                      </div>
+                    {% endif %}
+                  </div>
                 </div>
 
                 {% if block.settings.title != blank %}
                   <h3 class="mpt-step-title">{{ block.settings.title }}</h3>
                 {% endif %}
-              </div>
 
-              <div class="mpt-line-wrap">
-                <div class="mpt-line"></div>
-                <div class="mpt-dot">
-                  <span class="mpt-dot-inner"></span>
+                <div class="mpt-line-wrap">
+                  <div class="mpt-dot">
+                    <span class="mpt-dot-inner"></span>
+                  </div>
                 </div>
-                <div class="mpt-arrow-up"></div>
-                <div class="mpt-arrow-down"></div>
-              </div>
 
-              {% if block.settings.text != blank %}
-                <div class="mpt-bubble">
-                  <p>{{ block.settings.text }}</p>
-                </div>
-              {% endif %}
-            </div>
-          {% endfor %}
+                {% if block.settings.text != blank %}
+                  <div class="mpt-bubble">
+                    <p>{{ block.settings.text }}</p>
+                  </div>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
         </div>
-      </div>
+      {% endif %}
 
       <div class="mpt-mobile-timeline">
         {% for block in section.blocks %}
@@ -218,56 +260,54 @@
       display: none;
     }
 
-    .mpt-section .mpt-steps-row {
+    /* ─────── HORIZONTAL LAYOUT ─────── */
+    .mpt-horizontal .mpt-steps-row {
       display: grid;
       grid-template-columns: repeat(5, minmax(0, 1fr));
-      column-gap: 14px;
+      column-gap: 28px;
       row-gap: 24px;
       align-items: start;
+      position: relative;
     }
 
-    .mpt-section .mpt-step {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    .mpt-horizontal .mpt-step {
+      display: grid;
+      grid-template-rows: auto auto auto 1fr;
+      gap: 18px;
+      align-items: start;
+      justify-items: center;
+      position: relative;
     }
 
-    .mpt-section .mpt-top-card {
-      width: 100%;
-      max-width: 250px;
-      min-height: 164px;
-      background: var(--mpt-card-bg);
-      border-radius: 34px;
-      padding: 20px 16px 22px;
+    /* Image area with watermark number */
+    .mpt-horizontal .mpt-step-media {
+      position: relative;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      position: relative;
-      box-sizing: border-box;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      border: 1px solid rgba(36, 19, 13, 0.08);
-      box-shadow: 0 14px 34px rgba(36, 19, 13, 0.07);
-      overflow: hidden;
+      width: 100%;
+      padding-top: 32px;
     }
 
-    .mpt-section .mpt-top-card::before {
-      content: "";
+    .mpt-horizontal .mpt-step-number {
       position: absolute;
-      inset: 10px;
-      border-radius: 28px;
-      border: 1px solid rgba(210, 99, 46, 0.12);
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 88px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--mpt-accent);
+      opacity: 0.10;
       pointer-events: none;
+      user-select: none;
+      z-index: 0;
     }
 
-    .mpt-section .mpt-step:hover .mpt-top-card {
-      transform: translateY(-4px);
-      box-shadow: 0 18px 44px rgba(36, 19, 13, 0.11);
-    }
-
-    .mpt-section .mpt-image-wrap {
-      width: 116px;
-      height: 116px;
+    .mpt-horizontal .mpt-image-wrap {
+      width: 140px;
+      height: 140px;
       border-radius: 999px;
       display: flex;
       align-items: center;
@@ -275,157 +315,284 @@
       position: relative;
       z-index: 1;
       overflow: hidden;
-      background: transparent;
-      box-shadow: none;
-      border: none;
+      background: var(--mpt-card-bg);
+      box-shadow: 0 12px 32px rgba(36, 19, 13, 0.10);
+      border: 6px solid #ffffff;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .mpt-section .mpt-icon-image {
-      width: 116px;
-      height: 116px;
+    .mpt-horizontal .mpt-step:hover .mpt-image-wrap {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px rgba(36, 19, 13, 0.14);
+    }
+
+    .mpt-horizontal .mpt-icon-image {
+      width: 100%;
+      height: 100%;
       border-radius: 999px;
       object-fit: cover;
       object-position: center;
       display: block;
-      background: transparent;
-      border: none;
-      box-shadow: none;
     }
 
-    .mpt-section .mpt-fallback-icon {
-      width: 116px;
-      height: 116px;
+    .mpt-horizontal .mpt-fallback-icon {
+      width: 100%;
+      height: 100%;
       border-radius: 999px;
-      background: rgba(210, 99, 46, 0.1);
+      background: rgba(210, 99, 46, 0.10);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 42px;
+      font-size: 48px;
       line-height: 1;
     }
 
-    .mpt-section .mpt-step-title {
-      margin: 14px 0 0;
-      position: relative;
-      z-index: 1;
+    .mpt-horizontal .mpt-step-title {
+      margin: 0;
       color: var(--mpt-heading);
       text-align: center;
-      font-size: clamp(18px, 1.5vw, 22px);
-      line-height: 1.08;
-      font-weight: 850;
-      max-width: 190px;
+      font-size: 19px;
+      line-height: 1.2;
+      font-weight: 800;
+      max-width: 220px;
+      min-height: 46px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
     }
 
-    .mpt-section .mpt-line-wrap {
+    /* Continuous connector line + centered dot */
+    .mpt-horizontal .mpt-line-wrap {
       width: 100%;
-      height: 72px;
+      height: 28px;
       position: relative;
-      margin-top: 0;
     }
 
-    .mpt-section .mpt-line {
+    .mpt-horizontal .mpt-line-wrap::before {
+      content: "";
       position: absolute;
-      left: 0;
-      right: 0;
+      left: -50%;
+      right: -50%;
       top: 50%;
       transform: translateY(-50%);
-      height: 5px;
+      height: 2px;
       background: var(--mpt-accent);
-      opacity: 0.9;
+      opacity: 0.45;
+      z-index: 0;
     }
 
-    .mpt-section .mpt-dot {
+    .mpt-horizontal .mpt-step:first-child .mpt-line-wrap::before { left: 50%; }
+    .mpt-horizontal .mpt-step:last-child .mpt-line-wrap::before { right: 50%; }
+
+    .mpt-horizontal .mpt-dot {
       position: absolute;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-      width: 34px;
-      height: 34px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 3px solid var(--mpt-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      box-sizing: border-box;
+      box-shadow: 0 4px 10px rgba(36, 19, 13, 0.12);
+    }
+
+    .mpt-horizontal .mpt-dot-inner {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--mpt-accent);
+      display: block;
+    }
+
+    .mpt-horizontal .mpt-bubble {
+      width: 100%;
+      max-width: 260px;
+      min-height: 130px;
+      background: transparent;
+      border-radius: 18px;
+      padding: 18px 16px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      text-align: center;
+      box-sizing: border-box;
+      border: 1px solid rgba(36, 19, 13, 0.10);
+      transition: border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .mpt-horizontal .mpt-step:hover .mpt-bubble {
+      border-color: var(--mpt-accent);
+      background: var(--mpt-soft);
+    }
+
+    .mpt-horizontal .mpt-bubble p {
+      margin: 0;
+      color: var(--mpt-text);
+      font-size: 14.5px;
+      line-height: 1.6;
+      font-weight: 500;
+    }
+
+    /* ─────── ZIGZAG LAYOUT ─────── */
+    .mpt-zigzag {
+      position: relative;
+      padding: 20px 0;
+    }
+
+    .mpt-zigzag-spine {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 3px;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        var(--mpt-accent) 8%,
+        var(--mpt-accent) 92%,
+        transparent 100%
+      );
+      opacity: 0.55;
+      z-index: 0;
+    }
+
+    .mpt-zigzag-step {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 60px 1fr;
+      align-items: center;
+      column-gap: 0;
+      padding: 36px 0;
+      z-index: 1;
+    }
+
+    .mpt-zigzag-step.is-left .mpt-zigzag-media {
+      grid-column: 1;
+      justify-self: end;
+      padding-right: 50px;
+    }
+
+    .mpt-zigzag-step.is-left .mpt-zigzag-content {
+      grid-column: 3;
+      justify-self: start;
+      padding-left: 50px;
+      text-align: left;
+    }
+
+    .mpt-zigzag-step.is-right .mpt-zigzag-media {
+      grid-column: 3;
+      justify-self: start;
+      padding-left: 50px;
+      order: 1;
+    }
+
+    .mpt-zigzag-step.is-right .mpt-zigzag-content {
+      grid-column: 1;
+      justify-self: end;
+      padding-right: 50px;
+      text-align: right;
+    }
+
+    .mpt-zigzag-media {
+      width: 100%;
+      max-width: 340px;
+    }
+
+    .mpt-zigzag-image-wrap {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 28px;
+      overflow: hidden;
+      background: var(--mpt-card-bg);
+      box-shadow: 0 20px 50px rgba(36, 19, 13, 0.14);
+      border: 8px solid #ffffff;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .mpt-zigzag-step:hover .mpt-zigzag-image-wrap {
+      transform: translateY(-6px);
+      box-shadow: 0 28px 60px rgba(36, 19, 13, 0.18);
+    }
+
+    .mpt-zigzag-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .mpt-fallback-icon--lg {
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+      background: rgba(210, 99, 46, 0.10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 96px;
+      line-height: 1;
+    }
+
+    .mpt-zigzag-dot {
+      grid-column: 2;
+      justify-self: center;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       background: #ffffff;
       border: 5px solid var(--mpt-accent);
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 2;
       box-sizing: border-box;
-      box-shadow: 0 8px 18px rgba(36, 19, 13, 0.12);
+      box-shadow: 0 6px 16px rgba(36, 19, 13, 0.18);
+      position: relative;
+      z-index: 2;
     }
 
-    .mpt-section .mpt-dot-inner {
-      width: 10px;
-      height: 10px;
+    .mpt-zigzag-dot-inner {
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       background: var(--mpt-accent);
-      display: block;
     }
 
-    .mpt-section .mpt-arrow-up,
-    .mpt-section .mpt-arrow-down {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 4px;
-      background: var(--mpt-accent);
-      z-index: 1;
+    .mpt-zigzag-content {
+      max-width: 420px;
     }
 
-    .mpt-section .mpt-arrow-up {
-      top: 10px;
-      height: 22px;
+    .mpt-zigzag-number {
+      display: inline-block;
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+      color: var(--mpt-accent);
+      opacity: 0.18;
+      margin-bottom: 4px;
     }
 
-    .mpt-section .mpt-arrow-down {
-      bottom: 10px;
-      height: 22px;
-    }
-
-    .mpt-section .mpt-arrow-up::before,
-    .mpt-section .mpt-arrow-down::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      border-left: 7px solid transparent;
-      border-right: 7px solid transparent;
-    }
-
-    .mpt-section .mpt-arrow-up::before {
-      top: -8px;
-      border-bottom: 10px solid var(--mpt-accent);
-    }
-
-    .mpt-section .mpt-arrow-down::after {
-      bottom: -8px;
-      border-top: 10px solid var(--mpt-accent);
-    }
-
-    .mpt-section .mpt-bubble {
-      width: 100%;
-      max-width: 250px;
-      min-height: 112px;
-      background: var(--mpt-soft);
-      border-radius: 26px;
-      padding: 18px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      box-sizing: border-box;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      border: 1px solid rgba(36, 19, 13, 0.07);
-    }
-
-    .mpt-section .mpt-step:hover .mpt-bubble {
-      transform: translateY(4px);
-      box-shadow: 0 12px 26px rgba(36, 19, 13, 0.07);
-    }
-
-    .mpt-section .mpt-bubble p {
-      margin: 0;
+    .mpt-zigzag-title {
+      margin: 0 0 12px;
       color: var(--mpt-heading);
-      font-size: 15px;
-      line-height: 1.55;
+      font-size: clamp(24px, 2.2vw, 32px);
+      line-height: 1.1;
+      font-weight: 850;
+      letter-spacing: -0.01em;
+    }
+
+    .mpt-zigzag-text {
+      margin: 0;
+      color: var(--mpt-text);
+      font-size: 16px;
+      line-height: 1.7;
       font-weight: 500;
     }
 
@@ -508,10 +675,84 @@
       gap: 14px;
     }
 
+    .mpt-mobile-content .mpt-top-card {
+      width: 100%;
+      background: var(--mpt-card-bg);
+      border-radius: 24px;
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid rgba(36, 19, 13, 0.08);
+      box-shadow: 0 10px 24px rgba(36, 19, 13, 0.06);
+      box-sizing: border-box;
+    }
+
+    .mpt-mobile-content .mpt-image-wrap {
+      width: 108px;
+      height: 108px;
+      border-radius: 999px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+    }
+
+    .mpt-mobile-content .mpt-icon-image {
+      width: 100%;
+      height: 100%;
+      border-radius: 999px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .mpt-mobile-content .mpt-fallback-icon {
+      width: 108px;
+      height: 108px;
+      border-radius: 999px;
+      background: rgba(210, 99, 46, 0.10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 42px;
+    }
+
+    .mpt-mobile-content .mpt-step-title {
+      margin: 0;
+      color: var(--mpt-heading);
+      text-align: center;
+      font-size: 18px;
+      line-height: 1.2;
+      font-weight: 800;
+    }
+
+    .mpt-mobile-content .mpt-bubble {
+      width: 100%;
+      background: var(--mpt-soft);
+      border-radius: 18px;
+      padding: 16px 18px;
+      border: 1px solid rgba(36, 19, 13, 0.06);
+      box-sizing: border-box;
+    }
+
+    .mpt-mobile-content .mpt-bubble p {
+      margin: 0;
+      color: var(--mpt-heading);
+      font-size: 14.5px;
+      line-height: 1.55;
+      font-weight: 500;
+    }
+
     @media screen and (max-width: 1200px) {
-      .mpt-section .mpt-steps-row {
+      .mpt-horizontal .mpt-steps-row {
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        row-gap: 28px;
+        row-gap: 40px;
+      }
+
+      .mpt-horizontal .mpt-line-wrap::before {
+        display: none;
       }
     }
 
@@ -548,11 +789,6 @@
         max-width: 100%;
       }
 
-      .mpt-section .mpt-top-card {
-        min-height: 168px;
-        padding: 18px 14px 22px;
-      }
-
       .mpt-section .mpt-image-wrap,
       .mpt-section .mpt-icon-image,
       .mpt-section .mpt-fallback-icon {
@@ -574,6 +810,17 @@
   "tag": "section",
   "class": "section-manufacturing-timeline",
   "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Desktop layout style",
+      "options": [
+        { "value": "horizontal", "label": "Numbered horizontal" },
+        { "value": "zigzag", "label": "Vertical zig-zag" }
+      ],
+      "default": "horizontal",
+      "info": "Mobile uses vertical timeline regardless"
+    },
     {
       "type": "text",
       "id": "eyebrow",
