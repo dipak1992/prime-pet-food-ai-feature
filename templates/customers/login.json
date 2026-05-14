@@ -1,1 +1,84 @@
-{"sections":{"main":{"type":"main-login","blocks":{"text_iCj7qx":{"type":"text","settings":{"text":"<p>Manage orders, subscriptions, dog profile details, and faster reorders from one calm account hub.</p>","text_size":"t3"}},"spacer_3Q7afx":{"type":"spacer","settings":{"show_line_separator":false,"spacing_top":0.6,"spacing_bottom":0.6,"spacer_visibility":"both","line_color":""}},"login_form_GgzDWH":{"type":"login_form","settings":{"show_register_link":true}}},"block_order":["text_iCj7qx","spacer_3Q7afx","login_form_GgzDWH"],"settings":{"enable_shop_login_button":true,"full_width":false,"desktop_content_alignment":"left","mobile_content_alignment":"left","image":"","image_overlay_opacity":40,"desktop_section_height":560,"mobile_section_height":400,"desktop_media_width":45,"layout":"media_first","show_header_beside":true,"content_max_width":"xl","desktop_heading_alignment":"left","mobile_heading_alignment":"left","desktop_content_position":"md:justify-start md:items-end","mobile_content_position":"justify-start items-end","title":"","italic_convert":"","heading_size":"h2","text":"<h6><strong>Your dog&rsquo;s enrichment hub</strong></h6>","text_size":"t3","button_text_size":"t5","button_label":"Shop yak chews","button_link":"shopify://collections/yak-chew","button_style":"secondary","button_style_show_arrow":true,"section_color_scheme":"","color_scheme":"","image_overlay_color_scheme":"scheme-6","show_content_shadow":true,"top_padding":"pt-s","bottom_padding":"pb-s","heading_tag":"h2"}}},"order":["main"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-login",
+      "blocks": {
+        "text_iCj7qx": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Manage orders, subscriptions, dog profile details, and faster reorders from one calm account hub.</p>",
+            "text_size": "t3"
+          }
+        },
+        "spacer_3Q7afx": {
+          "type": "spacer",
+          "settings": {
+            "show_line_separator": false,
+            "spacing_top": 0.6,
+            "spacing_bottom": 0.6,
+            "spacer_visibility": "both",
+            "line_color": ""
+          }
+        },
+        "login_form_GgzDWH": {
+          "type": "login_form",
+          "settings": {
+            "show_register_link": true
+          }
+        }
+      },
+      "block_order": [
+        "text_iCj7qx",
+        "spacer_3Q7afx",
+        "login_form_GgzDWH"
+      ],
+      "settings": {
+        "enable_shop_login_button": true,
+        "full_width": false,
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "image": "",
+        "image_overlay_opacity": 40,
+        "desktop_section_height": 560,
+        "mobile_section_height": 400,
+        "desktop_media_width": 45,
+        "layout": "media_first",
+        "show_header_beside": true,
+        "content_max_width": "xl",
+        "desktop_heading_alignment": "left",
+        "mobile_heading_alignment": "left",
+        "desktop_content_position": "md:justify-start md:items-end",
+        "mobile_content_position": "justify-start items-end",
+        "title": "",
+        "italic_convert": "",
+        "heading_size": "h2",
+        "text": "<h6><strong>Your dog&rsquo;s enrichment hub</strong></h6>",
+        "text_size": "t3",
+        "button_text_size": "t5",
+        "button_label": "Shop yak chews",
+        "button_link": "shopify://collections/yak-chew",
+        "button_style": "secondary",
+        "button_style_show_arrow": true,
+        "section_color_scheme": "",
+        "color_scheme": "",
+        "image_overlay_color_scheme": "scheme-6",
+        "show_content_shadow": true,
+        "top_padding": "pt-s",
+        "bottom_padding": "pb-s",
+        "heading_tag": "h2"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,1 +1,343 @@
-{"type":"aside","name":"Overlays","sections":{"stickers":{"type":"stickers","settings":{}},"age_verifier_47qffQ":{"type":"age-verifier","blocks":{"heading_3NThFQ":{"type":"heading","settings":{"heading":"ARE YOU 21 OR OLDER?","heading_italic_convert":"","heading_size":"h2","heading_size_custom":2.4,"heading_line_height_custom":1.2,"heading_tag":"h2"}},"age_verifier_buttons_Xj9r7L":{"type":"age_verifier_buttons","settings":{"button_text_size":"t3","button_label_1":"YES","button_style_1":"primary","button_style_1_show_arrow":false,"button_label_2":"NO","button_style_2":"secondary","no_text":"Sorry, you must be at least 21 to enter this site."}},"spacer_iMNkA4":{"type":"spacer","settings":{"show_line_separator":true,"spacing_top":2.4,"spacing_bottom":2.4,"spacer_visibility":"both","line_color":""}},"text_T46Hpr":{"type":"text","settings":{"text":"<p>You must verify that you are at least 21 years of age to enter.<\/p>","text_size":"t6"}}},"block_order":["heading_3NThFQ","age_verifier_buttons_Xj9r7L","spacer_iMNkA4","text_T46Hpr"],"disabled":true,"settings":{"mode":"enabled","desktop_content_position":"md:justify-start md:items-end","mobile_content_position":"justify-start items-end","content_max_width":"s","desktop_content_alignment":"center","mobile_content_alignment":"center","content_padding":5,"image_position_desktop":"left","image_position_mobile":"top","image_size_desktop":230,"image_size_mobile":230,"image_overlay_opacity":0,"color_scheme":""}},"popup_EJ8KWa":{"type":"popup","disabled":true,"blocks":{"heading_G6GXj3":{"type":"heading","settings":{"heading":"","heading_italic_convert":"","heading_size":"h3","heading_size_custom":2.4,"heading_line_height_custom":1.2,"heading_tag":"h2"}},"text_iiwerJ":{"type":"text","settings":{"text":"","text_size":"t2"}},"spacer_cUpYnc":{"type":"spacer","settings":{"show_line_separator":true,"spacing_top":2.4,"spacing_bottom":2.4,"spacer_visibility":"both","line_color":""}},"text_CTWmBF":{"type":"text","settings":{"text":"<h6><strong>Join the pack & Get 10% 0ff<\/strong><br\/><br\/> + exclusive news & offers<\/h6>","text_size":"t2"}},"discount_fmxNrV":{"type":"discount","settings":{"discount_code":"THE PRIMEPETFOOD","text_size":"t3","discount_gated":false,"color_peel_background":"#f57309","color_peel_foreground":"#ffffff"}}},"block_order":["heading_G6GXj3","text_iiwerJ","spacer_cUpYnc","text_CTWmBF","discount_fmxNrV"],"settings":{"mode":"enabled","show_trigger":"exit_intent","show_delay":4,"popup_id":"","desktop_content_position":"md:justify-start md:items-end","mobile_content_position":"justify-start items-end","content_max_width":"s","desktop_content_alignment":"center","mobile_content_alignment":"left","content_padding":5,"image_position_desktop":"left","image_position_mobile":"top","image_size_desktop":230,"image_size_mobile":230,"image_overlay_opacity":0,"color_scheme":"scheme-5","close_color":"","visibility":"both","show_at_specific_time_of_day":false,"show_time_morning":true,"show_time_afternoon":true,"show_time_evening":true,"show_time_night":true}},"popup_Hepgfg":{"type":"popup","disabled":true,"blocks":{"heading_edwgqU":{"type":"heading","settings":{"heading":"Price promise","heading_italic_convert":"","heading_size":"h4","heading_size_custom":2.4,"heading_line_height_custom":1.2,"heading_tag":"h2"}},"text_nqx8d4":{"type":"text","settings":{"text":"<p>Buy from us safe in the knowledge you've paid a <strong>great price<\/strong>.<\/p><p>If you find the same item online at a cheaper price, <strong>we'll match it<\/strong>. Just get in touch with a link to the item you've found.<\/p>","text_size":"t4"}},"buttons_zVACTx":{"type":"buttons","settings":{"click_to_close":true,"button_text_size":"t4","button_label_1":"Request price match","button_link_1":"\/","button_style_1":"link","button_style_1_show_arrow":true,"button_label_2":"","button_link_2":"","button_style_2":"secondary","button_style_2_show_arrow":false}}},"block_order":["heading_edwgqU","text_nqx8d4","buttons_zVACTx"],"settings":{"mode":"enabled","show_trigger":"copy_to_clipboard","show_delay":4,"popup_id":"","desktop_content_position":"md:justify-start md:items-end","mobile_content_position":"justify-center items-center","content_max_width":"xs","desktop_content_alignment":"left","mobile_content_alignment":"left","content_padding":3.2,"image_position_desktop":"background","image_position_mobile":"background","image_size_desktop":230,"image_size_mobile":230,"image_overlay_opacity":0,"color_scheme":"","close_color":"","visibility":"both","show_at_specific_time_of_day":false,"show_time_morning":true,"show_time_afternoon":true,"show_time_evening":true,"show_time_night":true}},"popup_iRfQiW":{"type":"popup","blocks":{"heading_8EhQYg":{"type":"heading","settings":{"heading":"Popup","heading_italic_convert":"","heading_size":"h3","heading_size_custom":2.4,"heading_line_height_custom":1.2,"heading_tag":"h2"}}},"block_order":["heading_8EhQYg"],"disabled":true,"name":"Popup","settings":{"mode":"enabled","show_trigger":"delay","show_delay":4,"popup_id":"","desktop_content_position":"md:justify-start md:items-end","mobile_content_position":"justify-start items-end","content_max_width":"s","desktop_content_alignment":"left","mobile_content_alignment":"left","content_padding":5,"image_position_desktop":"left","image_position_mobile":"top","image_size_desktop":230,"image_size_mobile":230,"image_overlay_opacity":0,"color_scheme":"","close_color":"","visibility":"both","show_at_specific_time_of_day":false,"show_time_morning":true,"show_time_afternoon":true,"show_time_evening":true,"show_time_night":true}},"alert_wgL63i":{"type":"alert","disabled":true,"blocks":{"text_7cAWYf":{"type":"text","settings":{"text":"<p><strong>Selling fast!<\/strong><\/p><p>Get yours while you can.<\/p>","text_size":"t3"}}},"block_order":["text_7cAWYf"],"name":"Alert","settings":{"show_delay":4,"auto_close":0,"show_close":true,"mode":"enabled","desktop_content_position":"md:justify-start md:items-end","mobile_content_position":"justify-start items-end","content_max_width":"xs","desktop_content_alignment":"left","mobile_content_alignment":"left","content_padding":1.8,"icon":"speedometer","icon_container":"rounded","icon_size":5,"icon_color":"#ffffff","icon_background_color":"#44c3ed","background_gradient":"linear-gradient(45deg, rgba(54, 149, 250, 1), rgba(68, 195, 237, 1) 100%)","image":"shopify:\/\/shop_images\/67d79f7646f7bb9163a28c3a.png","image_cover":true,"image_position_desktop":"left","image_position_mobile":"left","image_size_desktop":150,"image_size_mobile":150,"image_overlay_opacity":0,"color_scheme":"","close_color":"","visibility":"both","hide_when_empty":false,"show_at_specific_time_of_day":false,"show_time_morning":true,"show_time_afternoon":true,"show_time_evening":true,"show_time_night":true}}},"order":["stickers","age_verifier_47qffQ","popup_EJ8KWa","popup_Hepgfg","popup_iRfQiW","alert_wgL63i"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "aside",
+  "name": "Overlays",
+  "sections": {
+    "stickers": {
+      "type": "stickers",
+      "settings": {}
+    },
+    "age_verifier_47qffQ": {
+      "type": "age-verifier",
+      "blocks": {
+        "heading_3NThFQ": {
+          "type": "heading",
+          "settings": {
+            "heading": "ARE YOU 21 OR OLDER?",
+            "heading_italic_convert": "",
+            "heading_size": "h2",
+            "heading_size_custom": 2.4,
+            "heading_line_height_custom": 1.2,
+            "heading_tag": "h2"
+          }
+        },
+        "age_verifier_buttons_Xj9r7L": {
+          "type": "age_verifier_buttons",
+          "settings": {
+            "button_text_size": "t3",
+            "button_label_1": "YES",
+            "button_style_1": "primary",
+            "button_style_1_show_arrow": false,
+            "button_label_2": "NO",
+            "button_style_2": "secondary",
+            "no_text": "Sorry, you must be at least 21 to enter this site."
+          }
+        },
+        "spacer_iMNkA4": {
+          "type": "spacer",
+          "settings": {
+            "show_line_separator": true,
+            "spacing_top": 2.4,
+            "spacing_bottom": 2.4,
+            "spacer_visibility": "both",
+            "line_color": ""
+          }
+        },
+        "text_T46Hpr": {
+          "type": "text",
+          "settings": {
+            "text": "<p>You must verify that you are at least 21 years of age to enter.</p>",
+            "text_size": "t6"
+          }
+        }
+      },
+      "block_order": [
+        "heading_3NThFQ",
+        "age_verifier_buttons_Xj9r7L",
+        "spacer_iMNkA4",
+        "text_T46Hpr"
+      ],
+      "disabled": true,
+      "settings": {
+        "mode": "enabled",
+        "desktop_content_position": "md:justify-start md:items-end",
+        "mobile_content_position": "justify-start items-end",
+        "content_max_width": "s",
+        "desktop_content_alignment": "center",
+        "mobile_content_alignment": "center",
+        "content_padding": 5,
+        "image_position_desktop": "left",
+        "image_position_mobile": "top",
+        "image_size_desktop": 230,
+        "image_size_mobile": 230,
+        "image_overlay_opacity": 0,
+        "color_scheme": ""
+      }
+    },
+    "popup_EJ8KWa": {
+      "type": "popup",
+      "disabled": true,
+      "blocks": {
+        "heading_G6GXj3": {
+          "type": "heading",
+          "settings": {
+            "heading": "",
+            "heading_italic_convert": "",
+            "heading_size": "h3",
+            "heading_size_custom": 2.4,
+            "heading_line_height_custom": 1.2,
+            "heading_tag": "h2"
+          }
+        },
+        "text_iiwerJ": {
+          "type": "text",
+          "settings": {
+            "text": "",
+            "text_size": "t2"
+          }
+        },
+        "spacer_cUpYnc": {
+          "type": "spacer",
+          "settings": {
+            "show_line_separator": true,
+            "spacing_top": 2.4,
+            "spacing_bottom": 2.4,
+            "spacer_visibility": "both",
+            "line_color": ""
+          }
+        },
+        "text_CTWmBF": {
+          "type": "text",
+          "settings": {
+            "text": "<h6><strong>Join the pack & Get 10% 0ff</strong><br/><br/> + exclusive news & offers</h6>",
+            "text_size": "t2"
+          }
+        },
+        "discount_fmxNrV": {
+          "type": "discount",
+          "settings": {
+            "discount_code": "THE PRIMEPETFOOD",
+            "text_size": "t3",
+            "discount_gated": false,
+            "color_peel_background": "#f57309",
+            "color_peel_foreground": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "heading_G6GXj3",
+        "text_iiwerJ",
+        "spacer_cUpYnc",
+        "text_CTWmBF",
+        "discount_fmxNrV"
+      ],
+      "settings": {
+        "mode": "enabled",
+        "show_trigger": "exit_intent",
+        "show_delay": 4,
+        "popup_id": "",
+        "desktop_content_position": "md:justify-start md:items-end",
+        "mobile_content_position": "justify-start items-end",
+        "content_max_width": "s",
+        "desktop_content_alignment": "center",
+        "mobile_content_alignment": "left",
+        "content_padding": 5,
+        "image_position_desktop": "left",
+        "image_position_mobile": "top",
+        "image_size_desktop": 230,
+        "image_size_mobile": 230,
+        "image_overlay_opacity": 0,
+        "color_scheme": "scheme-5",
+        "close_color": "",
+        "visibility": "both",
+        "show_at_specific_time_of_day": false,
+        "show_time_morning": true,
+        "show_time_afternoon": true,
+        "show_time_evening": true,
+        "show_time_night": true
+      }
+    },
+    "popup_Hepgfg": {
+      "type": "popup",
+      "disabled": true,
+      "blocks": {
+        "heading_edwgqU": {
+          "type": "heading",
+          "settings": {
+            "heading": "Price promise",
+            "heading_italic_convert": "",
+            "heading_size": "h4",
+            "heading_size_custom": 2.4,
+            "heading_line_height_custom": 1.2,
+            "heading_tag": "h2"
+          }
+        },
+        "text_nqx8d4": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Buy from us safe in the knowledge you've paid a <strong>great price</strong>.</p><p>If you find the same item online at a cheaper price, <strong>we'll match it</strong>. Just get in touch with a link to the item you've found.</p>",
+            "text_size": "t4"
+          }
+        },
+        "buttons_zVACTx": {
+          "type": "buttons",
+          "settings": {
+            "click_to_close": true,
+            "button_text_size": "t4",
+            "button_label_1": "Request price match",
+            "button_link_1": "/",
+            "button_style_1": "link",
+            "button_style_1_show_arrow": true,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_2": "secondary",
+            "button_style_2_show_arrow": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_edwgqU",
+        "text_nqx8d4",
+        "buttons_zVACTx"
+      ],
+      "settings": {
+        "mode": "enabled",
+        "show_trigger": "copy_to_clipboard",
+        "show_delay": 4,
+        "popup_id": "",
+        "desktop_content_position": "md:justify-start md:items-end",
+        "mobile_content_position": "justify-center items-center",
+        "content_max_width": "xs",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "content_padding": 3.2,
+        "image_position_desktop": "background",
+        "image_position_mobile": "background",
+        "image_size_desktop": 230,
+        "image_size_mobile": 230,
+        "image_overlay_opacity": 0,
+        "color_scheme": "",
+        "close_color": "",
+        "visibility": "both",
+        "show_at_specific_time_of_day": false,
+        "show_time_morning": true,
+        "show_time_afternoon": true,
+        "show_time_evening": true,
+        "show_time_night": true
+      }
+    },
+    "popup_iRfQiW": {
+      "type": "popup",
+      "blocks": {
+        "heading_8EhQYg": {
+          "type": "heading",
+          "settings": {
+            "heading": "Popup",
+            "heading_italic_convert": "",
+            "heading_size": "h3",
+            "heading_size_custom": 2.4,
+            "heading_line_height_custom": 1.2,
+            "heading_tag": "h2"
+          }
+        }
+      },
+      "block_order": [
+        "heading_8EhQYg"
+      ],
+      "disabled": true,
+      "name": "Popup",
+      "settings": {
+        "mode": "enabled",
+        "show_trigger": "delay",
+        "show_delay": 4,
+        "popup_id": "",
+        "desktop_content_position": "md:justify-start md:items-end",
+        "mobile_content_position": "justify-start items-end",
+        "content_max_width": "s",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "content_padding": 5,
+        "image_position_desktop": "left",
+        "image_position_mobile": "top",
+        "image_size_desktop": 230,
+        "image_size_mobile": 230,
+        "image_overlay_opacity": 0,
+        "color_scheme": "",
+        "close_color": "",
+        "visibility": "both",
+        "show_at_specific_time_of_day": false,
+        "show_time_morning": true,
+        "show_time_afternoon": true,
+        "show_time_evening": true,
+        "show_time_night": true
+      }
+    },
+    "alert_wgL63i": {
+      "type": "alert",
+      "disabled": true,
+      "blocks": {
+        "text_7cAWYf": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Selling fast!</strong></p><p>Get yours while you can.</p>",
+            "text_size": "t3"
+          }
+        }
+      },
+      "block_order": [
+        "text_7cAWYf"
+      ],
+      "name": "Alert",
+      "settings": {
+        "show_delay": 4,
+        "auto_close": 0,
+        "show_close": true,
+        "mode": "enabled",
+        "desktop_content_position": "md:justify-start md:items-end",
+        "mobile_content_position": "justify-start items-end",
+        "content_max_width": "xs",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "content_padding": 1.8,
+        "icon": "speedometer",
+        "icon_container": "rounded",
+        "icon_size": 5,
+        "icon_color": "#ffffff",
+        "icon_background_color": "#44c3ed",
+        "background_gradient": "linear-gradient(45deg, rgba(54, 149, 250, 1), rgba(68, 195, 237, 1) 100%)",
+        "image": "shopify://shop_images/67d79f7646f7bb9163a28c3a.png",
+        "image_cover": true,
+        "image_position_desktop": "left",
+        "image_position_mobile": "left",
+        "image_size_desktop": 150,
+        "image_size_mobile": 150,
+        "image_overlay_opacity": 0,
+        "color_scheme": "",
+        "close_color": "",
+        "visibility": "both",
+        "hide_when_empty": false,
+        "show_at_specific_time_of_day": false,
+        "show_time_morning": true,
+        "show_time_afternoon": true,
+        "show_time_evening": true,
+        "show_time_night": true
+      }
+    }
+  },
+  "order": [
+    "stickers",
+    "age_verifier_47qffQ",
+    "popup_EJ8KWa",
+    "popup_Hepgfg",
+    "popup_iRfQiW",
+    "alert_wgL63i"
+  ]
+}

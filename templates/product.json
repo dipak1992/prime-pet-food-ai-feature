@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "breadcrumbs": {
@@ -7,6 +16,21 @@
         "color_scheme": "scheme-2",
         "line_separator": "border-bottom",
         "visibility": ""
+      }
+    },
+    "prime_product_trust_bar": {
+      "type": "prime-product-trust-bar",
+      "settings": {
+        "stat1_value": "67 min",
+        "stat1_label": "Average chew time",
+        "stat2_value": "4",
+        "stat2_label": "Natural ingredients",
+        "stat3_value": "4.9★",
+        "stat3_label": "From 2,400+ reviews",
+        "stat4_value": "30-day",
+        "stat4_label": "Satisfaction guarantee",
+        "stat5_value": "Free",
+        "stat5_label": "Shipping over $30"
       }
     },
     "main": {
@@ -87,6 +111,34 @@
             "show_tax_info": true,
             "price_color": "#1a1a1a",
             "text_size": "h5-size"
+          }
+        },
+        "duration_badge": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'duration-badge' %}",
+            "stock_visibility": "either"
+          }
+        },
+        "breed_messaging": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'breed-messaging' %}",
+            "stock_visibility": "either"
+          }
+        },
+        "chew_analyzer_inline": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'chew-analyzer-widget' %}",
+            "stock_visibility": "either"
+          }
+        },
+        "subscription_toggle": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'subscription-toggle', product: product %}",
+            "stock_visibility": "either"
           }
         },
         "buy_buttons": {
@@ -636,30 +688,6 @@
             "content": "<h3>Shopping Safely</h3><p>At our Shopify store, we prioritize your safety and security. Here's how we ensure a secure shopping experience:</p><p><strong>1. Secure Transactions:</strong> We use advanced encryption to protect your personal and payment information, ensuring it is safely transmitted and safeguarded.</p><p><strong>2. Trusted Payment Gateways:</strong> Our store integrates with trusted payment gateways, ensuring your transactions are processed securely and efficiently.</p><p><strong>3. Data Privacy:</strong> Your privacy is our top priority. We follow strict data protection policies to keep your personal information confidential and secure.</p><p><strong>4. Secure Platform:</strong> Shopify provides robust security features and continuous monitoring against vulnerabilities, ensuring a safe shopping environment.</p><p><strong>5. Transparent Policies:</strong> We are an independent Shopify store, committed to providing authentic and high-quality products.</p><p><strong>6. Clear Policies:</strong> Our clear return, refund, and shipping policies provide peace of mind, knowing we stand behind our products.</p><p><strong>7. Customer Support:</strong> Our dedicated customer support team is ready to assist with any concerns or questions you may have.</p><p>Shop confidently at our Shopify store, where your safety and satisfaction are our top priorities.</p>",
             "page": ""
           }
-        },
-        "chew_analyzer_inline": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "{% render 'chew-analyzer-widget' %}"
-          }
-        },
-        "duration_badge": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "{% render 'duration-badge' %}"
-          }
-        },
-        "subscription_toggle": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "{% render 'subscription-toggle', product: product %}"
-          }
-        },
-        "breed_messaging": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "{% render 'breed-messaging' %}"
-          }
         }
       },
       "block_order": [
@@ -750,36 +778,6 @@
         "bottom_padding": "pb-s"
       }
     },
-    "related-products": {
-      "type": "related-products",
-      "disabled": false,
-      "settings": {
-        "products_to_show": 4,
-        "desktop_layout": "carousel",
-        "mobile_layout": "carousel",
-        "columns_desktop": "4",
-        "columns_mobile": "2",
-        "full_width": false,
-        "content_max_width": "m",
-        "desktop_heading_alignment": "left",
-        "mobile_heading_alignment": "left",
-        "title": "You may also like",
-        "italic_convert": "",
-        "heading_size": "h2",
-        "text": "",
-        "text_size": "t3",
-        "color_scheme": "scheme-1",
-        "line_separator": "border-top",
-        "top_padding": "pt-s",
-        "bottom_padding": "pb-s",
-        "visibility": "",
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true
-      }
-    },
     "ypc_product_hero_AXmQHp": {
       "type": "ypc-product-hero",
       "custom_css": [],
@@ -801,6 +799,10 @@
         "show_info_line": true,
         "per_chew_prefix": "$0.22 per hour of calm time",
         "shipping_text": "Free shipping over $30",
+        "show_urgency_signals": true,
+        "low_stock_threshold": 8,
+        "urgency_fallback_text": "Popular size - ships fast while today's batch lasts.",
+        "urgency_shipping_text": "Ships quickly from current inventory",
         "subscribe_label": "Subscribe & save",
         "cta_text": "ADD TO CART",
         "size_guide_label": "How Long Will This Last For MY Dog?",
@@ -810,52 +812,43 @@
         "review_card_3": "Always supervise and remove small end pieces."
       }
     },
-    "ypc_product_tab_QnMPYB": {
-      "type": "ypc-product-tab",
-      "blocks": {
-        "recommended_product_XJJNQN": {
-          "type": "recommended_product",
-          "settings": {
-            "product": "himalayan-yak-chews-for-dogs"
-          }
-        },
-        "recommended_product_cqJkJp": {
-          "type": "recommended_product",
-          "settings": {
-            "product": "2-lb-bulk-yak-cheese-dog-chews-natural-long-lasting-treats-small-to-jumbo-copy"
-          }
-        }
-      },
-      "block_order": [
-        "recommended_product_XJJNQN",
-        "recommended_product_cqJkJp"
-      ],
-      "name": "YPC Product Tabs",
+    "why_prime": {
+      "type": "why-prime",
       "settings": {
-        "tab_1_label": "Description",
-        "tab_2_label": "Safe Feeding Guidelines",
-        "tab_3_label": "Shipping",
-        "tab_4_label": "Ingredients",
-        "description_heading": "The Chew That Calms and Cleans",
-        "change_heading": "Safe Feeding Guidelines for Yak Chews",
-        "sizing_heading": "Shipping",
-        "ingredients_heading": "Simple Ingredients",
-        "description_fallback": "<p>Prime Pet Food Himalayan Yak Chews are more than a quick bite. They are dense, long-lasting enrichment chews made to help dogs stay busy, redirect chewing energy, and settle into supervised calm-time routines.</p><ul><li><strong>Simple Ingredients</strong><br/>Made with yak and cow milk, lime juice, and salt using a traditional Himalayan cheese process.</li><li><strong>Longer Occupation</strong><br/>Designed for dogs that need more than a soft chew or short distraction.</li><li><strong>Rawhide-Free Alternative</strong><br/>A cleaner option for dog parents who want a simple-ingredient chew routine.</li></ul>",
-        "change_fallback": "<p><strong>Supervised Chewing</strong><br/><br/>Always supervise your dog while enjoying Himalayan yak chews. Make sure fresh drinking water is available during every chewing session for a safe and comfortable experience.</p><p><strong>Introducing Yak Chews to Sensitive Dogs</strong><br/><br/>Our protein-rich yak chews are natural and highly satisfying, but dogs with sensitive stomachs should start slowly. For first-time use, we recommend limiting intake to less than one chew per day to help avoid digestive discomfort.</p><p><strong>Naturally Hard, Gradually Softer</strong><br/><br/>Yak chews begin as a dense, long-lasting chew and naturally soften over time as your dog chews, making them ideal for strong chewers and extended chewing sessions.</p><p><strong>Helpful Tip for First-Time Chewers</strong><br/><br/>If your dog is used to softer processed treats or you have concerns about sensitive teeth, soak the yak chew in warm water for about 10 minutes before giving it to your dog. This helps soften the chew slightly while maintaining its durability.</p><p><strong>Safe & Enjoyable Chewing Experience</strong><br/><br/>By following these simple feeding recommendations, you can help your dog enjoy a safer, cleaner, and more satisfying natural chewing experience with Himalayan yak chews.</p>",
-        "sizing_fallback": "<p>Orders are typically processed and shipped within 24–48 hours after purchase using trusted carriers such as UPS, FedEx, DHL, or USPS, depending on your location and the fastest available shipping option.</p><p>Most customers receive their orders within 2–5 business days, and in many cases, packages arrive even sooner.</p><p>Every order includes a tracking number so you can monitor your shipment from dispatch to delivery.</p><p>Please note that occasional shipping delays caused by customs processing, weather conditions, or postal carrier issues may occur and are outside our control.</p>",
-        "ingredients_fallback": "<p>Yak milk, cow milk, lime juice, and salt.</p>",
-        "reco_heading": "You may also like...",
-        "product_link_label": "Quick view",
-        "bg_color": "#f6f1e9",
-        "text_color": "#2b1408",
-        "muted_color": "#6d7478",
-        "accent_color": "#e16610",
-        "heading_size": 31,
-        "body_size": 16,
-        "tab_size": 13,
-        "reco_heading_size": 16,
-        "product_title_size": 17,
-        "product_price_size": 16
+        "eyebrow": "Why dog parents choose Prime",
+        "heading": "Not just a chew. A calmer home.",
+        "subtext": "Most chews are gone in minutes. Prime yak chews are built to last — giving your dog a focused, satisfying job that keeps them calm and you at peace.",
+        "cta_text": "Buy Yak Chews",
+        "cta_link": ""
+      }
+    },
+    "product_trust_stack": {
+      "type": "product-trust-stack",
+      "settings": {
+        "eyebrow": "Buying confidence",
+        "title": "The questions every dog parent asks before buying"
+      }
+    },
+    "chew_analyzer_widget": {
+      "type": "chew-analyzer",
+      "settings": {
+        "display_mode": "full",
+        "show_section_heading": false,
+        "heading": "How Long Will This Last For YOUR Dog?",
+        "subtitle": "Get a personalized chew duration estimate in 30 seconds",
+        "cta_text": "Find My Dog's Chew",
+        "cta_link": "",
+        "top_padding": "",
+        "bottom_padding": ""
+      }
+    },
+    "breed_review_highlights": {
+      "type": "breed-review-highlights",
+      "settings": {
+        "eyebrow": "Breed-aware confidence",
+        "title": "What dogs like yours usually need",
+        "subtitle": "Breed, weight, age, and chewing style change how long a chew feels useful. Use these patterns as a starting point, then run the estimator for your dog.",
+        "color_scheme": "scheme-1"
       }
     },
     "two_treats_in_one_C8mxDb": {
@@ -919,97 +912,6 @@
         "muted_color": "#7b675e",
         "accent_color": "#d2632e",
         "button_text_color": "#ffffff"
-      }
-    },
-    "video_carousel_6EkF8r": {
-      "type": "video-carousel",
-      "blocks": {
-        "video_qg3dfM": {
-          "type": "video",
-          "settings": {
-            "html5_video": "shopify://files/videos/1737008260923.mp4",
-            "product": "himalayan-yak-chews-for-dogs",
-            "caption": "Golden Retriever · 72 min calm-time session"
-          }
-        },
-        "video_3FiDC7": {
-          "type": "video",
-          "settings": {
-            "html5_video": "shopify://files/videos/1737005781491.mp4",
-            "product": "himalayan-yak-chews-for-dogs",
-            "caption": "French Bulldog · steady indoor chew routine"
-          }
-        },
-        "video_RLbcAF": {
-          "type": "video",
-          "settings": {
-            "html5_video": "shopify://files/videos/[Tiktok] Himalayan Yak Cheese 03.mp4",
-            "product": "himalayan-yak-chews-for-dogs",
-            "caption": "Labrador · post-walk decompression"
-          }
-        },
-        "video_BqKy7U": {
-          "type": "video",
-          "settings": {
-            "html5_video": "shopify://files/videos/1737005584344.mp4",
-            "product": "himalayan-yak-chews-for-dogs",
-            "caption": "Small breed · focused crate-time enrichment"
-          }
-        },
-        "video_44C8B8": {
-          "type": "video",
-          "settings": {
-            "html5_video": "shopify://files/videos/1736610302090.mp4",
-            "product": "himalayan-yak-chews-for-dogs",
-            "caption": "Power chewer · longer-lasting occupation"
-          }
-        },
-        "video_Jcw4yp": {
-          "type": "video",
-          "settings": {
-            "html5_video": "shopify://files/videos/WhatsApp Video 2026-04-25 at 21.07.27.mp4",
-            "product": "himalayan-yak-chews-for-dogs",
-            "caption": "Evening routine · calmer household wind-down"
-          }
-        },
-        "video_TELc9F": {
-          "type": "video",
-          "settings": {
-            "html5_video": "shopify://files/videos/1737008392265.mp4",
-            "product": "himalayan-yak-chews-for-dogs",
-            "caption": "Real dog parent video · rawhide-free chew time"
-          }
-        }
-      },
-      "block_order": [
-        "video_qg3dfM",
-        "video_3FiDC7",
-        "video_RLbcAF",
-        "video_BqKy7U",
-        "video_44C8B8",
-        "video_Jcw4yp",
-        "video_TELc9F"
-      ],
-      "name": "Video carousel",
-      "settings": {
-        "heading": "Watch dogs discover their new favorite chew",
-        "heading_size": 100,
-        "heading_letter_spacing": 0,
-        "custom_font_url": "",
-        "description": "",
-        "description_size": 100,
-        "heading_description_spacing": 20,
-        "autoplay": 0,
-        "gap": 10,
-        "show_arrows": true,
-        "text_size": 100,
-        "text_color": "#121212",
-        "button_text_color": "#ffffff",
-        "button_bg_color": "#E66711",
-        "background_color": "",
-        "top_padding": 40,
-        "bottom_padding": 40,
-        "navigation_spacing": 20
       }
     },
     "comparison_table_URRwp9": {
@@ -1140,6 +1042,54 @@
         "mobile_padding_bottom": 48
       }
     },
+    "ypc_product_tab_QnMPYB": {
+      "type": "ypc-product-tab",
+      "blocks": {
+        "recommended_product_XJJNQN": {
+          "type": "recommended_product",
+          "settings": {
+            "product": "himalayan-yak-chews-for-dogs"
+          }
+        },
+        "recommended_product_cqJkJp": {
+          "type": "recommended_product",
+          "settings": {
+            "product": "2-lb-bulk-yak-cheese-dog-chews-natural-long-lasting-treats-small-to-jumbo-copy"
+          }
+        }
+      },
+      "block_order": [
+        "recommended_product_XJJNQN",
+        "recommended_product_cqJkJp"
+      ],
+      "name": "YPC Product Tabs",
+      "settings": {
+        "tab_1_label": "Description",
+        "tab_2_label": "Safe Feeding Guidelines",
+        "tab_3_label": "Shipping",
+        "tab_4_label": "Ingredients",
+        "description_heading": "The Chew That Calms and Cleans",
+        "change_heading": "Safe Feeding Guidelines for Yak Chews",
+        "sizing_heading": "Shipping",
+        "ingredients_heading": "Simple Ingredients",
+        "description_fallback": "<p>Prime Pet Food Himalayan Yak Chews are more than a quick treat. They are dense, long-lasting enrichment chews made to help dogs stay busy, redirect chewing energy, and settle into supervised calm-time routines.</p><ul><li><strong>Simple Ingredients</strong><br/>Made with yak and cow milk, lime juice, and salt using a traditional Himalayan cheese process.</li><li><strong>Longer Occupation</strong><br/>Designed for dogs that need more than a soft snack or fast treat.</li><li><strong>Rawhide-Free Alternative</strong><br/>A cleaner option for owners who want a simple-ingredient chew routine.</li></ul>",
+        "change_fallback": "<p><strong>Supervised Chewing</strong><br/><br/>Always supervise your dog while enjoying Himalayan yak chews. Make sure fresh drinking water is available during every chewing session for a safe and comfortable experience.</p><p><strong>Introducing Yak Chews to Sensitive Dogs</strong><br/><br/>Our protein-rich yak chews are natural and highly satisfying, but dogs with sensitive stomachs should start slowly. For first-time use, we recommend limiting intake to less than one chew per day to help avoid digestive discomfort.</p><p><strong>Naturally Hard, Gradually Softer</strong><br/><br/>Yak chews begin as a dense, long-lasting chew and naturally soften over time as your dog chews, making them ideal for strong chewers and extended chewing sessions.</p><p><strong>Helpful Tip for First-Time Chewers</strong><br/><br/>If your dog is used to softer processed treats or you have concerns about sensitive teeth, soak the yak chew in warm water for about 10 minutes before giving it to your dog. This helps soften the chew slightly while maintaining its durability.</p><p><strong>Safe & Enjoyable Chewing Experience</strong><br/><br/>By following these simple feeding recommendations, you can help your dog enjoy a safer, cleaner, and more satisfying natural chewing experience with Himalayan yak chews.</p>",
+        "sizing_fallback": "<p>Orders are typically processed and shipped within 24–48 hours after purchase using trusted carriers such as UPS, FedEx, DHL, or USPS, depending on your location and the fastest available shipping option.</p><p>Most customers receive their orders within 2–5 business days, and in many cases, packages arrive even sooner.</p><p>Every order includes a tracking number so you can monitor your shipment from dispatch to delivery.</p><p>Please note that occasional shipping delays caused by customs processing, weather conditions, or postal carrier issues may occur and are outside our control.</p>",
+        "ingredients_fallback": "<p>Yak milk, cow milk, lime juice, and salt.</p>",
+        "reco_heading": "You may also like...",
+        "product_link_label": "Quick view",
+        "bg_color": "#f6f1e9",
+        "text_color": "#2b1408",
+        "muted_color": "#6d7478",
+        "accent_color": "#e16610",
+        "heading_size": 31,
+        "body_size": 16,
+        "tab_size": 13,
+        "reco_heading_size": 16,
+        "product_title_size": 17,
+        "product_price_size": 16
+      }
+    },
     "faqs_tVaRYD": {
       "type": "faqs",
       "blocks": {
@@ -1259,84 +1209,42 @@
         "icon_bg_open": "#d2632e"
       }
     },
-    "chew_analyzer_widget": {
-      "type": "chew-analyzer",
+    "related-products": {
+      "type": "related-products",
       "settings": {
-        "display_mode": "full",
-        "show_section_heading": false,
-        "heading": "How Long Will This Last For YOUR Dog?",
-        "subtitle": "Get a personalized chew duration estimate in 30 seconds",
-        "top_padding": "",
-        "bottom_padding": ""
-      }
-    },
-    "product_trust_stack": {
-      "type": "product-trust-stack",
-      "settings": {
-        "eyebrow": "Buying confidence",
-        "title": "The questions every dog parent asks before buying"
-      }
-    },
-    "breed_review_highlights": {
-      "type": "breed-review-highlights",
-      "settings": {
-        "eyebrow": "Breed-aware confidence",
-        "title": "What dogs like yours usually need",
-        "subtitle": "Breed, weight, age, and chewing style change how long a chew feels useful. Use these patterns as a starting point, then run the estimator for your dog.",
-        "color_scheme": "scheme-1"
-      }
-    },
-    "prime_product_trust_bar": {
-      "type": "prime-product-trust-bar",
-      "settings": {
-        "stat1_value": "67 min",
-        "stat1_label": "Average chew time",
-        "stat2_value": "4",
-        "stat2_label": "Natural ingredients",
-        "stat3_value": "4.9★",
-        "stat3_label": "From 2,400+ reviews",
-        "stat4_value": "30-day",
-        "stat4_label": "Satisfaction guarantee",
-        "stat5_value": "Free",
-        "stat5_label": "Shipping over $30"
-      }
-    },
-    "why_prime": {
-      "type": "why-prime",
-      "settings": {
-        "eyebrow": "Why dog parents choose Prime",
-        "heading": "Not just a chew. A calmer home.",
-        "subtext": "Most chews are gone in minutes. Prime Pet Food yak chews are built to last — giving your dog a focused, satisfying job that keeps them calm and you at peace."
+        "products_to_show": 4,
+        "desktop_layout": "carousel",
+        "mobile_layout": "carousel",
+        "columns_desktop": "4",
+        "columns_mobile": "2",
+        "full_width": false,
+        "content_max_width": "m",
+        "desktop_heading_alignment": "left",
+        "mobile_heading_alignment": "left",
+        "title": "You may also like",
+        "italic_convert": "",
+        "heading_size": "h2",
+        "text": "",
+        "text_size": "t3",
+        "color_scheme": "scheme-1",
+        "line_separator": "border-top",
+        "top_padding": "pt-s",
+        "bottom_padding": "pb-s",
+        "visibility": "",
+        "show_at_specific_time_of_day": false,
+        "show_time_morning": true,
+        "show_time_afternoon": true,
+        "show_time_evening": true,
+        "show_time_night": true
       }
     },
     "prime_sticky_atc": {
       "type": "prime-sticky-atc",
       "settings": {
-        "btn_text": "Add to Cart"
-      }
-    },
-    "prime_product_routine_upsell": {
-      "type": "prime-product-routine-upsell",
-      "settings": {
-        "eyebrow": "Complete the routine",
-        "heading": "Make calm-time easier to repeat.",
-        "text": "Pair the right chew size with flexible reorders or multi-pack value so your dog’s enrichment routine never depends on last-minute shopping.",
-        "main_product": "himalayan-yak-chews-for-dogs",
-        "bulk_product": "2-lb-bulk-yak-cheese-dog-chews-natural-long-lasting-treats-small-to-jumbo-copy",
-        "subscribe_link": "/pages/subscribe-and-save",
-        "bulk_link": "/collections/all"
-      }
-    },
-    "prime_duration_guarantee": {
-      "type": "prime-duration-guarantee",
-      "settings": {}
-    },
-    "prime_seo_internal_links": {
-      "type": "prime-seo-internal-links",
-      "settings": {
-        "eyebrow": "Chew education",
-        "heading": "Choose with confidence.",
-        "text": "Compare duration, sizing, ingredients, and chew style before checkout. These guides support the product page without competing with it for purchase intent."
+        "btn_text": "Add to Cart",
+        "show_urgency_signal": true,
+        "low_stock_threshold": 8,
+        "urgency_fallback_text": "Selling fast today"
       }
     }
   },
@@ -1347,14 +1255,10 @@
     "ypc_product_hero_AXmQHp",
     "why_prime",
     "product_trust_stack",
-    "prime_product_routine_upsell",
     "chew_analyzer_widget",
-    "prime_duration_guarantee",
     "breed_review_highlights",
     "two_treats_in_one_C8mxDb",
     "comparison_table_URRwp9",
-    "prime_seo_internal_links",
-    "video_carousel_6EkF8r",
     "ypc_product_tab_QnMPYB",
     "faqs_tVaRYD",
     "related-products",
