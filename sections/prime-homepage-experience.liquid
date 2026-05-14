@@ -2324,7 +2324,11 @@
     .ph-fit,
     .ph-craft,
     .ph-vet {
-      display: none;
+      display: none !important;
+      height: 0 !important;
+      margin: 0 !important;
+      overflow: hidden !important;
+      padding: 0 !important;
     }
 
     .ph-product-grid {
@@ -2558,6 +2562,24 @@
   .ph-close {
     content-visibility: auto;
     contain-intrinsic-size: auto 760px;
+  }
+
+  @media (max-width: 560px) {
+    .ph-quiz,
+    .ph-subscribe,
+    .ph-reviews,
+    .ph-compare,
+    .ph-routine,
+    .ph-ingredients,
+    .ph-craft,
+    .ph-fit,
+    .ph-vet,
+    .ph-guarantee,
+    .ph-faq,
+    .ph-close {
+      content-visibility: visible;
+      contain-intrinsic-size: none;
+    }
   }
 
   .ph-back-top {
