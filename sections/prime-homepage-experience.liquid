@@ -2395,16 +2395,28 @@
 
     .ph-product-card__footer {
       grid-area: footer;
-      grid-template-columns: minmax(0, 1fr) minmax(128px, 0.9fr);
-      align-items: center;
-      gap: 10px;
+      grid-template-columns: 1fr;
+      align-items: stretch;
+      gap: 8px;
       border-top: 1px solid var(--ph-line);
       margin-top: 0;
       padding: 12px 14px;
     }
 
+    .ph-product-card__buy-meta {
+      min-width: 0;
+      text-align: center;
+    }
+
     .ph-product-card__price {
+      display: block;
       font-size: 16px;
+      line-height: 1.2;
+      white-space: normal;
+    }
+
+    .ph-product-card__footer form {
+      min-width: 0;
     }
 
     .ph-product-card__note {
@@ -2666,6 +2678,12 @@
   }
 
   @media (max-width: 560px) {
+    .ph-reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
     .ph-quiz,
     .ph-subscribe,
     .ph-reviews,
