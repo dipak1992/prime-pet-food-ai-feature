@@ -117,7 +117,7 @@
         "logo": "shopify://shop_images/logoedited.jpg",
         "menu": "main-menu",
         "contact_link": "",
-        "contact_number": "123-456-7890",
+        "contact_number": "",
         "bg_color": "#fffaf2",
         "text_color": "#173b2b",
         "accent_color": "#eb7300"

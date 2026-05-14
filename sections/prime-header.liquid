@@ -5,6 +5,7 @@
   assign whatsapp_contact_link = shop.brand.metafields.social_links.whatsapp.value
   assign whatsapp_contact_number = ''
   assign whatsapp_contact_number_display = ''
+  assign header_contact_href = whatsapp_contact_link | default: section.settings.contact_link | default: '/pages/contact'
   assign prime_shop_collection_url = section.settings.shop_collection_url | default: '/collections/himalayan-yak-chews-for-dogs'
 
   if whatsapp_contact_link != blank
@@ -133,13 +134,15 @@
 
             {%- comment -%} Icons to be replaced by expanded search {%- endcomment -%}
             <div class="header__icons-to-hide">
-              {%- comment -%} Contact Us with Number {%- endcomment -%}
-              <a href="{{ whatsapp_contact_link | default: section.settings.contact_link | default: '/pages/contact' }}" class="header__icon-link header__contact">
+              {%- comment -%} Sizing support link {%- endcomment -%}
+              <a href="{{ header_contact_href }}" class="header__icon-link header__contact">
                 {% render 'icon', icon: 'call', size: 24 %}
                 <div class="header__contact-info">
-                  <span class="header__icon-text">Contact Us</span>
+                  <span class="header__icon-text">Support</span>
                   {%- if whatsapp_contact_number_display != blank -%}
                     <span class="header__contact-number">{{ whatsapp_contact_number_display }}</span>
+                  {%- else -%}
+                    <span class="header__contact-number">Sizing help</span>
                   {%- endif -%}
                 </div>
               </a>
@@ -207,7 +210,7 @@
             </button>
           {%- endunless -%}
 
-          <a href="{{ whatsapp_contact_link | default: section.settings.contact_link | default: '/pages/contact' }}" class="header__icon-link" aria-label="Contact">
+          <a href="{{ header_contact_href }}" class="header__icon-link" aria-label="Contact support">
             {% render 'icon', icon: 'call', size: 24 %}
           </a>
 
@@ -349,7 +352,7 @@
       "type": "text",
       "id": "contact_number",
       "label": "Contact Number",
-      "default": "123-456-7890"
+      "default": ""
     },
     {
       "type": "color",
