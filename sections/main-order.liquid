@@ -30,6 +30,55 @@
         <p>{{ 'customer.order.cancelled_reason' | t: reason: order.cancel_reason_label }}</p>
       {%- endif -%}
 
+      {%- liquid
+        assign reorder_line = blank
+        assign first_tracking_url = blank
+        assign first_tracking_company = blank
+        assign first_tracking_number = blank
+
+        for line_item in order.line_items
+          if reorder_line == blank and line_item.variant != blank
+            assign reorder_line = line_item
+          endif
+          if first_tracking_url == blank and line_item.fulfillment and line_item.fulfillment.tracking_url
+            assign first_tracking_url = line_item.fulfillment.tracking_url
+            assign first_tracking_company = line_item.fulfillment.tracking_company
+            assign first_tracking_number = line_item.fulfillment.tracking_number
+          endif
+        endfor
+      -%}
+
+      <div class="prime-order-summary">
+        <div>
+          <p class="prime-order-summary__eyebrow">Order detail</p>
+          <h3>Keep this chew routine easy to repeat.</h3>
+          <p>Reorder the same yak chew, check tracking, or shift to flexible refills when your dog is ready for the next box.</p>
+        </div>
+        <div class="prime-order-summary__actions">
+          {%- if reorder_line != blank -%}
+            <a href="/cart/add?id={{ reorder_line.variant.id | default: reorder_line.variant_id }}&quantity={{ reorder_line.quantity }}" class="button button--primary button--small">Reorder this item</a>
+          {%- endif -%}
+          <a href="/pages/subscribe-and-save" class="button button--secondary button--small">Manage refills</a>
+        </div>
+      </div>
+
+      {%- if first_tracking_url != blank -%}
+        <div class="prime-tracking-card">
+          <div>
+            <strong>Tracking is ready</strong>
+            <p>
+              {%- if first_tracking_company != blank -%}
+                {{ first_tracking_company }}
+              {%- endif -%}
+              {%- if first_tracking_number != blank -%}
+                #{{ first_tracking_number }}
+              {%- endif -%}
+            </p>
+          </div>
+          <a href="{{ first_tracking_url }}" class="prime-tracking-card__link">Track shipment</a>
+        </div>
+      {%- endif -%}
+
       {% render 'post-purchase-chew-education', order: order %}
 
       <div class="customer-table color-scheme-2 gradient">
@@ -56,12 +105,22 @@
                   scope="row"
                   data-label="{{ 'customer.order.product' | t }}"
                 >
-                  <div>
-                    {%- if line_item.url != blank -%}
-                      <a href="{{ line_item.url }}">{{ line_item.title | escape }}</a>
-                    {%- else -%}
-                      <p>{{ line_item.title | escape }}</p>
+                  <div class="prime-order-line">
+                    {%- if line_item.image -%}
+                      <div class="prime-order-line__media">
+                        {{ line_item.image | image_url: width: 180 | image_tag: loading: 'lazy', widths: '90, 140, 180', sizes: '90px', alt: line_item.title }}
+                      </div>
+                    {%- elsif line_item.product.featured_image -%}
+                      <div class="prime-order-line__media">
+                        {{ line_item.product.featured_image | image_url: width: 180 | image_tag: loading: 'lazy', widths: '90, 140, 180', sizes: '90px', alt: line_item.title }}
+                      </div>
                     {%- endif -%}
+                    <div class="prime-order-line__content">
+                      {%- if line_item.url != blank -%}
+                        <a href="{{ line_item.url }}">{{ line_item.title | escape }}</a>
+                      {%- else -%}
+                        <p>{{ line_item.title | escape }}</p>
+                      {%- endif -%}
                     {%- assign property_size = line_item.properties | size -%}
                     {%- unless line_item.selling_plan_allocation == null and property_size == 0 -%}
                       <div class="properties">
@@ -121,13 +180,14 @@
                           </a>
                         {%- endif -%}
                         <span>
-                          {{ line_item.fulfillment.tracking_company }}
-                          {%- if line_item.fulfillment.tracking_number -%}
-                            #{{ line_item.fulfillment.tracking_number }}
-                          {%- endif -%}
+                        {{ line_item.fulfillment.tracking_company }}
+                        {%- if line_item.fulfillment.tracking_number -%}
+                          #{{ line_item.fulfillment.tracking_number }}
+                        {%- endif -%}
                         </span>
                       </div>
                     {%- endif -%}
+                    </div>
                   </div>
                 </td>
                 <td

@@ -120,6 +120,17 @@
                 {%- assign hide_shop_login_button = true -%}
               {%- endif -%}
               <div class="customer login">
+                <div class="prime-auth-intro text-{{ section.settings.mobile_content_alignment }} md:text-{{ section.settings.desktop_content_alignment }}">
+                  <p class="prime-auth-intro__eyebrow">Customer account</p>
+                  <h2>Welcome back to your dog's chew routine.</h2>
+                  <p>Sign in to track orders, manage subscriptions, reopen your dog profile, and reorder long-lasting yak chews faster.</p>
+                  <div class="prime-auth-intro__stack" aria-label="Account benefits">
+                    <span>Order tracking</span>
+                    <span>One-click reorders</span>
+                    <span>Dog profile recommendations</span>
+                  </div>
+                </div>
+
                 <h1 id="recover" class="b-main-title h2 mb-15 text-{{ section.settings.mobile_content_alignment }} md:text-{{ section.settings.desktop_content_alignment }}" tabindex="-1">
                   {{ 'customer.recover_password.title' | t }}
                 </h1>
@@ -269,6 +280,7 @@
                             </div>
                           {% endif %}
                         </div>
+                        <p class="prime-auth-note">Secure login. Your account keeps chew orders, subscription details, and dog profile context in one place.</p>
                       {%- endform -%}
 
                       {%- if shop.checkout.guest_login -%}

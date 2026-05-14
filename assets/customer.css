@@ -773,3 +773,407 @@ li[data-address] > h2 {
 .addresses form > div:nth-of-type(7) + div[id] {
   margin-top: 1.5rem;
 }
+
+/* Prime account experience */
+.prime-account {
+  --prime-account-ink: #173b2b;
+  --prime-account-muted: #5d675f;
+  --prime-account-cream: #fffaf2;
+  --prime-account-line: rgba(23, 59, 43, 0.12);
+  --prime-account-orange: #eb7300;
+  color: var(--prime-account-ink);
+  padding-top: clamp(2rem, 4vw, 4.5rem);
+  padding-bottom: clamp(4rem, 7vw, 7rem);
+}
+
+.prime-account__tabs {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+  scrollbar-width: none;
+}
+
+.prime-account__tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.prime-account__tabs a {
+  min-height: 4.4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  padding: 0.9rem 1.4rem;
+  border: 1px solid var(--prime-account-line);
+  border-radius: 999px;
+  color: var(--prime-account-ink);
+  font-weight: 700;
+  text-decoration: none;
+  background: #fff;
+}
+
+.prime-account__tabs a[aria-current='page'] {
+  background: var(--prime-account-ink);
+  color: #fff;
+}
+
+.prime-account__hero,
+.prime-account-card,
+.prime-account__panel,
+.prime-order-summary,
+.prime-tracking-card,
+.prime-auth-simple {
+  border: 1px solid var(--prime-account-line);
+  border-radius: 0.8rem;
+  background: #fff;
+  box-shadow: 0 1.4rem 3.5rem rgba(23, 59, 43, 0.08);
+}
+
+.prime-account__hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+  padding: clamp(2rem, 4vw, 3.5rem);
+  background:
+    linear-gradient(135deg, rgba(255, 250, 242, 0.96), rgba(255, 255, 255, 0.98)),
+    var(--prime-account-cream);
+}
+
+.prime-account__eyebrow,
+.prime-account-card__kicker,
+.prime-order-summary__eyebrow,
+.prime-auth-intro__eyebrow {
+  margin: 0 0 0.75rem;
+  color: var(--prime-account-orange);
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.prime-account__hero h1,
+.prime-account-card h2,
+.prime-account__section-head h2,
+.prime-order-summary h3,
+.prime-auth-intro h2 {
+  margin: 0;
+  color: var(--prime-account-ink);
+  line-height: 1.05;
+}
+
+.prime-account__hero p,
+.prime-account-card p,
+.prime-account-empty p,
+.prime-account-address,
+.prime-account-mini p,
+.prime-order-summary p,
+.prime-tracking-card p,
+.prime-auth-intro p,
+.prime-auth-note {
+  color: var(--prime-account-muted);
+}
+
+.prime-account__hero-actions,
+.prime-order-summary__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.prime-account__button,
+.prime-account-card__link,
+.prime-account__text-link,
+.prime-order-card__actions a,
+.prime-tracking-card__link {
+  color: var(--prime-account-ink);
+  font-weight: 800;
+}
+
+.prime-account__button {
+  min-height: 4.6rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 1.1rem 1.7rem;
+  text-decoration: none;
+}
+
+.prime-account__button--primary {
+  background: var(--prime-account-ink);
+  color: #fff;
+}
+
+.prime-account__button--secondary {
+  border: 1px solid var(--prime-account-line);
+  background: #fff;
+}
+
+.prime-account__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.25rem 0;
+}
+
+.prime-account-card {
+  padding: 1.5rem;
+}
+
+.prime-account-card--dog {
+  background: linear-gradient(145deg, #fffaf2, #fff);
+}
+
+.prime-account-card__link {
+  display: inline-flex;
+  margin-top: 0.25rem;
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
+}
+
+.prime-account__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(28rem, 34rem);
+  gap: 1.25rem;
+}
+
+.prime-account__panel {
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.prime-account__section-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
+}
+
+.prime-order-list {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.prime-order-card {
+  display: grid;
+  grid-template-columns: minmax(12rem, 1fr) minmax(15rem, 0.8fr) auto auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.2rem;
+  border: 1px solid var(--prime-account-line);
+  border-radius: 0.8rem;
+  background: var(--prime-account-cream);
+}
+
+.prime-order-card p,
+.prime-order-card span {
+  margin: 0;
+  color: var(--prime-account-muted);
+}
+
+.prime-order-card__name {
+  color: var(--prime-account-ink);
+  font-weight: 800;
+}
+
+.prime-order-card__actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.prime-account-empty {
+  padding: 2rem;
+  border: 1px dashed var(--prime-account-line);
+  border-radius: 0.8rem;
+  background: var(--prime-account-cream);
+}
+
+.prime-account-address,
+.prime-account-mini {
+  padding: 1.25rem;
+  border: 1px solid var(--prime-account-line);
+  border-radius: 0.8rem;
+  background: var(--prime-account-cream);
+}
+
+.prime-account-mini {
+  margin-top: 1rem;
+}
+
+.prime-auth-intro {
+  --prime-account-ink: #173b2b;
+  --prime-account-muted: #5d675f;
+  --prime-account-cream: #fffaf2;
+  --prime-account-line: rgba(23, 59, 43, 0.12);
+  --prime-account-orange: #eb7300;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border: 1px solid var(--prime-account-line);
+  border-radius: 0.8rem;
+  background: var(--prime-account-cream);
+}
+
+.prime-auth-intro__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.prime-auth-intro__stack span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 3.4rem;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--prime-account-line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--prime-account-ink);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.prime-auth-note {
+  margin: 1rem 0 0;
+  font-size: 1.35rem;
+  line-height: 1.45;
+}
+
+.prime-auth-simple {
+  max-width: 58rem;
+  padding: clamp(2rem, 5vw, 3.5rem);
+  text-align: left;
+  --prime-account-ink: #173b2b;
+  --prime-account-muted: #5d675f;
+  --prime-account-line: rgba(23, 59, 43, 0.12);
+  --prime-account-orange: #eb7300;
+}
+
+.prime-auth-simple__head {
+  margin-bottom: 1.5rem;
+}
+
+.prime-order-summary {
+  --prime-account-ink: #173b2b;
+  --prime-account-muted: #5d675f;
+  --prime-account-line: rgba(23, 59, 43, 0.12);
+  --prime-account-orange: #eb7300;
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  background: #fffaf2;
+}
+
+.prime-tracking-card {
+  --prime-account-ink: #173b2b;
+  --prime-account-muted: #5d675f;
+  --prime-account-line: rgba(23, 59, 43, 0.12);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.prime-order-line {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.prime-order-line__media {
+  flex: 0 0 7.2rem;
+  width: 7.2rem;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 0.8rem;
+  background: #fffaf2;
+}
+
+.prime-order-line__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.prime-order-line__content {
+  min-width: 0;
+}
+
+@media screen and (min-width: 990px) {
+  .prime-account__hero {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 989.98px) {
+  .prime-account__grid,
+  .prime-account__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .prime-order-card {
+    grid-template-columns: 1fr;
+    align-items: flex-start;
+  }
+
+  .prime-order-summary {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 749.98px) {
+  .prime-account {
+    padding-inline-start: 1.2rem;
+    padding-inline-end: 1.2rem;
+  }
+
+  .prime-account__tabs {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    margin-inline: -1.2rem;
+    padding: 0.8rem 1.2rem;
+    background: rgba(255, 250, 242, 0.96);
+    border-bottom: 1px solid var(--prime-account-line);
+  }
+
+  .prime-account__hero-actions,
+  .prime-order-summary__actions,
+  .prime-tracking-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .prime-account__button,
+  .prime-order-summary__actions .button,
+  .prime-tracking-card__link {
+    width: 100%;
+    text-align: center;
+  }
+
+  .prime-account__section-head {
+    flex-direction: column;
+  }
+
+  .prime-order-line {
+    width: 100%;
+  }
+
+  .order tbody tr:first-of-type td:first-of-type > .prime-order-line {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}

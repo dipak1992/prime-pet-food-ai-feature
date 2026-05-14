@@ -117,6 +117,17 @@
           >
             <div class="section-content lg:p-0 mr-auto ml-auto xs:w-full">
               <div class="customer login">
+                <div class="prime-auth-intro text-{{ section.settings.mobile_content_alignment }} md:text-{{ section.settings.desktop_content_alignment }}">
+                  <p class="prime-auth-intro__eyebrow">Create account</p>
+                  <h2>Build a better chew routine for your dog.</h2>
+                  <p>Create an account to keep orders, reorder shortcuts, subscription options, and dog sizing guidance together.</p>
+                  <div class="prime-auth-intro__stack" aria-label="Account benefits">
+                    <span>Save dog details</span>
+                    <span>Reorder faster</span>
+                    <span>Manage refills</span>
+                  </div>
+                </div>
+
                 <svg style="display: none">
                   <symbol id="icon-error" viewBox="0 0 512 512" style="color: red;">
                     <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="currentColor"
@@ -246,6 +257,7 @@
                             </button>
                           </div>
                         </div>
+                        <p class="prime-auth-note">After signup, open My Dog to save breed, weight, chewing style, and preferred reorder timing.</p>
                       {%- endform -%}
 
                     {%- else -%}

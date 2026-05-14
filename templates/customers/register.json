@@ -6,7 +6,7 @@
         "text_nQPPNe": {
           "type": "text",
           "settings": {
-            "text": "<p>Register for exclusive member-only discounts and faster checkout.<\/p>",
+            "text": "<p>Create an account for dog profile recommendations, order tracking, subscription options, and faster yak chew reorders.<\/p>",
             "text_size": "t3"
           }
         },
@@ -25,12 +25,13 @@
         "full_width": false,
         "desktop_content_alignment": "left",
         "mobile_content_alignment": "left",
-        "image_overlay_opacity": 20,
+        "image": "shopify:\/\/shop_images\/67d858de6e8af838f858edf5_9839846e-11b0-4ad0-a3b0-990e17c76b9b.png",
+        "image_overlay_opacity": 40,
         "desktop_section_height": 500,
         "mobile_section_height": 400,
         "desktop_media_width": 50,
         "layout": "media_first",
-        "show_header_beside": false,
+        "show_header_beside": true,
         "content_max_width": "m",
         "desktop_heading_alignment": "left",
         "mobile_heading_alignment": "left",
@@ -39,7 +40,7 @@
         "title": "",
         "italic_convert": "",
         "heading_size": "h2",
-        "text": "",
+        "text": "<h6><strong>Build your dog&rsquo;s chew profile<\/strong><\/h6>",
         "text_size": "t3",
         "button_text_size": "t5",
         "button_label": "",

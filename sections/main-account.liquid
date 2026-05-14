@@ -1,85 +1,161 @@
 {{ 'customer.css' | asset_url | stylesheet_tag }}
 
-<div class="customer account section__inner">
-  <div class="flex flex-wrap justify-between items-center row-gap-1">
+{%- liquid
+  assign latest_order = customer.orders.first
+  assign customer_name = customer.first_name | default: customer.name | default: customer.email
+  assign customer_order_count = customer.orders_count | default: customer.orders.size
+  assign latest_reorder_line = blank
+  if latest_order
+    for line_item in latest_order.line_items
+      if latest_reorder_line == blank and line_item.variant != blank
+        assign latest_reorder_line = line_item
+      endif
+    endfor
+  endif
+-%}
+
+<div class="customer account prime-account section__inner">
+  <nav class="prime-account__tabs" aria-label="Account navigation">
+    <a href="{{ routes.account_url }}" aria-current="page">Dashboard</a>
+    <a href="#prime-orders">Orders</a>
+    <a href="{{ routes.account_addresses_url }}">Addresses</a>
+    <a href="/pages/my-dog">My Dog</a>
+  </nav>
+
+  <header class="prime-account__hero">
     <div>
-      <h1 class="customer__title b-main-title mb-0">{{ 'customer.account.title' | t }}</h1>
+      <p class="prime-account__eyebrow">Your dog's enrichment hub</p>
+      <h1>Welcome back, {{ customer_name | escape }}</h1>
+      <p>Manage orders, track your dog's chew routine, and reorder long-lasting yak chews without starting from scratch.</p>
     </div>
-    <div class="flex flex-wrap gap-1">
-      <a href="{{ routes.account_addresses_url }}" class="button button--secondary button--small">
-        {{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})
-      </a>
-      <a href="{{ routes.account_logout_url }}" class="button button--secondary button--small" data-no-instant>
+    <div class="prime-account__hero-actions">
+      {%- if latest_reorder_line -%}
+        <a
+          href="/cart/add?id={{ latest_reorder_line.variant.id | default: latest_reorder_line.variant_id }}&quantity={{ latest_reorder_line.quantity }}"
+          class="prime-account__button prime-account__button--primary"
+        >
+          Reorder latest chew
+        </a>
+      {%- else -%}
+        <a href="/collections/yak-chew" class="prime-account__button prime-account__button--primary">Shop yak chews</a>
+      {%- endif -%}
+      <a href="{{ routes.account_logout_url }}" class="prime-account__button prime-account__button--secondary" data-no-instant>
         {{ 'customer.log_out' | t }}
       </a>
     </div>
-  </div>
+  </header>
 
-  <div>
-    <div>
-      <h2 class="h4">{{ 'customer.orders.title' | t }}</h2>
+  <section class="prime-account__grid" aria-label="Account quick actions">
+    <article class="prime-account-card prime-account-card--dog" id="PrimeDogAccountCard">
+      <p class="prime-account-card__kicker">My Dog</p>
+      <h2 data-dog-profile-title>Build your dog's chew profile</h2>
+      <p data-dog-profile-copy>Save weight, breed, and chewing style for better sizing, duration estimates, and reorder timing.</p>
+      <a href="/pages/my-dog" class="prime-account-card__link" data-dog-profile-link>Set up profile</a>
+    </article>
+
+    <article class="prime-account-card">
+      <p class="prime-account-card__kicker">Subscribe &amp; Save</p>
+      <h2>Keep calm-time stocked</h2>
+      <p>Manage flexible yak chew refills, skip when your dog is stocked, or start a recurring routine that fits your household.</p>
+      <a href="/pages/subscribe-and-save" class="prime-account-card__link">Manage or learn more</a>
+    </article>
+
+    <article class="prime-account-card">
+      <p class="prime-account-card__kicker">Post-purchase guide</p>
+      <h2>What to do after the box arrives</h2>
+      <p>Start with supervised sessions, remove the small end, and log real chew time so future recommendations improve.</p>
+      <a href="/blogs/dog-behavior/how-long-do-yak-chews-last" class="prime-account-card__link">Read chew guide</a>
+    </article>
+
+    <article class="prime-account-card">
+      <p class="prime-account-card__kicker">Referral</p>
+      <h2>Share calmer chew time</h2>
+      <p>Invite another dog parent to Prime and help them choose a safer, rawhide-free routine.</p>
+      <a href="/pages/refer-a-friend" class="prime-account-card__link">Open referral page</a>
+    </article>
+
+    <article class="prime-account-card">
+      <p class="prime-account-card__kicker">Enrichment hub</p>
+      <h2>Build calmer sessions</h2>
+      <p>Read practical chew guides for crate training, supervised chew time, and rawhide-free enrichment routines.</p>
+      <a href="/blogs/dog-behavior" class="prime-account-card__link">Open guides</a>
+    </article>
+
+    <article class="prime-account-card">
+      <p class="prime-account-card__kicker">Milestone</p>
+      <h2>{{ customer_order_count }} Prime order{% unless customer_order_count == 1 %}s{% endunless %}</h2>
+      <p>Every order helps refine your household's chew rhythm, reorder timing, and sizing confidence.</p>
+      <a href="#prime-orders" class="prime-account-card__link">Review orders</a>
+    </article>
+
+    <article class="prime-account-card">
+      <p class="prime-account-card__kicker">Breed guidance</p>
+      <h2>Find size-specific tips</h2>
+      <p>Use My Dog to save breed, weight, and chewing style so recommendations stay specific instead of generic.</p>
+      <a href="/pages/my-dog" class="prime-account-card__link">Open My Dog</a>
+    </article>
+
+    <article class="prime-account-card">
+      <p class="prime-account-card__kicker">Running low?</p>
+      <h2>Restart the routine</h2>
+      <p>If the last box is almost gone, reorder now or switch to flexible refills before calm-time runs out.</p>
+      {%- if latest_reorder_line -%}
+        <a href="/cart/add?id={{ latest_reorder_line.variant.id | default: latest_reorder_line.variant_id }}&quantity={{ latest_reorder_line.quantity }}" class="prime-account-card__link">Reorder latest chew</a>
+      {%- else -%}
+        <a href="/collections/yak-chew" class="prime-account-card__link">Shop yak chews</a>
+      {%- endif -%}
+    </article>
+  </section>
+
+  <div class="prime-account__layout">
+    <section id="prime-orders" class="prime-account__panel">
+      <div class="prime-account__section-head">
+        <div>
+          <p class="prime-account__eyebrow">Order history</p>
+          <h2>{{ 'customer.orders.title' | t }}</h2>
+        </div>
+        <a href="/collections/yak-chew" class="prime-account__text-link">Continue shopping</a>
+      </div>
 
       {% paginate customer.orders by 20 %}
         {%- if customer.orders.size > 0 -%}
-          <div class="customer-table color-scheme-2 gradient">
-            <table role="table" class="order-history">
-              <caption class="visually-hidden">
-                {{ 'customer.orders.title' | t }}
-              </caption>
-              <thead role="rowgroup">
-                <tr role="row">
-                  <th id="ColumnOrder" scope="col" role="columnheader">{{ 'customer.orders.order_number' | t }}</th>
-                  <th id="ColumnDate" scope="col" role="columnheader">{{ 'customer.orders.date' | t }}</th>
-                  <th id="ColumnPayment" scope="col" role="columnheader">{{ 'customer.orders.payment_status' | t }}</th>
-                  <th id="ColumnFulfillment" scope="col" role="columnheader">
-                    {{ 'customer.orders.fulfillment_status' | t }}
-                  </th>
-                  <th id="ColumnTotal" scope="col" role="columnheader">{{ 'customer.orders.total' | t }}</th>
-                </tr>
-              </thead>
-              <tbody role="rowgroup">
-                {%- for order in customer.orders -%}
-                  <tr role="row">
-                    <td
-                      id="RowOrder"
-                      role="cell"
-                      headers="ColumnOrder"
-                      data-label="{{ 'customer.orders.order_number' | t }}"
-                    >
-                      <a
-                        href="{{ order.customer_url }}"
-                        aria-label="{{ 'customer.orders.order_number_link' | t: number: order.name }}"
-                      >
-                        {{ order.name }}
-                      </a>
-                    </td>
-                    <td headers="RowOrder ColumnDate" role="cell" data-label="{{ 'customer.orders.date' | t }}">
-                      {{ order.created_at | time_tag: format: 'date' }}
-                    </td>
-                    <td
-                      headers="RowOrder ColumnPayment"
-                      role="cell"
-                      data-label="{{ 'customer.orders.payment_status' | t }}"
-                    >
-                      {{ order.financial_status_label }}
-                    </td>
-                    <td
-                      headers="RowOrder ColumnFulfillment"
-                      role="cell"
-                      data-label="{{ 'customer.orders.fulfillment_status' | t }}"
-                    >
-                      {{ order.fulfillment_status_label }}
-                    </td>
-                    <td headers="RowOrder ColumnTotal" role="cell" data-label="{{ 'customer.orders.total' | t }}">
-                      {{ order.total_net_amount | money_with_currency }}
-                    </td>
-                  </tr>
-                {%- endfor -%}
-              </tbody>
-            </table>
+          <div class="prime-order-list" role="list">
+            {%- for order in customer.orders -%}
+              {%- liquid
+                assign reorder_line = blank
+                for line_item in order.line_items
+                  if reorder_line == blank and line_item.variant != blank
+                    assign reorder_line = line_item
+                  endif
+                endfor
+              -%}
+              <article class="prime-order-card" role="listitem">
+                <div>
+                  <a href="{{ order.customer_url }}" class="prime-order-card__name" aria-label="{{ 'customer.orders.order_number_link' | t: number: order.name }}">
+                    {{ order.name }}
+                  </a>
+                  <p>{{ order.created_at | time_tag: format: 'date' }}</p>
+                </div>
+                <div>
+                  <span>{{ order.financial_status_label }}</span>
+                  <span>{{ order.fulfillment_status_label }}</span>
+                </div>
+                <strong>{{ order.total_net_amount | money_with_currency }}</strong>
+                <div class="prime-order-card__actions">
+                  <a href="{{ order.customer_url }}">View details</a>
+                  {%- if reorder_line -%}
+                    <a href="/cart/add?id={{ reorder_line.variant.id | default: reorder_line.variant_id }}&quantity={{ reorder_line.quantity }}">Reorder</a>
+                  {%- endif -%}
+                </div>
+              </article>
+            {%- endfor -%}
           </div>
         {%- else -%}
-          <p>{{ 'customer.orders.none' | t }}</p>
+          <div class="prime-account-empty">
+            <h3>Your first chew routine is waiting.</h3>
+            <p>Once you place an order, tracking, reorder shortcuts, and chew education will appear here.</p>
+            <a href="/collections/yak-chew" class="prime-account__button prime-account__button--primary">Shop Best Sellers</a>
+          </div>
         {%- endif -%}
 
         {%- if paginate.pages > 1 -%}
@@ -87,64 +163,76 @@
             <nav class="pagination" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
               <ul role="list">
                 {%- if paginate.previous -%}
-                  <li>
-                    <a href="{{ paginate.previous.url }}" aria-label="{{ 'general.pagination.previous' | t }}">
-                      <svg aria-hidden="true" focusable="false" viewBox="0 0 10 6">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
-                      </svg>
-                    </a>
-                  </li>
+                  <li><a href="{{ paginate.previous.url }}" aria-label="{{ 'general.pagination.previous' | t }}">&larr;</a></li>
                 {%- endif -%}
-
                 {%- for part in paginate.parts -%}
                   <li>
                     {%- if part.is_link -%}
-                      <a href="{{ part.url }}" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">
-                        {{- part.title -}}
-                      </a>
+                      <a href="{{ part.url }}" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">{{ part.title }}</a>
+                    {%- elsif part.title == paginate.current_page -%}
+                      <span aria-current="page" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">{{ part.title }}</span>
                     {%- else -%}
-                      {%- if part.title == paginate.current_page -%}
-                        <span aria-current="page" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">
-                          {{- part.title -}}
-                        </span>
-                      {%- else -%}
-                        <span>{{ part.title }}</span>
-                      {%- endif -%}
+                      <span>{{ part.title }}</span>
                     {%- endif -%}
                   </li>
                 {%- endfor -%}
-
                 {%- if paginate.next -%}
-                  <li>
-                    <a href="{{ paginate.next.url }}" aria-label="{{ 'general.pagination.next' | t }}">
-                      <svg aria-hidden="true" focusable="false" viewBox="0 0 10 6">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
-                      </svg>
-                    </a>
-                  </li>
+                  <li><a href="{{ paginate.next.url }}" aria-label="{{ 'general.pagination.next' | t }}">&rarr;</a></li>
                 {%- endif -%}
               </ul>
             </nav>
           {%- endif -%}
         {%- endif -%}
       {% endpaginate %}
-    </div>
+    </section>
 
-    <div>
-      <h2 class="h4">{{ 'customer.account.details' | t }}</h2>
-
-      <div class="border-radius-panel border color-scheme-2 gradient p-2">
-        <div class="rte">
-          {{ customer.default_address | format_address }}
+    <aside class="prime-account__panel prime-account__side">
+      <div class="prime-account__section-head">
+        <div>
+          <p class="prime-account__eyebrow">Account details</p>
+          <h2>{{ 'customer.account.details' | t }}</h2>
         </div>
-
-        <a href="{{ routes.account_addresses_url }}" class="mt-1">
-          {{ 'customer.account.edit' | t }}
-        </a>
       </div>
-    </div>
+
+      <div class="prime-account-address">
+        <div class="rte">
+          {%- if customer.default_address -%}
+            {{ customer.default_address | format_address }}
+          {%- else -%}
+            <p>Add a default address to make future chew orders faster.</p>
+          {%- endif -%}
+        </div>
+        <a href="{{ routes.account_addresses_url }}">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a>
+      </div>
+
+      <div class="prime-account-mini">
+        <strong>Rawhide-free peace of mind</strong>
+        <p>Every reorder stays focused on simple Himalayan yak chews, supervised enrichment, and fast support if anything feels off.</p>
+      </div>
+    </aside>
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var card = document.getElementById('PrimeDogAccountCard');
+    if (!card || typeof PrimeDogProfile === 'undefined' || !PrimeDogProfile.hasProfile()) return;
+    var profile = PrimeDogProfile.get();
+    var title = card.querySelector('[data-dog-profile-title]');
+    var copy = card.querySelector('[data-dog-profile-copy]');
+    var link = card.querySelector('[data-dog-profile-link]');
+    if (title) title.textContent = 'Welcome back, ' + (profile.name || 'your dog');
+    if (copy) {
+      var details = [];
+      if (profile.weight) details.push(profile.weight + ' lbs');
+      if (profile.chewer) details.push(profile.chewer + ' chewer');
+      copy.textContent = details.length
+        ? details.join(' · ') + '. Open My Dog for chew duration, session logging, and reorder timing.'
+        : 'Open My Dog for chew duration, session logging, and reorder timing.';
+    }
+    if (link) link.textContent = 'Open My Dog';
+  });
+</script>
 
 {% schema %}
 {
