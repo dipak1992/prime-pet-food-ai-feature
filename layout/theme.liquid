@@ -7,6 +7,20 @@
   if rtl_languages contains current_lang
     assign is_rtl = true
   endif
+
+  assign prime_canonical_override = ''
+  case request.path
+    when '/pages/who-we-are'
+      assign prime_canonical_override = request.origin | append: '/pages/about-us'
+    when '/pages/contact-us'
+      assign prime_canonical_override = request.origin | append: '/pages/contact'
+    when '/pages/faqs'
+      assign prime_canonical_override = request.origin | append: '/pages/faq'
+    when '/pages/return-policy'
+      assign prime_canonical_override = request.origin | append: '/pages/refund-policy'
+    when '/pages/wholesale-application'
+      assign prime_canonical_override = request.origin | append: '/pages/wholesale'
+  endcase
 -%}
 <!doctype html>
 <html class="no-js" lang="{{ request.locale.iso_code }}"{% if is_rtl %} dir="rtl"{% endif %}>
@@ -16,7 +30,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
 
-    {%- if canonical_url != blank -%}
+    {%- if prime_canonical_override != blank -%}
+      <link rel="canonical" href="{{ prime_canonical_override }}">
+    {%- elsif canonical_url != blank -%}
       <link rel="canonical" href="{{ canonical_url }}">
     {%- endif -%}
 
