@@ -38,21 +38,17 @@
           {% render 'cart-chew-personalization', context: 'cart_page' %}
 
           <div class="cart__warnings">
-            <h2 class="cart__empty-text ypc-cart__title ypc-cart__title--empty">{{ 'sections.cart.empty' | t }}</h2>
+            <h2 class="cart__empty-text ypc-cart__title ypc-cart__title--empty">Your dog&rsquo;s chew box is waiting.</h2>
             <p class="ypc-cart__subtitle">{{ section.settings.empty_subtitle }}</p>
             <a
               href="{% if settings.cart_continue_shopping_link %}{{ settings.cart_continue_shopping_link }}{% else %}{{ routes.all_products_collection_url }}{% endif %}"
               class="ypc-cart__empty-btn"
             >
-              {{ 'general.continue_shopping' | t }}
+              Shop Best Sellers
             </a>
-
-            {%- if settings.cart_show_login and shop.customer_accounts_enabled and customer == null -%}
-              <h2 class="cart__login-title h4">{{ 'sections.cart.login.title' | t }}</h2>
-              <p class="cart__login-paragraph">
-                {{ 'sections.cart.login.paragraph_html' | t: link: routes.account_login_url }}
-              </p>
-            {%- endif -%}
+            <a href="/pages/how-long-will-this-last-for-my-dog" class="ypc-cart__empty-secondary">
+              Find the Right Chew
+            </a>
           </div>
 
           <form action="{{ routes.cart_url }}" class="cart__contents critical-hidden" method="post" id="cart">
@@ -474,6 +470,12 @@
           </div>
 
           {%- if cart != empty -%}
+            <div class="ypc-cart-summary__confidence" aria-label="Checkout reassurance">
+              <span>Rawhide-free enrichment</span>
+              <span>30-day chew guarantee</span>
+              <span>Free shipping $30+</span>
+            </div>
+
             <div class="ypc-cart-summary__discount">
               <label class="ypc-cart-summary__discount-label" for="ypc-discount-code">
                 🏷 Promo / Discount Code
@@ -498,8 +500,8 @@
           <div class="ypc-cart-summary__subscribe">
             <p class="ypc-cart-summary__subscribe-kicker">Subscribe &amp; Save</p>
             <h3>Keep yak chews ready for calm-time routines.</h3>
-            <p>Automatic deliveries, flexible schedules, and savings after checkout without the subscription anxiety.</p>
-            <a href="/pages/subscribe-and-save">Explore subscription options</a>
+            <p>Automatic deliveries, flexible schedules, and savings without the subscription anxiety. Skip or cancel anytime.</p>
+            <a href="/pages/subscribe-and-save">Start saving 15% today</a>
           </div>
 
           {%- if settings.cart_show_shipping_calculator -%}
@@ -716,6 +718,22 @@
     font-weight: 700;
   }
 
+  .ypc-cart__empty-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    margin-top: 14px;
+    margin-left: 12px;
+    padding: 0 22px;
+    border: 1px solid rgba(23,59,43,0.14);
+    border-radius: 14px;
+    background: #fffaf2;
+    color: #173b2b;
+    text-decoration: none;
+    font-weight: 760;
+  }
+
   .ypc-cart__headings {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 160px 140px;
@@ -872,6 +890,17 @@
     color: #de7c2f;
   }
 
+  .ypc-cart-item__quantity .quantity__button {
+    min-width: 44px;
+    min-height: 48px;
+    color: #173b2b;
+  }
+
+  .ypc-cart-item__quantity .quantity__button.disabled,
+  .ypc-cart-item__quantity .quantity__button:disabled {
+    opacity: 0.45;
+  }
+
   .ypc-cart-item__remove {
     display: inline-flex;
     align-items: center;
@@ -944,6 +973,41 @@
 
   .ypc-cart-summary__totals {
     margin-bottom: 12px;
+  }
+
+  .ypc-cart-summary__confidence {
+    display: grid;
+    gap: 8px;
+    margin: 14px 0 4px;
+    padding: 14px;
+    border: 1px solid rgba(23, 59, 43, 0.08);
+    border-radius: 16px;
+    background: #f2f8ef;
+  }
+
+  .ypc-cart-summary__confidence span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #173b2b;
+    font-size: 13px;
+    line-height: 1.35;
+    font-weight: 760;
+  }
+
+  .ypc-cart-summary__confidence span::before {
+    content: "✓";
+    display: inline-flex;
+    width: 20px;
+    height: 20px;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 20px;
+    border-radius: 999px;
+    background: #173b2b;
+    color: #fff;
+    font-size: 12px;
+    line-height: 1;
   }
 
   .ypc-cart-summary__total-row {
@@ -1152,6 +1216,12 @@
       font-size: 15px;
     }
 
+    .ypc-cart__empty-btn,
+    .ypc-cart__empty-secondary {
+      width: 100%;
+      margin-left: 0;
+    }
+
     .ypc-cart-item {
       padding: 16px;
       border-radius: 18px;
@@ -1172,9 +1242,31 @@
       font-size: 22px;
     }
 
+    .ypc-cart-item__quantity {
+      min-height: 56px;
+    }
+
+    .ypc-cart-item__quantity .quantity__button {
+      min-width: 50px;
+      min-height: 54px;
+    }
+
     .ypc-cart-summary {
       padding: 18px;
       border-radius: 18px;
+    }
+
+    .ypc-cart-summary__cta-wrap {
+      position: sticky;
+      bottom: 12px;
+      z-index: 3;
+      margin: 18px -6px 0;
+      padding: 10px;
+      border: 1px solid rgba(23,59,43,0.08);
+      border-radius: 18px;
+      background: rgba(255, 250, 242, 0.96);
+      box-shadow: 0 14px 32px rgba(17, 38, 28, 0.16);
+      backdrop-filter: blur(10px);
     }
 
     .ypc-cart-summary__value {
@@ -1376,13 +1468,13 @@
       "type": "text",
       "id": "cart_subtitle",
       "label": "Cart subtitle",
-      "default": "Almost there — your dog’s next favorite chew is waiting."
+      "default": "Review your dog’s calm-time routine, adjust quantities, and checkout when everything looks right."
     },
     {
       "type": "text",
       "id": "empty_subtitle",
       "label": "Empty cart subtitle",
-      "default": "Looks like your cart is empty. Browse our premium chews and find the right fit for your dog."
+      "default": "Explore long-lasting Himalayan yak chews made for calmer, happier dogs."
     },
     {
       "type": "text",

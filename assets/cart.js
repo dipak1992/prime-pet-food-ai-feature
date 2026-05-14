@@ -2,14 +2,20 @@ if (!customElements.get('cart-remove-button')) {
   class CartRemoveButton extends HTMLElement {
     constructor() {
       super();
-      window.initScriptOnDemand(this, this.init.bind(this));
+      this.initialized = false;
+    }
+
+    connectedCallback() {
+      this.init();
     }
 
     init() {
+      if (this.initialized) return;
+      this.initialized = true;
       this.addEventListener('click', (event) => {
         event.preventDefault();
         const cartItems = this.closest('cart-items') || this.closest('cart-drawer-items');
-        cartItems.updateQuantity(this.dataset.index, 0);
+        if (cartItems) cartItems.updateQuantity(this.dataset.index, 0);
       });
     }
   }
@@ -20,10 +26,12 @@ if (!customElements.get('cart-remove-button')) {
 class CartItems extends HTMLElement {
   constructor() {
     super();
-    window.initScriptOnDemand(this, this.init.bind(this));
+    this.initialized = false;
   }
 
   init() {
+    if (this.initialized) return;
+    this.initialized = true;
     this.lineItemStatusElement =
       document.getElementById('shopping-cart-line-item-status') || document.getElementById('CartDrawer-LineItemStatus');
     this.cartDrawer = document.querySelector('cart-drawer');
@@ -38,6 +46,9 @@ class CartItems extends HTMLElement {
   cartUpdateUnsubscriber = undefined;
 
   connectedCallback() {
+    this.init();
+
+    if (this.cartUpdateUnsubscriber) return;
     this.cartUpdateUnsubscriber = subscribe(PUB_SUB_EVENTS.cartUpdate, (event) => {
       if (event.source === 'cart-items') {
         return;
@@ -54,6 +65,7 @@ class CartItems extends HTMLElement {
 
   resetQuantityInput(id) {
     const input = this.querySelector(`#Quantity-${id}`);
+    if (!input) return;
     input.value = input.getAttribute('value');
     this.isEnterPressed = false;
   }
@@ -197,10 +209,10 @@ class CartItems extends HTMLElement {
         const parsedState = JSON.parse(state);
         const quantityElement =
             document.getElementById(`Quantity-${line}`) || document.getElementById(`Drawer-quantity-${line}`);
-        const items = document.querySelectorAll('.cart-item');
+        const items = document.querySelectorAll('.cart-item, .ypc-cart-item');
 
         if (parsedState.errors) {
-          quantityElement.value = quantityElement.getAttribute('value');
+          if (quantityElement) quantityElement.value = quantityElement.getAttribute('value');
           this.updateLiveRegions(line, parsedState.errors);
           return;
         }
@@ -209,7 +221,7 @@ class CartItems extends HTMLElement {
 
         const updatedValue = parsedState.items[line - 1] ? parsedState.items[line - 1].quantity : undefined;
         let message = '';
-        if (items.length === parsedState.items.length && updatedValue !== parseInt(quantityElement.value)) {
+        if (quantityElement && items.length === parsedState.items.length && updatedValue !== parseInt(quantityElement.value)) {
           if (typeof updatedValue === 'undefined') {
             message = window.cartStrings.error;
           } else {
@@ -239,7 +251,7 @@ class CartItems extends HTMLElement {
         console.warn(err);
         this.querySelectorAll('.loading__spinner').forEach((spinner) => spinner.classList.add('hidden', 'spinning-complete'));
         const errors = document.getElementById('cart-errors') || document.getElementById('CartDrawer-CartErrors');
-        errors.textContent = window.cartStrings.error;
+        if (errors) errors.textContent = 'We couldn’t update your cart. Please try again.';
       })
       .finally(() => {
         this.cartDrawer?.removeDeleteTabIndex();
@@ -258,14 +270,18 @@ class CartItems extends HTMLElement {
     if (cartDrawerWrapper) cartDrawerWrapper.classList.toggle('is-empty', parsedState.item_count === 0);
 
     sectionsToRender.forEach((section) => {
-      const elementToReplace =
-          document.getElementById(section.id).querySelector(section.selector) || document.getElementById(section.id);
+      const sectionHtml = parsedState.sections && parsedState.sections[section.section];
+      const container = document.getElementById(section.id);
+      if (!sectionHtml || !container) return;
+
       const newHtml = this.getSectionInnerHTML(
-          parsedState.sections[section.section],
+          sectionHtml,
           section.selector
       );
 
       if (newHtml) {
+        const elementToReplace = container.querySelector(section.selector) || container;
+
         // Prevent a flash of content with recommendations
         const oldRecommendations = elementToReplace.querySelector('product-recommendations');
         if (oldRecommendations) {
@@ -300,10 +316,11 @@ class CartItems extends HTMLElement {
       document.getElementById(`Line-item-error-${line}`) || document.getElementById(`CartDrawer-LineItemError-${line}`);
     if (lineItemError) lineItemError.querySelector('.cart-item__error-text').textContent = message;
 
-    this.lineItemStatusElement.setAttribute('aria-hidden', true);
+    if (this.lineItemStatusElement) this.lineItemStatusElement.setAttribute('aria-hidden', true);
 
     const cartStatus =
       document.getElementById('cart-live-region-text') || document.getElementById('CartDrawer-LiveRegionText');
+    if (!cartStatus) return;
     cartStatus.setAttribute('aria-hidden', false);
 
     setTimeout(() => {
@@ -318,7 +335,7 @@ class CartItems extends HTMLElement {
 
   enableLoading(line) {
     const mainCartItems = document.getElementById('main-cart-items') || document.getElementById('CartDrawer-CartItems');
-    mainCartItems.classList.add('cart__items--disabled');
+    if (mainCartItems) mainCartItems.classList.add('cart__items--disabled');
 
     const cartItemElements = this.querySelectorAll(`#CartItem-${line} .loading__spinner`);
     const cartDrawerItemElements = this.querySelectorAll(`#CartDrawer-Item-${line} .loading__spinner`);
@@ -326,14 +343,14 @@ class CartItems extends HTMLElement {
     [...cartItemElements, ...cartDrawerItemElements].forEach((overlay) => overlay.classList.remove('hidden'));
 
     document.activeElement.blur();
-    this.lineItemStatusElement.setAttribute('aria-hidden', false);
+    if (this.lineItemStatusElement) this.lineItemStatusElement.setAttribute('aria-hidden', false);
 
     this.closest('cart-drawer')?.classList.add('closable-element--no-trans');
   }
 
   disableLoading(line) {
     const mainCartItems = document.getElementById('main-cart-items') || document.getElementById('CartDrawer-CartItems');
-    mainCartItems.classList.remove('cart__items--disabled');
+    if (mainCartItems) mainCartItems.classList.remove('cart__items--disabled');
 
     const cartItemElements = this.querySelectorAll(`#CartItem-${line} .loading__spinner`);
     const cartDrawerItemElements = this.querySelectorAll(`#CartDrawer-Item-${line} .loading__spinner`);
@@ -355,10 +372,16 @@ if (!customElements.get('cart-note')) {
     class CartNote extends HTMLElement {
       constructor() {
         super();
-        window.initScriptOnDemand(this, this.init.bind(this));
+        this.initialized = false;
+      }
+
+      connectedCallback() {
+        this.init();
       }
 
       init() {
+        if (this.initialized) return;
+        this.initialized = true;
         this.addEventListener(
           'input',
           debounce((event) => {
