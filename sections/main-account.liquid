@@ -96,9 +96,9 @@
     </article>
 
     <article class="prime-account-card">
-      <p class="prime-account-card__kicker">Running low?</p>
-      <h2>Restart the routine</h2>
-      <p>If the last box is almost gone, reorder now or switch to flexible refills before calm-time runs out.</p>
+      <p class="prime-account-card__kicker">Reorder last chew</p>
+      <h2>Keep the routine stocked</h2>
+      <p>Repeat your most recent yak chew order in one click, or switch to flexible refills before calm-time runs out.</p>
       {%- if latest_reorder_line -%}
         <a href="/cart/add?id={{ latest_reorder_line.variant.id | default: latest_reorder_line.variant_id }}&quantity={{ latest_reorder_line.quantity }}" class="prime-account-card__link">Reorder latest chew</a>
       {%- else -%}

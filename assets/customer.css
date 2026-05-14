@@ -1027,6 +1027,7 @@ li[data-address] > h2 {
 .prime-auth-intro__stack span {
   display: inline-flex;
   align-items: center;
+  gap: 0.5rem;
   min-height: 3.4rem;
   padding: 0.65rem 0.9rem;
   border: 1px solid var(--prime-account-line);
@@ -1035,6 +1036,17 @@ li[data-address] > h2 {
   color: var(--prime-account-ink);
   font-size: 1.3rem;
   font-weight: 700;
+}
+
+.prime-auth-intro__stack span::before {
+  content: "";
+  width: 1.35rem;
+  height: 1.35rem;
+  flex: 0 0 1.35rem;
+  border-radius: 999px;
+  background:
+    linear-gradient(135deg, transparent 43%, #fff 0 57%, transparent 0) 42% 53% / 0.75rem 0.75rem no-repeat,
+    var(--prime-account-orange);
 }
 
 .prime-auth-note {
