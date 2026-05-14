@@ -9,6 +9,7 @@
       <div class="pf-newsletter__copy">
         <p class="pf-newsletter__kicker">{{ section.settings.newsletter_eyebrow | default: 'Dog parent tips' }}</p>
         <h2>{{ section.settings.newsletter_heading | default: 'Get chew guides, enrichment tips, and early access.' }}</h2>
+        <span class="pf-newsletter__proof">Trusted by 20,000+ dog parents</span>
       </div>
       <form class="pf-newsletter__form" action="/contact#contact_form" method="post" accept-charset="UTF-8">
         <input type="hidden" name="form_type" value="customer">
@@ -30,7 +31,7 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </button>
         </div>
-        <p class="pf-newsletter__disclaimer">No spam. Unsubscribe anytime. We respect your inbox.</p>
+        <p class="pf-newsletter__disclaimer">Weekly chew tips for calmer dogs. Unsubscribe anytime.</p>
       </form>
     </div>
   </div>
@@ -247,6 +248,18 @@
     font-weight: 735;
     line-height: 1.15;
     letter-spacing: -0.02em;
+  }
+
+  .pf-newsletter__proof {
+    display: inline-flex;
+    margin-top: 14px;
+    padding: 8px 12px;
+    border: 1px solid rgba(255, 250, 242, 0.18);
+    border-radius: 999px;
+    color: rgba(255, 250, 242, 0.78);
+    font-size: 12px;
+    line-height: 1;
+    font-weight: 720;
   }
 
   .pf-newsletter__field {

@@ -16,6 +16,10 @@
         <a href="/pages/subscribe-and-save" class="pfq-button pfq-button--secondary">Subscribe &amp; Save</a>
         <a href="/pages/contact" class="pfq-button pfq-button--secondary">Contact support</a>
       </div>
+      <div class="pfq-search">
+        <label for="PrimeFaqSearch">Search questions</label>
+        <input id="PrimeFaqSearch" type="search" placeholder="Search safety, sizing, shipping..." autocomplete="off">
+      </div>
     </header>
 
     <div class="pfq-layout">
@@ -25,7 +29,7 @@
         <a href="#duration">Duration</a>
         <a href="#sizing">Sizing</a>
         <a href="#orders">Orders</a>
-        <a href="#orders">Subscribe &amp; Save</a>
+        <a href="#subscriptions">Subscribe &amp; Save</a>
       </aside>
 
       <div class="pfq-content">
@@ -74,8 +78,19 @@
         </section>
 
         <section class="pfq-category" id="orders">
-          <p class="pfq-category__label">Shipping, subscriptions & support</p>
-          {% for item in faq_items offset: 12 %}
+          <p class="pfq-category__label">Shipping & support</p>
+          {% for item in faq_items offset: 12 limit: 3 %}
+            {% assign parts = item | split: "|" %}
+            <details class="pfq-item">
+              <summary>{{ parts[0] }}</summary>
+              <div><p>{{ parts[1] }}</p></div>
+            </details>
+          {% endfor %}
+        </section>
+
+        <section class="pfq-category" id="subscriptions">
+          <p class="pfq-category__label">Subscribe & Save</p>
+          {% for item in faq_items offset: 15 %}
             {% assign parts = item | split: "|" %}
             <details class="pfq-item">
               <summary>{{ parts[0] }}</summary>
@@ -115,6 +130,29 @@
     {% endfor %}
   ]
 }
+</script>
+
+<script>
+  (function() {
+    var input = document.getElementById('PrimeFaqSearch');
+    if (!input) return;
+    var items = Array.prototype.slice.call(document.querySelectorAll('.pfq-item'));
+    var categories = Array.prototype.slice.call(document.querySelectorAll('.pfq-category'));
+
+    input.addEventListener('input', function() {
+      var query = input.value.trim().toLowerCase();
+      items.forEach(function(item) {
+        var text = item.textContent.toLowerCase();
+        var match = !query || text.indexOf(query) !== -1;
+        item.hidden = !match;
+        if (match && query) item.open = true;
+      });
+      categories.forEach(function(category) {
+        var visible = category.querySelector('.pfq-item:not([hidden])');
+        category.hidden = !visible;
+      });
+    });
+  })();
 </script>
 
 <style>
@@ -177,6 +215,31 @@
     flex-wrap: wrap;
     gap: 12px;
     margin-top: 28px;
+  }
+
+  .pfq-search {
+    display: grid;
+    gap: 8px;
+    max-width: 520px;
+    margin-top: 26px;
+  }
+
+  .pfq-search label {
+    color: #302820;
+    font-size: 13px;
+    font-weight: 760;
+  }
+
+  .pfq-search input {
+    min-height: 52px;
+    width: 100%;
+    border: 1px solid rgba(55, 43, 31, 0.16);
+    border-radius: 999px;
+    background: #fff;
+    color: #171512;
+    font: inherit;
+    font-size: 16px;
+    padding: 14px 18px;
   }
 
   .pfq-button {
@@ -317,7 +380,17 @@
 
     .pfq-sidebar {
       position: static;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 10px;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .pfq-sidebar a {
+      white-space: nowrap;
+      scroll-snap-align: start;
     }
 
     .pfq-hero h1 {
@@ -350,10 +423,6 @@
 
     .pfq-button {
       width: 100%;
-    }
-
-    .pfq-sidebar {
-      grid-template-columns: 1fr;
     }
 
     .pfq-item summary {

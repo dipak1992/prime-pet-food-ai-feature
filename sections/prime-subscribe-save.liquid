@@ -151,6 +151,49 @@
     </div>
   </section>
 
+  <section class="pss-pricing" aria-labelledby="PssPricingTitle">
+    <div class="pss-shell">
+      <div class="pss-section-head">
+        <p class="pss-kicker">Simple value check</p>
+        <h2 id="PssPricingTitle">See the routine savings by size.</h2>
+        <p>Use this as a planning guide before choosing the exact size and frequency on the product page.</p>
+      </div>
+
+      <div class="pss-price-table" role="table" aria-label="Subscription savings by chew size">
+        <div class="pss-price-row pss-price-row--head" role="row">
+          <span role="columnheader">Dog size</span>
+          <span role="columnheader">One-time</span>
+          <span role="columnheader">Subscribe</span>
+          <span role="columnheader">Best rhythm</span>
+        </div>
+        <div class="pss-price-row" role="row">
+          <span role="cell">Small / 1-15 lbs</span>
+          <span role="cell">Standard price</span>
+          <span role="cell">Save 10-20%</span>
+          <span role="cell">Every 4-6 weeks</span>
+        </div>
+        <div class="pss-price-row" role="row">
+          <span role="cell">Medium / 15-35 lbs</span>
+          <span role="cell">Standard price</span>
+          <span role="cell">Save 10-20%</span>
+          <span role="cell">Every 3-5 weeks</span>
+        </div>
+        <div class="pss-price-row" role="row">
+          <span role="cell">Large / 35-55 lbs</span>
+          <span role="cell">Standard price</span>
+          <span role="cell">Save up to 30%</span>
+          <span role="cell">Every 2-4 weeks</span>
+        </div>
+        <div class="pss-price-row" role="row">
+          <span role="cell">XL/Jumbo / 55+ lbs</span>
+          <span role="cell">Standard price</span>
+          <span role="cell">Save up to 30%</span>
+          <span role="cell">Every 2-3 weeks</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="pss-love" aria-labelledby="PssLoveTitle">
     <div class="pss-shell pss-love__inner">
       <div>
@@ -483,6 +526,7 @@
   .pss-benefits,
   .pss-how,
   .pss-tiers,
+  .pss-pricing,
   .pss-love,
   .pss-trust,
   .pss-faq,
@@ -497,6 +541,7 @@
   }
 
   .pss-how,
+  .pss-pricing,
   .pss-trust {
     background: var(--pss-white);
   }
@@ -678,6 +723,52 @@
     color: var(--pss-green);
   }
 
+  .pss-price-table {
+    overflow: hidden;
+    border: 1px solid var(--pss-line);
+    border-radius: 8px;
+    background: #fffdf9;
+    box-shadow: 0 14px 34px rgba(55, 43, 31, 0.05);
+  }
+
+  .pss-price-row {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr 0.8fr 1fr;
+    border-top: 1px solid var(--pss-line);
+  }
+
+  .pss-price-row:first-child {
+    border-top: 0;
+  }
+
+  .pss-price-row span {
+    padding: 16px 18px;
+    color: var(--pss-muted);
+    font-size: 14px;
+    line-height: 1.4;
+    border-left: 1px solid var(--pss-line);
+  }
+
+  .pss-price-row span:first-child {
+    border-left: 0;
+    color: var(--pss-ink);
+    font-weight: 760;
+  }
+
+  .pss-price-row--head {
+    background: var(--pss-green);
+  }
+
+  .pss-price-row--head span,
+  .pss-price-row--head span:first-child {
+    color: var(--pss-white);
+    font-size: 12px;
+    font-weight: 820;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-left-color: rgba(255, 250, 242, 0.18);
+  }
+
   .pss-love {
     background: #1d211c;
     color: var(--pss-white);
@@ -823,6 +914,7 @@
     .pss-section-head h2,
     .pss-love h2,
     .pss-trust h2,
+    .pss-pricing h2,
     .pss-terms h2 {
       font-size: 42px;
     }
@@ -897,6 +989,7 @@
     .pss-benefits,
     .pss-how,
     .pss-tiers,
+    .pss-pricing,
     .pss-love,
     .pss-trust,
     .pss-faq,
@@ -909,6 +1002,40 @@
     .pss-tier-grid,
     .pss-trust__grid {
       grid-template-columns: 1fr;
+    }
+
+    .pss-price-table {
+      display: grid;
+      gap: 12px;
+      overflow: visible;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .pss-price-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      border: 1px solid var(--pss-line);
+      border-radius: 8px;
+      background: #fffdf9;
+      overflow: hidden;
+    }
+
+    .pss-price-row--head {
+      display: none;
+    }
+
+    .pss-price-row span {
+      border-left: 0;
+      border-top: 1px solid var(--pss-line);
+      padding: 13px 16px;
+    }
+
+    .pss-price-row span:first-child {
+      border-top: 0;
+      background: var(--pss-green);
+      color: var(--pss-white);
     }
 
     .pss-benefit {

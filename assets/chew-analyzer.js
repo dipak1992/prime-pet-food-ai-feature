@@ -77,8 +77,8 @@ function analyze(breed,weight,chewStyle,age){
   var product;
   if(weight==='under-15')product={size:'Small',bundle:'Small Dog Starter Pack',count:'4-pack'};
   else if(weight==='15-35')product=chewStyle==='aggressive'?{size:'Medium',bundle:'Power Chewer Bundle',count:'3-pack'}:{size:'Medium',bundle:'Medium Dog Bundle',count:'3-pack'};
-  else if(weight==='35-60')product=chewStyle==='aggressive'?{size:'Large',bundle:'XL Power Chewer Pack',count:'3-pack'}:{size:'Large',bundle:'Large Dog Bundle',count:'3-pack'};
-  else product={size:'Extra Large',bundle:'Giant Breed Bundle',count:'2-pack'};
+  else if(weight==='35-60')product=chewStyle==='aggressive'?{size:'Extra Large',bundle:'XL Power Chewer Pack',count:'2-pack'}:{size:'Large',bundle:'Large Dog Bundle',count:'3-pack'};
+  else product=chewStyle==='aggressive'?{size:'Jumbo',bundle:'Giant Power Chewer Bundle',count:'2-pack'}:{size:'Extra Large',bundle:'Giant Breed Bundle',count:'2-pack'};
   var compat;
   if(chewStyle==='aggressive'&&(b.jaw==='very-strong'||b.jaw==='strong'))compat={label:'Excellent Match',score:95,note:'Yak chews are specifically designed for power chewers like yours!'};
   else if(chewStyle==='aggressive')compat={label:'Great Match',score:88,note:'Our dense yak cheese stands up to aggressive chewers.'};
@@ -396,7 +396,7 @@ window.ChewAnalyzerStickyCTA=function(){
   if(!this.el){
     this.el=document.createElement('div');
     this.el.className='ca-sticky-cta';
-    this.el.innerHTML='<a href="/products/himalayan-yak-chews-for-dogs" class="ca-sticky-cta__btn"><span class="ca-sticky-cta__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Buy Yak Chews</span></a>';
+    this.el.innerHTML='<a href="/pages/how-long-will-this-last-for-my-dog" class="ca-sticky-cta__btn"><span class="ca-sticky-cta__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Find My Dog Size</span></a>';
     document.body.appendChild(this.el);
   }
   this.el.querySelector('.ca-sticky-cta__btn').addEventListener('click',function(e){

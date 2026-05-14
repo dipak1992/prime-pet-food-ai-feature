@@ -5,7 +5,8 @@
       <h1 id="PrimeContactTitle">Real support for better chew decisions.</h1>
       <p>
         Questions about sizing, safety, orders, wholesale, or subscriptions? Send a note and
-        we will help you choose the next best step. We usually respond within 24 hours.
+        we will help you choose the next best step. Average response time is 4 business hours
+        Monday-Friday, 9am-5pm CT.
       </p>
     </header>
 
@@ -15,6 +16,11 @@
           <p class="pcp-kicker">Human help</p>
           <h2>Tell us about your dog.</h2>
           <p>For product questions, include breed, weight, age, and chewing style so we can give more useful guidance.</p>
+        </div>
+
+        <div class="pcp-response">
+          <strong>Average response</strong>
+          <span>4 business hours, Mon-Fri 9am-5pm CT</span>
         </div>
 
         <div class="pcp-cards">
@@ -178,6 +184,31 @@
   .pcp-cards {
     display: grid;
     gap: 10px;
+  }
+
+  .pcp-response {
+    padding: 16px;
+    border: 1px solid rgba(184, 95, 50, 0.22);
+    border-radius: 8px;
+    background: #fff8f3;
+  }
+
+  .pcp-response strong,
+  .pcp-response span {
+    display: block;
+  }
+
+  .pcp-response strong {
+    color: #171512;
+    font-size: 15px;
+    font-weight: 780;
+  }
+
+  .pcp-response span {
+    margin-top: 4px;
+    color: #5f574e;
+    font-size: 14px;
+    line-height: 1.45;
   }
 
   .pcp-cards div {

@@ -42,3 +42,91 @@
 <meta name="theme:version" content="2.5.0">
 <meta name="theme:preset" content="{% if settings.color_overlay == '#010101' %}tech{% elsif settings.color_overlay == '#020202' %}fashion{% elsif settings.color_overlay == '#030303' %}toys{% elsif settings.color_overlay == '#040404' %}pets{% elsif settings.color_overlay == '#050505' %}automotive{% elsif settings.color_overlay == '#060606' %}food{% else %}unknown{% endif %}">
 {% if request.design_mode %}<meta name="theme:contact" content="{{ shop.email | escape }}">{% endif %}
+
+{%- if request.page_type == 'product' and product != blank -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": {{ product.title | json }},
+      "description": {{ product.description | strip_html | truncate: 500 | json }},
+      "url": {{ canonical_url | json }},
+      "brand": {
+        "@type": "Brand",
+        "name": {{ shop.name | json }}
+      },
+      {%- if product.featured_media -%}
+        "image": [{{ product.featured_media | image_url: width: 1200 | prepend: "https:" | json }}],
+      {%- endif -%}
+      "sku": {{ product.selected_or_first_available_variant.sku | default: product.selected_or_first_available_variant.id | json }},
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": {{ cart.currency.iso_code | json }},
+        "lowPrice": {{ product.price_min | divided_by: 100.0 | json }},
+        "highPrice": {{ product.price_max | divided_by: 100.0 | json }},
+        "offerCount": {{ product.variants.size | json }},
+        "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+        "url": {{ canonical_url | json }}
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "2400"
+      }
+    }
+  </script>
+{%- endif -%}
+
+{%- unless request.page_type == 'index' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": {{ request.origin | append: routes.root_url | json }}
+        }
+        {%- if request.page_type == 'product' and product != blank -%}
+          {%- if collection != blank -%}
+            ,{
+              "@type": "ListItem",
+              "position": 2,
+              "name": {{ collection.title | json }},
+              "item": {{ request.origin | append: collection.url | json }}
+            }
+            ,{
+              "@type": "ListItem",
+              "position": 3,
+              "name": {{ product.title | json }},
+              "item": {{ canonical_url | json }}
+            }
+          {%- else -%}
+            ,{
+              "@type": "ListItem",
+              "position": 2,
+              "name": {{ product.title | json }},
+              "item": {{ canonical_url | json }}
+            }
+          {%- endif -%}
+        {%- elsif request.page_type == 'collection' and collection != blank -%}
+          ,{
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{ collection.title | json }},
+            "item": {{ canonical_url | json }}
+          }
+        {%- elsif page_title != blank -%}
+          ,{
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{ page_title | json }},
+            "item": {{ canonical_url | json }}
+          }
+        {%- endif -%}
+      ]
+    }
+  </script>
+{%- endunless -%}

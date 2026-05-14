@@ -56,7 +56,7 @@
   },
   "order": [
     "prime_collection_hero",
-    "prime_subscribe_strip",
-    "product-grid"
+    "product-grid",
+    "prime_subscribe_strip"
   ]
 }
