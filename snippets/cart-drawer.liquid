@@ -107,6 +107,71 @@
     font-weight: 800;
     line-height: 1;
   }
+
+  .cart-drawer-discount {
+    display: grid;
+    gap: 8px;
+    margin: 0 0 14px;
+    padding: 14px;
+    border: 1px solid rgba(23, 59, 43, 0.12);
+    border-radius: 16px;
+    background: #fffaf2;
+  }
+
+  .cart-drawer-discount label {
+    color: #173b2b;
+    font-size: 12px;
+    font-weight: 850;
+    letter-spacing: var(--prime-kicker-letter-spacing, 0.08em);
+    text-transform: uppercase;
+  }
+
+  .cart-drawer-discount__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px;
+  }
+
+  .cart-drawer-discount input {
+    min-height: 44px;
+    width: 100%;
+    border: 1px solid rgba(23, 59, 43, 0.16);
+    border-radius: 999px;
+    background: #ffffff;
+    color: #173b2b;
+    font: inherit;
+    font-size: 14px;
+    padding: 0 14px;
+    text-transform: uppercase;
+  }
+
+  .cart-drawer-discount button {
+    min-height: 44px;
+    border: 0;
+    border-radius: 999px;
+    background: #173b2b;
+    color: #ffffff;
+    cursor: pointer;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 850;
+    padding: 0 16px;
+  }
+
+  .cart-drawer-discount__msg {
+    color: #5f574e;
+    font-size: 12px;
+    line-height: 1.35;
+    margin: 0;
+  }
+
+  .cart-drawer-discount__msg--error {
+    color: #9a3412;
+  }
+
+  .cart-drawer-discount__msg--success {
+    color: #173b2b;
+  }
 </style>
 
 <cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %} motion-reduce">
@@ -691,6 +756,15 @@
                 Subscribe &amp; Save 15% →
               </a>
             </div>
+
+            <div class="cart-drawer-discount">
+              <label for="cart-drawer-discount-code">Promo / discount code</label>
+              <div class="cart-drawer-discount__row">
+                <input id="cart-drawer-discount-code" type="text" placeholder="Enter code" autocomplete="off" autocapitalize="characters">
+                <button id="cart-drawer-apply-discount" type="button">Apply</button>
+              </div>
+              <p class="cart-drawer-discount__msg" id="cart-drawer-discount-msg" hidden></p>
+            </div>
           {%- endif -%}
 
           <div class="pb-1">
@@ -777,6 +851,53 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
+    var drawerDiscountBtn = document.getElementById('cart-drawer-apply-discount');
+    var drawerDiscountInput = document.getElementById('cart-drawer-discount-code');
+    var drawerDiscountMsg = document.getElementById('cart-drawer-discount-msg');
+
+    function showDrawerDiscountMessage(text, type) {
+      if (!drawerDiscountMsg) return;
+      drawerDiscountMsg.textContent = text;
+      drawerDiscountMsg.className = 'cart-drawer-discount__msg cart-drawer-discount__msg--' + type;
+      drawerDiscountMsg.hidden = false;
+    }
+
+    if (drawerDiscountBtn && drawerDiscountInput) {
+      drawerDiscountBtn.addEventListener('click', function () {
+        var code = (drawerDiscountInput.value || '').trim();
+        if (!code) {
+          showDrawerDiscountMessage('Enter a discount code to apply it at checkout.', 'error');
+          return;
+        }
+
+        drawerDiscountBtn.disabled = true;
+        drawerDiscountBtn.textContent = 'Applying';
+        if (drawerDiscountMsg) drawerDiscountMsg.hidden = true;
+
+        fetch('/discount/' + encodeURIComponent(code), {
+          method: 'GET',
+          headers: { 'Accept': 'application/json' }
+        }).then(function () {
+          return fetch('/cart/update.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({})
+          });
+        }).then(function () {
+          showDrawerDiscountMessage('Discount saved. Checkout will show the final savings.', 'success');
+          setTimeout(function () { window.location.reload(); }, 900);
+        }).catch(function () {
+          showDrawerDiscountMessage('Could not apply that code. Please try again.', 'error');
+          drawerDiscountBtn.disabled = false;
+          drawerDiscountBtn.textContent = 'Apply';
+        });
+      });
+
+      drawerDiscountInput.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') drawerDiscountBtn.click();
+      });
+    }
+
     function isIE() {
       const ua = window.navigator.userAgent;
       const msie = ua.indexOf('MSIE ');

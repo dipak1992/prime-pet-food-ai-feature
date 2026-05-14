@@ -31,12 +31,30 @@
   data-variant="{{ prime_variant | escape }}"
 >
   <div class="ppf-post-purchase__copy">
-    <p class="ppf-post-purchase__eyebrow">Next chew session</p>
-    <h2>Turn this order into a calmer routine</h2>
-    <p>Use the first few sessions to learn your dog's real chew pace. That helps Prime estimate reorder timing, subscription cadence, and future breed-duration guidance.</p>
+    <p class="ppf-post-purchase__eyebrow">What to expect next</p>
+    <h2>Your calm-time routine starts before the box arrives</h2>
+    <p>Use the first few sessions to learn your dog's real chew pace. Prime can turn that into better enrichment tips, reorder timing, and subscription cadence.</p>
   </div>
 
-  <div class="ppf-post-purchase__steps">
+  <div class="ppf-post-purchase__timeline" aria-label="Post purchase timeline">
+    <article>
+      <span>Today</span>
+      <strong>Order confirmed</strong>
+      <p>We prepare your chew order and send tracking once it ships.</p>
+    </article>
+    <article>
+      <span>First chew</span>
+      <strong>Supervised calm-time</strong>
+      <p>Start with a short session, fresh water, and the right surface.</p>
+    </article>
+    <article>
+      <span>After session</span>
+      <strong>Log duration</strong>
+      <p>Save actual minutes in My Dog to tune your reorder reminder.</p>
+    </article>
+  </div>
+
+  <div class="ppf-post-purchase__steps" aria-label="Enrichment tips">
     <article>
       <span>01</span>
       <strong>Start short</strong>
@@ -54,8 +72,14 @@
     </article>
   </div>
 
+  <div class="ppf-post-purchase__reorder" data-post-purchase-reorder hidden>
+    <strong data-post-purchase-reorder-title>Reorder timing will appear here.</strong>
+    <p data-post-purchase-reorder-copy>Open My Dog after your first chew session to tune the reminder.</p>
+  </div>
+
   <div class="ppf-post-purchase__actions">
     <a href="/pages/my-dog" class="ppf-post-purchase__button">Open My Dog</a>
+    <a href="/pages/subscribe-and-save" class="ppf-post-purchase__link">Set flexible reorders</a>
     <a href="/blogs/dog-behavior/how-long-do-yak-chews-last" class="ppf-post-purchase__link">Read duration guide</a>
   </div>
 </section>
@@ -76,7 +100,7 @@
     color: #d2632e;
     font-size: 12px;
     font-weight: 850;
-    letter-spacing: 0.12em;
+    letter-spacing: var(--prime-kicker-letter-spacing, 0.08em);
     margin: 0 0 8px;
     text-transform: uppercase;
   }
@@ -99,6 +123,39 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .ppf-post-purchase__timeline {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .ppf-post-purchase__timeline article {
+    background: #173b2b;
+    border-radius: 14px;
+    color: #fffaf2;
+    padding: 18px;
+  }
+
+  .ppf-post-purchase__timeline span {
+    color: #f0b989;
+    display: block;
+    font-size: 12px;
+    font-weight: 850;
+    letter-spacing: var(--prime-kicker-letter-spacing, 0.08em);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+
+  .ppf-post-purchase__timeline strong {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  .ppf-post-purchase__timeline p {
+    color: rgba(255, 250, 242, 0.76);
+  }
+
   .ppf-post-purchase__steps article {
     background: #ffffff;
     border: 1px solid #eadfce;
@@ -117,6 +174,20 @@
     display: block;
     font-size: 18px;
     margin-bottom: 8px;
+  }
+
+  .ppf-post-purchase__reorder {
+    background: #ffffff;
+    border: 1px solid rgba(23, 59, 43, 0.14);
+    border-radius: 14px;
+    padding: 18px;
+  }
+
+  .ppf-post-purchase__reorder strong {
+    color: #173b2b;
+    display: block;
+    font-size: 18px;
+    margin-bottom: 6px;
   }
 
   .ppf-post-purchase__actions {
@@ -147,6 +218,7 @@
   }
 
   @media (max-width: 749px) {
+    .ppf-post-purchase__timeline,
     .ppf-post-purchase__steps {
       grid-template-columns: 1fr;
     }
@@ -178,12 +250,38 @@
       });
     }
 
+    function renderReorderTiming() {
+      if (!window.PrimeDogProfile || typeof window.PrimeDogProfile.getReorderTiming !== 'function') return;
+      var box = root.querySelector('[data-post-purchase-reorder]');
+      if (!box) return;
+      var title = box.querySelector('[data-post-purchase-reorder-title]');
+      var copy = box.querySelector('[data-post-purchase-reorder-copy]');
+      var timing = window.PrimeDogProfile.getReorderTiming();
+      var days = timing && timing.daysUntilReorder;
+      if (days == null && window.PrimeDogProfile.getSubscriptionCadence) {
+        var cadence = window.PrimeDogProfile.getSubscriptionCadence();
+        days = cadence && cadence.intervalDays;
+      }
+      if (days == null) return;
+      if (title) title.textContent = 'Estimated reorder reminder: about ' + days + ' days';
+      if (copy) copy.textContent = 'This updates as you log real chew sessions in My Dog.';
+      box.hidden = false;
+    }
+
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', hydratePurchase);
+      document.addEventListener('DOMContentLoaded', function() {
+        hydratePurchase();
+        renderReorderTiming();
+      });
     } else {
       hydratePurchase();
+      renderReorderTiming();
     }
-    window.addEventListener('prime:profile:ready', hydratePurchase);
+    window.addEventListener('prime:profile:ready', function() {
+      hydratePurchase();
+      renderReorderTiming();
+    });
+    window.addEventListener('prime:profile:updated', renderReorderTiming);
   })();
 </script>
 {%- endif -%}
