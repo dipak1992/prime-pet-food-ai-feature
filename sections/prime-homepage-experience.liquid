@@ -445,7 +445,7 @@
 
       <div class="ph-reviews__grid" data-prime-review-track tabindex="0" aria-label="Customer review carousel">
         <article class="ph-review-card">
-          <img class="ph-review-card__photo" src="{{ golden_image }}" alt="Golden Retriever using a Prime yak chew during calm time" loading="lazy" width="768" height="960">
+          <img class="ph-review-card__photo" src="{{ golden_image }}" alt="Golden Retriever using a Prime yak chew during calm time" loading="lazy" width="768" height="768">
           <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <blockquote>&ldquo;My golden retriever used to destroy bully sticks in 10 minutes. This lasted over an hour. I finally got to drink my coffee in peace.&rdquo;</blockquote>
           <footer>
@@ -455,7 +455,7 @@
         </article>
 
         <article class="ph-review-card">
-          <img class="ph-review-card__photo" src="{{ frenchie_image }}" alt="French Bulldog holding a Prime yak chew" loading="lazy" width="768" height="960">
+          <img class="ph-review-card__photo" src="{{ frenchie_image }}" alt="French Bulldog holding a Prime yak chew" loading="lazy" width="768" height="768">
           <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <blockquote>&ldquo;Finally a chew I don&rsquo;t have to worry about. No weird chemicals, no splintering. My frenchie is obsessed and I feel good about it.&rdquo;</blockquote>
           <footer>
@@ -465,7 +465,7 @@
         </article>
 
         <article class="ph-review-card">
-          <img class="ph-review-card__photo" src="{{ lab_image }}" alt="Labrador chewing a Prime Himalayan yak chew" loading="lazy" width="768" height="960">
+          <img class="ph-review-card__photo" src="{{ lab_image }}" alt="Labrador chewing a Prime Himalayan yak chew" loading="lazy" width="768" height="768">
           <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <blockquote>&ldquo;We switched from rawhide after our vet recommended it. Three months in and my lab still gets excited every time she sees the bag.&rdquo;</blockquote>
           <footer>
@@ -475,7 +475,7 @@
         </article>
 
         <article class="ph-review-card">
-          <img class="ph-review-card__photo" src="{{ shepherd_image }}" alt="German Shepherd resting with a Prime yak chew" loading="lazy" width="768" height="960">
+          <img class="ph-review-card__photo" src="{{ shepherd_image }}" alt="German Shepherd resting with a Prime yak chew" loading="lazy" width="768" height="768">
           <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <blockquote>&ldquo;Our Shepherd needs something to do after evening walks. This turned that restless hour into focused quiet time.&rdquo;</blockquote>
           <footer>
@@ -485,7 +485,7 @@
         </article>
 
         <article class="ph-review-card">
-          <img class="ph-review-card__photo" src="{{ beagle_image }}" alt="Beagle enjoying a Prime yak chew on a rug" loading="lazy" width="768" height="960">
+          <img class="ph-review-card__photo" src="{{ beagle_image }}" alt="Beagle enjoying a Prime yak chew on a rug" loading="lazy" width="768" height="768">
           <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <blockquote>&ldquo;My beagle is food motivated and easily bored. The medium chew gives him a job without the mess of other chews.&rdquo;</blockquote>
           <footer>
@@ -495,7 +495,7 @@
         </article>
 
         <article class="ph-review-card">
-          <img class="ph-review-card__photo" src="{{ poodle_image }}" alt="Poodle calmly holding a Prime Himalayan yak chew" loading="lazy" width="768" height="960">
+          <img class="ph-review-card__photo" src="{{ poodle_image }}" alt="Poodle calmly holding a Prime Himalayan yak chew" loading="lazy" width="768" height="768">
           <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <blockquote>&ldquo;We use it during work calls. She settles in, chews, and I am not constantly redirecting her from furniture.&rdquo;</blockquote>
           <footer>
@@ -1710,7 +1710,9 @@
   }
 
   .ph-review-card__photo {
+    display: block;
     width: 100%;
+    height: auto;
     aspect-ratio: 1 / 1;
     border-radius: 10px;
     object-fit: cover;
