@@ -226,8 +226,8 @@
         {% render 'prime-home-product-card',
           product: product,
           variant: extra_large_variant,
-          image: large_dog_chew_image,
-          image_alt: 'Extra large Himalayan yak chew for a large dog',
+          image: lab_image,
+          image_alt: 'Large Labrador enjoying an extra large Prime Himalayan yak chew',
           label: 'Big dogs',
           title: 'Extra Large Yak Chew',
           fit: '55-85 lbs',
@@ -239,8 +239,8 @@
         {% render 'prime-home-product-card',
           product: product,
           variant: jumbo_variant,
-          image: large_dog_chew_image,
-          image_alt: 'Jumbo Himalayan yak chew for a giant breed dog',
+          image: shepherd_image,
+          image_alt: 'German Shepherd with a jumbo Prime Himalayan yak chew',
           label: 'Giant breeds',
           title: 'Jumbo Yak Chew',
           fit: '85+ lbs',
@@ -2333,11 +2333,112 @@
 
     .ph-product-grid {
       grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .ph-product-card {
+      grid-template-columns: 104px minmax(0, 1fr);
+      grid-template-rows: auto auto;
+      grid-template-areas:
+        "media copy"
+        "footer footer";
+      align-items: stretch;
+      min-height: 0;
+    }
+
+    .ph-product-card__media {
+      grid-area: media;
+      aspect-ratio: auto;
+      min-height: 100%;
+      border-radius: 0;
+    }
+
+    .ph-product-card__media img {
+      object-position: center;
+    }
+
+    .ph-product-card__label {
+      top: 8px;
+      left: 8px;
+      min-height: 24px;
+      max-width: calc(100% - 16px);
+      padding: 6px 8px;
+      font-size: 10px;
+      white-space: normal;
+    }
+
+    .ph-product-card > div:not(.ph-product-card__media) {
+      grid-area: copy;
+      padding: 14px 14px 10px;
+    }
+
+    .ph-product-card__badge {
+      font-size: 10px;
+    }
+
+    .ph-product-card h3 {
+      margin: 8px 0 0;
+      font-size: 18px;
+      line-height: 1.15;
+    }
+
+    .ph-product-card p {
+      display: none;
+    }
+
+    .ph-product-card__fit,
+    .ph-product-card__best {
+      margin-top: 6px;
+      font-size: 12px;
+      line-height: 1.3;
+    }
+
+    .ph-product-card__footer {
+      grid-area: footer;
+      grid-template-columns: minmax(0, 1fr) minmax(128px, 0.9fr);
+      align-items: center;
+      gap: 10px;
+      border-top: 1px solid var(--ph-line);
+      margin-top: 0;
+      padding: 12px 14px;
+    }
+
+    .ph-product-card__price {
+      font-size: 16px;
+    }
+
+    .ph-product-card__note {
+      display: none;
+    }
+
+    .ph-product-card button,
+    .ph-product-card__link {
+      min-height: 44px;
+      font-size: 11px;
+      padding: 0 12px;
+      white-space: nowrap;
     }
 
     .ph-size-scale,
     .ph-subscribe__cadence {
       grid-template-columns: 1fr;
+    }
+
+    .ph-size-scale {
+      gap: 8px;
+      padding: 14px;
+    }
+
+    .ph-size-scale span {
+      grid-template-columns: 56px minmax(0, 1fr);
+      align-items: center;
+      gap: 10px;
+      text-align: left;
+    }
+
+    .ph-size-scale span::before {
+      order: 2;
+      margin-inline: 0;
     }
 
     .ph-ingredients__grid {
