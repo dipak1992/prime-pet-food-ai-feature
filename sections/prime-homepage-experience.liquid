@@ -69,6 +69,10 @@
   </div>
   {% endif %}
 
+  <button class="ph-back-top" type="button" data-ph-back-top aria-label="Back to top">
+    ↑
+  </button>
+
   <!-- ═══════════════════════════════════════════════════════════════
        HERO — Emotional hook with social proof
   ════════════════════════════════════════════════════════════════ -->
@@ -2540,6 +2544,47 @@
     transform: translateY(-1px);
   }
 
+  .ph-quiz,
+  .ph-subscribe,
+  .ph-reviews,
+  .ph-compare,
+  .ph-routine,
+  .ph-ingredients,
+  .ph-craft,
+  .ph-fit,
+  .ph-vet,
+  .ph-guarantee,
+  .ph-faq,
+  .ph-close {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 760px;
+  }
+
+  .ph-back-top {
+    position: fixed;
+    right: 14px;
+    bottom: 78px;
+    z-index: 998;
+    display: none;
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(255, 250, 242, 0.24);
+    border-radius: 999px;
+    background: var(--ph-ink);
+    color: #fffaf2;
+    box-shadow: 0 10px 26px rgba(23, 21, 18, 0.22);
+    font-size: 18px;
+    font-weight: 850;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .ph-back-top--visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   /* ═══════════════════════════════════════════════════════════════
      FIND YOUR CHEW QUIZ
   ════════════════════════════════════════════════════════════════ */
@@ -2836,6 +2881,11 @@
     .ph-sticky-bar__btn {
       width: 100%;
       max-width: 320px;
+    }
+    .ph-back-top {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
     .ph-quiz__step h3 {
       font-size: 22px;
@@ -3239,6 +3289,28 @@
     }, { threshold: 0 });
 
     stickyObserver.observe(productsSection);
+  }
+
+  /* ─── MOBILE BACK TO TOP ─── */
+  var backTop = document.querySelector('[data-ph-back-top]');
+  if (backTop) {
+    var ticking = false;
+    function updateBackTop() {
+      var visible = window.innerWidth <= 560 && window.scrollY > 900;
+      backTop.classList.toggle('ph-back-top--visible', visible);
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        window.requestAnimationFrame(updateBackTop);
+        ticking = true;
+      }
+    }, { passive: true });
+    window.addEventListener('resize', updateBackTop);
+    backTop.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    updateBackTop();
   }
 
   /* ─── TRUST STAT COUNT-UP ─── */

@@ -230,6 +230,21 @@
           </div>
         {% endif %}
 
+        <div class="ypc-conversion-badges" aria-label="Purchase reassurance">
+          <span>Safety tested</span>
+          <span>$0.22/hour of calm time</span>
+          <span>30-day chew duration guarantee</span>
+        </div>
+
+        <div class="ypc-profile-recommendation" data-ypc-profile-card hidden>
+          <div>
+            <span>Your dog profile</span>
+            <strong data-ypc-profile-size>Recommended size</strong>
+            <p data-ypc-profile-duration>Estimated chew duration based on your saved dog profile.</p>
+          </div>
+          <a href="/pages/my-dog">View My Dog</a>
+        </div>
+
         {% if product.selling_plan_groups.size > 0 %}
           <div class="ypc-subscription">
             <div class="ypc-sub-toggle">
@@ -266,10 +281,16 @@
             <div class="ypc-subscription-proof" aria-label="Subscribe and Save benefits">
               <span>Never run out</span>
               <span>Skip or cancel anytime</span>
+              <span>Cancel in 2 clicks</span>
               <span>Built for steady chew routines</span>
             </div>
           </div>
         {% endif %}
+
+        <details class="ypc-guarantee-details">
+          <summary>What if my dog does not love it?</summary>
+          <p>Try Prime during supervised chew sessions for 30 days. If the size, chew pace, or routine fit is not right, contact us and we will help with a replacement size or a refund.</p>
+        </details>
 
         <div class="ypc-cart-row">
           <div class="ypc-quantity" aria-label="Quantity selector">
@@ -298,16 +319,19 @@
       {% if section.settings.show_review_cards %}
         <div class="ypc-review-cards">
           <div class="ypc-review-card">
+            <img src="{{ 'prime-ugc-golden-retriever-chew-card.jpg' | asset_url }}" alt="Golden Retriever enjoying a Prime yak chew at home" loading="lazy" width="96" height="96">
             <div class="ypc-review-card__stars">★★★★★</div>
             <p>{{ section.settings.review_card_1 }}</p>
           </div>
 
           <div class="ypc-review-card">
+            <img src="{{ 'prime-ugc-labrador-chew-card.jpg' | asset_url }}" alt="Labrador chewing a Prime Himalayan yak chew" loading="lazy" width="96" height="96">
             <div class="ypc-review-card__stars">★★★★★</div>
             <p>{{ section.settings.review_card_2 }}</p>
           </div>
 
           <div class="ypc-review-card">
+            <img src="{{ 'prime-ugc-french-bulldog-chew-card.jpg' | asset_url }}" alt="French Bulldog with a Prime yak chew" loading="lazy" width="96" height="96">
             <div class="ypc-review-card__stars">★★★★★</div>
             <p>{{ section.settings.review_card_3 }}</p>
           </div>
@@ -639,6 +663,17 @@
       const targetSize = normalizeProfileSize(recommendation && (recommendation.variantTitle || recommendation.size));
       if (!targetSize) return;
 
+      const profileCard = document.querySelector('[data-ypc-profile-card]');
+      if (profileCard && recommendation) {
+        const sizeEl = profileCard.querySelector('[data-ypc-profile-size]');
+        const durationEl = profileCard.querySelector('[data-ypc-profile-duration]');
+        if (sizeEl) sizeEl.textContent = (recommendation.variantTitle || recommendation.size || 'Prime') + ' Yak Chew';
+        if (durationEl) {
+          durationEl.textContent = 'Estimated ' + (recommendation.durationRange || (recommendation.duration + ' minutes')) + ' for your saved dog profile.';
+        }
+        profileCard.hidden = false;
+      }
+
       const sizeGroup = Array.prototype.find.call(document.querySelectorAll('.ypc-product-hero__options'), function(group) {
         const label = group.closest('.ypc-product-hero__option')?.querySelector('.ypc-product-hero__option-label');
         return label && /size/i.test(label.textContent || '');
@@ -689,6 +724,17 @@
       });
     }
 
+    function applySubscriptionIntent() {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('purchase') !== 'subscription') return;
+      const subscribeRadio = Array.prototype.find.call(purchaseTypeRadios, function(radio) {
+        return radio.value === 'subscription';
+      });
+      if (!subscribeRadio) return;
+      subscribeRadio.checked = true;
+      if (frequencyWrap) frequencyWrap.style.display = 'block';
+    }
+
     if (qtyMinus && qtyInput) {
       qtyMinus.addEventListener('click', function() {
         const currentQty = parseInt(qtyInput.value || '1', 10);
@@ -733,6 +779,7 @@
     });
 
     applyDogProfileRecommendation();
+    applySubscriptionIntent();
     setDeliveryEstimate();
     updateVariantUI(getCurrentVariant());
   })();
@@ -1136,6 +1183,82 @@
     flex-shrink: 0;
   }
 
+  .ypc-conversion-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 14px;
+  }
+
+  .ypc-conversion-badges span {
+    display: inline-flex;
+    min-height: 32px;
+    align-items: center;
+    border: 1px solid rgba(23, 59, 43, 0.16);
+    border-radius: 999px;
+    background: rgba(23, 59, 43, 0.06);
+    color: #173b2b;
+    padding: 0 11px;
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .ypc-profile-recommendation {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 14px;
+    align-items: center;
+    border: 1px solid rgba(23, 59, 43, 0.16);
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(23, 59, 43, 0.08), rgba(235, 115, 0, 0.08));
+    margin: 0 0 14px;
+    padding: 14px;
+  }
+
+  .ypc-profile-recommendation[hidden] {
+    display: none;
+  }
+
+  .ypc-profile-recommendation span {
+    display: block;
+    color: #8a5b35;
+    font-size: 11px;
+    font-weight: 850;
+    letter-spacing: var(--prime-kicker-letter-spacing, 0.08em);
+    text-transform: uppercase;
+  }
+
+  .ypc-profile-recommendation strong {
+    display: block;
+    margin-top: 4px;
+    color: #173b2b;
+    font-size: 16px;
+    line-height: 1.2;
+  }
+
+  .ypc-profile-recommendation p {
+    margin: 6px 0 0;
+    color: #5f4b42;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .ypc-profile-recommendation a {
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: #173b2b;
+    color: #fff;
+    padding: 0 14px;
+    font-size: 12px;
+    font-weight: 850;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
   /* ─── Size hint ─── */
   .ypc-size-hint {
     display: flex;
@@ -1272,6 +1395,52 @@
     line-height: 1.2;
   }
 
+  .ypc-guarantee-details {
+    overflow: hidden;
+    border: 1px solid rgba(43, 20, 8, 0.14);
+    border-radius: 12px;
+    background: #fffdf8;
+    margin: 0 0 14px;
+  }
+
+  .ypc-guarantee-details summary {
+    display: flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    cursor: pointer;
+    list-style: none;
+    color: #2b1408;
+    font-size: 14px;
+    font-weight: 850;
+    padding: 0 16px;
+  }
+
+  .ypc-guarantee-details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .ypc-guarantee-details summary::after {
+    content: '+';
+    color: #d2622e;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .ypc-guarantee-details[open] summary::after {
+    content: '-';
+  }
+
+  .ypc-guarantee-details p {
+    margin: 0;
+    border-top: 1px solid rgba(43, 20, 8, 0.1);
+    color: #6f5a4b;
+    font-size: 13px;
+    line-height: 1.65;
+    padding: 0 16px 16px;
+  }
+
   .ypc-cart-row {
     display: grid;
     grid-template-columns: 135px 1fr;
@@ -1385,6 +1554,15 @@
     border-radius: 12px;
     padding: 16px;
     min-height: 130px;
+  }
+
+  .ypc-review-card img {
+    width: 54px;
+    height: 54px;
+    border-radius: 999px;
+    object-fit: cover;
+    border: 2px solid #fff7ed;
+    margin-bottom: 10px;
   }
 
   .ypc-review-card__stars {
@@ -1513,7 +1691,7 @@
     .ypc-hero-summary__list li {
       padding: 14px 10px 14px 36px;
       font-size: 10px;
-      letter-spacing: 0.06em;
+      letter-spacing: var(--prime-kicker-letter-spacing, 0.08em);
     }
 
     .ypc-hero-summary__list li::before {
@@ -1523,6 +1701,14 @@
 
     .ypc-product-hero__price {
       font-size: 36px;
+    }
+
+    .ypc-profile-recommendation {
+      grid-template-columns: 1fr;
+    }
+
+    .ypc-profile-recommendation a {
+      width: fit-content;
     }
 
     .ypc-cart-row {

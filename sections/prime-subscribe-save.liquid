@@ -1,6 +1,7 @@
 {% liquid
   assign hero_image = 'prime-subscribe-save-hero.jpg' | asset_url
   assign product_url = section.settings.product_url | default: '/products/himalayan-yak-chews-for-dogs'
+  assign subscribe_url = product_url | append: '?purchase=subscription'
 %}
 
 <main class="pss" aria-labelledby="SubscribeSaveTitle">
@@ -16,7 +17,7 @@
       <p class="pss-hero__sub">{{ section.settings.hero_subheading }}</p>
 
       <div class="pss-hero__actions" aria-label="Subscribe and Save actions">
-        <a href="{{ product_url }}" class="pss-btn pss-btn--primary">Start Subscription</a>
+        <a href="{{ subscribe_url }}" class="pss-btn pss-btn--primary">Start Subscription</a>
         <a href="#subscribe-how" class="pss-btn pss-btn--secondary">How It Works</a>
       </div>
 
@@ -127,7 +128,7 @@
           <p>For steady enrichment and households that want a reliable chew on hand.</p>
           <strong>20% off first month</strong>
           <span>10% recurring savings</span>
-          <a href="{{ product_url }}">Start Monthly</a>
+          <a href="{{ subscribe_url }}">Start Monthly</a>
         </article>
 
         <article class="pss-tier pss-tier--featured">
@@ -136,7 +137,7 @@
           <p>For households with multiple dogs or a more frequent calm-time routine.</p>
           <strong>20% off first month</strong>
           <span>Up to 20% recurring savings</span>
-          <a href="{{ product_url }}">Build My Routine</a>
+          <a href="{{ subscribe_url }}">Build My Routine</a>
         </article>
 
         <article class="pss-tier">
@@ -145,7 +146,7 @@
           <p>For power chewers, larger dogs, and families who rely on daily enrichment.</p>
           <strong>20% off first month</strong>
           <span>Up to 30% recurring savings</span>
-          <a href="{{ product_url }}">Choose Heavy Chewer</a>
+          <a href="{{ subscribe_url }}">Choose Heavy Chewer</a>
         </article>
       </div>
     </div>
@@ -217,6 +218,61 @@
     </div>
   </section>
 
+  <section class="pss-savings" aria-labelledby="PssSavingsTitle">
+    <div class="pss-shell pss-savings__inner">
+      <div class="pss-section-head">
+        <p class="pss-kicker">Annual savings calculator</p>
+        <h2 id="PssSavingsTitle">See what your calm-time routine could save.</h2>
+        <p>Estimate your annual subscription savings by size and monthly chew rhythm before you choose your delivery cadence.</p>
+      </div>
+
+      <div class="pss-calculator" data-pss-calculator>
+        <label>
+          <span>Dog size</span>
+          <select data-pss-size>
+            <option value="small">Small / under 15 lbs</option>
+            <option value="medium" selected>Medium / 15-35 lbs</option>
+            <option value="large">Large / 35-55 lbs</option>
+            <option value="xlarge">XL/Jumbo / 55+ lbs</option>
+          </select>
+        </label>
+        <label>
+          <span>Chews per month</span>
+          <input type="number" min="1" max="12" step="1" value="4" inputmode="numeric" data-pss-quantity>
+        </label>
+
+        <div class="pss-calculator__result" aria-live="polite">
+          <span>Estimated annual savings</span>
+          <strong data-pss-savings>$108</strong>
+          <p data-pss-summary>Based on 4 medium chews per month with 15% recurring Subscribe &amp; Save pricing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pss-management" aria-labelledby="PssManagementTitle">
+    <div class="pss-shell pss-management__inner">
+      <div>
+        <p class="pss-kicker">Management preview</p>
+        <h2 id="PssManagementTitle">Flexible really means flexible.</h2>
+        <p>Dog routines change. Your subscription should adapt without support tickets or commitment anxiety.</p>
+      </div>
+      <div class="pss-account-card" aria-label="Subscription management preview">
+        <div class="pss-account-card__top">
+          <span>Next shipment</span>
+          <strong>Medium Yak Chew</strong>
+          <small>Ships in 3 weeks</small>
+        </div>
+        <div class="pss-account-card__actions">
+          <button type="button">Skip next box</button>
+          <button type="button">Change frequency</button>
+          <button type="button">Swap size</button>
+          <button type="button">Cancel in 2 clicks</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="pss-trust" aria-labelledby="PssTrustTitle">
     <div class="pss-shell pss-trust__inner">
       <div>
@@ -227,7 +283,7 @@
       <div class="pss-trust__grid">
         <div><strong>Skip anytime</strong><span>Need a break? Skip the next shipment.</span></div>
         <div><strong>Pause anytime</strong><span>Hold deliveries while you catch up.</span></div>
-        <div><strong>Cancel anytime</strong><span>No hidden fees or awkward hoops.</span></div>
+        <div><strong>Cancel in 2 clicks</strong><span>No hidden fees, no support ticket, no awkward hoops.</span></div>
         <div><strong>Change frequency</strong><span>Adjust cadence as your dog&rsquo;s chew pace changes.</span></div>
       </div>
     </div>
@@ -288,7 +344,7 @@
   </section>
 
   <div class="pss-mobile-cta" aria-label="Subscribe and Save mobile action">
-    <a href="{{ product_url }}">Start Subscription</a>
+    <a href="{{ subscribe_url }}">Start Subscription</a>
   </div>
 </main>
 
@@ -356,7 +412,7 @@
     color: var(--pss-clay);
     font-size: 12px;
     font-weight: 820;
-    letter-spacing: 0.1em;
+    letter-spacing: var(--prime-kicker-letter-spacing, 0.08em);
     line-height: 1.25;
     text-transform: uppercase;
   }
@@ -528,6 +584,8 @@
   .pss-tiers,
   .pss-pricing,
   .pss-love,
+  .pss-savings,
+  .pss-management,
   .pss-trust,
   .pss-faq,
   .pss-terms {
@@ -542,6 +600,7 @@
 
   .pss-how,
   .pss-pricing,
+  .pss-management,
   .pss-trust {
     background: var(--pss-white);
   }
@@ -556,6 +615,8 @@
   .pss-step,
   .pss-tier,
   .pss-stories blockquote,
+  .pss-calculator,
+  .pss-account-card,
   .pss-trust__grid div,
   .pss-accordion details {
     border: 1px solid var(--pss-line);
@@ -815,6 +876,130 @@
     font-weight: 760;
   }
 
+  .pss-savings {
+    background: var(--pss-cream);
+  }
+
+  .pss-savings__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: 42px;
+    align-items: center;
+  }
+
+  .pss-calculator {
+    display: grid;
+    gap: 18px;
+    padding: 28px;
+    background: #fffdf9;
+    box-shadow: 0 16px 38px rgba(55, 43, 31, 0.07);
+  }
+
+  .pss-calculator label {
+    display: grid;
+    gap: 8px;
+    color: var(--pss-ink);
+    font-size: 13px;
+    font-weight: 820;
+    text-transform: uppercase;
+    letter-spacing: var(--prime-kicker-letter-spacing, 0.08em);
+  }
+
+  .pss-calculator select,
+  .pss-calculator input {
+    min-height: 50px;
+    border: 1px solid var(--pss-line);
+    border-radius: 8px;
+    background: var(--pss-white);
+    color: var(--pss-ink);
+    font: inherit;
+    font-size: 16px;
+    padding: 0 14px;
+  }
+
+  .pss-calculator__result {
+    border-radius: 8px;
+    background: var(--pss-green);
+    color: var(--pss-white);
+    padding: 24px;
+  }
+
+  .pss-calculator__result span {
+    display: block;
+    color: rgba(255, 250, 242, 0.72);
+    font-size: 12px;
+    font-weight: 820;
+    text-transform: uppercase;
+    letter-spacing: var(--prime-kicker-letter-spacing, 0.08em);
+  }
+
+  .pss-calculator__result strong {
+    display: block;
+    margin-top: 6px;
+    color: var(--pss-white);
+    font-size: clamp(38px, 6vw, 64px);
+    line-height: 1;
+  }
+
+  .pss-calculator__result p {
+    margin: 12px 0 0;
+    color: rgba(255, 250, 242, 0.78);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .pss-management__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 42px;
+    align-items: center;
+  }
+
+  .pss-account-card {
+    padding: 28px;
+    background: #fffdf9;
+    box-shadow: 0 16px 38px rgba(55, 43, 31, 0.07);
+  }
+
+  .pss-account-card__top {
+    display: grid;
+    gap: 6px;
+    border-bottom: 1px solid var(--pss-line);
+    padding-bottom: 18px;
+  }
+
+  .pss-account-card__top span,
+  .pss-account-card__top small {
+    color: var(--pss-muted);
+    font-size: 13px;
+    font-weight: 720;
+  }
+
+  .pss-account-card__top strong {
+    color: var(--pss-ink);
+    font-size: 24px;
+    line-height: 1.15;
+  }
+
+  .pss-account-card__actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .pss-account-card__actions button {
+    min-height: 48px;
+    border: 1px solid var(--pss-line);
+    border-radius: 999px;
+    background: var(--pss-white);
+    color: var(--pss-green);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 820;
+    cursor: default;
+  }
+
   .pss-trust__inner,
   .pss-terms__inner {
     display: grid;
@@ -915,6 +1100,8 @@
     .pss-love h2,
     .pss-trust h2,
     .pss-pricing h2,
+    .pss-savings h2,
+    .pss-management h2,
     .pss-terms h2 {
       font-size: 42px;
     }
@@ -926,6 +1113,8 @@
 
     .pss-tier-grid,
     .pss-love__inner,
+    .pss-savings__inner,
+    .pss-management__inner,
     .pss-trust__inner,
     .pss-faq__inner,
     .pss-terms__inner {
@@ -972,6 +1161,8 @@
     .pss-section-head h2,
     .pss-love h2,
     .pss-trust h2,
+    .pss-savings h2,
+    .pss-management h2,
     .pss-terms h2 {
       font-size: 32px;
     }
@@ -991,6 +1182,8 @@
     .pss-tiers,
     .pss-pricing,
     .pss-love,
+    .pss-savings,
+    .pss-management,
     .pss-trust,
     .pss-faq,
     .pss-terms {
@@ -1000,6 +1193,7 @@
     .pss-benefit-grid,
     .pss-steps,
     .pss-tier-grid,
+    .pss-account-card__actions,
     .pss-trust__grid {
       grid-template-columns: 1fr;
     }
@@ -1079,6 +1273,43 @@
     }
   }
 </style>
+
+<script>
+(function() {
+  var calculator = document.querySelector('[data-pss-calculator]');
+  if (!calculator) return;
+
+  var prices = {
+    small: { label: 'small', price: 12.99 },
+    medium: { label: 'medium', price: 14.99 },
+    large: { label: 'large', price: 17.99 },
+    xlarge: { label: 'XL/Jumbo', price: 22.99 }
+  };
+  var recurringDiscount = 0.15;
+  var sizeInput = calculator.querySelector('[data-pss-size]');
+  var quantityInput = calculator.querySelector('[data-pss-quantity]');
+  var savingsOutput = calculator.querySelector('[data-pss-savings]');
+  var summaryOutput = calculator.querySelector('[data-pss-summary]');
+
+  function formatMoney(value) {
+    return '$' + Math.round(value).toLocaleString();
+  }
+
+  function updateSavings() {
+    var size = prices[sizeInput.value] || prices.medium;
+    var quantity = Math.max(1, Math.min(12, Number(quantityInput.value) || 1));
+    var annualOneTime = size.price * quantity * 12;
+    var annualSubscribe = annualOneTime * (1 - recurringDiscount);
+    var annualSavings = annualOneTime - annualSubscribe;
+    savingsOutput.textContent = formatMoney(annualSavings);
+    summaryOutput.textContent = 'Based on ' + quantity + ' ' + size.label + ' chews per month with 15% recurring Subscribe & Save pricing.';
+  }
+
+  sizeInput.addEventListener('change', updateSavings);
+  quantityInput.addEventListener('input', updateSavings);
+  updateSavings();
+})();
+</script>
 
 {% schema %}
 {

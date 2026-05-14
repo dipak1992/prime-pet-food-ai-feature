@@ -305,6 +305,11 @@ cart-drawer-items {
 }
 
 @media screen and (max-width: 749.98px) {
+  .drawer__inner {
+    width: 100vw;
+    max-width: 100vw;
+  }
+
   .cart-drawer .cart-item cart-remove-button {
     margin-inline-start: 0;
   }
