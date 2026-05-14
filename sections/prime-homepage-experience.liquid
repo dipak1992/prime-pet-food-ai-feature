@@ -402,6 +402,7 @@
 
       <div class="ph-reviews__grid">
         <article class="ph-review-card">
+          <img class="ph-review-card__photo" src="{{ golden_image }}" alt="Golden Retriever using a Prime yak chew during calm time" loading="lazy" width="768" height="960">
           <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <blockquote>&ldquo;My golden retriever used to destroy bully sticks in 10 minutes. This lasted over an hour. I finally got to drink my coffee in peace.&rdquo;</blockquote>
           <footer>
@@ -411,6 +412,7 @@
         </article>
 
         <article class="ph-review-card">
+          <img class="ph-review-card__photo" src="{{ frenchie_image }}" alt="French Bulldog holding a Prime yak chew" loading="lazy" width="768" height="960">
           <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <blockquote>&ldquo;Finally a chew I don&rsquo;t have to worry about. No weird chemicals, no splintering. My frenchie is obsessed and I feel good about it.&rdquo;</blockquote>
           <footer>
@@ -420,6 +422,7 @@
         </article>
 
         <article class="ph-review-card">
+          <img class="ph-review-card__photo" src="{{ lab_image }}" alt="Labrador chewing a Prime Himalayan yak chew" loading="lazy" width="768" height="960">
           <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <blockquote>&ldquo;We switched from rawhide after our vet recommended it. Three months in and my lab still gets excited every time she sees the bag.&rdquo;</blockquote>
           <footer>
@@ -1456,6 +1459,14 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+  }
+
+  .ph-review-card__photo {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 10px;
+    object-fit: cover;
+    background: var(--ph-soft);
   }
 
   .ph-review-card__stars {
