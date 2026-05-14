@@ -140,8 +140,14 @@
   assign dog_age_group_values = blank
   assign product_meta_description = blank
   assign selling_fast_threshold = settings.inventory_threshold | plus: 0
+  assign prime_calm_card = false
 
   if card_product and card_product != empty
+    assign prime_card_signal = card_product.handle | append: ' ' | append: card_product.title | downcase
+    if prime_card_signal contains 'yak' or prime_card_signal contains 'chew' or prime_card_signal contains 'himalayan'
+      assign prime_calm_card = true
+    endif
+
     if card_product.metafields.custom.product_card != blank
       assign product_card_metaobject = card_product.metafields.custom.product_card.value
     endif
@@ -431,6 +437,14 @@
           {%- endif -%}
 
           <div class="card-information">
+            {%- if prime_calm_card and horizontal_class == blank -%}
+              <div class="prime-card-signals" aria-label="Prime chew buying details">
+                <span>~67 min avg</span>
+                <span>1-85+ lb dogs</span>
+                <span>Subscribe &amp; Save</span>
+              </div>
+            {%- endif -%}
+
             {%- if card_product.metafields.reviews.rating.value != blank -%}
               {% liquid
                 assign rating_decimal = 0

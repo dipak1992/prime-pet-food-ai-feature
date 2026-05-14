@@ -212,6 +212,8 @@
             <span id="ypc-per-chew">{{ section.settings.per_chew_prefix }}</span>
             <span class="ypc-dot">•</span>
             <span>{{ section.settings.shipping_text }}</span>
+            <span class="ypc-dot">•</span>
+            <span>Estimated delivery by <strong data-ypc-delivery-date></strong></span>
           </div>
         {% endif %}
 
@@ -366,6 +368,7 @@
     const ctaPriceEl = document.getElementById('ypc-cta-price');
     const ctaCompareEl = document.getElementById('ypc-cta-compare');
     const perChewEl = document.getElementById('ypc-per-chew');
+    const deliveryDateEl = document.querySelector('[data-ypc-delivery-date]');
     const urgencyStockEl = document.getElementById('ypc-urgency-stock');
 
     const qtyInput = document.getElementById('ypc-quantity-input');
@@ -541,6 +544,24 @@
       }
     }
 
+    function setDeliveryEstimate() {
+      if (!deliveryDateEl) return;
+      const estimate = new Date();
+      let addedDays = 0;
+
+      while (addedDays < 4) {
+        estimate.setDate(estimate.getDate() + 1);
+        const day = estimate.getDay();
+        if (day !== 0 && day !== 6) addedDays += 1;
+      }
+
+      deliveryDateEl.textContent = estimate.toLocaleDateString(undefined, {
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric'
+      });
+    }
+
     function updateUrgency(variant) {
       if (!urgencyStockEl || !variant) return;
 
@@ -712,6 +733,7 @@
     });
 
     applyDogProfileRecommendation();
+    setDeliveryEstimate();
     updateVariantUI(getCurrentVariant());
   })();
 
@@ -1064,6 +1086,11 @@
     font-size: 13px;
     margin-bottom: 12px;
     flex-wrap: wrap;
+  }
+
+  .ypc-info-line strong {
+    color: #173b2b;
+    font-weight: 820;
   }
 
   .ypc-dot {

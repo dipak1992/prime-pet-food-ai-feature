@@ -23,6 +23,19 @@
           <span>4 business hours, Mon-Fri 9am-5pm CT</span>
         </div>
 
+        <div class="pcp-response pcp-response--quiet">
+          <strong>Email-first support</strong>
+          <span>Send the context once and we will reply with sizing, order, or subscription guidance you can reference later.</span>
+        </div>
+
+        <div class="pcp-instant">
+          <strong>Common questions answered instantly</strong>
+          <a href="/pages/faq#sizing">Sizing help</a>
+          <a href="/pages/faq#duration">Chew duration</a>
+          <a href="/pages/faq#orders">Shipping &amp; returns</a>
+          <a href="{{ routes.account_url }}">Track order from account</a>
+        </div>
+
         <div class="pcp-cards">
           <div>
             <strong>Orders</strong>
@@ -193,6 +206,11 @@
     background: #fff8f3;
   }
 
+  .pcp-response--quiet {
+    border-color: rgba(55, 43, 31, 0.12);
+    background: #fff;
+  }
+
   .pcp-response strong,
   .pcp-response span {
     display: block;
@@ -209,6 +227,30 @@
     color: #5f574e;
     font-size: 14px;
     line-height: 1.45;
+  }
+
+  .pcp-instant {
+    display: grid;
+    gap: 8px;
+    padding: 18px;
+    border: 1px solid rgba(36, 60, 45, 0.14);
+    border-radius: 8px;
+    background: #f8f1e7;
+  }
+
+  .pcp-instant strong {
+    color: #171512;
+    font-size: 15px;
+    line-height: 1.25;
+    font-weight: 780;
+  }
+
+  .pcp-instant a {
+    color: #94451f;
+    font-size: 14px;
+    line-height: 1.35;
+    font-weight: 740;
+    text-decoration: none;
   }
 
   .pcp-cards div {

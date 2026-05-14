@@ -116,6 +116,7 @@
       "settings": {
         "logo": "shopify://shop_images/logoedited.jpg",
         "menu": "main-menu",
+        "use_curated_nav": true,
         "contact_link": "",
         "contact_number": "",
         "bg_color": "#fffaf2",

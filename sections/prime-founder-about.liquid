@@ -92,6 +92,54 @@
     </div>
   </div>
 
+  <div class="pfa-milestones">
+    <div class="pfa-shell">
+      <div class="pfa-section-head">
+        <p class="pfa-kicker">How Prime grew</p>
+        <h2>A small team building a calmer chew routine for more dog homes.</h2>
+      </div>
+
+      <div class="pfa-milestones__grid" aria-label="Prime Pet Food milestones">
+        <article>
+          <span>2019</span>
+          <h3>Nepali roots, US perspective</h3>
+          <p>The founder moved to the United States and began shaping Prime around better sourcing, clearer education, and modern dog-parent expectations.</p>
+        </article>
+        <article>
+          <span>2024</span>
+          <h3>Early community milestone</h3>
+          <p>Prime became a trusted calm-time routine for families looking for rawhide-free enrichment and less throwaway chewing.</p>
+        </article>
+        <article>
+          <span>2026</span>
+          <h3>20,000+ community</h3>
+          <p>The brand continues to grow around sizing guidance, chew-duration education, and a more personal shopping experience.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="pfa-team">
+    <div class="pfa-shell pfa-team__inner">
+      <div>
+        <p class="pfa-kicker">The Prime team</p>
+        <h2>Personal enough to care, organized enough to earn trust.</h2>
+      </div>
+      <div class="pfa-team__copy">
+        <p>
+          Prime Pet Food is built by a focused team across sourcing, fulfillment, customer support,
+          and digital product experience. That mix matters: every chew has to arrive reliably, every
+          size recommendation has to feel useful, and every customer question deserves a clear answer.
+        </p>
+        <div class="pfa-team__stats" aria-label="Prime team trust stats">
+          <span>20,000+ dog parents</span>
+          <span>4.9★ average rating</span>
+          <span>30-day guarantee</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="pfa-beliefs">
     <div class="pfa-shell">
       <div class="pfa-section-head">
@@ -154,6 +202,33 @@
     </div>
   </div>
 
+  <div class="pfa-testimonials">
+    <div class="pfa-shell">
+      <div class="pfa-section-head">
+        <p class="pfa-kicker">What dog parents say</p>
+        <h2>Real calm-time wins from homes like yours.</h2>
+      </div>
+
+      <div class="pfa-testimonials__grid">
+        <article>
+          <div aria-hidden="true">★★★★★</div>
+          <p>"Our golden settles with this chew instead of pacing during calls. It feels like a routine now, not a bribe."</p>
+          <span>Golden Retriever parent</span>
+        </article>
+        <article>
+          <div aria-hidden="true">★★★★★</div>
+          <p>"I wanted something rawhide-free that did not smell up the house. Prime became our evening calm-time chew."</p>
+          <span>Beagle parent</span>
+        </article>
+        <article>
+          <div aria-hidden="true">★★★★★</div>
+          <p>"The size guidance helped us stop guessing. Our power chewer finally has something that lasts long enough."</p>
+          <span>German Shepherd parent</span>
+        </article>
+      </div>
+    </div>
+  </div>
+
   <div class="pfa-cta">
     <div class="pfa-shell pfa-cta__inner">
       <p class="pfa-kicker">For dogs who need more than a treat</p>
@@ -162,7 +237,11 @@
         Explore authentic Himalayan yak cheese chews made for enrichment, focus, and everyday
         moments of calm.
       </p>
-      <a href="/collections/all" class="pfa-button pfa-button--primary">Shop Prime Pet Food</a>
+      <div class="pfa-cta__actions">
+        <a href="/collections/all" class="pfa-button pfa-button--primary">Shop Prime Pet Food</a>
+        <a href="/pages/how-long-will-this-last-for-my-dog" class="pfa-button pfa-button--outline">Find your dog's chew</a>
+        <a href="/pages/subscribe-and-save" class="pfa-button pfa-button--outline">Build a routine</a>
+      </div>
     </div>
   </div>
 </section>
@@ -340,10 +419,25 @@
     backdrop-filter: blur(12px);
   }
 
+  .pfa-button--outline {
+    border: 1px solid rgba(55, 43, 31, 0.18);
+    background: #fff;
+    color: var(--pfa-ink);
+    box-shadow: none;
+  }
+
+  .pfa-button--outline:hover {
+    border-color: rgba(184, 95, 50, 0.42);
+    color: var(--pfa-clay-dark);
+  }
+
   .pfa-origin,
   .pfa-editorial,
+  .pfa-milestones,
+  .pfa-team,
   .pfa-beliefs,
   .pfa-promise,
+  .pfa-testimonials,
   .pfa-cta {
     padding-block: clamp(72px, 10vw, 132px);
   }
@@ -379,6 +473,88 @@
 
   .pfa-editorial {
     background: var(--pfa-soft);
+  }
+
+  .pfa-milestones {
+    background: var(--pfa-cream);
+  }
+
+  .pfa-milestones__grid,
+  .pfa-testimonials__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .pfa-milestones__grid article,
+  .pfa-testimonials__grid article {
+    display: grid;
+    gap: 14px;
+    padding: clamp(24px, 3vw, 32px);
+    border: 1px solid var(--pfa-line);
+    border-radius: 8px;
+    background: #fff;
+  }
+
+  .pfa-milestones__grid article > span,
+  .pfa-testimonials__grid article > div {
+    color: var(--pfa-clay);
+    font-size: 13px;
+    font-weight: 820;
+    letter-spacing: 0;
+  }
+
+  .pfa-milestones__grid p,
+  .pfa-testimonials__grid p {
+    font-size: 16px;
+    line-height: 1.68;
+  }
+
+  .pfa-testimonials__grid article > span {
+    color: #3d352e;
+    font-size: 14px;
+    font-weight: 780;
+  }
+
+  .pfa-team {
+    background: var(--pfa-soft);
+  }
+
+  .pfa-team__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(34px, 6vw, 80px);
+    align-items: center;
+  }
+
+  .pfa-team__copy {
+    display: grid;
+    gap: 22px;
+  }
+
+  .pfa-team__copy p {
+    font-size: 21px;
+    line-height: 1.65;
+    color: #3d352e;
+  }
+
+  .pfa-team__stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .pfa-team__stats span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    border: 1px solid rgba(36, 60, 45, 0.16);
+    border-radius: 999px;
+    background: #fffaf2;
+    color: var(--pfa-forest);
+    font-size: 13px;
+    font-weight: 800;
+    padding: 10px 14px;
   }
 
   .pfa-founder-card {
@@ -533,6 +709,17 @@
     color: #fff;
   }
 
+  .pfa-cta .pfa-button--outline {
+    color: var(--pfa-ink);
+  }
+
+  .pfa-cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
   @media (max-width: 900px) {
     .prime-founder-about h1 {
       font-size: 64px;
@@ -567,6 +754,9 @@
     .pfa-origin__grid,
     .pfa-editorial__grid,
     .pfa-promise__grid,
+    .pfa-team__inner,
+    .pfa-milestones__grid,
+    .pfa-testimonials__grid,
     .pfa-beliefs__grid {
       grid-template-columns: 1fr;
     }
@@ -626,8 +816,11 @@
 
     .pfa-origin,
     .pfa-editorial,
+    .pfa-milestones,
+    .pfa-team,
     .pfa-beliefs,
     .pfa-promise,
+    .pfa-testimonials,
     .pfa-cta {
       padding-block: 62px;
     }

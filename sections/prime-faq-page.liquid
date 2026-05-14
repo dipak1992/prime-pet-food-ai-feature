@@ -50,7 +50,14 @@
             {% assign parts = item | split: "|" %}
             <details class="pfq-item">
               <summary>{{ parts[0] }}</summary>
-              <div><p>{{ parts[1] }}</p></div>
+              <div>
+                <p>{{ parts[1] }}</p>
+                <p class="pfq-related">
+                  <a href="/pages/how-long-will-this-last-for-my-dog">Use the size estimator</a>
+                  <span>·</span>
+                  <a href="/collections/all">Shop by size</a>
+                </p>
+              </div>
             </details>
           {% endfor %}
         </section>
@@ -105,7 +112,7 @@
       <div>
         <p class="pfq-kicker">Still unsure?</p>
         <h2>We can help you choose.</h2>
-        <p>Send your dog's breed, weight, age, and chewing style. We usually respond within 24 hours.</p>
+        <p>Send your dog's breed, weight, age, and chewing style. Average response time is 4 business hours, Monday-Friday 9am-5pm CT.</p>
       </div>
       <a href="/pages/contact" class="pfq-button pfq-button--primary">Ask a question</a>
     </div>
@@ -150,6 +157,23 @@
       categories.forEach(function(category) {
         var visible = category.querySelector('.pfq-item:not([hidden])');
         category.hidden = !visible;
+      });
+    });
+
+    items.forEach(function(item, index) {
+      var answer = item.querySelector('div');
+      if (!answer || answer.querySelector('.pfq-helpful')) return;
+
+      var helpful = document.createElement('div');
+      helpful.className = 'pfq-helpful';
+      helpful.innerHTML = '<span>Was this helpful?</span><button type="button" data-helpful="yes">Yes</button><button type="button" data-helpful="no">No</button>';
+      answer.appendChild(helpful);
+
+      helpful.addEventListener('click', function(event) {
+        var button = event.target.closest('button');
+        if (!button) return;
+        helpful.dataset.selected = button.dataset.helpful;
+        helpful.setAttribute('aria-label', button.dataset.helpful === 'yes' ? 'Marked helpful' : 'Marked not helpful');
       });
     });
   })();
@@ -345,6 +369,60 @@
   .pfq-item p {
     margin: 0;
     font-size: 16px;
+  }
+
+  .pfq-related {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 14px !important;
+    font-size: 14px !important;
+    font-weight: 760;
+  }
+
+  .pfq-related a {
+    color: #94451f;
+    text-decoration: none;
+  }
+
+  .pfq-helpful {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(55, 43, 31, 0.1);
+    color: #6f5a4b;
+    font-size: 13px;
+    line-height: 1.3;
+    font-weight: 720;
+  }
+
+  .pfq-helpful button {
+    min-height: 32px;
+    border: 1px solid rgba(55, 43, 31, 0.14);
+    border-radius: 999px;
+    background: #fffaf2;
+    color: #173b2b;
+    cursor: pointer;
+    font: inherit;
+    font-size: 12px;
+    line-height: 1;
+    font-weight: 780;
+    padding: 8px 12px;
+  }
+
+  .pfq-helpful[data-selected] button {
+    opacity: 0.58;
+  }
+
+  .pfq-helpful[data-selected="yes"] button[data-helpful="yes"],
+  .pfq-helpful[data-selected="no"] button[data-helpful="no"] {
+    border-color: rgba(184, 95, 50, 0.5);
+    background: #fff2e8;
+    color: #94451f;
+    opacity: 1;
   }
 
   .pfq-support {

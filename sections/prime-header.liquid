@@ -7,6 +7,7 @@
   assign whatsapp_contact_number_display = ''
   assign header_contact_href = whatsapp_contact_link | default: section.settings.contact_link | default: '/pages/contact'
   assign prime_shop_collection_url = section.settings.shop_collection_url | default: '/collections/himalayan-yak-chews-for-dogs'
+  assign use_curated_nav = section.settings.use_curated_nav
 
   if whatsapp_contact_link != blank
     assign whatsapp_contact_number = whatsapp_contact_link | replace: 'https://wa.me/', '' | replace: 'http://wa.me/', '' | replace: 'https://api.whatsapp.com/send?phone=', '' | replace: 'http://api.whatsapp.com/send?phone=', '' | replace: 'https://web.whatsapp.com/send?phone=', '' | replace: 'http://web.whatsapp.com/send?phone=', '' | split: '&' | first | replace: '%2B', '+' | replace: '%20', '' | replace: ' ', ''
@@ -69,7 +70,20 @@
 
         <nav class="header__nav desktop-only">
           <ul class="header__menu">
-            {%- if section.settings.menu != blank -%}
+            {%- if use_curated_nav -%}
+              <li class="header__menu-item">
+                <a href="{{ prime_shop_collection_url }}" class="header__link">Shop</a>
+              </li>
+              <li class="header__menu-item">
+                <a href="/pages/how-long-will-this-last-for-my-dog" class="header__link">How It Works</a>
+              </li>
+              <li class="header__menu-item">
+                <a href="/pages/subscribe-and-save" class="header__link">Subscribe &amp; Save</a>
+              </li>
+              <li class="header__menu-item">
+                <a href="/pages/about-us" class="header__link">About</a>
+              </li>
+            {%- elsif section.settings.menu != blank -%}
               {%- for link in section.settings.menu.links -%}
                 {%- liquid
                   assign link_url = link.url
@@ -269,7 +283,28 @@
       </div>
       <nav class="header__drawer-nav">
         <ul class="header__drawer-menu">
-          {%- if section.settings.menu != blank -%}
+          {%- if use_curated_nav -%}
+            <li class="header__drawer-item">
+              <div class="header__drawer-item-header">
+                <a href="{{ prime_shop_collection_url }}" class="header__drawer-link">Shop</a>
+              </div>
+            </li>
+            <li class="header__drawer-item">
+              <div class="header__drawer-item-header">
+                <a href="/pages/how-long-will-this-last-for-my-dog" class="header__drawer-link">How It Works</a>
+              </div>
+            </li>
+            <li class="header__drawer-item">
+              <div class="header__drawer-item-header">
+                <a href="/pages/subscribe-and-save" class="header__drawer-link">Subscribe &amp; Save</a>
+              </div>
+            </li>
+            <li class="header__drawer-item">
+              <div class="header__drawer-item-header">
+                <a href="/pages/about-us" class="header__drawer-link">About</a>
+              </div>
+            </li>
+          {%- elsif section.settings.menu != blank -%}
             {%- for link in section.settings.menu.links -%}
               {%- liquid
                 assign link_url = link.url
@@ -336,6 +371,12 @@
       "id": "menu",
       "default": "main-menu",
       "label": "Menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_curated_nav",
+      "label": "Use curated Prime navigation",
+      "default": true
     },
     {
       "type": "url",

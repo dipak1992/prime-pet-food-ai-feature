@@ -902,6 +902,29 @@ button:hover .icon-wrap--left svg {
   padding-top: 0;
 }
 
+.prime-card-signals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: var(--card-text-alignment, flex-start);
+  margin: 0.55rem 0 0.75rem;
+}
+
+.prime-card-signals span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.75rem;
+  border: 1px solid rgba(23, 59, 43, 0.14);
+  border-radius: 999px;
+  background: #fffaf2;
+  color: #173b2b;
+  font-size: 0.72rem;
+  line-height: 1;
+  font-weight: 750;
+  letter-spacing: 0;
+  padding: 0.45rem 0.62rem;
+}
+
 /* Collection card */
 .collection-card .card__inner .card__media {
   border-radius: calc(var(--border-radius));
