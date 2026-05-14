@@ -92,7 +92,14 @@ window.ChewAnalyzer=function(container,opts){
 };
 var CA=window.ChewAnalyzer.prototype;
 
-CA._init=function(){this._render();this._bind();this._track('widget_loaded');};
+CA._init=function(){
+  this._render();
+  if(this.el.dataset.placement==='product_page'){
+    this.el.querySelector('.ca-widget').classList.add('ca-widget--modal');
+  }
+  this._bind();
+  this._track('widget_loaded');
+};
 
 CA._render=function(){
   this.el.innerHTML=
@@ -191,6 +198,7 @@ CA.open=function(){
   this.openedAt=Date.now();
   this.el.querySelector('.ca-widget').classList.add('ca-widget--open');
   this.el.querySelector('.ca-panel').setAttribute('aria-hidden','false');
+  if(this.el.querySelector('.ca-widget--modal'))document.body.style.overflow='hidden';
   this._goTo(1);
   this._track('widget_opened');
 };
@@ -200,6 +208,7 @@ CA.close=function(){
   this.isOpen=false;
   this.el.querySelector('.ca-widget').classList.remove('ca-widget--open');
   this.el.querySelector('.ca-panel').setAttribute('aria-hidden','true');
+  if(this.el.querySelector('.ca-widget--modal'))document.body.style.overflow='';
   this._track('widget_closed',{step:this.step});
   this.step=0;
 };

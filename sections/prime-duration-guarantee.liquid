@@ -1,0 +1,26 @@
+{{ 'prime-roadmap.css' | asset_url | stylesheet_tag }}
+
+<section class="pdg" aria-labelledby="PrimeDurationGuaranteeTitle">
+  <div class="pdg__inner">
+    <div class="pdg__copy">
+      <p class="pdg__kicker">Chew Duration Guarantee</p>
+      <h2 id="PrimeDurationGuaranteeTitle">We help you find the chew that actually fits your dog.</h2>
+      <p>If your first size does not feel right for your dog&rsquo;s weight, jaw strength, or supervised chew routine, contact us within 30 days. We will help you troubleshoot sizing, choose the next best fit, or make it right.</p>
+    </div>
+    <div class="pdg__steps">
+      <article><strong>1</strong><span>Run the estimator before checkout.</span></article>
+      <article><strong>2</strong><span>Use supervised chew sessions and log real duration.</span></article>
+      <article><strong>3</strong><span>We help adjust size or routine if it is not a fit.</span></article>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Prime duration guarantee",
+  "settings": [],
+  "presets": [
+    { "name": "Prime duration guarantee" }
+  ]
+}
+{% endschema %}

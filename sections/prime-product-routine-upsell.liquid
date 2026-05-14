@@ -1,0 +1,91 @@
+{% liquid
+  assign bulk_product = section.settings.bulk_product
+%}
+
+{{ 'prime-roadmap.css' | asset_url | stylesheet_tag }}
+
+<section class="ppru" aria-labelledby="PrimeRoutineUpsellTitle">
+  <div class="ppru__inner">
+    <div class="ppru__copy">
+      <p class="ppru__kicker">{{ section.settings.eyebrow }}</p>
+      <h2 id="PrimeRoutineUpsellTitle">{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.text }}</p>
+    </div>
+
+    <div class="ppru__cards">
+      <article class="ppru__card ppru__card--featured">
+        <span class="ppru__badge">Best for repeat calm-time</span>
+        <h3>Subscribe &amp; Save</h3>
+        <p>Keep the right chew size stocked automatically. Skip, pause, or cancel from your account.</p>
+        <a href="{{ section.settings.subscribe_link }}">Start saving today</a>
+      </article>
+
+      <article class="ppru__card">
+        <span class="ppru__badge">Multi-pack value</span>
+        <h3>{{ bulk_product.title | default: 'Bulk yak chew pack' }}</h3>
+        <p>For multi-dog homes, larger breeds, or dog parents who use chews as a weekly enrichment routine.</p>
+        <a href="{% if bulk_product != blank %}{{ bulk_product.url }}{% else %}{{ section.settings.bulk_link }}{% endif %}">View multi-pack</a>
+      </article>
+
+      <article class="ppru__card">
+        <span class="ppru__badge">Need confidence?</span>
+        <h3>Run the estimator</h3>
+        <p>Estimate chew duration by breed, weight, age, and chewing style before you choose.</p>
+        <a href="/pages/how-long-will-this-last-for-my-dog">Find my dog size</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Prime product routine upsell",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Complete the routine"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Make calm-time easier to repeat."
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "The best chew is the one that fits your dog and stays stocked when your household needs it."
+    },
+    {
+      "type": "product",
+      "id": "main_product",
+      "label": "Main product"
+    },
+    {
+      "type": "product",
+      "id": "bulk_product",
+      "label": "Bulk product"
+    },
+    {
+      "type": "url",
+      "id": "subscribe_link",
+      "label": "Subscribe link",
+      "default": "/pages/subscribe-and-save"
+    },
+    {
+      "type": "url",
+      "id": "bulk_link",
+      "label": "Bulk fallback link",
+      "default": "/collections/all"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Prime product routine upsell"
+    }
+  ]
+}
+{% endschema %}

@@ -27,6 +27,29 @@
   margin: 24px 0;
 }
 
+.ca-section {
+  margin: 0 auto;
+  max-width: 680px;
+}
+
+.ca-section__header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.ca-section__title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0 0 8px;
+}
+
+.ca-section__subtitle {
+  font-size: 16px;
+  color: #6b7280;
+  margin: 0;
+}
+
 /* ============================================
    TRIGGER BUTTON
    ============================================ */
@@ -161,6 +184,33 @@
 
 .ca-widget--open .ca-panel {
   display: block;
+}
+
+.ca-widget--modal.ca-widget--open::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(18, 16, 13, 0.52);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.ca-widget--modal.ca-widget--open .ca-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 9999;
+  width: min(680px, calc(100vw - 28px));
+  max-height: min(760px, calc(100vh - 28px));
+  margin: 0;
+  overflow: auto;
+  transform: translate(-50%, -50%);
+}
+
+.ca-widget--modal.ca-widget--open .ca-trigger {
+  display: block;
+  visibility: hidden;
 }
 
 @keyframes ca-slideDown {
@@ -888,6 +938,20 @@
 @media (max-width: 768px) {
   .ca-widget-container {
     margin: 16px 0;
+  }
+
+  .ca-section__title {
+    font-size: 24px;
+  }
+
+  .ca-widget--modal.ca-widget--open .ca-panel {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-height: calc(100vh - 48px);
+    border-radius: 18px 18px 0 0;
+    transform: none;
   }
 
   .ca-trigger {

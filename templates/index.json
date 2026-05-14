@@ -122,11 +122,16 @@
         "secondary_text": "View all chews",
         "secondary_link": ""
       }
+    },
+    "community_chew_board": {
+      "type": "community-chew-board",
+      "settings": {}
     }
   },
   "order": [
     "prime_homepage_experience",
     "video_carousel",
+    "community_chew_board",
     "prime_video_cta"
   ]
 }

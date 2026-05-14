@@ -988,7 +988,7 @@
       ],
       "name": "Video carousel",
       "settings": {
-        "heading": "Chew moments from Prime dogs",
+        "heading": "Watch Prime dogs use their calm-time chew",
         "heading_size": 130,
         "heading_letter_spacing": 0,
         "custom_font_url": "",
@@ -1310,6 +1310,22 @@
       "settings": {
         "btn_text": "Add to Cart"
       }
+    },
+    "prime_product_routine_upsell": {
+      "type": "prime-product-routine-upsell",
+      "settings": {
+        "eyebrow": "Complete the routine",
+        "heading": "Make calm-time easier to repeat.",
+        "text": "Pair the right chew size with flexible reorders or multi-pack value so your dog’s enrichment routine never depends on last-minute shopping.",
+        "main_product": "himalayan-yak-chews-for-dogs",
+        "bulk_product": "2-lb-bulk-yak-cheese-dog-chews-natural-long-lasting-treats-small-to-jumbo-copy",
+        "subscribe_link": "/pages/subscribe-and-save",
+        "bulk_link": "/collections/all"
+      }
+    },
+    "prime_duration_guarantee": {
+      "type": "prime-duration-guarantee",
+      "settings": {}
     }
   },
   "order": [
@@ -1319,7 +1335,9 @@
     "ypc_product_hero_AXmQHp",
     "why_prime",
     "product_trust_stack",
+    "prime_product_routine_upsell",
     "chew_analyzer_widget",
+    "prime_duration_guarantee",
     "breed_review_highlights",
     "two_treats_in_one_C8mxDb",
     "comparison_table_URRwp9",

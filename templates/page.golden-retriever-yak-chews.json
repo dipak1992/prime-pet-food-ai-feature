@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "prime_breed_landing": {
+      "type": "prime-breed-landing",
+      "settings": {
+        "eyebrow": "Golden Retriever yak chew guide",
+        "heading": "Yak chews for Golden Retrievers who need calmer focus.",
+        "subheading": "Golden Retrievers often need a satisfying job after walks, training, or family activity. Prime yak chews give them rawhide-free supervised enrichment with simple ingredients.",
+        "duration": "55-80 min",
+        "estimate_note": "Most Golden Retrievers do best with Large or Extra Large chews depending on chewing intensity.",
+        "primary_label": "Shop yak chews",
+        "primary_link": "/products/himalayan-yak-chews-for-dogs",
+        "card_1_title": "Choose by jaw strength",
+        "card_1_text": "Breed matters, but chewing style matters more. Gentle, moderate, and power chewers need different size confidence.",
+        "card_2_title": "Avoid rawhide guesswork",
+        "card_2_text": "Prime chews use yak milk, cow milk, lime juice, and salt. No rawhide or artificial fillers.",
+        "card_3_title": "Save the profile",
+        "card_3_text": "Run the estimator once and your My Dog dashboard can remember size, duration, and reorder timing."
+      }
+    }
+  },
+  "order": [
+    "prime_breed_landing"
+  ]
+}

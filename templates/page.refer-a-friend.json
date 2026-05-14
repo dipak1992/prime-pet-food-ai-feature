@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "prime_loyalty_referral": {
+      "type": "prime-loyalty-referral",
+      "settings": {}
+    }
+  },
+  "order": [
+    "prime_loyalty_referral"
+  ]
+}

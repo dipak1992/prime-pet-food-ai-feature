@@ -601,6 +601,39 @@
       });
     });
 
+    function normalizeProfileSize(value) {
+      return String(value || '')
+        .toLowerCase()
+        .replace(/\(.+?\)/g, '')
+        .replace(/extra\s+large|xlarge/g, 'xl')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function applyDogProfileRecommendation() {
+      if (window.location.search.indexOf('variant=') !== -1) return;
+      if (!window.PrimeDogProfile || typeof window.PrimeDogProfile.getRecommendation !== 'function') return;
+
+      const recommendation = window.PrimeDogProfile.getRecommendation();
+      const targetSize = normalizeProfileSize(recommendation && (recommendation.variantTitle || recommendation.size));
+      if (!targetSize) return;
+
+      const sizeGroup = Array.prototype.find.call(document.querySelectorAll('.ypc-product-hero__options'), function(group) {
+        const label = group.closest('.ypc-product-hero__option')?.querySelector('.ypc-product-hero__option-label');
+        return label && /size/i.test(label.textContent || '');
+      });
+      if (!sizeGroup) return;
+
+      const matchedButton = Array.prototype.find.call(sizeGroup.querySelectorAll('.ypc-product-hero__option-btn'), function(button) {
+        const buttonSize = normalizeProfileSize(button.dataset.value || button.textContent);
+        return buttonSize === targetSize || buttonSize.indexOf(targetSize) !== -1 || targetSize.indexOf(buttonSize) !== -1;
+      });
+      if (!matchedButton || matchedButton.classList.contains('is-active')) return;
+
+      sizeGroup.querySelectorAll('.ypc-product-hero__option-btn').forEach((btn) => btn.classList.remove('is-active'));
+      matchedButton.classList.add('is-active');
+    }
+
     thumbs.forEach((thumb) => {
       thumb.addEventListener('click', function() {
         activateThumb(this);
@@ -678,6 +711,7 @@
       if (event.key === 'Escape') closeSizeGuide();
     });
 
+    applyDogProfileRecommendation();
     updateVariantUI(getCurrentVariant());
   })();
 
@@ -685,10 +719,16 @@
   var sizeHintLink = document.getElementById('ypc-size-hint-link');
   if (sizeHintLink) {
     sizeHintLink.addEventListener('click', function(e) {
-      var target = document.getElementById('chew-analyzer');
-      if (target) {
+      var target = document.getElementById('chew-analyzer-widget') || document.getElementById('chew-analyzer-section');
+      if (target && target._chewAnalyzer) {
         e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        target._chewAnalyzer.open();
+      } else {
+        target = document.getElementById('chew-analyzer');
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       }
     });
   }

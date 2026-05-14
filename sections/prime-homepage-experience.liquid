@@ -3015,6 +3015,8 @@
 
   function showResult() {
     var rec = getRecommendation();
+    var profileWeight = { small: 12, medium: 28, large: 48, xlarge: 72, jumbo: 90 }[answers.weight || 'medium'];
+    var profileChewStyle = answers.chewing === 'aggressive' ? 'destroyer' : answers.chewing;
     var resultCard = quizWidget.querySelector('.ph-quiz__result-card');
     if (resultCard) {
       resultCard.querySelector('.ph-quiz__result-title').textContent = rec.title;
@@ -3022,6 +3024,17 @@
       resultCard.querySelector('.ph-quiz__result-cta').href = rec.link;
       var stats = resultCard.querySelectorAll('.ph-quiz__result-stats strong');
       if (stats[0]) stats[0].textContent = rec.duration;
+    }
+    if (window.PrimeDogProfile && typeof window.PrimeDogProfile.save === 'function') {
+      window.PrimeDogProfile.save({
+        breed: 'mixed',
+        weight: profileWeight,
+        chewStyle: profileChewStyle || 'moderate',
+        chewReason: answers.goal || 'calm',
+        recommendedProductTitle: rec.title,
+        recommendedProductUrl: rec.link,
+        source: 'homepage_quiz'
+      });
     }
     saveResult(rec);
     showStep('result');

@@ -1,0 +1,43 @@
+{{ 'prime-roadmap.css' | asset_url | stylesheet_tag }}
+
+<section class="plr" aria-labelledby="PrimeLoyaltyTitle">
+  <div class="plr__inner">
+    <header class="plr__hero">
+      <p class="plr__kicker">Prime Pack Rewards</p>
+      <h1 id="PrimeLoyaltyTitle">Share calmer chew time. Earn better routines.</h1>
+      <p>Prime Pack Rewards is the storefront home for referrals, loyalty education, and future rewards app integration.</p>
+      <div class="plr__actions">
+        <a href="/pages/contact" class="plr__button plr__button--primary">Request referral link</a>
+        <a href="/pages/subscribe-and-save" class="plr__button plr__button--secondary">Subscribe &amp; Save</a>
+      </div>
+    </header>
+
+    <div class="plr__grid">
+      <article>
+        <span>Refer</span>
+        <h2>Give $10, get $10</h2>
+        <p>Use this page as the destination for a referral app or manual support-generated referral code.</p>
+      </article>
+      <article>
+        <span>Repeat</span>
+        <h2>Reward routine builders</h2>
+        <p>Dog parents who subscribe, reorder, and log chew sessions can be routed into future loyalty tiers.</p>
+      </article>
+      <article>
+        <span>Share</span>
+        <h2>Community chew reports</h2>
+        <p>Encourage customers to submit real duration reports through the My Dog dashboard.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Prime loyalty referral",
+  "settings": [],
+  "presets": [
+    { "name": "Prime loyalty referral" }
+  ]
+}
+{% endschema %}

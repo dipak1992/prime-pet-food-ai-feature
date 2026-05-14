@@ -316,18 +316,73 @@
       }
 
       #{{ section_id }} .yak-comparison__table-wrap {
-        margin-left: -16px;
-        margin-right: -16px;
-        padding-left: 16px;
-        padding-right: 16px;
+        overflow: visible;
+        margin: 0;
+        padding: 0;
       }
 
       #{{ section_id }} .yak-comparison__table {
-        min-width: 720px;
+        display: grid;
+        min-width: 0;
+        gap: 12px;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+
+      #{{ section_id }} .yak-comparison__row--head {
+        display: none;
+      }
+
+      #{{ section_id }} .yak-comparison__row {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        overflow: hidden;
+        border: 1px solid {{ section.settings.table_border }};
+        border-radius: 14px;
+        background: {{ section.settings.table_bg }};
       }
 
       #{{ section_id }} .yak-comparison__cell {
         padding: 14px 14px;
+        font-size: 15px;
+      }
+
+      #{{ section_id }} .yak-comparison__cell--feature {
+        grid-column: 1 / -1;
+        background: #fffaf2;
+        border-bottom: 1px solid {{ section.settings.row_border }};
+      }
+
+      #{{ section_id }} .yak-comparison__cell--icon {
+        min-height: 72px;
+        position: relative;
+        padding-top: 30px;
+      }
+
+      #{{ section_id }} .yak-comparison__cell--icon::before {
+        position: absolute;
+        top: 10px;
+        left: 0;
+        right: 0;
+        color: {{ section.settings.subtext_color }};
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      #{{ section_id }} .yak-comparison__cell--icon:nth-child(2)::before {
+        content: "{{ section.settings.left_title }}";
+      }
+
+      #{{ section_id }} .yak-comparison__cell--icon:nth-child(3)::before {
+        content: "Prime";
+      }
+
+      #{{ section_id }} .yak-comparison__cell--icon:nth-child(4)::before {
+        content: "{{ section.settings.right_title }}";
       }
 
       #{{ section_id }} .yak-comparison__actions {

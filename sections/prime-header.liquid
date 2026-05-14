@@ -1,0 +1,379 @@
+{{ 'header.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'header.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign whatsapp_contact_link = shop.brand.metafields.social_links.whatsapp.value
+  assign whatsapp_contact_number = ''
+  assign whatsapp_contact_number_display = ''
+  assign prime_shop_collection_url = section.settings.shop_collection_url | default: '/collections/himalayan-yak-chews-for-dogs'
+
+  if whatsapp_contact_link != blank
+    assign whatsapp_contact_number = whatsapp_contact_link | replace: 'https://wa.me/', '' | replace: 'http://wa.me/', '' | replace: 'https://api.whatsapp.com/send?phone=', '' | replace: 'http://api.whatsapp.com/send?phone=', '' | replace: 'https://web.whatsapp.com/send?phone=', '' | replace: 'http://web.whatsapp.com/send?phone=', '' | split: '&' | first | replace: '%2B', '+' | replace: '%20', '' | replace: ' ', ''
+
+    if whatsapp_contact_number != blank
+      if whatsapp_contact_number contains '+'
+        assign whatsapp_contact_number_display = whatsapp_contact_number
+      else
+        assign whatsapp_contact_number_display = '+' | append: whatsapp_contact_number
+      endif
+    endif
+  endif
+-%}
+
+<style>
+  :root {
+    --header-accent: {{ section.settings.accent_color }};
+    --header-bg: {{ section.settings.bg_color | default: '#ffffff' }};
+    --header-text: {{ section.settings.text_color | default: '#000000' }};
+  }
+
+  #shopify-section-{{ section.id }} {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    margin-top: 0;
+    width: 100%;
+    transition: transform 0.3s ease;
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
+  }
+
+  /* Optional: if there's an announcement bar, we might need to adjust top */
+  .shopify-section-group-header-group {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+</style>
+
+<main-header class="header-section">
+  <div class="header-container">
+    {%- comment -%} DESKTOP HEADER {%- endcomment -%}
+    <div class="header-desktop">
+      <div class="header-desktop-inner page-width">
+        {%- comment -%} Logo on the left {%- endcomment -%}
+        <div class="header__logo">
+          <a href="{{ routes.root_url }}" class="header__logo-link">
+            {%- if section.settings.logo != blank -%}
+              {%- assign logo_alt = section.settings.logo.alt | default: shop.name | escape -%}
+              {{ section.settings.logo | image_url: width: 300 | image_tag:
+                class: 'header__logo-img',
+                widths: '100, 200, 300',
+                alt: logo_alt
+              }}
+            {%- else -%}
+              <span class="h2">{{ shop.name }}</span>
+            {%- endif -%}
+          </a>
+        </div>
+
+        <nav class="header__nav desktop-only">
+          <ul class="header__menu">
+            {%- if section.settings.menu != blank -%}
+              {%- for link in section.settings.menu.links -%}
+                {%- liquid
+                  assign link_url = link.url
+                  assign link_title = link.title | downcase | strip
+                  if link_title == 'shop' and link.url contains '/collections/all'
+                    assign link_url = prime_shop_collection_url
+                  endif
+                -%}
+                <li class="header__menu-item{% if link.links != blank %} has-dropdown{% endif %}">
+                  <a href="{{ link_url }}" class="header__link{% if link.current %} header__link--active{% endif %}">
+                    {{ link.title | escape }}
+                    {%- if link.links != blank -%}
+                      {% render 'icon', icon: 'chevron_down', size: 12 %}
+                    {%- endif -%}
+                  </a>
+                  {%- if link.links != blank -%}
+                    <ul class="header__dropdown">
+                      {%- for childlink in link.links -%}
+                        <li class="header__dropdown-item{% if childlink.links != blank %} has-sub-dropdown{% endif %}">
+                          <a href="{{ childlink.url }}" class="header__dropdown-link">
+                            {{ childlink.title | escape }}
+                            {%- if childlink.links != blank -%}
+                              {% render 'icon', icon: 'chevron_right', size: 12 %}
+                            {%- endif -%}
+                          </a>
+                          {%- if childlink.links != blank -%}
+                            <ul class="header__sub-dropdown">
+                              {%- for grandchildlink in childlink.links -%}
+                                <li class="header__sub-dropdown-item">
+                                  <a href="{{ grandchildlink.url }}" class="header__sub-dropdown-link">
+                                    {{ grandchildlink.title | escape }}
+                                  </a>
+                                </li>
+                              {%- endfor -%}
+                            </ul>
+                          {%- endif -%}
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+                </li>
+              {%- endfor -%}
+            {%- endif -%}
+          </ul>
+        </nav>
+
+        {%- comment -%} My Dog Profile CTA (shows when profile exists) {%- endcomment -%}
+        <a href="/pages/my-dog" class="header__my-dog-cta desktop-only" id="header-my-dog-link" style="display:none;">
+          <span id="header-my-dog-emoji">🐾</span>
+          <span id="header-my-dog-label">My Dog</span>
+        </a>
+
+        {%- comment -%} Desktop Icons Row {%- endcomment -%}
+        <div class="header__desktop-right">
+          <div class="header__icons-row">
+            {%- comment -%} Search Icon {%- endcomment -%}
+            {%- unless template.name == 'search' -%}
+              <button type="button" class="header__icon-link header__search-trigger-desktop" aria-label="Search">
+                {% render 'icon', icon: 'search', size: 24 %}
+              </button>
+            {%- endunless -%}
+
+            {%- comment -%} Icons to be replaced by expanded search {%- endcomment -%}
+            <div class="header__icons-to-hide">
+              {%- comment -%} Contact Us with Number {%- endcomment -%}
+              <a href="{{ whatsapp_contact_link | default: section.settings.contact_link | default: '/pages/contact' }}" class="header__icon-link header__contact">
+                {% render 'icon', icon: 'call', size: 24 %}
+                <div class="header__contact-info">
+                  <span class="header__icon-text">Contact Us</span>
+                  {%- if whatsapp_contact_number_display != blank -%}
+                    <span class="header__contact-number">{{ whatsapp_contact_number_display }}</span>
+                  {%- endif -%}
+                </div>
+              </a>
+
+              {%- comment -%} Profile {%- endcomment -%}
+              {%- if shop.customer_accounts_enabled -%}
+                <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon-link" aria-label="Account">
+                  {% render 'icon', icon: 'person', size: 24 %}
+                </a>
+              {%- endif -%}
+
+              {%- comment -%} Cart {%- endcomment -%}
+              <a href="{{ routes.cart_url }}" class="header__icon-link" id="cart-icon-bubble-desktop" aria-label="Cart">
+                <div class="header__cart-icon-wrapper">
+                  {% render 'icon', icon: 'cart', size: 24 %}
+                  {%- if cart != empty -%}
+                    <div class="header__cart-bubble">
+                      {%- if cart.item_count < 100 -%}
+                        <span aria-hidden="true">{{ cart.item_count }}</span>
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+                </div>
+              </a>
+            </div>
+          </div>
+
+          {%- comment -%} Expanded Search Box (Desktop) {%- endcomment -%}
+          <div class="header__desktop-search-expanded">
+            <form action="{{ routes.search_url }}" method="get" role="search" class="header__search-form-desktop">
+              <input type="text" name="q" placeholder="Search yak chews, sizing, rawhide alternatives..." class="header__search-input-desktop">
+              <button type="submit" class="header__search-submit-desktop">
+                {% render 'icon', icon: 'search', size: 20 %}
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} MOBILE HEADER {%- endcomment -%}
+    <div class="header-mobile">
+      <div class="header-mobile-inner page-width">
+        {%- comment -%} Logo on the left {%- endcomment -%}
+        <div class="header__logo">
+          <a href="{{ routes.root_url }}" class="header__logo-link">
+            {%- if section.settings.logo != blank -%}
+              {%- assign logo_alt = section.settings.logo.alt | default: shop.name | escape -%}
+              {{ section.settings.logo | image_url: width: 200 | image_tag:
+                class: 'header__logo-img',
+                widths: '100, 200',
+                alt: logo_alt
+              }}
+            {%- else -%}
+              <span class="h2">{{ shop.name }}</span>
+            {%- endif -%}
+          </a>
+        </div>
+
+        {%- comment -%} Icons on the right for mobile {%- endcomment -%}
+        <div class="header-mobile__right">
+          {%- unless template.name == 'search' -%}
+            <button type="button" class="header__icon-link header__search-trigger-mobile" aria-label="Search">
+              {% render 'icon', icon: 'search', size: 24 %}
+            </button>
+          {%- endunless -%}
+
+          <a href="{{ whatsapp_contact_link | default: section.settings.contact_link | default: '/pages/contact' }}" class="header__icon-link" aria-label="Contact">
+            {% render 'icon', icon: 'call', size: 24 %}
+          </a>
+
+          {%- if shop.customer_accounts_enabled -%}
+            <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon-link" aria-label="Account">
+              {% render 'icon', icon: 'person', size: 24 %}
+            </a>
+          {%- endif -%}
+
+          <a href="{{ routes.cart_url }}" class="header__icon-link" aria-label="Cart">
+            <div class="header__cart-icon-wrapper">
+              {% render 'icon', icon: 'cart', size: 24 %}
+              {%- if cart != empty -%}
+                <div class="header__cart-bubble">
+                  {{ cart.item_count }}
+                </div>
+              {%- endif -%}
+            </div>
+          </a>
+
+          <button
+            type="button"
+            class="header__burger-toggle"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="mobile-sidebar-menu"
+          >
+            {% render 'icon', icon: 'menu', size: 28 %}
+          </button>
+        </div>
+      </div>
+
+      {%- comment -%} Mobile Search Bar (Reveals on click) {%- endcomment -%}
+      <div class="header-mobile__search-bar">
+        <form action="{{ routes.search_url }}" method="get" role="search" class="header-mobile__search-form">
+          <input type="text" name="q" placeholder="Search yak chews, breed guides, chew duration..." class="header-mobile__search-input">
+          <button type="button" class="header-mobile__search-close">
+            {% render 'icon', icon: 'close', size: 20 %}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} Mobile Burger Drawer {%- endcomment -%}
+  <div class="header__drawer" id="mobile-sidebar-menu" aria-hidden="true">
+    <div class="header__drawer-content">
+      <div class="header__drawer-header">
+        <span class="h3">Menu</span>
+        <button type="button" class="header__drawer-close" aria-label="Close menu">{% render 'icon', icon: 'close', size: 24 %}</button>
+      </div>
+      <div class="header__drawer-recommendation">
+        <p>Not sure which size will last?</p>
+        <a href="/pages/how-long-will-this-last-for-my-dog">Get a chew recommendation</a>
+        <a href="/pages/subscribe-and-save" class="header__drawer-subscribe-link">Build a Subscribe &amp; Save routine</a>
+      </div>
+      <nav class="header__drawer-nav">
+        <ul class="header__drawer-menu">
+          {%- if section.settings.menu != blank -%}
+            {%- for link in section.settings.menu.links -%}
+              {%- liquid
+                assign link_url = link.url
+                assign link_title = link.title | downcase | strip
+                if link_title == 'shop' and link.url contains '/collections/all'
+                  assign link_url = prime_shop_collection_url
+                endif
+              -%}
+              <li class="header__drawer-item{% if link.links != blank %} has-submenu{% endif %}">
+                <div class="header__drawer-item-header">
+                  <a href="{{ link_url }}" class="header__drawer-link">{{ link.title }}</a>
+                  {%- if link.links != blank -%}
+                    <button class="header__drawer-toggle" aria-expanded="false">
+                      {% render 'icon', icon: 'chevron_down', size: 16 %}
+                    </button>
+                  {%- endif -%}
+                </div>
+                {%- if link.links != blank -%}
+                  <ul class="header__drawer-submenu">
+                    {%- for childlink in link.links -%}
+                      <li class="header__drawer-submenu-item{% if childlink.links != blank %} has-submenu{% endif %}">
+                        <div class="header__drawer-item-header">
+                          <a href="{{ childlink.url }}" class="header__drawer-submenu-link">{{ childlink.title }}</a>
+                          {%- if childlink.links != blank -%}
+                            <button class="header__drawer-toggle" aria-expanded="false">
+                              {% render 'icon', icon: 'chevron_down', size: 14 %}
+                            </button>
+                          {%- endif -%}
+                        </div>
+                        {%- if childlink.links != blank -%}
+                          <ul class="header__drawer-grandsubmenu">
+                            {%- for grandchildlink in childlink.links -%}
+                              <li>
+                                <a href="{{ grandchildlink.url }}" class="header__drawer-grandsubmenu-link">{{ grandchildlink.title }}</a>
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        {%- endif -%}
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          {%- endif -%}
+        </ul>
+      </nav>
+    </div>
+    <div class="header__drawer-overlay"></div>
+  </div>
+</main-header>
+
+{% schema %}
+{
+  "name": "Prime Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "Menu"
+    },
+    {
+      "type": "url",
+      "id": "shop_collection_url",
+      "label": "Shop collection link",
+      "default": "/collections/himalayan-yak-chews-for-dogs"
+    },
+    {
+      "type": "url",
+      "id": "contact_link",
+      "label": "Contact Us Link"
+    },
+    {
+      "type": "text",
+      "id": "contact_number",
+      "label": "Contact Number",
+      "default": "123-456-7890"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Prime Header"
+    }
+  ]
+}
+{% endschema %}

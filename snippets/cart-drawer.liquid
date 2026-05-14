@@ -67,6 +67,46 @@
     background: #c75c00;
     transform: translateY(-1px);
   }
+
+  .cart-drawer-guarantee {
+    display: grid;
+    gap: 8px;
+    margin: 0 0 14px;
+    padding: 14px;
+    border: 1px solid rgba(47, 111, 70, 0.18);
+    border-radius: 16px;
+    background: #f2f8ef;
+    color: #173b2b;
+  }
+
+  .cart-drawer-guarantee strong {
+    font-size: 14px;
+    line-height: 1.25;
+    font-weight: 850;
+  }
+
+  .cart-drawer-guarantee p {
+    margin: 0;
+    color: #45624f;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .cart-drawer-guarantee__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .cart-drawer-guarantee__pills span {
+    padding: 5px 8px;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #173b2b;
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1;
+  }
 </style>
 
 <cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %} motion-reduce">
@@ -632,6 +672,16 @@
 
         <div class="cart-drawer__footer pl-2 pr-2" {{ block.shopify_attributes }}>
           {%- if cart != empty -%}
+            <div class="cart-drawer-guarantee" aria-label="Prime Pet Food guarantee">
+              <strong>30-day satisfaction guarantee.</strong>
+              <p>If the chew is not the right fit for your dog, contact us and we will help with the next best step.</p>
+              <div class="cart-drawer-guarantee__pills">
+                <span>Rawhide-free</span>
+                <span>Free shipping $30+</span>
+                <span>Support before &amp; after purchase</span>
+              </div>
+            </div>
+
             <div class="cart-drawer-subscribe-note">
               <div class="cart-drawer-subscribe-note__body">
                 <strong>Make chew time automatic.</strong>
