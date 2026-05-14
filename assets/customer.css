@@ -782,6 +782,8 @@ li[data-address] > h2 {
   --prime-account-line: rgba(23, 59, 43, 0.12);
   --prime-account-orange: #eb7300;
   color: var(--prime-account-ink);
+  background: var(--prime-account-cream);
+  font-family: var(--prime-font-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
   padding-top: clamp(2rem, 4vw, 4.5rem);
   padding-bottom: clamp(4rem, 7vw, 7rem);
 }
@@ -857,7 +859,9 @@ li[data-address] > h2 {
 .prime-account-card h2,
 .prime-account__section-head h2,
 .prime-order-summary h3,
-.prime-auth-intro h2 {
+.prime-auth-intro h2,
+.prime-auth-simple h1 {
+  font-family: var(--prime-font-serif, Georgia, "Times New Roman", serif);
   margin: 0;
   color: var(--prime-account-ink);
   line-height: 1.05;
@@ -932,6 +936,23 @@ li[data-address] > h2 {
   margin-top: 0.25rem;
   text-decoration: underline;
   text-underline-offset: 0.25rem;
+}
+
+.prime-reorder-preview {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin: 1rem 0 0.75rem;
+  color: var(--prime-account-ink);
+  font-weight: 800;
+}
+
+.prime-reorder-preview img {
+  width: 5.8rem;
+  height: 5.8rem;
+  border-radius: 0.8rem;
+  object-fit: cover;
+  background: #fffaf2;
 }
 
 .prime-account__layout {
@@ -1055,6 +1076,24 @@ li[data-address] > h2 {
   line-height: 1.45;
 }
 
+.prime-auth-proof {
+  margin: 1rem 0 0;
+  color: #6f5a50;
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.login input,
+.prime-auth-simple input,
+.prime-addresses input,
+.prime-addresses select,
+.prime-addresses button,
+.prime-addresses .button {
+  min-height: 4.4rem;
+  font-size: max(1.6rem, 16px);
+}
+
 .prime-auth-simple {
   max-width: 58rem;
   padding: clamp(2rem, 5vw, 3.5rem);
@@ -1095,6 +1134,30 @@ li[data-address] > h2 {
   margin-bottom: 1.5rem;
 }
 
+.prime-tracking-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+}
+
+.prime-tracking-steps span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--prime-account-ink);
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.prime-tracking-steps span::before {
+  content: "";
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 999px;
+  background: #eb7300;
+}
+
 .prime-order-line {
   display: flex;
   gap: 1rem;
@@ -1120,6 +1183,63 @@ li[data-address] > h2 {
 
 .prime-order-line__content {
   min-width: 0;
+}
+
+.prime-addresses {
+  --prime-account-ink: #173b2b;
+  --prime-account-muted: #5d675f;
+  --prime-account-cream: #fffaf2;
+  --prime-account-line: rgba(23, 59, 43, 0.12);
+  --prime-account-orange: #eb7300;
+  color: var(--prime-account-ink);
+}
+
+.prime-address-card {
+  background: #fff;
+  border-color: var(--prime-account-line) !important;
+  box-shadow: 0 1rem 2.5rem rgba(23, 59, 43, 0.07);
+}
+
+.prime-address-card--default {
+  background: var(--prime-account-cream);
+  border-color: rgba(235, 115, 0, 0.5) !important;
+}
+
+.prime-address-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 3.2rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  background: var(--prime-account-orange);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.prime-company-field {
+  margin: 0.75rem 0 1rem;
+}
+
+.prime-company-field summary {
+  min-height: 4.4rem;
+  display: inline-flex;
+  align-items: center;
+  color: var(--prime-account-ink);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.prime-addresses [id^='EditAddress_'],
+.prime-addresses #AddAddress {
+  margin-top: 1.25rem;
+  padding: 1.25rem;
+  border: 1px solid var(--prime-account-line);
+  border-radius: 0.8rem;
+  background: #fff;
 }
 
 @media screen and (min-width: 990px) {

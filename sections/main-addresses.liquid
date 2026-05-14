@@ -3,7 +3,7 @@
 <script src="{{ 'customer.js' | asset_url }}" defer></script>
 
 {%- paginate customer.addresses by 5 -%}
-  <div class="customer addresses section__inner text-center" data-customer-addresses>
+  <div class="customer addresses prime-addresses section__inner text-center" data-customer-addresses>
     <svg style="display: none">
       <symbol id="icon-caret" viewBox="0 0 10 6">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
@@ -24,9 +24,9 @@
 
     <ul role="list">
       {%- for address in customer.addresses -%}
-        <li data-address class="border-radius-panel border color-scheme-2 gradient p-2 text-left">
+        <li data-address class="prime-address-card border-radius-panel border color-scheme-2 gradient p-2 text-left{% if address == customer.default_address %} prime-address-card--default{% endif %}">
           {%- if address == customer.default_address -%}
-            <h2 class="h4 text-left">{{ 'customer.addresses.default' | t }}</h2>
+            <span class="prime-address-badge">{{ 'customer.addresses.default' | t }}</span>
           {%- endif -%}
 
           <div class="mb-1">
@@ -80,17 +80,20 @@
                 >
                 <label for="AddressLastName_{{ form.id }}">{{ 'customer.addresses.last_name' | t }}</label>
               </div>
-              <div class="field">
-                <input
-                  type="text"
-                  id="AddressCompany_{{ form.id }}"
-                  name="address[company]"
-                  value="{{ form.company }}"
-                  autocomplete="organization"
-                  placeholder="{{ 'customer.addresses.company' | t }}"
-                >
-                <label for="AddressCompany_{{ form.id }}">{{ 'customer.addresses.company' | t }}</label>
-              </div>
+              <details class="prime-company-field"{% if form.company != blank %} open{% endif %}>
+                <summary>Add company name</summary>
+                <div class="field">
+                  <input
+                    type="text"
+                    id="AddressCompany_{{ form.id }}"
+                    name="address[company]"
+                    value="{{ form.company }}"
+                    autocomplete="organization"
+                    placeholder="{{ 'customer.addresses.company' | t }}"
+                  >
+                  <label for="AddressCompany_{{ form.id }}">{{ 'customer.addresses.company' | t }}</label>
+                </div>
+              </details>
               <div class="field">
                 <input
                   type="text"
@@ -232,17 +235,20 @@
             >
             <label for="AddressLastNameNew">{{ 'customer.addresses.last_name' | t }}</label>
           </div>
-          <div class="field">
-            <input
-                type="text"
-                id="AddressCompanyNew"
-                name="address[company]"
-                value="{{ form.company }}"
-                autocomplete="organization"
-                placeholder="{{ 'customer.addresses.company' | t }}"
-            >
-            <label for="AddressCompanyNew">{{ 'customer.addresses.company' | t }}</label>
-          </div>
+          <details class="prime-company-field"{% if form.company != blank %} open{% endif %}>
+            <summary>Add company name</summary>
+            <div class="field">
+              <input
+                  type="text"
+                  id="AddressCompanyNew"
+                  name="address[company]"
+                  value="{{ form.company }}"
+                  autocomplete="organization"
+                  placeholder="{{ 'customer.addresses.company' | t }}"
+              >
+              <label for="AddressCompanyNew">{{ 'customer.addresses.company' | t }}</label>
+            </div>
+          </details>
           <div class="field">
             <input
                 type="text"

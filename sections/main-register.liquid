@@ -128,6 +128,7 @@
                     <span>Manage refills</span>
                     <span>Track chew education</span>
                   </div>
+                  <p class="prime-auth-proof">Join 2,400+ dog parents who trust Prime for rawhide-free, long-lasting enrichment.</p>
                 </div>
 
                 <svg style="display: none">
@@ -201,6 +202,7 @@
                             type="email"
                             name="customer[email]"
                             id="RegisterForm-email"
+                            inputmode="email"
                             {% if form.email %}
                               value="{{ form.email }}"
                             {% endif %}
@@ -277,6 +279,16 @@
     </div>
   </div>
 </div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Create Account - Prime Pet Food Dog Enrichment Hub",
+  "description": "Create your free Prime Pet Food account for faster reorders, subscription management, personalized chew sizing, and enrichment tracking for your dog.",
+  "url": {{ shop.url | append: routes.account_register_url | json }}
+}
+</script>
 
 {% schema %}
 {

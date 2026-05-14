@@ -32,6 +32,7 @@
 
       {%- liquid
         assign reorder_line = blank
+        assign reorder_path = blank
         assign first_tracking_url = blank
         assign first_tracking_company = blank
         assign first_tracking_number = blank
@@ -39,6 +40,19 @@
         for line_item in order.line_items
           if reorder_line == blank and line_item.variant != blank
             assign reorder_line = line_item
+          endif
+          if line_item.variant != blank
+            capture item_pair
+              echo line_item.variant.id | default: line_item.variant_id
+              echo ':'
+              echo line_item.quantity
+            endcapture
+            assign item_pair = item_pair | strip
+            if reorder_path == blank
+              assign reorder_path = item_pair
+            else
+              assign reorder_path = reorder_path | append: ',' | append: item_pair
+            endif
           endif
           if first_tracking_url == blank and line_item.fulfillment and line_item.fulfillment.tracking_url
             assign first_tracking_url = line_item.fulfillment.tracking_url
@@ -56,7 +70,7 @@
         </div>
         <div class="prime-order-summary__actions">
           {%- if reorder_line != blank -%}
-            <a href="/cart/add?id={{ reorder_line.variant.id | default: reorder_line.variant_id }}&quantity={{ reorder_line.quantity }}" class="button button--primary button--small">Reorder this item</a>
+            <a href="/cart/{{ reorder_path }}" class="button button--primary button--small">Reorder this order</a>
           {%- endif -%}
           <a href="/pages/subscribe-and-save" class="button button--secondary button--small">Manage refills</a>
         </div>
@@ -74,6 +88,11 @@
                 #{{ first_tracking_number }}
               {%- endif -%}
             </p>
+            <div class="prime-tracking-steps" aria-label="Order progress">
+              <span>Ordered</span>
+              <span>Shipped</span>
+              <span>Delivered</span>
+            </div>
           </div>
           <a href="{{ first_tracking_url }}" class="prime-tracking-card__link">Track shipment</a>
         </div>

@@ -5,10 +5,28 @@
   assign customer_name = customer.first_name | default: customer.name | default: customer.email
   assign customer_order_count = customer.orders_count | default: customer.orders.size
   assign latest_reorder_line = blank
+  assign latest_reorder_path = blank
+  assign latest_tracking_url = blank
   if latest_order
     for line_item in latest_order.line_items
       if latest_reorder_line == blank and line_item.variant != blank
         assign latest_reorder_line = line_item
+      endif
+      if line_item.variant != blank
+        capture latest_item_pair
+          echo line_item.variant.id | default: line_item.variant_id
+          echo ':'
+          echo line_item.quantity
+        endcapture
+        assign latest_item_pair = latest_item_pair | strip
+        if latest_reorder_path == blank
+          assign latest_reorder_path = latest_item_pair
+        else
+          assign latest_reorder_path = latest_reorder_path | append: ',' | append: latest_item_pair
+        endif
+      endif
+      if latest_tracking_url == blank and line_item.fulfillment and line_item.fulfillment.tracking_url
+        assign latest_tracking_url = line_item.fulfillment.tracking_url
       endif
     endfor
   endif
@@ -31,7 +49,7 @@
     <div class="prime-account__hero-actions">
       {%- if latest_reorder_line -%}
         <a
-          href="/cart/add?id={{ latest_reorder_line.variant.id | default: latest_reorder_line.variant_id }}&quantity={{ latest_reorder_line.quantity }}"
+          href="/cart/{{ latest_reorder_path }}"
           class="prime-account__button prime-account__button--primary"
         >
           Reorder latest chew
@@ -39,9 +57,11 @@
       {%- else -%}
         <a href="/collections/yak-chew" class="prime-account__button prime-account__button--primary">Shop yak chews</a>
       {%- endif -%}
-      <a href="{{ routes.account_logout_url }}" class="prime-account__button prime-account__button--secondary" data-no-instant>
-        {{ 'customer.log_out' | t }}
-      </a>
+      {%- if latest_tracking_url != blank -%}
+        <a href="{{ latest_tracking_url }}" class="prime-account__button prime-account__button--secondary">Track latest order</a>
+      {%- elsif latest_order -%}
+        <a href="{{ latest_order.customer_url }}" class="prime-account__button prime-account__button--secondary">View latest order</a>
+      {%- endif -%}
     </div>
   </header>
 
@@ -55,9 +75,9 @@
 
     <article class="prime-account-card">
       <p class="prime-account-card__kicker">Subscribe &amp; Save</p>
-      <h2>Keep calm-time stocked</h2>
-      <p>Manage flexible yak chew refills, skip when your dog is stocked, or start a recurring routine that fits your household.</p>
-      <a href="/pages/subscribe-and-save" class="prime-account-card__link">Manage or learn more</a>
+      <h2>Save up to 30%</h2>
+      <p>Turn your usual yak chew into flexible refills. Skip, pause, or adjust frequency before the next box ships.</p>
+      <a href="/pages/subscribe-and-save" class="prime-account-card__link">Manage or start refills</a>
     </article>
 
     <article class="prime-account-card">
@@ -100,7 +120,13 @@
       <h2>Keep the routine stocked</h2>
       <p>Repeat your most recent yak chew order in one click, or switch to flexible refills before calm-time runs out.</p>
       {%- if latest_reorder_line -%}
-        <a href="/cart/add?id={{ latest_reorder_line.variant.id | default: latest_reorder_line.variant_id }}&quantity={{ latest_reorder_line.quantity }}" class="prime-account-card__link">Reorder latest chew</a>
+        {%- if latest_reorder_line.image -%}
+          <div class="prime-reorder-preview">
+            {{ latest_reorder_line.image | image_url: width: 160 | image_tag: loading: 'lazy', widths: '80, 120, 160', sizes: '80px', alt: latest_reorder_line.title }}
+            <span>{{ latest_reorder_line.title | escape }}</span>
+          </div>
+        {%- endif -%}
+        <a href="/cart/{{ latest_reorder_path }}" class="prime-account-card__link">Reorder latest chew</a>
       {%- else -%}
         <a href="/collections/yak-chew" class="prime-account-card__link">Shop yak chews</a>
       {%- endif -%}
@@ -123,9 +149,23 @@
             {%- for order in customer.orders -%}
               {%- liquid
                 assign reorder_line = blank
+                assign reorder_path = blank
                 for line_item in order.line_items
                   if reorder_line == blank and line_item.variant != blank
                     assign reorder_line = line_item
+                  endif
+                  if line_item.variant != blank
+                    capture item_pair
+                      echo line_item.variant.id | default: line_item.variant_id
+                      echo ':'
+                      echo line_item.quantity
+                    endcapture
+                    assign item_pair = item_pair | strip
+                    if reorder_path == blank
+                      assign reorder_path = item_pair
+                    else
+                      assign reorder_path = reorder_path | append: ',' | append: item_pair
+                    endif
                   endif
                 endfor
               -%}
@@ -144,7 +184,7 @@
                 <div class="prime-order-card__actions">
                   <a href="{{ order.customer_url }}">View details</a>
                   {%- if reorder_line -%}
-                    <a href="/cart/add?id={{ reorder_line.variant.id | default: reorder_line.variant_id }}&quantity={{ reorder_line.quantity }}">Reorder</a>
+                    <a href="/cart/{{ reorder_path }}">Reorder</a>
                   {%- endif -%}
                 </div>
               </article>
@@ -195,6 +235,8 @@
       </div>
 
       <div class="prime-account-address">
+        <p><strong>{{ customer.name | default: customer.email | escape }}</strong></p>
+        <p>{{ customer.email }}</p>
         <div class="rte">
           {%- if customer.default_address -%}
             {{ customer.default_address | format_address }}
@@ -209,6 +251,18 @@
         <strong>Rawhide-free peace of mind</strong>
         <p>Every reorder stays focused on simple Himalayan yak chews, supervised enrichment, and fast support if anything feels off.</p>
       </div>
+
+      <div class="prime-account-mini">
+        <strong>Reminder preferences</strong>
+        <p>Use My Dog to tune chew-session reminders, reorder timing, and breed-specific enrichment tips.</p>
+        <a href="/pages/my-dog">Update dog profile</a>
+      </div>
+
+      <div class="prime-account-mini">
+        <strong>Account access</strong>
+        <p>Finished managing your chew routine?</p>
+        <a href="{{ routes.account_logout_url }}" data-no-instant>{{ 'customer.log_out' | t }}</a>
+      </div>
     </aside>
   </div>
 </div>
@@ -221,14 +275,21 @@
     var title = card.querySelector('[data-dog-profile-title]');
     var copy = card.querySelector('[data-dog-profile-copy]');
     var link = card.querySelector('[data-dog-profile-link]');
-    if (title) title.textContent = 'Welcome back, ' + (profile.name || 'your dog');
+    var dogName = profile.dogName || profile.name || 'your dog';
+    if (title) title.textContent = 'Welcome back, ' + dogName;
     if (copy) {
       var details = [];
       if (profile.weight) details.push(profile.weight + ' lbs');
-      if (profile.chewer) details.push(profile.chewer + ' chewer');
-      copy.textContent = details.length
-        ? details.join(' · ') + '. Open My Dog for chew duration, session logging, and reorder timing.'
-        : 'Open My Dog for chew duration, session logging, and reorder timing.';
+      if (profile.breed) details.push(profile.breed);
+      if (profile.chewStyle || profile.chewer) details.push((profile.chewStyle || profile.chewer) + ' chewer');
+      var rec = typeof PrimeDogProfile.getRecommendation === 'function' ? PrimeDogProfile.getRecommendation() : null;
+      var timing = typeof PrimeDogProfile.getReorderTiming === 'function' ? PrimeDogProfile.getReorderTiming() : null;
+      var score = typeof PrimeDogProfile.getEnrichmentScore === 'function' ? PrimeDogProfile.getEnrichmentScore() : null;
+      var summary = details.length ? details.join(' · ') + '. ' : '';
+      if (rec && rec.size) summary += 'Recommended size: ' + rec.size + '. ';
+      if (timing && typeof timing.daysUntilReorder === 'number') summary += timing.daysUntilReorder + ' days until reorder. ';
+      if (score) summary += 'Enrichment score: ' + score + '.';
+      copy.textContent = summary || 'Open My Dog for chew duration, session logging, and reorder timing.';
     }
     if (link) link.textContent = 'Open My Dog';
   });
