@@ -1,0 +1,50 @@
+{{ 'prime-roadmap.css' | asset_url | stylesheet_tag }}
+
+<section class="psil" aria-labelledby="PrimeSeoInternalLinksTitle">
+  <div class="psil__inner">
+    <div>
+      <p class="psil__kicker">{{ section.settings.eyebrow }}</p>
+      <h2 id="PrimeSeoInternalLinksTitle">{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.text }}</p>
+    </div>
+    <ul class="psil__links">
+      <li><a href="/pages/how-long-will-this-last-for-my-dog"><span>Estimator</span><strong>How long will this last for my dog?</strong></a></li>
+      <li><a href="/pages/how-long-do-yak-chews-last"><span>Duration</span><strong>How long do yak chews last?</strong></a></li>
+      <li><a href="/pages/best-long-lasting-chew-for-aggressive-chewers"><span>Power chewers</span><strong>Best chew for aggressive chewers</strong></a></li>
+      <li><a href="/pages/best-rawhide-alternative"><span>Ingredients</span><strong>Best rawhide alternative</strong></a></li>
+      <li><a href="/pages/yak-chews-vs-bully-sticks"><span>Comparison</span><strong>Yak chews vs bully sticks</strong></a></li>
+      <li><a href="/pages/yak-chew-guides"><span>Hub</span><strong>Browse all yak chew guides</strong></a></li>
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Prime SEO internal links",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Chew education"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Choose with confidence."
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "These guides answer the most common buying questions about yak chew duration, sizing, ingredients, and safer supervised enrichment routines."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Prime SEO internal links"
+    }
+  ]
+}
+{% endschema %}

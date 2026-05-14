@@ -39,6 +39,13 @@
       <meta name="description" content="{{ page_description | escape }}">
     {% endif %}
 
+    {%- liquid
+      assign noindex_template_suffixes = 'pf-eb98f979,golden-retriever-yak-chews,labrador-yak-chews,aggressive-chewer-yak-chews' | split: ','
+    -%}
+    {%- if noindex_template_suffixes contains template.suffix -%}
+      <meta name="robots" content="noindex,follow">
+    {%- endif -%}
+
     {% render 'meta-tags' %}
 
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>

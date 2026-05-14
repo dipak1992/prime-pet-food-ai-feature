@@ -1326,6 +1326,14 @@
     "prime_duration_guarantee": {
       "type": "prime-duration-guarantee",
       "settings": {}
+    },
+    "prime_seo_internal_links": {
+      "type": "prime-seo-internal-links",
+      "settings": {
+        "eyebrow": "Chew education",
+        "heading": "Choose with confidence.",
+        "text": "Compare duration, sizing, ingredients, and chew style before checkout. These guides support the product page without competing with it for purchase intent."
+      }
     }
   },
   "order": [
@@ -1341,6 +1349,7 @@
     "breed_review_highlights",
     "two_treats_in_one_C8mxDb",
     "comparison_table_URRwp9",
+    "prime_seo_internal_links",
     "video_carousel_6EkF8r",
     "ypc_product_tab_QnMPYB",
     "faqs_tVaRYD",
