@@ -924,85 +924,89 @@
     "video_carousel_6EkF8r": {
       "type": "video-carousel",
       "blocks": {
-        "video_6DMLLj": {
+        "video_qg3dfM": {
+          "type": "video",
+          "settings": {
+            "html5_video": "shopify://files/videos/1737008260923.mp4",
+            "product": "himalayan-yak-chews-for-dogs",
+            "caption": "Golden Retriever · 72 min calm-time session"
+          }
+        },
+        "video_3FiDC7": {
           "type": "video",
           "settings": {
             "html5_video": "shopify://files/videos/1737005781491.mp4",
-            "product": ""
+            "product": "himalayan-yak-chews-for-dogs",
+            "caption": "French Bulldog · steady indoor chew routine"
           }
         },
-        "video_9zG6et": {
+        "video_RLbcAF": {
           "type": "video",
           "settings": {
-            "html5_video": "shopify://files/videos/1737005659942.mp4",
-            "product": ""
+            "html5_video": "shopify://files/videos/[Tiktok] Himalayan Yak Cheese 03.mp4",
+            "product": "himalayan-yak-chews-for-dogs",
+            "caption": "Labrador · post-walk decompression"
           }
         },
-        "video_RGfPAH": {
+        "video_BqKy7U": {
+          "type": "video",
+          "settings": {
+            "html5_video": "shopify://files/videos/1737005584344.mp4",
+            "product": "himalayan-yak-chews-for-dogs",
+            "caption": "Small breed · focused crate-time enrichment"
+          }
+        },
+        "video_44C8B8": {
+          "type": "video",
+          "settings": {
+            "html5_video": "shopify://files/videos/1736610302090.mp4",
+            "product": "himalayan-yak-chews-for-dogs",
+            "caption": "Power chewer · longer-lasting occupation"
+          }
+        },
+        "video_Jcw4yp": {
           "type": "video",
           "settings": {
             "html5_video": "shopify://files/videos/WhatsApp Video 2026-04-25 at 21.07.27.mp4",
-            "product": ""
+            "product": "himalayan-yak-chews-for-dogs",
+            "caption": "Evening routine · calmer household wind-down"
           }
         },
-        "video_BwTUJ3": {
+        "video_TELc9F": {
           "type": "video",
           "settings": {
-            "html5_video": "shopify://files/videos/WhatsApp Video 2026-04-25 at 21.07.23.mp4",
-            "product": ""
-          }
-        },
-        "video_beGYgc": {
-          "type": "video",
-          "settings": {
-            "html5_video": "shopify://files/videos/WhatsApp Video 2026-04-25 at 21.07.22.mp4",
-            "product": ""
-          }
-        },
-        "video_kRzNML": {
-          "type": "video",
-          "settings": {
-            "html5_video": "shopify://files/videos/WhatsApp Video 2026-04-25 at 21.07.19.mp4",
-            "product": ""
-          }
-        },
-        "video_iqWD9m": {
-          "type": "video",
-          "settings": {
-            "html5_video": "shopify://files/videos/WhatsApp Video 2026-04-27 at 01.45.47.mp4",
-            "product": ""
+            "html5_video": "shopify://files/videos/1737008392265.mp4",
+            "product": "himalayan-yak-chews-for-dogs",
+            "caption": "Real dog parent video · rawhide-free chew time"
           }
         }
       },
       "block_order": [
-        "video_6DMLLj",
-        "video_9zG6et",
-        "video_RGfPAH",
-        "video_BwTUJ3",
-        "video_beGYgc",
-        "video_kRzNML",
-        "video_iqWD9m"
-      ],
-      "custom_css": [
-        "h2 {font-weight: 700; font-size: 42px;}"
+        "video_qg3dfM",
+        "video_3FiDC7",
+        "video_RLbcAF",
+        "video_BqKy7U",
+        "video_44C8B8",
+        "video_Jcw4yp",
+        "video_TELc9F"
       ],
       "name": "Video carousel",
       "settings": {
-        "heading": "Watch Prime dogs use their calm-time chew",
-        "heading_size": 130,
+        "heading": "Watch dogs discover their new favorite chew",
+        "heading_size": 100,
         "heading_letter_spacing": 0,
         "custom_font_url": "",
         "description": "",
-        "description_size": 135,
+        "description_size": 100,
         "heading_description_spacing": 20,
-        "autoplay": 8,
+        "autoplay": 0,
         "gap": 10,
         "show_arrows": true,
-        "text_size": 110,
+        "text_size": 100,
         "text_color": "#121212",
         "button_text_color": "#ffffff",
-        "button_bg_color": "#121212",
-        "background_color": "linear-gradient(76deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 1) 100%)",
+        "button_bg_color": "#E66711",
+        "background_color": "",
         "top_padding": 40,
         "bottom_padding": 40,
         "navigation_spacing": 20
