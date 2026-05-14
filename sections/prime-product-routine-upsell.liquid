@@ -2,6 +2,7 @@
   assign bulk_product = section.settings.bulk_product
 %}
 
+{% comment %}Product template dependency: keep synced with templates/product.json.{% endcomment %}
 {{ 'prime-roadmap.css' | asset_url | stylesheet_tag }}
 
 <section class="ppru" aria-labelledby="PrimeRoutineUpsellTitle">
