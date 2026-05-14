@@ -726,47 +726,29 @@
       </div>
 
       <div class="ph-fit__grid">
-        <article>
-          <img src="{{ frenchie_image }}" alt="French Bulldog enjoying a Prime yak chew" loading="lazy" width="768" height="960">
-          <div>
-            <strong>French Bulldog</strong>
-            <span class="ph-fit__duration">Avg: 45 min &bull; Small/Medium</span>
-          </div>
+        <article style="--fit-accent: #b85f32;">
+          <span class="ph-fit__size">Small/Medium</span>
+          <strong>Compact breeds</strong>
+          <span class="ph-fit__duration">French Bulldog, Beagle</span>
+          <p>Often lands around 45-60 minutes for steady chewers under 35 lbs.</p>
         </article>
-        <article>
-          <img src="{{ golden_image }}" alt="Golden Retriever with a Prime yak chew" loading="lazy" width="768" height="960">
-          <div>
-            <strong>Golden Retriever</strong>
-            <span class="ph-fit__duration">Avg: 72 min &bull; Large</span>
-          </div>
+        <article style="--fit-accent: #d5964f;">
+          <span class="ph-fit__size">Medium/Large</span>
+          <strong>Family-size dogs</strong>
+          <span class="ph-fit__duration">Poodle mix, Golden Retriever</span>
+          <p>A practical starting point for 35-65 lb dogs who need focused calm time.</p>
         </article>
-        <article>
-          <img src="{{ lab_image }}" alt="Labrador chewing a Prime yak chew" loading="lazy" width="768" height="960">
-          <div>
-            <strong>Labrador</strong>
-            <span class="ph-fit__duration">Avg: 85 min &bull; Large/XL</span>
-          </div>
+        <article style="--fit-accent: #2f6547;">
+          <span class="ph-fit__size">Large/XL</span>
+          <strong>Power chewers</strong>
+          <span class="ph-fit__duration">Labrador, German Shepherd</span>
+          <p>Size up for stronger jaws or longer supervised sessions, usually 70-90+ minutes.</p>
         </article>
-        <article>
-          <img src="{{ shepherd_image }}" alt="German Shepherd with a Prime yak chew" loading="lazy" width="768" height="960">
-          <div>
-            <strong>German Shepherd</strong>
-            <span class="ph-fit__duration">Avg: 92 min &bull; XL</span>
-          </div>
-        </article>
-        <article>
-          <img src="{{ beagle_image }}" alt="Beagle with a Prime yak chew" loading="lazy" width="768" height="960">
-          <div>
-            <strong>Beagle</strong>
-            <span class="ph-fit__duration">Avg: 58 min &bull; Medium</span>
-          </div>
-        </article>
-        <article>
-          <img src="{{ poodle_image }}" alt="Poodle with a Prime yak chew" loading="lazy" width="768" height="960">
-          <div>
-            <strong>Poodle Mix</strong>
-            <span class="ph-fit__duration">Avg: 64 min &bull; Medium/Large</span>
-          </div>
+        <article style="--fit-accent: #173b2b;">
+          <span class="ph-fit__size">Jumbo</span>
+          <strong>Giant breeds</strong>
+          <span class="ph-fit__duration">85+ lbs or intense chewers</span>
+          <p>Best when the goal is longer enrichment and a safer size buffer for big mouths.</p>
         </article>
       </div>
       <div class="ph-fit__link">
@@ -2044,16 +2026,24 @@
     background: var(--ph-soft);
   }
 
-  .ph-fit article img {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1 / 1;
-    display: block;
-    object-fit: cover;
+  .ph-fit__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  .ph-fit article div {
-    padding: 18px;
+  .ph-fit article {
+    position: relative;
+    padding: 24px;
+    overflow: hidden;
+  }
+
+  .ph-fit article::before {
+    content: "";
+    display: block;
+    width: 52px;
+    height: 8px;
+    margin-bottom: 22px;
+    border-radius: 999px;
+    background: var(--fit-accent, var(--ph-clay));
   }
 
   .ph-fit strong,
@@ -2062,16 +2052,33 @@
   }
 
   .ph-fit strong {
+    margin-top: 10px;
     font-size: 18px;
     line-height: 1.2;
     font-weight: 760;
   }
 
-  .ph-fit__duration {
-    margin-top: 6px;
+  .ph-fit__size {
     color: var(--ph-clay);
+    font-size: 12px;
+    line-height: 1.2;
+    font-weight: 820;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .ph-fit__duration {
+    margin-top: 10px;
+    color: var(--ph-muted);
     font-size: 13px;
-    font-weight: 680;
+    line-height: 1.4;
+    font-weight: 760;
+  }
+
+  .ph-fit article p {
+    margin: 14px 0 0;
+    font-size: 14px;
+    line-height: 1.55;
   }
 
   /* ═══════════════════════════════════════════════════════════════
