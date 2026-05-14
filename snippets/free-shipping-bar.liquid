@@ -2,11 +2,11 @@
   Free Shipping Progress Bar
   Shows progress toward free shipping threshold.
   Usage: {% render 'free-shipping-bar' %}
-  Configure threshold in the snippet below.
+  Configure threshold in cart theme settings.
 {% endcomment %}
 
 {% liquid
-  assign free_shipping_threshold = 5000
+  assign free_shipping_threshold = settings.cart_shipping_bar_threshold | default: 30 | times: 100
   assign cart_total = cart.total_price
   assign remaining = free_shipping_threshold | minus: cart_total
   assign progress = cart_total | times: 100 | divided_by: free_shipping_threshold

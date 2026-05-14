@@ -108,6 +108,29 @@
     line-height: 1;
   }
 
+  .cart-drawer-guarantee--subscription {
+    background: #fff7ec;
+    border-color: rgba(210, 99, 46, 0.2);
+  }
+
+  .cart-drawer-checkout-trust {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 12px;
+    margin: 0 0 10px;
+    color: #45624f;
+    font-size: 12px;
+    line-height: 1.35;
+    font-weight: 760;
+  }
+
+  .cart-drawer-checkout-trust span::before {
+    content: "✓ ";
+    color: #173b2b;
+    font-weight: 850;
+  }
+
   .cart-drawer-discount {
     display: grid;
     gap: 8px;
@@ -737,15 +760,31 @@
 
         <div class="cart-drawer__footer pl-2 pr-2" {{ block.shopify_attributes }}>
           {%- if cart != empty -%}
+            {%- liquid
+              assign has_subscription_item = false
+              for item in cart.items
+                if item.selling_plan_allocation != null
+                  assign has_subscription_item = true
+                endif
+              endfor
+            -%}
+
             <div class="cart-drawer-guarantee" aria-label="Prime Pet Food guarantee">
               <strong>30-day satisfaction guarantee.</strong>
               <p>If the chew is not the right fit for your dog, contact us and we will help with the next best step.</p>
               <div class="cart-drawer-guarantee__pills">
                 <span>Rawhide-free</span>
                 <span>Free shipping $30+</span>
-                <span>Support before &amp; after purchase</span>
+                <span>Guest checkout</span>
               </div>
             </div>
+
+            {%- if has_subscription_item -%}
+              <div class="cart-drawer-guarantee cart-drawer-guarantee--subscription" aria-label="Subscription checkout terms">
+                <strong>Subscription terms appear before payment.</strong>
+                <p>Skip, pause, or cancel before the next renewal from your account portal.</p>
+              </div>
+            {%- endif -%}
 
             <div class="cart-drawer-subscribe-note">
               <div class="cart-drawer-subscribe-note__body">
@@ -810,6 +849,14 @@
             </div>
           {%- endif -%}
         </div>
+
+        {%- if cart != empty -%}
+          <div class="cart-drawer-checkout-trust pl-2 pr-2" aria-label="Checkout reassurance">
+            <span>Secure checkout</span>
+            <span>Fast support</span>
+            <span>No account required</span>
+          </div>
+        {%- endif -%}
 
         <!-- CTAs -->
         <div class="cart__ctas-container">
