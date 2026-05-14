@@ -12,6 +12,9 @@
     <span class="ph-product-card__badge">{{ badge }}</span>
     <h3>{{ title }}</h3>
     <span class="ph-product-card__fit">{{ fit }}</span>
+    {% if best_for != blank %}
+      <span class="ph-product-card__best">Best for {{ best_for }}</span>
+    {% endif %}
     <p>{{ text }}</p>
   </div>
 

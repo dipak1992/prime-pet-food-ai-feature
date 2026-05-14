@@ -4,6 +4,9 @@
   assign lab_image = 'prime-ugc-labrador-chew-card.jpg' | asset_url
   assign frenchie_image = 'prime-ugc-french-bulldog-chew-card.jpg' | asset_url
   assign golden_image = 'prime-ugc-golden-retriever-chew-card.jpg' | asset_url
+  assign shepherd_image = 'prime-ugc-german-shepherd-chew-card.jpg' | asset_url
+  assign beagle_image = 'prime-ugc-beagle-chew-card.jpg' | asset_url
+  assign poodle_image = 'prime-ugc-poodle-chew-card.jpg' | asset_url
   assign small_dog_chew_image = 'prime-home-small-dog-chew.jpg' | asset_url
   assign medium_dog_chew_image = 'prime-home-medium-dog-chew.jpg' | asset_url
   assign large_dog_chew_image = 'prime-home-large-dog-chew.jpg' | asset_url
@@ -17,7 +20,7 @@
 
   assign hero_headline = section.settings.hero_headline | default: 'Calmer dogs start with a better chew.'
   assign hero_subtext = section.settings.hero_subtext | default: 'Long-lasting Himalayan yak cheese chews made with 4 simple ingredients. Built for focused chew time, cleaner enrichment, and fewer destroyed shoes.'
-  assign trust_stat_1_value = section.settings.trust_stat_1_value | default: '20k+'
+  assign trust_stat_1_value = section.settings.trust_stat_1_value | default: '20,000+'
   assign trust_stat_1_label = section.settings.trust_stat_1_label | default: 'Dog parents'
   assign trust_stat_2_value = section.settings.trust_stat_2_value | default: '4'
   assign trust_stat_2_label = section.settings.trust_stat_2_label | default: 'Ingredients only'
@@ -108,19 +111,19 @@
   <div class="ph-trust-bar" aria-label="Key statistics">
     <div class="ph-shell ph-trust-bar__inner">
       <div class="ph-trust-bar__stat">
-        <strong>{{ trust_stat_1_value }}</strong>
+        <strong data-ph-count="20000" data-ph-suffix="+">{{ trust_stat_1_value }}</strong>
         <span>{{ trust_stat_1_label }}</span>
       </div>
       <div class="ph-trust-bar__stat">
-        <strong>{{ trust_stat_2_value }}</strong>
+        <strong data-ph-count="4">{{ trust_stat_2_value }}</strong>
         <span>{{ trust_stat_2_label }}</span>
       </div>
       <div class="ph-trust-bar__stat">
-        <strong>{{ trust_stat_3_value }}</strong>
+        <strong data-ph-count="67" data-ph-suffix=" min">{{ trust_stat_3_value }}</strong>
         <span>{{ trust_stat_3_label }}</span>
       </div>
       <div class="ph-trust-bar__stat">
-        <strong>{{ trust_stat_4_value }}</strong>
+        <strong data-ph-count="30" data-ph-suffix="-day">{{ trust_stat_4_value }}</strong>
         <span>{{ trust_stat_4_label }}</span>
       </div>
       <div class="ph-trust-bar__stat ph-trust-bar__stat--stars">
@@ -148,17 +151,17 @@
       <div class="ph-outcomes__grid">
         <article>
           <span>01</span>
-          <h3>Longer focus</h3>
+          <h3>Longer focus <svg class="ph-outcomes__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></h3>
           <p>Dense Himalayan cheese keeps many dogs engaged far longer than soft treats.</p>
         </article>
         <article>
           <span>02</span>
-          <h3>Cleaner ingredients</h3>
+          <h3>Cleaner ingredients <svg class="ph-outcomes__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C7 7 5 11 5 15a7 7 0 0 0 14 0c0-4-2-8-7-13Z"/><path d="M9 15c1.2 1.4 3.9 1.4 6 0"/></svg></h3>
           <p>Just yak milk, cow milk, lime juice, and salt. No rawhide or artificial fillers.</p>
         </article>
         <article>
           <span>03</span>
-          <h3>Easier routines</h3>
+          <h3>Easier routines <svg class="ph-outcomes__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V8"/><path d="M4 8l8-4 8 4v11"/><path d="M8 19v-6h8v6"/></svg></h3>
           <p>Use it for crate time, post-walk decompression, or supervised evening calm.</p>
         </article>
       </div>
@@ -186,7 +189,8 @@
           title: 'Small Yak Chew',
           fit: '1-15 lbs',
           text: 'A compact chew for small breeds and lighter chewing sessions.',
-          badge: 'Small'
+          badge: 'Small',
+          best_for: 'Chihuahuas, Yorkies, and toy mixes'
         %}
 
         {% render 'prime-home-product-card',
@@ -198,7 +202,8 @@
           title: 'Medium Yak Chew',
           fit: '15-35 lbs',
           text: 'The everyday fit for steady chewers who need a reliable calm-time routine.',
-          badge: 'Medium &bull; Best seller'
+          badge: 'Medium &bull; Best seller',
+          best_for: 'Frenchies, Beagles, and Cocker Spaniels'
         %}
 
         {% render 'prime-home-product-card',
@@ -210,7 +215,8 @@
           title: 'Large Yak Chew',
           fit: '35-55 lbs',
           text: 'A denser chew for bigger jaws and dogs that finish softer treats too quickly.',
-          badge: 'Large'
+          badge: 'Large',
+          best_for: 'Labs, Goldens, and Shepherd mixes'
         %}
 
         {% render 'prime-home-product-card',
@@ -222,7 +228,8 @@
           title: 'Extra Large Yak Chew',
           fit: '55-85 lbs',
           text: 'More chew mass for larger breeds and dogs who need longer supervised sessions.',
-          badge: 'Extra Large'
+          badge: 'Extra Large',
+          best_for: 'German Shepherds and larger Labs'
         %}
 
         {% render 'prime-home-product-card',
@@ -234,8 +241,17 @@
           title: 'Jumbo Yak Chew',
           fit: '85+ lbs',
           text: 'The largest option for serious chewers and giant breed calm-time routines.',
-          badge: 'Jumbo'
+          badge: 'Jumbo',
+          best_for: 'Great Danes, Mastiffs, and giant breeds'
         %}
+      </div>
+
+      <div class="ph-size-scale" aria-label="Chew size comparison">
+        <span style="--size: 34%">Small</span>
+        <span style="--size: 48%">Medium</span>
+        <span style="--size: 62%">Large</span>
+        <span style="--size: 78%">XL</span>
+        <span style="--size: 100%">Jumbo</span>
       </div>
 
       <div class="ph-products__link">
@@ -348,6 +364,14 @@
               <span><strong>100%</strong> digestible</span>
             </div>
             <a href="/collections/all" class="ph-button ph-button--primary ph-quiz__result-cta">Shop this size</a>
+            {% form 'customer', class: 'ph-quiz__email-form' %}
+              <input type="hidden" name="contact[tags]" value="homepage_quiz_recommendation">
+              <label for="PrimeQuizEmail-{{ section.id }}">Want us to save this recommendation?</label>
+              <div>
+                <input id="PrimeQuizEmail-{{ section.id }}" type="email" name="contact[email]" placeholder="Email address" autocomplete="email">
+                <button type="submit">Save</button>
+              </div>
+            {% endform %}
             <button type="button" class="ph-quiz__restart">← Retake quiz</button>
           </div>
         </div>
@@ -371,9 +395,14 @@
           For dogs who use chews as part of a real enrichment routine, recurring delivery keeps the pantry ready without overbuying.
         </p>
         <div class="ph-subscribe__benefits" aria-label="Subscribe and Save benefits">
-          <span>First-month savings</span>
+          <span>20% off first month</span>
           <span>Flexible delivery</span>
           <span>Skip or pause anytime</span>
+        </div>
+        <div class="ph-subscribe__cadence" aria-label="Delivery cadence example">
+          <span>Choose size</span>
+          <span>Set cadence</span>
+          <span>Restock calmly</span>
         </div>
         <div class="ph-subscribe__offer" aria-label="Subscribe and Save offer">
           <span>Save up to</span>
@@ -430,6 +459,39 @@
             <span class="ph-review-card__badge">Labrador &bull; 85 min</span>
           </footer>
         </article>
+
+        <article class="ph-review-card">
+          <img class="ph-review-card__photo" src="{{ shepherd_image }}" alt="German Shepherd resting with a Prime yak chew" loading="lazy" width="768" height="960">
+          <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>&ldquo;Our Shepherd needs something to do after evening walks. This turned that restless hour into focused quiet time.&rdquo;</blockquote>
+          <footer>
+            <strong>Priya K.</strong>
+            <span class="ph-review-card__badge">German Shepherd &bull; 92 min</span>
+          </footer>
+        </article>
+
+        <article class="ph-review-card">
+          <img class="ph-review-card__photo" src="{{ beagle_image }}" alt="Beagle enjoying a Prime yak chew on a rug" loading="lazy" width="768" height="960">
+          <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>&ldquo;My beagle is food motivated and easily bored. The medium chew gives him a job without the mess of other chews.&rdquo;</blockquote>
+          <footer>
+            <strong>Andrew L.</strong>
+            <span class="ph-review-card__badge">Beagle &bull; 58 min</span>
+          </footer>
+        </article>
+
+        <article class="ph-review-card">
+          <img class="ph-review-card__photo" src="{{ poodle_image }}" alt="Poodle calmly holding a Prime Himalayan yak chew" loading="lazy" width="768" height="960">
+          <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>&ldquo;We use it during work calls. She settles in, chews, and I am not constantly redirecting her from furniture.&rdquo;</blockquote>
+          <footer>
+            <strong>Emily W.</strong>
+            <span class="ph-review-card__badge">Poodle mix &bull; 64 min</span>
+          </footer>
+        </article>
+      </div>
+      <div class="ph-reviews__link">
+        <a href="/products/himalayan-yak-chews-for-dogs#judgeme_product_reviews">Read all 2,400+ reviews &rarr;</a>
       </div>
     </div>
   </div>
@@ -452,6 +514,7 @@
               <th class="ph-compare__highlight">Prime Yak Chew</th>
               <th>Rawhide</th>
               <th>Bully Sticks</th>
+              <th>Nylon/Rubber Toys</th>
             </tr>
           </thead>
           <tbody>
@@ -460,12 +523,14 @@
               <td class="ph-compare__highlight"><strong>67 min</strong></td>
               <td>20 min</td>
               <td>15 min</td>
+              <td>Varies</td>
             </tr>
             <tr>
               <td>Ingredients</td>
               <td class="ph-compare__highlight"><strong>4 natural</strong></td>
               <td>Chemical-processed</td>
               <td>Single ingredient</td>
+              <td>Synthetic material</td>
             </tr>
             <tr>
               <td>Digestibility</td>
@@ -480,6 +545,10 @@
               <td>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                 Digestible
+              </td>
+              <td>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                Not edible
               </td>
             </tr>
             <tr>
@@ -496,21 +565,33 @@
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 Moderate
               </td>
+              <td>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Chewing wear
+              </td>
             </tr>
             <tr>
               <td>Smell</td>
               <td class="ph-compare__highlight"><strong>Low odor</strong></td>
               <td>Moderate</td>
               <td>Strong</td>
+              <td>No food odor</td>
             </tr>
             <tr>
               <td>Price per hour</td>
               <td class="ph-compare__highlight"><strong>~$0.22/hr</strong></td>
               <td>~$0.35/hr</td>
               <td>~$0.80/hr</td>
+              <td>No nutrition</td>
             </tr>
           </tbody>
         </table>
+      </div>
+      <div class="ph-compare__cards" aria-label="Mobile product comparison">
+        <article><strong>Prime Yak Chew</strong><span>67 min avg</span><span>4 natural ingredients</span><span>Digestible, low odor, ~$0.22/hr</span></article>
+        <article><strong>Rawhide</strong><span>20 min avg</span><span>Chemical-processed</span><span>Blockage risk and moderate odor</span></article>
+        <article><strong>Bully Sticks</strong><span>15 min avg</span><span>Single ingredient</span><span>Strong odor and higher price per hour</span></article>
+        <article><strong>Nylon/Rubber Toys</strong><span>Duration varies</span><span>Synthetic material</span><span>Not edible and no nutrition</span></article>
       </div>
     </div>
   </div>
@@ -589,6 +670,9 @@
         <span>No grain or gluten</span>
         <span>Human-grade facility</span>
       </div>
+      <div class="ph-ingredients__link">
+        <a href="/pages/about-us">See our quality standards &rarr;</a>
+      </div>
     </div>
   </div>
 
@@ -649,6 +733,30 @@
             <span class="ph-fit__duration">Avg: 85 min &bull; Large/XL</span>
           </div>
         </article>
+        <article>
+          <img src="{{ shepherd_image }}" alt="German Shepherd with a Prime yak chew" loading="lazy" width="768" height="960">
+          <div>
+            <strong>German Shepherd</strong>
+            <span class="ph-fit__duration">Avg: 92 min &bull; XL</span>
+          </div>
+        </article>
+        <article>
+          <img src="{{ beagle_image }}" alt="Beagle with a Prime yak chew" loading="lazy" width="768" height="960">
+          <div>
+            <strong>Beagle</strong>
+            <span class="ph-fit__duration">Avg: 58 min &bull; Medium</span>
+          </div>
+        </article>
+        <article>
+          <img src="{{ poodle_image }}" alt="Poodle with a Prime yak chew" loading="lazy" width="768" height="960">
+          <div>
+            <strong>Poodle Mix</strong>
+            <span class="ph-fit__duration">Avg: 64 min &bull; Medium/Large</span>
+          </div>
+        </article>
+      </div>
+      <div class="ph-fit__link">
+        <a href="/pages/how-long-will-this-last-for-my-dog">Estimate for my dog &rarr;</a>
       </div>
     </div>
   </div>
@@ -660,19 +768,19 @@
     <div class="ph-shell ph-vet__inner">
       <div class="ph-vet__quote-mark" aria-hidden="true">&ldquo;</div>
       <blockquote class="ph-vet__quote">
-        I recommend yak chews as a rawhide-free alternative for dogs who need structured enrichment. The simple ingredient list and dense texture make them one of the safer long-duration chew options available.
+        Vet-reviewed ingredient standards help Prime keep chew time simple: rawhide-free, limited-ingredient, and intended for supervised enrichment sessions.
       </blockquote>
       <div class="ph-vet__attribution">
         <div class="ph-vet__avatar" aria-hidden="true">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </div>
         <div>
-          <strong>Dr. Sarah Chen, DVM</strong>
-          <span>Small Animal Veterinarian &bull; 12 years practice</span>
+          <strong>Veterinarian-reviewed ingredient list</strong>
+          <span>Safety guidance for supervised chew routines</span>
         </div>
       </div>
       <div class="ph-vet__badges">
-        <span>Vet recommended</span>
+        <span>Vet-reviewed ingredients</span>
         <span>Rawhide-free</span>
         <span>Safe for supervised use</span>
       </div>
@@ -855,6 +963,8 @@
     display: block;
     object-fit: cover;
     object-position: center;
+    transform: scale(1.03);
+    animation: ph-hero-drift 18s ease-in-out infinite alternate;
   }
 
   .ph-hero__content {
@@ -994,7 +1104,7 @@
 
   .ph-trust-bar__inner {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 16px;
     text-align: center;
   }
@@ -1116,6 +1226,20 @@
     font-size: 15px;
   }
 
+  .ph-outcomes__icon {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-left: 6px;
+    color: var(--ph-clay);
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vertical-align: -2px;
+  }
+
   /* ═══════════════════════════════════════════════════════════════
      PRODUCTS
   ════════════════════════════════════════════════════════════════ */
@@ -1221,6 +1345,15 @@
     font-weight: 720;
   }
 
+  .ph-product-card__best {
+    display: block;
+    margin-top: 8px;
+    color: var(--ph-clay);
+    font-size: 12px;
+    line-height: 1.35;
+    font-weight: 760;
+  }
+
   .ph-product-card__footer {
     align-self: end;
     display: grid;
@@ -1324,6 +1457,38 @@
     font-size: 13px;
     line-height: 1.2;
     font-weight: 700;
+  }
+
+  .ph-size-scale {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 10px;
+    align-items: end;
+    margin-top: 24px;
+    padding: 18px;
+    border: 1px solid var(--ph-line);
+    border-radius: var(--ph-radius);
+    background: #fff;
+  }
+
+  .ph-size-scale span {
+    display: grid;
+    gap: 8px;
+    color: var(--ph-muted);
+    font-size: 12px;
+    font-weight: 760;
+    text-align: center;
+  }
+
+  .ph-size-scale span::before {
+    content: "";
+    display: block;
+    width: var(--size);
+    max-width: 100%;
+    height: 12px;
+    margin-inline: auto;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #d8b58a, var(--ph-clay));
   }
 
   /* ═══════════════════════════════════════════════════════════════
@@ -1437,6 +1602,26 @@
     font-weight: 820;
   }
 
+  .ph-subscribe__cadence {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    max-width: 520px;
+  }
+
+  .ph-subscribe__cadence span {
+    position: relative;
+    padding: 12px 10px;
+    border: 1px solid rgba(244, 194, 125, 0.24);
+    border-radius: var(--ph-radius);
+    background: rgba(244, 194, 125, 0.09);
+    color: rgba(255, 250, 242, 0.9);
+    font-size: 12px;
+    font-weight: 780;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
   .ph-subscribe__link {
     color: #f4c27d;
     font-size: 13px;
@@ -1509,6 +1694,24 @@
     font-weight: 600;
   }
 
+  .ph-reviews__link,
+  .ph-ingredients__link,
+  .ph-fit__link {
+    margin-top: 24px;
+    text-align: center;
+  }
+
+  .ph-reviews__link a,
+  .ph-ingredients__link a,
+  .ph-fit__link a {
+    color: var(--ph-clay);
+    font-size: 13px;
+    font-weight: 780;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
   /* ═══════════════════════════════════════════════════════════════
      COMPARE TABLE
   ════════════════════════════════════════════════════════════════ */
@@ -1524,7 +1727,7 @@
     width: 100%;
     border-collapse: collapse;
     font-size: 15px;
-    min-width: 600px;
+    min-width: 760px;
   }
 
   .ph-compare__table th,
@@ -1559,6 +1762,34 @@
 
   .ph-compare__table tbody tr:last-child td {
     border-bottom: 0;
+  }
+
+  .ph-compare__cards {
+    display: none;
+  }
+
+  .ph-compare__cards article {
+    border: 1px solid var(--ph-line);
+    border-radius: var(--ph-radius);
+    background: #fff;
+    padding: 18px;
+  }
+
+  .ph-compare__cards strong,
+  .ph-compare__cards span {
+    display: block;
+  }
+
+  .ph-compare__cards strong {
+    color: var(--ph-ink);
+    font-size: 17px;
+    margin-bottom: 10px;
+  }
+
+  .ph-compare__cards span {
+    color: var(--ph-muted);
+    font-size: 14px;
+    line-height: 1.45;
   }
 
   /* ═══════════════════════════════════════════════════════════════
@@ -2027,7 +2258,7 @@
     }
 
     .ph-hero {
-      min-height: 560px;
+      min-height: 52vh;
     }
 
     .ph-hero__media::after {
@@ -2035,7 +2266,7 @@
     }
 
     .ph-hero__content {
-      padding: 190px 0 44px;
+      padding: 118px 0 36px;
     }
 
     .prime-homepage h1 {
@@ -2096,6 +2327,11 @@
       grid-template-columns: 1fr;
     }
 
+    .ph-size-scale,
+    .ph-subscribe__cadence {
+      grid-template-columns: 1fr;
+    }
+
     .ph-ingredients__grid {
       grid-template-columns: 1fr;
     }
@@ -2148,10 +2384,12 @@
     }
 
     .ph-compare__table-wrap {
-      margin: 0 -12px;
-      border-radius: 0;
-      border-left: 0;
-      border-right: 0;
+      display: none;
+    }
+
+    .ph-compare__cards {
+      display: grid;
+      gap: 12px;
     }
   }
 
@@ -2205,6 +2443,18 @@
   @keyframes ph-stagger-in {
     from { opacity: 0; transform: translateY(18px); }
     to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes ph-hero-drift {
+    from { transform: scale(1.03) translate3d(0, 0, 0); }
+    to { transform: scale(1.08) translate3d(-1.2%, -0.8%, 0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ph-hero__media img {
+      animation: none;
+      transform: none;
+    }
   }
 
   /* Respect reduced motion */
@@ -2518,6 +2768,48 @@
     margin-bottom: 16px;
   }
 
+  .ph-quiz__email-form {
+    display: grid;
+    gap: 10px;
+    max-width: 420px;
+    margin: 0 auto 14px;
+  }
+
+  .ph-quiz__email-form label {
+    color: var(--ph-muted);
+    font-size: 13px;
+    font-weight: 680;
+  }
+
+  .ph-quiz__email-form div {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px;
+  }
+
+  .ph-quiz__email-form input {
+    min-height: 44px;
+    border: 1px solid var(--ph-line);
+    border-radius: 999px;
+    padding: 0 16px;
+    font: inherit;
+    font-size: 14px;
+  }
+
+  .ph-quiz__email-form button {
+    min-height: 44px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--ph-ink);
+    color: #fff;
+    cursor: pointer;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 780;
+    padding: 0 18px;
+    text-transform: uppercase;
+  }
+
   .ph-quiz__restart {
     background: none;
     border: none;
@@ -2550,6 +2842,12 @@
     }
     .ph-quiz__option {
       padding: 14px 16px;
+    }
+    .ph-quiz__email-form div {
+      grid-template-columns: 1fr;
+    }
+    .ph-quiz__email-form button {
+      width: 100%;
     }
     .ph-quiz__result-stats {
       gap: 16px;
@@ -2943,6 +3241,31 @@
     stickyObserver.observe(productsSection);
   }
 
+  /* ─── TRUST STAT COUNT-UP ─── */
+  var countEls = document.querySelectorAll('[data-ph-count]');
+  if (countEls.length && 'IntersectionObserver' in window && animationsEnabled) {
+    var countObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        var target = Number(el.getAttribute('data-ph-count') || 0);
+        var suffix = el.getAttribute('data-ph-suffix') || '';
+        var start = performance.now();
+        var duration = 900;
+        function tick(now) {
+          var progress = Math.min((now - start) / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          var value = Math.round(target * eased);
+          el.textContent = value.toLocaleString() + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        countObserver.unobserve(el);
+      });
+    }, { threshold: 0.6 });
+    countEls.forEach(function(el) { countObserver.observe(el); });
+  }
+
   /* ─── FIND YOUR CHEW QUIZ ─── */
   var QUIZ_STORAGE_KEY = 'prime_quiz_result';
   var quizWidget = document.getElementById('ph-quiz-widget');
@@ -3134,7 +3457,7 @@
       "type": "text",
       "id": "trust_stat_1_value",
       "label": "Stat 1 value",
-      "default": "20k+"
+      "default": "20,000+"
     },
     {
       "type": "text",

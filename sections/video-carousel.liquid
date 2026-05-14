@@ -502,7 +502,7 @@
                       <a href="{{ block.settings.product.url }}" class="onhow__absolute-link"></a>
                       <div class="onhow__text-area">
                         <div class="onhow__text onhow__rte">
-                          <p>{{ block.settings.product.title }}</p>
+                          <p>{{ block.settings.caption | default: block.settings.product.title }}</p>
                         </div>
                         <a href="{{ block.settings.product.url }}" class="onhow__view-product">View Product</a>
                       </div>
@@ -709,6 +709,12 @@
           "type": "product",
           "id": "product",
           "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Breed / duration caption",
+          "default": "Real dog chew session"
         }
       ]
     }
