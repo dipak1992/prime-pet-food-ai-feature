@@ -19,11 +19,12 @@
       <div class="ypc-tabs-recos__nav" role="tablist">
         <button
           id="ypc-tab-description-{{ section.id }}"
-          class="ypc-tabs-recos__tab is-active"
+          class="ypc-tabs-recos__tab"
           type="button"
           data-tab="description"
           role="tab"
-          aria-selected="true"
+          aria-selected="false"
+          aria-expanded="false"
           aria-controls="ypc-panel-description-{{ section.id }}"
         >
           <span class="ypc-tabs-recos__tab-icon" aria-hidden="true">
@@ -39,8 +40,8 @@
           data-tab="feeding"
           role="tab"
           aria-selected="false"
+          aria-expanded="false"
           aria-controls="ypc-panel-feeding-{{ section.id }}"
-          tabindex="-1"
         >
           <span class="ypc-tabs-recos__tab-icon" aria-hidden="true">
             {% render 'icon', icon: 'shield_checkmark', size: 18 %}
@@ -55,8 +56,8 @@
           data-tab="shipping"
           role="tab"
           aria-selected="false"
+          aria-expanded="false"
           aria-controls="ypc-panel-shipping-{{ section.id }}"
-          tabindex="-1"
         >
           <span class="ypc-tabs-recos__tab-icon" aria-hidden="true">
             {% render 'icon', icon: 'airplane', size: 18 %}
@@ -71,8 +72,8 @@
           data-tab="ingredients"
           role="tab"
           aria-selected="false"
+          aria-expanded="false"
           aria-controls="ypc-panel-ingredients-{{ section.id }}"
-          tabindex="-1"
         >
           <span class="ypc-tabs-recos__tab-icon" aria-hidden="true">
             {% render 'icon', icon: 'restaurant', size: 18 %}
@@ -84,10 +85,11 @@
       <div class="ypc-tabs-recos__content">
         <div
           id="ypc-panel-description-{{ section.id }}"
-          class="ypc-tabs-recos__panel is-active"
+          class="ypc-tabs-recos__panel"
           data-panel="description"
           role="tabpanel"
           aria-labelledby="ypc-tab-description-{{ section.id }}"
+          hidden
         >
           <h2>{{ section.settings.description_heading }}</h2>
           <div class="rte">
@@ -160,9 +162,11 @@
     </div>
 
     <aside class="ypc-tabs-recos__right">
-      <h3 class="ypc-tabs-recos__reco-heading">
-        {{ section.settings.reco_heading }}
-      </h3>
+      {% if section.settings.reco_heading != blank %}
+        <h3 class="ypc-tabs-recos__reco-heading">
+          {{ section.settings.reco_heading }}
+        </h3>
+      {% endif %}
 
       <div class="ypc-tabs-recos__products">
         {% for block in section.blocks %}
@@ -228,8 +232,10 @@
           const isSelected = item === this;
           item.classList.toggle('is-active', isSelected);
           item.setAttribute('aria-selected', isSelected ? 'true' : 'false');
-          item.setAttribute('tabindex', isSelected ? '0' : '-1');
+          item.setAttribute('aria-expanded', isSelected ? 'true' : 'false');
         });
+
+        section.classList.add('ypc-tabs-recos--has-open-panel');
 
         panels.forEach((panel) => {
           const isActive = panel.getAttribute('data-panel') === selectedTab;
@@ -267,7 +273,7 @@
     max-width: 1280px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+    grid-template-columns: minmax(0, 1fr) minmax(340px, 420px);
     gap: 42px;
     align-items: start;
   }
@@ -275,6 +281,14 @@
   .ypc-tabs-recos__left,
   .ypc-tabs-recos__right {
     min-width: 0;
+  }
+
+  .ypc-tabs-recos__right {
+    background: rgba(255, 250, 243, 0.74);
+    border: 1px solid rgba(43, 20, 8, 0.1);
+    border-radius: 22px;
+    padding: 22px;
+    box-shadow: 0 18px 42px rgba(43, 20, 8, 0.06);
   }
 
   .ypc-tabs-recos__nav {
@@ -345,6 +359,10 @@
   }
 
   .ypc-tabs-recos__content {
+    padding-top: 0;
+  }
+
+  .ypc-tabs-recos--has-open-panel .ypc-tabs-recos__content {
     padding-top: 24px;
   }
 
@@ -532,7 +550,7 @@
       gap: 8px;
     }
 
-    .ypc-tabs-recos__content {
+    .ypc-tabs-recos--has-open-panel .ypc-tabs-recos__content {
       padding-top: 18px;
     }
 

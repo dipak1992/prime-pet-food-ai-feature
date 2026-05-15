@@ -827,14 +827,12 @@
       "blocks": {
         "recommended_product_XJJNQN": {
           "type": "recommended_product",
-          "disabled": true,
           "settings": {
             "product": "himalayan-yak-chews-for-dogs"
           }
         },
         "recommended_product_cqJkJp": {
           "type": "recommended_product",
-          "disabled": true,
           "settings": {
             "product": "2-lb-bulk-yak-cheese-dog-chews-natural-long-lasting-treats-small-to-jumbo-copy"
           }
@@ -858,7 +856,7 @@
         "change_fallback": "<p><strong>Supervised Chewing</strong><br/><br/>Always supervise your dog while enjoying Himalayan yak chews. Make sure fresh drinking water is available during every chewing session for a safe and comfortable experience.</p><p><strong>Introducing Yak Chews to Sensitive Dogs</strong><br/><br/>Our protein-rich yak chews are natural and highly satisfying, but dogs with sensitive stomachs should start slowly. For first-time use, we recommend limiting intake to less than one chew per day to help avoid digestive discomfort.</p><p><strong>Naturally Hard, Gradually Softer</strong><br/><br/>Yak chews begin as a dense, long-lasting chew and naturally soften over time as your dog chews, making them ideal for strong chewers and extended chewing sessions.</p><p><strong>Helpful Tip for First-Time Chewers</strong><br/><br/>If your dog is used to softer processed treats or you have concerns about sensitive teeth, soak the yak chew in warm water for about 10 minutes before giving it to your dog. This helps soften the chew slightly while maintaining its durability.</p><p><strong>Safe & Enjoyable Chewing Experience</strong><br/><br/>By following these simple feeding recommendations, you can help your dog enjoy a safer, cleaner, and more satisfying natural chewing experience with Himalayan yak chews.</p>",
         "sizing_fallback": "<p>Orders are typically processed and shipped within 24–48 hours after purchase using trusted carriers such as UPS, FedEx, DHL, or USPS, depending on your location and the fastest available shipping option.</p><p>Most customers receive their orders within 2–5 business days, and in many cases, packages arrive even sooner.</p><p>Every order includes a tracking number so you can monitor your shipment from dispatch to delivery.</p><p>Please note that occasional shipping delays caused by customs processing, weather conditions, or postal carrier issues may occur and are outside our control.</p>",
         "ingredients_fallback": "<p>Yak milk, cow milk, lime juice, and salt.</p>",
-        "reco_heading": "",
+        "reco_heading": "You may also like...",
         "product_link_label": "Quick view",
         "bg_color": "#f6f1e9",
         "text_color": "#2b1408",
