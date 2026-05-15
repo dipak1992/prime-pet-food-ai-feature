@@ -13,6 +13,7 @@
   assign rawhide_url = request.origin | append: '/pages/best-rawhide-alternative'
   assign aggressive_url = request.origin | append: '/pages/best-long-lasting-chew-for-aggressive-chewers'
   assign wholesale_url = request.origin | append: '/pages/wholesale'
+  assign search_base_url = request.origin | append: routes.search_url | append: '?q='
 -%}
 
 <script type="application/ld+json">
@@ -70,7 +71,7 @@
       },
       "potentialAction": {
         "@type": "SearchAction",
-        "target": {{ request.origin | append: routes.search_url | append: '?q={search_term_string}' | json }},
+        "target": "{{ search_base_url }}{%- raw -%}{search_term_string}{%- endraw -%}",
         "query-input": "required name=search_term_string"
       }
     },
