@@ -1500,6 +1500,36 @@
     font-weight: 700;
     line-height: 1.2;
   }
+  /* ── Swipe-to-remove styles (mobile) ── */
+  @media (max-width: 989px) {
+    .ypc-cart-item {
+      position: relative;
+      overflow: visible;
+      will-change: transform;
+    }
+
+    .ypc-cart-item::after {
+      content: "Remove";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #e74c3c;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-radius: 0 22px 22px 0;
+      opacity: var(--swipe-progress, 0);
+      transform: translateX(100%);
+      pointer-events: none;
+      transition: opacity 0.15s ease;
+    }
+  }
 </style>
 
 <script>
