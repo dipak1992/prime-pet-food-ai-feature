@@ -353,7 +353,7 @@
   <section class="prime-chatbot__panel" aria-label="Prime Pet Food helper" aria-hidden="true">
     <div class="prime-chatbot__header">
       <div>
-        <div class="prime-chatbot__title">Prime Chew Concierge</div>
+        <div class="prime-chatbot__title">Prime Pet Food Concierge</div>
         <div class="prime-chatbot__subtitle">Sizing, safety, orders, and wholesale help</div>
       </div>
       <button class="prime-chatbot__close" type="button" aria-label="Close chat" data-prime-chat-close>&times;</button>
@@ -386,7 +386,7 @@
         <input type="email" name="contact[email]" placeholder="Email address" autocomplete="email" required>
         <input type="text" name="contact[name]" placeholder="Name or order number">
         <textarea data-prime-chat-question placeholder="Tell us your question. For sizing, include breed, weight, age, and chewing style." required></textarea>
-        <button type="submit">Send to Prime support</button>
+        <button type="submit">Send to Prime Pet Food support</button>
       </form>
     </div>
   </section>
@@ -446,7 +446,7 @@
       { id: 'safety-senior', category: 'safety', q: 'Can senior dogs use yak chews?', tags: ['senior', 'older dog', 'teeth', 'dental'], a: 'Some senior dogs enjoy yak chews, but dental condition matters. If your dog has weak teeth, missing teeth, dental disease, or a history of cracked teeth, ask your vet before offering any hard chew.' },
       { id: 'safety-swallow', category: 'safety', q: 'What if my dog swallows a piece?', tags: ['swallow', 'choking', 'gulp', 'piece'], a: 'Remove the chew before it becomes small enough to swallow. If your dog swallows a piece and shows coughing, choking, vomiting, discomfort, loss of appetite, or unusual behavior, contact your veterinarian immediately.' },
       { id: 'safety-teeth', category: 'safety', q: 'Can yak chews break teeth?', tags: ['teeth', 'cracked tooth', 'hard'], a: 'Yak chews are hard, long-lasting chews. Dogs with dental issues or extreme chewing force may be at higher risk with any hard chew. Supervise and ask your vet if your dog has dental concerns.' },
-      { id: 'ingredients', category: 'product', q: 'What are Prime Pet Food yak chews made from?', tags: ['ingredients', 'milk', 'salt', 'lime', 'natural'], a: 'Prime yak chews are inspired by a simple Himalayan cheese tradition and made with a minimal ingredient philosophy. Check the product page for the current ingredient list and size-specific details.', links: [{ label: 'View product', href: '/products/himalayan-yak-chews-for-dogs' }] },
+      { id: 'ingredients', category: 'product', q: 'What are Prime Pet Food yak chews made from?', tags: ['ingredients', 'milk', 'salt', 'lime', 'natural'], a: 'Prime Pet Food yak chews are inspired by a simple Himalayan cheese tradition and made with a minimal ingredient philosophy. Check the product page for the current ingredient list and size-specific details.', links: [{ label: 'View product', href: '/products/himalayan-yak-chews-for-dogs' }] },
       { id: 'rawhide', category: 'product', q: 'Are yak chews better than rawhide?', tags: ['rawhide', 'alternative', 'rawhide-free'], a: 'Many dog parents choose yak chews because they are rawhide-free, dense, simple, and cleaner for indoor chew time. Yak chews should still be matched to your dog and given with supervision.', links: [{ label: 'Rawhide alternative guide', href: '/pages/rawhide-alternatives-for-dogs' }] },
       { id: 'odor-mess', category: 'product', q: 'Do yak chews smell or make a mess?', tags: ['smell', 'odor', 'mess', 'clean'], a: 'Yak chews are generally cleaner and lower odor than many animal-based chews. Every dog chews differently, so use them on an easy-to-clean surface and supervise.' },
       { id: 'nub', category: 'product', q: 'What do I do with the leftover end piece?', tags: ['nub', 'end piece', 'microwave', 'puff'], a: 'When the chew becomes small, remove it from your dog. The small nub can often be soaked and microwaved into a puffed crunchy treat, then cooled fully before serving.' },
@@ -675,7 +675,7 @@
     contactForm.addEventListener('submit', function() {
       var message = contactQuestion.value.trim();
       contactBody.value = [
-        'Prime Chatbot fallback question:',
+        'Prime Pet Food chatbot fallback question:',
         message,
         '',
         'Last viewed chatbot question: ' + (lastQuestion || 'None'),

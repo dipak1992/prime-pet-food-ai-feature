@@ -4,7 +4,7 @@ Date: 2026-05-14
 
 ## Executive Summary
 
-This Shopify theme contains the active Prime custom experience plus legacy Ignite theme sections, PageFly output, old page templates, and active app embeds. Cleanup should be conservative: remove only confirmed-unused files, preserve SEO landing pages, and redirect old public URLs before deleting any live Shopify pages.
+This Shopify theme contains the active Prime Pet Food custom experience plus legacy Ignite theme sections, PageFly output, old page templates, and active app embeds. Cleanup should be conservative: remove only confirmed-unused files, preserve SEO landing pages, and redirect old public URLs before deleting any live Shopify pages.
 
 ## What Was Audited
 
@@ -19,7 +19,7 @@ This Shopify theme contains the active Prime custom experience plus legacy Ignit
 ### Keep
 
 - SEO landing pages under `/pages/how-long-*`, `/pages/best-*`, `/pages/dog-chews-*`, and breed pages. These target long-tail yak chew and dog enrichment queries.
-- Active Prime templates:
+- Active Prime Pet Food templates:
   - `page.about-us.json`
   - `page.contact.json`
   - `page.faq.json`

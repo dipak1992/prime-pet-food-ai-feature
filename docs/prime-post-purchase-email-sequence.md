@@ -48,7 +48,7 @@ Content:
 ## Email 5: Referral
 Timing: 35 days after first purchase.
 
-Subject: Share Prime with another dog parent
+Subject: Share Prime Pet Food with another dog parent
 
 Content:
 - Ask for referral or duration report.

@@ -1,9 +1,9 @@
 # Prime Pet Food — Complete Store Master Audit
 ## Implementation-Ready Strategy Document for GPT 5.5
 
-**Audit Date:** May 2026  
-**Auditor Perspective:** CRO strategist, premium DTC UX designer, behavioral psychology expert, Shopify architect, dog-owner beta tester, mobile-first expert, SEO strategist, product manager  
-**Website:** theprimepetfood.com  
+**Audit Date:** May 2026
+**Auditor Perspective:** CRO strategist, premium DTC UX designer, behavioral psychology expert, Shopify architect, dog-owner beta tester, mobile-first expert, SEO strategist, product manager
+**Website:** theprimepetfood.com
 **Brand:** Premium Himalayan Yak Cheese Dog Chews
 
 ---
@@ -20,7 +20,7 @@
 5. **Consistent brand system** — Warm cream backgrounds (#f6f1e9, #fffaf2), deep green ink (#173b2b), amber CTAs (#eb7300), Georgia serif headings. The visual language is cohesive across all custom sections.
 
 ### Biggest Weaknesses
-1. **Inconsistent experience between custom and theme sections** — Custom Prime sections are premium; remaining theme sections (header, announcement bar, some collection elements) feel generic Shopify.
+1. **Inconsistent experience between custom and theme sections** — Custom Prime Pet Food sections are premium; remaining theme sections (header, announcement bar, some collection elements) feel generic Shopify.
 2. **Announcement bar contradicts itself** — Says "Free shipping over $50" but the homepage and product trust bar say "$30." This creates immediate distrust.
 3. **Too many pages doing similar things** — Multiple about pages (`page.about-us.json`, `page.about-us-2.json`), multiple B2B pages (`page.b2b.json`, `page.wholesale.json`), duplicate section files (`b2b.liquid`, `b2b1.liquid`, `b2b2.liquid`). This creates maintenance debt and SEO cannibalization.
 4. **No post-purchase experience** — No thank-you page customization, no order confirmation upsell, no "what to expect" email sequence guidance.
@@ -61,12 +61,12 @@ The store should communicate: "We are the premium dog enrichment brand that give
 | Relationship | Transactional | Routine partner |
 | Emotion | "This chew lasts long" | "My home is calmer because of this" |
 | Trust | "4 ingredients" | "I trust this brand with my dog's health" |
-| Community | No community presence | "I'm part of the Prime dog parent community" |
+| Community | No community presence | "I'm part of the Prime Pet Food dog parent community" |
 
 ## Messaging Improvements
 
 ### Primary Message (Hero)
-**Current:** "Calmer dogs start with a better chew."  
+**Current:** "Calmer dogs start with a better chew."
 **Assessment:** ✅ Excellent. Emotional, outcome-focused, not product-focused.
 
 ### Supporting Messages That Need Work
@@ -84,24 +84,24 @@ The store should communicate: "We are the premium dog enrichment brand that give
 
 # 3. Homepage Audit
 
-**File:** `sections/prime-homepage-experience.liquid` (3,135 lines)  
-**Template:** `templates/index.json`  
+**File:** `sections/prime-homepage-experience.liquid` (3,135 lines)
+**Template:** `templates/index.json`
 **Sections in order:** prime_homepage_experience → video_carousel → prime_video_cta
 
 ## Section-by-Section Analysis
 
 ### 3.1 Sticky Shop Bar
-**Purpose:** Persistent CTA after scrolling past hero  
-**Status:** ✅ KEEP  
-**Content:** "Rawhide-free • 67 min avg • Free shipping $30+"  
+**Purpose:** Persistent CTA after scrolling past hero
+**Status:** ✅ KEEP
+**Content:** "Rawhide-free • 67 min avg • Free shipping $30+"
 **Issues:**
 - None significant. Good implementation.
 **Recommendation:** Add a subtle entrance animation (slide down) instead of abrupt appearance.
 
 ### 3.2 Hero Section
-**Purpose:** Emotional hook + primary CTA  
-**Status:** ✅ KEEP — this is excellent  
-**Content:** Headline + subtext + dual CTAs + micro-copy + proof badges  
+**Purpose:** Emotional hook + primary CTA
+**Status:** ✅ KEEP — this is excellent
+**Content:** Headline + subtext + dual CTAs + micro-copy + proof badges
 **Strengths:**
 - Social badge ("Trusted by 10,000+ dog parents") creates immediate credibility
 - Dual CTAs ("Shop yak chews" + "Choose by size") serve different buyer intents
@@ -118,9 +118,9 @@ The store should communicate: "We are the premium dog enrichment brand that give
 - On mobile, reduce hero image height to 50vh so headline + CTA are visible without scrolling
 
 ### 3.3 Trust Bar
-**Purpose:** Quick-scan credibility stats  
-**Status:** ✅ KEEP  
-**Content:** 20k+ Dog parents | 4 Ingredients only | 67 min Avg chew time | 30-day Guarantee | ★★★★★ 4.9 (2,400+ reviews)  
+**Purpose:** Quick-scan credibility stats
+**Status:** ✅ KEEP
+**Content:** 20k+ Dog parents | 4 Ingredients only | 67 min Avg chew time | 30-day Guarantee | ★★★★★ 4.9 (2,400+ reviews)
 **Strengths:**
 - 5 stats is the right density
 - Star rating as 5th stat adds visual variety
@@ -132,9 +132,9 @@ The store should communicate: "We are the premium dog enrichment brand that give
 - Standardize to "20,000+" across all touchpoints
 
 ### 3.4 Outcomes Section ("Built for calmer homes")
-**Purpose:** Emotional benefit framing  
-**Status:** ✅ KEEP  
-**Content:** 3 outcomes — Longer focus, Cleaner ingredients, Easier routines  
+**Purpose:** Emotional benefit framing
+**Status:** ✅ KEEP
+**Content:** 3 outcomes — Longer focus, Cleaner ingredients, Easier routines
 **Strengths:**
 - Outcome-focused, not feature-focused
 - Numbered cards create visual hierarchy
@@ -144,9 +144,9 @@ The store should communicate: "We are the premium dog enrichment brand that give
 - Add subtle icons or micro-illustrations to each card for visual richness
 
 ### 3.5 Products Section ("Choose the right chew size first")
-**Purpose:** Primary product showcase with size guidance  
-**Status:** ✅ KEEP  
-**Content:** 3 product cards (Small/Medium/Large) with weight ranges, descriptions, and ATC  
+**Purpose:** Primary product showcase with size guidance
+**Status:** ✅ KEEP
+**Content:** 3 product cards (Small/Medium/Large) with weight ranges, descriptions, and ATC
 **Strengths:**
 - Size-first approach reduces decision fatigue
 - "Most popular" label on Medium guides uncertain buyers
@@ -160,9 +160,9 @@ The store should communicate: "We are the premium dog enrichment brand that give
 - Add "Best for [breed examples]" under each size card
 
 ### 3.6 Quiz Section ("Find your dog's perfect chew in 30 seconds")
-**Purpose:** Interactive engagement + personalization  
-**Status:** ✅ KEEP — unique differentiator  
-**Content:** 3-question quiz (weight → chewing style → goal) → personalized recommendation  
+**Purpose:** Interactive engagement + personalization
+**Status:** ✅ KEEP — unique differentiator
+**Content:** 3-question quiz (weight → chewing style → goal) → personalized recommendation
 **Strengths:**
 - localStorage persistence means returning visitors see their saved result
 - Questions are genuinely useful (not gimmicky)
@@ -180,9 +180,9 @@ The store should communicate: "We are the premium dog enrichment brand that give
 - Consider a floating "Find My Size" button that opens quiz as a modal
 
 ### 3.7 Subscribe & Save Section
-**Purpose:** Subscription conversion  
-**Status:** ✅ KEEP  
-**Content:** Image + benefits + savings offer + referral teaser  
+**Purpose:** Subscription conversion
+**Status:** ✅ KEEP
+**Content:** Image + benefits + savings offer + referral teaser
 **Strengths:**
 - "Save up to 30%" is compelling
 - Referral teaser ("Refer a friend & you both get $10 off") adds viral loop
@@ -196,9 +196,9 @@ The store should communicate: "We are the premium dog enrichment brand that give
 - Add a visual showing the delivery cadence (calendar graphic)
 
 ### 3.8 Reviews Section ("What changes after a better chew")
-**Purpose:** Social proof with emotional stories  
-**Status:** ✅ KEEP  
-**Content:** 3 review cards with breed + duration badges  
+**Purpose:** Social proof with emotional stories
+**Status:** ✅ KEEP
+**Content:** 3 review cards with breed + duration badges
 **Strengths:**
 - Breed-specific badges ("Golden Retriever • 72 min") are brilliant — they let buyers find dogs like theirs
 - Reviews focus on lifestyle change, not product features
@@ -211,13 +211,13 @@ The store should communicate: "We are the premium dog enrichment brand that give
 - Add "Read all 2,400+ reviews →" link
 
 ### 3.9 Comparison Table ("Not all chews are created equal")
-**Purpose:** Competitive differentiation  
-**Status:** ✅ KEEP — very effective  
-**Content:** Prime vs Rawhide vs Bully Sticks across 6 metrics  
+**Purpose:** Competitive differentiation
+**Status:** ✅ KEEP — very effective
+**Content:** Prime Pet Food vs Rawhide vs Bully Sticks across 6 metrics
 **Strengths:**
 - Visual checkmarks/X marks make scanning instant
 - "Price per hour" metric is genius — reframes value perception
-- Prime column is highlighted
+- Prime Pet Food column is highlighted
 **Issues:**
 - Table is hard to read on mobile (horizontal scroll needed)
 **Recommendations:**
@@ -225,9 +225,9 @@ The store should communicate: "We are the premium dog enrichment brand that give
 - Add a 4th competitor column: "Nylon/Rubber Toys" (common alternative)
 
 ### 3.10 Routine Section ("Better chew time in 3 steps")
-**Purpose:** Usage education + safety messaging  
-**Status:** ✅ KEEP  
-**Content:** 3 steps — Pick size, Supervise, Remove small end  
+**Purpose:** Usage education + safety messaging
+**Status:** ✅ KEEP
+**Content:** 3 steps — Pick size, Supervise, Remove small end
 **Strengths:**
 - Addresses safety concern proactively
 - "Supervised enrichment" language positions the brand as responsible
@@ -237,9 +237,9 @@ The store should communicate: "We are the premium dog enrichment brand that give
 - Add a 15-second looping video showing the 3-step routine
 
 ### 3.11 Ingredients Section ("4 ingredients. Nothing else.")
-**Purpose:** Transparency + trust building  
-**Status:** ✅ KEEP  
-**Content:** 4 ingredient cards with photos + badges (No preservatives, No artificial colors, etc.)  
+**Purpose:** Transparency + trust building
+**Status:** ✅ KEEP
+**Content:** 4 ingredient cards with photos + badges (No preservatives, No artificial colors, etc.)
 **Strengths:**
 - Beautiful ingredient photography
 - "Human-grade facility" badge is a strong trust signal
@@ -249,9 +249,9 @@ The store should communicate: "We are the premium dog enrichment brand that give
 - Add a "See our facility" link or video for maximum transparency
 
 ### 3.12 Craft/Founder Section ("Simple chews, held to a higher standard")
-**Purpose:** Brand story + human connection  
-**Status:** ✅ KEEP  
-**Content:** Founder photo + brand philosophy  
+**Purpose:** Brand story + human connection
+**Status:** ✅ KEEP
+**Content:** Founder photo + brand philosophy
 **Strengths:**
 - Founder-led brands convert higher than faceless brands
 - Copy is authentic and specific
@@ -261,9 +261,9 @@ The store should communicate: "We are the premium dog enrichment brand that give
 - Use a different founder photo here (behind-the-scenes, with dogs, or in Nepal)
 
 ### 3.13 Dog Fit Section ("See how long it lasts for dogs like yours")
-**Purpose:** Breed-specific duration data  
-**Status:** ✅ KEEP — unique and valuable  
-**Content:** Breed cards with UGC photos + duration ranges  
+**Purpose:** Breed-specific duration data
+**Status:** ✅ KEEP — unique and valuable
+**Content:** Breed cards with UGC photos + duration ranges
 **Strengths:**
 - Breed-specific data is exactly what buyers search for
 - UGC photos add authenticity
@@ -274,9 +274,9 @@ The store should communicate: "We are the premium dog enrichment brand that give
 - Make this section link to the chew analyzer for personalized estimates
 
 ### 3.14 Vet Endorsement Section
-**Purpose:** Authority/credibility  
-**Status:** ✅ KEEP  
-**Content:** Vet quote with credentials  
+**Purpose:** Authority/credibility
+**Status:** ✅ KEEP
+**Content:** Vet quote with credentials
 **Strengths:**
 - Professional endorsement adds medical credibility
 **Issues:**
@@ -286,18 +286,18 @@ The store should communicate: "We are the premium dog enrichment brand that give
 - If no real vet endorsement exists, change to "Vet-reviewed ingredient list"
 
 ### 3.15 Final CTA Section
-**Purpose:** Bottom-of-page conversion  
-**Status:** ✅ KEEP  
-**Content:** Emotional closing + CTA  
+**Purpose:** Bottom-of-page conversion
+**Status:** ✅ KEEP
+**Content:** Emotional closing + CTA
 **Issues:**
 - Not visible in current template — may be handled by `prime-video-cta` section
 **Recommendations:**
 - Ensure a strong closing CTA exists with urgency element
 
 ### 3.16 Video Carousel
-**Purpose:** Social proof via real dog videos  
-**Status:** ✅ KEEP  
-**Content:** 7 videos of real dogs chewing  
+**Purpose:** Social proof via real dog videos
+**Status:** ✅ KEEP
+**Content:** 7 videos of real dogs chewing
 **Strengths:**
 - Video is the highest-trust content format
 - Real dogs, not stock footage
@@ -310,8 +310,8 @@ The store should communicate: "We are the premium dog enrichment brand that give
 - Ensure videos are muted by default with sound toggle
 
 ### HOMEPAGE OVERALL VERDICT
-**Score: 9.2/10**  
-**Primary Issue:** Too long for mobile. Needs 2-3 sections removed or collapsed.  
+**Score: 9.2/10**
+**Primary Issue:** Too long for mobile. Needs 2-3 sections removed or collapsed.
 **Sections to consider removing/collapsing on mobile:**
 - Routine section (move to FAQ or product page)
 - Vet endorsement (move to product page)
@@ -370,8 +370,8 @@ Cannot see the `main-menu` structure from theme files. Based on footer links, th
 
 # 5. Collection Page Audit
 
-**File:** `sections/prime-collection-hero.liquid` (279 lines)  
-**Template:** `templates/collection.json`  
+**File:** `sections/prime-collection-hero.liquid` (279 lines)
+**Template:** `templates/collection.json`
 **Sections:** prime-collection-hero → prime-subscribe-strip → main-collection-product-grid
 
 ## Current State
@@ -421,8 +421,8 @@ Between hero and products means buyers must scroll past it to see products. Some
 
 # 6. Product Page Audit
 
-**File:** `sections/ypc-product-hero.liquid` (1,661 lines)  
-**Template:** `templates/product.json`  
+**File:** `sections/ypc-product-hero.liquid` (1,661 lines)
+**Template:** `templates/product.json`
 **Key sections:** breadcrumbs → main-product (disabled) → ypc-product-hero → prime-product-trust-bar → chew-analyzer → prime-sticky-atc
 
 ## Current State — Custom Product Hero
@@ -490,7 +490,7 @@ The homepage has a beautiful ingredients section. The product page doesn't show 
 
 # 7. About Page Audit
 
-**File:** `sections/prime-founder-about.liquid` (668 lines)  
+**File:** `sections/prime-founder-about.liquid` (668 lines)
 **Template:** `templates/page.about-us.json`
 
 ## Current State
@@ -512,7 +512,7 @@ The homepage has a beautiful ingredients section. The product page doesn't show 
 
 ### Issue 2: No Team/Scale Indicators 🟡
 The page is entirely founder-focused. For a brand claiming "20,000+ dog parents," there's no indication of team size, warehouse, or operational scale.
-- **FIX:** Add a brief "The Prime team" section or at minimum mention the team
+- **FIX:** Add a brief "The Prime Pet Food team" section or at minimum mention the team
 
 ### Issue 3: No Social Proof on About Page 🟡
 No reviews, no customer count, no press mentions.
@@ -533,7 +533,7 @@ Only CTAs are "Shop yak chews" and "Read the story." No email capture, no quiz l
 
 # 8. FAQ Page Audit
 
-**File:** `sections/prime-faq-page.liquid` (383 lines)  
+**File:** `sections/prime-faq-page.liquid` (383 lines)
 **Template:** `templates/page.faq.json`
 
 ## Current State
@@ -582,7 +582,7 @@ With 15+ FAQ items, buyers can't search for their specific question.
 
 # 9. Contact Page Audit
 
-**File:** `sections/prime-contact-page.liquid` (348 lines)  
+**File:** `sections/prime-contact-page.liquid` (348 lines)
 **Template:** `templates/page.contact.json`
 
 ## Current State
@@ -781,7 +781,7 @@ Leftover from previous theme. Generic copy about "toys and accessories."
 ## Triggers Missing ❌
 1. **Identity** — "You're the kind of dog parent who reads labels"
 2. **Guilt reduction** — "You deserve 67 minutes of peace"
-3. **Belonging** — "Join 20,000+ Prime dog parents"
+3. **Belonging** — "Join 20,000+ Prime Pet Food dog parents"
 4. **Progress** — Enrichment journey narrative
 5. **Loss aversion** — Data on destructive behavior reduction
 
@@ -851,7 +851,7 @@ Leftover from previous theme. Generic copy about "toys and accessories."
 
 # 20. Competitive Positioning Audit
 
-## Prime's Advantages
+## Prime Pet Food's Advantages
 1. AI-powered personalization (unique in category)
 2. Premium DTC experience (competitors sell on Amazon)
 3. Founder authenticity (Nepali cultural connection)
