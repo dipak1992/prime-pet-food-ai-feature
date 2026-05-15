@@ -896,8 +896,8 @@
     }
 
     .pycp h1 {
-      font-size: 46px;
-      line-height: 1.02;
+      font-size: 38px;
+      line-height: 1.06;
     }
 
     .pycp h2 {
@@ -911,33 +911,40 @@
     }
 
     .pycp-hero {
-      min-height: 820px;
-      align-items: end;
+      display: block;
+      min-height: 0;
+      background: #18130f;
     }
 
     .pycp-hero__media {
-      height: 62%;
-      bottom: auto;
+      position: relative;
+      inset: auto;
+      z-index: 0;
+      height: clamp(315px, 58vh, 430px);
     }
 
     .pycp-hero__media img {
-      object-position: 56% 30%;
+      object-position: 58% 38%;
     }
 
     .pycp-hero__media::after {
       background:
-        linear-gradient(180deg, rgba(18, 14, 10, 0.04) 0%, rgba(18, 14, 10, 0.16) 48%, rgba(18, 14, 10, 0.94) 100%),
-        linear-gradient(90deg, rgba(18, 14, 10, 0.32) 0%, rgba(18, 14, 10, 0.02) 68%);
+        linear-gradient(180deg, rgba(18, 14, 10, 0.02) 0%, rgba(18, 14, 10, 0.14) 54%, #18130f 100%),
+        linear-gradient(90deg, rgba(18, 14, 10, 0.22) 0%, rgba(18, 14, 10, 0.02) 72%);
     }
 
     .pycp-hero__overlay {
-      background:
-        linear-gradient(180deg, rgba(24, 19, 15, 0) 0%, rgba(24, 19, 15, 0) 40%, rgba(24, 19, 15, 0.92) 63%, #18130f 100%),
-        radial-gradient(circle at 20% 62%, rgba(184, 95, 50, 0.22), transparent 34%);
+      display: none;
     }
 
     .pycp-hero__content {
-      padding-block: 455px 54px;
+      position: relative;
+      z-index: 1;
+      padding-block: 28px 116px;
+      margin-top: -1px;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(184, 95, 50, 0.18), transparent 32%),
+        linear-gradient(180deg, #18130f 0%, #120e0b 100%);
     }
 
     .pycp-breadcrumb {
@@ -951,9 +958,23 @@
       align-items: stretch;
     }
 
+    .pycp-hero__actions {
+      margin-top: 28px;
+    }
+
+    .pycp-hero__proof {
+      margin-top: 18px;
+    }
+
     .pycp-button,
     .pycp-inline-links a {
       width: 100%;
+    }
+
+    .pycp-button {
+      min-height: 56px;
+      padding: 16px 18px;
+      font-size: 12px;
     }
 
     .pycp-section {
