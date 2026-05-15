@@ -530,6 +530,7 @@
   min-width: 28rem;
   max-width: 42rem;
   height: 100%;
+  max-height: 100dvh;
   background: #ffffff;
   color: #1a1a1a;
   z-index: 2;
@@ -537,6 +538,7 @@
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   box-shadow: 10px 0 30px rgba(0,0,0,0.1);
 }
 
@@ -574,6 +576,8 @@ body.header-drawer-open .header__drawer-content * {
   justify-content: space-between;
   padding: 2.5rem;
   border-bottom: 1px solid rgba(0,0,0,0.05);
+  flex: 0 0 auto;
+  background: #ffffff;
 }
 
 .header__drawer-recommendation {
@@ -582,6 +586,7 @@ body.header-drawer-open .header__drawer-content * {
   border: 1px solid rgba(210, 99, 46, 0.22);
   border-radius: 1.6rem;
   background: #fff7ec;
+  flex: 0 0 auto;
 }
 
 .header__drawer-recommendation p {
@@ -637,11 +642,15 @@ body.header-drawer-open .header__drawer-content * {
 }
 
 .header__drawer-nav {
-  padding: 2rem 0 2rem 2rem;
+  position: relative;
+  z-index: 3;
+  padding: 2rem 2.5rem 2.5rem;
   background: #ffffff;
   color: #1a1a1a;
-  flex: 1;
+  flex: 1 1 auto;
+  min-height: 0;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .header__drawer-menu {
@@ -652,18 +661,20 @@ body.header-drawer-open .header__drawer-content * {
 
 .header__drawer-item {
   border-bottom: 1px solid rgba(0,0,0,0.05);
+  background: #ffffff;
 }
 
 .header__drawer-item-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-inline-start: 1rem;
+  padding-inline-start: 0;
+  min-height: 5.6rem;
 }
 
 .header__drawer-link {
   display: block;
-  padding: 1.5rem 0 1.5rem 0.8rem;
+  padding: 1.5rem 0;
   text-decoration: none;
   color: #1a1a1a !important;
   font-size: 1.9rem;
@@ -671,6 +682,8 @@ body.header-drawer-open .header__drawer-content * {
   line-height: 1.25;
   letter-spacing: 0;
   flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .header__drawer-toggle {
@@ -699,7 +712,7 @@ body.header-drawer-open .header__drawer-content * {
 
 .header__drawer-submenu-link {
   display: block;
-  padding: 1.2rem 0 1.2rem 0.8rem;
+  padding: 1.2rem 0;
   text-decoration: none;
   color: #1a1a1a !important;
   font-size: 1.55rem;
@@ -722,7 +735,7 @@ body.header-drawer-open .header__drawer-content * {
 
 .header__drawer-grandsubmenu-link {
   display: block;
-  padding: 1rem 0 1rem 0.8rem;
+  padding: 1rem 0;
   text-decoration: none;
   color: #3a3a3a !important;
   font-size: 1.42rem;

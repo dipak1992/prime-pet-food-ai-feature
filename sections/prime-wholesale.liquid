@@ -286,6 +286,15 @@
 
   <!-- FINAL CTA -->
   <section class="pw-final-cta">
+    <div class="pw-final-cta__media" aria-hidden="true">
+      <img
+        src="{{ 'prime-wholesale-final-cta.jpg' | asset_url }}"
+        alt=""
+        width="1800"
+        height="1199"
+        loading="lazy"
+      >
+    </div>
     <div class="pw-shell pw-final-cta__inner">
       <h2>{{ section.settings.final_cta_heading | default: 'Ready to Bring Premium Dog Enrichment to Your Customers?' }}</h2>
       <p>{{ section.settings.final_cta_subtext | default: 'Join 200+ retailers already stocking Prime Pet Food. Apply today and start offering the chews that dogs love and owners trust.' }}</p>
@@ -431,11 +440,17 @@
   .pw-apply__note{font-size:13px;color:var(--pw-muted);margin-top:16px}
 
   /* Final CTA */
-  .pw-final-cta{padding:96px 0;background:linear-gradient(135deg,#1e1a15 0%,#2d2520 100%);text-align:center}
-  .pw-final-cta__inner{max-width:700px}
-  .pw-final-cta h2{color:#fff}
-  .pw-final-cta p{color:rgba(255,250,242,0.75);font-size:18px;margin-bottom:32px}
-  .pw-final-cta__buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+  .pw-final-cta{position:relative;isolation:isolate;overflow:hidden;padding:108px 0;background:#1e1a15;text-align:left}
+  .pw-final-cta::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(18,14,10,0.9) 0%,rgba(18,14,10,0.76) 48%,rgba(18,14,10,0.52) 100%)}
+  .pw-final-cta::after{content:'';position:absolute;inset:0;z-index:1;background:radial-gradient(circle at 14% 24%,rgba(194,97,49,0.24),transparent 34%),linear-gradient(180deg,rgba(18,14,10,0.08),rgba(18,14,10,0.48))}
+  .pw-final-cta__media{position:absolute;inset:0;z-index:0}
+  .pw-final-cta__media img{width:100%;height:100%;object-fit:cover;object-position:center center;filter:saturate(1.06) contrast(1.05)}
+  .pw-final-cta__inner{position:relative;z-index:2;max-width:1200px}
+  .pw-final-cta h2{max-width:720px;color:#fff;text-shadow:0 2px 18px rgba(0,0,0,0.32)}
+  .pw-final-cta p{max-width:660px;color:rgba(255,250,242,0.82);font-size:18px;margin-bottom:32px;text-shadow:0 1px 12px rgba(0,0,0,0.28)}
+  .pw-final-cta__buttons{display:flex;gap:16px;justify-content:flex-start;flex-wrap:wrap}
+  .pw-final-cta .pw-btn--secondary{background:rgba(255,250,242,0.08);color:#fffaf2;border-color:rgba(255,250,242,0.72);backdrop-filter:blur(8px)}
+  .pw-final-cta .pw-btn--ghost{background:rgba(18,14,10,0.22);color:#fffaf2;border-color:rgba(255,250,242,0.34);backdrop-filter:blur(8px)}
 
   /* Responsive */
   @media(max-width:900px){
@@ -468,7 +483,14 @@
     .pw-hero__stats{gap:14px;padding-top:30px}
     .pw-hero__stat strong{font-size:22px}
     .pw-hero__stat span{font-size:12px;line-height:1.25}
-    .pw-final-cta__buttons{flex-direction:column;align-items:center}
+    .pw-final-cta{padding:76px 0;text-align:center}
+    .pw-final-cta::before{background:linear-gradient(180deg,rgba(18,14,10,0.78) 0%,rgba(18,14,10,0.88) 40%,rgba(18,14,10,0.94) 100%)}
+    .pw-final-cta::after{background:radial-gradient(circle at 50% 18%,rgba(194,97,49,0.2),transparent 38%),linear-gradient(180deg,rgba(18,14,10,0.12),rgba(18,14,10,0.56))}
+    .pw-final-cta__media img{object-position:center center}
+    .pw-final-cta h2{font-size:clamp(32px,10vw,44px)}
+    .pw-final-cta p{font-size:16px;line-height:1.62}
+    .pw-final-cta__buttons{flex-direction:column;align-items:stretch}
+    .pw-final-cta__buttons .pw-btn{width:100%;min-height:52px}
   }
 </style>
 
