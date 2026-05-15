@@ -578,6 +578,7 @@ body.header-drawer-open .header__drawer-content * {
   border-bottom: 1px solid rgba(0,0,0,0.05);
   flex: 0 0 auto;
   background: #ffffff;
+  order: 1;
 }
 
 .header__drawer-recommendation {
@@ -587,6 +588,7 @@ body.header-drawer-open .header__drawer-content * {
   border-radius: 1.6rem;
   background: #fff7ec;
   flex: 0 0 auto;
+  order: 3;
 }
 
 .header__drawer-recommendation p {
@@ -651,6 +653,7 @@ body.header-drawer-open .header__drawer-content * {
   min-height: 0;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  order: 2;
 }
 
 .header__drawer-menu {
@@ -741,6 +744,49 @@ body.header-drawer-open .header__drawer-content * {
   font-size: 1.42rem;
   line-height: 1.35;
   letter-spacing: 0;
+}
+
+@media screen and (max-width: 749px) {
+  .header__drawer-content {
+    width: min(88vw, 42rem);
+  }
+
+  .header__drawer-header {
+    padding: 1.8rem 2rem;
+  }
+
+  .header__drawer-nav {
+    flex: 1 1 auto;
+    padding: 1rem 2rem 1.4rem;
+  }
+
+  .header__drawer-item-header {
+    min-height: 5rem;
+  }
+
+  .header__drawer-link {
+    padding: 1.25rem 0;
+    color: #1a1a1a !important;
+    font-size: 1.72rem;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .header__drawer-recommendation {
+    margin: 0 2rem 2rem;
+    padding: 1.2rem;
+    border-radius: 1.4rem;
+  }
+
+  .header__drawer-recommendation p {
+    margin-bottom: 0.8rem;
+    font-size: 1.32rem;
+  }
+
+  .header__drawer-recommendation a {
+    min-height: 3.8rem;
+    font-size: 1.28rem;
+  }
 }
 
 .header__burger-toggle {
