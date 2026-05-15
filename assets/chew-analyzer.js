@@ -398,25 +398,8 @@ CA._track=function(event,data){
   try{document.dispatchEvent(new CustomEvent('chew-analyzer:'+event,{detail:data}));}catch(e){}
 };
 
-// Sticky CTA
-window.ChewAnalyzerStickyCTA=function(){
-  var self=this;this.visible=false;
-  this.el=document.querySelector('.ca-sticky-cta');
-  if(!this.el){
-    this.el=document.createElement('div');
-    this.el.className='ca-sticky-cta';
-    this.el.innerHTML='<a href="/pages/how-long-will-this-last-for-my-dog" class="ca-sticky-cta__btn"><span class="ca-sticky-cta__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2"/><path d="M8 12.5L11 15.5L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Find My Dog Size</span></a>';
-    document.body.appendChild(this.el);
-  }
-  this.el.querySelector('.ca-sticky-cta__btn').addEventListener('click',function(e){
-    e.currentTarget.blur();
-  });
-  window.addEventListener('scroll',function(){
-    var show=window.scrollY>400;
-    if(show&&!self.visible){self.el.classList.add('ca-sticky-cta--visible');self.visible=true;}
-    else if(!show&&self.visible){self.el.classList.remove('ca-sticky-cta--visible');self.visible=false;}
-  },{passive:true});
-};
+// Sticky CTA intentionally disabled. The estimator still works through inline links.
+window.ChewAnalyzerStickyCTA=function(){};
 
 // Auto-init
 function initAll(){
@@ -434,7 +417,6 @@ function initAll(){
       setTimeout(function(){if(target._chewAnalyzer&&!target._chewAnalyzer.isOpen)target._chewAnalyzer.open();},450);
     });
   });
-  if(window.innerWidth<=768&&!window._caStickyCTA)window._caStickyCTA=new window.ChewAnalyzerStickyCTA();
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initAll);
 else initAll();
