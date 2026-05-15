@@ -68,7 +68,7 @@
 
         <nav class="header__nav desktop-only">
           <ul class="header__menu">
-            {%- if section.settings.menu != blank -%}
+            {%- if section.settings.menu != blank and section.settings.menu.links.size > 0 -%}
               {%- for link in section.settings.menu.links -%}
                 {%- liquid
                   assign link_url = link.url
@@ -266,7 +266,7 @@
       </div>
       <nav class="header__drawer-nav">
         <ul class="header__drawer-menu">
-          {%- if section.settings.menu != blank -%}
+          {%- if section.settings.menu != blank and section.settings.menu.links.size > 0 -%}
             {%- for link in section.settings.menu.links -%}
               {%- liquid
                 assign link_url = link.url

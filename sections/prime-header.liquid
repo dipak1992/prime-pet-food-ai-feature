@@ -83,7 +83,7 @@
               <li class="header__menu-item">
                 <a href="/pages/about-us" class="header__link">Who We Are</a>
               </li>
-            {%- elsif section.settings.menu != blank -%}
+            {%- elsif section.settings.menu != blank and section.settings.menu.links.size > 0 -%}
               {%- for link in section.settings.menu.links -%}
                 {%- liquid
                   assign link_url = link.url
@@ -304,7 +304,7 @@
                 <a href="/pages/about-us" class="header__drawer-link">Who We Are</a>
               </div>
             </li>
-          {%- elsif section.settings.menu != blank -%}
+          {%- elsif section.settings.menu != blank and section.settings.menu.links.size > 0 -%}
             {%- for link in section.settings.menu.links -%}
               {%- liquid
                 assign link_url = link.url
