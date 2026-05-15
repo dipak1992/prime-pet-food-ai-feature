@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "prime_yak_process": {
+      "type": "prime-yak-chew-process",
+      "settings": {}
+    }
+  },
+  "order": [
+    "prime_yak_process"
+  ]
+}
