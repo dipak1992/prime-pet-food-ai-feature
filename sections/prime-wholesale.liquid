@@ -6,7 +6,16 @@
 
   <!-- HERO -->
   <section class="pw-hero">
-    <div class="pw-hero__bg" aria-hidden="true"></div>
+    <div class="pw-hero__bg" aria-hidden="true">
+      <img
+        src="{{ 'prime-wholesale-hero-chews.jpg' | asset_url }}"
+        alt=""
+        width="2000"
+        height="1333"
+        loading="eager"
+        fetchpriority="high"
+      >
+    </div>
     <div class="pw-shell pw-hero__inner">
       <div class="pw-hero__badge">{{ section.settings.hero_badge | default: 'Now Accepting Wholesale Partners' }}</div>
       <h1 class="pw-hero__headline">{{ section.settings.hero_headline | default: 'Premium Himalayan Dog Chews for Modern Pet Retailers' }}</h1>
@@ -313,9 +322,12 @@
   .pw-btn--lg{padding:18px 40px;font-size:16px}
 
   /* Hero */
-  .pw-hero{position:relative;padding:100px 0 80px;background:linear-gradient(135deg,#1e1a15 0%,#2d2520 50%,#1e1a15 100%);overflow:hidden}
-  .pw-hero__bg{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 30%,rgba(184,95,50,0.15) 0%,transparent 60%)}
-  .pw-hero__inner{position:relative;text-align:center;max-width:800px}
+  .pw-hero{position:relative;isolation:isolate;padding:110px 0 86px;background:#1e1a15;overflow:hidden}
+  .pw-hero__bg{position:absolute;inset:0;z-index:0}
+  .pw-hero__bg img{width:100%;height:100%;object-fit:cover;object-position:center center;filter:saturate(1.08) contrast(1.06)}
+  .pw-hero__bg::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(18,14,10,0.82) 0%,rgba(18,14,10,0.66) 48%,rgba(18,14,10,0.76) 100%)}
+  .pw-hero__bg::after{content:'';position:absolute;inset:0;z-index:2;background:radial-gradient(ellipse at 50% 18%,rgba(184,95,50,0.34) 0%,rgba(184,95,50,0.08) 38%,transparent 70%)}
+  .pw-hero__inner{position:relative;z-index:1;text-align:center;max-width:840px}
   .pw-hero__badge{display:inline-block;padding:8px 20px;background:rgba(184,95,50,0.15);border:1px solid rgba(184,95,50,0.3);border-radius:999px;color:#f4c27d;font-size:13px;font-weight:600;margin-bottom:24px}
   .pw-hero__headline{color:#fff;font-size:clamp(32px,5vw,56px);margin-bottom:20px}
   .pw-hero__subtext{color:rgba(255,250,242,0.8);font-size:clamp(16px,2vw,20px);max-width:640px;margin:0 auto 36px}
@@ -438,7 +450,12 @@
     .pw-hero__stats{grid-template-columns:repeat(2,1fr)}
   }
   @media(max-width:640px){
-    .pw-hero{padding:72px 0 56px}
+    .pw-shell{padding:0 20px}
+    .pw-hero{padding:72px 0 50px}
+    .pw-hero__bg img{object-position:center top}
+    .pw-hero__bg::before{background:linear-gradient(180deg,rgba(18,14,10,0.54) 0%,rgba(18,14,10,0.82) 34%,rgba(18,14,10,0.92) 100%)}
+    .pw-hero__headline{font-size:clamp(34px,12vw,46px);letter-spacing:-0.035em}
+    .pw-hero__subtext{font-size:16px;line-height:1.55}
     .pw-why,.pw-benefits,.pw-tiers,.pw-products,.pw-display,.pw-audience,.pw-founder,.pw-process,.pw-faq,.pw-apply,.pw-final-cta{padding:64px 0}
     .pw-why__grid,.pw-benefits__grid,.pw-tiers__grid{grid-template-columns:1fr}
     .pw-display__packs{gap:8px}
@@ -446,7 +463,11 @@
     .pw-audience__grid{grid-template-columns:repeat(2,1fr)}
     .pw-apply__form{padding:28px 20px}
     .pw-apply__row{grid-template-columns:1fr}
-    .pw-hero__ctas{flex-direction:column;align-items:center}
+    .pw-hero__ctas{flex-direction:column;align-items:stretch;margin-bottom:42px}
+    .pw-hero__ctas .pw-btn{width:100%;min-height:52px;padding:14px 20px}
+    .pw-hero__stats{gap:14px;padding-top:30px}
+    .pw-hero__stat strong{font-size:22px}
+    .pw-hero__stat span{font-size:12px;line-height:1.25}
     .pw-final-cta__buttons{flex-direction:column;align-items:center}
   }
 </style>
