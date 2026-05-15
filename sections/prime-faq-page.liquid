@@ -53,9 +53,32 @@
               <div>
                 <p>{{ parts[1] }}</p>
                 <p class="pfq-related">
-                  <a href="/pages/how-long-will-this-last-for-my-dog">Use the size estimator</a>
-                  <span>·</span>
-                  <a href="/collections/all">Shop by size</a>
+                  {% case parts[0] %}
+                    {% when 'Are yak chews safe for dogs?' %}
+                      <a href="/pages/yak-chew-safety-guide">Read the yak chew safety guide</a>
+                      <span>·</span>
+                      <a href="/pages/how-long-will-this-last-for-my-dog">Use the size estimator</a>
+                    {% when 'Are yak chews better than rawhide?' %}
+                      <a href="/pages/best-rawhide-alternative">Compare rawhide alternatives</a>
+                      <span>·</span>
+                      <a href="/pages/natural-dog-chews">Explore natural dog chews</a>
+                    {% when 'Can puppies eat yak chews?' %}
+                      <a href="/pages/yak-chews-for-puppies">Read the puppy yak chew guide</a>
+                      <span>·</span>
+                      <a href="/pages/yak-chew-safety-guide">Review safety basics</a>
+                    {% when 'What if my dog swallows a small piece?' %}
+                      <a href="/pages/yak-chew-safety-guide">Read small-piece safety guidance</a>
+                      <span>·</span>
+                      <a href="/pages/contact">Contact support</a>
+                    {% when 'How often should I give a yak chew?' %}
+                      <a href="/pages/are-yak-chews-digestible">Read the digestibility guide</a>
+                      <span>·</span>
+                      <a href="/pages/how-long-do-yak-chews-last">Plan chew duration</a>
+                    {% else %}
+                      <a href="/pages/yak-chew-safety-guide">Read the safety guide</a>
+                      <span>·</span>
+                      <a href="/collections/all">Shop by size</a>
+                  {% endcase %}
                 </p>
               </div>
             </details>
