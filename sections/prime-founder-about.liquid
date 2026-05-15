@@ -1,15 +1,16 @@
 {% liquid
   assign founder_image_url = 'prime-founder.png' | asset_url
+  assign hero_image_url = 'prime-about-himalayas-yak-hero.png' | asset_url
 %}
 
 <section class="prime-founder-about" aria-labelledby="PrimeFounderAboutTitle">
   <div class="pfa-hero">
     <div class="pfa-hero__media">
       <img
-        src="{{ founder_image_url }}"
-        alt="Prime Pet Food founder representing Himalayan yak chew sourcing and dog enrichment"
-        width="941"
-        height="1672"
+        src="{{ hero_image_url }}"
+        alt="Yaks grazing in the Himalayan foothills, reflecting Prime Pet Food's Nepalese yak chew roots"
+        width="1672"
+        height="941"
         loading="eager"
         class="pfa-hero__image"
       >
@@ -747,8 +748,8 @@
     }
 
     .pfa-hero__image {
-      height: 64%;
-      object-position: center 18%;
+      height: 100%;
+      object-position: center 34%;
     }
 
     .pfa-origin__grid,

@@ -181,6 +181,20 @@ class CartItems extends HTMLElement {
     ];
   }
 
+  getUniqueSectionsToRender(sectionsToRender) {
+    const uniqueSections = [];
+    const seen = new Set();
+
+    sectionsToRender.forEach((section) => {
+      const key = `${section.id}:${section.section}:${section.selector}`;
+      if (seen.has(key)) return;
+      seen.add(key);
+      uniqueSections.push(section);
+    });
+
+    return uniqueSections;
+  }
+
   updateQuantity(line, quantity, name, variantId) {
     this.enableLoading(line);
 
@@ -195,11 +209,12 @@ class CartItems extends HTMLElement {
     if (cartItems && typeof cartItems.getSectionsToRender === 'function') {
       sectionsToRender = [...sectionsToRender, ...cartItems.getSectionsToRender()];
     }
+    sectionsToRender = this.getUniqueSectionsToRender(sectionsToRender);
 
     const body = JSON.stringify({
       line,
       quantity,
-      sections: sectionsToRender.map((section) => section.section),
+      sections: [...new Set(sectionsToRender.map((section) => section.section))],
       sections_url: window.location.pathname,
     });
 
@@ -298,17 +313,19 @@ class CartItems extends HTMLElement {
         if (oldFreeShippingBar) {
           const oldProgress = oldFreeShippingBar.style.getPropertyValue('--shipping-bar-width');
           const newFreeShippingBar = newHtml.querySelector('.free-shipping-bar');
-          const newProgress = newFreeShippingBar.style.getPropertyValue('--shipping-bar-width');
-          newFreeShippingBar.style.setProperty('--shipping-bar-width', oldProgress);
+          if (newFreeShippingBar) {
+            const newProgress = newFreeShippingBar.style.getPropertyValue('--shipping-bar-width');
+            newFreeShippingBar.style.setProperty('--shipping-bar-width', oldProgress);
 
-          setTimeout(() => {
-            elementToReplace.querySelector('.free-shipping-bar').style
-              .setProperty('--shipping-bar-width', newProgress);
-          }, 0);
+            setTimeout(() => {
+              elementToReplace.querySelector('.free-shipping-bar')?.style
+                .setProperty('--shipping-bar-width', newProgress);
+            }, 0);
+          }
         }
 
         elementToReplace.innerHTML = newHtml.innerHTML;
-        window.loadTemplateContent(this);
+        window.loadTemplateContent(elementToReplace);
       }
     });
 
@@ -407,39 +424,86 @@ if (!customElements.get('cart-note')) {
 
   const SWIPE_THRESHOLD = 80; // px to trigger remove
   const SWIPE_MAX = 120; // max visual offset
+  const SWIPE_VERTICAL_TOLERANCE = 24;
+  const INTERACTIVE_SELECTOR = 'a, button, input, select, textarea, label, quantity-input, cart-remove-button, quantity-popover, summary, details';
+
+  function isTouchLikeDevice() {
+    return window.matchMedia('(pointer: coarse)').matches || navigator.maxTouchPoints > 0;
+  }
+
+  function isInteractiveTarget(target) {
+    return target.closest(INTERACTIVE_SELECTOR);
+  }
+
+  function removeCartItem(item) {
+    const removeButton = item.querySelector('cart-remove-button');
+    const cartItems = item.closest('cart-items') || document.querySelector('cart-items');
+
+    if (removeButton?.dataset.index && cartItems && typeof cartItems.updateQuantity === 'function') {
+      cartItems.updateQuantity(removeButton.dataset.index, 0);
+      return;
+    }
+
+    const removeLink = item.querySelector('cart-remove-button a');
+    if (removeLink) window.location.href = removeLink.href;
+  }
 
   function initCartSwipeRemove() {
+    if (!isTouchLikeDevice()) return;
+
     const items = document.querySelectorAll('.ypc-cart-item');
     items.forEach((item) => {
       if (item.dataset.swipeInit) return;
       item.dataset.swipeInit = '1';
 
       let startX = 0;
+      let startY = 0;
       let currentX = 0;
       let isSwiping = false;
+      let isHorizontalSwipe = false;
 
       item.addEventListener('touchstart', (e) => {
+        if (isInteractiveTarget(e.target)) return;
         const touch = e.touches[0];
         startX = touch.clientX;
+        startY = touch.clientY;
         currentX = 0;
         isSwiping = true;
+        isHorizontalSwipe = false;
         item.style.transition = 'none';
       }, { passive: true });
 
       item.addEventListener('touchmove', (e) => {
         if (!isSwiping) return;
         const touch = e.touches[0];
-        const diff = touch.clientX - startX;
+        const diffX = touch.clientX - startX;
+        const diffY = touch.clientY - startY;
+
+        if (!isHorizontalSwipe) {
+          if (Math.abs(diffY) > SWIPE_VERTICAL_TOLERANCE && Math.abs(diffY) > Math.abs(diffX)) {
+            isSwiping = false;
+            item.style.transform = '';
+            item.style.transition = '';
+            item.style.setProperty('--swipe-progress', '0');
+            return;
+          }
+
+          if (Math.abs(diffX) < 12) return;
+          isHorizontalSwipe = Math.abs(diffX) > Math.abs(diffY);
+        }
+
+        if (!isHorizontalSwipe) return;
 
         // Only allow left swipe (negative diff)
-        if (diff > 10) {
+        if (diffX > 10) {
           isSwiping = false;
           item.style.transform = '';
           item.style.transition = '';
+          item.style.setProperty('--swipe-progress', '0');
           return;
         }
 
-        currentX = Math.max(-SWIPE_MAX, diff);
+        currentX = Math.max(-SWIPE_MAX, diffX);
         item.style.transform = `translateX(${currentX}px)`;
 
         // Show red background indicator
@@ -462,8 +526,7 @@ if (!customElements.get('cart-note')) {
           item.style.opacity = '0';
 
           setTimeout(() => {
-            const removeBtn = item.querySelector('cart-remove-button a');
-            if (removeBtn) removeBtn.click();
+            removeCartItem(item);
           }, 280);
         } else {
           // Snap back
