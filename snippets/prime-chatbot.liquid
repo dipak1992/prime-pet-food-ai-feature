@@ -17,6 +17,10 @@
     font-family: var(--font-body-family, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
   }
 
+  .prime-chatbot * {
+    box-sizing: border-box;
+  }
+
   .prime-chatbot__toggle {
     width: 62px;
     height: 62px;
@@ -39,8 +43,8 @@
     position: absolute;
     right: 0;
     bottom: 78px;
-    width: min(360px, calc(100vw - 32px));
-    max-height: min(620px, calc(100vh - 112px));
+    width: min(390px, calc(100vw - 32px));
+    max-height: min(680px, calc(100vh - 112px));
     overflow: hidden;
     border-radius: 18px;
     background: #fffaf4;
@@ -70,14 +74,14 @@
 
   .prime-chatbot__title {
     font-size: 15px;
-    font-weight: 800;
+    font-weight: 850;
     line-height: 1.2;
   }
 
   .prime-chatbot__subtitle {
     margin-top: 3px;
     font-size: 12px;
-    color: rgba(255,255,255,0.72);
+    color: rgba(255, 255, 255, 0.72);
   }
 
   .prime-chatbot__close {
@@ -85,19 +89,21 @@
     height: 34px;
     border: 0;
     border-radius: 999px;
-    background: rgba(255,255,255,0.12);
+    background: rgba(255, 255, 255, 0.12);
     color: #fff;
     cursor: pointer;
+    font-size: 22px;
+    line-height: 1;
   }
 
   .prime-chatbot__body {
     padding: 16px;
-    max-height: 460px;
+    max-height: calc(min(680px, calc(100vh - 112px)) - 66px);
     overflow-y: auto;
   }
 
   .prime-chatbot__message {
-    margin: 0 0 14px;
+    margin: 0 0 12px;
     padding: 12px 14px;
     border-radius: 14px;
     background: #ffffff;
@@ -107,12 +113,70 @@
     line-height: 1.45;
   }
 
-  .prime-chatbot__quick {
+  .prime-chatbot__search {
+    display: grid;
+    gap: 7px;
+    margin-bottom: 12px;
+  }
+
+  .prime-chatbot__search label {
+    color: #6f5a50;
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+  .prime-chatbot__search input,
+  .prime-chatbot__contact input,
+  .prime-chatbot__contact textarea {
+    width: 100%;
+    border: 1px solid #eadfce;
+    border-radius: 12px;
+    background: #fff;
+    color: #2b1408;
+    font: inherit;
+    font-size: 14px;
+    padding: 12px 13px;
+  }
+
+  .prime-chatbot__search input:focus,
+  .prime-chatbot__contact input:focus,
+  .prime-chatbot__contact textarea:focus {
+    outline: 2px solid rgba(230, 103, 17, 0.24);
+    border-color: #e66711;
+  }
+
+  .prime-chatbot__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 0 0 12px;
+  }
+
+  .prime-chatbot__chip {
+    border: 1px solid #eadfce;
+    border-radius: 999px;
+    background: #fff;
+    color: #3d2a22;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 8px 11px;
+  }
+
+  .prime-chatbot__chip.is-active {
+    background: #2b1408;
+    border-color: #2b1408;
+    color: #fff;
+  }
+
+  .prime-chatbot__quick,
+  .prime-chatbot__results {
     display: grid;
     gap: 8px;
   }
 
   .prime-chatbot__quick button,
+  .prime-chatbot__result,
   .prime-chatbot__link {
     width: 100%;
     border: 1px solid #eadfce;
@@ -122,12 +186,13 @@
     padding: 11px 12px;
     text-align: left;
     font-size: 13px;
-    font-weight: 700;
+    font-weight: 760;
     cursor: pointer;
     text-decoration: none;
   }
 
   .prime-chatbot__quick button:hover,
+  .prime-chatbot__result:hover,
   .prime-chatbot__link:hover {
     border-color: #e66711;
     color: #2b1408;
@@ -135,12 +200,60 @@
 
   .prime-chatbot__answer {
     margin-top: 12px;
-    padding: 13px 14px;
+    padding: 14px;
     border-radius: 14px;
     background: #f4eee3;
     color: #3d2a22;
     font-size: 13px;
-    line-height: 1.45;
+    line-height: 1.5;
+  }
+
+  .prime-chatbot__answer h3 {
+    color: #2b1408;
+    font-size: 15px;
+    line-height: 1.25;
+    margin: 0 0 7px;
+  }
+
+  .prime-chatbot__answer p {
+    margin: 0;
+  }
+
+  .prime-chatbot__answer a {
+    color: #94451f;
+    font-weight: 800;
+  }
+
+  .prime-chatbot__feedback {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .prime-chatbot__feedback span {
+    color: #6f5a50;
+    font-size: 12px;
+    font-weight: 760;
+  }
+
+  .prime-chatbot__feedback button {
+    border: 1px solid #d8c9b6;
+    border-radius: 999px;
+    background: #fff;
+    color: #2b1408;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 850;
+    min-height: 32px;
+    padding: 0 12px;
+  }
+
+  .prime-chatbot__feedback button.is-selected {
+    background: #2b1408;
+    border-color: #2b1408;
+    color: #fff;
   }
 
   .prime-chatbot__actions {
@@ -157,6 +270,52 @@
     border-color: #e66711;
   }
 
+  .prime-chatbot__contact-toggle {
+    width: 100%;
+    margin-top: 12px;
+    border: 1px solid #eadfce;
+    border-radius: 12px;
+    background: #fff;
+    color: #2b1408;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 850;
+    min-height: 44px;
+  }
+
+  .prime-chatbot__contact {
+    display: grid;
+    gap: 9px;
+    margin-top: 12px;
+    padding: 12px;
+    border: 1px solid #eadfce;
+    border-radius: 14px;
+    background: #fff;
+  }
+
+  .prime-chatbot__contact textarea {
+    min-height: 84px;
+    resize: vertical;
+  }
+
+  .prime-chatbot__contact button {
+    border: 0;
+    border-radius: 999px;
+    background: #2b1408;
+    color: #fff;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 850;
+    min-height: 42px;
+  }
+
+  .prime-chatbot__empty {
+    color: #6f5a50;
+    font-size: 13px;
+    line-height: 1.45;
+    margin: 10px 0 0;
+  }
+
   @media (max-width: 520px) {
     .prime-chatbot {
       right: 14px;
@@ -171,32 +330,64 @@
     .prime-chatbot__panel {
       right: -2px;
       bottom: 72px;
+      width: calc(100vw - 28px);
+      max-height: calc(100vh - 104px);
+    }
+
+    .prime-chatbot__body {
+      max-height: calc(100vh - 180px);
     }
   }
 </style>
 
-<div class="prime-chatbot" data-prime-chatbot>
+<div
+  class="prime-chatbot"
+  data-prime-chatbot
+  data-page-type="{{ request.page_type | escape }}"
+  data-template-suffix="{{ template.suffix | default: '' | escape }}"
+  {% if request.page_type == 'product' and product %}
+    data-product-title="{{ product.title | escape }}"
+    data-product-url="{{ product.url | escape }}"
+  {% endif %}
+>
   <section class="prime-chatbot__panel" aria-label="Prime Pet Food helper" aria-hidden="true">
     <div class="prime-chatbot__header">
       <div>
-        <div class="prime-chatbot__title">Prime Pet Food Helper</div>
-        <div class="prime-chatbot__subtitle">Chew sizing, orders, and product help</div>
+        <div class="prime-chatbot__title">Prime Chew Concierge</div>
+        <div class="prime-chatbot__subtitle">Sizing, safety, orders, and wholesale help</div>
       </div>
       <button class="prime-chatbot__close" type="button" aria-label="Close chat" data-prime-chat-close>&times;</button>
     </div>
     <div class="prime-chatbot__body">
-      <p class="prime-chatbot__message">Hi. Choose a topic and I will point you to the fastest answer.</p>
-      <div class="prime-chatbot__quick" data-prime-chat-options>
-        <button type="button" data-answer="size">Find the right chew size</button>
-        <button type="button" data-answer="duration">How long will a chew last?</button>
-        <button type="button" data-answer="safety">Safety and supervision</button>
-        <button type="button" data-answer="order">Order or shipping help</button>
+      <p class="prime-chatbot__message" data-prime-chat-greeting>Need help choosing the right yak chew? Start with a topic or search a question.</p>
+
+      <div class="prime-chatbot__search">
+        <label for="PrimeChatbotSearch">Search help</label>
+        <input id="PrimeChatbotSearch" type="search" placeholder="Try sizing, rawhide, shipping, puppy..." autocomplete="off" data-prime-chat-search>
       </div>
+
+      <div class="prime-chatbot__chips" data-prime-chat-categories aria-label="Help categories"></div>
+      <div class="prime-chatbot__quick" data-prime-chat-suggestions></div>
+      <div class="prime-chatbot__results" data-prime-chat-results hidden></div>
+      <p class="prime-chatbot__empty" data-prime-chat-empty hidden>No exact match yet. Send your question and we will help.</p>
+
       <div class="prime-chatbot__answer" data-prime-chat-answer hidden></div>
+
       <div class="prime-chatbot__actions">
         <a class="prime-chatbot__link" href="/pages/how-long-will-this-last-for-my-dog">Chew finder</a>
         <a class="prime-chatbot__link" href="/pages/contact">Contact us</a>
       </div>
+
+      <button class="prime-chatbot__contact-toggle" type="button" data-prime-chat-contact-toggle>Ask a specific question</button>
+      <form class="prime-chatbot__contact" method="post" action="/contact#ContactForm" data-prime-chat-contact hidden>
+        <input type="hidden" name="form_type" value="contact">
+        <input type="hidden" name="utf8" value="&#10003;">
+        <input type="hidden" name="contact[body]" data-prime-chat-contact-body>
+        <input type="email" name="contact[email]" placeholder="Email address" autocomplete="email" required>
+        <input type="text" name="contact[name]" placeholder="Name or order number">
+        <textarea data-prime-chat-question placeholder="Tell us your question. For sizing, include breed, weight, age, and chewing style." required></textarea>
+        <button type="submit">Send to Prime support</button>
+      </form>
     </div>
   </section>
   <button class="prime-chatbot__toggle" type="button" aria-label="Open Prime Pet Food helper" aria-expanded="false" data-prime-chat-toggle>
@@ -215,20 +406,222 @@
     var panel = root.querySelector('.prime-chatbot__panel');
     var toggle = root.querySelector('[data-prime-chat-toggle]');
     var close = root.querySelector('[data-prime-chat-close]');
+    var greeting = root.querySelector('[data-prime-chat-greeting]');
     var answer = root.querySelector('[data-prime-chat-answer]');
-    var options = root.querySelector('[data-prime-chat-options]');
+    var search = root.querySelector('[data-prime-chat-search]');
+    var categoryWrap = root.querySelector('[data-prime-chat-categories]');
+    var suggestionWrap = root.querySelector('[data-prime-chat-suggestions]');
+    var resultsWrap = root.querySelector('[data-prime-chat-results]');
+    var empty = root.querySelector('[data-prime-chat-empty]');
+    var contactToggle = root.querySelector('[data-prime-chat-contact-toggle]');
+    var contactForm = root.querySelector('[data-prime-chat-contact]');
+    var contactQuestion = root.querySelector('[data-prime-chat-question]');
+    var contactBody = root.querySelector('[data-prime-chat-contact-body]');
+    var pageType = root.dataset.pageType || '';
+    var templateSuffix = root.dataset.templateSuffix || '';
+    var productTitle = root.dataset.productTitle || '';
+    var activeCategory = 'recommended';
+    var lastQuestion = '';
 
-    var answers = {
-      size: 'Use the chew finder for the safest match. It looks at weight, breed, age, and chewing style before suggesting a size.',
-      duration: 'Chew time varies by dog. Most guidance on this site is an estimate, so supervise each session and remove small end pieces.',
-      safety: "Choose a chew larger than your dog's mouth, supervise chewing, provide fresh water, and remove the chew when it becomes small enough to swallow.",
-      order: 'For shipping, order status, or product questions, use the contact page so the team can look up your details.'
+    var categories = [
+      { id: 'recommended', label: 'Recommended' },
+      { id: 'sizing', label: 'Sizing' },
+      { id: 'safety', label: 'Safety' },
+      { id: 'product', label: 'Product' },
+      { id: 'orders', label: 'Orders' },
+      { id: 'subscription', label: 'Subscribe' },
+      { id: 'wholesale', label: 'Wholesale' }
+    ];
+
+    var knowledge = [
+      { id: 'size-choose', category: 'sizing', q: 'What size yak chew should I choose?', tags: ['size', 'weight', 'breed', 'recommendation', 'fit'], a: 'Start with your dog\'s weight, mouth size, and chewing intensity. When in doubt, size up rather than down. The chew should be large enough that your dog cannot fit the whole piece comfortably in their mouth.', links: [{ label: 'Use chew finder', href: '/pages/how-long-will-this-last-for-my-dog' }, { label: 'Shop yak chews', href: '/products/himalayan-yak-chews-for-dogs' }] },
+      { id: 'size-aggressive', category: 'sizing', q: 'Which chew is best for aggressive chewers?', tags: ['aggressive', 'power chewer', 'strong chewer', 'heavy chewer'], a: 'For power chewers, choose a larger size and supervise closely. A larger yak chew gives the dog more surface area and reduces the chance of swallowing a small piece too early.', links: [{ label: 'Aggressive chewer guide', href: '/pages/aggressive-chewer-yak-chews' }] },
+      { id: 'size-between', category: 'sizing', q: 'What if my dog is between two sizes?', tags: ['between sizes', 'size up', 'small', 'medium', 'large'], a: 'Size up if your dog is between weight ranges, has a wide mouth, or tends to chew intensely. Safer sizing matters more than finishing the chew quickly.' },
+      { id: 'size-small-dogs', category: 'sizing', q: 'Can small dogs use yak chews?', tags: ['small dog', 'toy dog', 'mini', 'chihuahua'], a: 'Many small dogs can enjoy yak chews when the chew is properly sized and the session is supervised. Choose a size that is too large to swallow whole and remove it when it becomes small.' },
+      { id: 'duration-how-long', category: 'product', q: 'How long does a yak chew last?', tags: ['duration', 'last', 'how long', 'chew time'], a: 'Chew duration depends on size, jaw strength, chewing style, and session length. Light chewers may use one over multiple sessions, while power chewers may finish faster.', links: [{ label: 'Estimate duration', href: '/pages/how-long-will-this-last-for-my-dog' }] },
+      { id: 'duration-routine', category: 'product', q: 'How often should I give my dog a yak chew?', tags: ['routine', 'frequency', 'daily', 'how often'], a: 'Most dogs do best with yak chews as supervised enrichment sessions, not unlimited all-day access. Start with shorter sessions and watch chewing style, digestion, and calorie intake.' },
+      { id: 'safety-safe', category: 'safety', q: 'Are yak chews safe for dogs?', tags: ['safe', 'safety', 'supervision'], a: 'Yak chews can be a safe chew option when properly sized and supervised. Provide fresh water, monitor each session, and remove the chew once it becomes small enough to swallow.' },
+      { id: 'safety-supervise', category: 'safety', q: 'Do I need to supervise my dog?', tags: ['supervise', 'watch', 'monitor'], a: 'Yes. No chew is risk-free. Supervise each chew session, especially for new chewers, puppies, seniors, and dogs that try to gulp or break off pieces.' },
+      { id: 'safety-puppy', category: 'safety', q: 'Can puppies eat yak chews?', tags: ['puppy', 'teething', 'young dog'], a: 'Puppies may be able to enjoy yak chews once they are old enough for harder chews, but dental development matters. Ask your vet if unsure, choose a safe size, and supervise closely.' },
+      { id: 'safety-senior', category: 'safety', q: 'Can senior dogs use yak chews?', tags: ['senior', 'older dog', 'teeth', 'dental'], a: 'Some senior dogs enjoy yak chews, but dental condition matters. If your dog has weak teeth, missing teeth, dental disease, or a history of cracked teeth, ask your vet before offering any hard chew.' },
+      { id: 'safety-swallow', category: 'safety', q: 'What if my dog swallows a piece?', tags: ['swallow', 'choking', 'gulp', 'piece'], a: 'Remove the chew before it becomes small enough to swallow. If your dog swallows a piece and shows coughing, choking, vomiting, discomfort, loss of appetite, or unusual behavior, contact your veterinarian immediately.' },
+      { id: 'safety-teeth', category: 'safety', q: 'Can yak chews break teeth?', tags: ['teeth', 'cracked tooth', 'hard'], a: 'Yak chews are hard, long-lasting chews. Dogs with dental issues or extreme chewing force may be at higher risk with any hard chew. Supervise and ask your vet if your dog has dental concerns.' },
+      { id: 'ingredients', category: 'product', q: 'What are Prime Pet Food yak chews made from?', tags: ['ingredients', 'milk', 'salt', 'lime', 'natural'], a: 'Prime yak chews are inspired by a simple Himalayan cheese tradition and made with a minimal ingredient philosophy. Check the product page for the current ingredient list and size-specific details.', links: [{ label: 'View product', href: '/products/himalayan-yak-chews-for-dogs' }] },
+      { id: 'rawhide', category: 'product', q: 'Are yak chews better than rawhide?', tags: ['rawhide', 'alternative', 'rawhide-free'], a: 'Many dog parents choose yak chews because they are rawhide-free, dense, simple, and cleaner for indoor chew time. Yak chews should still be matched to your dog and given with supervision.', links: [{ label: 'Rawhide alternative guide', href: '/pages/rawhide-alternatives-for-dogs' }] },
+      { id: 'odor-mess', category: 'product', q: 'Do yak chews smell or make a mess?', tags: ['smell', 'odor', 'mess', 'clean'], a: 'Yak chews are generally cleaner and lower odor than many animal-based chews. Every dog chews differently, so use them on an easy-to-clean surface and supervise.' },
+      { id: 'nub', category: 'product', q: 'What do I do with the leftover end piece?', tags: ['nub', 'end piece', 'microwave', 'puff'], a: 'When the chew becomes small, remove it from your dog. The small nub can often be soaked and microwaved into a puffed crunchy treat, then cooled fully before serving.' },
+      { id: 'origin', category: 'product', q: 'Where do Himalayan yak chews come from?', tags: ['himalayan', 'nepal', 'origin', 'made'], a: 'Yak chews are inspired by traditional Himalayan cheese-making methods from Nepal and the mountain region, where milk is boiled, curdled, pressed, shaped, and slowly dried.', links: [{ label: 'How yak chews are made', href: '/pages/how-himalayan-yak-cheese-chews-are-made' }] },
+      { id: 'process-made', category: 'product', q: 'How are yak cheese chews made?', tags: ['process', 'made', 'manufacturing', 'drying', 'aging'], a: 'The traditional process starts with milk, heat, curd formation, pressing, shaping, and a long drying period. That slow hardening is what creates the dense texture dogs work on over time.', links: [{ label: 'See the process', href: '/pages/how-himalayan-yak-cheese-chews-are-made' }] },
+      { id: 'calories', category: 'product', q: 'Are yak chews high in calories?', tags: ['calories', 'diet', 'weight', 'feeding'], a: 'Yak chews are edible chews, so they should be counted as part of your dog\'s overall treat and calorie routine. Use supervised sessions and adjust other treats if needed.' },
+      { id: 'allergies', category: 'safety', q: 'Can dogs with dairy sensitivity use yak chews?', tags: ['allergy', 'dairy', 'sensitive stomach', 'lactose'], a: 'Yak chews are dairy-based. If your dog has a known dairy sensitivity, allergy history, or frequent digestive upset, ask your veterinarian before offering one.' },
+      { id: 'digestion', category: 'safety', q: 'Are yak chews digestible?', tags: ['digest', 'stomach', 'diarrhea', 'vomit'], a: 'Yak chews are designed as edible chews, but every dog digests treats differently. Start with shorter sessions, supervise, and stop use if you notice vomiting, diarrhea, or discomfort.' },
+      { id: 'storage', category: 'product', q: 'How should I store yak chews?', tags: ['store', 'storage', 'fresh', 'shelf'], a: 'Store yak chews in a cool, dry place away from moisture. After a chew session, let the chew dry before storing it again.' },
+      { id: 'dog-not-interested', category: 'product', q: 'What if my dog is not interested at first?', tags: ['not interested', 'picky', 'won\'t chew', 'introduce'], a: 'Some dogs need an introduction period. Offer the chew during a calm supervised moment, let your dog sniff it, and try shorter sessions before expecting a long chew routine.' },
+      { id: 'boredom', category: 'product', q: 'Can yak chews help with boredom?', tags: ['boredom', 'enrichment', 'calm', 'busy'], a: 'A properly sized yak chew can give dogs a focused chewing outlet, which may help redirect boredom and support calmer downtime. It should be part of a broader enrichment routine.' },
+      { id: 'multi-dog', category: 'safety', q: 'Can multiple dogs chew near each other?', tags: ['multiple dogs', 'resource guarding', 'two dogs'], a: 'If you have multiple dogs, separate them during chew time unless you are fully confident there is no guarding. High-value chews can trigger competition in some homes.' },
+      { id: 'crate', category: 'safety', q: 'Can I give a yak chew in a crate?', tags: ['crate', 'alone', 'leave dog'], a: 'Use yak chews only when you can supervise. Avoid leaving your dog alone with any hard chew in a crate, especially if your dog is a strong chewer or gulper.' },
+      { id: 'order-ship', category: 'orders', q: 'How fast do orders ship?', tags: ['shipping', 'ship', 'delivery', 'tracking'], a: 'Shipping timing is shown at checkout and in your order updates. After your order ships, tracking details are sent by email or SMS if provided.' },
+      { id: 'order-track', category: 'orders', q: 'How do I track my order?', tags: ['track', 'tracking', 'order status'], a: 'Use the tracking link from your shipping confirmation email or sign in to your account. If you cannot find it, contact us with your order number.', links: [{ label: 'Account login', href: '/account/login' }, { label: 'Contact support', href: '/pages/contact' }] },
+      { id: 'order-change', category: 'orders', q: 'Can I change or cancel an order?', tags: ['cancel', 'change', 'address', 'edit order'], a: 'Contact us as soon as possible after placing your order. If it has not been packed or shipped, we will do our best to help.' },
+      { id: 'order-return', category: 'orders', q: 'What is your return policy?', tags: ['return', 'refund', 'policy'], a: 'If something is wrong with your order, contact us with your order number. For safety reasons, opened edible pet products may have return limits, but we will review the issue and help with the next best step.' },
+      { id: 'order-free-shipping', category: 'orders', q: 'Do you offer free shipping?', tags: ['free shipping', 'shipping cost', 'delivery'], a: 'Free shipping offers can vary by promotion and cart value. Check the cart and checkout for the current shipping threshold and available delivery options.' },
+      { id: 'order-damaged', category: 'orders', q: 'What if my order arrives damaged?', tags: ['damaged', 'broken', 'missing', 'wrong item'], a: 'Contact support with your order number and a photo of the issue. The team can review the shipment and help with the next best step.' },
+      { id: 'order-gift', category: 'orders', q: 'Can I send yak chews as a gift?', tags: ['gift', 'present', 'ship to friend'], a: 'Yes, you can ship to another address at checkout. Add the recipient\'s shipping address and use your own email for order updates unless you want the recipient to receive them.' },
+      { id: 'subscription-how', category: 'subscription', q: 'Do you offer subscriptions?', tags: ['subscription', 'subscribe', 'save', 'recurring'], a: 'Yes. Subscribe & Save is designed for dog parents who want yak chews ready for steady enrichment routines. Choose an eligible product and available delivery frequency.', links: [{ label: 'Subscribe & Save', href: '/pages/subscribe-and-save' }] },
+      { id: 'subscription-manage', category: 'subscription', q: 'Can I skip, pause, or cancel anytime?', tags: ['skip', 'pause', 'cancel subscription', 'manage'], a: 'Active subscriptions can be managed from your customer account, including skip, pause, delivery-frequency changes, and cancellation when those options are available for your plan.', links: [{ label: 'Account login', href: '/account/login' }] },
+      { id: 'subscription-discount', category: 'subscription', q: 'How do subscription discounts work?', tags: ['discount', 'savings', 'subscribe and save'], a: 'New subscribers receive 20% off the first month. Ongoing savings can vary by subscription type, delivery schedule, product availability, and active promotion terms.' },
+      { id: 'subscription-frequency', category: 'subscription', q: 'What delivery frequency should I choose?', tags: ['frequency', 'cadence', 'delivery schedule', 'monthly'], a: 'Choose based on how quickly your dog finishes chews and how many dogs are in the home. If unsure, start with a longer cadence and adjust after the first cycle.' },
+      { id: 'subscription-reorder', category: 'subscription', q: 'Can I reorder without subscribing?', tags: ['reorder', 'buy again', 'one time'], a: 'Yes. You can place one-time orders anytime. Subscriptions are best for customers who want automatic replenishment and available savings.' },
+      { id: 'wholesale-apply', category: 'wholesale', q: 'How do I apply for wholesale?', tags: ['wholesale', 'retailer', 'apply', 'b2b'], a: 'Retailers can apply through the wholesale application. The team reviews applications and approved partners receive access to wholesale pricing and the portal.', links: [{ label: 'Apply for wholesale', href: 'https://wholesale.theprimepetfood.com/apply' }] },
+      { id: 'wholesale-moq', category: 'wholesale', q: 'What is the wholesale minimum order quantity?', tags: ['moq', 'minimum', 'case', 'wholesale'], a: 'The wholesale program is designed to start lean with case-pack ordering and scale as demand grows. Check the wholesale page for current minimums and terms.', links: [{ label: 'Wholesale page', href: '/pages/wholesale' }] },
+      { id: 'wholesale-portal', category: 'wholesale', q: 'Where is the wholesale portal?', tags: ['portal', 'login', 'catalog'], a: 'Approved wholesale partners can access the wholesale portal to review products, pricing, and ordering options.', links: [{ label: 'Wholesale portal', href: 'https://wholesale.theprimepetfood.com' }] },
+      { id: 'wholesale-custom', category: 'wholesale', q: 'Do you offer custom or bulk wholesale orders?', tags: ['custom', 'bulk', 'case', 'large order'], a: 'Custom case configurations, bulk orders, and special requests may be available for qualified partners. Submit a wholesale application or contact the team for larger order planning.', links: [{ label: 'Wholesale page', href: '/pages/wholesale' }] },
+      { id: 'wholesale-private-label', category: 'wholesale', q: 'Do you offer private label?', tags: ['private label', 'co-brand', 'retailer'], a: 'Private label and co-branding may be available for qualified partners with minimum commitments. Contact the wholesale team to discuss fit and requirements.' },
+      { id: 'wholesale-payment', category: 'wholesale', q: 'What payment methods do wholesale accounts use?', tags: ['payment', 'net 30', 'invoice', 'ach'], a: 'Wholesale payment options can include card, ACH, manual invoicing, or terms for approved accounts. Exact options are confirmed after wholesale approval.' },
+      { id: 'contact-human', category: 'orders', q: 'How do I contact Prime Pet Food?', tags: ['contact', 'support', 'help', 'human'], a: 'Use the contact form for order-specific or dog-specific help. For sizing, include breed, weight, age, and chewing style. For orders, include your order number.', links: [{ label: 'Contact support', href: '/pages/contact' }] }
+    ];
+
+    window.PrimeChatbotKnowledge = {
+      version: '2026-05-15',
+      source: 'theme-snippet',
+      guardrails: [
+        'Do not give veterinary diagnosis.',
+        'Recommend supervision for all chewing.',
+        'Escalate choking, vomiting, dental injury, allergic reaction, or unusual behavior to a veterinarian.',
+        'Use only approved product, order, subscription, wholesale, and educational content.'
+      ],
+      items: knowledge
     };
+
+    function track(eventName, data) {
+      data = data || {};
+      data.feature = 'prime_chatbot';
+      try {
+        var history = JSON.parse(localStorage.getItem('prime_chatbot_events') || '[]');
+        history.push({ event: eventName, data: data, at: new Date().toISOString() });
+        localStorage.setItem('prime_chatbot_events', JSON.stringify(history.slice(-50)));
+      } catch (e) {}
+      if (window.gtag) window.gtag('event', 'prime_chatbot_' + eventName, data);
+      if (window.posthog) window.posthog.capture('prime_chatbot_' + eventName, data);
+      if (window.Shopify && window.Shopify.analytics && typeof window.Shopify.analytics.publish === 'function') {
+        try { window.Shopify.analytics.publish('prime_chatbot_' + eventName, data); } catch (e) {}
+      }
+    }
 
     function setOpen(isOpen) {
       root.classList.toggle('is-open', isOpen);
       panel.setAttribute('aria-hidden', String(!isOpen));
       toggle.setAttribute('aria-expanded', String(isOpen));
+      if (isOpen) {
+        track('opened', { pageType: pageType, templateSuffix: templateSuffix });
+        setTimeout(function() { search.focus(); }, 80);
+      }
+    }
+
+    function getRecommendedIds() {
+      if (pageType === 'product') return ['size-choose', 'safety-safe', 'duration-how-long', 'subscription-how'];
+      if (pageType === 'cart') return ['size-choose', 'order-ship', 'subscription-how', 'contact-human'];
+      if (templateSuffix === 'wholesale') return ['wholesale-apply', 'wholesale-moq', 'wholesale-portal', 'contact-human'];
+      if (templateSuffix === 'how-yak-cheese-chews-are-made' || templateSuffix === 'yak-chew-process') return ['origin', 'ingredients', 'rawhide', 'duration-how-long'];
+      if (pageType === 'customers/account') return ['order-track', 'subscription-manage', 'size-choose', 'contact-human'];
+      return ['size-choose', 'safety-safe', 'duration-how-long', 'order-track'];
+    }
+
+    function scoreItem(item, query) {
+      var q = query.trim().toLowerCase();
+      if (!q) return 0;
+      var text = [item.q, item.a, (item.tags || []).join(' ')].join(' ').toLowerCase();
+      var score = 0;
+      if (item.q.toLowerCase().indexOf(q) !== -1) score += 12;
+      q.split(/\s+/).forEach(function(part) {
+        if (part.length < 2) return;
+        if (item.q.toLowerCase().indexOf(part) !== -1) score += 4;
+        if ((item.tags || []).join(' ').toLowerCase().indexOf(part) !== -1) score += 3;
+        if (text.indexOf(part) !== -1) score += 1;
+      });
+      return score;
+    }
+
+    function itemById(id) {
+      return knowledge.find(function(item) { return item.id === id; });
+    }
+
+    function buttonForItem(item, className) {
+      var button = document.createElement('button');
+      button.type = 'button';
+      button.className = className;
+      button.textContent = item.q;
+      button.setAttribute('data-prime-chat-item', item.id);
+      return button;
+    }
+
+    function renderCategories() {
+      categoryWrap.innerHTML = '';
+      categories.forEach(function(category) {
+        var button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'prime-chatbot__chip' + (category.id === activeCategory ? ' is-active' : '');
+        button.textContent = category.label;
+        button.setAttribute('data-prime-chat-category', category.id);
+        categoryWrap.appendChild(button);
+      });
+    }
+
+    function renderSuggestions() {
+      suggestionWrap.innerHTML = '';
+      var items = activeCategory === 'recommended'
+        ? getRecommendedIds().map(itemById).filter(Boolean)
+        : knowledge.filter(function(item) { return item.category === activeCategory; }).slice(0, 5);
+      items.forEach(function(item) {
+        suggestionWrap.appendChild(buttonForItem(item, ''));
+      });
+      if (productTitle && pageType === 'product') {
+        greeting.textContent = 'Questions about ' + productTitle + '? Search or choose a common buying question.';
+      } else if (templateSuffix === 'wholesale') {
+        greeting.textContent = 'Wholesale questions? Start with pricing, MOQ, portal access, or application help.';
+      }
+    }
+
+    function renderResults(query) {
+      var matches = knowledge
+        .map(function(item) { return { item: item, score: scoreItem(item, query) }; })
+        .filter(function(row) { return row.score > 0; })
+        .sort(function(a, b) { return b.score - a.score; })
+        .slice(0, 5)
+        .map(function(row) { return row.item; });
+
+      resultsWrap.innerHTML = '';
+      matches.forEach(function(item) {
+        resultsWrap.appendChild(buttonForItem(item, 'prime-chatbot__result'));
+      });
+      resultsWrap.hidden = !query || matches.length === 0;
+      suggestionWrap.hidden = Boolean(query);
+      empty.hidden = !query || matches.length > 0;
+      if (query) track('searched', { query: query, results: matches.length });
+    }
+
+    function renderAnswer(item) {
+      lastQuestion = item.q;
+      var links = (item.links || []).map(function(link) {
+        return '<a href="' + link.href + '">' + link.label + '</a>';
+      }).join(' &middot; ');
+      answer.innerHTML =
+        '<h3>' + item.q + '</h3>' +
+        '<p>' + item.a + '</p>' +
+        (links ? '<p style="margin-top:10px">' + links + '</p>' : '') +
+        '<div class="prime-chatbot__feedback" data-prime-chat-feedback>' +
+          '<span>Was this helpful?</span>' +
+          '<button type="button" data-feedback="yes">Yes</button>' +
+          '<button type="button" data-feedback="no">No</button>' +
+        '</div>';
+      answer.hidden = false;
+      track('answer_viewed', { id: item.id, category: item.category, question: item.q });
+    }
+
+    function chooseItem(id) {
+      var item = itemById(id);
+      if (!item) return;
+      renderAnswer(item);
     }
 
     toggle.addEventListener('click', function() {
@@ -239,11 +632,61 @@
       setOpen(false);
     });
 
-    options.addEventListener('click', function(event) {
-      var button = event.target.closest('button[data-answer]');
+    categoryWrap.addEventListener('click', function(event) {
+      var button = event.target.closest('[data-prime-chat-category]');
       if (!button) return;
-      answer.textContent = answers[button.getAttribute('data-answer')] || '';
-      answer.hidden = false;
+      activeCategory = button.getAttribute('data-prime-chat-category');
+      search.value = '';
+      resultsWrap.hidden = true;
+      empty.hidden = true;
+      suggestionWrap.hidden = false;
+      renderCategories();
+      renderSuggestions();
+      track('category_selected', { category: activeCategory });
     });
+
+    root.addEventListener('click', function(event) {
+      var itemButton = event.target.closest('[data-prime-chat-item]');
+      if (itemButton) chooseItem(itemButton.getAttribute('data-prime-chat-item'));
+
+      var feedbackButton = event.target.closest('[data-feedback]');
+      if (feedbackButton) {
+        var wrap = feedbackButton.closest('[data-prime-chat-feedback]');
+        wrap.querySelectorAll('button').forEach(function(button) { button.classList.remove('is-selected'); });
+        feedbackButton.classList.add('is-selected');
+        track('feedback', { value: feedbackButton.dataset.feedback, question: lastQuestion });
+        if (feedbackButton.dataset.feedback === 'no') {
+          contactForm.hidden = false;
+          contactQuestion.focus();
+        }
+      }
+    });
+
+    search.addEventListener('input', function() {
+      renderResults(search.value);
+    });
+
+    contactToggle.addEventListener('click', function() {
+      contactForm.hidden = !contactForm.hidden;
+      if (!contactForm.hidden) contactQuestion.focus();
+      track('contact_form_toggled', { open: !contactForm.hidden });
+    });
+
+    contactForm.addEventListener('submit', function() {
+      var message = contactQuestion.value.trim();
+      contactBody.value = [
+        'Prime Chatbot fallback question:',
+        message,
+        '',
+        'Last viewed chatbot question: ' + (lastQuestion || 'None'),
+        'Page: ' + window.location.href,
+        'Page type: ' + pageType,
+        'Template suffix: ' + templateSuffix
+      ].join('\n');
+      track('contact_submitted', { hasLastQuestion: Boolean(lastQuestion), pageType: pageType });
+    });
+
+    renderCategories();
+    renderSuggestions();
   })();
 </script>
