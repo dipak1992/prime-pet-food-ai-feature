@@ -814,6 +814,8 @@ li[data-address] > h2 {
   font-weight: 700;
   text-decoration: none;
   background: #fff;
+  white-space: nowrap;
+  font-size: 1.4rem;
 }
 
 .prime-account__tabs a[aria-current='page'] {
@@ -1277,9 +1279,16 @@ li[data-address] > h2 {
     top: 0;
     z-index: 2;
     margin-inline: -1.2rem;
-    padding: 0.8rem 1.2rem;
+    padding: 0.6rem 1.2rem;
     background: rgba(255, 250, 242, 0.96);
     border-bottom: 1px solid var(--prime-account-line);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .prime-account__tabs a {
+    min-height: 3.6rem;
+    padding: 0.6rem 1.1rem;
+    font-size: 1.3rem;
   }
 
   .prime-account__hero-actions,
