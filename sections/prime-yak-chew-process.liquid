@@ -125,7 +125,9 @@
         </article>
         <article class="pycp-step pycp-step--image">
           <span class="pycp-step__num">02</span>
-          <img src="{{ boiling_image }}" alt="Traditional boiling process for Himalayan yak cheese curd formation" width="1672" height="941" loading="lazy">
+          <div class="pycp-step__image">
+            <img src="{{ boiling_image }}" alt="Traditional boiling process for Himalayan yak cheese curd formation" width="1672" height="941" loading="lazy">
+          </div>
           <div>
             <h3>Traditional boiling</h3>
             <p>The milk is gently heated. This stage begins the transformation from liquid dairy into the dense cheese structure that eventually becomes a long-lasting dog chew.</p>
@@ -147,7 +149,9 @@
         </article>
         <article class="pycp-step pycp-step--image">
           <span class="pycp-step__num">05</span>
-          <img src="{{ drying_image }}" alt="Yak cheese chew bars shaped and drying on wooden racks" width="1672" height="941" loading="lazy">
+          <div class="pycp-step__image">
+            <img src="{{ drying_image }}" alt="Yak cheese chew bars shaped and drying on wooden racks" width="1672" height="941" loading="lazy">
+          </div>
           <div>
             <h3>Shaping and drying</h3>
             <p>The pressed cheese is shaped into chew bars, then placed in a clean drying environment. The drying stage is where the chew begins to develop its signature hard texture.</p>
@@ -169,7 +173,9 @@
         </article>
         <article class="pycp-step pycp-step--image">
           <span class="pycp-step__num">08</span>
-          <img src="{{ finished_image }}" alt="Finished Himalayan yak cheese dog chews being inspected before packaging" width="1672" height="941" loading="lazy">
+          <div class="pycp-step__image">
+            <img src="{{ finished_image }}" alt="Finished Himalayan yak cheese dog chews being inspected before packaging" width="1672" height="941" loading="lazy">
+          </div>
           <div>
             <h3>Packaging and delivery</h3>
             <p>After inspection, chews are prepared for modern dog homes: cleanly packed, easy to store, and ready for supervised enrichment routines.</p>
@@ -697,12 +703,20 @@
     grid-row: span 2;
   }
 
-  .pycp-step img {
+  .pycp-step__image {
     width: 100%;
     aspect-ratio: 1 / 1;
+    overflow: hidden;
     border-radius: 8px;
+    background: #e8dfd3;
+  }
+
+  .pycp-step__image img {
+    width: 100%;
+    height: 100%;
     display: block;
     object-fit: cover;
+    object-position: center;
   }
 
   .pycp-step__num {
