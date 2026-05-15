@@ -17,25 +17,78 @@
   <div class="ypc-tabs-recos__inner">
     <div class="ypc-tabs-recos__left">
       <div class="ypc-tabs-recos__nav" role="tablist">
-        <button class="ypc-tabs-recos__tab is-active" type="button" data-tab="description">
-          {{ section.settings.tab_1_label }}
+        <button
+          id="ypc-tab-description-{{ section.id }}"
+          class="ypc-tabs-recos__tab is-active"
+          type="button"
+          data-tab="description"
+          role="tab"
+          aria-selected="true"
+          aria-controls="ypc-panel-description-{{ section.id }}"
+        >
+          <span class="ypc-tabs-recos__tab-icon" aria-hidden="true">
+            {% render 'icon', icon: 'information_circle', size: 18 %}
+          </span>
+          <span class="ypc-tabs-recos__tab-label">{{ section.settings.tab_1_label }}</span>
         </button>
 
-        <button class="ypc-tabs-recos__tab" type="button" data-tab="change">
-          {{ section.settings.tab_2_label }}
+        <button
+          id="ypc-tab-feeding-{{ section.id }}"
+          class="ypc-tabs-recos__tab"
+          type="button"
+          data-tab="feeding"
+          role="tab"
+          aria-selected="false"
+          aria-controls="ypc-panel-feeding-{{ section.id }}"
+          tabindex="-1"
+        >
+          <span class="ypc-tabs-recos__tab-icon" aria-hidden="true">
+            {% render 'icon', icon: 'shield_checkmark', size: 18 %}
+          </span>
+          <span class="ypc-tabs-recos__tab-label">{{ section.settings.tab_2_label }}</span>
         </button>
 
-        <button class="ypc-tabs-recos__tab" type="button" data-tab="sizing">
-          {{ section.settings.tab_3_label }}
+        <button
+          id="ypc-tab-shipping-{{ section.id }}"
+          class="ypc-tabs-recos__tab"
+          type="button"
+          data-tab="shipping"
+          role="tab"
+          aria-selected="false"
+          aria-controls="ypc-panel-shipping-{{ section.id }}"
+          tabindex="-1"
+        >
+          <span class="ypc-tabs-recos__tab-icon" aria-hidden="true">
+            {% render 'icon', icon: 'airplane', size: 18 %}
+          </span>
+          <span class="ypc-tabs-recos__tab-label">{{ section.settings.tab_3_label }}</span>
         </button>
 
-        <button class="ypc-tabs-recos__tab" type="button" data-tab="ingredients">
-          {{ section.settings.tab_4_label }}
+        <button
+          id="ypc-tab-ingredients-{{ section.id }}"
+          class="ypc-tabs-recos__tab"
+          type="button"
+          data-tab="ingredients"
+          role="tab"
+          aria-selected="false"
+          aria-controls="ypc-panel-ingredients-{{ section.id }}"
+          tabindex="-1"
+        >
+          <span class="ypc-tabs-recos__tab-icon" aria-hidden="true">
+            {% render 'icon', icon: 'restaurant', size: 18 %}
+          </span>
+          <span class="ypc-tabs-recos__tab-label">{{ section.settings.tab_4_label }}</span>
         </button>
       </div>
 
       <div class="ypc-tabs-recos__content">
-        <div class="ypc-tabs-recos__panel is-active" data-panel="description">
+        <div
+          id="ypc-panel-description-{{ section.id }}"
+          class="ypc-tabs-recos__panel is-active"
+          data-panel="description"
+          role="tabpanel"
+          aria-labelledby="ypc-tab-description-{{ section.id }}"
+        >
           <h2>{{ section.settings.description_heading }}</h2>
           <div class="rte">
             {% if product.description != blank %}
@@ -46,10 +99,19 @@
           </div>
         </div>
 
-        <div class="ypc-tabs-recos__panel" data-panel="change">
+        <div
+          id="ypc-panel-feeding-{{ section.id }}"
+          class="ypc-tabs-recos__panel"
+          data-panel="feeding"
+          role="tabpanel"
+          aria-labelledby="ypc-tab-feeding-{{ section.id }}"
+          hidden
+        >
           <h2>{{ section.settings.change_heading }}</h2>
           <div class="rte">
-            {% if product.metafields.custom.chews_for_change != blank %}
+            {% if product.metafields.custom.safe_feeding_guidelines != blank %}
+              {{ product.metafields.custom.safe_feeding_guidelines | metafield_tag }}
+            {% elsif product.metafields.custom.chews_for_change != blank %}
               {{ product.metafields.custom.chews_for_change | metafield_tag }}
             {% else %}
               {{ section.settings.change_fallback }}
@@ -57,10 +119,19 @@
           </div>
         </div>
 
-        <div class="ypc-tabs-recos__panel" data-panel="sizing">
+        <div
+          id="ypc-panel-shipping-{{ section.id }}"
+          class="ypc-tabs-recos__panel"
+          data-panel="shipping"
+          role="tabpanel"
+          aria-labelledby="ypc-tab-shipping-{{ section.id }}"
+          hidden
+        >
           <h2>{{ section.settings.sizing_heading }}</h2>
           <div class="rte">
-            {% if product.metafields.custom.sizing != blank %}
+            {% if product.metafields.custom.shipping != blank %}
+              {{ product.metafields.custom.shipping | metafield_tag }}
+            {% elsif product.metafields.custom.sizing != blank %}
               {{ product.metafields.custom.sizing | metafield_tag }}
             {% else %}
               {{ section.settings.sizing_fallback }}
@@ -68,7 +139,14 @@
           </div>
         </div>
 
-        <div class="ypc-tabs-recos__panel" data-panel="ingredients">
+        <div
+          id="ypc-panel-ingredients-{{ section.id }}"
+          class="ypc-tabs-recos__panel"
+          data-panel="ingredients"
+          role="tabpanel"
+          aria-labelledby="ypc-tab-ingredients-{{ section.id }}"
+          hidden
+        >
           <h2>{{ section.settings.ingredients_heading }}</h2>
           <div class="rte">
             {% if product.metafields.custom.ingredients != blank %}
@@ -147,19 +225,28 @@
         const selectedTab = this.getAttribute('data-tab');
 
         tabs.forEach((item) => {
-          item.classList.remove('is-active');
+          const isSelected = item === this;
+          item.classList.toggle('is-active', isSelected);
+          item.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+          item.setAttribute('tabindex', isSelected ? '0' : '-1');
         });
 
         panels.forEach((panel) => {
-          panel.classList.remove('is-active');
+          const isActive = panel.getAttribute('data-panel') === selectedTab;
+          panel.classList.toggle('is-active', isActive);
+          panel.hidden = !isActive;
         });
+      });
 
-        this.classList.add('is-active');
+      tab.addEventListener('keydown', function(event) {
+        if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
 
-        const activePanel = section.querySelector('[data-panel="' + selectedTab + '"]');
-        if (activePanel) {
-          activePanel.classList.add('is-active');
-        }
+        event.preventDefault();
+        const currentIndex = Array.prototype.indexOf.call(tabs, this);
+        const direction = event.key === 'ArrowRight' ? 1 : -1;
+        const nextIndex = (currentIndex + direction + tabs.length) % tabs.length;
+        tabs[nextIndex].focus();
+        tabs[nextIndex].click();
       });
     });
   })();
@@ -191,73 +278,91 @@
   }
 
   .ypc-tabs-recos__nav {
-    display: flex;
-    align-items: flex-end;
-    gap: 34px;
-    border-bottom: 1px solid rgba(43, 20, 8, 0.16);
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .ypc-tabs-recos__nav::-webkit-scrollbar {
-    height: 5px;
-  }
-
-  .ypc-tabs-recos__nav::-webkit-scrollbar-thumb {
-    background: rgba(43, 20, 8, 0.24);
-    border-radius: 999px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
   }
 
   .ypc-tabs-recos__tab {
     appearance: none;
-    border: none;
-    background: transparent;
+    border: 1px solid rgba(43, 20, 8, 0.16);
+    border-radius: 16px;
+    background: rgba(255, 250, 243, 0.82);
     color: var(--ypc-muted);
-    padding: 0 0 22px;
+    min-height: 66px;
+    padding: 13px 14px;
     font-size: var(--ypc-tab-size);
     line-height: 1.15;
     font-weight: 900;
-    letter-spacing: var(--prime-kicker-letter-spacing, 0.08em);
+    letter-spacing: 0.03em;
     text-transform: uppercase;
     cursor: pointer;
     text-align: left;
     position: relative;
-    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 8px 20px rgba(43, 20, 8, 0.04);
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
   }
 
   .ypc-tabs-recos__tab:hover,
   .ypc-tabs-recos__tab.is-active {
-    color: var(--ypc-text);
+    color: #fffaf3;
+    border-color: var(--ypc-text);
+    background: var(--ypc-text);
   }
 
-  .ypc-tabs-recos__tab.is-active::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -2px;
-    height: 3px;
-    background: var(--ypc-text);
-    border-radius: 999px;
+  .ypc-tabs-recos__tab:hover {
+    transform: translateY(-1px);
+  }
+
+  .ypc-tabs-recos__tab-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(225, 102, 16, 0.12);
+    color: var(--ypc-accent);
+    flex: 0 0 auto;
+  }
+
+  .ypc-tabs-recos__tab.is-active .ypc-tabs-recos__tab-icon,
+  .ypc-tabs-recos__tab:hover .ypc-tabs-recos__tab-icon {
+    background: rgba(255, 250, 243, 0.14);
+    color: #fffaf3;
+  }
+
+  .ypc-tabs-recos__tab-icon .icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .ypc-tabs-recos__tab-label {
+    overflow-wrap: anywhere;
   }
 
   .ypc-tabs-recos__content {
-    padding-top: 42px;
+    padding-top: 24px;
   }
 
   .ypc-tabs-recos__panel {
     display: none;
+    background: #fffaf3;
+    border: 1px solid rgba(43, 20, 8, 0.12);
+    border-radius: 22px;
+    padding: 34px;
+    box-shadow: 0 18px 42px rgba(43, 20, 8, 0.07);
   }
 
-  .ypc-tabs-recos__panel.is-active {
+  .ypc-tabs-recos__panel.is-active:not([hidden]) {
     display: block;
   }
 
   .ypc-tabs-recos__panel h2 {
-    margin: 0 0 34px;
+    margin: 0 0 20px;
     color: var(--ypc-text);
     font-size: var(--ypc-heading-size);
     line-height: 1.05;
@@ -416,15 +521,28 @@
     }
 
     .ypc-tabs-recos__nav {
-      gap: 30px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
     }
 
     .ypc-tabs-recos__tab {
-      padding-bottom: 20px;
+      min-height: 58px;
+      padding: 11px 12px;
+      font-size: 12px;
+      gap: 8px;
     }
 
     .ypc-tabs-recos__content {
-      padding-top: 34px;
+      padding-top: 18px;
+    }
+
+    .ypc-tabs-recos__panel {
+      border-radius: 18px;
+      padding: 24px 18px;
+    }
+
+    .ypc-tabs-recos__panel h2 {
+      font-size: clamp(24px, 8vw, var(--ypc-heading-size));
     }
 
     .ypc-tabs-recos__products {
@@ -451,13 +569,13 @@
       "type": "text",
       "id": "tab_2_label",
       "label": "Tab 2 label",
-      "default": "Chews for Change"
+      "default": "Safe Feeding"
     },
     {
       "type": "text",
       "id": "tab_3_label",
       "label": "Tab 3 label",
-      "default": "Sizing"
+      "default": "Shipping"
     },
     {
       "type": "text",
@@ -478,14 +596,14 @@
     {
       "type": "text",
       "id": "change_heading",
-      "label": "Chews for Change heading",
-      "default": "Chews for Change"
+      "label": "Safe feeding heading",
+      "default": "Safe Feeding Guidelines"
     },
     {
       "type": "text",
       "id": "sizing_heading",
-      "label": "Sizing heading",
-      "default": "Find the Right Size"
+      "label": "Shipping heading",
+      "default": "Shipping and Delivery"
     },
     {
       "type": "text",
@@ -506,14 +624,14 @@
     {
       "type": "richtext",
       "id": "change_fallback",
-      "label": "Chews for Change fallback",
-      "default": "<p>Every chew supports natural, responsible sourcing and helps bring premium Himalayan chews from local makers to happy dogs.</p>"
+      "label": "Safe feeding fallback",
+      "default": "<p>Always supervise your dog during chew time, choose the right size for their weight and chewing style, provide fresh water, and remove any small end pieces.</p>"
     },
     {
       "type": "richtext",
       "id": "sizing_fallback",
-      "label": "Sizing fallback",
-      "default": "<p>Choose the chew size based on your dog’s weight, chewing style, and chewing strength.</p>"
+      "label": "Shipping fallback",
+      "default": "<p>Orders are typically processed within 24-48 hours and shipped with tracking so you can follow your dog's chews from dispatch to delivery.</p>"
     },
     {
       "type": "richtext",
