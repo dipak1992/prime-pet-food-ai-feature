@@ -574,10 +574,16 @@
   }
 
   .pycp-button--secondary {
-    border: 1px solid rgba(255, 250, 242, 0.42);
-    color: #fffaf2;
-    background: rgba(255, 250, 242, 0.08);
-    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 250, 242, 0.82);
+    color: #211914;
+    background: #fffaf2;
+    box-shadow: 0 14px 30px rgba(18, 14, 10, 0.22);
+  }
+
+  .pycp-button--secondary:hover {
+    border-color: #fffaf2;
+    color: #211914;
+    background: #f7e8d7;
   }
 
   .pycp-section {
@@ -905,31 +911,33 @@
     }
 
     .pycp-hero {
-      min-height: 790px;
+      min-height: 820px;
       align-items: end;
     }
 
     .pycp-hero__media {
-      height: 56%;
+      height: 62%;
       bottom: auto;
     }
 
     .pycp-hero__media img {
-      object-position: 58% 34%;
+      object-position: 56% 30%;
     }
 
     .pycp-hero__media::after {
       background:
-        linear-gradient(180deg, rgba(18, 14, 10, 0.08) 0%, rgba(18, 14, 10, 0.22) 50%, rgba(18, 14, 10, 0.92) 100%),
-        linear-gradient(90deg, rgba(18, 14, 10, 0.36) 0%, rgba(18, 14, 10, 0.04) 65%);
+        linear-gradient(180deg, rgba(18, 14, 10, 0.04) 0%, rgba(18, 14, 10, 0.16) 48%, rgba(18, 14, 10, 0.94) 100%),
+        linear-gradient(90deg, rgba(18, 14, 10, 0.32) 0%, rgba(18, 14, 10, 0.02) 68%);
     }
 
     .pycp-hero__overlay {
-      background: linear-gradient(180deg, rgba(24, 19, 15, 0) 0%, rgba(24, 19, 15, 0) 35%, rgba(24, 19, 15, 0.9) 60%, #18130f 100%);
+      background:
+        linear-gradient(180deg, rgba(24, 19, 15, 0) 0%, rgba(24, 19, 15, 0) 40%, rgba(24, 19, 15, 0.92) 63%, #18130f 100%),
+        radial-gradient(circle at 20% 62%, rgba(184, 95, 50, 0.22), transparent 34%);
     }
 
     .pycp-hero__content {
-      padding-block: 405px 54px;
+      padding-block: 455px 54px;
     }
 
     .pycp-breadcrumb {
