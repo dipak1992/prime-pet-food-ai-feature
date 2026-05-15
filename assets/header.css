@@ -489,11 +489,13 @@
 
 /* MOBILE BURGER DRAWER */
 .header__drawer {
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: fixed !important;
+  inset: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
   z-index: 100001;
   visibility: hidden;
   pointer-events: none;
@@ -507,10 +509,10 @@
 
 .header__drawer-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  height: 100dvh;
   background: rgba(15, 23, 42, 0.28);
   opacity: 0;
   transition: opacity 0.4s ease;
@@ -529,7 +531,10 @@
   width: min(88vw, 42rem);
   min-width: 28rem;
   max-width: 42rem;
-  height: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
   max-height: 100dvh;
   background: #ffffff;
   color: #1a1a1a;
