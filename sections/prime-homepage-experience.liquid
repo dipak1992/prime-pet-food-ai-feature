@@ -2354,23 +2354,23 @@
 
     .ph-hero__media::after {
       background:
-        linear-gradient(180deg, rgba(19, 16, 12, 0.36) 0%, rgba(19, 16, 12, 0.58) 42%, rgba(19, 16, 12, 0.95) 100%),
-        linear-gradient(90deg, rgba(19, 16, 12, 0.46) 0%, rgba(19, 16, 12, 0.1) 70%);
+        linear-gradient(180deg, rgba(19, 16, 12, 0.55) 0%, rgba(19, 16, 12, 0.68) 42%, rgba(19, 16, 12, 0.96) 100%),
+        linear-gradient(90deg, rgba(19, 16, 12, 0.52) 0%, rgba(19, 16, 12, 0.12) 70%);
     }
 
     .ph-hero__media img {
-      object-position: 58% center;
+      object-position: 50% 28%;
       transform: scale(1.01);
     }
 
     .ph-hero__content {
-      padding: 78px 0 42px;
+      padding: 64px 0 48px;
     }
 
     .prime-homepage h1 {
-      max-width: 350px;
-      font-size: 34px;
-      line-height: 1.08;
+      max-width: 100%;
+      font-size: clamp(36px, 10vw, 48px);
+      line-height: 1.05;
     }
 
     .prime-homepage h2 {
@@ -2382,15 +2382,17 @@
     }
 
     .ph-hero p {
-      max-width: 350px;
-      margin-top: 16px;
-      line-height: 1.58;
+      max-width: 100%;
+      margin-top: 14px;
+      font-size: 15px;
+      line-height: 1.6;
+      color: rgba(255, 250, 242, 0.9);
     }
 
     .ph-hero__social-badge {
       max-width: 100%;
-      margin-bottom: 18px;
-      padding: 8px 12px;
+      margin-bottom: 16px;
+      padding: 7px 14px;
       font-size: 12px;
       line-height: 1.25;
     }
@@ -2398,25 +2400,35 @@
     .ph-actions {
       flex-direction: column;
       gap: 10px;
-      margin-top: 24px;
+      margin-top: 22px;
     }
 
     .ph-button {
       width: 100%;
       min-height: 54px;
       padding: 15px 18px;
-      font-size: 12px;
-      letter-spacing: 0;
+      font-size: 13px;
+      letter-spacing: 0.01em;
     }
 
     .ph-hero__micro {
-      margin-top: 16px;
-      font-size: 17px !important;
-      line-height: 1.52 !important;
+      margin-top: 14px;
+      font-size: 14px;
+      line-height: 1.5;
+      font-weight: 600;
+      color: rgba(255, 250, 242, 0.82);
     }
 
     .ph-hero__proof {
-      display: none;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .ph-hero__proof span {
+      font-size: 12px;
+      padding: 8px 12px;
     }
 
     .ph-trust-bar__inner {
