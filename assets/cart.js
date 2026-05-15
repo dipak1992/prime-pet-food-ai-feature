@@ -82,7 +82,9 @@ class CartItems extends HTMLElement {
     const index = event.target.dataset.index;
     let message = '';
 
-    if (inputValue > 0 && inputValue < event.target.dataset.min) {
+    if (Number.isNaN(inputValue)) {
+      message = window.cartStrings?.error || 'Enter a valid quantity.';
+    } else if (inputValue > 0 && inputValue < event.target.dataset.min) {
       message = window.quickOrderListStrings.min_error.replace('[min]', event.target.dataset.min);
     } else if (inputValue > parseInt(event.target.max)) {
       message = window.quickOrderListStrings.max_error.replace('[max]', event.target.max);
