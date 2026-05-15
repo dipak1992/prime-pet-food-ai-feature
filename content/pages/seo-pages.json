@@ -144,6 +144,51 @@
     "body": "<p>A breed-specific chew guide for French Bulldogs, focused on compact jaw shape, indoor enrichment, correctly sized yak chews, and safe supervision.</p>"
   },
   {
+    "title": "Yak Chews for Small Dogs",
+    "handle": "yak-chews-for-small-dogs",
+    "templateSuffix": "seo-chew",
+    "published": true,
+    "seoTitle": "Yak Chews for Small Dogs | Size & Safety Guide",
+    "seoDescription": "Choose yak chews for small dogs with safer sizing, supervision tips, chew duration guidance, and indoor enrichment routines.",
+    "body": "<p>A size-specific yak chew guide for small dogs, focused on safer chew sizing, supervised sessions, chew duration, and compact-breed enrichment.</p>"
+  },
+  {
+    "title": "Yak Chews for Puppies",
+    "handle": "yak-chews-for-puppies",
+    "templateSuffix": "seo-chew",
+    "published": true,
+    "seoTitle": "Yak Chews for Puppies | Safety & Age Guide",
+    "seoDescription": "Learn when yak chews may fit puppy chewing routines, how to size them safely, and when to ask your veterinarian first.",
+    "body": "<p>A puppy chew guide explaining when harder yak chews may fit, how to supervise chewing, how to size safely, and when veterinary guidance matters.</p>"
+  },
+  {
+    "title": "Yak Chew Safety Guide",
+    "handle": "yak-chew-safety-guide",
+    "templateSuffix": "seo-chew",
+    "published": true,
+    "seoTitle": "Yak Chew Safety Guide | Sizing & Supervision",
+    "seoDescription": "Learn yak chew safety basics, including correct sizing, supervision, leftover nub handling, dental cautions, and when to contact a vet.",
+    "body": "<p>An answer-first yak chew safety guide covering supervision, sizing up, dental caution, small end-piece handling, and safe enrichment routines.</p>"
+  },
+  {
+    "title": "Are Yak Chews Digestible?",
+    "handle": "are-yak-chews-digestible",
+    "templateSuffix": "seo-chew",
+    "published": true,
+    "seoTitle": "Are Yak Chews Digestible? | Dog Chew Guide",
+    "seoDescription": "Understand yak chew digestibility, dairy sensitivity, session length, supervision, and what to watch for when introducing yak chews.",
+    "body": "<p>A digestibility guide for dog owners introducing Himalayan yak cheese chews, with dairy sensitivity notes, supervision guidance, and safe session tips.</p>"
+  },
+  {
+    "title": "Natural Dog Chews",
+    "handle": "natural-dog-chews",
+    "templateSuffix": "seo-chew",
+    "published": true,
+    "seoTitle": "Natural Dog Chews | Rawhide-Free Enrichment Guide",
+    "seoDescription": "Compare natural dog chews for safer supervised enrichment, simple ingredients, rawhide-free routines, and longer-lasting chew time.",
+    "body": "<p>A natural dog chew guide comparing simple-ingredient chew options, rawhide-free enrichment, safety, chew duration, and cleaner indoor routines.</p>"
+  },
+  {
     "title": "Who We Are",
     "handle": "about-us",
     "templateSuffix": "about-us",

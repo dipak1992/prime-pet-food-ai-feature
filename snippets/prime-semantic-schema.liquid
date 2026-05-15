@@ -1,0 +1,131 @@
+{% comment %}
+  Prime Pet Food semantic entity graph for Google, AI Overviews, and LLM retrieval.
+  Keep this concise: page-level Product, FAQ, Article, and Breadcrumb schemas remain in their own templates.
+{% endcomment %}
+
+{%- liquid
+  assign homepage_url = request.origin | append: routes.root_url
+  assign product_url = request.origin | append: '/products/himalayan-yak-chews-for-dogs'
+  assign guide_hub_url = request.origin | append: '/pages/yak-chew-guides'
+  assign faq_url = request.origin | append: '/pages/faq'
+  assign process_url = request.origin | append: '/pages/how-himalayan-yak-cheese-chews-are-made'
+  assign duration_url = request.origin | append: '/pages/how-long-will-this-last-for-my-dog'
+  assign rawhide_url = request.origin | append: '/pages/best-rawhide-alternative'
+  assign aggressive_url = request.origin | append: '/pages/best-long-lasting-chew-for-aggressive-chewers'
+  assign wholesale_url = request.origin | append: '/pages/wholesale'
+-%}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": {{ homepage_url | append: '#organization' | json }},
+      "name": {{ shop.name | json }},
+      "url": {{ homepage_url | json }},
+      "description": "Prime Pet Food is a premium dog enrichment brand focused on Himalayan yak cheese dog chews, rawhide-free chewing routines, natural dog chews, and safer supervised chew-time education.",
+      "sameAs": [
+        {%- liquid
+          assign has_same_as = false
+          if settings.social_instagram_link != blank
+            echo settings.social_instagram_link | json
+            assign has_same_as = true
+          endif
+          if settings.social_facebook_link != blank
+            if has_same_as
+              echo ','
+            endif
+            echo settings.social_facebook_link | json
+            assign has_same_as = true
+          endif
+          if settings.social_tiktok_link != blank
+            if has_same_as
+              echo ','
+            endif
+            echo settings.social_tiktok_link | json
+          endif
+        -%}
+      ],
+      "knowsAbout": [
+        "Himalayan yak cheese dog chews",
+        "yak chews for dogs",
+        "long-lasting dog chews",
+        "rawhide alternatives",
+        "aggressive chewer enrichment",
+        "natural dog chews",
+        "dog chew safety",
+        "dog enrichment",
+        "Nepalese yak cheese traditions",
+        "supervised chewing routines"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": {{ homepage_url | append: '#website' | json }},
+      "url": {{ homepage_url | json }},
+      "name": {{ shop.name | json }},
+      "publisher": {
+        "@id": {{ homepage_url | append: '#organization' | json }}
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {{ request.origin | append: routes.search_url | append: '?q={search_term_string}' | json }},
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "DefinedTermSet",
+      "@id": {{ homepage_url | append: '#yak-chew-knowledge-graph' | json }},
+      "name": "Prime Pet Food yak chew knowledge graph",
+      "description": "A semantic map connecting Prime Pet Food content about Himalayan yak chews, dog enrichment, rawhide alternatives, chew safety, manufacturing, and breed-specific chew guidance.",
+      "hasDefinedTerm": [
+        {
+          "@type": "DefinedTerm",
+          "name": "Himalayan yak cheese dog chews",
+          "url": {{ product_url | json }},
+          "sameAs": {{ process_url | json }}
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "Dog chew duration estimator",
+          "url": {{ duration_url | json }}
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "Rawhide-free dog chew alternatives",
+          "url": {{ rawhide_url | json }}
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "Aggressive chewer solutions",
+          "url": {{ aggressive_url | json }}
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "Yak chew safety and sizing FAQ",
+          "url": {{ faq_url | json }}
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "Wholesale Himalayan dog chews",
+          "url": {{ wholesale_url | json }}
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": {{ guide_hub_url | append: '#topic-clusters' | json }},
+      "name": "Prime Pet Food topical authority clusters",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"name":"Himalayan yak cheese chews","url":{{ product_url | json }}},
+        {"@type":"ListItem","position":2,"name":"Yak chew manufacturing","url":{{ process_url | json }}},
+        {"@type":"ListItem","position":3,"name":"Chew duration and sizing","url":{{ duration_url | json }}},
+        {"@type":"ListItem","position":4,"name":"Rawhide alternatives","url":{{ rawhide_url | json }}},
+        {"@type":"ListItem","position":5,"name":"Aggressive chewer guidance","url":{{ aggressive_url | json }}},
+        {"@type":"ListItem","position":6,"name":"Yak chew FAQ","url":{{ faq_url | json }}}
+      ]
+    }
+  ]
+}
+</script>
