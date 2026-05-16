@@ -131,6 +131,7 @@
 
       el.setAttribute('data-motion', 'reveal');
       el.setAttribute('data-motion-auto', 'true');
+      el.setAttribute('data-motion-kind', el.getAttribute('data-motion-kind') || 'section');
       neutralizeNativeScrollTrigger(el);
       if (delayStep && index > 0) {
         el.setAttribute('data-motion-delay', String(Math.min(index * delayStep, 240)));
@@ -145,6 +146,30 @@
 
       el.setAttribute('data-motion-stagger', 'true');
       el.setAttribute('data-motion-auto', 'true');
+      el.setAttribute('data-motion-kind', el.getAttribute('data-motion-kind') || 'cards');
+      neutralizeNativeScrollTrigger(el);
+    });
+  }
+
+  function markImageTargets(selectors) {
+    document.querySelectorAll(selectors).forEach(function (el) {
+      if (!isEligibleAutoMotionTarget(el)) return;
+
+      el.setAttribute('data-motion', 'image-reveal');
+      el.setAttribute('data-motion-auto', 'true');
+      el.setAttribute('data-motion-kind', 'image');
+      neutralizeNativeScrollTrigger(el);
+    });
+  }
+
+  function markTextTargets(selectors) {
+    document.querySelectorAll(selectors).forEach(function (el) {
+      if (!isEligibleAutoMotionTarget(el)) return;
+
+      el.setAttribute('data-motion', 'reveal');
+      el.setAttribute('data-motion-auto', 'true');
+      el.setAttribute('data-motion-kind', 'text');
+      el.setAttribute('data-motion-delay', el.getAttribute('data-motion-delay') || '80');
       neutralizeNativeScrollTrigger(el);
     });
   }
@@ -163,6 +188,7 @@
 
       section.setAttribute('data-motion', 'reveal');
       section.setAttribute('data-motion-auto', 'true');
+      section.setAttribute('data-motion-kind', 'section');
       neutralizeNativeScrollTrigger(section);
       section.setAttribute('data-motion-delay', String(Math.min(index * 25, 160)));
     });
@@ -253,6 +279,42 @@
       ].join(', ')
     );
 
+    markTextTargets(
+      [
+        'main .shopify-section h2',
+        'main .shopify-section h3',
+        '.section-title',
+        '.section-text',
+        '.section-content__heading',
+        '.section-content__text',
+        '.ypc-product-hero__title',
+        '.ypc-product-hero__subtitle',
+        '.ypc-tabs-recos__reco-heading',
+        '.prime-ad-landing__subhead',
+        '.prime-wholesale__lede',
+        '.seo-chew__lede'
+      ].join(', ')
+    );
+
+    markImageTargets(
+      [
+        'main .shopify-section picture',
+        'main .shopify-section .media',
+        'main .shopify-section .image-wrapper',
+        'main .shopify-section .image-with-text__media',
+        'main .shopify-section .collection-hero__image-container',
+        '.ypc-product-hero__main-image-wrap',
+        '.ypc-cart-item__image-wrap',
+        '.prime-ad-landing__hero-media',
+        '.prime-ad-landing__offer-media',
+        '.prime-wholesale__hero-media',
+        '.prime-yak-process__hero-media',
+        '.prime-yak-process__step-media',
+        '.seo-chew__media',
+        '.pav2-hero__media'
+      ].join(', ')
+    );
+
     markGenericSectionTargets();
   }
 
@@ -288,6 +350,33 @@
     }
   }
 
+  function getRevealProfile(el) {
+    var kind = el.getAttribute('data-motion-kind') || 'section';
+
+    if (kind === 'text') {
+      return {
+        y: isMobile ? 10 : 14,
+        duration: isMobile ? 0.32 : 0.38,
+        delayOffset: 0.02
+      };
+    }
+
+    if (kind === 'image') {
+      return {
+        y: 0,
+        scale: 1.03,
+        duration: isMobile ? 0.42 : 0.56,
+        delayOffset: 0.1
+      };
+    }
+
+    return {
+      y: isMobile ? 12 : 16,
+      duration: isMobile ? 0.36 : 0.46,
+      delayOffset: 0
+    };
+  }
+
   // ─── Scroll Reveal System ─────────────────────────────────────────────────
   function initScrollReveals() {
     var selectors = '.ph-reveal, .pm-reveal, [data-motion="reveal"]';
@@ -307,11 +396,12 @@
         return;
       }
 
-      var delay      = parseFloat(el.getAttribute('data-motion-delay') || '0') / 1000;
+      var profile    = getRevealProfile(el);
+      var delay      = (parseFloat(el.getAttribute('data-motion-delay') || '0') / 1000) + profile.delayOffset;
       var hasStagger = el.hasAttribute('data-motion-stagger');
 
-      var revealDistance = isMobile ? 16 : 28;
-      var childDistance  = isMobile ? 12 : 18;
+      var revealDistance = profile.y;
+      var childDistance  = isMobile ? 12 : 16;
       var observerMargin = isMobile ? '0px 0px -20px 0px' : '0px 0px -60px 0px';
 
       // Set initial state via JS (overrides CSS for Motion-controlled elements)
@@ -332,9 +422,9 @@
               children,
               { opacity: 1, transform: 'translateY(0px)' },
               {
-                duration: isMobile ? 0.36 : 0.46,
+                duration: isMobile ? 0.36 : 0.44,
                 easing:   tokens.easing.out,
-                delay:    stagger(tokens.stagger.normal, { start: delay })
+                delay:    stagger(0.06, { start: delay + 0.08 })
               }
             );
             el.classList.add('is-visible');
@@ -346,7 +436,7 @@
           el,
           { opacity: 1, transform: 'translateY(0px)' },
           {
-            duration: isMobile ? 0.36 : 0.46,
+            duration: profile.duration,
             easing:   tokens.easing.out,
             delay:    delay
           }
@@ -373,7 +463,7 @@
 
       children.forEach(function (child) {
         child.style.opacity   = '0';
-        child.style.transform = 'translateY(' + (isMobile ? 12 : 18) + 'px)';
+        child.style.transform = 'translateY(' + (isMobile ? 12 : 16) + 'px)';
       });
 
       inView(parent, function () {
@@ -381,9 +471,9 @@
           children,
           { opacity: 1, transform: 'translateY(0px)' },
           {
-            duration: isMobile ? 0.36 : 0.46,
+            duration: isMobile ? 0.36 : 0.44,
             easing:   tokens.easing.out,
-            delay:    stagger(tokens.stagger.normal)
+            delay:    stagger(0.06, { start: 0.12 })
           }
         );
         parent.classList.add('is-visible');
@@ -730,18 +820,27 @@
     );
 
     images.forEach(function (img) {
+      if (img.classList.contains('is-visible')) return;
+
+      if (img.getAttribute('data-motion-auto') === 'true' && isInInitialViewport(img)) {
+        revealElementImmediately(img);
+        return;
+      }
+
       img.style.opacity   = '0';
-      img.style.transform = 'scale(1.04)';
+      img.style.transform = 'scale(1.03)';
 
       inView(img, function () {
         animate(
           img,
-          { opacity: [0, 1], scale: [1.04, 1] },
+          { opacity: [0, 1], scale: [1.03, 1] },
           {
-            duration: tokens.duration.narrative,
-            easing:   tokens.easing.gentle
+            duration: isMobile ? 0.42 : 0.56,
+            easing:   tokens.easing.gentle,
+            delay:    0.1
           }
         ).then(function () {
+          img.classList.add('is-visible');
           img.style.willChange = 'auto';
         });
         return false;
