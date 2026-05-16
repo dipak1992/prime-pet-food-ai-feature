@@ -14,6 +14,7 @@ if (!customElements.get('cart-remove-button')) {
       this.initialized = true;
       this.addEventListener('click', (event) => {
         event.preventDefault();
+        event.stopPropagation();
         const cartItems = this.closest('cart-items') || this.closest('cart-drawer-items');
         if (cartItems) cartItems.updateQuantity(this.dataset.index, 0);
       });
