@@ -77,18 +77,18 @@
        HERO — Emotional hook with social proof
   ════════════════════════════════════════════════════════════════ -->
   <div class="ph-hero">
-    <div class="ph-hero__media">
+    <div class="ph-hero__media ph-hero-image" data-motion="image-reveal">
       <img src="{{ hero_image }}" alt="Calm dog enjoying a Prime Pet Food Himalayan yak chew at home" width="1536" height="1024" loading="eager" fetchpriority="high">
     </div>
     <div class="ph-shell ph-hero__content">
-      <div class="ph-hero__social-badge" aria-label="Social proof">
+      <div class="ph-hero__social-badge ph-hero-badge" aria-label="Social proof">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         Trusted by 20,000+ dog parents
       </div>
-      <h1>{{ hero_headline }}</h1>
-      <p>{{ hero_subtext }}</p>
-      <div class="ph-actions" aria-label="Homepage actions">
-        <a href="/products/himalayan-yak-chews-for-dogs" class="ph-button ph-button--primary">Find your dog's chew</a>
+      <h1 class="ph-hero-headline">{{ hero_headline }}</h1>
+      <p class="ph-hero-sub">{{ hero_subtext }}</p>
+      <div class="ph-actions ph-hero-cta" aria-label="Homepage actions">
+        <a href="/products/himalayan-yak-chews-for-dogs" class="ph-button ph-button--primary ph-cta-btn">Find your dog's chew</a>
         <a href="#prime-home-shop" class="ph-button ph-button--secondary">Choose by size</a>
       </div>
       <p class="ph-hero__micro">Free shipping over $30. Backed by a 30-day satisfaction guarantee.</p>
@@ -112,7 +112,7 @@
   <!-- ═══════════════════════════════════════════════════════════════
        TRUST BAR — Key stats at a glance
   ════════════════════════════════════════════════════════════════ -->
-  <div class="ph-trust-bar" aria-label="Key statistics">
+  <div class="ph-trust-bar" aria-label="Key statistics" data-motion-stagger="true">
     <div class="ph-shell ph-trust-bar__inner">
       <div class="ph-trust-bar__stat">
         <strong data-ph-count="20000" data-ph-suffix="+">{{ trust_stat_1_value }}</strong>
@@ -145,14 +145,14 @@
   ════════════════════════════════════════════════════════════════ -->
   <div class="ph-outcomes ph-reveal">
     <div class="ph-shell ph-outcomes__inner">
-      <div class="ph-outcomes__copy">
+      <div class="ph-outcomes__copy" data-motion="reveal">
         <p class="ph-kicker">Built for calmer homes</p>
-        <h2>A chew that gives your dog a job.</h2>
+        <h2 data-motion="reveal">A chew that gives your dog a job.</h2>
         <p>
           Prime Pet Food yak chews are dense, simple, and satisfying, so dogs can settle into a focused routine instead of hunting for the next thing to destroy.
         </p>
       </div>
-      <div class="ph-outcomes__grid">
+      <div class="ph-outcomes__grid" data-motion-stagger="true">
         <article>
           <span>01</span>
           <h3>Longer focus <svg class="ph-outcomes__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></h3>
@@ -177,13 +177,13 @@
   ════════════════════════════════════════════════════════════════ -->
   <div id="prime-home-shop" class="ph-products ph-reveal">
     <div class="ph-shell">
-      <div class="ph-section-head">
+      <div class="ph-section-head" data-motion="reveal">
         <p class="ph-kicker">Start here</p>
-        <h2>Choose the right chew size first.</h2>
+        <h2 data-motion="reveal">Choose the right chew size first.</h2>
         <p>Match the chew to your dog&rsquo;s weight and chewing style. When you are between sizes, size up for safer supervised chew time.</p>
       </div>
 
-      <div class="ph-product-grid">
+      <div class="ph-product-grid" data-motion-stagger="true">
         {% render 'prime-home-product-card',
           product: product,
           variant: small_variant,
@@ -429,9 +429,9 @@
   <div class="ph-reviews ph-reveal">
     <div class="ph-shell">
       <div class="ph-reviews__top">
-        <div class="ph-section-head">
+        <div class="ph-section-head" data-motion="reveal">
           <p class="ph-kicker">Real results</p>
-          <h2>What changes after a better chew.</h2>
+          <h2 data-motion="reveal">What changes after a better chew.</h2>
         </div>
         <div class="ph-reviews__controls" aria-label="Review carousel controls">
           <button type="button" class="ph-reviews__arrow" data-prime-review-prev aria-label="Previous review">
@@ -443,8 +443,8 @@
         </div>
       </div>
 
-      <div class="ph-reviews__grid" data-prime-review-track tabindex="0" aria-label="Customer review carousel">
-        <article class="ph-review-card">
+      <div class="ph-reviews__grid" data-prime-review-track tabindex="0" aria-label="Customer review carousel" data-motion-stagger="true">
+        <article class="ph-review-card" data-motion="reveal">
           <img class="ph-review-card__photo" src="{{ golden_image }}" alt="Golden Retriever using a Prime Pet Food yak chew during calm time" loading="lazy" width="768" height="768">
           <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <blockquote>&ldquo;My golden retriever used to destroy bully sticks in 10 minutes. This lasted over an hour. I finally got to drink my coffee in peace.&rdquo;</blockquote>
@@ -454,7 +454,7 @@
           </footer>
         </article>
 
-        <article class="ph-review-card">
+        <article class="ph-review-card" data-motion="reveal" data-motion-delay="60">
           <img class="ph-review-card__photo" src="{{ frenchie_image }}" alt="French Bulldog holding a Prime Pet Food yak chew" loading="lazy" width="768" height="768">
           <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <blockquote>&ldquo;Finally a chew I don&rsquo;t have to worry about. No weird chemicals, no splintering. My frenchie is obsessed and I feel good about it.&rdquo;</blockquote>
@@ -464,7 +464,7 @@
           </footer>
         </article>
 
-        <article class="ph-review-card">
+        <article class="ph-review-card" data-motion="reveal" data-motion-delay="120">
           <img class="ph-review-card__photo" src="{{ lab_image }}" alt="Labrador chewing a Prime Pet Food Himalayan yak chew" loading="lazy" width="768" height="768">
           <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <blockquote>&ldquo;We switched from rawhide after our vet recommended it. Three months in and my lab still gets excited every time she sees the bag.&rdquo;</blockquote>
@@ -474,7 +474,7 @@
           </footer>
         </article>
 
-        <article class="ph-review-card">
+        <article class="ph-review-card" data-motion="reveal" data-motion-delay="180">
           <img class="ph-review-card__photo" src="{{ shepherd_image }}" alt="German Shepherd resting with a Prime Pet Food yak chew" loading="lazy" width="768" height="768">
           <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <blockquote>&ldquo;Our Shepherd needs something to do after evening walks. This turned that restless hour into focused quiet time.&rdquo;</blockquote>
@@ -484,7 +484,7 @@
           </footer>
         </article>
 
-        <article class="ph-review-card">
+        <article class="ph-review-card" data-motion="reveal" data-motion-delay="240">
           <img class="ph-review-card__photo" src="{{ beagle_image }}" alt="Beagle enjoying a Prime Pet Food yak chew on a rug" loading="lazy" width="768" height="768">
           <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <blockquote>&ldquo;My beagle is food motivated and easily bored. The medium chew gives him a job without the mess of other chews.&rdquo;</blockquote>
@@ -494,7 +494,7 @@
           </footer>
         </article>
 
-        <article class="ph-review-card">
+        <article class="ph-review-card" data-motion="reveal" data-motion-delay="300">
           <img class="ph-review-card__photo" src="{{ poodle_image }}" alt="Poodle calmly holding a Prime Pet Food Himalayan yak chew" loading="lazy" width="768" height="768">
           <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <blockquote>&ldquo;We use it during work calls. She settles in, chews, and I am not constantly redirecting her from furniture.&rdquo;</blockquote>
@@ -645,32 +645,32 @@
   ════════════════════════════════════════════════════════════════ -->
   <div class="ph-ingredients ph-reveal">
     <div class="ph-shell">
-      <div class="ph-section-head ph-section-head--center">
+      <div class="ph-section-head ph-section-head--center" data-motion="reveal">
         <p class="ph-kicker">Ingredient transparency</p>
-        <h2>4 ingredients. Nothing else.</h2>
+        <h2 data-motion="reveal">4 ingredients. Nothing else.</h2>
         <p>We believe the best chew is the simplest one. No fillers, no preservatives, no chemicals.</p>
       </div>
 
-      <div class="ph-ingredients__grid">
-        <article class="ph-ingredient-card">
+      <div class="ph-ingredients__grid" data-motion-stagger="true">
+        <article class="ph-ingredient-card" data-motion="reveal">
           <img src="{{ ingredient_yak_milk_image }}" alt="Fresh yak milk in a simple ceramic bowl" loading="lazy" width="768" height="768">
           <span class="ph-ingredient-card__num">01</span>
           <h3>Yak milk</h3>
           <p>Protein-rich base from free-grazing Himalayan yaks. The foundation of every chew.</p>
         </article>
-        <article class="ph-ingredient-card">
+        <article class="ph-ingredient-card" data-motion="reveal" data-motion-delay="80">
           <img src="{{ ingredient_cow_milk_image }}" alt="Cow milk in a clean ceramic pitcher" loading="lazy" width="768" height="768">
           <span class="ph-ingredient-card__num">02</span>
           <h3>Cow milk</h3>
           <p>Blended for texture and consistency. Creates the dense, long-lasting structure.</p>
         </article>
-        <article class="ph-ingredient-card">
+        <article class="ph-ingredient-card" data-motion="reveal" data-motion-delay="160">
           <img src="{{ ingredient_lime_image }}" alt="Fresh lime halves and lime juice on stone" loading="lazy" width="768" height="768">
           <span class="ph-ingredient-card__num">03</span>
           <h3>Lime juice</h3>
           <p>Natural coagulant that hardens the cheese. No synthetic binding agents needed.</p>
         </article>
-        <article class="ph-ingredient-card">
+        <article class="ph-ingredient-card" data-motion="reveal" data-motion-delay="240">
           <img src="{{ ingredient_salt_image }}" alt="Natural salt crystals in a small ceramic bowl" loading="lazy" width="768" height="768">
           <span class="ph-ingredient-card__num">04</span>
           <h3>Salt</h3>
@@ -695,12 +695,12 @@
   ════════════════════════════════════════════════════════════════ -->
   <div class="ph-craft ph-reveal">
     <div class="ph-shell ph-craft__inner">
-      <div class="ph-craft__media">
-        <img src="{{ founder_image }}" alt="Prime Pet Food founder with a dog" loading="lazy" width="900" height="900">
+      <div class="ph-craft__media" data-motion="reveal">
+        <img src="{{ founder_image }}" alt="Prime Pet Food founder with a dog" loading="lazy" width="900" height="900" data-motion="image-reveal">
       </div>
-      <div class="ph-craft__copy">
+      <div class="ph-craft__copy" data-motion="reveal" data-motion-delay="150">
         <p class="ph-kicker">Made with intention</p>
-        <h2>Simple chews, held to a higher standard.</h2>
+        <h2 data-motion="reveal">Simple chews, held to a higher standard.</h2>
         <p>
           Prime Pet Food was built for dog parents who read ingredient labels and want chew time to feel calm, clean, and trustworthy.
           Every detail is designed around a simple idea: give dogs something satisfying without giving parents another thing to worry about.
@@ -719,13 +719,13 @@
   ════════════════════════════════════════════════════════════════ -->
   <div class="ph-fit ph-reveal">
     <div class="ph-shell">
-      <div class="ph-section-head">
+      <div class="ph-section-head" data-motion="reveal">
         <p class="ph-kicker">Dog fit examples</p>
-        <h2>See how long it lasts for dogs like yours.</h2>
+        <h2 data-motion="reveal">See how long it lasts for dogs like yours.</h2>
         <p>Real-world chew time varies by breed, jaw strength, and chewing intensity. These examples give you a practical starting point.</p>
       </div>
 
-      <div class="ph-fit__grid">
+      <div class="ph-fit__grid" data-motion-stagger="true">
         <article style="--fit-accent: #b85f32;">
           <span class="ph-fit__size">Small/Medium</span>
           <strong>Compact breeds</strong>
@@ -788,7 +788,7 @@
   ════════════════════════════════════════════════════════════════ -->
   <div class="ph-guarantee ph-reveal">
     <div class="ph-shell ph-guarantee__inner">
-      <div class="ph-guarantee__card">
+      <div class="ph-guarantee__card" data-motion="reveal">
         <div class="ph-guarantee__icon" aria-hidden="true">
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
@@ -797,7 +797,7 @@
         </div>
         <div class="ph-guarantee__copy">
           <p class="ph-kicker">Risk-free trial</p>
-          <h2>30-day satisfaction guarantee.</h2>
+          <h2 data-motion="reveal">30-day satisfaction guarantee.</h2>
           <p>
             If your dog doesn&rsquo;t love it, we&rsquo;ll make it right. Every order is backed by a clear, no-stress promise.
           </p>
@@ -816,9 +816,9 @@
   ════════════════════════════════════════════════════════════════ -->
   <div class="ph-faq ph-reveal">
     <div class="ph-shell ph-faq__inner">
-      <div class="ph-section-head">
+      <div class="ph-section-head" data-motion="reveal">
         <p class="ph-kicker">Before you buy</p>
-        <h2>Quick answers for safer chew time.</h2>
+        <h2 data-motion="reveal">Quick answers for safer chew time.</h2>
       </div>
       <div class="ph-faq__list">
         <details open>
@@ -845,12 +845,12 @@
        CLOSING CTA — Final conversion push
   ════════════════════════════════════════════════════════════════ -->
   <div class="ph-close ph-reveal" style="--ph-close-image: url('{{ calm_cta_image }}');">
-    <div class="ph-shell ph-close__inner">
+    <div class="ph-shell ph-close__inner" data-motion="reveal">
       <p class="ph-kicker">Ready for calmer chew time?</p>
-      <h2>Give your dog the chew they deserve.</h2>
+      <h2 data-motion="reveal">Give your dog the chew they deserve.</h2>
       <p>Join 20,000+ dog parents who switched to safer, longer-lasting enrichment.</p>
       <div class="ph-actions ph-actions--center">
-        <a href="/collections/all" class="ph-button ph-button--primary">Shop yak chews</a>
+        <a href="/collections/all" class="ph-button ph-button--primary ph-cta-btn">Shop yak chews</a>
       </div>
     </div>
   </div>
@@ -959,7 +959,11 @@
     display: block;
     object-fit: cover;
     object-position: center;
-    transform: scale(1.03);
+    /* Parallax offset is driven by prime-motion.js via --parallax-y CSS variable.
+       translateY(var(--parallax-y, 0px)) composes with the drift animation cleanly
+       because CSS animations run on the compositor and custom properties are resolved
+       before the animation value is applied. */
+    transform: scale(1.03) translateY(var(--parallax-y, 0px));
     animation: ph-hero-drift 18s ease-in-out infinite alternate;
   }
 

@@ -565,6 +565,11 @@
       }
     {% endstyle %}
 
+    {{ 'prime-motion-tokens.css' | asset_url | stylesheet_tag }}
+    {{ 'prime-motion-base.css' | asset_url | stylesheet_tag }}
+    {{ 'prime-nav-motion.css' | asset_url | stylesheet_tag }}
+    {{ 'prime-cart-motion.css' | asset_url | stylesheet_tag }}
+
     {{ 'base.css' | asset_url | stylesheet_tag: preload: true }}
 
     {%- if is_rtl -%}
@@ -809,6 +814,9 @@
     {%- unless request.design_mode or settings.enable_instant_page == false -%}
       <script src="{{ 'instant-page.js' | asset_url }}" defer="defer"></script>
     {%- endunless -%}
+
+    <script src="https://cdn.jsdelivr.net/npm/motion@11/dist/motion.min.js" defer></script>
+    <script src="{{ 'prime-motion.js' | asset_url }}" defer></script>
 
     {% render 'toast-notifications' %}
     {% render 'prime-chatbot' %}
