@@ -10,5 +10,8 @@
     "pages:check": "node scripts/page-sync.mjs --check",
     "pages:dry-run": "node scripts/page-sync.mjs --dry-run",
     "pages:push": "node scripts/page-sync.mjs"
+  },
+  "dependencies": {
+    "framer-motion": "^12.38.0"
   }
 }

@@ -1,0 +1,259 @@
+/* ============================================================
+   Prime Pet Food — Navigation Motion CSS
+   /assets/prime-nav-motion.css
+   ============================================================ */
+
+/* ── Header scroll behavior ─────────────────────────────────── */
+.site-header,
+header[role="banner"],
+#shopify-section-header .header-wrapper,
+#shopify-section-header header {
+  will-change: transform, background-color, box-shadow;
+  transition:
+    background-color 0.25s cubic-bezier(0.0, 0.0, 0.2, 1.0),
+    box-shadow       0.25s cubic-bezier(0.0, 0.0, 0.2, 1.0),
+    backdrop-filter  0.25s cubic-bezier(0.0, 0.0, 0.2, 1.0),
+    transform        0.35s cubic-bezier(0.0, 0.0, 0.2, 1.0);
+}
+
+/* Scrolled state — frosted glass background */
+.site-header.is-scrolled,
+header[role="banner"].is-scrolled,
+#shopify-section-header .header-wrapper.is-scrolled {
+  background-color: rgba(255, 250, 242, 0.92) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 rgba(28, 25, 23, 0.08);
+}
+
+/* Hidden state (scroll down) */
+.site-header.is-hidden,
+header[role="banner"].is-hidden {
+  transform: translateY(-100%);
+}
+
+/* ── Logo hover ──────────────────────────────────────────────── */
+.header__heading-link,
+.site-header__logo,
+.header__logo a,
+.header__logo img {
+  transition: opacity 0.15s cubic-bezier(0.0, 0.0, 0.2, 1.0),
+              transform 0.2s cubic-bezier(0.0, 0.0, 0.2, 1.0);
+}
+
+.header__heading-link:hover,
+.site-header__logo:hover,
+.header__logo a:hover {
+  opacity: 0.85;
+  transform: scale(1.02);
+}
+
+/* ── Nav link hover underline ───────────────────────────────── */
+.header__menu-item a,
+.site-nav__link,
+.header__active-menu-item a,
+.pm-nav-link {
+  position: relative;
+  text-decoration: none;
+}
+
+.header__menu-item a::after,
+.site-nav__link::after,
+.pm-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: currentColor;
+  transition: width 0.25s cubic-bezier(0.0, 0.0, 0.2, 1.0);
+}
+
+.header__menu-item a:hover::after,
+.site-nav__link:hover::after,
+.pm-nav-link:hover::after,
+.header__menu-item a:focus-visible::after,
+.pm-nav-link:focus-visible::after {
+  width: 100%;
+}
+
+/* Active nav link — full underline */
+.header__menu-item--active a::after,
+.site-nav__link--active::after {
+  width: 100%;
+}
+
+/* ── Dropdown reveal animation ──────────────────────────────── */
+.header__submenu,
+.site-nav__dropdown,
+.header__dropdown {
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition:
+    opacity  0.2s cubic-bezier(0.0, 0.0, 0.2, 1.0),
+    transform 0.2s cubic-bezier(0.0, 0.0, 0.2, 1.0),
+    visibility 0s linear 0.2s;
+  visibility: hidden;
+}
+
+.header__menu-item:hover .header__submenu,
+.header__menu-item:focus-within .header__submenu,
+.site-nav__item:hover .site-nav__dropdown,
+.site-nav__item:focus-within .site-nav__dropdown {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  visibility: visible;
+  transition:
+    opacity  0.2s cubic-bezier(0.0, 0.0, 0.2, 1.0),
+    transform 0.2s cubic-bezier(0.0, 0.0, 0.2, 1.0),
+    visibility 0s linear 0s;
+}
+
+/* ── Mobile menu slide animation ────────────────────────────── */
+.header__drawer,
+.mobile-facets__wrapper,
+.menu-drawer {
+  transform: translateX(calc(-100% * var(--direction-multiplier, 1)));
+  transition: transform 0.35s cubic-bezier(0.0, 0.0, 0.2, 1.0);
+  will-change: transform;
+}
+
+.header__drawer.is-open,
+.menu-drawer.is-open,
+details[open].menu-opening > .menu-drawer,
+.menu-opening .header__drawer,
+.menu-opening .menu-drawer {
+  transform: translateX(0);
+}
+
+.header__drawer.is-closing,
+.menu-drawer.is-closing {
+  transform: translateX(calc(-100% * var(--direction-multiplier, 1)));
+  transition: transform 0.25s cubic-bezier(0.4, 0.0, 1.0, 1.0);
+}
+
+/* ── Mobile menu items stagger ──────────────────────────────── */
+.header__drawer .header__menu-item,
+.menu-drawer__navigation .header__menu-item,
+.menu-drawer__navigation .menu-drawer__menu-item {
+  opacity: 0;
+  transform: translateX(calc(-16px * var(--direction-multiplier, 1)));
+  transition:
+    opacity   0.3s cubic-bezier(0.0, 0.0, 0.2, 1.0),
+    transform 0.3s cubic-bezier(0.0, 0.0, 0.2, 1.0);
+}
+
+.header__drawer.is-open .header__menu-item:nth-child(1),
+.menu-drawer.is-open .header__menu-item:nth-child(1) { transition-delay: 0.05s; opacity: 1; transform: translateX(0); }
+.header__drawer.is-open .header__menu-item:nth-child(2),
+.menu-drawer.is-open .header__menu-item:nth-child(2) { transition-delay: 0.10s; opacity: 1; transform: translateX(0); }
+.header__drawer.is-open .header__menu-item:nth-child(3),
+.menu-drawer.is-open .header__menu-item:nth-child(3) { transition-delay: 0.15s; opacity: 1; transform: translateX(0); }
+.header__drawer.is-open .header__menu-item:nth-child(4),
+.menu-drawer.is-open .header__menu-item:nth-child(4) { transition-delay: 0.20s; opacity: 1; transform: translateX(0); }
+.header__drawer.is-open .header__menu-item:nth-child(5),
+.menu-drawer.is-open .header__menu-item:nth-child(5) { transition-delay: 0.25s; opacity: 1; transform: translateX(0); }
+.header__drawer.is-open .header__menu-item:nth-child(6),
+.menu-drawer.is-open .header__menu-item:nth-child(6) { transition-delay: 0.30s; opacity: 1; transform: translateX(0); }
+
+/* The theme's mobile drawer opens through a <details> state and its real links
+   use .menu-drawer__menu-item. Keep those links visible even without JS classes. */
+details[open] > .menu-drawer .menu-drawer__menu-item,
+details[open] > .menu-drawer .header__menu-item,
+.menu-drawer.is-open .menu-drawer__menu-item,
+.menu-drawer.is-open .header__menu-item {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+details[open] > .menu-drawer .menu-drawer__menu > li:nth-child(1) .menu-drawer__menu-item,
+details[open].menu-opening > .menu-drawer .menu-drawer__menu > li:nth-child(1) .menu-drawer__menu-item { transition-delay: 0.05s; }
+details[open] > .menu-drawer .menu-drawer__menu > li:nth-child(2) .menu-drawer__menu-item,
+details[open].menu-opening > .menu-drawer .menu-drawer__menu > li:nth-child(2) .menu-drawer__menu-item { transition-delay: 0.10s; }
+details[open] > .menu-drawer .menu-drawer__menu > li:nth-child(3) .menu-drawer__menu-item,
+details[open].menu-opening > .menu-drawer .menu-drawer__menu > li:nth-child(3) .menu-drawer__menu-item { transition-delay: 0.15s; }
+details[open] > .menu-drawer .menu-drawer__menu > li:nth-child(4) .menu-drawer__menu-item,
+details[open].menu-opening > .menu-drawer .menu-drawer__menu > li:nth-child(4) .menu-drawer__menu-item { transition-delay: 0.20s; }
+details[open] > .menu-drawer .menu-drawer__menu > li:nth-child(5) .menu-drawer__menu-item,
+details[open].menu-opening > .menu-drawer .menu-drawer__menu > li:nth-child(5) .menu-drawer__menu-item { transition-delay: 0.25s; }
+details[open] > .menu-drawer .menu-drawer__menu > li:nth-child(6) .menu-drawer__menu-item,
+details[open].menu-opening > .menu-drawer .menu-drawer__menu > li:nth-child(6) .menu-drawer__menu-item { transition-delay: 0.30s; }
+
+/* ── Announcement bar ───────────────────────────────────────── */
+.announcement-bar,
+.shopify-section-announcement-bar {
+  transition: transform 0.3s cubic-bezier(0.0, 0.0, 0.2, 1.0);
+}
+
+/* ── Cart icon hover ────────────────────────────────────────── */
+.header__icon--cart,
+.cart-icon-bubble,
+[data-cart-icon] {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1.0);
+}
+
+.header__icon--cart:hover,
+.cart-icon-bubble:hover,
+[data-cart-icon]:hover {
+  transform: scale(1.1);
+}
+
+/* ── Search icon hover ──────────────────────────────────────── */
+.header__icon--search,
+[data-search-icon] {
+  transition: transform 0.2s cubic-bezier(0.0, 0.0, 0.2, 1.0),
+              opacity   0.15s cubic-bezier(0.0, 0.0, 0.2, 1.0);
+}
+
+.header__icon--search:hover,
+[data-search-icon]:hover {
+  transform: scale(1.08);
+  opacity: 0.75;
+}
+
+/* ── Reduced motion overrides ───────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .site-header,
+  header[role="banner"],
+  #shopify-section-header .header-wrapper,
+  #shopify-section-header header,
+  .header__heading-link,
+  .site-header__logo,
+  .header__logo a,
+  .header__logo img,
+  .header__menu-item a::after,
+  .site-nav__link::after,
+  .pm-nav-link::after,
+  .header__submenu,
+  .site-nav__dropdown,
+  .header__dropdown,
+  .header__drawer,
+  .menu-drawer,
+  .header__drawer .header__menu-item,
+  .menu-drawer__navigation .header__menu-item,
+  .menu-drawer__navigation .menu-drawer__menu-item,
+  .header__icon--cart,
+  .cart-icon-bubble,
+  .header__icon--search {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .header__submenu,
+  .site-nav__dropdown,
+  .header__dropdown {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .header__drawer .header__menu-item,
+  .menu-drawer__navigation .header__menu-item {
+    opacity: 1;
+    transform: none;
+  }
+}

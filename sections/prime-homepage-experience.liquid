@@ -2455,13 +2455,28 @@
     .ph-craft,
     .ph-fit,
     .ph-guarantee,
-    .ph-faq,
+    .ph-faq {
+      padding: 52px 0;
+    }
+
     .ph-close {
       padding: 52px 0;
       background:
         linear-gradient(180deg, rgba(23, 21, 18, 0.38) 0%, rgba(23, 21, 18, 0.52) 55%, rgba(23, 21, 18, 0.82) 100%),
         var(--ph-close-image) center 30% / cover no-repeat,
         var(--ph-ink);
+    }
+
+    .ph-guarantee {
+      background:
+        radial-gradient(circle at top, rgba(244, 194, 125, 0.16), transparent 46%),
+        linear-gradient(135deg, rgba(23, 21, 18, 0.98), rgba(46, 33, 25, 0.98)),
+        var(--ph-ink);
+      overflow: visible;
+    }
+
+    .ph-guarantee__inner {
+      width: min(100% - 24px, 980px);
     }
 
     .ph-close__inner {
@@ -2712,7 +2727,37 @@
     }
 
     .ph-guarantee__card {
-      padding: 26px 20px;
+      gap: 18px;
+      padding: 28px 18px;
+      overflow: visible;
+    }
+
+    .ph-guarantee__icon {
+      height: 64px;
+      width: 64px;
+    }
+
+    .ph-guarantee h2 {
+      font-size: clamp(28px, 8vw, 34px);
+      line-height: 1.08;
+      overflow-wrap: anywhere;
+    }
+
+    .ph-guarantee p {
+      max-width: 100%;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .ph-guarantee__pills {
+      width: 100%;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .ph-guarantee__pills span {
+      padding: 8px 12px;
+      font-size: 12px;
     }
 
     .ph-routine__grid article {

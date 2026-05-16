@@ -12,11 +12,23 @@
 
   // ─── Reduced Motion Guard ─────────────────────────────────────────────────
   var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion) {
-    // Make all .pm-reveal and .ph-reveal elements immediately visible
-    document.querySelectorAll('.pm-reveal, .ph-reveal, [data-motion="reveal"]').forEach(function (el) {
+
+  function revealMotionContent() {
+    document.querySelectorAll('.pm-reveal, .ph-reveal, [data-motion="reveal"], [data-motion-stagger]').forEach(function (el) {
       el.classList.add('is-visible');
+      el.style.opacity = '';
+      el.style.transform = '';
     });
+
+    document.querySelectorAll('[data-motion-stagger] > *').forEach(function (child) {
+      child.style.opacity = '';
+      child.style.transform = '';
+    });
+  }
+
+  if (prefersReducedMotion) {
+    // Make all Motion-controlled content immediately visible
+    revealMotionContent();
     return;
   }
 
@@ -129,6 +141,7 @@
                 delay:    stagger(tokens.stagger.normal, { start: delay })
               }
             );
+            el.classList.add('is-visible');
           }
         }
 
@@ -173,6 +186,7 @@
             delay:    stagger(tokens.stagger.normal)
           }
         );
+        parent.classList.add('is-visible');
         return false;
       }, {
         margin: '0px 0px -60px 0px'
@@ -783,9 +797,7 @@
         } else if (attempts >= maxAttempts) {
           clearInterval(poll);
           console.warn('[PrimeMotion] window.Motion never loaded — CSS-only fallback active');
-          document.querySelectorAll('.pm-reveal, .ph-reveal, [data-motion="reveal"]').forEach(function (el) {
-            el.classList.add('is-visible');
-          });
+          revealMotionContent();
         }
       }, 100);
     }
@@ -795,15 +807,11 @@
     // threshold never firing on short mobile screens, or any other silent failure.
     setTimeout(function () {
       var hidden = document.querySelectorAll(
-        '.ph-reveal:not(.is-visible), .pm-reveal:not(.is-visible), [data-motion="reveal"]:not(.is-visible)'
+        '.ph-reveal:not(.is-visible), .pm-reveal:not(.is-visible), [data-motion="reveal"]:not(.is-visible), [data-motion-stagger]:not(.is-visible)'
       );
       if (hidden.length) {
         console.warn('[PrimeMotion] Safety net: force-revealing ' + hidden.length + ' still-hidden element(s)');
-        hidden.forEach(function (el) {
-          el.classList.add('is-visible');
-          el.style.opacity   = '';
-          el.style.transform = '';
-        });
+        revealMotionContent();
       }
     }, 3000);
   }

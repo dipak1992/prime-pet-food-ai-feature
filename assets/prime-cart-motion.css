@@ -1,0 +1,213 @@
+/* ============================================================
+   Prime Pet Food — Cart Drawer Motion CSS
+   /assets/prime-cart-motion.css
+   ============================================================ */
+
+/* ── Cart drawer base positioning ──────────────────────────── */
+cart-drawer,
+#cart-drawer,
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(420px, 100vw);
+  z-index: 200;
+  will-change: transform;
+  transform: translateX(100%);
+  visibility: hidden;
+  background: #fff;
+  box-shadow: -4px 0 40px rgba(28, 25, 23, 0.12);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+cart-drawer.is-open,
+#cart-drawer.is-open,
+.cart-drawer.is-open {
+  visibility: visible;
+  transform: translateX(0);
+  transition:
+    transform 0.35s cubic-bezier(0.0, 0.0, 0.2, 1.0),
+    visibility 0s linear 0s;
+}
+
+cart-drawer.is-closing,
+#cart-drawer.is-closing,
+.cart-drawer.is-closing {
+  transform: translateX(100%);
+  transition:
+    transform 0.25s cubic-bezier(0.4, 0.0, 1.0, 1.0),
+    visibility 0s linear 0.25s;
+  visibility: hidden;
+}
+
+/* ── Cart overlay backdrop ──────────────────────────────────── */
+.drawer__overlay,
+#Drawer-Overlay,
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 199;
+  background: rgba(28, 25, 23, 0.4);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s cubic-bezier(0.0, 0.0, 0.2, 1.0);
+  will-change: opacity;
+}
+
+.drawer__overlay.is-visible,
+#Drawer-Overlay.is-visible,
+.cart-overlay.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── Cart item enter animation ──────────────────────────────── */
+.cart-item,
+.cart-drawer__item {
+  transition:
+    opacity 0.25s cubic-bezier(0.0, 0.0, 0.2, 1.0),
+    transform 0.25s cubic-bezier(0.0, 0.0, 0.2, 1.0);
+  will-change: opacity, transform;
+  overflow: hidden;
+}
+
+.cart-item.is-entering,
+.cart-drawer__item.is-entering {
+  animation: pm-cart-item-enter 0.3s cubic-bezier(0.0, 0.0, 0.2, 1.0) both;
+}
+
+@keyframes pm-cart-item-enter {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ── Cart item exit animation ───────────────────────────────── */
+.cart-item.is-removing,
+.cart-drawer__item.is-removing {
+  animation: pm-cart-item-exit 0.25s cubic-bezier(0.4, 0.0, 1.0, 1.0) both;
+}
+
+@keyframes pm-cart-item-exit {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+    max-height: 200px;
+  }
+  to {
+    opacity: 0;
+    transform: translateX(20px);
+    max-height: 0;
+    margin-block: 0;
+    padding-block: 0;
+  }
+}
+
+/* ── Quantity update pulse ──────────────────────────────────── */
+.cart-item__quantity.is-updating,
+.quantity__input.is-updating {
+  animation: pm-quantity-pulse 0.3s cubic-bezier(0.34, 1.56, 0.64, 1.0);
+}
+
+@keyframes pm-quantity-pulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+/* ── Cart total update flash ────────────────────────────────── */
+.cart-drawer__footer .totals,
+.cart-drawer__total {
+  transition: opacity 0.15s cubic-bezier(0.0, 0.0, 0.2, 1.0);
+}
+
+.cart-drawer__footer .totals.is-updating,
+.cart-drawer__total.is-updating {
+  opacity: 0.5;
+}
+
+/* ── Checkout button loading state ──────────────────────────── */
+.cart-drawer__checkout[aria-busy="true"],
+.cart__checkout-button[aria-busy="true"] {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.75;
+}
+
+.cart-drawer__checkout[aria-busy="true"]::after,
+.cart__checkout-button[aria-busy="true"]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: pm-btn-loading 1.2s ease-in-out infinite;
+}
+
+@keyframes pm-btn-loading {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Cart count badge bounce ────────────────────────────────── */
+.cart-count-bubble.is-updated,
+[data-cart-count].is-updated {
+  animation: pm-badge-bounce 0.4s cubic-bezier(0.34, 1.56, 0.64, 1.0);
+}
+
+@keyframes pm-badge-bounce {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+/* ── Reduced motion overrides ───────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  /* Do NOT reset transform on the drawer — it uses translateX(100%) as its
+     closed/hidden state. Removing transform would make the drawer always visible.
+     Instead, only disable the transition so open/close is instant. */
+  cart-drawer,
+  #cart-drawer,
+  .cart-drawer {
+    transition: none !important;
+  }
+
+  cart-drawer.is-open,
+  #cart-drawer.is-open,
+  .cart-drawer.is-open {
+    transition: none !important;
+  }
+
+  .cart-item.is-entering,
+  .cart-drawer__item.is-entering,
+  .cart-item.is-removing,
+  .cart-drawer__item.is-removing,
+  .cart-item__quantity.is-updating,
+  .quantity__input.is-updating,
+  .cart-count-bubble.is-updated,
+  [data-cart-count].is-updated {
+    animation: none !important;
+  }
+
+  .cart-drawer__checkout[aria-busy="true"]::after,
+  .cart__checkout-button[aria-busy="true"]::after {
+    animation: none !important;
+    display: none;
+  }
+}
