@@ -103,6 +103,129 @@
     return true;
   }
 
+  // ─── Universal Section Registration ──────────────────────────────────────
+  // Homepage sections declare motion hooks directly in Liquid. Most product,
+  // cart, collection, editorial, and ad-landing sections do not. This lightweight
+  // registration pass gives those pages the same reveal system without requiring
+  // duplicated data attributes across every template.
+  function isEligibleAutoMotionTarget(el) {
+    if (!el || el.nodeType !== 1) return false;
+
+    if (
+      el.matches('.ph-reveal, .pm-reveal, [data-motion], [data-motion-stagger], .is-visible') ||
+      el.closest(
+        'cart-drawer, .cart-drawer, .header__drawer, .header-drawer, ' +
+        '.menu-drawer, #menu-drawer, .mobile-menu, .psatc, .prime-sticky-atc, ' +
+        '.shopify-payment-button, .chat-widget, [aria-hidden="true"], [hidden]'
+      )
+    ) {
+      return false;
+    }
+
+    return true;
+  }
+
+  function markRevealTargets(selectors, delayStep) {
+    document.querySelectorAll(selectors).forEach(function (el, index) {
+      if (!isEligibleAutoMotionTarget(el)) return;
+
+      el.setAttribute('data-motion', 'reveal');
+      if (delayStep && index > 0) {
+        el.setAttribute('data-motion-delay', String(Math.min(index * delayStep, 240)));
+      }
+    });
+  }
+
+  function markStaggerTargets(selectors) {
+    document.querySelectorAll(selectors).forEach(function (el) {
+      if (!isEligibleAutoMotionTarget(el)) return;
+      if (!el.children || !el.children.length) return;
+
+      el.setAttribute('data-motion-stagger', 'true');
+    });
+  }
+
+  function registerUniversalMotionTargets() {
+    markRevealTargets(
+      [
+        // Product pages
+        '.ypc-product-hero__media',
+        '.ypc-product-hero__content',
+        '.ypc-tabs-recos__left',
+        '.ypc-tabs-recos__right',
+        '.related-products',
+        'product-recommendations',
+
+        // Cart and account-style pages
+        '.ypc-cart__hero',
+        '.ypc-cart__main',
+        '.ypc-cart__summary',
+        '.customer',
+
+        // Collections and standard editorial sections
+        '.collection-hero__text-wrapper',
+        '.collection-hero__image-container',
+        '.prime-collection-hero__content',
+        '.prime-collection-hero__media',
+        '.main-page-title',
+        '.page-title',
+        '.page-header',
+
+        // Paid landing pages
+        '.prime-ad-landing__hero-media',
+        '.prime-ad-landing__hero-copy',
+        '.prime-ad-landing__problem-solution',
+        '.prime-ad-landing__proof-band',
+        '.prime-ad-landing__offer',
+        '.prime-ad-landing__objections',
+        '.prime-ad-landing__final',
+
+        // SEO/storytelling/custom pages
+        '.seo-chew__hero',
+        '.seo-chew__section',
+        '.prime-wholesale__hero',
+        '.prime-wholesale__section',
+        '.prime-yak-process__hero',
+        '.prime-yak-process__section',
+        '.prime-yak-process__step',
+        '.pav2-hero__copy',
+        '.pav2-hero__media',
+        '.pav2-section',
+
+        // Theme generic content sections
+        '.rich-text',
+        '.image-with-text',
+        '.multicolumn',
+        '.collapsible-content',
+        '.testimonials'
+      ].join(', '),
+      45
+    );
+
+    markStaggerTargets(
+      [
+        '.ypc-product-hero__thumb-row',
+        '.ypc-product-hero__options',
+        '.ypc-tabs-recos__nav',
+        '.ypc-tabs-recos__products',
+        '.ypc-cart-items',
+        '.related-products .grid',
+        '.product-grid',
+        '.collection .grid',
+        '.prime-ad-landing__review-grid',
+        '.prime-ad-landing__microproof',
+        '.seo-chew__cards',
+        '.seo-chew__links',
+        '.prime-wholesale__cards',
+        '.prime-wholesale__steps',
+        '.prime-yak-process__timeline',
+        '.pav2-grid',
+        '.multicolumn-list',
+        '.testimonial-list'
+      ].join(', ')
+    );
+  }
+
   // ─── Scroll Reveal System ─────────────────────────────────────────────────
   function initScrollReveals() {
     var selectors = '.ph-reveal, .pm-reveal, [data-motion="reveal"]';
@@ -586,6 +709,7 @@
       return;
     }
 
+    registerUniversalMotionTargets();
     initScrollReveals();
     initHeroEntrance();
     initStatCounters();
