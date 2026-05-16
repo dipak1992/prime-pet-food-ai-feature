@@ -15,17 +15,18 @@
 |------|---------|
 | `assets/prime-motion-tokens.css` | CSS custom properties for all durations, easings, stagger values, and hover/press tokens |
 | `assets/prime-motion-base.css` | CSS-only motion layer: `.pm-reveal`, `.pm-fade`, `.pm-slide-*`, card/button hover states, skeleton shimmer |
-| `assets/prime-motion.js` | Motion One (vanilla JS) orchestration: scroll reveals, hero entrance, stat counters, card hover, nav hide/show, cart drawer, button press, parallax, section transitions, image reveal |
-| `assets/prime-cart-motion.css` | Cart drawer slide-in/out, overlay backdrop, item enter/exit animations, quantity pulse, badge bounce |
+| `assets/prime-motion-vendor.js` | Local Framer Motion DOM UMD bundle exposing `window.Motion`; replaces the external CDN dependency |
+| `assets/prime-motion.js` | Motion One / Framer Motion DOM orchestration: scroll reveals, hero entrance, stat counters, card hover, nav hide/show, cart item motion, button press, parallax, image reveal |
+| `assets/prime-cart-motion.css` | Cart drawer timing refinements scoped to the theme's existing `cart-drawer` / `.drawer.active` state, plus item enter/exit animations, quantity pulse, badge bounce |
 | `assets/prime-nav-motion.css` | Header scroll behavior (frosted glass, hide-on-scroll-down), nav link underline, dropdown reveal, mobile menu slide |
 
 ### Files Modified
 
 | File | Change |
 |------|--------|
-| `layout/theme.liquid` | Added 4 CSS `<link>` tags in `<head>` (tokens → base → nav → cart), Motion One CDN `<script>` + `prime-motion.js` before `</body>`, both with `defer` |
+| `layout/theme.liquid` | Loads theme base CSS first, then motion CSS overrides; loads local `prime-motion-vendor.js` + `prime-motion.js` before `</body>`, both with `defer` |
 | `assets/animations.js` | Added `PRIME_MOTION_HANDLES_REVEALS` coexistence guard (refactored to `isPrimeMotionActive()` function to fix race condition) |
-| `sections/prime-homepage-experience.liquid` | Added `--parallax-y` CSS variable support to hero image `transform` |
+| `sections/prime-homepage-experience.liquid` | Removed legacy homepage reveal observer/CSS so `prime-motion.js` is the single reveal owner; added `--parallax-y` CSS variable support to hero image `transform` |
 
 ---
 
@@ -42,14 +43,14 @@
                           ↓ page renders ↓
 ┌─────────────────────────────────────────────────────────────┐
 │  theme.liquid before </body>  (both defer)                   │
-│  ⑤ motion@11/dist/motion.min.js  — Motion One CDN UMD       │
+│  ⑤ prime-motion-vendor.js  — local Motion DOM UMD           │
 │     → exposes window.Motion { animate, inView, scroll,       │
 │       stagger }                                              │
 │  ⑥ prime-motion.js  — JS orchestration layer                 │
 │     → checks prefersReducedMotion → early return             │
 │     → checks window.Motion → warn + return if missing        │
 │     → applyMobileOptimizations() → may abort                 │
-│     → init() calls all 12 animation functions                │
+│     → init() calls the scoped animation functions            │
 └─────────────────────────────────────────────────────────────┘
                           ↓ coexistence ↓
 ┌─────────────────────────────────────────────────────────────┐
@@ -62,7 +63,7 @@
 
 ### Layered Fallback Strategy
 
-1. **No JS / Motion CDN fails** → CSS-only `.pm-reveal` transitions via `animations.js` IntersectionObserver adding `.is-visible`
+1. **No JS / Motion vendor fails** → `prime-motion.js` safety net reveals all Motion-controlled content; existing theme `.scroll-trigger` remains owned by `animations.js`
 2. **`prefers-reduced-motion`** → All durations zeroed in tokens CSS + JS early-returns + CSS `!important` overrides
 3. **Save-data / low-power** → `applyMobileOptimizations()` detects `navigator.connection.saveData` and aborts all animations
 4. **Mobile** → Reduced stagger timing, parallax disabled, hover effects skipped
@@ -86,9 +87,9 @@
 **Issue:** `document.querySelector('#shopify-section-header')` targets the Shopify section `<div>` wrapper, not the actual `<header>` element inside it. Animating `translateY` on the wrapper would not produce the expected hide/show behavior since the wrapper is not `position: fixed`.  
 **Fix:** Updated selector to `'#shopify-section-header .header-wrapper, #shopify-section-header header'` to target the actual header element, consistent with `prime-nav-motion.css` selectors.
 
-### 🔴 Bug Fix 4 — `animations.js` race condition with Motion CDN
+### 🔴 Bug Fix 4 — `animations.js` race condition with Motion vendor loading
 **File:** `assets/animations.js` line ~10  
-**Issue:** `const PRIME_MOTION_HANDLES_REVEALS = typeof window.Motion !== 'undefined'` — evaluated at script parse time. Both `animations.js` and the Motion CDN script load with `defer`, so execution order is not guaranteed. If `animations.js` parses before `motion.min.js` executes, `window.Motion` is `undefined` and the coexistence guard silently fails, causing double-animation conflicts on `.ph-reveal` elements.  
+**Issue:** `const PRIME_MOTION_HANDLES_REVEALS = typeof window.Motion !== 'undefined'` — evaluated at script parse time. Both `animations.js` and the Motion vendor script load with `defer`, so execution order is not guaranteed. If `animations.js` parses before the vendor asset executes, `window.Motion` is `undefined` and the coexistence guard silently fails, causing double-animation conflicts on `.ph-reveal` elements.
 **Fix:** Replaced the top-level constant with `function isPrimeMotionActive() { return typeof window.Motion !== 'undefined'; }` — evaluated lazily at `DOMContentLoaded` call time, after all deferred scripts have executed.
 
 ### 🟡 Fix 5 — `prime-cart-motion.css` reduced-motion breaks drawer closed state
@@ -138,12 +139,12 @@ shopify theme push \
   --only sections/prime-homepage-experience.liquid
 ```
 
-### Verify CDN Availability
-The Motion One CDN URL used is:
+### Verify Local Motion Vendor Asset
+The storefront now loads:
 ```
-https://cdn.jsdelivr.net/npm/motion@11/dist/motion.min.js
+assets/prime-motion-vendor.js
 ```
-This is the correct UMD bundle for Motion One v11 vanilla JS. It exposes `window.Motion` with `{ animate, inView, scroll, stagger, timeline }`. Verify it loads in browser DevTools Network tab after deploy.
+This local UMD bundle exposes `window.Motion` with `{ animate, inView, scroll, stagger }`, avoiding an external runtime CDN dependency. Verify it loads in browser DevTools Network tab after deploy.
 
 ---
 
@@ -193,11 +194,10 @@ This is the correct UMD bundle for Motion One v11 vanilla JS. It exposes `window
 
 ## 6. Performance Notes
 
-### CDN Load Impact
-- **Motion One v11 UMD bundle:** ~18KB gzipped (jsdelivr CDN, cached globally)
+### Vendor Load Impact
+- **Local Motion DOM UMD bundle:** served as a Shopify theme asset and browser-cached from the store domain
 - **Load strategy:** `defer` — does not block HTML parsing or first render
-- **CDN:** jsDelivr has 99.9% uptime SLA and edge nodes worldwide; no SPOF risk
-- **Fallback:** If CDN fails, `prime-motion.js` detects `window.Motion === undefined`, logs a warning, and returns. CSS-only animations via `.pm-reveal` + `animations.js` IntersectionObserver continue to work.
+- **Fallback:** If the vendor asset fails, `prime-motion.js` detects `window.Motion === undefined`, logs a warning, and reveals Motion-controlled content so the page remains usable.
 
 ### Core Web Vitals Impact
 

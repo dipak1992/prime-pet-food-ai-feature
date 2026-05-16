@@ -4,11 +4,11 @@ const SCROLL_ZOOM_IN_TRIGGER_CLASSNAME = 'animate--zoom-in';
 const SCROLL_ANIMATION_CANCEL_CLASSNAME = 'scroll-trigger--cancel';
 
 // ─── Prime Motion coexistence check ──────────────────────────────────────────
-// If window.Motion (Motion One CDN) is loaded, let prime-motion.js handle
+// If window.Motion (local Motion vendor asset) is loaded, let prime-motion.js handle
 // .ph-reveal and .pm-reveal elements. This file keeps handling .scroll-trigger
 // elements (Shopify Ignite native system) as a separate, non-conflicting layer.
 //
-// IMPORTANT: Both this file and the Motion CDN script load with `defer`, so
+// IMPORTANT: Both this file and the Motion vendor script load with `defer`, so
 // evaluation order is not guaranteed. We must NOT evaluate window.Motion at
 // parse time — instead we check it lazily inside initializeScrollAnimationTrigger()
 // which runs on DOMContentLoaded (after all deferred scripts have executed).
@@ -56,7 +56,7 @@ function initializeScrollAnimationTrigger(rootEl = document, isDesignModeEvent =
 
   // Filter out .ph-reveal and .pm-reveal elements when Motion One is active
   // to prevent double-animation conflicts. Check is deferred to call-time
-  // (not parse-time) to avoid a race condition with the Motion CDN defer script.
+  // (not parse-time) to avoid a race condition with the Motion vendor defer script.
   const elementsToObserve = isPrimeMotionActive()
     ? animationTriggerElements.filter((el) =>
         !el.classList.contains('ph-reveal') &&

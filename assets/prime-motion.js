@@ -1,7 +1,6 @@
 /**
  * Prime Pet Food — Premium Motion System
- * Uses Motion One (vanilla JS) via window.Motion (CDN UMD bundle)
- * CDN: https://cdn.jsdelivr.net/npm/motion@11/dist/motion.min.js
+ * Uses Motion One / Framer Motion DOM (vanilla JS) via local prime-motion-vendor.js
  * Respects prefers-reduced-motion
  *
  * /assets/prime-motion.js
@@ -33,9 +32,9 @@
   }
 
   // ─── Motion Library Bootstrap ─────────────────────────────────────────────
-  // Both the CDN script and this script use `defer`, which guarantees in-order
+  // Both the vendor script and this script use `defer`, which guarantees in-order
   // execution per the HTML spec. However, to guard against any race condition
-  // (CDN cache miss, slow network, browser quirk), we defer the Motion check
+  // (asset cache miss, slow network, browser quirk), we defer the Motion check
   // until DOMContentLoaded rather than checking at parse time.
   // If Motion still isn't available by then, we retry with a short poll so
   // CSS-only fallbacks remain visible.
@@ -118,9 +117,13 @@
       var delay      = parseFloat(el.getAttribute('data-motion-delay') || '0') / 1000;
       var hasStagger = el.hasAttribute('data-motion-stagger');
 
+      var revealDistance = isMobile ? 10 : 24;
+      var childDistance  = isMobile ? 8 : 16;
+      var observerMargin = isMobile ? '0px 0px -20px 0px' : '0px 0px -60px 0px';
+
       // Set initial state via JS (overrides CSS for Motion-controlled elements)
       el.style.opacity   = '0';
-      el.style.transform = 'translateY(24px)';
+      el.style.transform = 'translateY(' + revealDistance + 'px)';
 
       inView(el, function () {
         if (hasStagger) {
@@ -129,7 +132,7 @@
           if (children.length) {
             children.forEach(function (child) {
               child.style.opacity   = '0';
-              child.style.transform = 'translateY(16px)';
+              child.style.transform = 'translateY(' + childDistance + 'px)';
             });
 
             animate(
@@ -160,9 +163,7 @@
         });
 
         return false; // fire once
-      }, {
-        margin: '0px 0px -60px 0px'
-      });
+      }, { margin: observerMargin });
     });
 
     // Also handle [data-motion-stagger] parent containers
@@ -173,7 +174,7 @@
 
       children.forEach(function (child) {
         child.style.opacity   = '0';
-        child.style.transform = 'translateY(16px)';
+        child.style.transform = 'translateY(' + (isMobile ? 8 : 16) + 'px)';
       });
 
       inView(parent, function () {
@@ -188,9 +189,7 @@
         );
         parent.classList.add('is-visible');
         return false;
-      }, {
-        margin: '0px 0px -60px 0px'
-      });
+      }, { margin: isMobile ? '0px 0px -20px 0px' : '0px 0px -60px 0px' });
     });
   }
 
@@ -402,59 +401,7 @@
 
   // ─── Cart Drawer Motion ───────────────────────────────────────────────────
   function initCartMotion() {
-    var drawer  = document.querySelector('cart-drawer, #cart-drawer, .cart-drawer');
-    var overlay = document.querySelector('.drawer__overlay, #Drawer-Overlay, .cart-overlay');
-
-    if (!drawer && !overlay) return;
-
-    // Listen for Shopify theme pub/sub cart events
-    function onCartOpen() {
-      if (drawer) {
-        drawer.style.visibility = 'visible';
-        animate(
-          drawer,
-          { x: ['100%', '0%'] },
-          { duration: 0.35, easing: tokens.easing.out }
-        );
-      }
-      if (overlay) {
-        overlay.style.display = 'block';
-        animate(
-          overlay,
-          { opacity: [0, 1] },
-          { duration: tokens.duration.normal, easing: tokens.easing.out }
-        );
-      }
-    }
-
-    function onCartClose() {
-      if (drawer) {
-        animate(
-          drawer,
-          { x: ['0%', '100%'] },
-          { duration: tokens.duration.normal, easing: tokens.easing.in }
-        ).then(function () {
-          drawer.style.visibility = 'hidden';
-        });
-      }
-      if (overlay) {
-        animate(
-          overlay,
-          { opacity: [1, 0] },
-          { duration: tokens.duration.fast, easing: tokens.easing.in }
-        ).then(function () {
-          overlay.style.display = 'none';
-        });
-      }
-    }
-
-    // Shopify theme pub/sub events
-    document.addEventListener('cart:open',  onCartOpen);
-    document.addEventListener('cart:close', onCartClose);
-
-    // Also listen for custom events from Ignite theme
-    document.addEventListener('on:cart-drawer:open',  onCartOpen);
-    document.addEventListener('on:cart-drawer:close', onCartClose);
+    if (!document.querySelector('cart-drawer')) return;
 
     // Animate cart item removal — avoid animating `height` (GPU-unsafe layout property).
     // Instead collapse via maxHeight (CSS-animatable) and use overflow:hidden on the item.
@@ -577,79 +524,6 @@
     );
   }
 
-  // ─── Section Transitions ──────────────────────────────────────────────────
-  function initSectionTransitions() {
-    var sections = document.querySelectorAll(
-      '.ph-outcomes, .ph-products, .ph-quiz, .ph-reviews, .ph-ingredients, ' +
-      '.ph-craft, .ph-guarantee, .ph-fit, .ph-vet, .ph-faq, .ph-close, ' +
-      '.ph-subscribe, .ph-compare, .ph-routine'
-    );
-
-    sections.forEach(function (section) {
-      // Animate section heading
-      var heading = section.querySelector('h2');
-      var kicker  = section.querySelector('.ph-kicker');
-      var body    = section.querySelector('p:not(.ph-kicker)');
-
-      if (heading) {
-        heading.style.opacity   = '0';
-        heading.style.transform = 'translateY(20px)';
-
-        inView(heading, function () {
-          animate(
-            heading,
-            { opacity: [0, 1], transform: ['translateY(20px)', 'translateY(0px)'] },
-            { duration: tokens.duration.slow, easing: tokens.easing.out }
-          ).then(function () {
-            heading.style.willChange = 'auto';
-          });
-          return false;
-        }, { margin: '0px 0px -40px 0px' });
-      }
-
-      if (kicker) {
-        kicker.style.opacity = '0';
-        inView(kicker, function () {
-          animate(
-            kicker,
-            { opacity: [0, 1] },
-            { duration: tokens.duration.normal, easing: tokens.easing.out }
-          );
-          return false;
-        }, { margin: '0px 0px -20px 0px' });
-      }
-
-      // Stagger grid children
-      var grids = section.querySelectorAll(
-        '.ph-outcomes__grid, .ph-product-grid, .ph-ingredients__grid, ' +
-        '.ph-reviews__grid, .ph-fit__grid, .ph-routine__grid'
-      );
-
-      grids.forEach(function (grid) {
-        var children = Array.from(grid.children);
-        if (!children.length) return;
-
-        children.forEach(function (child) {
-          child.style.opacity   = '0';
-          child.style.transform = 'translateY(20px)';
-        });
-
-        inView(grid, function () {
-          animate(
-            children,
-            { opacity: 1, transform: 'translateY(0px)' },
-            {
-              duration: tokens.duration.slow,
-              easing:   tokens.easing.out,
-              delay:    stagger(tokens.stagger.normal)
-            }
-          );
-          return false;
-        }, { margin: '0px 0px -60px 0px' });
-      });
-    });
-  }
-
   // ─── Image Reveal ─────────────────────────────────────────────────────────
   function initImageReveal() {
     var images = document.querySelectorAll(
@@ -696,74 +570,21 @@
     });
   }
 
-  // ─── Trust Bar Animation ──────────────────────────────────────────────────
-  function initTrustBar() {
-    var trustBar = document.querySelector('.ph-trust-bar');
-    if (!trustBar) return;
-
-    var stats = trustBar.querySelectorAll('.ph-trust-bar__stat');
-    if (!stats.length) return;
-
-    stats.forEach(function (stat) {
-      stat.style.opacity   = '0';
-      stat.style.transform = 'translateY(12px)';
-    });
-
-    inView(trustBar, function () {
-      animate(
-        Array.from(stats),
-        { opacity: 1, transform: 'translateY(0px)' },
-        {
-          duration: tokens.duration.normal,
-          easing:   tokens.easing.out,
-          delay:    stagger(tokens.stagger.fast)
-        }
-      );
-      return false;
-    }, { margin: '0px 0px -20px 0px' });
-  }
-
-  // ─── Review Card Carousel Hint ────────────────────────────────────────────
-  function initReviewMotion() {
-    var reviewCards = document.querySelectorAll('.ph-review-card');
-    if (!reviewCards.length) return;
-
-    reviewCards.forEach(function (card) {
-      card.style.opacity   = '0';
-      card.style.transform = 'translateY(16px)';
-    });
-
-    var reviewGrid = document.querySelector('.ph-reviews__grid');
-    if (!reviewGrid) return;
-
-    inView(reviewGrid, function () {
-      animate(
-        Array.from(reviewCards),
-        { opacity: 1, transform: 'translateY(0px)' },
-        {
-          duration: tokens.duration.slow,
-          easing:   tokens.easing.out,
-          delay:    stagger(tokens.stagger.normal)
-        }
-      );
-      return false;
-    }, { margin: '0px 0px -60px 0px' });
-  }
-
   // ─── Init ─────────────────────────────────────────────────────────────────
   function init() {
     // Guard: Motion must be resolved before any animation calls
     if (!resolveMotion()) {
       console.warn('[PrimeMotion] window.Motion not available at init — falling back to CSS-only animations');
       // Ensure all reveal elements are visible so content is never hidden
-      document.querySelectorAll('.pm-reveal, .ph-reveal, [data-motion="reveal"]').forEach(function (el) {
-        el.classList.add('is-visible');
-      });
+      revealMotionContent();
       return;
     }
 
     var shouldAnimate = applyMobileOptimizations();
-    if (!shouldAnimate) return;
+    if (!shouldAnimate) {
+      revealMotionContent();
+      return;
+    }
 
     initScrollReveals();
     initHeroEntrance();
@@ -773,18 +594,15 @@
     initCartMotion();
     initButtonMotion();
     initHeroParallax();
-    initSectionTransitions();
     initImageReveal();
-    initTrustBar();
-    initReviewMotion();
   }
 
   function bootstrap() {
     if (resolveMotion()) {
-      // Motion CDN already executed — run immediately
+      // Motion vendor already executed — run immediately
       init();
     } else {
-      // CDN hasn't executed yet (race condition). Poll up to 2s then fall back.
+      // Vendor hasn't executed yet (race condition). Poll up to 2s then fall back.
       console.info('[PrimeMotion] window.Motion not yet available — polling…');
       var attempts = 0;
       var maxAttempts = 20; // 20 × 100ms = 2s

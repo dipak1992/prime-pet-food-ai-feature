@@ -2779,58 +2779,6 @@
     }
   }
 
-  /* ═══════════════════════════════════════════════════════════════
-     SCROLL REVEAL ANIMATIONS
-  ════════════════════════════════════════════════════════════════ */
-  .ph-reveal {
-    opacity: 0;
-    transform: translateY(32px);
-    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .ph-reveal.ph-revealed {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Stagger children for grids */
-  .ph-reveal.ph-revealed .ph-product-grid > *,
-  .ph-reveal.ph-revealed .ph-outcomes__grid > *,
-  .ph-reveal.ph-revealed .ph-reviews__grid > *,
-  .ph-reveal.ph-revealed .ph-ingredients__grid > *,
-  .ph-reveal.ph-revealed .ph-routine__grid > *,
-  .ph-reveal.ph-revealed .ph-fit__grid > * {
-    animation: ph-stagger-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
-  }
-
-  .ph-reveal.ph-revealed .ph-product-grid > *:nth-child(1),
-  .ph-reveal.ph-revealed .ph-outcomes__grid > *:nth-child(1),
-  .ph-reveal.ph-revealed .ph-reviews__grid > *:nth-child(1),
-  .ph-reveal.ph-revealed .ph-ingredients__grid > *:nth-child(1),
-  .ph-reveal.ph-revealed .ph-routine__grid > *:nth-child(1),
-  .ph-reveal.ph-revealed .ph-fit__grid > *:nth-child(1) { animation-delay: 0.1s; }
-
-  .ph-reveal.ph-revealed .ph-product-grid > *:nth-child(2),
-  .ph-reveal.ph-revealed .ph-outcomes__grid > *:nth-child(2),
-  .ph-reveal.ph-revealed .ph-reviews__grid > *:nth-child(2),
-  .ph-reveal.ph-revealed .ph-ingredients__grid > *:nth-child(2),
-  .ph-reveal.ph-revealed .ph-routine__grid > *:nth-child(2),
-  .ph-reveal.ph-revealed .ph-fit__grid > *:nth-child(2) { animation-delay: 0.2s; }
-
-  .ph-reveal.ph-revealed .ph-product-grid > *:nth-child(3),
-  .ph-reveal.ph-revealed .ph-outcomes__grid > *:nth-child(3),
-  .ph-reveal.ph-revealed .ph-reviews__grid > *:nth-child(3),
-  .ph-reveal.ph-revealed .ph-ingredients__grid > *:nth-child(3),
-  .ph-reveal.ph-revealed .ph-routine__grid > *:nth-child(3),
-  .ph-reveal.ph-revealed .ph-fit__grid > *:nth-child(3) { animation-delay: 0.3s; }
-
-  .ph-reveal.ph-revealed .ph-ingredients__grid > *:nth-child(4) { animation-delay: 0.4s; }
-
-  @keyframes ph-stagger-in {
-    from { opacity: 0; transform: translateY(18px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
   @keyframes ph-hero-drift {
     from { transform: scale(1.03) translate3d(0, 0, 0); }
     to { transform: scale(1.08) translate3d(-1.2%, -0.8%, 0); }
@@ -2840,23 +2788,6 @@
     .ph-hero__media img {
       animation: none;
       transform: none;
-    }
-  }
-
-  /* Respect reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    .ph-reveal {
-      opacity: 1;
-      transform: none;
-      transition: none;
-    }
-    .ph-reveal.ph-revealed .ph-product-grid > *,
-    .ph-reveal.ph-revealed .ph-outcomes__grid > *,
-    .ph-reveal.ph-revealed .ph-reviews__grid > *,
-    .ph-reveal.ph-revealed .ph-ingredients__grid > *,
-    .ph-reveal.ph-revealed .ph-routine__grid > *,
-    .ph-reveal.ph-revealed .ph-fit__grid > * {
-      animation: none;
     }
   }
 
@@ -2943,12 +2874,6 @@
   }
 
   @media (max-width: 560px) {
-    .ph-reveal {
-      opacity: 1;
-      transform: none;
-      transition: none;
-    }
-
     .ph-quiz,
     .ph-subscribe,
     .ph-reviews,
@@ -3655,28 +3580,6 @@
 <script>
 (function() {
   'use strict';
-
-  /* ─── SCROLL REVEAL (IntersectionObserver) ─── */
-  const homepage = document.querySelector('.prime-homepage');
-  const animationsEnabled = homepage && homepage.getAttribute('data-animations') !== 'false';
-  const revealEls = document.querySelectorAll('.ph-reveal');
-
-  if (!animationsEnabled) {
-    revealEls.forEach(function(el) { el.classList.add('ph-revealed'); });
-  } else if ('IntersectionObserver' in window) {
-    const revealObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('ph-revealed');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-    revealEls.forEach(function(el) { revealObserver.observe(el); });
-  } else {
-    revealEls.forEach(function(el) { el.classList.add('ph-revealed'); });
-  }
 
   /* ─── REVIEW CAROUSEL ─── */
   const reviewTrack = document.querySelector('[data-prime-review-track]');

@@ -565,11 +565,6 @@
       }
     {% endstyle %}
 
-    {{ 'prime-motion-tokens.css' | asset_url | stylesheet_tag }}
-    {{ 'prime-motion-base.css' | asset_url | stylesheet_tag }}
-    {{ 'prime-nav-motion.css' | asset_url | stylesheet_tag }}
-    {{ 'prime-cart-motion.css' | asset_url | stylesheet_tag }}
-
     {{ 'base.css' | asset_url | stylesheet_tag: preload: true }}
 
     {%- if is_rtl -%}
@@ -581,6 +576,11 @@
     {%- else -%}
       <link rel="stylesheet" href="{{ 'standard.css' | asset_url }}" media="print" onload="this.media='all'">
     {%- endif -%}
+
+    {{ 'prime-motion-tokens.css' | asset_url | stylesheet_tag }}
+    {{ 'prime-motion-base.css' | asset_url | stylesheet_tag }}
+    {{ 'prime-nav-motion.css' | asset_url | stylesheet_tag }}
+    {{ 'prime-cart-motion.css' | asset_url | stylesheet_tag }}
 
     {%- if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}
       <link rel="stylesheet" href="{{ 'component-localization-form.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -815,7 +815,7 @@
       <script src="{{ 'instant-page.js' | asset_url }}" defer="defer"></script>
     {%- endunless -%}
 
-    <script src="https://cdn.jsdelivr.net/npm/motion@11/dist/motion.min.js" defer></script>
+    <script src="{{ 'prime-motion-vendor.js' | asset_url }}" defer></script>
     <script src="{{ 'prime-motion.js' | asset_url }}" defer></script>
 
     {% render 'toast-notifications' %}

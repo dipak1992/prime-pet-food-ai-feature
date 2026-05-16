@@ -11,7 +11,7 @@
     "pages:dry-run": "node scripts/page-sync.mjs --dry-run",
     "pages:push": "node scripts/page-sync.mjs"
   },
-  "dependencies": {
+  "devDependencies": {
     "framer-motion": "^12.38.0"
   }
 }

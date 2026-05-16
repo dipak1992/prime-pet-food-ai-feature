@@ -3,67 +3,21 @@
    /assets/prime-cart-motion.css
    ============================================================ */
 
-/* ── Cart drawer base positioning ──────────────────────────── */
-cart-drawer,
-#cart-drawer,
-.cart-drawer {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: min(420px, 100vw);
-  z-index: 200;
+/* ── Cart drawer shell enhancement ────────────────────────────
+   The theme owns cart-drawer positioning and the `.drawer.active` state.
+   This file only refines timing/easing on the confirmed inner drawer and
+   overlay elements so cart add/edit/remove behavior stays under cart.js. */
+cart-drawer .drawer__inner {
+  transition: transform 0.34s cubic-bezier(0.0, 0.0, 0.2, 1.0);
   will-change: transform;
-  transform: translateX(100%);
-  visibility: hidden;
-  background: #fff;
-  box-shadow: -4px 0 40px rgba(28, 25, 23, 0.12);
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  -webkit-overflow-scrolling: touch;
 }
 
-cart-drawer.is-open,
-#cart-drawer.is-open,
-.cart-drawer.is-open {
-  visibility: visible;
-  transform: translateX(0);
-  transition:
-    transform 0.35s cubic-bezier(0.0, 0.0, 0.2, 1.0),
-    visibility 0s linear 0s;
+cart-drawer.active .drawer__inner {
+  transition-duration: 0.36s;
 }
 
-cart-drawer.is-closing,
-#cart-drawer.is-closing,
-.cart-drawer.is-closing {
-  transform: translateX(100%);
-  transition:
-    transform 0.25s cubic-bezier(0.4, 0.0, 1.0, 1.0),
-    visibility 0s linear 0.25s;
-  visibility: hidden;
-}
-
-/* ── Cart overlay backdrop ──────────────────────────────────── */
-.drawer__overlay,
-#Drawer-Overlay,
-.cart-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 199;
-  background: rgba(28, 25, 23, 0.4);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.25s cubic-bezier(0.0, 0.0, 0.2, 1.0);
-  will-change: opacity;
-}
-
-.drawer__overlay.is-visible,
-#Drawer-Overlay.is-visible,
-.cart-overlay.is-visible {
-  opacity: 1;
-  pointer-events: auto;
+cart-drawer .cart-drawer__overlay {
+  transition: opacity 0.24s cubic-bezier(0.0, 0.0, 0.2, 1.0);
 }
 
 /* ── Cart item enter animation ──────────────────────────────── */
@@ -179,18 +133,8 @@ cart-drawer.is-closing,
 
 /* ── Reduced motion overrides ───────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  /* Do NOT reset transform on the drawer — it uses translateX(100%) as its
-     closed/hidden state. Removing transform would make the drawer always visible.
-     Instead, only disable the transition so open/close is instant. */
-  cart-drawer,
-  #cart-drawer,
-  .cart-drawer {
-    transition: none !important;
-  }
-
-  cart-drawer.is-open,
-  #cart-drawer.is-open,
-  .cart-drawer.is-open {
+  cart-drawer .drawer__inner,
+  cart-drawer .cart-drawer__overlay {
     transition: none !important;
   }
 

@@ -298,25 +298,22 @@ html {
   }
 }
 
-/* ── Mobile: skip reveal animation, show content immediately ────
-   On viewports ≤768px the IntersectionObserver margin (-60px) can
-   prevent the threshold from ever firing on short screens, leaving
-   elements permanently at opacity:0. We bypass the animation
-   entirely on mobile so content is always visible. The JS safety-
-   net timeout in prime-motion.js provides a belt-and-suspenders
-   fallback for edge cases (save-data mode, CDN race, etc.). */
+/* ── Mobile: shorter, subtler reveals ──────────────────────────
+   Mobile still gets motion, but with shorter travel and duration so it
+   feels responsive and does not block content scanning. The JS safety net
+   in prime-motion.js keeps content visible if observers or vendor loading
+   fail on constrained mobile browsers. */
 @media (max-width: 768px) {
   .ph-reveal,
   .pm-reveal,
   [data-motion="reveal"],
-  .pm-fade,
-  .pm-slide-up,
-  .pm-slide-left,
-  .pm-slide-right,
+  .pm-slide-up {
+    --reveal-y: 10px;
+    transition-duration: 220ms;
+  }
+
   [data-motion-stagger] > * {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-    animation: none !important;
+    transform: translateY(8px);
+    transition-duration: 220ms;
   }
 }
