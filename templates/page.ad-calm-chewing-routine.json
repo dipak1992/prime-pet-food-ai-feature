@@ -1,0 +1,38 @@
+{
+  "sections": {
+    "ad_landing": {
+      "type": "ad-landing-page",
+      "settings": {
+        "eyebrow": "Crate and calm chewing",
+        "heading": "Calmer crate time starts with a better chew routine.",
+        "subheading": "Use supervised yak chew sessions to build positive calm-time associations before crate, rest, or downtime.",
+        "hero_asset": "prime-blog-crate-calm.jpg",
+        "cta_label": "Build a Calm Routine",
+        "secondary_label": "Crate Chew Guide",
+        "secondary_url": "/pages/best-chews-for-crate-training",
+        "microproof_1": "Calm-time support",
+        "microproof_2": "Supervised routine",
+        "microproof_3": "Rawhide-free",
+        "problem_heading": "Crate time can feel stressful without the right routine.",
+        "problem_text": "Dogs need calm transitions, familiar rewards, and safe supervised practice before downtime feels natural.",
+        "solution_heading": "A chew can become a positive calm cue.",
+        "solution_text": "Prime Pet Food yak chews support a repeatable enrichment ritual that helps dogs settle into quieter moments.",
+        "review_1": "This became part of our calm-down routine.",
+        "review_2": "A great supervised reward after training.",
+        "review_3": "Helped redirect anxious energy into chewing.",
+        "product_asset": "prime-home-calm-cta-bg.jpg",
+        "product_heading": "Create a repeatable calm-time ritual.",
+        "product_text": "Use a correctly sized yak chew during supervised practice to support calmer transitions.",
+        "bullet_1": "Great for supervised calm-time",
+        "bullet_2": "Long-lasting focused chewing",
+        "bullet_3": "Simple rawhide-free ingredients",
+        "bullet_4": "Best with fresh water and supervision",
+        "final_heading": "Make downtime feel more rewarding.",
+        "final_text": "Start a calmer chew routine today.",
+        "sticky_text": "Calm chewing routine",
+        "featured_product": "himalayan-yak-chews-for-dogs"
+      }
+    }
+  },
+  "order": ["ad_landing"]
+}

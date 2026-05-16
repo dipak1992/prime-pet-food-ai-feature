@@ -1,0 +1,702 @@
+{%- liquid
+  assign featured_product = section.settings.featured_product
+  assign featured_variant = blank
+  if featured_product != blank
+    assign featured_variant = featured_product.selected_or_first_available_variant
+  endif
+
+  assign hero_asset = section.settings.hero_asset | default: 'prime-calm-dog-yak-chew-hero.jpg'
+  assign product_asset = section.settings.product_asset | default: 'prime-yak-process-finished-chews.jpg'
+  assign cta_label = section.settings.cta_label | default: 'Shop now'
+  assign cta_url = section.settings.cta_url
+  if cta_url == blank and featured_product != blank
+    assign cta_url = featured_product.url
+  elsif cta_url == blank
+    assign cta_url = '/products/himalayan-yak-chews-for-dogs'
+  endif
+-%}
+
+<section
+  id="PrimeAdLanding-{{ section.id }}"
+  class="prime-ad-landing"
+  data-prime-landing-page="{{ template.suffix | escape }}"
+  data-prime-campaign="{{ section.settings.campaign_name | escape }}"
+  style="
+    --prime-ad-bg: {{ section.settings.bg_color }};
+    --prime-ad-text: {{ section.settings.text_color }};
+    --prime-ad-muted: {{ section.settings.muted_color }};
+    --prime-ad-accent: {{ section.settings.accent_color }};
+  "
+>
+  <div class="prime-ad-landing__hero">
+    <div class="prime-ad-landing__hero-media" aria-hidden="true">
+      <img
+        src="{{ hero_asset | asset_url }}"
+        alt=""
+        width="1600"
+        height="1200"
+        loading="eager"
+        fetchpriority="high"
+      >
+    </div>
+
+    <div class="prime-ad-landing__hero-copy">
+      {% if section.settings.eyebrow != blank %}
+        <p class="prime-ad-landing__eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+
+      <h1>{{ section.settings.heading }}</h1>
+
+      {% if section.settings.subheading != blank %}
+        <p class="prime-ad-landing__subhead">{{ section.settings.subheading }}</p>
+      {% endif %}
+
+      <div class="prime-ad-landing__cta-row">
+        {% if featured_product != blank and featured_variant != blank %}
+          {% form 'product', featured_product, class: 'prime-ad-landing__form' %}
+            <input type="hidden" name="id" value="{{ featured_variant.id }}">
+            <button type="submit" class="prime-ad-landing__button" data-prime-event="ad_landing_add_to_cart">
+              {{ cta_label }}
+            </button>
+          {% endform %}
+        {% else %}
+          <a class="prime-ad-landing__button" href="{{ cta_url }}" data-prime-event="ad_landing_primary_cta">{{ cta_label }}</a>
+        {% endif %}
+
+        {% if section.settings.secondary_label != blank %}
+          <a class="prime-ad-landing__button prime-ad-landing__button--ghost" href="{{ section.settings.secondary_url | default: '/pages/how-long-will-this-last-for-my-dog' }}" data-prime-event="ad_landing_secondary_cta">
+            {{ section.settings.secondary_label }}
+          </a>
+        {% endif %}
+      </div>
+
+      <div class="prime-ad-landing__microproof">
+        <span>{{ section.settings.microproof_1 }}</span>
+        <span>{{ section.settings.microproof_2 }}</span>
+        <span>{{ section.settings.microproof_3 }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="prime-ad-landing__inner">
+    <div class="prime-ad-landing__problem-solution">
+      <article>
+        <span class="prime-ad-landing__kicker">{{ section.settings.problem_kicker }}</span>
+        <h2>{{ section.settings.problem_heading }}</h2>
+        <p>{{ section.settings.problem_text }}</p>
+      </article>
+
+      <article>
+        <span class="prime-ad-landing__kicker">{{ section.settings.solution_kicker }}</span>
+        <h2>{{ section.settings.solution_heading }}</h2>
+        <p>{{ section.settings.solution_text }}</p>
+      </article>
+    </div>
+
+    <div class="prime-ad-landing__proof-band" aria-label="Customer proof">
+      <div>
+        <strong>{{ section.settings.proof_stat_1 }}</strong>
+        <span>{{ section.settings.proof_label_1 }}</span>
+      </div>
+      <div>
+        <strong>{{ section.settings.proof_stat_2 }}</strong>
+        <span>{{ section.settings.proof_label_2 }}</span>
+      </div>
+      <div>
+        <strong>{{ section.settings.proof_stat_3 }}</strong>
+        <span>{{ section.settings.proof_label_3 }}</span>
+      </div>
+    </div>
+
+    <div class="prime-ad-landing__review-grid">
+      <figure>
+        <blockquote>{{ section.settings.review_1 }}</blockquote>
+        <figcaption>{{ section.settings.review_author_1 }}</figcaption>
+      </figure>
+      <figure>
+        <blockquote>{{ section.settings.review_2 }}</blockquote>
+        <figcaption>{{ section.settings.review_author_2 }}</figcaption>
+      </figure>
+      <figure>
+        <blockquote>{{ section.settings.review_3 }}</blockquote>
+        <figcaption>{{ section.settings.review_author_3 }}</figcaption>
+      </figure>
+    </div>
+
+    <div class="prime-ad-landing__offer">
+      <div class="prime-ad-landing__offer-media">
+        <img
+          src="{{ product_asset | asset_url }}"
+          alt="{{ section.settings.product_image_alt | escape }}"
+          width="900"
+          height="900"
+          loading="lazy"
+        >
+      </div>
+
+      <div class="prime-ad-landing__offer-copy">
+        <span class="prime-ad-landing__kicker">{{ section.settings.product_kicker }}</span>
+        <h2>{{ section.settings.product_heading }}</h2>
+        <p>{{ section.settings.product_text }}</p>
+
+        <ul class="prime-ad-landing__bullets">
+          <li>{% render 'icon', icon: 'shield_checkmark', size: 18 %}<span>{{ section.settings.bullet_1 }}</span></li>
+          <li>{% render 'icon', icon: 'timer', size: 18 %}<span>{{ section.settings.bullet_2 }}</span></li>
+          <li>{% render 'icon', icon: 'restaurant', size: 18 %}<span>{{ section.settings.bullet_3 }}</span></li>
+          <li>{% render 'icon', icon: 'return', size: 18 %}<span>{{ section.settings.bullet_4 }}</span></li>
+        </ul>
+
+        {% if featured_product != blank and featured_variant != blank %}
+          <div class="prime-ad-landing__price">
+            <span>{{ featured_product.title }}</span>
+            <strong>{{ featured_variant.price | money }}</strong>
+          </div>
+
+          {% form 'product', featured_product, class: 'prime-ad-landing__form' %}
+            <input type="hidden" name="id" value="{{ featured_variant.id }}">
+            <button type="submit" class="prime-ad-landing__button" data-prime-event="ad_landing_offer_add_to_cart">
+              {{ section.settings.offer_cta_label | default: cta_label }}
+            </button>
+          {% endform %}
+        {% else %}
+          <a class="prime-ad-landing__button" href="{{ cta_url }}" data-prime-event="ad_landing_offer_cta">{{ section.settings.offer_cta_label | default: cta_label }}</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="prime-ad-landing__objections">
+      <details open>
+        <summary>{{ section.settings.objection_1_heading }}</summary>
+        <p>{{ section.settings.objection_1_text }}</p>
+      </details>
+      <details>
+        <summary>{{ section.settings.objection_2_heading }}</summary>
+        <p>{{ section.settings.objection_2_text }}</p>
+      </details>
+      <details>
+        <summary>{{ section.settings.objection_3_heading }}</summary>
+        <p>{{ section.settings.objection_3_text }}</p>
+      </details>
+    </div>
+
+    <div class="prime-ad-landing__final">
+      <p class="prime-ad-landing__eyebrow">{{ section.settings.final_eyebrow }}</p>
+      <h2>{{ section.settings.final_heading }}</h2>
+      <p>{{ section.settings.final_text }}</p>
+      <a class="prime-ad-landing__button" href="{{ cta_url }}" data-prime-event="ad_landing_final_cta">{{ section.settings.final_cta_label | default: cta_label }}</a>
+    </div>
+  </div>
+
+  <div class="prime-ad-landing__sticky">
+    <span>{{ section.settings.sticky_text }}</span>
+    <a href="{{ cta_url }}" data-prime-event="ad_landing_sticky_cta">{{ section.settings.sticky_cta_label | default: cta_label }}</a>
+  </div>
+</section>
+
+<style>
+  .prime-ad-landing,
+  .prime-ad-landing * {
+    box-sizing: border-box;
+  }
+
+  .prime-ad-landing {
+    background: var(--prime-ad-bg);
+    color: var(--prime-ad-text);
+    overflow: clip;
+  }
+
+  .prime-ad-landing__hero {
+    position: relative;
+    min-height: min(820px, calc(100svh - 80px));
+    display: flex;
+    align-items: flex-end;
+    isolation: isolate;
+  }
+
+  .prime-ad-landing__hero-media {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background: #211207;
+  }
+
+  .prime-ad-landing__hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .prime-ad-landing__hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, rgba(20, 10, 3, 0.14), rgba(20, 10, 3, 0.78));
+  }
+
+  .prime-ad-landing__hero-copy {
+    width: min(760px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 88px 0 72px;
+    color: #fffaf2;
+    text-align: center;
+  }
+
+  .prime-ad-landing__eyebrow,
+  .prime-ad-landing__kicker {
+    margin: 0 0 12px;
+    font-size: 13px;
+    line-height: 1.2;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .prime-ad-landing__hero h1,
+  .prime-ad-landing__offer h2,
+  .prime-ad-landing__problem-solution h2,
+  .prime-ad-landing__final h2 {
+    margin: 0;
+    font-size: clamp(42px, 8vw, 88px);
+    line-height: 0.96;
+    font-weight: 950;
+    letter-spacing: 0;
+  }
+
+  .prime-ad-landing__subhead {
+    margin: 22px auto 0;
+    max-width: 680px;
+    font-size: clamp(18px, 2.4vw, 25px);
+    line-height: 1.42;
+    font-weight: 650;
+  }
+
+  .prime-ad-landing__cta-row,
+  .prime-ad-landing__form {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .prime-ad-landing__cta-row {
+    margin-top: 30px;
+  }
+
+  .prime-ad-landing__button {
+    min-height: 56px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 999px;
+    padding: 0 30px;
+    background: var(--prime-ad-accent);
+    color: #201006;
+    font-size: 15px;
+    font-weight: 950;
+    line-height: 1;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.18);
+  }
+
+  .prime-ad-landing__button--ghost {
+    background: rgba(255, 250, 242, 0.16);
+    color: #fffaf2;
+    border: 1px solid rgba(255, 250, 242, 0.52);
+  }
+
+  .prime-ad-landing__microproof {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+
+  .prime-ad-landing__microproof span {
+    border: 1px solid rgba(255, 250, 242, 0.32);
+    border-radius: 999px;
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.18);
+    font-size: 13px;
+    font-weight: 800;
+  }
+
+  .prime-ad-landing__inner {
+    width: min(1180px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 56px 0 104px;
+  }
+
+  .prime-ad-landing__problem-solution {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .prime-ad-landing__problem-solution article,
+  .prime-ad-landing__offer,
+  .prime-ad-landing__objections,
+  .prime-ad-landing__final,
+  .prime-ad-landing__proof-band,
+  .prime-ad-landing__review-grid figure {
+    border: 1px solid rgba(43, 20, 8, 0.1);
+    border-radius: 22px;
+    background: #fffaf2;
+    box-shadow: 0 18px 44px rgba(43, 20, 8, 0.07);
+  }
+
+  .prime-ad-landing__problem-solution article {
+    padding: 30px;
+  }
+
+  .prime-ad-landing__kicker {
+    color: var(--prime-ad-accent);
+  }
+
+  .prime-ad-landing__problem-solution h2,
+  .prime-ad-landing__offer h2,
+  .prime-ad-landing__final h2 {
+    font-size: clamp(30px, 4vw, 52px);
+  }
+
+  .prime-ad-landing__problem-solution p,
+  .prime-ad-landing__offer p,
+  .prime-ad-landing__final p,
+  .prime-ad-landing__objections p {
+    margin: 16px 0 0;
+    color: var(--prime-ad-muted);
+    font-size: 17px;
+    line-height: 1.55;
+    font-weight: 550;
+  }
+
+  .prime-ad-landing__proof-band {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    overflow: hidden;
+  }
+
+  .prime-ad-landing__proof-band div {
+    padding: 24px;
+    text-align: center;
+  }
+
+  .prime-ad-landing__proof-band div + div {
+    border-left: 1px solid rgba(43, 20, 8, 0.1);
+  }
+
+  .prime-ad-landing__proof-band strong {
+    display: block;
+    font-size: clamp(28px, 5vw, 54px);
+    line-height: 1;
+    font-weight: 950;
+  }
+
+  .prime-ad-landing__proof-band span {
+    display: block;
+    margin-top: 8px;
+    color: var(--prime-ad-muted);
+    font-weight: 800;
+  }
+
+  .prime-ad-landing__review-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 18px;
+  }
+
+  .prime-ad-landing__review-grid figure {
+    margin: 0;
+    padding: 24px;
+  }
+
+  .prime-ad-landing__review-grid blockquote {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.45;
+    font-weight: 750;
+  }
+
+  .prime-ad-landing__review-grid figcaption {
+    margin-top: 16px;
+    color: var(--prime-ad-muted);
+    font-size: 14px;
+    font-weight: 850;
+  }
+
+  .prime-ad-landing__offer {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    gap: 34px;
+    padding: 24px;
+    align-items: center;
+  }
+
+  .prime-ad-landing__offer-media {
+    aspect-ratio: 1 / 1;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #f7ead9;
+  }
+
+  .prime-ad-landing__offer-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .prime-ad-landing__offer-copy {
+    padding: 10px 10px 10px 0;
+  }
+
+  .prime-ad-landing__bullets {
+    list-style: none;
+    padding: 0;
+    margin: 22px 0;
+    display: grid;
+    gap: 10px;
+  }
+
+  .prime-ad-landing__bullets li {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: var(--prime-ad-text);
+    font-weight: 850;
+  }
+
+  .prime-ad-landing__bullets .icon {
+    color: var(--prime-ad-accent);
+    flex: 0 0 auto;
+  }
+
+  .prime-ad-landing__price {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 0 22px;
+    font-weight: 850;
+    border-top: 1px solid rgba(43, 20, 8, 0.1);
+  }
+
+  .prime-ad-landing__price strong {
+    color: var(--prime-ad-accent);
+  }
+
+  .prime-ad-landing__objections {
+    margin-top: 28px;
+    padding: 8px 24px;
+  }
+
+  .prime-ad-landing__objections details + details {
+    border-top: 1px solid rgba(43, 20, 8, 0.1);
+  }
+
+  .prime-ad-landing__objections summary {
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 900;
+  }
+
+  .prime-ad-landing__objections p {
+    margin: 0 0 20px;
+  }
+
+  .prime-ad-landing__final {
+    margin-top: 28px;
+    padding: 38px;
+    text-align: center;
+  }
+
+  .prime-ad-landing__final .prime-ad-landing__button {
+    margin-top: 24px;
+  }
+
+  .prime-ad-landing__sticky {
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    z-index: 50;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px;
+    border-radius: 999px;
+    background: rgba(32, 16, 6, 0.94);
+    color: #fffaf2;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+  }
+
+  .prime-ad-landing__sticky span {
+    padding-left: 10px;
+    font-size: 13px;
+    font-weight: 850;
+  }
+
+  .prime-ad-landing__sticky a {
+    min-height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 0 16px;
+    background: var(--prime-ad-accent);
+    color: #201006;
+    font-size: 13px;
+    font-weight: 950;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 860px) {
+    .prime-ad-landing__hero {
+      min-height: calc(100svh - 74px);
+    }
+
+    .prime-ad-landing__hero-copy {
+      width: calc(100% - 28px);
+      padding: 56px 0 40px;
+      text-align: left;
+    }
+
+    .prime-ad-landing__cta-row,
+    .prime-ad-landing__form {
+      justify-content: stretch;
+    }
+
+    .prime-ad-landing__button {
+      width: 100%;
+    }
+
+    .prime-ad-landing__microproof {
+      justify-content: flex-start;
+    }
+
+    .prime-ad-landing__inner {
+      width: calc(100% - 24px);
+      padding: 28px 0 100px;
+    }
+
+    .prime-ad-landing__problem-solution,
+    .prime-ad-landing__proof-band,
+    .prime-ad-landing__review-grid,
+    .prime-ad-landing__offer {
+      grid-template-columns: 1fr;
+    }
+
+    .prime-ad-landing__problem-solution article,
+    .prime-ad-landing__review-grid figure,
+    .prime-ad-landing__final {
+      padding: 24px;
+    }
+
+    .prime-ad-landing__proof-band div + div {
+      border-left: 0;
+      border-top: 1px solid rgba(43, 20, 8, 0.1);
+    }
+
+    .prime-ad-landing__offer {
+      gap: 22px;
+      padding: 14px;
+    }
+
+    .prime-ad-landing__offer-copy {
+      padding: 0 8px 8px;
+    }
+
+    .prime-ad-landing__sticky {
+      display: flex;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Ad landing page",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "campaign_name", "label": "Campaign name", "default": "Paid social campaign" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Prime Pet Food" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Finally, a chew that actually lasts." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Premium Himalayan yak cheese chews made for calmer dogs, focused chew time, and fewer destroyed shoes." },
+    { "type": "text", "id": "hero_asset", "label": "Hero asset filename", "default": "prime-calm-dog-yak-chew-hero.jpg" },
+    { "type": "text", "id": "cta_label", "label": "Primary CTA", "default": "Shop Yak Chews" },
+    { "type": "url", "id": "cta_url", "label": "Primary CTA URL" },
+    { "type": "text", "id": "secondary_label", "label": "Secondary CTA", "default": "Find the Right Size" },
+    { "type": "url", "id": "secondary_url", "label": "Secondary CTA URL" },
+    { "type": "text", "id": "microproof_1", "label": "Microproof 1", "default": "Rawhide-free" },
+    { "type": "text", "id": "microproof_2", "label": "Microproof 2", "default": "4 simple ingredients" },
+    { "type": "text", "id": "microproof_3", "label": "Microproof 3", "default": "30-day guarantee" },
+    { "type": "header", "content": "Problem and solution" },
+    { "type": "text", "id": "problem_kicker", "label": "Problem kicker", "default": "The problem" },
+    { "type": "text", "id": "problem_heading", "label": "Problem heading", "default": "Soft treats disappear too fast." },
+    { "type": "textarea", "id": "problem_text", "label": "Problem text", "default": "When a dog needs a real chewing job, short-lived treats can leave them bored, restless, and looking for furniture, shoes, or anything else nearby." },
+    { "type": "text", "id": "solution_kicker", "label": "Solution kicker", "default": "The solution" },
+    { "type": "text", "id": "solution_heading", "label": "Solution heading", "default": "Dense yak cheese chews built for focused chewing." },
+    { "type": "textarea", "id": "solution_text", "label": "Solution text", "default": "Prime Pet Food chews are naturally hard, long-lasting, and simple-ingredient, giving dogs a satisfying enrichment routine without rawhide." },
+    { "type": "header", "content": "Proof" },
+    { "type": "text", "id": "proof_stat_1", "label": "Proof stat 1", "default": "4.9★" },
+    { "type": "text", "id": "proof_label_1", "label": "Proof label 1", "default": "Average customer rating" },
+    { "type": "text", "id": "proof_stat_2", "label": "Proof stat 2", "default": "67 min" },
+    { "type": "text", "id": "proof_label_2", "label": "Proof label 2", "default": "Average chew time" },
+    { "type": "text", "id": "proof_stat_3", "label": "Proof stat 3", "default": "20,000+" },
+    { "type": "text", "id": "proof_label_3", "label": "Proof label 3", "default": "Dog parents served" },
+    { "type": "textarea", "id": "review_1", "label": "Review 1", "default": "Lasted over an hour for my dog and kept him focused the whole time." },
+    { "type": "text", "id": "review_author_1", "label": "Review author 1", "default": "Prime Pet Food customer" },
+    { "type": "textarea", "id": "review_2", "label": "Review 2", "default": "A cleaner alternative to the chews we used before. My dog loves it." },
+    { "type": "text", "id": "review_author_2", "label": "Review author 2", "default": "Verified buyer" },
+    { "type": "textarea", "id": "review_3", "label": "Review 3", "default": "Finally something that slows down my heavy chewer." },
+    { "type": "text", "id": "review_author_3", "label": "Review author 3", "default": "Dog parent" },
+    { "type": "header", "content": "Offer" },
+    { "type": "product", "id": "featured_product", "label": "Featured product" },
+    { "type": "text", "id": "product_asset", "label": "Product asset filename", "default": "prime-yak-process-finished-chews.jpg" },
+    { "type": "text", "id": "product_image_alt", "label": "Product image alt", "default": "Prime Pet Food Himalayan yak cheese dog chews" },
+    { "type": "text", "id": "product_kicker", "label": "Product kicker", "default": "Focused product" },
+    { "type": "text", "id": "product_heading", "label": "Product heading", "default": "Start with the chew made for everyday enrichment." },
+    { "type": "textarea", "id": "product_text", "label": "Product text", "default": "A premium rawhide-free Himalayan yak cheese chew for supervised calm-time, boredom reduction, and cleaner chewing routines." },
+    { "type": "text", "id": "bullet_1", "label": "Bullet 1", "default": "Rawhide-free and simple-ingredient" },
+    { "type": "text", "id": "bullet_2", "label": "Bullet 2", "default": "Long-lasting focused chew time" },
+    { "type": "text", "id": "bullet_3", "label": "Bullet 3", "default": "Yak milk, cow milk, lime juice, salt" },
+    { "type": "text", "id": "bullet_4", "label": "Bullet 4", "default": "Backed by a 30-day guarantee" },
+    { "type": "text", "id": "offer_cta_label", "label": "Offer CTA", "default": "Add to Cart" },
+    { "type": "header", "content": "Objections" },
+    { "type": "text", "id": "objection_1_heading", "label": "Objection 1 heading", "default": "Is it safe for my dog?" },
+    { "type": "textarea", "id": "objection_1_text", "label": "Objection 1 text", "default": "Choose the right size, supervise every session, provide fresh water, and remove small end pieces." },
+    { "type": "text", "id": "objection_2_heading", "label": "Objection 2 heading", "default": "What makes yak chews different?" },
+    { "type": "textarea", "id": "objection_2_text", "label": "Objection 2 text", "default": "The slow drying process creates a dense, naturally hard chew that lasts longer than many soft treats." },
+    { "type": "text", "id": "objection_3_heading", "label": "Objection 3 heading", "default": "How fast is shipping?" },
+    { "type": "textarea", "id": "objection_3_text", "label": "Objection 3 text", "default": "Orders typically ship quickly with tracking, and qualifying orders receive free shipping." },
+    { "type": "header", "content": "Final CTA" },
+    { "type": "text", "id": "final_eyebrow", "label": "Final eyebrow", "default": "Upgrade chew time" },
+    { "type": "text", "id": "final_heading", "label": "Final heading", "default": "Give your dog a better chewing routine." },
+    { "type": "textarea", "id": "final_text", "label": "Final text", "default": "One simple chew can turn restless energy into focused enrichment." },
+    { "type": "text", "id": "final_cta_label", "label": "Final CTA", "default": "Try Prime Pet Food Today" },
+    { "type": "text", "id": "sticky_text", "label": "Sticky text", "default": "Ready for calmer chew time?" },
+    { "type": "text", "id": "sticky_cta_label", "label": "Sticky CTA", "default": "Shop now" },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#fff8ef" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#2b1408" },
+    { "type": "color", "id": "muted_color", "label": "Muted text", "default": "#6f5a50" },
+    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#d2632e" }
+  ],
+  "presets": [
+    { "name": "Ad landing page" }
+  ]
+}
+{% endschema %}

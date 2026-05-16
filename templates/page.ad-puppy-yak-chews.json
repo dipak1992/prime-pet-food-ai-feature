@@ -1,0 +1,38 @@
+{
+  "sections": {
+    "ad_landing": {
+      "type": "ad-landing-page",
+      "settings": {
+        "eyebrow": "Puppy chewing routine",
+        "heading": "Gentle structure for puppy chew time.",
+        "subheading": "Help redirect teething energy with a supervised, correctly sized chew routine made for calmer moments.",
+        "hero_asset": "prime-home-small-dog-chew.jpg",
+        "cta_label": "Find a Puppy Chew",
+        "secondary_label": "Read Safety Guide",
+        "secondary_url": "/pages/yak-chews-for-puppies",
+        "microproof_1": "Supervised use",
+        "microproof_2": "Simple ingredients",
+        "microproof_3": "Size matters",
+        "problem_heading": "Puppies chew because they need direction.",
+        "problem_text": "Teething, boredom, and curiosity can turn shoes, cords, and furniture into targets when puppies do not have a better outlet.",
+        "solution_heading": "A slow, supervised chew routine helps redirect energy.",
+        "solution_text": "Prime Pet Food yak chews can support structured calm-time when sized carefully and introduced gradually.",
+        "review_1": "Helped us build a calmer routine after playtime.",
+        "review_2": "We sized up and supervised. It became our puppy's focused chew time.",
+        "review_3": "Cleaner than the treats we were buying every week.",
+        "product_asset": "prime-home-small-dog-chew.jpg",
+        "product_heading": "Choose the right size before puppy chew time.",
+        "product_text": "Start slowly, supervise closely, and choose a chew larger than your puppy can swallow.",
+        "bullet_1": "Best for supervised sessions",
+        "bullet_2": "Introduce gradually",
+        "bullet_3": "Simple rawhide-free ingredients",
+        "bullet_4": "Remove small end pieces",
+        "final_heading": "Build a safer puppy chew routine.",
+        "final_text": "Give teething energy a calmer, cleaner outlet.",
+        "sticky_text": "Puppy chew routine",
+        "featured_product": "himalayan-yak-chews-for-dogs"
+      }
+    }
+  },
+  "order": ["ad_landing"]
+}

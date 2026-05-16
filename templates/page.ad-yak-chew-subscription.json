@@ -1,0 +1,40 @@
+{
+  "sections": {
+    "ad_landing": {
+      "type": "ad-landing-page",
+      "settings": {
+        "eyebrow": "Subscribe and save",
+        "heading": "Never run out of your dog's favorite chew.",
+        "subheading": "Build a flexible Prime Pet Food yak chew routine with automatic deliveries and savings for repeat chew time.",
+        "hero_asset": "prime-home-subscribe-dog-box.jpg",
+        "cta_label": "Start Subscribe & Save",
+        "cta_url": "/pages/subscribe-and-save",
+        "secondary_label": "Shop One-Time",
+        "secondary_url": "/products/himalayan-yak-chews-for-dogs",
+        "microproof_1": "Flexible routine",
+        "microproof_2": "Subscriber savings",
+        "microproof_3": "Skip or adjust",
+        "problem_heading": "Good chew routines fall apart when you run out.",
+        "problem_text": "If your dog relies on chewing for enrichment, missed restocks can mean more boredom and more emergency treat runs.",
+        "solution_heading": "Subscriptions make enrichment easier to maintain.",
+        "solution_text": "Set a routine, save on repeat orders, and keep your dog's favorite yak chews arriving on schedule.",
+        "review_1": "Subscription keeps us from running out.",
+        "review_2": "Easy routine and my dog gets the chews he loves.",
+        "review_3": "Great for households that use yak chews every week.",
+        "product_asset": "prime-home-subscribe-dog-box.jpg",
+        "product_heading": "Build your dog's chew schedule.",
+        "product_text": "Subscribe & Save helps you keep calmer chew routines stocked without manual reordering.",
+        "bullet_1": "Designed for repeat enrichment",
+        "bullet_2": "Subscriber savings",
+        "bullet_3": "Flexible delivery cadence",
+        "bullet_4": "Easy account management",
+        "offer_cta_label": "Start Subscription",
+        "final_heading": "Keep chew time consistent.",
+        "final_text": "A better routine is easier when the chews arrive before you need them.",
+        "sticky_text": "Subscribe & save",
+        "featured_product": "himalayan-yak-chews-for-dogs"
+      }
+    }
+  },
+  "order": ["ad_landing"]
+}

@@ -1,0 +1,37 @@
+{
+  "sections": {
+    "ad_landing": {
+      "type": "ad-landing-page",
+      "settings": {
+        "eyebrow": "Long-lasting dog chews",
+        "heading": "More chew time from one better chew.",
+        "subheading": "Dense Himalayan yak cheese chews designed for dogs that need longer enrichment than soft treats can provide.",
+        "hero_asset": "prime-blog-yak-chew-duration.jpg",
+        "cta_label": "Shop Long-Lasting Chews",
+        "secondary_label": "Estimate Chew Duration",
+        "microproof_1": "67 min avg duration",
+        "microproof_2": "Premium yak cheese",
+        "microproof_3": "Rawhide-free",
+        "problem_heading": "Short treats do not create calm.",
+        "problem_text": "When treats disappear in minutes, dogs can stay restless and owners keep rebuying low-value distractions.",
+        "solution_heading": "Longer chew time creates a better routine.",
+        "solution_text": "Prime Pet Food yak chews are slow-dried for natural hardness, giving dogs a more satisfying job.",
+        "review_1": "This lasted longer than anything else we tried.",
+        "review_2": "Worth it because my dog stayed focused instead of begging for another treat.",
+        "review_3": "A much better value for chew time.",
+        "product_asset": "prime-yak-process-finished-chews.jpg",
+        "product_heading": "Choose the chew built to last.",
+        "product_text": "A premium long-lasting dog chew for supervised enrichment and calmer routines.",
+        "bullet_1": "Dense slow-dried texture",
+        "bullet_2": "Built for focused chew sessions",
+        "bullet_3": "Rawhide-free",
+        "bullet_4": "Free shipping over $30",
+        "final_heading": "Stop buying chews that disappear too fast.",
+        "final_text": "Start with one better long-lasting chew.",
+        "sticky_text": "Longer chew time",
+        "featured_product": "himalayan-yak-chews-for-dogs"
+      }
+    }
+  },
+  "order": ["ad_landing"]
+}

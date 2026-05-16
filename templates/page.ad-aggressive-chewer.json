@@ -1,0 +1,37 @@
+{
+  "sections": {
+    "ad_landing": {
+      "type": "ad-landing-page",
+      "settings": {
+        "eyebrow": "Aggressive chewer solution",
+        "heading": "Finally, a chew that actually lasts.",
+        "subheading": "For dogs that destroy soft treats in minutes, Prime Pet Food Himalayan yak chews create a longer, more focused chewing routine.",
+        "hero_asset": "prime-blog-aggressive-chewer.jpg",
+        "cta_label": "Shop Long-Lasting Chews",
+        "secondary_label": "Check Your Dog's Size",
+        "microproof_1": "Built for strong chewers",
+        "microproof_2": "Rawhide-free",
+        "microproof_3": "30-day guarantee",
+        "problem_heading": "Your dog needs more than a quick snack.",
+        "problem_text": "Heavy chewers burn through soft treats fast, then go looking for shoes, furniture, and anything else that feels satisfying.",
+        "solution_heading": "A dense yak cheese chew gives them a better job.",
+        "solution_text": "Slow-dried Himalayan yak cheese creates a naturally hard chew made for longer supervised sessions and calmer energy.",
+        "review_1": "My power chewer finally slowed down. This lasted so much longer than his usual treats.",
+        "review_2": "Less mess, less odor, and my dog was focused for a full chew session.",
+        "review_3": "The first chew that felt worth it for my aggressive chewer.",
+        "product_asset": "prime-yak-process-finished-chews.jpg",
+        "product_heading": "Start with Prime Pet Food yak chews.",
+        "product_text": "A premium rawhide-free chew for dogs that need durability, enrichment, and a cleaner routine.",
+        "bullet_1": "Naturally hard for stronger chewing styles",
+        "bullet_2": "Long-lasting supervised enrichment",
+        "bullet_3": "Only 4 simple ingredients",
+        "bullet_4": "Free shipping over $30",
+        "final_heading": "Give your heavy chewer something worthy of the job.",
+        "final_text": "Upgrade from short-lived treats to focused chew time.",
+        "sticky_text": "For strong chewers",
+        "featured_product": "himalayan-yak-chews-for-dogs"
+      }
+    }
+  },
+  "order": ["ad_landing"]
+}

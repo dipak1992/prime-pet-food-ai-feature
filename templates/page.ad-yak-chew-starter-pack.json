@@ -1,0 +1,37 @@
+{
+  "sections": {
+    "ad_landing": {
+      "type": "ad-landing-page",
+      "settings": {
+        "eyebrow": "First-time buyer",
+        "heading": "Start your dog's yak chew routine the right way.",
+        "subheading": "A simple first order for dog parents ready to try cleaner, longer-lasting Himalayan yak cheese chews.",
+        "hero_asset": "prime-home-medium-dog-chew.jpg",
+        "cta_label": "Start With Yak Chews",
+        "secondary_label": "Find the Right Size",
+        "microproof_1": "First-order friendly",
+        "microproof_2": "Easy size guide",
+        "microproof_3": "30-day guarantee",
+        "problem_heading": "Trying a new chew should feel simple.",
+        "problem_text": "Dog parents want confidence on size, ingredients, safety, and whether the chew will actually keep their dog engaged.",
+        "solution_heading": "Prime Pet Food makes the first try easy.",
+        "solution_text": "Start with a premium rawhide-free yak chew, follow simple supervision guidance, and size up for safer chewing.",
+        "review_1": "Great first yak chew experience.",
+        "review_2": "The size guidance helped us choose confidently.",
+        "review_3": "My dog loved it from the first session.",
+        "product_asset": "prime-yak-process-finished-chews.jpg",
+        "product_heading": "Your first Prime Pet Food chew.",
+        "product_text": "A straightforward way to test premium yak chews without overthinking the choice.",
+        "bullet_1": "Simple starter choice",
+        "bullet_2": "Long-lasting supervised chewing",
+        "bullet_3": "Only 4 ingredients",
+        "bullet_4": "30-day satisfaction guarantee",
+        "final_heading": "Ready to see if your dog loves yak chews?",
+        "final_text": "Start with one better chew routine.",
+        "sticky_text": "First-time buyer",
+        "featured_product": "himalayan-yak-chews-for-dogs"
+      }
+    }
+  },
+  "order": ["ad_landing"]
+}

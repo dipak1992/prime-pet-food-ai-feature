@@ -1,0 +1,38 @@
+{
+  "sections": {
+    "ad_landing": {
+      "type": "ad-landing-page",
+      "settings": {
+        "eyebrow": "Rawhide-free chew",
+        "heading": "A cleaner alternative to rawhide.",
+        "subheading": "Prime Pet Food Himalayan yak cheese chews are simple-ingredient, long-lasting, and made for supervised dog enrichment.",
+        "hero_asset": "prime-blog-rawhide-alternative.jpg",
+        "cta_label": "Shop Rawhide-Free Chews",
+        "secondary_label": "Compare Rawhide Alternatives",
+        "secondary_url": "/pages/best-rawhide-alternative",
+        "microproof_1": "No rawhide",
+        "microproof_2": "No artificial fillers",
+        "microproof_3": "Long-lasting",
+        "problem_heading": "Rawhide worries are real.",
+        "problem_text": "Many dog parents want a chew that feels cleaner, simpler, and easier to trust than conventional rawhide.",
+        "solution_heading": "Yak cheese chews keep the ingredient list simple.",
+        "solution_text": "Our chews are made with yak milk, cow milk, lime juice, and salt, then dried into a dense chew dogs can work on slowly.",
+        "review_1": "This replaced rawhide in our house. My dog loves it.",
+        "review_2": "Simple ingredients and it lasts. That is exactly what I wanted.",
+        "review_3": "A cleaner chew routine without the rawhide stress.",
+        "product_asset": "prime-yak-process-finished-chews.jpg",
+        "product_heading": "Switch to Prime Pet Food yak chews.",
+        "product_text": "A premium rawhide-free chew designed for long-lasting supervised enrichment.",
+        "bullet_1": "Rawhide-free",
+        "bullet_2": "Naturally dense texture",
+        "bullet_3": "Only 4 ingredients",
+        "bullet_4": "30-day satisfaction guarantee",
+        "final_heading": "Upgrade from rawhide to a cleaner chew routine.",
+        "final_text": "Simple ingredients. Longer chew time. More confidence.",
+        "sticky_text": "Rawhide-free chewing",
+        "featured_product": "himalayan-yak-chews-for-dogs"
+      }
+    }
+  },
+  "order": ["ad_landing"]
+}

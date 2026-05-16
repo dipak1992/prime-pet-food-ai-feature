@@ -1,0 +1,38 @@
+{
+  "sections": {
+    "ad_landing": {
+      "type": "ad-landing-page",
+      "settings": {
+        "eyebrow": "Multi-dog household",
+        "heading": "Chew time for every dog in the house.",
+        "subheading": "Stock a cleaner, longer-lasting chew routine for households with more than one chewing style.",
+        "hero_asset": "prime-ugc-dog-chew-card.jpg",
+        "cta_label": "Shop Multi-Dog Chews",
+        "secondary_label": "Shop Bulk Chews",
+        "secondary_url": "/products/2-lb-bulk-yak-cheese-dog-chews-natural-long-lasting-treats-small-to-jumbo-copy",
+        "microproof_1": "Great for routines",
+        "microproof_2": "Bulk-friendly",
+        "microproof_3": "Rawhide-free",
+        "problem_heading": "Multiple dogs means multiple chew needs.",
+        "problem_text": "One dog finishes fast, another chews slowly, and the household goes through treats faster than expected.",
+        "solution_heading": "Build a stocked routine around durable yak chews.",
+        "solution_text": "Prime Pet Food makes it easier to keep simple-ingredient chews on hand for different dogs and chewing styles.",
+        "review_1": "Perfect for our two-dog household.",
+        "review_2": "Both dogs stay busy, and we buy fewer random treats.",
+        "review_3": "Bulk chews made our routine easier.",
+        "product_asset": "prime-wholesale-hero-chews.jpg",
+        "product_heading": "Keep the chew drawer ready.",
+        "product_text": "A better fit for multi-dog homes that need reliable, longer-lasting chew options.",
+        "bullet_1": "Bulk-friendly chewing",
+        "bullet_2": "Simple ingredients",
+        "bullet_3": "Use different sizes for different dogs",
+        "bullet_4": "Free shipping over $30",
+        "final_heading": "Make chew time easier for the whole house.",
+        "final_text": "Stock up on premium yak cheese dog chews.",
+        "sticky_text": "Multi-dog routine",
+        "featured_product": "2-lb-bulk-yak-cheese-dog-chews-natural-long-lasting-treats-small-to-jumbo-copy"
+      }
+    }
+  },
+  "order": ["ad_landing"]
+}

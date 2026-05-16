@@ -1,0 +1,37 @@
+{
+  "sections": {
+    "ad_landing": {
+      "type": "ad-landing-page",
+      "settings": {
+        "eyebrow": "Heavy chewer bundle",
+        "heading": "Stock up for the dog who chews hard.",
+        "subheading": "A focused bundle-style landing page for dogs that need stronger, longer-lasting chew routines.",
+        "hero_asset": "prime-home-large-dog-chew.jpg",
+        "cta_label": "Shop Heavy Chewer Bundle",
+        "secondary_label": "Find the Right Size",
+        "microproof_1": "For powerful chewers",
+        "microproof_2": "Bulk-friendly",
+        "microproof_3": "Rawhide-free",
+        "problem_heading": "Heavy chewers need more than one backup chew.",
+        "problem_text": "If your dog works through everything, running out of durable chews can lead to boredom and destructive chewing.",
+        "solution_heading": "A stocked yak chew routine keeps you prepared.",
+        "solution_text": "Bulk-friendly Prime Pet Food chews help heavy chewer households maintain consistent, cleaner enrichment.",
+        "review_1": "The bulk option made sense for our large dog.",
+        "review_2": "Great value for a dog who chews every day.",
+        "review_3": "We finally stopped panic-buying treats.",
+        "product_asset": "prime-wholesale-hero-chews.jpg",
+        "product_heading": "Choose the heavy chewer stock-up option.",
+        "product_text": "A focused offer for dogs that need more durable chew time and owners who want fewer restock runs.",
+        "bullet_1": "Built for frequent chewers",
+        "bullet_2": "Bulk-friendly value",
+        "bullet_3": "Simple rawhide-free ingredients",
+        "bullet_4": "Long-lasting enrichment",
+        "final_heading": "Stay ahead of your heavy chewer.",
+        "final_text": "Keep premium yak chews ready before the next chewing session.",
+        "sticky_text": "Heavy chewer stock-up",
+        "featured_product": "2-lb-bulk-yak-cheese-dog-chews-natural-long-lasting-treats-small-to-jumbo-copy"
+      }
+    }
+  },
+  "order": ["ad_landing"]
+}

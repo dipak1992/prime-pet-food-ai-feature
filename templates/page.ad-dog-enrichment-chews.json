@@ -1,0 +1,37 @@
+{
+  "sections": {
+    "ad_landing": {
+      "type": "ad-landing-page",
+      "settings": {
+        "eyebrow": "Boredom and enrichment",
+        "heading": "Give bored dogs a better job.",
+        "subheading": "Turn restless energy into focused chew time with premium Himalayan yak cheese dog chews.",
+        "hero_asset": "prime-calm-dog-yak-chew-hero.jpg",
+        "cta_label": "Shop Enrichment Chews",
+        "secondary_label": "Find Your Dog's Size",
+        "microproof_1": "Boredom support",
+        "microproof_2": "Focused chew time",
+        "microproof_3": "Rawhide-free",
+        "problem_heading": "Bored dogs invent their own entertainment.",
+        "problem_text": "Without a satisfying outlet, chewing energy can turn into destroyed shoes, couch corners, and restless pacing.",
+        "solution_heading": "Chewing is enrichment when the routine is right.",
+        "solution_text": "Prime Pet Food yak chews give dogs a dense, satisfying task that supports calmer indoor downtime.",
+        "review_1": "Perfect for keeping my dog busy after walks.",
+        "review_2": "My dog settles faster when he has a chew routine.",
+        "review_3": "A clean way to keep boredom under control.",
+        "product_asset": "prime-home-medium-dog-chew.jpg",
+        "product_heading": "Make calm-time easier.",
+        "product_text": "Use a long-lasting chew to help redirect bored chewing into supervised enrichment.",
+        "bullet_1": "Supports indoor enrichment",
+        "bullet_2": "Helps redirect destructive chewing",
+        "bullet_3": "Simple ingredients",
+        "bullet_4": "Satisfying dense texture",
+        "final_heading": "Create a calmer enrichment routine.",
+        "final_text": "Give your dog something better to do.",
+        "sticky_text": "Bored dog solution",
+        "featured_product": "himalayan-yak-chews-for-dogs"
+      }
+    }
+  },
+  "order": ["ad_landing"]
+}
