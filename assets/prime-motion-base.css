@@ -16,13 +16,6 @@ html {
    but present in the document flow. The translateY offset is small (24px)
    and does not affect surrounding layout because transforms are non-layout. */
 
-/* DIAGNOSTIC: temporary 2px outline so we can confirm CSS is loading.
-   Remove after confirming motion is visible on the live store. */
-.pm-reveal,
-.ph-reveal {
-  outline: 2px solid rgba(255, 0, 0, 0.35);
-}
-
 .pm-reveal,
 .ph-reveal {
   opacity: var(--reveal-opacity-start, 0);
@@ -302,5 +295,28 @@ html {
   .prime-home-product-card:hover,
   .card-product:hover {
     transform: none;
+  }
+}
+
+/* ── Mobile: skip reveal animation, show content immediately ────
+   On viewports ≤768px the IntersectionObserver margin (-60px) can
+   prevent the threshold from ever firing on short screens, leaving
+   elements permanently at opacity:0. We bypass the animation
+   entirely on mobile so content is always visible. The JS safety-
+   net timeout in prime-motion.js provides a belt-and-suspenders
+   fallback for edge cases (save-data mode, CDN race, etc.). */
+@media (max-width: 768px) {
+  .ph-reveal,
+  .pm-reveal,
+  [data-motion="reveal"],
+  .pm-fade,
+  .pm-slide-up,
+  .pm-slide-left,
+  .pm-slide-right,
+  [data-motion-stagger] > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
   }
 }

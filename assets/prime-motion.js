@@ -789,6 +789,23 @@
         }
       }, 100);
     }
+
+    // Safety net: after 3 seconds, force-reveal any elements that are still
+    // hidden. Covers edge cases: save-data mode aborting init(), IntersectionObserver
+    // threshold never firing on short mobile screens, or any other silent failure.
+    setTimeout(function () {
+      var hidden = document.querySelectorAll(
+        '.ph-reveal:not(.is-visible), .pm-reveal:not(.is-visible), [data-motion="reveal"]:not(.is-visible)'
+      );
+      if (hidden.length) {
+        console.warn('[PrimeMotion] Safety net: force-revealing ' + hidden.length + ' still-hidden element(s)');
+        hidden.forEach(function (el) {
+          el.classList.add('is-visible');
+          el.style.opacity   = '';
+          el.style.transform = '';
+        });
+      }
+    }, 3000);
   }
 
   if (document.readyState === 'loading') {
