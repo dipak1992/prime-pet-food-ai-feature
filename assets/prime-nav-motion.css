@@ -112,8 +112,11 @@ header[role="banner"].is-hidden {
     visibility 0s linear 0s;
 }
 
-/* ── Mobile menu slide animation ────────────────────────────── */
-.header__drawer,
+/* ── Mobile menu slide animation ──────────────────────────────
+   Do not transform `.header__drawer` itself: the Prime header opens that
+   fixed shell with `.is-active`, while `header.css` slides the inner
+   `.header__drawer-content`. Moving the shell hides the visible menu and
+   leaves only the blurred page behind it on mobile. */
 .mobile-facets__wrapper,
 .menu-drawer {
   transform: translateX(calc(-100% * var(--direction-multiplier, 1)));
@@ -121,15 +124,12 @@ header[role="banner"].is-hidden {
   will-change: transform;
 }
 
-.header__drawer.is-open,
 .menu-drawer.is-open,
 details[open].menu-opening > .menu-drawer,
-.menu-opening .header__drawer,
 .menu-opening .menu-drawer {
   transform: translateX(0);
 }
 
-.header__drawer.is-closing,
 .menu-drawer.is-closing {
   transform: translateX(calc(-100% * var(--direction-multiplier, 1)));
   transition: transform 0.25s cubic-bezier(0.4, 0.0, 1.0, 1.0);
