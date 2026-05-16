@@ -12,6 +12,7 @@
     "pages:push": "node scripts/page-sync.mjs"
   },
   "devDependencies": {
+    "@shopify/cli": "^3.94.3",
     "framer-motion": "^12.38.0"
   }
 }
