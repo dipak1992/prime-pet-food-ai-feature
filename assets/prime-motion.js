@@ -130,6 +130,8 @@
       if (!isEligibleAutoMotionTarget(el)) return;
 
       el.setAttribute('data-motion', 'reveal');
+      el.setAttribute('data-motion-auto', 'true');
+      neutralizeNativeScrollTrigger(el);
       if (delayStep && index > 0) {
         el.setAttribute('data-motion-delay', String(Math.min(index * delayStep, 240)));
       }
@@ -142,6 +144,8 @@
       if (!el.children || !el.children.length) return;
 
       el.setAttribute('data-motion-stagger', 'true');
+      el.setAttribute('data-motion-auto', 'true');
+      neutralizeNativeScrollTrigger(el);
     });
   }
 
@@ -158,6 +162,8 @@
       if (section.offsetHeight < 80) return;
 
       section.setAttribute('data-motion', 'reveal');
+      section.setAttribute('data-motion-auto', 'true');
+      neutralizeNativeScrollTrigger(section);
       section.setAttribute('data-motion-delay', String(Math.min(index * 25, 160)));
     });
   }
@@ -250,6 +256,38 @@
     markGenericSectionTargets();
   }
 
+  function isInInitialViewport(el) {
+    var rect = el.getBoundingClientRect();
+    return rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
+  }
+
+  function isNearViewport(el, buffer) {
+    var rect = el.getBoundingClientRect();
+    var threshold = typeof buffer === 'number' ? buffer : 160;
+    return rect.top < window.innerHeight + threshold && rect.bottom > -threshold;
+  }
+
+  function neutralizeNativeScrollTrigger(el) {
+    if (!el || !el.classList || !el.classList.contains('scroll-trigger')) return;
+
+    el.classList.remove('scroll-trigger--offscreen');
+    el.classList.add('scroll-trigger--cancel');
+  }
+
+  function revealElementImmediately(el) {
+    neutralizeNativeScrollTrigger(el);
+    el.classList.add('is-visible');
+    el.style.opacity = '';
+    el.style.transform = '';
+
+    if (el.hasAttribute('data-motion-stagger')) {
+      Array.from(el.children).forEach(function (child) {
+        child.style.opacity = '';
+        child.style.transform = '';
+      });
+    }
+  }
+
   // ─── Scroll Reveal System ─────────────────────────────────────────────────
   function initScrollReveals() {
     var selectors = '.ph-reveal, .pm-reveal, [data-motion="reveal"]';
@@ -260,6 +298,14 @@
     elements.forEach(function (el) {
       // Skip if already visible (e.g. above the fold)
       if (el.classList.contains('is-visible')) return;
+
+      // Auto-registered targets are added after first paint. Do not hide and
+      // replay content already visible in the initial viewport; that reads as
+      // a page-refresh blink. Below-fold targets still animate on scroll.
+      if (el.getAttribute('data-motion-auto') === 'true' && isInInitialViewport(el)) {
+        revealElementImmediately(el);
+        return;
+      }
 
       var delay      = parseFloat(el.getAttribute('data-motion-delay') || '0') / 1000;
       var hasStagger = el.hasAttribute('data-motion-stagger');
@@ -318,6 +364,12 @@
     staggerParents.forEach(function (parent) {
       var children = Array.from(parent.children);
       if (!children.length) return;
+      if (parent.classList.contains('is-visible')) return;
+
+      if (parent.getAttribute('data-motion-auto') === 'true' && isInInitialViewport(parent)) {
+        revealElementImmediately(parent);
+        return;
+      }
 
       children.forEach(function (child) {
         child.style.opacity   = '0';
@@ -768,17 +820,21 @@
       }, 100);
     }
 
-    // Safety net: after 3 seconds, force-reveal any elements that are still
-    // hidden. Covers edge cases: save-data mode aborting init(), IntersectionObserver
-    // threshold never firing on short mobile screens, or any other silent failure.
+    // Safety net: after 3 seconds, reveal only stale targets that are in or near
+    // the current viewport. Do not reveal the entire below-fold page, otherwise
+    // users get no motion when they eventually scroll.
     setTimeout(function () {
       var hidden = document.querySelectorAll(
         '.ph-reveal:not(.is-visible), .pm-reveal:not(.is-visible), [data-motion="reveal"]:not(.is-visible), [data-motion-stagger]:not(.is-visible)'
       );
-      if (hidden.length) {
-        console.warn('[PrimeMotion] Safety net: force-revealing ' + hidden.length + ' still-hidden element(s)');
-        revealMotionContent();
-      }
+      var staleVisibleTargets = Array.from(hidden).filter(function (el) {
+        return isNearViewport(el, 180);
+      });
+
+      if (!staleVisibleTargets.length) return;
+
+      console.warn('[PrimeMotion] Safety net: force-revealing ' + staleVisibleTargets.length + ' stale in-view element(s)');
+      staleVisibleTargets.forEach(revealElementImmediately);
     }, 3000);
   }
 
