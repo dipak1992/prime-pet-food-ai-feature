@@ -194,6 +194,13 @@
     });
   }
 
+  function setMotionStrength(selectors, strength) {
+    document.querySelectorAll(selectors).forEach(function (el) {
+      if (!el || el.nodeType !== 1) return;
+      el.setAttribute('data-motion-strength', strength);
+    });
+  }
+
   function registerUniversalMotionTargets() {
     markRevealTargets(
       [
@@ -316,6 +323,76 @@
     );
 
     markGenericSectionTargets();
+    applyMotionStrengths();
+  }
+
+  function applyMotionStrengths() {
+    setMotionStrength(
+      [
+        // Strongest: homepage storytelling, product education, reviews/social proof,
+        // manufacturing/origin, and ad landing pages.
+        '.ph-outcomes',
+        '.ph-products',
+        '.ph-reviews',
+        '.ph-compare',
+        '.ph-routine',
+        '.ph-ingredients',
+        '.ph-craft',
+        '.ph-fit',
+        '.ph-vet',
+        '.ph-guarantee',
+        '.ph-faq',
+        '.ph-close',
+        '.ypc-tabs-recos',
+        '.ypc-tabs-recos__left',
+        '.ypc-tabs-recos__right',
+        '.related-products',
+        'product-recommendations',
+        '.testimonials',
+        '.prime-yak-process',
+        '.prime-yak-process__hero',
+        '.prime-yak-process__section',
+        '.prime-yak-process__step',
+        '.prime-yak-process__timeline',
+        '.prime-ad-landing',
+        '.prime-ad-landing__hero-media',
+        '.prime-ad-landing__hero-copy',
+        '.prime-ad-landing__problem-solution',
+        '.prime-ad-landing__proof-band',
+        '.prime-ad-landing__review-grid',
+        '.prime-ad-landing__offer',
+        '.prime-ad-landing__objections',
+        '.prime-ad-landing__final'
+      ].join(', '),
+      'strong'
+    );
+
+    setMotionStrength(
+      [
+        // Lightest: product hero, cart, customer/auth/account, and utility pages.
+        '.ypc-product-hero',
+        '.ypc-product-hero__media',
+        '.ypc-product-hero__content',
+        '.ypc-product-hero__main-image-wrap',
+        '.ypc-product-hero__thumb-row',
+        '.ypc-product-hero__options',
+        '.ypc-cart',
+        '.ypc-cart__hero',
+        '.ypc-cart__main',
+        '.ypc-cart__summary',
+        '.ypc-cart-items',
+        '.customer',
+        '.shopify-section--main-login',
+        '.shopify-section--main-register',
+        '.shopify-section--main-account',
+        '.shopify-section--main-addresses',
+        '.main-login',
+        '.main-register',
+        '.main-account',
+        '.main-addresses'
+      ].join(', '),
+      'light'
+    );
   }
 
   function isInInitialViewport(el) {
@@ -352,6 +429,57 @@
 
   function getRevealProfile(el) {
     var kind = el.getAttribute('data-motion-kind') || 'section';
+    var strength = getMotionStrength(el);
+
+    if (strength === 'light') {
+      if (kind === 'text') {
+        return {
+          y: isMobile ? 6 : 8,
+          duration: isMobile ? 0.22 : 0.28,
+          delayOffset: 0
+        };
+      }
+
+      if (kind === 'image') {
+        return {
+          y: 0,
+          scale: 1.012,
+          duration: isMobile ? 0.28 : 0.34,
+          delayOffset: 0
+        };
+      }
+
+      return {
+        y: isMobile ? 6 : 8,
+        duration: isMobile ? 0.24 : 0.3,
+        delayOffset: 0
+      };
+    }
+
+    if (strength === 'strong') {
+      if (kind === 'text') {
+        return {
+          y: isMobile ? 12 : 16,
+          duration: isMobile ? 0.36 : 0.44,
+          delayOffset: 0.04
+        };
+      }
+
+      if (kind === 'image') {
+        return {
+          y: 0,
+          scale: 1.03,
+          duration: isMobile ? 0.46 : 0.62,
+          delayOffset: 0.12
+        };
+      }
+
+      return {
+        y: isMobile ? 14 : 18,
+        duration: isMobile ? 0.42 : 0.52,
+        delayOffset: 0
+      };
+    }
 
     if (kind === 'text') {
       return {
@@ -375,6 +503,38 @@
       duration: isMobile ? 0.36 : 0.46,
       delayOffset: 0
     };
+  }
+
+  function getMotionStrength(el) {
+    var current = el;
+    while (current && current !== document.documentElement) {
+      if (current.getAttribute && current.getAttribute('data-motion-strength')) {
+        return current.getAttribute('data-motion-strength');
+      }
+      current = current.parentElement;
+    }
+    return 'normal';
+  }
+
+  function getStaggerStep(el) {
+    var strength = getMotionStrength(el);
+    if (strength === 'light') return 0.035;
+    if (strength === 'strong') return 0.06;
+    return 0.05;
+  }
+
+  function getStaggerStart(el) {
+    var strength = getMotionStrength(el);
+    if (strength === 'light') return 0.04;
+    if (strength === 'strong') return 0.14;
+    return 0.1;
+  }
+
+  function getCardDuration(el) {
+    var strength = getMotionStrength(el);
+    if (strength === 'light') return isMobile ? 0.26 : 0.32;
+    if (strength === 'strong') return isMobile ? 0.38 : 0.46;
+    return isMobile ? 0.34 : 0.4;
   }
 
   // ─── Scroll Reveal System ─────────────────────────────────────────────────
@@ -422,9 +582,9 @@
               children,
               { opacity: 1, transform: 'translateY(0px)' },
               {
-                duration: isMobile ? 0.36 : 0.44,
+                duration: getCardDuration(el),
                 easing:   tokens.easing.out,
-                delay:    stagger(0.06, { start: delay + 0.08 })
+                delay:    stagger(getStaggerStep(el), { start: delay + getStaggerStart(el) })
               }
             );
             el.classList.add('is-visible');
@@ -471,9 +631,9 @@
           children,
           { opacity: 1, transform: 'translateY(0px)' },
           {
-            duration: isMobile ? 0.36 : 0.44,
+            duration: getCardDuration(parent),
             easing:   tokens.easing.out,
-            delay:    stagger(0.06, { start: 0.12 })
+            delay:    stagger(getStaggerStep(parent), { start: getStaggerStart(parent) })
           }
         );
         parent.classList.add('is-visible');
@@ -827,17 +987,19 @@
         return;
       }
 
+      var profile = getRevealProfile(img);
+
       img.style.opacity   = '0';
-      img.style.transform = 'scale(1.03)';
+      img.style.transform = 'scale(' + (profile.scale || 1.03) + ')';
 
       inView(img, function () {
         animate(
           img,
-          { opacity: [0, 1], scale: [1.03, 1] },
+          { opacity: [0, 1], scale: [profile.scale || 1.03, 1] },
           {
-            duration: isMobile ? 0.42 : 0.56,
+            duration: profile.duration,
             easing:   tokens.easing.gentle,
-            delay:    0.1
+            delay:    profile.delayOffset
           }
         ).then(function () {
           img.classList.add('is-visible');
