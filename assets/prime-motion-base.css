@@ -1,0 +1,306 @@
+/* ============================================================
+   Prime Pet Food — Motion Base CSS
+   CSS-only motion enhancements (no JS required)
+   /assets/prime-motion-base.css
+   ============================================================ */
+
+/* ── Smooth scroll ──────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Scroll Reveal — Base ───────────────────────────────────── */
+/* CLS Prevention: .pm-reveal / .ph-reveal elements start at opacity:0 but
+   must still occupy their natural layout space to avoid Cumulative Layout
+   Shift. We do NOT set height:0 or display:none — the element is invisible
+   but present in the document flow. The translateY offset is small (24px)
+   and does not affect surrounding layout because transforms are non-layout. */
+
+/* DIAGNOSTIC: temporary 2px outline so we can confirm CSS is loading.
+   Remove after confirming motion is visible on the live store. */
+.pm-reveal,
+.ph-reveal {
+  outline: 2px solid rgba(255, 0, 0, 0.35);
+}
+
+.pm-reveal,
+.ph-reveal {
+  opacity: var(--reveal-opacity-start, 0);
+  transform: translateY(var(--reveal-y, 24px));
+  transition:
+    opacity var(--motion-slow, 400ms) var(--ease-out, cubic-bezier(0.0, 0.0, 0.2, 1.0)),
+    transform var(--motion-slow, 400ms) var(--ease-out, cubic-bezier(0.0, 0.0, 0.2, 1.0));
+  /* will-change is set only while animating to avoid permanent GPU layer promotion.
+     JS sets will-change before animation and resets to 'auto' after .then() resolves. */
+}
+
+.pm-reveal.is-visible,
+.ph-reveal.is-visible {
+  opacity: var(--reveal-opacity-end, 1);
+  transform: translateY(0);
+  will-change: auto; /* Explicitly release GPU layer after reveal completes */
+}
+
+/* ── Stagger delay classes ──────────────────────────────────── */
+.pm-reveal--delay-1 { transition-delay: 60ms; }
+.pm-reveal--delay-2 { transition-delay: 120ms; }
+.pm-reveal--delay-3 { transition-delay: 180ms; }
+.pm-reveal--delay-4 { transition-delay: 240ms; }
+.pm-reveal--delay-5 { transition-delay: 300ms; }
+
+/* ── Fade only variant ──────────────────────────────────────── */
+.pm-fade {
+  opacity: 0;
+  transition: opacity var(--motion-slow, 400ms) var(--ease-out, cubic-bezier(0.0, 0.0, 0.2, 1.0));
+  will-change: opacity;
+}
+
+.pm-fade.is-visible {
+  opacity: 1;
+}
+
+/* ── Directional variants ───────────────────────────────────── */
+.pm-slide-up {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity var(--motion-slow, 400ms) var(--ease-out, cubic-bezier(0.0, 0.0, 0.2, 1.0)),
+    transform var(--motion-slow, 400ms) var(--ease-out, cubic-bezier(0.0, 0.0, 0.2, 1.0));
+}
+
+.pm-slide-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  will-change: auto;
+}
+
+.pm-slide-left {
+  opacity: 0;
+  transform: translateX(32px);
+  transition:
+    opacity var(--motion-slow, 400ms) var(--ease-out, cubic-bezier(0.0, 0.0, 0.2, 1.0)),
+    transform var(--motion-slow, 400ms) var(--ease-out, cubic-bezier(0.0, 0.0, 0.2, 1.0));
+}
+
+.pm-slide-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+  will-change: auto;
+}
+
+.pm-slide-right {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition:
+    opacity var(--motion-slow, 400ms) var(--ease-out, cubic-bezier(0.0, 0.0, 0.2, 1.0)),
+    transform var(--motion-slow, 400ms) var(--ease-out, cubic-bezier(0.0, 0.0, 0.2, 1.0));
+}
+
+.pm-slide-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+  will-change: auto;
+}
+
+/* ── Button hover / press states ────────────────────────────── */
+.btn,
+.button,
+[type="submit"],
+.prime-btn,
+.ph-button,
+.ph-cta-btn {
+  transition:
+    transform var(--motion-instant, 80ms) var(--ease-in, cubic-bezier(0.4, 0.0, 1.0, 1.0)),
+    background-color var(--motion-fast, 150ms) var(--ease-out, cubic-bezier(0.0, 0.0, 0.2, 1.0)),
+    box-shadow var(--motion-fast, 150ms) var(--ease-out, cubic-bezier(0.0, 0.0, 0.2, 1.0)),
+    color var(--motion-fast, 150ms) var(--ease-out, cubic-bezier(0.0, 0.0, 0.2, 1.0));
+  cursor: pointer;
+}
+
+.btn:active,
+.button:active,
+[type="submit"]:active,
+.prime-btn:active,
+.ph-button:active,
+.ph-cta-btn:active {
+  transform: scale(var(--press-scale, 0.97));
+}
+
+/* ── Card hover states ──────────────────────────────────────── */
+.card,
+.product-card,
+.ph-product-card,
+.ph-review-card,
+.ph-ingredient-card,
+.prime-home-product-card,
+.card-product {
+  transition:
+    transform var(--motion-normal, 250ms) var(--ease-out, cubic-bezier(0.0, 0.0, 0.2, 1.0)),
+    box-shadow var(--motion-normal, 250ms) var(--ease-out, cubic-bezier(0.0, 0.0, 0.2, 1.0));
+  /* will-change omitted from base state — applied only on :hover to avoid
+     promoting every card to its own GPU layer on page load */
+}
+
+.card:hover,
+.product-card:hover,
+.ph-product-card:hover,
+.ph-review-card:hover,
+.ph-ingredient-card:hover,
+.prime-home-product-card:hover,
+.card-product:hover {
+  will-change: transform, box-shadow;
+}
+
+.card:hover,
+.product-card:hover,
+.ph-product-card:hover,
+.ph-review-card:hover,
+.ph-ingredient-card:hover,
+.prime-home-product-card:hover,
+.card-product:hover {
+  transform: translateY(var(--hover-lift-md, -4px));
+  box-shadow: var(--shadow-card-hover, 0 12px 40px rgba(28, 25, 23, 0.12));
+}
+
+/* ── Image hover zoom ───────────────────────────────────────── */
+.pm-img-zoom {
+  overflow: hidden;
+}
+
+.pm-img-zoom img {
+  transition: transform var(--motion-slow, 400ms) var(--ease-gentle, cubic-bezier(0.25, 0.46, 0.45, 0.94));
+  /* will-change applied on hover only, not permanently */
+}
+
+.pm-img-zoom:hover img {
+  will-change: transform;
+}
+
+.pm-img-zoom:hover img {
+  transform: scale(1.04);
+}
+
+/* ── Nav link underline animation ───────────────────────────── */
+.pm-nav-link {
+  position: relative;
+  text-decoration: none;
+}
+
+.pm-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: currentColor;
+  transition: width var(--motion-normal, 250ms) var(--ease-out, cubic-bezier(0.0, 0.0, 0.2, 1.0));
+}
+
+.pm-nav-link:hover::after,
+.pm-nav-link:focus-visible::after {
+  width: 100%;
+}
+
+/* ── Skeleton loading shimmer ───────────────────────────────── */
+.pm-skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(28, 25, 23, 0.06) 25%,
+    rgba(28, 25, 23, 0.12) 50%,
+    rgba(28, 25, 23, 0.06) 75%
+  );
+  background-size: 200% 100%;
+  animation: pm-shimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+}
+
+@keyframes pm-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Hero entrance animations (CSS fallback) ────────────────── */
+@keyframes pm-fade-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pm-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes pm-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ── Stagger group ──────────────────────────────────────────── */
+[data-motion-stagger] > * {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity var(--motion-slow, 400ms) var(--ease-out, cubic-bezier(0.0, 0.0, 0.2, 1.0)),
+    transform var(--motion-slow, 400ms) var(--ease-out, cubic-bezier(0.0, 0.0, 0.2, 1.0));
+}
+
+[data-motion-stagger].is-visible > *:nth-child(1) { transition-delay: 0ms; }
+[data-motion-stagger].is-visible > *:nth-child(2) { transition-delay: 60ms; }
+[data-motion-stagger].is-visible > *:nth-child(3) { transition-delay: 120ms; }
+[data-motion-stagger].is-visible > *:nth-child(4) { transition-delay: 180ms; }
+[data-motion-stagger].is-visible > *:nth-child(5) { transition-delay: 240ms; }
+[data-motion-stagger].is-visible > *:nth-child(6) { transition-delay: 300ms; }
+
+[data-motion-stagger].is-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Reduced motion overrides ───────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .pm-reveal,
+  .ph-reveal,
+  .pm-fade,
+  .pm-slide-up,
+  .pm-slide-left,
+  .pm-slide-right,
+  [data-motion-stagger] > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+    outline: none !important;
+  }
+
+  .pm-skeleton {
+    animation: none;
+    background: rgba(28, 25, 23, 0.06);
+  }
+
+  .pm-img-zoom:hover img {
+    transform: none;
+  }
+
+  .card:hover,
+  .product-card:hover,
+  .ph-product-card:hover,
+  .ph-review-card:hover,
+  .ph-ingredient-card:hover,
+  .prime-home-product-card:hover,
+  .card-product:hover {
+    transform: none;
+  }
+}
