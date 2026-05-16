@@ -145,6 +145,23 @@
     });
   }
 
+  function markGenericSectionTargets() {
+    var sectionShells = document.querySelectorAll(
+      'main .shopify-section > section, ' +
+      'main .shopify-section > div:not([id^="shopify-block-"])'
+    );
+
+    sectionShells.forEach(function (section, index) {
+      if (!isEligibleAutoMotionTarget(section)) return;
+      if (section.closest('#shopify-section-header, #shopify-section-footer')) return;
+      if (section.querySelector('.ph-reveal, .pm-reveal, [data-motion], [data-motion-stagger]')) return;
+      if (section.offsetHeight < 80) return;
+
+      section.setAttribute('data-motion', 'reveal');
+      section.setAttribute('data-motion-delay', String(Math.min(index * 25, 160)));
+    });
+  }
+
   function registerUniversalMotionTargets() {
     markRevealTargets(
       [
@@ -197,7 +214,9 @@
         '.image-with-text',
         '.multicolumn',
         '.collapsible-content',
-        '.testimonials'
+        '.testimonials',
+        '.scroll-trigger.animate--fade-in',
+        '.scroll-trigger.animate--slide-in'
       ].join(', '),
       45
     );
@@ -221,9 +240,14 @@
         '.prime-yak-process__timeline',
         '.pav2-grid',
         '.multicolumn-list',
-        '.testimonial-list'
+        '.testimonial-list',
+        '.responsive-grid',
+        '.card-grid',
+        '.slider:not(.slider--mobile)'
       ].join(', ')
     );
+
+    markGenericSectionTargets();
   }
 
   // ─── Scroll Reveal System ─────────────────────────────────────────────────
@@ -240,8 +264,8 @@
       var delay      = parseFloat(el.getAttribute('data-motion-delay') || '0') / 1000;
       var hasStagger = el.hasAttribute('data-motion-stagger');
 
-      var revealDistance = isMobile ? 10 : 24;
-      var childDistance  = isMobile ? 8 : 16;
+      var revealDistance = isMobile ? 16 : 28;
+      var childDistance  = isMobile ? 12 : 18;
       var observerMargin = isMobile ? '0px 0px -20px 0px' : '0px 0px -60px 0px';
 
       // Set initial state via JS (overrides CSS for Motion-controlled elements)
@@ -262,7 +286,7 @@
               children,
               { opacity: 1, transform: 'translateY(0px)' },
               {
-                duration: tokens.duration.slow,
+                duration: isMobile ? 0.36 : 0.46,
                 easing:   tokens.easing.out,
                 delay:    stagger(tokens.stagger.normal, { start: delay })
               }
@@ -276,7 +300,7 @@
           el,
           { opacity: 1, transform: 'translateY(0px)' },
           {
-            duration: tokens.duration.slow,
+            duration: isMobile ? 0.36 : 0.46,
             easing:   tokens.easing.out,
             delay:    delay
           }
@@ -297,7 +321,7 @@
 
       children.forEach(function (child) {
         child.style.opacity   = '0';
-        child.style.transform = 'translateY(' + (isMobile ? 8 : 16) + 'px)';
+        child.style.transform = 'translateY(' + (isMobile ? 12 : 18) + 'px)';
       });
 
       inView(parent, function () {
@@ -305,7 +329,7 @@
           children,
           { opacity: 1, transform: 'translateY(0px)' },
           {
-            duration: tokens.duration.slow,
+            duration: isMobile ? 0.36 : 0.46,
             easing:   tokens.easing.out,
             delay:    stagger(tokens.stagger.normal)
           }

@@ -308,12 +308,12 @@ html {
   .pm-reveal,
   [data-motion="reveal"],
   .pm-slide-up {
-    --reveal-y: 10px;
-    transition-duration: 220ms;
+    --reveal-y: 16px;
+    transition-duration: 360ms;
   }
 
   [data-motion-stagger] > * {
-    transform: translateY(8px);
-    transition-duration: 220ms;
+    transform: translateY(12px);
+    transition-duration: 360ms;
   }
 }
