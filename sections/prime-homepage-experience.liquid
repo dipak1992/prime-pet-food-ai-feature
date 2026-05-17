@@ -86,6 +86,16 @@
         Trusted by 20,000+ dog parents
       </div>
       <h1 class="ph-hero-headline">{{ hero_headline }}</h1>
+      <div class="ph-hero-rotator" data-ph-hero-rotator>
+        <span class="ph-hero-rotator__prefix">Built for</span>
+        <span class="ph-hero-rotator__words" aria-hidden="true">
+          <span class="ph-hero-rotator__word is-active" data-ph-hero-word>focused chew time</span>
+          <span class="ph-hero-rotator__word" data-ph-hero-word>rawhide-free routines</span>
+          <span class="ph-hero-rotator__word" data-ph-hero-word>aggressive chewers</span>
+          <span class="ph-hero-rotator__word" data-ph-hero-word>calmer evenings</span>
+        </span>
+        <span class="visually-hidden">focused chew time, rawhide-free routines, aggressive chewers, and calmer evenings</span>
+      </div>
       <p class="ph-hero-sub">{{ hero_subtext }}</p>
       <div class="ph-actions ph-hero-cta" aria-label="Homepage actions">
         <a href="/products/himalayan-yak-chews-for-dogs" class="ph-button ph-button--primary ph-cta-btn">Find your dog's chew</a>
@@ -982,6 +992,44 @@
     max-width: 620px;
     margin: 22px 0 0;
     color: rgba(255, 250, 242, 0.84);
+  }
+
+  .ph-hero-rotator {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
+    min-height: 36px;
+    margin-top: 18px;
+    color: rgba(255, 250, 242, 0.86);
+    font-size: clamp(18px, 2vw, 24px);
+    line-height: 1.25;
+    font-weight: 720;
+  }
+
+  .ph-hero-rotator__prefix {
+    color: rgba(255, 250, 242, 0.72);
+    font-weight: 650;
+  }
+
+  .ph-hero-rotator__words {
+    position: relative;
+    display: inline-grid;
+    min-width: min(58vw, 330px);
+    overflow: hidden;
+    color: #fffaf2;
+  }
+
+  .ph-hero-rotator__word {
+    grid-area: 1 / 1;
+    opacity: 0;
+    transform: translateY(0.72em);
+    transition: opacity 0.42s ease, transform 0.42s ease;
+    will-change: opacity, transform;
+  }
+
+  .ph-hero-rotator__word.is-active {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .ph-hero__social-badge {
@@ -2479,6 +2527,19 @@
       color: rgba(255, 250, 242, 0.9);
     }
 
+    .ph-hero-rotator {
+      display: grid;
+      gap: 3px;
+      min-height: 54px;
+      margin-top: 14px;
+      font-size: 18px;
+      line-height: 1.22;
+    }
+
+    .ph-hero-rotator__words {
+      min-width: 100%;
+    }
+
     .ph-hero__social-badge {
       max-width: 100%;
       margin-bottom: 16px;
@@ -2919,6 +2980,16 @@
     .ph-hero__media img {
       animation: none;
       transform: none;
+    }
+
+    .ph-hero-rotator__word {
+      opacity: 0;
+      transform: none;
+      transition: none;
+    }
+
+    .ph-hero-rotator__word.is-active {
+      opacity: 1;
     }
   }
 
@@ -3728,6 +3799,39 @@
   let reviewScrollTicking = false;
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ─── HERO BENEFIT ROTATOR ─── */
+  const heroRotator = document.querySelector('[data-ph-hero-rotator]');
+  const heroWords = heroRotator ? Array.from(heroRotator.querySelectorAll('[data-ph-hero-word]')) : [];
+  let heroWordIndex = 0;
+  let heroWordTimer = null;
+
+  function setHeroWord(index) {
+    if (!heroWords.length) return;
+    heroWordIndex = (index + heroWords.length) % heroWords.length;
+    heroWords.forEach(function(word, wordIndex) {
+      word.classList.toggle('is-active', wordIndex === heroWordIndex);
+    });
+  }
+
+  function startHeroWords() {
+    if (prefersReducedMotion || heroWords.length < 2 || heroWordTimer) return;
+    heroWordTimer = window.setInterval(function() {
+      if (document.hidden) return;
+      setHeroWord(heroWordIndex + 1);
+    }, 2400);
+  }
+
+  function stopHeroWords() {
+    if (!heroWordTimer) return;
+    window.clearInterval(heroWordTimer);
+    heroWordTimer = null;
+  }
+
+  if (heroWords.length) {
+    setHeroWord(0);
+    startHeroWords();
+  }
+
   function reviewIndexOffset(index, offset) {
     if (!reviewSlides.length) return 0;
     return (index + offset + reviewSlides.length) % reviewSlides.length;
@@ -3869,7 +3973,9 @@
     document.addEventListener('visibilitychange', function() {
       if (document.hidden) {
         stopReviewAutoplay();
+        stopHeroWords();
       } else {
+        startHeroWords();
         startReviewAutoplay();
       }
     });
