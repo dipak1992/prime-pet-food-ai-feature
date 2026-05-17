@@ -424,58 +424,86 @@
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       SOCIAL PROOF — Circular Testimonials (3D carousel)
+       SOCIAL PROOF — Real customer stories
   ════════════════════════════════════════════════════════════════ -->
-  <div class="ph-reviews ph-reveal" id="reviews">
+  <div class="ph-reviews ph-reveal">
     <div class="ph-shell">
-      <div class="ph-section-head" data-motion="reveal">
-        <p class="ph-kicker">Real results</p>
-        <h2 data-motion="reveal">What changes after a better chew.</h2>
+      <div class="ph-reviews__top">
+        <div class="ph-section-head" data-motion="reveal">
+          <p class="ph-kicker">Real results</p>
+          <h2 data-motion="reveal">What changes after a better chew.</h2>
+        </div>
+        <div class="ph-reviews__controls" aria-label="Review carousel controls">
+          <button type="button" class="ph-reviews__arrow" data-prime-review-prev aria-label="Previous review">
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+          <button type="button" class="ph-reviews__arrow" data-prime-review-next aria-label="Next review">
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        </div>
       </div>
 
-      <circular-testimonials>
-        <script type="application/json">
-          [
-            {
-              "name": "Sarah M.",
-              "designation": "Golden Retriever \u2022 72 min chew time",
-              "quote": "My golden retriever used to destroy bully sticks in 10 minutes. This lasted over an hour. I finally got to drink my coffee in peace.",
-              "src": "{{ 'prime-ugc-golden-retriever-chew-card.jpg' | asset_url }}"
-            },
-            {
-              "name": "Mike T.",
-              "designation": "French Bulldog \u2022 45 min chew time",
-              "quote": "Finally a chew I don\u2019t have to worry about. No weird chemicals, no splintering. My frenchie is obsessed and I feel good about it.",
-              "src": "{{ 'prime-ugc-french-bulldog-chew-card.jpg' | asset_url }}"
-            },
-            {
-              "name": "Jessica R.",
-              "designation": "Labrador \u2022 85 min chew time",
-              "quote": "We switched from rawhide after our vet recommended it. Three months in and my lab still gets excited every time she sees the bag.",
-              "src": "{{ 'prime-ugc-labrador-chew-card.jpg' | asset_url }}"
-            },
-            {
-              "name": "Priya K.",
-              "designation": "German Shepherd \u2022 92 min chew time",
-              "quote": "Our Shepherd needs something to do after evening walks. This turned that restless hour into focused quiet time.",
-              "src": "{{ 'prime-ugc-german-shepherd-chew-card.jpg' | asset_url }}"
-            },
-            {
-              "name": "Andrew L.",
-              "designation": "Beagle \u2022 58 min chew time",
-              "quote": "My beagle is food motivated and easily bored. The medium chew gives him a job without the mess of other chews.",
-              "src": "{{ 'prime-ugc-beagle-chew-card.jpg' | asset_url }}"
-            },
-            {
-              "name": "Emily W.",
-              "designation": "Poodle mix \u2022 64 min chew time",
-              "quote": "We use it during work calls. She settles in, chews, and I am not constantly redirecting her from furniture.",
-              "src": "{{ 'prime-ugc-poodle-chew-card.jpg' | asset_url }}"
-            }
-          ]
-        </script>
-      </circular-testimonials>
+      <div class="ph-reviews__grid" data-prime-review-track tabindex="0" aria-label="Customer review carousel" data-motion-stagger="true">
+        <article class="ph-review-card" data-motion="reveal">
+          <img class="ph-review-card__photo" src="{{ golden_image }}" alt="Golden Retriever using a Prime Pet Food yak chew during calm time" loading="lazy" width="768" height="768">
+          <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>&ldquo;My golden retriever used to destroy bully sticks in 10 minutes. This lasted over an hour. I finally got to drink my coffee in peace.&rdquo;</blockquote>
+          <footer>
+            <strong>Sarah M.</strong>
+            <span class="ph-review-card__badge">Golden Retriever &bull; 72 min</span>
+          </footer>
+        </article>
 
+        <article class="ph-review-card" data-motion="reveal" data-motion-delay="60">
+          <img class="ph-review-card__photo" src="{{ frenchie_image }}" alt="French Bulldog holding a Prime Pet Food yak chew" loading="lazy" width="768" height="768">
+          <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>&ldquo;Finally a chew I don&rsquo;t have to worry about. No weird chemicals, no splintering. My frenchie is obsessed and I feel good about it.&rdquo;</blockquote>
+          <footer>
+            <strong>Mike T.</strong>
+            <span class="ph-review-card__badge">French Bulldog &bull; 45 min</span>
+          </footer>
+        </article>
+
+        <article class="ph-review-card" data-motion="reveal" data-motion-delay="120">
+          <img class="ph-review-card__photo" src="{{ lab_image }}" alt="Labrador chewing a Prime Pet Food Himalayan yak chew" loading="lazy" width="768" height="768">
+          <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>&ldquo;We switched from rawhide after our vet recommended it. Three months in and my lab still gets excited every time she sees the bag.&rdquo;</blockquote>
+          <footer>
+            <strong>Jessica R.</strong>
+            <span class="ph-review-card__badge">Labrador &bull; 85 min</span>
+          </footer>
+        </article>
+
+        <article class="ph-review-card" data-motion="reveal" data-motion-delay="180">
+          <img class="ph-review-card__photo" src="{{ shepherd_image }}" alt="German Shepherd resting with a Prime Pet Food yak chew" loading="lazy" width="768" height="768">
+          <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>&ldquo;Our Shepherd needs something to do after evening walks. This turned that restless hour into focused quiet time.&rdquo;</blockquote>
+          <footer>
+            <strong>Priya K.</strong>
+            <span class="ph-review-card__badge">German Shepherd &bull; 92 min</span>
+          </footer>
+        </article>
+
+        <article class="ph-review-card" data-motion="reveal" data-motion-delay="240">
+          <img class="ph-review-card__photo" src="{{ beagle_image }}" alt="Beagle enjoying a Prime Pet Food yak chew on a rug" loading="lazy" width="768" height="768">
+          <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>&ldquo;My beagle is food motivated and easily bored. The medium chew gives him a job without the mess of other chews.&rdquo;</blockquote>
+          <footer>
+            <strong>Andrew L.</strong>
+            <span class="ph-review-card__badge">Beagle &bull; 58 min</span>
+          </footer>
+        </article>
+
+        <article class="ph-review-card" data-motion="reveal" data-motion-delay="300">
+          <img class="ph-review-card__photo" src="{{ poodle_image }}" alt="Poodle calmly holding a Prime Pet Food Himalayan yak chew" loading="lazy" width="768" height="768">
+          <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>&ldquo;We use it during work calls. She settles in, chews, and I am not constantly redirecting her from furniture.&rdquo;</blockquote>
+          <footer>
+            <strong>Emily W.</strong>
+            <span class="ph-review-card__badge">Poodle mix &bull; 64 min</span>
+          </footer>
+        </article>
+      </div>
       <div class="ph-reviews__link">
         <a href="/products/himalayan-yak-chews-for-dogs#judgeme_product_reviews">Read all 2,400+ reviews &rarr;</a>
       </div>
