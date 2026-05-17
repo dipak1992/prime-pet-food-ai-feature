@@ -457,8 +457,8 @@
         </div>
       </div>
 
-      <div class="ph-reviews__grid" data-prime-review-track tabindex="0" role="region" aria-roledescription="carousel" aria-label="Customer review carousel" data-motion-stagger="true">
-        <article class="ph-review-card is-active" data-prime-review-slide data-review-index="0" aria-roledescription="slide" aria-label="Review 1 of 6" data-motion="reveal">
+      <div class="ph-reviews__grid" data-prime-review-track tabindex="0" aria-label="Customer review carousel" data-motion-stagger="true">
+        <article class="ph-review-card" data-motion="reveal">
           <img class="ph-review-card__photo" src="{{ golden_image }}" alt="Golden Retriever using a Prime Pet Food yak chew during calm time" loading="lazy" width="768" height="768">
           <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <blockquote>&ldquo;My golden retriever used to destroy bully sticks in 10 minutes. This lasted over an hour. I finally got to drink my coffee in peace.&rdquo;</blockquote>
@@ -468,7 +468,7 @@
           </footer>
         </article>
 
-        <article class="ph-review-card" data-prime-review-slide data-review-index="1" aria-roledescription="slide" aria-label="Review 2 of 6" data-motion="reveal" data-motion-delay="60">
+        <article class="ph-review-card" data-motion="reveal" data-motion-delay="60">
           <img class="ph-review-card__photo" src="{{ frenchie_image }}" alt="French Bulldog holding a Prime Pet Food yak chew" loading="lazy" width="768" height="768">
           <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <blockquote>&ldquo;Finally a chew I don&rsquo;t have to worry about. No weird chemicals, no splintering. My frenchie is obsessed and I feel good about it.&rdquo;</blockquote>
@@ -478,7 +478,7 @@
           </footer>
         </article>
 
-        <article class="ph-review-card" data-prime-review-slide data-review-index="2" aria-roledescription="slide" aria-label="Review 3 of 6" data-motion="reveal" data-motion-delay="120">
+        <article class="ph-review-card" data-motion="reveal" data-motion-delay="120">
           <img class="ph-review-card__photo" src="{{ lab_image }}" alt="Labrador chewing a Prime Pet Food Himalayan yak chew" loading="lazy" width="768" height="768">
           <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <blockquote>&ldquo;We switched from rawhide after our vet recommended it. Three months in and my lab still gets excited every time she sees the bag.&rdquo;</blockquote>
@@ -488,7 +488,7 @@
           </footer>
         </article>
 
-        <article class="ph-review-card" data-prime-review-slide data-review-index="3" aria-roledescription="slide" aria-label="Review 4 of 6" data-motion="reveal" data-motion-delay="180">
+        <article class="ph-review-card" data-motion="reveal" data-motion-delay="180">
           <img class="ph-review-card__photo" src="{{ shepherd_image }}" alt="German Shepherd resting with a Prime Pet Food yak chew" loading="lazy" width="768" height="768">
           <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <blockquote>&ldquo;Our Shepherd needs something to do after evening walks. This turned that restless hour into focused quiet time.&rdquo;</blockquote>
@@ -498,7 +498,7 @@
           </footer>
         </article>
 
-        <article class="ph-review-card" data-prime-review-slide data-review-index="4" aria-roledescription="slide" aria-label="Review 5 of 6" data-motion="reveal" data-motion-delay="240">
+        <article class="ph-review-card" data-motion="reveal" data-motion-delay="240">
           <img class="ph-review-card__photo" src="{{ beagle_image }}" alt="Beagle enjoying a Prime Pet Food yak chew on a rug" loading="lazy" width="768" height="768">
           <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <blockquote>&ldquo;My beagle is food motivated and easily bored. The medium chew gives him a job without the mess of other chews.&rdquo;</blockquote>
@@ -508,7 +508,7 @@
           </footer>
         </article>
 
-        <article class="ph-review-card" data-prime-review-slide data-review-index="5" aria-roledescription="slide" aria-label="Review 6 of 6" data-motion="reveal" data-motion-delay="300">
+        <article class="ph-review-card" data-motion="reveal" data-motion-delay="300">
           <img class="ph-review-card__photo" src="{{ poodle_image }}" alt="Poodle calmly holding a Prime Pet Food Himalayan yak chew" loading="lazy" width="768" height="768">
           <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <blockquote>&ldquo;We use it during work calls. She settles in, chews, and I am not constantly redirecting her from furniture.&rdquo;</blockquote>
@@ -518,7 +518,6 @@
           </footer>
         </article>
       </div>
-      <div class="ph-reviews__dots" data-prime-review-dots aria-label="Choose a review"></div>
       <div class="ph-reviews__link">
         <a href="/products/himalayan-yak-chews-for-dogs#judgeme_product_reviews">Read all 2,400+ reviews &rarr;</a>
       </div>
@@ -1747,15 +1746,16 @@
   }
 
   .ph-reviews__grid {
-    position: relative;
-    display: grid;
-    grid-template-columns: minmax(0, 1.35fr) minmax(220px, 0.72fr) minmax(220px, 0.72fr);
-    align-items: stretch;
-    gap: 20px;
-    margin-inline: 0;
-    padding: 2px 0 12px;
-    overflow: hidden;
+    display: flex;
+    grid-template-columns: none;
+    gap: 18px;
+    margin-inline: -10px;
+    padding: 2px 10px 12px;
+    overflow-x: auto;
     scroll-behavior: smooth;
+    scroll-padding-inline: 10px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
   }
 
   .ph-reviews__grid::-webkit-scrollbar {
@@ -1773,53 +1773,12 @@
   }
 
   .ph-review-card {
-    position: relative;
-    min-width: 0;
-    padding: 24px;
+    flex: 0 0 calc((100% - 36px) / 3);
+    scroll-snap-align: start;
+    padding: 28px;
     display: flex;
     flex-direction: column;
     gap: 16px;
-    opacity: 0;
-    transform: translateY(14px) scale(0.96);
-    visibility: hidden;
-    pointer-events: none;
-    transition:
-      opacity 0.34s ease,
-      transform 0.34s ease,
-      border-color 0.22s ease,
-      box-shadow 0.22s ease;
-  }
-
-  .ph-review-card.is-active,
-  .ph-review-card.is-preview {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateY(0) scale(1);
-  }
-
-  .ph-review-card.is-active {
-    grid-column: 1;
-    grid-row: 1 / span 2;
-    padding: 32px;
-    border-color: rgba(184, 95, 50, 0.28);
-    box-shadow: 0 24px 70px rgba(36, 19, 13, 0.11);
-  }
-
-  .ph-review-card.is-preview-one {
-    grid-column: 2;
-  }
-
-  .ph-review-card.is-preview-two {
-    grid-column: 3;
-  }
-
-  .ph-review-card:not(.is-active):not(.is-preview) {
-    position: absolute;
-    inset: 0 auto auto 0;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
   }
 
   .ph-review-card__photo {
@@ -1831,10 +1790,6 @@
     object-fit: cover;
     object-position: center;
     background: var(--ph-soft);
-  }
-
-  .ph-review-card.is-active .ph-review-card__photo {
-    aspect-ratio: 16 / 10;
   }
 
   .ph-review-card__stars {
@@ -1851,19 +1806,6 @@
     color: var(--ph-ink);
     font-style: normal;
     flex: 1;
-  }
-
-  .ph-review-card.is-active blockquote {
-    font-size: clamp(19px, 2.2vw, 30px);
-    line-height: 1.42;
-    letter-spacing: -0.01em;
-  }
-
-  .ph-review-card.is-preview blockquote {
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
   }
 
   .ph-review-card footer {
@@ -1888,34 +1830,6 @@
     font-size: 12px;
     color: var(--ph-muted);
     font-weight: 600;
-  }
-
-  .ph-reviews__dots {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 18px;
-  }
-
-  .ph-reviews__dot {
-    width: 9px;
-    height: 9px;
-    padding: 0;
-    border: 0;
-    border-radius: 999px;
-    background: rgba(36, 19, 13, 0.22);
-    cursor: pointer;
-    transition: width 0.18s ease, background 0.18s ease;
-  }
-
-  .ph-reviews__dot.is-active {
-    width: 28px;
-    background: var(--ph-clay);
-  }
-
-  .ph-reviews__dot:focus-visible {
-    outline: 2px solid var(--ph-clay);
-    outline-offset: 3px;
   }
 
   .ph-reviews__link,
@@ -2846,15 +2760,10 @@
     }
 
     .ph-reviews__grid {
-      display: flex;
       gap: 12px;
       margin-inline: -16px;
       padding: 0 16px 6px;
-      overflow-x: auto;
-      scroll-behavior: smooth;
       scroll-padding-inline: 16px;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
     }
 
     .ph-reviews__grid::-webkit-scrollbar {
@@ -2866,46 +2775,11 @@
       scroll-snap-align: start;
       padding: 16px;
       gap: 10px;
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-      transform: none;
-      position: relative;
-      inset: auto;
-      width: auto;
-      height: auto;
-      overflow: visible;
-    }
-
-    .ph-review-card:not(.is-active):not(.is-preview) {
-      position: relative;
-      inset: auto;
-      width: auto;
-      height: auto;
-      overflow: visible;
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-    }
-
-    .ph-review-card.is-active,
-    .ph-review-card.is-preview,
-    .ph-review-card.is-preview-one,
-    .ph-review-card.is-preview-two {
-      grid-column: auto;
-      grid-row: auto;
-      padding: 16px;
-      transform: none;
-      box-shadow: none;
     }
 
     .ph-review-card__photo {
       aspect-ratio: 1 / 1;
       border-radius: 8px;
-    }
-
-    .ph-review-card.is-active .ph-review-card__photo {
-      aspect-ratio: 1 / 1;
     }
 
     .ph-review-card__stars {
@@ -2920,11 +2794,6 @@
       line-height: 1.5;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 4;
-    }
-
-    .ph-review-card.is-active blockquote {
-      font-size: 14px;
-      line-height: 1.5;
     }
 
     .ph-review-card footer {
@@ -3653,12 +3522,7 @@
   }
 
   .ph-review-card {
-    transition:
-      opacity 0.34s ease,
-      transform 0.34s ease,
-      visibility 0.34s ease,
-      border-color 0.22s ease,
-      box-shadow 0.25s ease;
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
   }
 
   .ph-review-card:hover {
@@ -3813,11 +3677,6 @@
   const reviewTrack = document.querySelector('[data-prime-review-track]');
   const reviewPrev = document.querySelector('[data-prime-review-prev]');
   const reviewNext = document.querySelector('[data-prime-review-next]');
-  const reviewDots = document.querySelector('[data-prime-review-dots]');
-  const reviewSlides = reviewTrack ? Array.from(reviewTrack.querySelectorAll('[data-prime-review-slide]')) : [];
-  let activeReviewIndex = 0;
-  let reviewAutoplay = null;
-  let reviewScrollTicking = false;
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ─── HERO BENEFIT ROTATOR ─── */
@@ -3853,157 +3712,26 @@
     startHeroWords();
   }
 
-  function reviewIndexOffset(index, offset) {
-    if (!reviewSlides.length) return 0;
-    return (index + offset + reviewSlides.length) % reviewSlides.length;
+  function scrollReviews(direction) {
+    if (!reviewTrack) return;
+    const firstCard = reviewTrack.querySelector('.ph-review-card');
+    const gap = 18;
+    const scrollAmount = firstCard ? firstCard.getBoundingClientRect().width + gap : reviewTrack.clientWidth * 0.8;
+    reviewTrack.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
   }
 
-  function updateReviewDots(index) {
-    if (!reviewDots) return;
-    Array.from(reviewDots.children).forEach(function(dot, dotIndex) {
-      const isActive = dotIndex === index;
-      dot.classList.toggle('is-active', isActive);
-      dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
-      dot.setAttribute('tabindex', isActive ? '0' : '-1');
-    });
+  if (reviewTrack && reviewPrev && reviewNext) {
+    reviewPrev.addEventListener('click', function() { scrollReviews(-1); });
+    reviewNext.addEventListener('click', function() { scrollReviews(1); });
   }
 
-  function setActiveReview(index, options) {
-    if (!reviewSlides.length) return;
-    const settings = options || {};
-    activeReviewIndex = (index + reviewSlides.length) % reviewSlides.length;
-    const firstPreview = reviewIndexOffset(activeReviewIndex, 1);
-    const secondPreview = reviewIndexOffset(activeReviewIndex, 2);
-
-    reviewSlides.forEach(function(slide, slideIndex) {
-      const isActive = slideIndex === activeReviewIndex;
-      const isPreviewOne = slideIndex === firstPreview;
-      const isPreviewTwo = slideIndex === secondPreview;
-
-      slide.classList.toggle('is-active', isActive);
-      slide.classList.toggle('is-preview', isPreviewOne || isPreviewTwo);
-      slide.classList.toggle('is-preview-one', isPreviewOne);
-      slide.classList.toggle('is-preview-two', isPreviewTwo);
-      slide.setAttribute('aria-hidden', isActive || isPreviewOne || isPreviewTwo ? 'false' : 'true');
-    });
-
-    updateReviewDots(activeReviewIndex);
-
-    if (settings.scroll !== false && window.innerWidth <= 767) {
-      reviewSlides[activeReviewIndex].scrollIntoView({
-        behavior: prefersReducedMotion ? 'auto' : 'smooth',
-        inline: 'start',
-        block: 'nearest'
-      });
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+      stopHeroWords();
+    } else {
+      startHeroWords();
     }
-  }
-
-  function moveReview(direction) {
-    setActiveReview(activeReviewIndex + direction);
-  }
-
-  function stopReviewAutoplay() {
-    if (reviewAutoplay) {
-      window.clearInterval(reviewAutoplay);
-      reviewAutoplay = null;
-    }
-  }
-
-  function startReviewAutoplay() {
-    if (prefersReducedMotion || reviewSlides.length < 2 || reviewAutoplay) return;
-    reviewAutoplay = window.setInterval(function() {
-      if (document.hidden) return;
-      setActiveReview(activeReviewIndex + 1, { scroll: false });
-    }, 5500);
-  }
-
-  function syncReviewFromScroll() {
-    reviewScrollTicking = false;
-    if (!reviewSlides.length || window.innerWidth > 767) return;
-
-    const trackLeft = reviewTrack.getBoundingClientRect().left;
-    let closestIndex = activeReviewIndex;
-    let closestDistance = Infinity;
-
-    reviewSlides.forEach(function(slide, index) {
-      const distance = Math.abs(slide.getBoundingClientRect().left - trackLeft);
-      if (distance < closestDistance) {
-        closestDistance = distance;
-        closestIndex = index;
-      }
-    });
-
-    if (closestIndex !== activeReviewIndex) {
-      setActiveReview(closestIndex, { scroll: false });
-    }
-  }
-
-  if (reviewTrack && reviewSlides.length) {
-    if (reviewDots) {
-      reviewSlides.forEach(function(_, index) {
-        const dot = document.createElement('button');
-        dot.type = 'button';
-        dot.className = 'ph-reviews__dot';
-        dot.setAttribute('role', 'tab');
-        dot.setAttribute('aria-label', 'Show review ' + (index + 1));
-        dot.addEventListener('click', function() {
-          stopReviewAutoplay();
-          setActiveReview(index);
-        });
-        reviewDots.appendChild(dot);
-      });
-    }
-
-    if (reviewPrev) {
-      reviewPrev.addEventListener('click', function() {
-        stopReviewAutoplay();
-        moveReview(-1);
-      });
-    }
-
-    if (reviewNext) {
-      reviewNext.addEventListener('click', function() {
-        stopReviewAutoplay();
-        moveReview(1);
-      });
-    }
-
-    reviewTrack.addEventListener('keydown', function(event) {
-      if (event.key === 'ArrowLeft') {
-        event.preventDefault();
-        stopReviewAutoplay();
-        moveReview(-1);
-      }
-      if (event.key === 'ArrowRight') {
-        event.preventDefault();
-        stopReviewAutoplay();
-        moveReview(1);
-      }
-    });
-
-    reviewTrack.addEventListener('scroll', function() {
-      if (reviewScrollTicking) return;
-      reviewScrollTicking = true;
-      window.requestAnimationFrame(syncReviewFromScroll);
-    }, { passive: true });
-
-    reviewTrack.addEventListener('mouseenter', stopReviewAutoplay);
-    reviewTrack.addEventListener('focusin', stopReviewAutoplay);
-    reviewTrack.addEventListener('mouseleave', startReviewAutoplay);
-    reviewTrack.addEventListener('focusout', startReviewAutoplay);
-    document.addEventListener('visibilitychange', function() {
-      if (document.hidden) {
-        stopReviewAutoplay();
-        stopHeroWords();
-      } else {
-        startHeroWords();
-        startReviewAutoplay();
-      }
-    });
-
-    setActiveReview(0, { scroll: false });
-    startReviewAutoplay();
-  }
+  });
 
   /* ─── STICKY SHOP BAR ─── */
   const stickyBar = document.getElementById('ph-sticky-bar');
