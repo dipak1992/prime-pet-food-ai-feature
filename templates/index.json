@@ -127,22 +127,6 @@
         "bottom_padding": 40,
         "navigation_spacing": 20
       }
-    },
-    "prime_video_cta": {
-      "type": "prime-video-cta",
-      "settings": {
-        "kicker": "Real dogs. Real chew time.",
-        "heading": "Ready to give your dog a better chew?",
-        "subtext": "Choose the 4-ingredient Himalayan yak chew built for longer calm-time enrichment.",
-        "cta_text": "Buy Yak Chews",
-        "cta_link": "/products/himalayan-yak-chews-for-dogs",
-        "secondary_text": "View all chews",
-        "secondary_link": ""
-      }
-    },
-    "community_chew_board": {
-      "type": "community-chew-board",
-      "settings": {}
     }
   },
   "order": [
