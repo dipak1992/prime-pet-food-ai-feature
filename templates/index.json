@@ -25,6 +25,16 @@
         "trust_stat_4_label": "Guarantee",
         "show_quiz": true,
         "show_sticky_bar": true,
+        "show_outcomes": false,
+        "show_subscribe": true,
+        "show_routine": false,
+        "show_ingredients": true,
+        "show_craft": false,
+        "show_fit": false,
+        "show_vet": false,
+        "show_guarantee": true,
+        "show_faq": true,
+        "show_closing_cta": true,
         "enable_animations": true
       }
     },
@@ -137,8 +147,6 @@
   },
   "order": [
     "prime_homepage_experience",
-    "video_carousel",
-    "community_chew_board",
-    "prime_video_cta"
+    "video_carousel"
   ]
 }

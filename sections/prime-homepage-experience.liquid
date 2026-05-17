@@ -153,6 +153,7 @@
   <!-- ═══════════════════════════════════════════════════════════════
        OUTCOMES — Why this chew matters
   ════════════════════════════════════════════════════════════════ -->
+  {% if section.settings.show_outcomes %}
   <div class="ph-outcomes ph-reveal">
     <div class="ph-shell ph-outcomes__inner">
       <div class="ph-outcomes__copy" data-motion="reveal">
@@ -181,6 +182,7 @@
       </div>
     </div>
   </div>
+  {% endif %}
 
   <!-- ═══════════════════════════════════════════════════════════════
        PRODUCTS — Shop by dog size
@@ -397,7 +399,8 @@
   <!-- ═══════════════════════════════════════════════════════════════
        SUBSCRIBE & SAVE — Routine builder
   ════════════════════════════════════════════════════════════════ -->
-  <div class="ph-subscribe ph-reveal">
+  {% if section.settings.show_subscribe %}
+  <div class="ph-subscribe ph-reveal ph-mobile-secondary">
     <div class="ph-shell ph-subscribe__inner">
       <div class="ph-subscribe__media">
         <img src="{{ subscribe_dog_image }}" alt="Happy dog beside a subscription box and yak chew" loading="lazy" width="1024" height="1024">
@@ -432,6 +435,7 @@
       </div>
     </div>
   </div>
+  {% endif %}
 
   <!-- ═══════════════════════════════════════════════════════════════
        SOCIAL PROOF — Real customer stories
@@ -624,6 +628,7 @@
   <!-- ═══════════════════════════════════════════════════════════════
        ROUTINE — How to use the chew safely
   ════════════════════════════════════════════════════════════════ -->
+  {% if section.settings.show_routine %}
   <div class="ph-routine ph-reveal">
     <div class="ph-shell">
       <div class="ph-section-head ph-section-head--center">
@@ -650,11 +655,13 @@
       </div>
     </div>
   </div>
+  {% endif %}
 
   <!-- ═══════════════════════════════════════════════════════════════
        INGREDIENTS — Transparency section
   ════════════════════════════════════════════════════════════════ -->
-  <div class="ph-ingredients ph-reveal">
+  {% if section.settings.show_ingredients %}
+  <div class="ph-ingredients ph-reveal ph-mobile-secondary">
     <div class="ph-shell">
       <div class="ph-section-head ph-section-head--center" data-motion="reveal">
         <p class="ph-kicker">Ingredient transparency</p>
@@ -700,10 +707,12 @@
       </div>
     </div>
   </div>
+  {% endif %}
 
   <!-- ═══════════════════════════════════════════════════════════════
        CRAFT — Brand story and quality signal
   ════════════════════════════════════════════════════════════════ -->
+  {% if section.settings.show_craft %}
   <div class="ph-craft ph-reveal">
     <div class="ph-shell ph-craft__inner">
       <div class="ph-craft__media" data-motion="reveal">
@@ -724,10 +733,12 @@
       </div>
     </div>
   </div>
+  {% endif %}
 
   <!-- ═══════════════════════════════════════════════════════════════
        DOG FIT — Breed examples with duration data
   ════════════════════════════════════════════════════════════════ -->
+  {% if section.settings.show_fit %}
   <div class="ph-fit ph-reveal">
     <div class="ph-shell">
       <div class="ph-section-head" data-motion="reveal">
@@ -767,10 +778,12 @@
       </div>
     </div>
   </div>
+  {% endif %}
 
   <!-- ═══════════════════════════════════════════════════════════════
        VET ENDORSEMENT — Authority signal
   ════════════════════════════════════════════════════════════════ -->
+  {% if section.settings.show_vet %}
   <div class="ph-vet ph-reveal">
     <div class="ph-shell ph-vet__inner">
       <div class="ph-vet__quote-mark" aria-hidden="true">&ldquo;</div>
@@ -793,10 +806,12 @@
       </div>
     </div>
   </div>
+  {% endif %}
 
   <!-- ═══════════════════════════════════════════════════════════════
        GUARANTEE — Risk reversal
   ════════════════════════════════════════════════════════════════ -->
+  {% if section.settings.show_guarantee %}
   <div class="ph-guarantee ph-reveal">
     <div class="ph-shell ph-guarantee__inner">
       <div class="ph-guarantee__card" data-motion="reveal">
@@ -821,10 +836,12 @@
       </div>
     </div>
   </div>
+  {% endif %}
 
   <!-- ═══════════════════════════════════════════════════════════════
        FAQ — Buying confidence
   ════════════════════════════════════════════════════════════════ -->
+  {% if section.settings.show_faq %}
   <div class="ph-faq ph-reveal">
     <div class="ph-shell ph-faq__inner">
       <div class="ph-section-head" data-motion="reveal">
@@ -851,10 +868,12 @@
       </div>
     </div>
   </div>
+  {% endif %}
 
   <!-- ═══════════════════════════════════════════════════════════════
        CLOSING CTA — Final conversion push
   ════════════════════════════════════════════════════════════════ -->
+  {% if section.settings.show_closing_cta %}
   <div class="ph-close ph-reveal" style="--ph-close-image: url('{{ calm_cta_image }}');">
     <div class="ph-shell ph-close__inner" data-motion="reveal">
       <p class="ph-kicker">Ready for calmer chew time?</p>
@@ -865,6 +884,7 @@
       </div>
     </div>
   </div>
+  {% endif %}
 
 </section>
 
@@ -2637,7 +2657,8 @@
     .ph-ingredients,
     .ph-fit,
     .ph-craft,
-    .ph-vet {
+    .ph-vet,
+    .ph-mobile-secondary {
       display: none !important;
       height: 0 !important;
       margin: 0 !important;
@@ -4299,6 +4320,66 @@
       "type": "checkbox",
       "id": "show_sticky_bar",
       "label": "Show sticky Shop Now bar",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_outcomes",
+      "label": "Show outcomes section",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_subscribe",
+      "label": "Show Subscribe & Save section",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_routine",
+      "label": "Show routine education section",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_ingredients",
+      "label": "Show ingredient transparency section",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_craft",
+      "label": "Show brand craft section",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_fit",
+      "label": "Show dog fit examples section",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vet",
+      "label": "Show vet-reviewed standards section",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_guarantee",
+      "label": "Show guarantee section",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_faq",
+      "label": "Show homepage FAQ section",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_closing_cta",
+      "label": "Show closing CTA section",
       "default": true
     },
     {
