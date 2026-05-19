@@ -315,19 +315,56 @@
           </button>
         </div>
 
-        <div class="ypc-safety-ritual" aria-label="Safety-first chew routine">
+        <div class="ypc-puff-hack" aria-label="Puff Hack safety video">
+          <div class="ypc-puff-hack__video">
+            <video
+              controls
+              muted
+              playsinline
+              preload="metadata"
+              aria-label="Watch how to turn a small yak chew nub into a crunchy puff treat"
+            >
+              <source src="https://cdn.shopify.com/videos/c/o/v/d7aeb1ab2e45499ba3b718e8920fe919.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="ypc-puff-hack__copy">
+            <span>Puff Hack</span>
+            <strong>Turn the small end piece into a crunchy bonus treat.</strong>
+            <p>When the chew gets too small to safely chew, remove it, soak it, microwave it, let it cool, and serve the puff.</p>
+            <a href="https://cdn.shopify.com/videos/c/o/v/d7aeb1ab2e45499ba3b718e8920fe919.mp4" target="_blank" rel="noopener">Watch full clip</a>
+          </div>
+        </div>
+
+        <div class="ypc-safety-ritual" aria-label="Safety First chew system">
           <div class="ypc-safety-ritual__head">
             <span aria-hidden="true">🛡️</span>
             <div>
-              <strong>Safety-first chew ritual</strong>
-              <p>Built for supervised calm time, not unattended all-day chewing.</p>
+              <strong>Safety First chew system</strong>
+              <p>Built for supervised calm time, safer sizing, and responsible hard-chew use.</p>
             </div>
           </div>
-          <ul>
-            <li>Choose a size your dog cannot swallow whole.</li>
-            <li>Supervise every session and keep fresh water nearby.</li>
-            <li>Remove the small end piece, then soak and microwave it into a puff treat.</li>
-          </ul>
+          <div class="ypc-safety-ritual__grid">
+            <div class="ypc-safety-ritual__item">
+              <span>01</span>
+              <strong>Size up for safety</strong>
+              <p>Choose a chew your dog cannot swallow whole. Power chewers and dogs between sizes should start larger.</p>
+            </div>
+            <div class="ypc-safety-ritual__item">
+              <span>02</span>
+              <strong>Supervise every session</strong>
+              <p>Use short, watched chew sessions with fresh water nearby. Do not leave hard chews unattended.</p>
+            </div>
+            <div class="ypc-safety-ritual__item">
+              <span>03</span>
+              <strong>Respect hard-chew limits</strong>
+              <p>The thumbnail test is a useful caution: if a chew cannot indent, dogs with dental risk may need a softer option.</p>
+            </div>
+            <div class="ypc-safety-ritual__item">
+              <span>04</span>
+              <strong>Puff the nub</strong>
+              <p>Remove the small end piece before it can be swallowed, then soak and microwave it into a crunchy puff treat.</p>
+            </div>
+          </div>
           <p class="ypc-safety-ritual__note">Hard chews are not right for every dog. Ask your vet first if your dog has dental issues, weak teeth, or a history of cracked teeth.</p>
           <a href="/pages/yak-chew-safety-guide">Read the safety guide</a>
         </div>
@@ -1221,6 +1258,69 @@
     line-height: 1.2;
   }
 
+  .ypc-puff-hack {
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr);
+    gap: 13px;
+    align-items: center;
+    margin: 14px 0 0;
+    padding: 12px;
+    border: 1px solid rgba(184, 95, 50, 0.22);
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(184, 95, 50, 0.1), rgba(255, 250, 242, 0.9));
+  }
+
+  .ypc-puff-hack__video {
+    overflow: hidden;
+    aspect-ratio: 9 / 12;
+    border-radius: 12px;
+    background: #211008;
+  }
+
+  .ypc-puff-hack__video video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ypc-puff-hack__copy {
+    min-width: 0;
+  }
+
+  .ypc-puff-hack__copy span {
+    display: inline-flex;
+    margin-bottom: 5px;
+    color: #b85f32;
+    font-size: 11px;
+    font-weight: 950;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .ypc-puff-hack__copy strong {
+    display: block;
+    color: #173b2b;
+    font-size: 14px;
+    font-weight: 950;
+    line-height: 1.25;
+  }
+
+  .ypc-puff-hack__copy p {
+    margin: 5px 0 7px;
+    color: #5f4b42;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .ypc-puff-hack__copy a {
+    color: #173b2b;
+    font-size: 12px;
+    font-weight: 900;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
   .ypc-safety-ritual {
     display: grid;
     gap: 12px;
@@ -1257,8 +1357,7 @@
     line-height: 1.25;
   }
 
-  .ypc-safety-ritual p,
-  .ypc-safety-ritual li {
+  .ypc-safety-ritual p {
     color: #5f4b42;
     font-size: 13px;
     line-height: 1.45;
@@ -1268,29 +1367,37 @@
     margin: 3px 0 0;
   }
 
-  .ypc-safety-ritual ul {
+  .ypc-safety-ritual__grid {
     display: grid;
-    gap: 7px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .ypc-safety-ritual__item {
+    display: grid;
+    gap: 4px;
+    min-width: 0;
+    padding: 11px;
+    border: 1px solid rgba(23, 59, 43, 0.1);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.66);
+  }
+
+  .ypc-safety-ritual__item > span {
+    color: #b85f32;
+    font-size: 11px;
+    font-weight: 950;
+    letter-spacing: 0.08em;
+  }
+
+  .ypc-safety-ritual__item strong {
+    font-size: 13px;
+  }
+
+  .ypc-safety-ritual__item p {
     margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .ypc-safety-ritual li {
-    position: relative;
-    padding-left: 18px;
-  }
-
-  .ypc-safety-ritual li::before {
-    content: "";
-    position: absolute;
-    top: 0.72em;
-    left: 2px;
-    width: 6px;
-    height: 6px;
-    border-radius: 999px;
-    background: #b85f32;
-    transform: translateY(-50%);
+    font-size: 12px;
+    line-height: 1.4;
   }
 
   .ypc-safety-ritual__note {
@@ -1305,6 +1412,16 @@
     font-weight: 900;
     text-decoration: underline;
     text-underline-offset: 3px;
+  }
+
+  @media screen and (max-width: 640px) {
+    .ypc-puff-hack {
+      grid-template-columns: 82px minmax(0, 1fr);
+    }
+
+    .ypc-safety-ritual__grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   .ypc-profile-recommendation {

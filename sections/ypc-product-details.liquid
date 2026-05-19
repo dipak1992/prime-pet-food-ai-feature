@@ -260,24 +260,38 @@
       <p class="ypd-subtitle">{{ section.settings.puff_subtitle }}</p>
     </div>
 
-    <div class="ypd-puff-grid">
-      <div class="ypd-puff-card">
-        <div class="ypd-puff-num">1</div>
-        <div class="ypd-puff-icon">💧</div>
-        <h4>Soak</h4>
-        <p>Place the leftover end piece in warm water for a few minutes.</p>
+    <div class="ypd-puff-feature">
+      <div class="ypd-puff-video">
+        <video
+          controls
+          muted
+          playsinline
+          preload="metadata"
+          aria-label="Puff Hack video showing a yak chew nub turning into a crunchy puff treat"
+        >
+          <source src="https://cdn.shopify.com/videos/c/o/v/c38abacb86f24090b46d80355eb94a6f.mp4" type="video/mp4">
+        </video>
       </div>
-      <div class="ypd-puff-card">
-        <div class="ypd-puff-num">2</div>
-        <div class="ypd-puff-icon">📡</div>
-        <h4>Microwave</h4>
-        <p>Heat it until it puffs into a crunchy cheese treat.</p>
-      </div>
-      <div class="ypd-puff-card">
-        <div class="ypd-puff-num">3</div>
-        <div class="ypd-puff-icon">🐶</div>
-        <h4>Enjoy</h4>
-        <p>Let it cool and serve as a bonus snack your dog will love.</p>
+
+      <div class="ypd-puff-grid">
+        <div class="ypd-puff-card">
+          <div class="ypd-puff-num">1</div>
+          <div class="ypd-puff-icon">💧</div>
+          <h4>Remove + soak</h4>
+          <p>Take the small nub away before it can be swallowed, then soak it in warm water.</p>
+        </div>
+        <div class="ypd-puff-card">
+          <div class="ypd-puff-num">2</div>
+          <div class="ypd-puff-icon">📡</div>
+          <h4>Microwave</h4>
+          <p>Place it on a microwave-safe plate and heat until it expands into a crunchy cheese puff.</p>
+        </div>
+        <div class="ypd-puff-card">
+          <div class="ypd-puff-num">3</div>
+          <div class="ypd-puff-icon">🐶</div>
+          <h4>Cool + serve</h4>
+          <p>Let it cool completely, then serve the puff as a memorable bonus snack.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -372,11 +386,15 @@
       </div>
       <div class="ypd-faq-item">
         <button type="button" class="ypd-faq-question">Which size should I choose?<span>+</span></button>
-        <div class="ypd-faq-answer">Use the size guide above and size up if your dog is between weight ranges.</div>
+        <div class="ypd-faq-answer">Use the size guide above and size up if your dog is between weight ranges, has a wide mouth, or chews with intense jaw pressure. Aggressive chewers should start with shorter supervised sessions.</div>
       </div>
       <div class="ypd-faq-item">
         <button type="button" class="ypd-faq-question">What do I do with the leftover end piece?<span>+</span></button>
-        <div class="ypd-faq-answer">Soak it, microwave it, cool it, and turn it into a crunchy puff treat.</div>
+        <div class="ypd-faq-answer">Remove the nub before it is small enough to swallow. Soak it, microwave it, cool it completely, and turn it into a crunchy puff treat. <a href="https://cdn.shopify.com/videos/c/o/v/d7aeb1ab2e45499ba3b718e8920fe919.mp4" target="_blank" rel="noopener">Watch the Puff Hack video.</a></div>
+      </div>
+      <div class="ypd-faq-item">
+        <button type="button" class="ypd-faq-question">What is the thumbnail test?<span>+</span></button>
+        <div class="ypd-faq-answer">The thumbnail test is a simple hardness caution: if a chew cannot be indented with your thumbnail, dogs with dental risk may need a softer option. Yak chews are intentionally dense, so dental history and supervision matter.</div>
       </div>
     </div>
   </div>
@@ -642,24 +660,43 @@
       margin: 0;
     }
 
+    .ypd-puff-feature {
+      display: grid;
+      grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+    .ypd-puff-video {
+      overflow: hidden;
+      min-height: 100%;
+      border-radius: 24px;
+      background: #211008;
+      box-shadow: 0 14px 34px rgba(17,38,28,0.12);
+    }
+    .ypd-puff-video video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 430px;
+      object-fit: cover;
+    }
     .ypd-puff-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      grid-template-columns: 1fr;
+      gap: 18px;
     }
     .ypd-puff-card {
       position: relative;
       background: #fff;
       border-radius: 22px;
-      padding: 34px 24px 28px;
-      text-align: center;
+      padding: 28px 24px 24px;
+      text-align: left;
       box-shadow: 0 10px 30px rgba(17,38,28,0.08);
     }
     .ypd-puff-num {
       position: absolute;
-      top: -16px;
-      left: 50%;
-      transform: translateX(-50%);
+      top: 18px;
+      right: 18px;
       width: 38px;
       height: 38px;
       border-radius: 999px;
@@ -670,7 +707,7 @@
       color: #173b2b;
       font: 800 15px/1 system-ui, sans-serif;
     }
-    .ypd-puff-icon { font-size: 46px; margin: 10px 0 14px; }
+    .ypd-puff-icon { font-size: 38px; margin: 0 0 14px; }
     .ypd-puff-card h4 {
       margin: 0 0 8px;
       font: 700 20px/1.2 Georgia, serif;
@@ -844,11 +881,12 @@
 
     @media (max-width: 991px) {
       .ypd-size-card,
-      .ypd-story-grid { grid-template-columns: 1fr; }
+      .ypd-story-grid,
+      .ypd-puff-feature { grid-template-columns: 1fr; }
       .ypd-compare-grid,
       .ypd-benefits-grid,
-      .ypd-puff-grid,
       .ypd-promise-grid { grid-template-columns: repeat(2, 1fr); }
+      .ypd-puff-video video { min-height: 360px; }
     }
 
     @media (max-width: 767px) {
@@ -859,6 +897,7 @@
       .ypd-review-grid,
       .ypd-puff-grid,
       .ypd-promise-grid { grid-template-columns: 1fr; }
+      .ypd-puff-video video { min-height: 320px; }
       .ypd-final-btn { min-width: 0; width: 100%; }
     }
 </style>
