@@ -1,0 +1,202 @@
+{{ 'seo-chew-pages.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign hub_type = section.settings.hub_type | default: 'safety'
+
+  assign eyebrow = 'Prime Pet Food Learning Center'
+  assign heading = 'Yak Chew Safety & Science Hub'
+  assign lede = 'Answer-first guidance on yak chew hardness, broken-tooth concerns, thumbnail testing, rawhide comparisons, and safer supervised chewing routines.'
+  assign primary_cta = '/pages/yak-chew-safety-guide'
+  assign primary_cta_label = 'Start with the safety guide'
+  assign secondary_cta = '/pages/how-long-will-this-last-for-my-dog'
+  assign secondary_cta_label = "Estimate your dog's chew time"
+  assign summary_1_label = 'Primary Intent'
+  assign summary_1_value = 'Safety confidence'
+  assign summary_2_label = 'Best Starting Point'
+  assign summary_2_value = 'Sizing + supervision'
+  assign summary_3_label = 'Buyer Anxiety'
+  assign summary_3_value = 'Hardness, teeth, swallowing'
+  assign section_title = 'Safety questions dog parents ask before buying'
+  assign section_copy = 'Yak chews are intentionally dense, so safety content should be direct, practical, and easy to scan. These guides explain how to choose the right size, supervise sessions, manage the leftover nub, and decide when a softer chew or veterinary guidance makes more sense.'
+  assign faq_1_q = 'Are yak chews too hard for dogs?'
+  assign faq_1_a = "Yak chews are hard, long-lasting chews. They can fit many dogs when correctly sized and supervised, but dogs with weak teeth, dental disease, or extreme molar-biting behavior may need a softer option."
+  assign faq_2_q = 'What is the safest way to offer a yak chew?'
+  assign faq_2_a = 'Choose a chew too large to swallow, supervise every session, provide fresh water, use shorter first sessions, and remove the chew before the small end piece becomes a choking risk.'
+  assign faq_3_q = 'Are yak chews safer than rawhide?'
+  assign faq_3_a = 'Many dog parents choose yak chews as a rawhide-free alternative because they are simple, dense, and cleaner for supervised enrichment. No chew is risk-free, so sizing and supervision still matter.'
+
+  if hub_type == 'ritual'
+    assign heading = 'Dog Ritual & Enrichment Hub'
+    assign lede = 'Build calm chewing routines for post-walk decompression, crate training, hyper dogs, work-from-home days, and boredom-prone dogs.'
+    assign primary_cta = '/pages/dog-chews-for-bored-dogs'
+    assign primary_cta_label = 'Build a boredom routine'
+    assign secondary_cta = '/pages/calm-chewing-routine'
+    assign secondary_cta_label = 'View calm chewing plan'
+    assign summary_1_label = 'Primary Intent'
+    assign summary_1_value = 'Calmer routines'
+    assign summary_2_label = 'Best Starting Point'
+    assign summary_2_value = 'Post-walk decompression'
+    assign summary_3_label = 'Buyer Anxiety'
+    assign summary_3_value = 'Boredom and destruction'
+    assign section_title = 'Turn chewing into a daily calming ritual'
+    assign section_copy = 'The strongest Prime Pet Food positioning is not just long-lasting chews. It is repeatable enrichment: the moments after walks, during crate practice, before evening downtime, and when a dog needs a focused job instead of destructive chewing.'
+    assign faq_1_q = 'Can yak chews calm hyper dogs?'
+    assign faq_1_a = 'A yak chew can support a calmer routine by giving a dog a focused chewing job after exercise or training. It should be used as enrichment, not as a substitute for training, exercise, or veterinary behavior guidance.'
+    assign faq_2_q = 'When is the best time to give a yak chew?'
+    assign faq_2_a = 'Many dogs do best after a walk, during supervised crate practice, before evening downtime, or during a work-from-home quiet block.'
+    assign faq_3_q = 'Are yak chews good for bored dogs?'
+    assign faq_3_a = 'They can help redirect boredom into supervised chewing because they last longer than soft treats and create a predictable calm-time routine.'
+  elsif hub_type == 'heritage'
+    assign heading = 'Himalayan Heritage & Sourcing Hub'
+    assign lede = 'Explore the Himalayan tradition, Nepalese cheese-making inspiration, sourcing philosophy, founder story, and craftsmanship behind Prime Pet Food yak chews.'
+    assign primary_cta = '/pages/how-himalayan-yak-cheese-chews-are-made'
+    assign primary_cta_label = 'See how yak chews are made'
+    assign secondary_cta = '/pages/about-us'
+    assign secondary_cta_label = 'Read the founder story'
+    assign summary_1_label = 'Primary Intent'
+    assign summary_1_value = 'Authenticity and trust'
+    assign summary_2_label = 'Best Starting Point'
+    assign summary_2_value = 'Himalayan craft'
+    assign summary_3_label = 'Buyer Anxiety'
+    assign summary_3_value = 'Sourcing and quality'
+    assign section_title = 'Make the origin story visible and useful'
+    assign section_copy = 'Heritage content gives Prime Pet Food depth beyond product claims. These pages connect Himalayan yak cheese tradition, slow drying, simple ingredients, and founder-led trust into a clear brand story that search engines and buyers can understand.'
+    assign faq_1_q = 'Where do Himalayan yak chews come from?'
+    assign faq_1_a = 'Himalayan yak chews are inspired by mountain-region cheese-making traditions from Nepal and the Himalayas, then adapted into dense dog chews for supervised enrichment.'
+    assign faq_2_q = 'Why does the traditional process matter?'
+    assign faq_2_a = 'The slow cheese-making, pressing, drying, and hardening process helps create the dense texture that makes yak chews long-lasting.'
+    assign faq_3_q = 'How does heritage improve trust?'
+    assign faq_3_a = 'Clear origin content helps buyers understand why the product exists, what makes it different, and why Prime Pet Food is not a generic dog treat brand.'
+  endif
+-%}
+
+<main class="seo-chew seo-hub seo-authority-hub" data-hub-type="{{ hub_type | escape }}">
+  <header class="seo-chew__hero">
+    <div class="page-width seo-chew__grid">
+      <div>
+        <p class="seo-chew__eyebrow">{{ eyebrow }}</p>
+        <h1>{{ heading }}</h1>
+        <p class="seo-chew__lede">{{ lede }}</p>
+        <div class="seo-chew__actions">
+          <a class="seo-chew__button" href="{{ primary_cta }}">{{ primary_cta_label }}</a>
+          <a class="seo-chew__button seo-chew__button--secondary" href="{{ secondary_cta }}">{{ secondary_cta_label }}</a>
+        </div>
+      </div>
+      <aside class="seo-chew__summary" aria-label="Hub summary">
+        <dl>
+          <div><dt>{{ summary_1_label }}</dt><dd>{{ summary_1_value }}</dd></div>
+          <div><dt>{{ summary_2_label }}</dt><dd>{{ summary_2_value }}</dd></div>
+          <div><dt>{{ summary_3_label }}</dt><dd>{{ summary_3_value }}</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </header>
+
+  <section class="seo-chew__section">
+    <div class="page-width seo-chew__content">
+      <h2>{{ section_title }}</h2>
+      <p>{{ section_copy }}</p>
+    </div>
+
+    <div class="page-width">
+      {%- if hub_type == 'safety' -%}
+        <div class="seo-hub__grid">
+          <a class="seo-hub__item" href="/pages/yak-chew-safety-guide"><span>Safety</span><strong>Safe Chewing Guide</strong><p>Correct sizing, supervision, water, session length, nub removal, and when to pause.</p></a>
+          <a class="seo-hub__item" href="/pages/are-yak-chews-too-hard"><span>Hardness</span><strong>Are Yak Chews Too Hard?</strong><p>Answer the biggest dental concern directly with hardness, risk, and dog-fit guidance.</p></a>
+          <a class="seo-hub__item" href="/pages/how-to-prevent-broken-teeth-from-dog-chews"><span>Dental Safety</span><strong>How to Prevent Broken Teeth</strong><p>Help shoppers understand chewing style, tooth history, and safer hard-chew use.</p></a>
+          <a class="seo-hub__item" href="/pages/thumbnail-test-for-dog-chews"><span>Test</span><strong>Thumbnail Test</strong><p>Explain what the thumbnail test means and why it is only one part of safety.</p></a>
+          <a class="seo-hub__item" href="/pages/best-rawhide-alternative"><span>Comparison</span><strong>Yak Chews vs Rawhide</strong><p>Compare rawhide-free chewing by digestibility, processing, mess, and supervision.</p></a>
+          <a class="seo-hub__item" href="/pages/supervised-chewing-guide"><span>Routine</span><strong>Supervised Chewing</strong><p>Turn safety into a repeatable session structure for real dog parents.</p></a>
+        </div>
+      {%- elsif hub_type == 'ritual' -%}
+        <div class="seo-hub__grid">
+          <a class="seo-hub__item" href="/pages/post-walk-calm-routine"><span>Routine</span><strong>Post-Walk Calm Routine</strong><p>Use a chew after exercise to help transition from arousal to rest.</p></a>
+          <a class="seo-hub__item" href="/pages/best-chews-for-crate-training"><span>Crate</span><strong>Crate Training Chews</strong><p>Create positive crate associations with sizing and supervision boundaries.</p></a>
+          <a class="seo-hub__item" href="/pages/calming-chews-for-hyper-dogs"><span>Calm</span><strong>Calming Hyper Dogs</strong><p>Position chewing as structured enrichment after exercise, not a magic fix.</p></a>
+          <a class="seo-hub__item" href="/pages/dog-decompression-rituals"><span>Decompression</span><strong>Dog Decompression Rituals</strong><p>Build calm transitions after walks, visitors, travel, or high-energy play.</p></a>
+          <a class="seo-hub__item" href="/pages/work-from-home-dog-enrichment"><span>WFH</span><strong>Work From Home Dog Enrichment</strong><p>Use focused chew sessions during calls, desk work, and quiet windows.</p></a>
+          <a class="seo-hub__item" href="/pages/dog-chews-for-bored-dogs"><span>Boredom</span><strong>Dog Chews for Bored Dogs</strong><p>Redirect bored chewing into a predictable routine with better duration.</p></a>
+        </div>
+      {%- else -%}
+        <div class="seo-hub__grid">
+          <a class="seo-hub__item" href="/pages/himalayan-yak-chew-tradition"><span>Origin</span><strong>Himalayan Tradition</strong><p>Connect the product to mountain-region cheese-making roots.</p></a>
+          <a class="seo-hub__item" href="/pages/nepal-yak-chew-sourcing"><span>Sourcing</span><strong>Nepal Sourcing</strong><p>Explain sourcing philosophy, quality expectations, and cultural respect.</p></a>
+          <a class="seo-hub__item" href="/pages/how-himalayan-yak-cheese-chews-are-made"><span>Craft</span><strong>Cheese Making Process</strong><p>Follow milk, boiling, curd formation, pressing, drying, and hardening.</p></a>
+          <a class="seo-hub__item" href="/pages/sustainable-dog-chews"><span>Responsibility</span><strong>Sustainability</strong><p>Frame long-lasting chews, lower waste, and responsible product use.</p></a>
+          <a class="seo-hub__item" href="/pages/about-us"><span>Founder</span><strong>Founder Story</strong><p>Connect Nepali roots and modern dog-parent trust.</p></a>
+          <a class="seo-hub__item" href="/pages/how-himalayan-yak-cheese-chews-are-made"><span>Journey</span><strong>From Himalayas to Your Dog</strong><p>Build a documentary-style story from tradition to modern enrichment.</p></a>
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+
+  <section class="seo-chew__section seo-chew__section--soft">
+    <div class="page-width seo-chew__grid">
+      <div>
+        <h2>How this hub supports better buying decisions</h2>
+        <p>Each guide has one job: answer a real buyer objection, connect the answer to supervised enrichment, and route the customer toward the right Prime Pet Food product, size guide, or chew duration tool.</p>
+      </div>
+      <ul class="seo-chew__links">
+        <li><a href="/pages/yak-chew-guides">All Yak Chew Guides</a></li>
+        <li><a href="/products/himalayan-yak-chews-for-dogs">Shop Himalayan Yak Chews</a></li>
+        <li><a href="/pages/how-long-will-this-last-for-my-dog">Chew Duration Estimator</a></li>
+        <li><a href="/pages/faq">Yak Chew FAQ</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="seo-chew__section">
+    <div class="page-width seo-chew__content">
+      <h2>FAQ</h2>
+      <div class="seo-chew__faq">
+        <details><summary>{{ faq_1_q }}</summary><p>{{ faq_1_a }}</p></details>
+        <details><summary>{{ faq_2_q }}</summary><p>{{ faq_2_a }}</p></details>
+        <details><summary>{{ faq_3_q }}</summary><p>{{ faq_3_a }}</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ heading | json }},
+  "description": {{ lede | json }},
+  "url": {{ canonical_url | json }},
+  "isPartOf": {"@type":"WebSite","name":{{ shop.name | json }},"url":{{ shop.url | json }}}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":{{ faq_1_q | json }},"acceptedAnswer":{"@type":"Answer","text":{{ faq_1_a | json }}}},
+    {"@type":"Question","name":{{ faq_2_q | json }},"acceptedAnswer":{"@type":"Answer","text":{{ faq_2_a | json }}}},
+    {"@type":"Question","name":{{ faq_3_q | json }},"acceptedAnswer":{"@type":"Answer","text":{{ faq_3_a | json }}}}
+  ]
+}
+</script>
+
+{% schema %}
+{
+  "name": "Prime authority hub",
+  "settings": [
+    {
+      "type": "select",
+      "id": "hub_type",
+      "label": "Hub type",
+      "default": "safety",
+      "options": [
+        { "value": "safety", "label": "Safety and Science" },
+        { "value": "ritual", "label": "Ritual and Enrichment" },
+        { "value": "heritage", "label": "Heritage and Sourcing" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Prime authority hub" }
+  ]
+}
+{% endschema %}

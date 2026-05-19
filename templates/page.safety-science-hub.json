@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "prime_authority_hub": {
+      "type": "prime-authority-hub",
+      "settings": {
+        "hub_type": "safety"
+      }
+    }
+  },
+  "order": [
+    "prime_authority_hub"
+  ]
+}

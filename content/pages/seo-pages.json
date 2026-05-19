@@ -18,6 +18,33 @@
     "body": "<p>Use the Prime Pet Food chew duration estimator to understand how long a Himalayan yak cheese dog chew may last for your dog's breed, size, age, and chewing style.</p>"
   },
   {
+    "title": "Yak Chew Safety & Science Hub",
+    "handle": "yak-chew-safety-science",
+    "templateSuffix": "safety-science-hub",
+    "published": true,
+    "seoTitle": "Yak Chew Safety & Science Hub | Prime Pet Food",
+    "seoDescription": "Learn yak chew safety, hardness, thumbnail testing, broken tooth prevention, rawhide comparisons, and supervised chewing routines.",
+    "body": "<p>The Prime Pet Food Safety and Science Hub answers the biggest buyer questions about yak chew hardness, dental safety, thumbnail testing, rawhide alternatives, nub handling, and supervised chewing.</p>"
+  },
+  {
+    "title": "Dog Ritual & Enrichment Hub",
+    "handle": "dog-ritual-enrichment",
+    "templateSuffix": "ritual-enrichment-hub",
+    "published": true,
+    "seoTitle": "Dog Ritual & Enrichment Hub | Prime Pet Food",
+    "seoDescription": "Build calm dog chewing routines for post-walk decompression, crate training, hyper dogs, boredom, and work-from-home enrichment.",
+    "body": "<p>The Prime Pet Food Ritual and Enrichment Hub helps dog parents use long-lasting Himalayan yak chews as part of calmer post-walk, crate training, boredom, decompression, and work-from-home routines.</p>"
+  },
+  {
+    "title": "Himalayan Heritage & Sourcing Hub",
+    "handle": "himalayan-heritage-sourcing",
+    "templateSuffix": "heritage-sourcing-hub",
+    "published": true,
+    "seoTitle": "Himalayan Heritage & Sourcing Hub | Prime Pet Food",
+    "seoDescription": "Explore Himalayan yak chew tradition, Nepal sourcing, cheese-making craft, sustainability, and the Prime Pet Food founder story.",
+    "body": "<p>The Prime Pet Food Heritage and Sourcing Hub connects Himalayan yak cheese tradition, Nepalese craft inspiration, sourcing philosophy, sustainability, and founder-led brand trust.</p>"
+  },
+  {
     "title": "How Long Do Yak Chews Last?",
     "handle": "how-long-do-yak-chews-last",
     "templateSuffix": "seo-chew",
@@ -81,6 +108,33 @@
     "body": "<p>Learn how Himalayan yak cheese chews are made through a traditional Nepalese-inspired process of milk collection, boiling, curd formation, pressing, drying, aging, quality inspection, and packaging for long-lasting rawhide-free dog enrichment.</p>"
   },
   {
+    "title": "Himalayan Yak Chew Tradition",
+    "handle": "himalayan-yak-chew-tradition",
+    "templateSuffix": "seo-chew",
+    "published": true,
+    "seoTitle": "Himalayan Yak Chew Tradition | Prime Pet Food",
+    "seoDescription": "Learn the Himalayan cheese tradition behind yak chews and how mountain-region craft inspires modern dog enrichment.",
+    "body": "<p>A heritage guide explaining the Himalayan cheese tradition behind yak chews, why slow drying matters, and how Prime Pet Food connects cultural roots with modern dog enrichment.</p>"
+  },
+  {
+    "title": "Nepal Yak Chew Sourcing",
+    "handle": "nepal-yak-chew-sourcing",
+    "templateSuffix": "seo-chew",
+    "published": true,
+    "seoTitle": "Nepal Yak Chew Sourcing | Prime Pet Food",
+    "seoDescription": "Explore Nepal yak chew sourcing philosophy, quality expectations, cultural respect, and Prime Pet Food authenticity signals.",
+    "body": "<p>A sourcing-focused guide explaining Nepal yak chew authenticity, quality expectations, cultural respect, and how Prime Pet Food communicates trust beyond generic dog treat claims.</p>"
+  },
+  {
+    "title": "Sustainable Dog Chews",
+    "handle": "sustainable-dog-chews",
+    "templateSuffix": "seo-chew",
+    "published": true,
+    "seoTitle": "Sustainable Dog Chews | Prime Pet Food",
+    "seoDescription": "Learn how longer-lasting dog chews, simple ingredients, nub puffing, and better sizing can support lower-waste routines.",
+    "body": "<p>A sustainable dog chew guide explaining how long-lasting chews, simple ingredient choices, better sizing, and the yak chew puff hack can reduce waste in everyday enrichment routines.</p>"
+  },
+  {
     "title": "Dog Chews for Separation Anxiety",
     "handle": "dog-chews-for-separation-anxiety",
     "templateSuffix": "seo-chew",
@@ -97,6 +151,42 @@
     "seoTitle": "Best Chews for Crate Training | Prime Pet Food",
     "seoDescription": "Choose safer crate training chews that support positive crate associations, calm enrichment, and supervised routines.",
     "body": "<p>A crate training chew guide focused on positive crate associations, correctly sized chews, supervision, and calm enrichment routines.</p>"
+  },
+  {
+    "title": "Post-Walk Calm Routine",
+    "handle": "post-walk-calm-routine",
+    "templateSuffix": "seo-chew",
+    "published": true,
+    "seoTitle": "Post-Walk Calm Routine for Dogs | Prime Pet Food",
+    "seoDescription": "Use post-walk chewing routines to help dogs decompress, settle indoors, and redirect energy with supervised yak chews.",
+    "body": "<p>A post-walk dog calm routine guide explaining how supervised yak chew sessions can help transition active dogs from exercise to quieter indoor decompression.</p>"
+  },
+  {
+    "title": "Calming Chews for Hyper Dogs",
+    "handle": "calming-chews-for-hyper-dogs",
+    "templateSuffix": "seo-chew",
+    "published": true,
+    "seoTitle": "Calming Chews for Hyper Dogs | Enrichment Guide",
+    "seoDescription": "Learn how long-lasting supervised chews can support calmer routines for hyper dogs after exercise, training, or play.",
+    "body": "<p>An enrichment guide for hyper dogs explaining how long-lasting supervised chewing can support calmer transitions after exercise, training, visitors, or high-energy play.</p>"
+  },
+  {
+    "title": "Dog Decompression Rituals",
+    "handle": "dog-decompression-rituals",
+    "templateSuffix": "seo-chew",
+    "published": true,
+    "seoTitle": "Dog Decompression Rituals | Prime Pet Food",
+    "seoDescription": "Create dog decompression rituals after walks, travel, visitors, and play using quiet enrichment and supervised chewing.",
+    "body": "<p>A dog decompression ritual guide showing how to use quiet space, water, timing, and supervised yak chews after walks, travel, visitors, or overstimulating play.</p>"
+  },
+  {
+    "title": "Work From Home Dog Enrichment",
+    "handle": "work-from-home-dog-enrichment",
+    "templateSuffix": "seo-chew",
+    "published": true,
+    "seoTitle": "Work From Home Dog Enrichment | Prime Pet Food",
+    "seoDescription": "Build work-from-home dog enrichment routines with supervised chew sessions, boredom prevention, and calmer focus windows.",
+    "body": "<p>A work-from-home dog enrichment guide for creating predictable quiet windows with supervised yak chew sessions, boredom prevention, and calmer routines around meetings or desk work.</p>"
   },
   {
     "title": "Yak Chews for Golden Retrievers",
@@ -169,6 +259,42 @@
     "seoTitle": "Yak Chew Safety Guide | Sizing & Supervision",
     "seoDescription": "Learn yak chew safety basics, including correct sizing, supervision, leftover nub handling, dental cautions, and when to contact a vet.",
     "body": "<p>An answer-first yak chew safety guide covering supervision, sizing up, dental caution, small end-piece handling, and safe enrichment routines.</p>"
+  },
+  {
+    "title": "Are Yak Chews Too Hard?",
+    "handle": "are-yak-chews-too-hard",
+    "templateSuffix": "seo-chew",
+    "published": true,
+    "seoTitle": "Are Yak Chews Too Hard? | Prime Pet Food",
+    "seoDescription": "Learn when yak chews may be too hard, dental risk factors, thumbnail test limits, supervision, and safer sizing guidance.",
+    "body": "<p>An answer-first safety guide explaining yak chew hardness, dental risk factors, the limits of the thumbnail test, and how to decide whether a hard chew fits your dog.</p>"
+  },
+  {
+    "title": "How to Prevent Broken Teeth from Dog Chews",
+    "handle": "how-to-prevent-broken-teeth-from-dog-chews",
+    "templateSuffix": "seo-chew",
+    "published": true,
+    "seoTitle": "Prevent Broken Teeth from Dog Chews | Guide",
+    "seoDescription": "Reduce broken tooth risk from hard dog chews with dental screening, chew sizing, session limits, and supervision tips.",
+    "body": "<p>A practical dog chew dental safety guide covering tooth history, chewing pressure, size selection, session limits, and when to ask your veterinarian before offering a hard chew.</p>"
+  },
+  {
+    "title": "Thumbnail Test for Dog Chews",
+    "handle": "thumbnail-test-for-dog-chews",
+    "templateSuffix": "seo-chew",
+    "published": true,
+    "seoTitle": "Thumbnail Test for Dog Chews | Safety Guide",
+    "seoDescription": "Understand the thumbnail test for dog chews, what it can and cannot tell you, and how to use it with supervision.",
+    "body": "<p>A concise guide to the thumbnail test for dog chews, including what hardness can signal, why the test is not the whole safety story, and how to pair it with supervision and sizing.</p>"
+  },
+  {
+    "title": "Supervised Chewing Guide",
+    "handle": "supervised-chewing-guide",
+    "templateSuffix": "seo-chew",
+    "published": true,
+    "seoTitle": "Supervised Chewing Guide | Prime Pet Food",
+    "seoDescription": "Build safer supervised chewing sessions with correct sizing, fresh water, session timing, nub removal, and calm routines.",
+    "body": "<p>A supervised chewing guide for dog parents who want a safer, repeatable chew session structure using correct sizing, fresh water, time limits, nub removal, and observation.</p>"
   },
   {
     "title": "Are Yak Chews Digestible?",

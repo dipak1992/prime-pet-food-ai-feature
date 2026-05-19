@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "prime_authority_hub": {
+      "type": "prime-authority-hub",
+      "settings": {
+        "hub_type": "heritage"
+      }
+    }
+  },
+  "order": [
+    "prime_authority_hub"
+  ]
+}
