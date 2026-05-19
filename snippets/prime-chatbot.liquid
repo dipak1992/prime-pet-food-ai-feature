@@ -462,6 +462,9 @@
       { id: 'dog-not-interested', category: 'product', q: 'What if my dog is not interested at first?', tags: ['not interested', 'picky', 'won\'t chew', 'introduce'], a: 'Some dogs need an introduction period. Offer the chew during a calm supervised moment, let your dog sniff it, and try shorter sessions before expecting a long chew routine.' },
       { id: 'boredom', category: 'product', q: 'Can yak chews help with boredom?', tags: ['boredom', 'enrichment', 'calm', 'busy'], a: 'A properly sized yak chew can give dogs a focused chewing outlet, which may help redirect boredom and support calmer downtime. It should be part of a broader enrichment routine.', links: [{ label: 'Bored dog chew guide', href: '/pages/dog-chews-for-bored-dogs' }] },
       { id: 'enrichment-hub', category: 'product', q: 'How do I build a calm dog enrichment routine?', tags: ['enrichment', 'routine', 'calm', 'post walk', 'work from home', 'crate training'], a: 'Use yak chews as a structured calm-time ritual: exercise first, offer the chew during a supervised quiet window, remove the nub early, and repeat at predictable times like post-walk decompression or work-from-home focus blocks.', links: [{ label: 'Dog enrichment hub', href: '/pages/dog-ritual-enrichment' }, { label: 'Calm chewing routine', href: '/pages/calm-chewing-routine' }] },
+      { id: 'canine-decompression', category: 'product', q: 'What is canine decompression?', tags: ['decompression', 'calm', 'ritual', 'category', 'post walk'], a: 'Canine decompression is Prime Pet Food\u2019s calm-dog framework: exercise first, then use a supervised chew session to help your dog transition into settled focus after walks, visitors, training, travel, or busy household moments.', links: [{ label: 'Canine decompression', href: '/pages/canine-decompression' }] },
+      { id: 'prime-scale', category: 'safety', q: 'What is the Prime Scale?', tags: ['prime scale', 'hardness', 'safety standard', 'thumbnail test', 'teeth'], a: 'The Prime Scale is Prime Pet Food\u2019s safety-first way to explain chew density, dog fit, dental-risk history, correct sizing, supervision, and nub removal. Yak chews are dense chews, so they should be sized correctly and supervised.', links: [{ label: 'The Prime Scale', href: '/pages/prime-scale' }, { label: 'Safety & Science Hub', href: '/pages/yak-chew-safety-science' }] },
+      { id: 'predictive-chew-intelligence', category: 'subscription', q: 'Can Prime Pet Food predict when my dog needs more chews?', tags: ['predictive', 'reorder', 'subscription', 'weather', 'fireworks', 'holiday', 'cadence'], a: 'The Predictive Chew Intelligence roadmap connects dog profile, chewing strength, purchase cadence, and real-life calm moments to smarter reorder reminders, enrichment alerts, and Subscribe & Save timing.', links: [{ label: 'Predictive Chew Intelligence', href: '/pages/predictive-chew-intelligence' }, { label: 'Subscribe & Save', href: '/pages/subscribe-and-save' }] },
       { id: 'multi-dog', category: 'safety', q: 'Can multiple dogs chew near each other?', tags: ['multiple dogs', 'resource guarding', 'two dogs'], a: 'If you have multiple dogs, separate them during chew time unless you are fully confident there is no guarding. High-value chews can trigger competition in some homes.' },
       { id: 'crate', category: 'safety', q: 'Can I give a yak chew in a crate?', tags: ['crate', 'alone', 'leave dog'], a: 'Use yak chews only when you can supervise. Avoid leaving your dog alone with any hard chew in a crate, especially if your dog is a strong chewer or gulper.' },
       { id: 'order-ship', category: 'orders', q: 'How fast do orders ship?', tags: ['shipping', 'ship', 'delivery', 'tracking'], a: 'Shipping timing is shown at checkout and in your order updates. After your order ships, tracking details are sent by email or SMS if provided.' },
@@ -528,7 +531,10 @@
       if (templateSuffix === 'wholesale') return ['wholesale-apply', 'wholesale-moq', 'wholesale-portal', 'contact-human'];
       if (templateSuffix === 'how-yak-cheese-chews-are-made' || templateSuffix === 'yak-chew-process') return ['origin', 'ingredients', 'rawhide', 'duration-how-long'];
       if (templateSuffix === 'safety-science-hub') return ['best-safe-long-lasting', 'safety-safe', 'safety-thumbnail', 'safety-teeth'];
-      if (templateSuffix === 'ritual-enrichment-hub') return ['enrichment-hub', 'boredom', 'crate', 'duration-routine'];
+      if (templateSuffix === 'ritual-enrichment-hub') return ['canine-decompression', 'enrichment-hub', 'boredom', 'crate'];
+      if (templateSuffix === 'canine-decompression') return ['canine-decompression', 'enrichment-hub', 'duration-routine', 'crate'];
+      if (templateSuffix === 'prime-scale') return ['prime-scale', 'safety-safe', 'safety-thumbnail', 'safety-teeth'];
+      if (templateSuffix === 'predictive-chew-intelligence') return ['predictive-chew-intelligence', 'duration-predictor', 'subscription-frequency', 'subscription-how'];
       if (templateSuffix === 'heritage-sourcing-hub') return ['origin', 'process-made', 'ingredients', 'rawhide'];
       if (templateSuffix === 'chew-duration-tool') return ['duration-predictor', 'size-choose', 'size-aggressive', 'safety-safe'];
       if (pageType === 'customers/account') return ['order-track', 'subscription-manage', 'size-choose', 'contact-human'];
@@ -591,6 +597,12 @@
         greeting.textContent = 'Safety questions? Start with sizing, supervision, thumbnail testing, or dental-risk guidance.';
       } else if (templateSuffix === 'ritual-enrichment-hub') {
         greeting.textContent = 'Building a calmer routine? Start with boredom, crate practice, post-walk decompression, or chew timing.';
+      } else if (templateSuffix === 'canine-decompression') {
+        greeting.textContent = 'Building decompression time? Ask about post-walk routines, crate practice, or chew session timing.';
+      } else if (templateSuffix === 'prime-scale') {
+        greeting.textContent = 'Using the Prime Scale? Ask about hardness, sizing, thumbnail testing, or dental-risk guidance.';
+      } else if (templateSuffix === 'predictive-chew-intelligence') {
+        greeting.textContent = 'Planning smarter refills? Ask about chew cadence, reorder timing, or Subscribe & Save routines.';
       } else if (templateSuffix === 'chew-duration-tool') {
         greeting.textContent = 'Using the predictor? Ask about size, breed, age, chewing strength, or safety before you buy.';
       }

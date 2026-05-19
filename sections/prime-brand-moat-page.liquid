@@ -1,0 +1,211 @@
+{{ 'seo-chew-pages.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign page_type = section.settings.page_type | default: 'decompression'
+
+  assign eyebrow = 'Prime Pet Food Category Leadership'
+  assign heading = 'Canine Decompression'
+  assign lede = 'A calmer way to think about chewing: predictable, supervised decompression rituals that help dogs move from energy to settled focus.'
+  assign primary_cta = '/pages/dog-ritual-enrichment'
+  assign primary_cta_label = 'Build a decompression routine'
+  assign secondary_cta = '/pages/how-long-will-this-last-for-my-dog'
+  assign secondary_cta_label = 'Estimate chew duration'
+  assign summary_1_label = 'Category'
+  assign summary_1_value = 'Dog calm routines'
+  assign summary_2_label = 'Best for'
+  assign summary_2_value = 'Post-walk, WFH, crate practice'
+  assign summary_3_label = 'Core tool'
+  assign summary_3_value = 'Supervised yak chew sessions'
+  assign intro_title = 'Prime Pet Food is building beyond yak chews'
+  assign intro_copy = 'The bigger opportunity is canine decompression: a repeatable calm-time ritual where chewing becomes a focused job after exercise, stimulation, travel, visitors, or busy household moments.'
+  assign card_1_title = 'Exercise first'
+  assign card_1_copy = 'Use decompression after movement, training, or play so the chew supports settling instead of replacing activity.'
+  assign card_2_title = 'Supervise the session'
+  assign card_2_copy = 'Offer the right-size chew during a predictable quiet window, with water nearby and the dog in view.'
+  assign card_3_title = 'End before the nub'
+  assign card_3_copy = 'Remove the chew before it becomes small enough to swallow, then use the Puff Hack ritual when appropriate.'
+  assign final_title = 'Turn chew time into a calm ritual'
+  assign final_copy = 'A yak chew is the product. Decompression is the category: a calmer, more useful way to help dog parents understand why the routine matters.'
+  assign faq_1_q = 'What is canine decompression?'
+  assign faq_1_a = 'Canine decompression is a calm transition routine that helps a dog move from stimulation into settled focus. A supervised chew can be one part of that routine.'
+  assign faq_2_q = 'When should I use a decompression chew?'
+  assign faq_2_a = 'Good moments include after walks, after training, during supervised crate practice, before evening downtime, or during work-from-home focus blocks.'
+  assign faq_3_q = 'Is decompression the same as treating anxiety?'
+  assign faq_3_a = 'No. It is an enrichment routine, not a medical or behavioral diagnosis. Dogs with serious anxiety or behavior concerns should work with a veterinarian or qualified trainer.'
+
+  if page_type == 'prime-scale'
+    assign heading = 'The Prime Scale'
+    assign lede = 'A safety-first hardness and fit standard for choosing the right chew by dog size, dental history, and chewing intensity.'
+    assign primary_cta = '/pages/yak-chew-safety-science'
+    assign primary_cta_label = 'Start with safety'
+    assign secondary_cta = '/products/himalayan-yak-chews-for-dogs'
+    assign secondary_cta_label = 'Shop yak chews'
+    assign summary_1_label = 'Standard'
+    assign summary_1_value = 'Hardness + fit'
+    assign summary_2_label = 'Checks'
+    assign summary_2_value = 'Size, teeth, chewing style'
+    assign summary_3_label = 'Safety rule'
+    assign summary_3_value = 'Supervise every chew'
+    assign intro_title = 'A memorable safety standard for long-lasting chews'
+    assign intro_copy = 'The Prime Scale gives dog parents a simple way to think about chew selection: hardness is only one factor. Fit, dental history, chewing style, session length, and nub removal all matter.'
+    assign card_1_title = 'P1: Soft training rewards'
+    assign card_1_copy = 'Best for quick rewards and puppies that are not ready for dense chews. Short duration, low chewing challenge.'
+    assign card_2_title = 'P2: Flexible chews'
+    assign card_2_copy = 'Moderate chew challenge for gentle dogs, seniors, or dogs with dental-risk questions.'
+    assign card_3_title = 'P3: Dense yak chews'
+    assign card_3_copy = 'Prime Pet Food yak chews sit here: long-lasting, rawhide-free, and appropriate only when sized correctly and supervised.'
+    assign final_title = 'Hardness should never be the only decision'
+    assign final_copy = 'The Prime Scale makes the safety conversation clearer: choose the right density, size up for strong chewers, use the thumbnail test as a screen, and ask a veterinarian when dental risk is unclear.'
+    assign faq_1_q = 'What is the Prime Scale?'
+    assign faq_1_a = 'The Prime Scale is Prime Pet Food’s safety-first way to explain chew density, dog fit, supervision, and dental-risk considerations.'
+    assign faq_2_q = 'Where do yak chews fit on the Prime Scale?'
+    assign faq_2_a = 'Yak chews are dense, long-lasting chews. They are best for supervised sessions with a correctly sized chew and a dog whose dental history is appropriate for hard chews.'
+    assign faq_3_q = 'Does the Prime Scale replace veterinary advice?'
+    assign faq_3_a = 'No. It is buyer education. Dogs with weak teeth, dental disease, cracked-tooth history, or unusual chewing behavior should be evaluated by a veterinarian before hard chews.'
+  elsif page_type == 'predictive-subscription'
+    assign heading = 'Predictive Chew Intelligence'
+    assign lede = 'A modern Subscribe & Save vision: reorder timing, calm reminders, and enrichment alerts based on dog profile, chew cadence, and real life.'
+    assign primary_cta = '/pages/subscribe-and-save'
+    assign primary_cta_label = 'Build a refill routine'
+    assign secondary_cta = '/pages/how-long-will-this-last-for-my-dog'
+    assign secondary_cta_label = 'Estimate chew cadence'
+    assign summary_1_label = 'System'
+    assign summary_1_value = 'Predictive refill logic'
+    assign summary_2_label = 'Signals'
+    assign summary_2_value = 'Dog profile + chew duration'
+    assign summary_3_label = 'Outcome'
+    assign summary_3_value = 'Fewer last-minute reorders'
+    assign intro_title = 'Subscriptions should feel intelligent, not automatic'
+    assign intro_copy = 'Prime Pet Food can turn Subscribe & Save into a calm-routine system that predicts when a dog may be running low, adapts by chewing style, and reminds customers around high-stress moments.'
+    assign card_1_title = 'Reorder prediction'
+    assign card_1_copy = 'Use dog size, chewing strength, quantity purchased, and session cadence to estimate when the next box should arrive.'
+    assign card_2_title = 'Calm-time alerts'
+    assign card_2_copy = 'Send helpful reminders before fireworks, travel, holidays, bad weather days, or schedule disruptions.'
+    assign card_3_title = 'Profile-aware cadence'
+    assign card_3_copy = 'A heavy chewer, puppy, or multi-dog household should not receive the same subscription recommendation as a gentle occasional chewer.'
+    assign final_title = 'The subscription becomes part of the routine'
+    assign final_copy = 'The goal is not only recurring revenue. It is confidence: dog parents know the right chew is ready before the stressful moment arrives.'
+    assign faq_1_q = 'What is predictive chew intelligence?'
+    assign faq_1_a = 'It is a subscription and reminder system that estimates reorder timing from dog profile, chewing strength, purchase cadence, and enrichment use case.'
+    assign faq_2_q = 'Can this prevent running out of chews?'
+    assign faq_2_a = 'It can help by estimating when a household may need refills and nudging the customer before the routine breaks.'
+    assign faq_3_q = 'What reminders are useful for dog parents?'
+    assign faq_3_a = 'Useful reminders include reorder timing, fireworks or holiday calm prep, travel checklists, weather-day enrichment, and post-walk decompression prompts.'
+  endif
+-%}
+
+<main class="seo-chew seo-hub prime-brand-moat" data-brand-moat-page="{{ page_type | escape }}">
+  <header class="seo-chew__hero">
+    <div class="page-width seo-chew__grid">
+      <div>
+        <p class="seo-chew__eyebrow">{{ eyebrow }}</p>
+        <h1>{{ heading }}</h1>
+        <p class="seo-chew__lede">{{ lede }}</p>
+        <div class="seo-chew__actions">
+          <a class="seo-chew__button" href="{{ primary_cta }}">{{ primary_cta_label }}</a>
+          <a class="seo-chew__button seo-chew__button--secondary" href="{{ secondary_cta }}">{{ secondary_cta_label }}</a>
+        </div>
+      </div>
+      <aside class="seo-chew__summary" aria-label="Page summary">
+        <dl>
+          <div><dt>{{ summary_1_label }}</dt><dd>{{ summary_1_value }}</dd></div>
+          <div><dt>{{ summary_2_label }}</dt><dd>{{ summary_2_value }}</dd></div>
+          <div><dt>{{ summary_3_label }}</dt><dd>{{ summary_3_value }}</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </header>
+
+  <section class="seo-chew__section">
+    <div class="page-width seo-chew__content">
+      <h2>{{ intro_title }}</h2>
+      <p>{{ intro_copy }}</p>
+    </div>
+    <div class="page-width">
+      <div class="seo-chew__cards">
+        <div class="seo-chew__card"><h3>{{ card_1_title }}</h3><p>{{ card_1_copy }}</p></div>
+        <div class="seo-chew__card"><h3>{{ card_2_title }}</h3><p>{{ card_2_copy }}</p></div>
+        <div class="seo-chew__card"><h3>{{ card_3_title }}</h3><p>{{ card_3_copy }}</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seo-chew__section seo-chew__section--soft">
+    <div class="page-width seo-chew__grid">
+      <div>
+        <h2>{{ final_title }}</h2>
+        <p>{{ final_copy }}</p>
+      </div>
+      <ul class="seo-chew__links">
+        <li><a href="/pages/canine-decompression">Canine Decompression</a></li>
+        <li><a href="/pages/prime-scale">The Prime Scale</a></li>
+        <li><a href="/pages/predictive-chew-intelligence">Predictive Chew Intelligence</a></li>
+        <li><a href="/pages/yak-chew-guides">Yak Chew Guides</a></li>
+        <li><a href="/products/himalayan-yak-chews-for-dogs">Shop Yak Chews</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="seo-chew__section">
+    <div class="page-width seo-chew__content">
+      <h2>FAQ</h2>
+      <div class="seo-chew__faq">
+        <details><summary>{{ faq_1_q }}</summary><p>{{ faq_1_a }}</p></details>
+        <details><summary>{{ faq_2_q }}</summary><p>{{ faq_2_a }}</p></details>
+        <details><summary>{{ faq_3_q }}</summary><p>{{ faq_3_a }}</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": {{ heading | json }},
+  "description": {{ lede | json }},
+  "url": {{ canonical_url | json }},
+  "isPartOf": {"@type":"WebSite","name":{{ shop.name | json }},"url":{{ shop.url | json }}},
+  "publisher": {"@type":"Organization","name":{{ shop.name | json }},"url":{{ shop.url | json }}},
+  "about": [
+    "canine decompression",
+    "dog enrichment",
+    "safe dog chewing",
+    "Himalayan yak cheese dog chews",
+    "predictive dog chew subscription"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":{{ faq_1_q | json }},"acceptedAnswer":{"@type":"Answer","text":{{ faq_1_a | json }}}},
+    {"@type":"Question","name":{{ faq_2_q | json }},"acceptedAnswer":{"@type":"Answer","text":{{ faq_2_a | json }}}},
+    {"@type":"Question","name":{{ faq_3_q | json }},"acceptedAnswer":{"@type":"Answer","text":{{ faq_3_a | json }}}}
+  ]
+}
+</script>
+
+{% schema %}
+{
+  "name": "Prime brand moat page",
+  "settings": [
+    {
+      "type": "select",
+      "id": "page_type",
+      "label": "Page type",
+      "default": "decompression",
+      "options": [
+        { "value": "decompression", "label": "Canine Decompression" },
+        { "value": "prime-scale", "label": "Prime Scale" },
+        { "value": "predictive-subscription", "label": "Predictive Chew Intelligence" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Prime brand moat page" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "prime_brand_moat": {
+      "type": "prime-brand-moat-page",
+      "settings": {
+        "page_type": "decompression"
+      }
+    }
+  },
+  "order": [
+    "prime_brand_moat"
+  ]
+}

@@ -36,6 +36,33 @@
     "body": "<p>The Prime Pet Food Ritual and Enrichment Hub helps dog parents use long-lasting Himalayan yak chews as part of calmer post-walk, crate training, boredom, decompression, and work-from-home routines.</p>"
   },
   {
+    "title": "Canine Decompression",
+    "handle": "canine-decompression",
+    "templateSuffix": "canine-decompression",
+    "published": true,
+    "seoTitle": "Canine Decompression | Prime Pet Food",
+    "seoDescription": "Learn Prime Pet Food's calm chewing framework for post-walk decompression, crate practice, work-from-home focus, and dog enrichment.",
+    "body": "<p>Canine decompression is Prime Pet Food's category vision for calm dog enrichment: a supervised chew ritual that helps dogs transition from stimulation into settled focus after walks, training, travel, visitors, or busy household moments.</p>"
+  },
+  {
+    "title": "The Prime Scale",
+    "handle": "prime-scale",
+    "templateSuffix": "prime-scale",
+    "published": true,
+    "seoTitle": "The Prime Scale Dog Chew Safety Standard",
+    "seoDescription": "Use the Prime Scale to understand dog chew hardness, fit, supervision, thumbnail testing, dental risk, and safer yak chew routines.",
+    "body": "<p>The Prime Scale is Prime Pet Food's safety-first hardness and fit standard for dog chews, helping shoppers understand chew density, dental risk, correct sizing, supervised sessions, and when to choose a softer option.</p>"
+  },
+  {
+    "title": "Predictive Chew Intelligence",
+    "handle": "predictive-chew-intelligence",
+    "templateSuffix": "predictive-chew-intelligence",
+    "published": true,
+    "seoTitle": "Predictive Chew Intelligence | Prime Pet Food",
+    "seoDescription": "Explore Prime Pet Food's vision for smarter chew subscriptions, reorder prediction, calm reminders, and profile-aware enrichment.",
+    "body": "<p>Predictive Chew Intelligence is Prime Pet Food's modern subscription vision: dog-profile-aware reorder timing, chew cadence estimates, calm reminders, holiday and weather enrichment prompts, and smarter Subscribe and Save routines.</p>"
+  },
+  {
     "title": "Himalayan Heritage & Sourcing Hub",
     "handle": "himalayan-heritage-sourcing",
     "templateSuffix": "heritage-sourcing-hub",

@@ -15,6 +15,9 @@
   assign safety_hub_url = request.origin | append: '/pages/yak-chew-safety-science'
   assign safety_guide_url = request.origin | append: '/pages/yak-chew-safety-guide'
   assign enrichment_hub_url = request.origin | append: '/pages/dog-ritual-enrichment'
+  assign decompression_url = request.origin | append: '/pages/canine-decompression'
+  assign prime_scale_url = request.origin | append: '/pages/prime-scale'
+  assign predictive_url = request.origin | append: '/pages/predictive-chew-intelligence'
   assign heritage_hub_url = request.origin | append: '/pages/himalayan-heritage-sourcing'
   assign wholesale_url = request.origin | append: '/pages/wholesale'
   assign search_base_url = request.origin | append: routes.search_url | append: '?q='
@@ -63,7 +66,12 @@
         "thumbnail test for dog chews",
         "yak chew nub puffing",
         "dog enrichment",
+        "canine decompression",
+        "dog decompression rituals",
         "chew duration prediction",
+        "predictive dog chew subscriptions",
+        "dog chew hardness grading",
+        "Prime Scale dog chew safety standard",
         "breed-specific chew sizing",
         "Nepalese yak cheese traditions",
         "supervised chewing routines"
@@ -117,6 +125,21 @@
         },
         {
           "@type": "DefinedTerm",
+          "name": "Canine decompression",
+          "url": {{ decompression_url | json }}
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "Prime Scale dog chew safety standard",
+          "url": {{ prime_scale_url | json }}
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "Predictive chew intelligence",
+          "url": {{ predictive_url | json }}
+        },
+        {
+          "@type": "DefinedTerm",
           "name": "Himalayan heritage and sourcing",
           "url": {{ heritage_hub_url | json }}
         },
@@ -154,8 +177,11 @@
         {"@type":"ListItem","position":5,"name":"Aggressive chewer guidance","url":{{ aggressive_url | json }}},
         {"@type":"ListItem","position":6,"name":"Yak chew safety and science","url":{{ safety_hub_url | json }}},
         {"@type":"ListItem","position":7,"name":"Dog enrichment routines","url":{{ enrichment_hub_url | json }}},
-        {"@type":"ListItem","position":8,"name":"Himalayan heritage and sourcing","url":{{ heritage_hub_url | json }}},
-        {"@type":"ListItem","position":9,"name":"Yak chew FAQ","url":{{ faq_url | json }}}
+        {"@type":"ListItem","position":8,"name":"Canine decompression","url":{{ decompression_url | json }}},
+        {"@type":"ListItem","position":9,"name":"The Prime Scale","url":{{ prime_scale_url | json }}},
+        {"@type":"ListItem","position":10,"name":"Predictive chew intelligence","url":{{ predictive_url | json }}},
+        {"@type":"ListItem","position":11,"name":"Himalayan heritage and sourcing","url":{{ heritage_hub_url | json }}},
+        {"@type":"ListItem","position":12,"name":"Yak chew FAQ","url":{{ faq_url | json }}}
       ]
     },
     {
@@ -168,7 +194,9 @@
         {"@type":"ListItem","position":2,"name":"Yak chew safety and science hub","url":{{ safety_hub_url | json }}},
         {"@type":"ListItem","position":3,"name":"Chew duration predictor","url":{{ duration_url | json }}},
         {"@type":"ListItem","position":4,"name":"Rawhide alternative guide","url":{{ rawhide_url | json }}},
-        {"@type":"ListItem","position":5,"name":"Dog ritual and enrichment hub","url":{{ enrichment_hub_url | json }}}
+        {"@type":"ListItem","position":5,"name":"Dog ritual and enrichment hub","url":{{ enrichment_hub_url | json }}},
+        {"@type":"ListItem","position":6,"name":"Canine decompression category","url":{{ decompression_url | json }}},
+        {"@type":"ListItem","position":7,"name":"Prime Scale safety standard","url":{{ prime_scale_url | json }}}
       ]
     },
     {
