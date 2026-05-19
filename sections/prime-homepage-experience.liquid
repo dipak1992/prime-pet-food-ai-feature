@@ -371,13 +371,18 @@
         <!-- Result -->
         <div class="ph-quiz__step ph-quiz__result" data-step="result">
           <div class="ph-quiz__result-card">
-            <div class="ph-quiz__result-badge">Your perfect match</div>
+            <div class="ph-quiz__result-badge">Your calm-time plan</div>
             <h3 class="ph-quiz__result-title">Medium Yak Chew</h3>
             <p class="ph-quiz__result-desc">Based on your answers, we recommend starting with our medium chew for steady, focused enrichment sessions.</p>
+            <div class="ph-quiz__plan" aria-live="polite">
+              <strong>Best routine</strong>
+              <span class="ph-quiz__plan-text">Use during supervised evening downtime or focused calm time.</span>
+            </div>
+            <p class="ph-quiz__safety">Safety note: supervise every session, provide fresh water, and remove the nub once it is small enough to swallow.</p>
             <div class="ph-quiz__result-stats">
               <span><strong>~67 min</strong> avg duration</span>
               <span><strong>4</strong> ingredients</span>
-              <span><strong>100%</strong> digestible</span>
+              <span><strong>Rawhide</strong> free</span>
             </div>
             <a href="/collections/all" class="ph-button ph-button--primary ph-quiz__result-cta">Shop this size</a>
             {% form 'customer', class: 'ph-quiz__email-form' %}
@@ -616,10 +621,30 @@
         </table>
       </div>
       <div class="ph-compare__cards" aria-label="Mobile product comparison">
-        <article><strong>Prime Pet Food Yak Chew</strong><span>67 min avg</span><span>4 natural ingredients</span><span>Digestible, low odor, ~$0.22/hr</span></article>
-        <article><strong>Rawhide</strong><span>20 min avg</span><span>Chemical-processed</span><span>Blockage risk and moderate odor</span></article>
-        <article><strong>Bully Sticks</strong><span>15 min avg</span><span>Single ingredient</span><span>Strong odor and higher price per hour</span></article>
-        <article><strong>Nylon/Rubber Toys</strong><span>Duration varies</span><span>Synthetic material</span><span>Not edible and no nutrition</span></article>
+        <article class="is-prime" tabindex="0">
+          <strong>Prime Pet Food Yak Chew</strong>
+          <span><b>Duration</b> 67 min avg</span>
+          <span><b>Ingredients</b> 4 natural</span>
+          <span><b>Routine</b> Rawhide-free, low odor, supervised calm time</span>
+        </article>
+        <article tabindex="0">
+          <strong>Rawhide</strong>
+          <span><b>Duration</b> 20 min avg</span>
+          <span><b>Ingredients</b> Chemical-processed</span>
+          <span><b>Routine</b> Higher blockage concern for many dog parents</span>
+        </article>
+        <article tabindex="0">
+          <strong>Bully Sticks</strong>
+          <span><b>Duration</b> 15 min avg</span>
+          <span><b>Ingredients</b> Single ingredient</span>
+          <span><b>Routine</b> Strong odor and higher price per hour</span>
+        </article>
+        <article tabindex="0">
+          <strong>Nylon/Rubber Toys</strong>
+          <span><b>Duration</b> Varies</span>
+          <span><b>Ingredients</b> Synthetic material</span>
+          <span><b>Routine</b> Not edible and no nutritional value</span>
+        </article>
       </div>
     </div>
   </div>
@@ -1911,6 +1936,7 @@
     border-radius: var(--ph-radius);
     background: #fff;
     padding: 18px;
+    scroll-snap-align: start;
   }
 
   .ph-compare__cards strong,
@@ -1924,10 +1950,24 @@
     margin-bottom: 10px;
   }
 
+  .ph-compare__cards article.is-prime {
+    border-color: rgba(184, 95, 50, 0.34);
+    box-shadow: 0 12px 28px rgba(184, 95, 50, 0.1);
+  }
+
   .ph-compare__cards span {
     color: var(--ph-muted);
     font-size: 14px;
     line-height: 1.45;
+  }
+
+  .ph-compare__cards span + span {
+    margin-top: 6px;
+  }
+
+  .ph-compare__cards b {
+    color: var(--ph-ink);
+    font-weight: 850;
   }
 
   /* ═══════════════════════════════════════════════════════════════
@@ -2856,8 +2896,17 @@
     }
 
     .ph-compare__cards {
-      display: grid;
+      display: flex;
       gap: 12px;
+      overflow-x: auto;
+      margin-inline: calc(var(--ph-mobile-x, 20px) * -1);
+      padding: 0 var(--ph-mobile-x, 20px) 8px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .ph-compare__cards article {
+      min-width: min(82vw, 330px);
     }
   }
 
@@ -3207,6 +3256,36 @@
     max-width: 480px;
     margin: 0 auto 24px;
     font-size: 16px;
+  }
+
+  .ph-quiz__plan {
+    display: grid;
+    gap: 4px;
+    max-width: 480px;
+    margin: 0 auto 12px;
+    padding: 14px 16px;
+    border: 1px solid rgba(23, 59, 43, 0.14);
+    border-radius: 14px;
+    background: rgba(23, 59, 43, 0.05);
+    text-align: left;
+  }
+
+  .ph-quiz__plan strong {
+    color: var(--ph-ink);
+    font-size: 13px;
+    font-weight: 900;
+  }
+
+  .ph-quiz__plan span,
+  .ph-quiz__safety {
+    color: var(--ph-muted);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .ph-quiz__safety {
+    max-width: 480px;
+    margin: 0 auto 22px;
   }
 
   .ph-quiz__result-stats {
@@ -3891,6 +3970,19 @@
       resultCard.querySelector('.ph-quiz__result-title').textContent = rec.title;
       resultCard.querySelector('.ph-quiz__result-desc').textContent = rec.desc;
       resultCard.querySelector('.ph-quiz__result-cta').href = rec.link;
+      var routineCopy = {
+        calm: 'Use after walks, training, or before evening downtime to help your dog settle.',
+        occupy: 'Use during work calls, crate-adjacent practice, or busy household moments while you can supervise.',
+        dental: 'Use as supervised gnawing time with fresh water nearby and regular tooth checks.'
+      };
+      var planText = resultCard.querySelector('.ph-quiz__plan-text');
+      if (planText) planText.textContent = routineCopy[answers.goal] || routineCopy.calm;
+      var safetyText = resultCard.querySelector('.ph-quiz__safety');
+      if (safetyText) {
+        safetyText.textContent = answers.chewing === 'aggressive'
+          ? 'Power chewer note: size up, start with shorter supervised sessions, and remove the nub early so it can be puffed safely.'
+          : 'Safety note: supervise every session, provide fresh water, and remove the nub once it is small enough to swallow.';
+      }
       var stats = resultCard.querySelectorAll('.ph-quiz__result-stats strong');
       if (stats[0]) stats[0].textContent = rec.duration;
     }

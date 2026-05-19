@@ -314,6 +314,23 @@
             <span class="ypc-cta__compare" id="ypc-cta-compare" style="display:none;"></span>
           </button>
         </div>
+
+        <div class="ypc-safety-ritual" aria-label="Safety-first chew routine">
+          <div class="ypc-safety-ritual__head">
+            <span aria-hidden="true">🛡️</span>
+            <div>
+              <strong>Safety-first chew ritual</strong>
+              <p>Built for supervised calm time, not unattended all-day chewing.</p>
+            </div>
+          </div>
+          <ul>
+            <li>Choose a size your dog cannot swallow whole.</li>
+            <li>Supervise every session and keep fresh water nearby.</li>
+            <li>Remove the small end piece, then soak and microwave it into a puff treat.</li>
+          </ul>
+          <p class="ypc-safety-ritual__note">Hard chews are not right for every dog. Ask your vet first if your dog has dental issues, weak teeth, or a history of cracked teeth.</p>
+          <a href="/pages/yak-chew-safety-guide">Read the safety guide</a>
+        </div>
       {% endform %}
 
       {% if section.settings.show_review_cards %}
@@ -1202,6 +1219,92 @@
     font-size: 12px;
     font-weight: 800;
     line-height: 1.2;
+  }
+
+  .ypc-safety-ritual {
+    display: grid;
+    gap: 12px;
+    margin: 14px 0 16px;
+    padding: 15px;
+    border: 1px solid rgba(23, 59, 43, 0.16);
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(255, 250, 242, 0.94), rgba(246, 238, 222, 0.72));
+  }
+
+  .ypc-safety-ritual__head {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .ypc-safety-ritual__head > span {
+    display: inline-flex;
+    width: 34px;
+    height: 34px;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    border-radius: 999px;
+    background: rgba(23, 59, 43, 0.08);
+    font-size: 17px;
+  }
+
+  .ypc-safety-ritual strong {
+    display: block;
+    color: #173b2b;
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1.25;
+  }
+
+  .ypc-safety-ritual p,
+  .ypc-safety-ritual li {
+    color: #5f4b42;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .ypc-safety-ritual p {
+    margin: 3px 0 0;
+  }
+
+  .ypc-safety-ritual ul {
+    display: grid;
+    gap: 7px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .ypc-safety-ritual li {
+    position: relative;
+    padding-left: 18px;
+  }
+
+  .ypc-safety-ritual li::before {
+    content: "";
+    position: absolute;
+    top: 0.72em;
+    left: 2px;
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: #b85f32;
+    transform: translateY(-50%);
+  }
+
+  .ypc-safety-ritual__note {
+    padding-top: 10px;
+    border-top: 1px solid rgba(23, 59, 43, 0.12);
+  }
+
+  .ypc-safety-ritual a {
+    justify-self: start;
+    color: #173b2b;
+    font-size: 13px;
+    font-weight: 900;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
   .ypc-profile-recommendation {
