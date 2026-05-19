@@ -56,11 +56,14 @@
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "How Long Will This Last For MY Dog?",
+  "name": "Prime Pet Food Chew Duration Predictor",
   "applicationCategory": "LifestyleApplication",
   "operatingSystem": "Web",
-  "description": "A Prime Pet Food chew duration estimator for Himalayan yak cheese dog chews.",
-  "url": {{ canonical_url | json }}
+  "isAccessibleForFree": true,
+  "description": "A Prime Pet Food chew duration estimator for Himalayan yak cheese dog chews that uses breed, age, weight, and chewing strength to recommend duration, size, and safer supervised enrichment routines.",
+  "url": {{ canonical_url | json }},
+  "publisher": {"@type":"Organization","name":{{ shop.name | json }},"url":{{ shop.url | json }}},
+  "about": ["Himalayan yak cheese dog chews", "chew duration prediction", "breed-specific chew sizing", "aggressive chewer guidance", "puppy chew guidance"]
 }
 </script>
 <script type="application/ld+json">

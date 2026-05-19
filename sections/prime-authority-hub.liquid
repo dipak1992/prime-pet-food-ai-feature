@@ -147,6 +147,15 @@
 
   <section class="seo-chew__section">
     <div class="page-width seo-chew__content">
+      <p class="seo-chew__eyebrow">Editorial standards</p>
+      <h2>Safety-first guidance, written for real dog parents</h2>
+      <p>Prime Pet Food educational content is built around supervised chewing, right-size selection, dental-risk awareness, and clear escalation to a veterinarian for choking, tooth injury, vomiting, allergic reactions, or unusual behavior. The goal is practical buyer confidence, not veterinary diagnosis.</p>
+      <p>Every authority page connects back to product sizing, the chew duration predictor, safety education, and the Prime Pet Food Concierge so shoppers can move from research to a safer buying decision without guessing.</p>
+    </div>
+  </section>
+
+  <section class="seo-chew__section">
+    <div class="page-width seo-chew__content">
       <h2>FAQ</h2>
       <div class="seo-chew__faq">
         <details><summary>{{ faq_1_q }}</summary><p>{{ faq_1_a }}</p></details>
@@ -164,7 +173,16 @@
   "name": {{ heading | json }},
   "description": {{ lede | json }},
   "url": {{ canonical_url | json }},
-  "isPartOf": {"@type":"WebSite","name":{{ shop.name | json }},"url":{{ shop.url | json }}}
+  "isPartOf": {"@type":"WebSite","name":{{ shop.name | json }},"url":{{ shop.url | json }}},
+  "publisher": {"@type":"Organization","name":{{ shop.name | json }},"url":{{ shop.url | json }}},
+  "about": [
+    "Himalayan yak cheese dog chews",
+    "safe supervised dog chewing",
+    "rawhide alternatives",
+    "dog enrichment routines",
+    "chew duration and sizing"
+  ],
+  "audience": {"@type":"Audience","audienceType":"Dog parents researching safer long-lasting dog chews"}
 }
 </script>
 <script type="application/ld+json">

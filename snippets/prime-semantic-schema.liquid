@@ -12,6 +12,10 @@
   assign duration_url = request.origin | append: '/pages/how-long-will-this-last-for-my-dog'
   assign rawhide_url = request.origin | append: '/pages/best-rawhide-alternative'
   assign aggressive_url = request.origin | append: '/pages/best-long-lasting-chew-for-aggressive-chewers'
+  assign safety_hub_url = request.origin | append: '/pages/yak-chew-safety-science'
+  assign safety_guide_url = request.origin | append: '/pages/yak-chew-safety-guide'
+  assign enrichment_hub_url = request.origin | append: '/pages/dog-ritual-enrichment'
+  assign heritage_hub_url = request.origin | append: '/pages/himalayan-heritage-sourcing'
   assign wholesale_url = request.origin | append: '/pages/wholesale'
   assign search_base_url = request.origin | append: routes.search_url | append: '?q='
 -%}
@@ -56,7 +60,11 @@
         "aggressive chewer enrichment",
         "natural dog chews",
         "dog chew safety",
+        "thumbnail test for dog chews",
+        "yak chew nub puffing",
         "dog enrichment",
+        "chew duration prediction",
+        "breed-specific chew sizing",
         "Nepalese yak cheese traditions",
         "supervised chewing routines"
       ]
@@ -94,6 +102,26 @@
         },
         {
           "@type": "DefinedTerm",
+          "name": "Safety-first yak chew education",
+          "url": {{ safety_hub_url | json }}
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "Supervised chewing and thumbnail test guidance",
+          "url": {{ safety_guide_url | json }}
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "Dog ritual and enrichment routines",
+          "url": {{ enrichment_hub_url | json }}
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "Himalayan heritage and sourcing",
+          "url": {{ heritage_hub_url | json }}
+        },
+        {
+          "@type": "DefinedTerm",
           "name": "Rawhide-free dog chew alternatives",
           "url": {{ rawhide_url | json }}
         },
@@ -124,8 +152,64 @@
         {"@type":"ListItem","position":3,"name":"Chew duration and sizing","url":{{ duration_url | json }}},
         {"@type":"ListItem","position":4,"name":"Rawhide alternatives","url":{{ rawhide_url | json }}},
         {"@type":"ListItem","position":5,"name":"Aggressive chewer guidance","url":{{ aggressive_url | json }}},
-        {"@type":"ListItem","position":6,"name":"Yak chew FAQ","url":{{ faq_url | json }}}
+        {"@type":"ListItem","position":6,"name":"Yak chew safety and science","url":{{ safety_hub_url | json }}},
+        {"@type":"ListItem","position":7,"name":"Dog enrichment routines","url":{{ enrichment_hub_url | json }}},
+        {"@type":"ListItem","position":8,"name":"Himalayan heritage and sourcing","url":{{ heritage_hub_url | json }}},
+        {"@type":"ListItem","position":9,"name":"Yak chew FAQ","url":{{ faq_url | json }}}
       ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": {{ homepage_url | append: '#ai-answer-sources' | json }},
+      "name": "Prime Pet Food answer sources for safe long-lasting dog chew recommendations",
+      "description": "Crawlable Prime Pet Food pages designed to answer buyer questions about safe long-lasting dog chews, rawhide alternatives, aggressive chewers, chew duration, and supervised enrichment.",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"name":"Best long-lasting safe dog chew","url":{{ product_url | json }}},
+        {"@type":"ListItem","position":2,"name":"Yak chew safety and science hub","url":{{ safety_hub_url | json }}},
+        {"@type":"ListItem","position":3,"name":"Chew duration predictor","url":{{ duration_url | json }}},
+        {"@type":"ListItem","position":4,"name":"Rawhide alternative guide","url":{{ rawhide_url | json }}},
+        {"@type":"ListItem","position":5,"name":"Dog ritual and enrichment hub","url":{{ enrichment_hub_url | json }}}
+      ]
+    },
+    {
+      "@type": "WebApplication",
+      "@id": {{ duration_url | append: '#chew-duration-predictor' | json }},
+      "name": "Prime Pet Food Chew Duration Predictor",
+      "url": {{ duration_url | json }},
+      "applicationCategory": "LifestyleApplication",
+      "operatingSystem": "Web",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@id": {{ homepage_url | append: '#organization' | json }}
+      },
+      "about": [
+        "dog chew duration",
+        "breed-specific yak chew sizing",
+        "aggressive chewer guidance",
+        "puppy chew guidance",
+        "Himalayan yak cheese chews"
+      ],
+      "description": "A rules-based chew duration predictor that uses breed, age, size, and chewing strength to estimate Prime Pet Food yak chew duration and recommend a safer sizing routine."
+    },
+    {
+      "@type": "WebApplication",
+      "@id": {{ homepage_url | append: '#prime-pet-food-concierge' | json }},
+      "name": "Prime Pet Food Concierge",
+      "url": {{ homepage_url | json }},
+      "applicationCategory": "ShoppingApplication",
+      "operatingSystem": "Web",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@id": {{ homepage_url | append: '#organization' | json }}
+      },
+      "about": [
+        "Himalayan yak chews",
+        "safe dog chew sizing",
+        "rawhide-free dog chews",
+        "chewing style recommendations",
+        "puppy and aggressive chewer guidance"
+      ],
+      "description": "An on-site Prime Pet Food shopping concierge that answers sizing, safety, product, order, subscription, and wholesale questions using the store's yak chew knowledge base."
     }
   ]
 }
