@@ -12,14 +12,22 @@
       <p class="why-prime__sub">{{ section.settings.subtext | default: 'Most chews are gone in minutes. Prime Pet Food yak chews are built to last — giving your dog a focused, satisfying job that keeps them calm and you at peace.' }}</p>
     </div>
 
+    <div class="why-prime__editorial" data-motion="reveal">
+      <div class="why-prime__editorial-media">
+        <img src="{{ 'prime-about-himalayas-yak-hero.png' | asset_url }}" alt="Himalayan landscape with a yak, reflecting Prime Pet Food's mountain-region chew heritage" loading="lazy" width="1200" height="800">
+      </div>
+      <div class="why-prime__editorial-copy">
+        <span>Himalayan heritage</span>
+        <h3>Built from a mountain-region tradition, refined for modern dog routines.</h3>
+        <p>Prime Pet Food pairs the emotional trust of Himalayan yak cheese craft with practical sizing, duration, and safety guidance for real dog parents.</p>
+      </div>
+    </div>
+
     <div class="why-prime__grid">
 
       <div class="why-prime__card why-prime__card--featured">
         <div class="why-prime__card-icon" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <circle cx="12" cy="12" r="10"/>
-            <polyline points="12 6 12 12 16 14"/>
-          </svg>
+          {% render 'prime-blueprint-icon', name: 'chew-time', size: 28 %}
         </div>
         <h3>Lasts 45–90 minutes</h3>
         <p>Dense Himalayan cheese texture gives your dog a real chewing job — not a 5-minute snack. Most dogs stay engaged for a full calm-time session.</p>
@@ -28,10 +36,7 @@
 
       <div class="why-prime__card">
         <div class="why-prime__card-icon" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            <polyline points="9 12 11 14 15 10"/>
-          </svg>
+          {% render 'prime-blueprint-icon', name: 'safety', size: 28 %}
         </div>
         <h3>Safer than rawhide</h3>
         <p>No chemical processing. No splinter risk. Just 4 simple ingredients your dog&rsquo;s body can actually handle.</p>
@@ -39,9 +44,7 @@
 
       <div class="why-prime__card">
         <div class="why-prime__card-icon" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-          </svg>
+          {% render 'prime-blueprint-icon', name: 'love', size: 28 %}
         </div>
         <h3>Dogs genuinely love it</h3>
         <p>The natural yak cheese flavor keeps dogs coming back. No artificial flavoring needed — just real food they&rsquo;re wired to want.</p>
@@ -49,10 +52,7 @@
 
       <div class="why-prime__card">
         <div class="why-prime__card-icon" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-            <polyline points="9 22 9 12 15 12 15 22"/>
-          </svg>
+          {% render 'prime-blueprint-icon', name: 'calm-home', size: 28 %}
         </div>
         <h3>Calmer household</h3>
         <p>Give your dog a structured enrichment routine. Less barking, less destruction, less anxiety — just a focused dog doing what dogs do.</p>
@@ -60,10 +60,7 @@
 
       <div class="why-prime__card">
         <div class="why-prime__card-icon" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <line x1="12" y1="1" x2="12" y2="23"/>
-            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-          </svg>
+          {% render 'prime-blueprint-icon', name: 'value', size: 28 %}
         </div>
         <h3>Better value per chew</h3>
         <p>At ~$0.22/hour of enrichment, Prime Pet Food yak chews cost less per minute of calm than most alternatives. Longer lasting = better value.</p>
@@ -127,6 +124,64 @@
     margin: 0;
   }
 
+  .why-prime__editorial {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+    gap: clamp(18px, 3vw, 34px);
+    align-items: stretch;
+    margin: 0 0 20px;
+    border: 1px solid #eadfce;
+    border-radius: 24px;
+    background: linear-gradient(135deg, #fffaf2, #f4eadb);
+    overflow: hidden;
+    box-shadow: 0 18px 48px rgba(43, 20, 8, 0.08);
+  }
+
+  .why-prime__editorial-media {
+    min-height: 280px;
+    background: #2b1408;
+  }
+
+  .why-prime__editorial-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .why-prime__editorial-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(24px, 4vw, 44px);
+  }
+
+  .why-prime__editorial-copy span {
+    color: #b85f32;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .why-prime__editorial-copy h3 {
+    margin: 0 0 12px;
+    color: #24130d;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(25px, 3vw, 42px);
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: 0;
+  }
+
+  .why-prime__editorial-copy p {
+    margin: 0;
+    color: #6f5a50;
+    font-size: 16px;
+    line-height: 1.62;
+  }
+
   /* ═══════════════════════════════════════════════════════════════
      GRID
   ════════════════════════════════════════════════════════════════ */
@@ -164,19 +219,39 @@
   }
 
   .why-prime__card-icon {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 52px;
     height: 52px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(243, 178, 125, 0.42);
+    border-radius: 6px;
+    background:
+      linear-gradient(rgba(243,178,125,0.12) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(243,178,125,0.12) 1px, transparent 1px),
+      rgba(255, 255, 255, 0.08);
+    background-size: 10px 10px;
     color: #f3b27d;
     flex-shrink: 0;
   }
 
+  .why-prime__card-icon::after {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border: 1px dashed currentColor;
+    border-radius: 4px;
+    opacity: 0.34;
+    pointer-events: none;
+  }
+
   .why-prime__card:not(.why-prime__card--featured) .why-prime__card-icon {
-    background: #fff;
+    background:
+      linear-gradient(rgba(210,99,46,0.12) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(210,99,46,0.12) 1px, transparent 1px),
+      #fff;
+    border-color: rgba(210, 99, 46, 0.22);
     color: #d2632e;
   }
 
@@ -255,6 +330,14 @@
      RESPONSIVE — Tablet
   ════════════════════════════════════════════════════════════════ */
   @media (max-width: 989px) {
+    .why-prime__editorial {
+      grid-template-columns: 1fr;
+    }
+
+    .why-prime__editorial-media {
+      min-height: 340px;
+    }
+
     .why-prime__grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -269,6 +352,18 @@
      RESPONSIVE — Mobile
   ════════════════════════════════════════════════════════════════ */
   @media (max-width: 640px) {
+    .why-prime__editorial {
+      border-radius: 18px;
+    }
+
+    .why-prime__editorial-media {
+      min-height: 260px;
+    }
+
+    .why-prime__editorial-copy {
+      padding: 22px;
+    }
+
     .why-prime__grid {
       grid-template-columns: 1fr;
     }

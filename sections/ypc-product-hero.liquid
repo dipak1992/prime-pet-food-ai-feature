@@ -176,7 +176,7 @@
         {% endunless %}
 
         <div class="ypc-size-hint">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          {% render 'prime-blueprint-icon', name: 'fit', size: 14 %}
           Not sure which size?
           <a href="#chew-analyzer" class="ypc-size-hint__link" id="ypc-size-hint-link">Find the right fit for your dog &rarr;</a>
         </div>
@@ -224,7 +224,7 @@
               <span id="ypc-urgency-stock">{{ current_urgency_text }}</span>
             </span>
             <span class="ypc-urgency__item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              {% render 'prime-blueprint-icon', name: 'shipping', size: 14 %}
               <span>{{ section.settings.urgency_shipping_text | default: 'Ships quickly from current inventory' }}</span>
             </span>
           </div>
@@ -865,7 +865,9 @@
 
   .ypc-product-hero {
     padding: 24px 20px 34px;
-    background: #f6f1e9;
+    background:
+      radial-gradient(circle at 12% 8%, rgba(214, 179, 107, 0.24), transparent 34%),
+      linear-gradient(135deg, #fffaf2 0%, #f6f1e9 48%, #efe3d1 100%);
     overflow: visible;
   }
 
@@ -895,8 +897,9 @@
   }
 
   .ypc-product-hero__main-image-wrap {
-    background: #ffffff;
-    border-radius: 14px;
+    background: linear-gradient(145deg, rgba(255,255,255,0.96), rgba(250,244,233,0.92));
+    border: 1px solid rgba(43, 20, 8, 0.08);
+    border-radius: 24px;
     overflow: hidden;
     margin-bottom: 10px;
     height: min(50vh, 560px);
@@ -905,6 +908,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
+    box-shadow: 0 22px 60px rgba(43, 20, 8, 0.12);
   }
 
   .ypc-product-hero__main-image {
@@ -912,7 +916,7 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
-    border-radius: 14px;
+    border-radius: 24px;
     transform: translateX(0);
     opacity: 1;
     transition: transform 0.18s ease, opacity 0.18s ease;
@@ -999,11 +1003,12 @@
 
   .ypc-product-hero__title {
     margin: 0 0 8px;
-    font-size: 30px;
-    line-height: 1.08;
-    font-weight: 800;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(32px, 4vw, 54px);
+    line-height: 0.98;
+    font-weight: 700;
     color: #2b1408;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
   }
 
   .ypc-review-row {
@@ -1717,8 +1722,8 @@
     appearance: none;
     width: 100%;
     border: none;
-    border-radius: 11px;
-    background: #ff6a00;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #d2632e, #a9471f);
     color: #fff;
     padding: 16px 18px;
     font-size: 14px;
@@ -1731,6 +1736,7 @@
     gap: 10px;
     text-transform: uppercase;
     transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    box-shadow: 0 14px 30px rgba(184, 95, 50, 0.24);
   }
 
   .ypc-product-hero__cta:hover {
