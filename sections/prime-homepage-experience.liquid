@@ -3998,6 +3998,27 @@
       });
     }
     saveResult(rec);
+    try {
+      window.dispatchEvent(new CustomEvent('prime:homepage-quiz:complete', {
+        detail: {
+          weight: answers.weight || '',
+          chewing: answers.chewing || '',
+          goal: answers.goal || '',
+          recommendedProductTitle: rec.title,
+          recommendedProductUrl: rec.link
+        }
+      }));
+      if (window.PrimeAnalyticsEvents && typeof window.PrimeAnalyticsEvents.track === 'function') {
+        window.PrimeAnalyticsEvents.track('prime_quiz_completed', {
+          source: 'homepage_quiz',
+          weight: answers.weight || '',
+          chewing: answers.chewing || '',
+          goal: answers.goal || '',
+          recommendedProductTitle: rec.title,
+          recommendedProductUrl: rec.link
+        });
+      }
+    } catch(e) {}
     showStep('result');
   }
 

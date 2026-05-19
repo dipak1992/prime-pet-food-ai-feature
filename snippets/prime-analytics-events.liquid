@@ -1,0 +1,112 @@
+{% comment %}
+  Lightweight storefront analytics hooks for CRO proof.
+  Sends the same event to GA4, PostHog, Shopify analytics, and a local debug buffer.
+{% endcomment %}
+
+<script>
+  (function() {
+    if (window.PrimeAnalyticsEvents) return;
+
+    function cleanText(value) {
+      return String(value || '').replace(/\s+/g, ' ').trim().slice(0, 140);
+    }
+
+    function emit(eventName, properties) {
+      var data = properties || {};
+      data.page_type = {{ request.page_type | json }};
+      data.template_suffix = {{ template.suffix | default: '' | json }};
+      data.path = window.location.pathname;
+
+      try {
+        var history = JSON.parse(localStorage.getItem('prime_analytics_events') || '[]');
+        history.push({ event: eventName, data: data, at: new Date().toISOString() });
+        localStorage.setItem('prime_analytics_events', JSON.stringify(history.slice(-80)));
+      } catch (error) {}
+
+      if (window.gtag) window.gtag('event', eventName, data);
+      if (window.posthog && typeof window.posthog.capture === 'function') window.posthog.capture(eventName, data);
+      if (window.Shopify && window.Shopify.analytics && typeof window.Shopify.analytics.publish === 'function') {
+        try { window.Shopify.analytics.publish(eventName, data); } catch (error) {}
+      }
+    }
+
+    window.PrimeAnalyticsEvents = { track: emit };
+
+    document.addEventListener('submit', function(event) {
+      var form = event.target;
+      if (!form || !form.matches || !form.matches('form')) return;
+      var action = form.getAttribute('action') || '';
+      if (action.indexOf('/cart/add') !== -1) {
+        var submitter = event.submitter || form.querySelector('[type="submit"]');
+        emit('prime_add_to_cart_submit', {
+          source: 'form_submit',
+          button_text: submitter ? cleanText(submitter.textContent) : '',
+          product_id: form.querySelector('[name="product-id"]') ? form.querySelector('[name="product-id"]').value : '',
+          variant_id: form.querySelector('[name="id"]') ? form.querySelector('[name="id"]').value : ''
+        });
+      }
+    }, true);
+
+    document.addEventListener('click', function(event) {
+      var target = event.target;
+      var link = target.closest && target.closest('a[href]');
+      var button = target.closest && target.closest('button');
+
+      if (link) {
+        var href = link.getAttribute('href') || '';
+        var label = cleanText(link.textContent || link.getAttribute('aria-label'));
+
+        if (href.indexOf('/cart/add') !== -1 || href.indexOf('/products/') !== -1 && /add|cart|shop|buy/i.test(label)) {
+          emit('prime_add_to_cart_click', { source: 'link_click', href: href, label: label });
+        }
+
+        if (href.indexOf('puff') !== -1 || href.indexOf('cdn.shopify.com/videos') !== -1 && /puff|nub|microwave/i.test(label)) {
+          emit('prime_puff_hack_click', { href: href, label: label || 'Puff Hack video' });
+        }
+
+        if (href.indexOf('/pages/subscribe-and-save') !== -1 || /subscribe|refill|routine/i.test(label)) {
+          emit('prime_subscription_cta_click', { href: href, label: label });
+        }
+
+        if (href.indexOf('/pages/prime-scale') !== -1 || href.indexOf('/pages/yak-chew-safety') !== -1 || href.indexOf('/pages/yak-chew-safety-science') !== -1) {
+          emit('prime_safety_content_click', { href: href, label: label });
+        }
+      }
+
+      if (button) {
+        var buttonText = cleanText(button.textContent || button.getAttribute('aria-label'));
+        if (/add to cart|add recommended pack/i.test(buttonText)) {
+          emit('prime_add_to_cart_click', { source: 'button_click', label: buttonText });
+        }
+        if (button.closest('.ypd-faq') || button.closest('.pfq-faq') || button.closest('.seo-chew__faq')) {
+          emit('prime_safety_block_interaction', { label: buttonText });
+        }
+        if (button.closest('.ph-quiz') && button.classList.contains('ph-quiz__option')) {
+          emit('prime_quiz_step_answered', {
+            step: button.closest('[data-step]') ? button.closest('[data-step]').getAttribute('data-step') : '',
+            answer: button.getAttribute('data-answer') || '',
+            next: button.getAttribute('data-next') || ''
+          });
+        }
+      }
+    }, true);
+
+    document.addEventListener('play', function(event) {
+      var video = event.target;
+      if (!video || video.tagName !== 'VIDEO') return;
+      var source = video.currentSrc || (video.querySelector('source') && video.querySelector('source').src) || '';
+      if (/puff|c38abacb86f24090b46d80355eb94a6f|d7aeb1ab2e45499ba3b718e8920fe919|1d5bed8204e444e9a411e2ff172cb2eb|c8326205e1a4414facf9ef903fd91b1c/i.test(source + ' ' + (video.getAttribute('aria-label') || ''))) {
+        emit('prime_puff_hack_video_play', { source: source });
+      }
+    }, true);
+
+    window.addEventListener('prime:analyzer:complete', function(event) {
+      emit('prime_quiz_completed', Object.assign({ source: 'chew_analyzer' }, event.detail || {}));
+    });
+
+    window.addEventListener('load', function() {
+      var quizResult = document.querySelector('.ph-quiz__step[data-step="result"].ph-quiz__step--active');
+      if (quizResult) emit('prime_quiz_completed', { source: 'homepage_quiz_restore' });
+    });
+  })();
+</script>

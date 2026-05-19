@@ -819,6 +819,7 @@
     <script src="{{ 'prime-motion.js' | asset_url }}" defer></script>
 
     {% render 'toast-notifications' %}
+    {% render 'prime-analytics-events' %}
     {% render 'prime-chatbot' %}
     {% if request.page_type == 'product' %}
       {% render 'sticky-add-to-cart', product: product %}
