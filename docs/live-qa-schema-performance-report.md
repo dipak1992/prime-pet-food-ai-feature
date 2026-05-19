@@ -13,7 +13,7 @@ Checked against `https://theprimepetfood.com` at a mobile viewport.
 | Cart | Loads with H1 `Your cart`. Chatbot present. |
 | FAQ | Loads with H1 `Answers for safer, calmer chew time.` Chatbot present. |
 | Safety hub | Loads with H1 `Yak Chew Safety & Science Hub`. Chatbot present. |
-| Prime Scale | Loads with H1 `The Prime Scale`. Chatbot present. |
+| Prime Pet Food Scale | Loads with H1 `The Prime Pet Food Scale`. Chatbot present. |
 | Chew Duration Predictor | Loads with H1 `How Long Will This Last For MY Dog?`. Chatbot present. |
 | Subscribe & Save | Loads with H1 `The calm-time routine that runs itself.` Chatbot present. |
 
@@ -28,7 +28,7 @@ Validated by fetching live HTML and parsing all `application/ld+json` blocks as 
 | Product page | 4 | 4 | `Product`, `BreadcrumbList`, `Organization`, `WebSite`, `DefinedTermSet`, `ItemList`, `WebApplication` |
 | FAQ page | 3 | 3 | `BreadcrumbList`, `Organization`, `WebSite`, `DefinedTermSet`, `ItemList`, `WebApplication`, `FAQPage` |
 | Safety hub | 4 | 4 | `BreadcrumbList`, `Organization`, `WebSite`, `CollectionPage`, `FAQPage`, `DefinedTermSet`, `ItemList`, `WebApplication` |
-| Prime Scale | 4 | 4 | `BreadcrumbList`, `Organization`, `WebSite`, `WebPage`, `FAQPage`, `DefinedTermSet`, `ItemList`, `WebApplication` |
+| Prime Pet Food Scale | 4 | 4 | `BreadcrumbList`, `Organization`, `WebSite`, `WebPage`, `FAQPage`, `DefinedTermSet`, `ItemList`, `WebApplication` |
 | Chew Duration Predictor | 4 | 4 | `BreadcrumbList`, `Organization`, `WebSite`, `WebApplication`, `FAQPage`, `DefinedTermSet`, `ItemList` |
 
 Google Rich Results and Schema.org Validator do not provide a stable local CLI/API in this repo, so the practical validation performed here confirms that all embedded JSON-LD is parseable and contains the expected rich-result schema types.
@@ -42,7 +42,7 @@ Live Core Web Vitals sampled with `agent-browser vitals`.
 | Homepage | 25ms | 316ms | 400ms | 0.01 |
 | Product page | 36.9ms | 1168ms | Not reported by tool | 0 |
 | Cart | 16.9ms | 532ms | 600ms | 0 |
-| Prime Scale | 13.6ms | 276ms | 384ms | 0 |
+| Prime Pet Food Scale | 13.6ms | 276ms | 384ms | 0 |
 | Chew Duration Predictor | 18.9ms | 288ms | 288ms | 0 |
 | Subscribe & Save | 18.3ms | 616ms | 616ms | 0 |
 
@@ -77,7 +77,7 @@ Chatbot category and answer tracking already existed through `prime_chatbot_*` e
 
 Added `docs/authority-outreach-roadmap.md` for the off-site work that cannot be completed inside the Shopify theme:
 
-- veterinarian or dental professional review of the Prime Scale
+- veterinarian or dental professional review of the Prime Pet Food Scale
 - trainer/behavior consultant quotes on canine decompression
 - founder interviews
 - Reddit/forum presence with transparent brand disclosure

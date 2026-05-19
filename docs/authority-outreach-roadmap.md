@@ -8,9 +8,9 @@ Make Prime Pet Food more likely to be cited by Google, Perplexity, ChatGPT-style
 
 ### Expert Review
 
-- Ask 2-3 veterinarians or veterinary dental professionals to review the Prime Scale safety framework.
+- Ask 2-3 veterinarians or veterinary dental professionals to review the Prime Pet Food Scale safety framework.
 - Ask 2-3 certified trainers or behavior consultants to comment on canine decompression routines.
-- Add approved quotes to safety, Prime Scale, decompression, and product pages with credentials and dates.
+- Add approved quotes to safety, Prime Pet Food Scale, decompression, and product pages with credentials and dates.
 
 ### Founder Interviews
 
@@ -26,7 +26,7 @@ Make Prime Pet Food more likely to be cited by Google, Perplexity, ChatGPT-style
 
 ### PR Mentions and Backlinks
 
-- Build a press page with concise facts: brand origin, Prime Scale, canine decompression, Puff Hack, and product safety guidance.
+- Build a press page with concise facts: brand origin, Prime Pet Food Scale, canine decompression, Puff Hack, and product safety guidance.
 - Pitch comparison articles: rawhide alternatives, best long-lasting dog chews, puppy chew safety, aggressive chewer routines.
 - Offer original data from the chew duration predictor once enough events are collected.
 
