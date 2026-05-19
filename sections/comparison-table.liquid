@@ -20,6 +20,51 @@
       {% endif %}
     </div>
 
+    <div class="yak-comparison__value-table" aria-label="Cost and safety comparison" data-motion-stagger="true">
+      <div class="yak-comparison__value-row yak-comparison__value-row--head">
+        <span>Metric</span>
+        <strong>Prime Pet Food</strong>
+        <span>Bully Sticks</span>
+        <span>Rawhide</span>
+        <span>Nylon Toys</span>
+      </div>
+      <div class="yak-comparison__value-row">
+        <span>Avg. Duration</span>
+        <strong>67 min</strong>
+        <span>15 min</span>
+        <span>20 min</span>
+        <span>Varies</span>
+      </div>
+      <div class="yak-comparison__value-row yak-comparison__value-row--highlight">
+        <span>Price per Hour</span>
+        <strong>~$0.22</strong>
+        <span>~$0.80</span>
+        <span>~$0.35</span>
+        <span>N/A</span>
+      </div>
+      <div class="yak-comparison__value-row">
+        <span>Digestibility</span>
+        <strong>High</strong>
+        <span>High</span>
+        <span>Low</span>
+        <span>None</span>
+      </div>
+      <div class="yak-comparison__value-row">
+        <span>Splinter Risk</span>
+        <strong>Low when supervised</strong>
+        <span>Moderate</span>
+        <span>High</span>
+        <span>Wear/shavings</span>
+      </div>
+      <div class="yak-comparison__value-row">
+        <span>Ingredients</span>
+        <strong>4 natural</strong>
+        <span>Single, greasy</span>
+        <span>Chemical-processed</span>
+        <span>Synthetic</span>
+      </div>
+    </div>
+
     <div class="yak-comparison__table-wrap" data-motion="reveal" data-motion-delay="80">
       <div class="yak-comparison__table">
         <div class="yak-comparison__row yak-comparison__row--head">
@@ -197,6 +242,70 @@
       margin: 0;
     }
 
+    #{{ section_id }} .yak-comparison__value-table {
+      border: 1px solid rgba(184, 95, 50, 0.18);
+      border-radius: 22px;
+      background: #fffaf2;
+      box-shadow: 0 18px 46px rgba(43, 20, 8, 0.07);
+      margin: 0 auto 18px;
+      max-width: 1080px;
+      overflow: hidden;
+    }
+
+    #{{ section_id }} .yak-comparison__value-row {
+      display: grid;
+      grid-template-columns: 1.12fr repeat(4, minmax(0, 1fr));
+      border-bottom: 1px solid rgba(184, 95, 50, 0.13);
+      min-height: 54px;
+    }
+
+    #{{ section_id }} .yak-comparison__value-row:last-child {
+      border-bottom: 0;
+    }
+
+    #{{ section_id }} .yak-comparison__value-row > * {
+      align-items: center;
+      border-right: 1px solid rgba(184, 95, 50, 0.1);
+      color: #5f574e;
+      display: flex;
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1.25;
+      padding: 12px 14px;
+    }
+
+    #{{ section_id }} .yak-comparison__value-row > *:last-child {
+      border-right: 0;
+    }
+
+    #{{ section_id }} .yak-comparison__value-row > :first-child {
+      color: #2b1408;
+      font-weight: 850;
+    }
+
+    #{{ section_id }} .yak-comparison__value-row strong {
+      background: linear-gradient(135deg, #2b1408, #4d2412);
+      color: #fffaf2;
+      font-weight: 900;
+    }
+
+    #{{ section_id }} .yak-comparison__value-row--head {
+      background: #2b1408;
+    }
+
+    #{{ section_id }} .yak-comparison__value-row--head > * {
+      color: #fffaf2;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    #{{ section_id }} .yak-comparison__value-row--head strong,
+    #{{ section_id }} .yak-comparison__value-row--highlight strong {
+      background: #d2632e;
+      color: #ffffff;
+    }
+
     #{{ section_id }} .yak-comparison__table-wrap {
       overflow-x: auto;
       padding: 2px;
@@ -369,6 +478,65 @@
       #{{ section_id }} .yak-comparison__table-wrap {
         display: none;
       }
+
+      #{{ section_id }} .yak-comparison__value-table {
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+        display: grid;
+        gap: 12px;
+        margin-bottom: 18px;
+        overflow: visible;
+      }
+
+      #{{ section_id }} .yak-comparison__value-row {
+        background: #fffaf2;
+        border: 1px solid rgba(184, 95, 50, 0.18);
+        border-radius: 18px;
+        box-shadow: 0 12px 28px rgba(43, 20, 8, 0.07);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: unset;
+        overflow: hidden;
+      }
+
+      #{{ section_id }} .yak-comparison__value-row--head {
+        display: none;
+      }
+
+      #{{ section_id }} .yak-comparison__value-row > * {
+        border-right: 0;
+        border-bottom: 1px solid rgba(184, 95, 50, 0.12);
+        font-size: 12px;
+        padding: 10px 12px;
+      }
+
+      #{{ section_id }} .yak-comparison__value-row > :first-child {
+        background: #2b1408;
+        color: #fffaf2;
+        font-size: 13px;
+        grid-column: 1 / -1;
+      }
+
+      #{{ section_id }} .yak-comparison__value-row > *::before {
+        color: #8b6a57;
+        display: block;
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.06em;
+        line-height: 1;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+      }
+
+      #{{ section_id }} .yak-comparison__value-row > :first-child::before {
+        display: none;
+      }
+
+      #{{ section_id }} .yak-comparison__value-row > :nth-child(2)::before { content: "Prime"; }
+      #{{ section_id }} .yak-comparison__value-row > :nth-child(3)::before { content: "Bully"; }
+      #{{ section_id }} .yak-comparison__value-row > :nth-child(4)::before { content: "Rawhide"; }
+      #{{ section_id }} .yak-comparison__value-row > :nth-child(5)::before { content: "Nylon"; }
 
       #{{ section_id }} .yak-comparison__mobile-hint {
         display: block;

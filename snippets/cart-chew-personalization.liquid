@@ -237,8 +237,8 @@
 
         if (profile && recommendation) {
           var dogName = profile.dogName || formatBreed(profile.breed);
-          title.textContent = dogName + "'s chew match";
-          copy.textContent = 'Recommended before checkout: ' + recommendation.size + ' for a supervised calm-time routine.';
+          title.textContent = dogName + "'s calm-time routine";
+          copy.textContent = 'Recommended before checkout: ' + recommendation.size + ' for a supervised enrichment plan with safer sizing and nub guidance.';
           size.textContent = recommendation.variantTitle + ' size';
           duration.textContent = recommendation.durationRange || recommendation.duration + ' minutes';
           style.textContent = (profile.chewStyle || 'moderate') + ' chewer';
@@ -279,7 +279,7 @@
         } else {
           /* No profile — show compact quiz teaser instead of full widget */
           title.textContent = 'Match the chew before checkout';
-          copy.textContent = 'Answer four questions to estimate chew duration, size fit, and calm-time usefulness for your dog.';
+          copy.textContent = 'Answer four questions to build a chew size, duration estimate, and personalized calm-time plan for your dog.';
           facts.hidden = true;
           if (addButton) addButton.hidden = true;
           root.classList.add('cart-chew-plan--no-profile');

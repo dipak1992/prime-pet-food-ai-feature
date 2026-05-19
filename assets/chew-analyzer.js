@@ -270,9 +270,46 @@ CA._selectCard=function(card,stepNum){
   },350);
 };
 
+function buildCalmRoutine(result, answers) {
+  var chewStyle = answers.chewStyle || 'moderate';
+  var age = answers.age || 'adult';
+  var time = 'after dinner or before your household wind-down';
+  var setup = 'Use a quiet mat, fresh water, and a supervised 20-30 minute first session.';
+  var safety = 'Remove the final small nub before it becomes small enough to swallow.';
+  var guide = 'Breed-Specific Enrichment Guide';
+
+  if (chewStyle === 'aggressive') {
+    time = 'after exercise, training, or the most destructive part of the day';
+    setup = 'Start with a sized-up chew and a shorter supervised session so you can watch jaw pressure and pace.';
+    safety = 'Use the safety pre-soak: soak the chew in warm water for 5-10 minutes for the first session, then remove the small nub and puff it separately.';
+  } else if (chewStyle === 'gentle') {
+    time = 'crate time, evening settling, or a quiet work-from-home window';
+    setup = 'Offer shorter low-pressure sessions and let your dog revisit the chew over multiple calm moments.';
+  }
+
+  if (age === 'puppy') {
+    time = 'after play or training, when your puppy is ready to settle';
+    setup = 'Keep sessions short, choose a chew too large to swallow, and pause if puppy teeth seem sensitive.';
+    guide = 'Puppy Enrichment Guide';
+  } else if (age === 'senior') {
+    time = 'a calm afternoon or evening routine when you can watch comfortably';
+    setup = 'Check dental comfort first and ask your vet if your dog has weak, missing, or sensitive teeth.';
+    guide = 'Senior Dog Enrichment Guide';
+  }
+
+  return {
+    time: time,
+    setup: setup,
+    safety: safety,
+    guide: guide,
+    headline: result.product.size + ' Yak Chew calm routine'
+  };
+}
+
 CA._showResults=function(){
   var a=this.answers;
   var r=analyze(a.breed,a.weight,a.chewStyle,a.age);
+  var routine=buildCalmRoutine(r,a);
   var box=this.el.querySelector('.ca-results');
   var bHTML=r.benefits.map(function(b){return '<div class="ca-result__benefit"><span class="ca-result__benefit-icon">'+b.icon+'</span><span>'+b.text+'</span></div>';}).join('');
   box.innerHTML=
@@ -293,6 +330,15 @@ CA._showResults=function(){
       '</div>'+
     '</div>'+
     '<div class="ca-result__benefits"><h4 class="ca-result__benefits-title">Best For:</h4>'+bHTML+'</div>'+
+    '<div class="ca-result__routine">'+
+      '<span class="ca-result__routine-kicker">Personalized Enrichment Plan</span>'+
+      '<h4 class="ca-result__routine-title">'+routine.headline+'</h4>'+
+      '<div class="ca-result__routine-grid">'+
+        '<div><strong>Best time</strong><span>'+routine.time+'</span></div>'+
+        '<div><strong>First session</strong><span>'+routine.setup+'</span></div>'+
+        '<div><strong>Safety note</strong><span>'+routine.safety+'</span></div>'+
+      '</div>'+
+    '</div>'+
     '<div class="ca-result__recommendation">'+
       '<h4 class="ca-result__rec-title">Recommended for your dog:</h4>'+
       '<div class="ca-result__rec-product"><span class="ca-result__rec-size">'+r.product.size+' Yak Chew</span><span class="ca-result__rec-bundle">'+r.product.bundle+' ('+r.product.count+')</span></div>'+
@@ -300,10 +346,10 @@ CA._showResults=function(){
     '<form class="ca-result__email" data-action="email-capture" method="post" action="/contact#contact_form">'+
       '<input type="hidden" name="form_type" value="customer">'+
       '<input type="hidden" name="utf8" value="✓">'+
-      '<input type="hidden" name="contact[tags]" value="chew-analyzer,chew-recommendation">'+
-      '<label class="ca-result__email-label">Get this recommendation by email</label>'+
+      '<input type="hidden" name="contact[tags]" value="chew-analyzer,chew-recommendation,enrichment-guide">'+
+      '<label class="ca-result__email-label">Email my '+routine.guide+'</label>'+
       '<div class="ca-result__email-row"><input type="email" name="contact[email]" placeholder="Email address" required><button type="submit">Send</button></div>'+
-      '<p class="ca-result__email-note">Chew tips, size guidance, and Prime Pet Food offers. No spam.</p>'+
+      '<p class="ca-result__email-note">Includes your chew size, calm-time routine, safety reminders, and breed-aware enrichment tips.</p>'+
     '</form>'+
     '<div class="ca-result__actions">'+
       '<button class="ca-result__btn ca-result__btn--primary" data-action="add-to-cart">Add Recommended Pack</button>'+
