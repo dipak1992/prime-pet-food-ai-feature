@@ -21,6 +21,7 @@
   assign ingredient_lime_image = 'prime-home-ingredient-lime.jpg' | asset_url
   assign ingredient_salt_image = 'prime-home-ingredient-salt.jpg' | asset_url
   assign founder_image = 'prime-founder.png' | asset_url
+  assign himalayan_story_image = 'prime-himalayan-yak-story-hero.jpg' | asset_url
   assign calm_cta_image = 'prime-home-calm-cta-bg.jpg' | asset_url
 
   assign hero_headline = section.settings.hero_headline | default: 'Calmer dogs start with a better chew.'
@@ -287,6 +288,41 @@
         <span>Free shipping over $30</span>
         <span>30-day satisfaction guarantee</span>
         <span>Rawhide-free, 4-ingredient chews</span>
+        <span>Himalayan-inspired, packed in USA</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       HIMALAYAN STORY — Origin proof after size selection
+  ════════════════════════════════════════════════════════════════ -->
+  <div class="ph-himalayan-story ph-reveal" aria-labelledby="PrimeHimalayanStoryTitle">
+    <div class="ph-shell ph-himalayan-story__inner">
+      <div class="ph-himalayan-story__media" data-motion="image-reveal">
+        <img
+          src="{{ himalayan_story_image }}"
+          alt="Yak in the Himalayan mountains representing Prime Pet Food's Himalayan-inspired yak cheese chew tradition"
+          loading="lazy"
+          width="1586"
+          height="992"
+        >
+      </div>
+      <div class="ph-himalayan-story__copy" data-motion-stagger="true">
+        <p class="ph-kicker">From the Himalayas to your dog</p>
+        <h2 id="PrimeHimalayanStoryTitle" data-motion="reveal">Inspired by Himalayan tradition. Crafted for modern calm.</h2>
+        <p>
+          Prime Pet Food yak cheese chews are inspired by traditional Himalayan cheese-making and made for dog parents who want a rawhide-free, long-lasting chew with simple natural ingredients.
+        </p>
+        <p>
+          The result is a premium enrichment ritual: dense Himalayan yak cheese texture, a cleaner indoor chew, and calm-time structure for dogs who need a job.
+        </p>
+        <div class="ph-himalayan-story__signals" aria-label="Prime Pet Food origin and quality signals">
+          <span>Himalayan yak cheese</span>
+          <span>Inspired by Nepalese tradition</span>
+          <span>Rawhide-free</span>
+          <span>Packed in USA</span>
+        </div>
+        <a href="/pages/how-himalayan-yak-cheese-chews-are-made" class="ph-himalayan-story__link">See how yak chews are made</a>
       </div>
     </div>
   </div>
@@ -1239,6 +1275,7 @@
   ════════════════════════════════════════════════════════════════ */
   .ph-products,
   .ph-outcomes,
+  .ph-himalayan-story,
   .ph-subscribe,
   .ph-reviews,
   .ph-compare,
@@ -1269,6 +1306,106 @@
 
   #prime-home-shop {
     scroll-margin-top: 120px;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     HIMALAYAN STORY
+  ════════════════════════════════════════════════════════════════ */
+  .ph-himalayan-story {
+    background:
+      radial-gradient(circle at 16% 10%, rgba(210, 99, 46, 0.08), transparent 34%),
+      linear-gradient(180deg, #fffaf2 0%, #f7efe4 100%);
+    overflow: hidden;
+  }
+
+  .ph-himalayan-story__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.82fr);
+    gap: clamp(28px, 5vw, 68px);
+    align-items: center;
+  }
+
+  .ph-himalayan-story__media {
+    position: relative;
+    min-height: 420px;
+    overflow: hidden;
+    border-radius: 28px;
+    background: var(--ph-ink);
+    box-shadow: 0 24px 70px rgba(43, 20, 8, 0.16);
+  }
+
+  .ph-himalayan-story__media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, transparent 48%, rgba(23, 21, 18, 0.32) 100%),
+      linear-gradient(90deg, rgba(23, 21, 18, 0.12) 0%, transparent 46%);
+    pointer-events: none;
+  }
+
+  .ph-himalayan-story__media img {
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+    display: block;
+    object-fit: cover;
+    object-position: 50% 48%;
+  }
+
+  .ph-himalayan-story__copy {
+    max-width: 560px;
+  }
+
+  .ph-himalayan-story__copy h2 {
+    max-width: 10ch;
+  }
+
+  .ph-himalayan-story__copy p:not(.ph-kicker) {
+    margin: 16px 0 0;
+  }
+
+  .ph-himalayan-story__signals {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .ph-himalayan-story__signals span {
+    display: inline-flex;
+    min-height: 38px;
+    align-items: center;
+    border: 1px solid rgba(210, 99, 46, 0.18);
+    border-radius: 999px;
+    padding: 9px 13px;
+    background: rgba(255, 255, 255, 0.72);
+    color: var(--ph-ink);
+    font-size: 12px;
+    line-height: 1.2;
+    font-weight: 780;
+  }
+
+  .ph-himalayan-story__link {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 28px;
+    border-radius: 999px;
+    padding: 0 22px;
+    background: var(--ph-ink);
+    color: #fffaf2;
+    font-size: 13px;
+    line-height: 1;
+    font-weight: 820;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .ph-himalayan-story__link:hover {
+    background: var(--ph-clay);
+    color: #fffaf2;
   }
 
   /* ═══════════════════════════════════════════════════════════════
@@ -2439,6 +2576,7 @@
     .ph-fit__grid,
     .ph-reviews__grid,
     .ph-outcomes__inner,
+    .ph-himalayan-story__inner,
     .ph-faq__inner,
     .ph-craft__inner {
       grid-template-columns: 1fr;
@@ -2625,6 +2763,7 @@
 
     .ph-products,
     .ph-outcomes,
+    .ph-himalayan-story,
     .ph-subscribe,
     .ph-reviews,
     .ph-compare,
@@ -2822,6 +2961,41 @@
 
     .ph-ingredients__grid {
       grid-template-columns: 1fr;
+    }
+
+    .ph-himalayan-story__inner {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .ph-himalayan-story__media {
+      min-height: 320px;
+      border-radius: 22px;
+    }
+
+    .ph-himalayan-story__media img {
+      object-position: 48% 50%;
+    }
+
+    .ph-himalayan-story__copy h2 {
+      max-width: 100%;
+    }
+
+    .ph-himalayan-story__signals {
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .ph-himalayan-story__signals span {
+      min-height: 34px;
+      padding: 8px 11px;
+      font-size: 11px;
+    }
+
+    .ph-himalayan-story__link {
+      width: 100%;
+      min-height: 52px;
+      margin-top: 22px;
     }
 
     .ph-outcomes__grid article {
