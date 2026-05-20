@@ -286,6 +286,7 @@
         <a href="/collections/all">Shop the full collection &rarr;</a>
       </div>
       <div class="ph-confidence" aria-label="Shopping confidence">
+        <span>100% natural, long-lasting enrichment</span>
         <span>Free shipping over $30</span>
         <span>30-day satisfaction guarantee</span>
         <span>Rawhide-free, 4-ingredient chews</span>
@@ -1807,16 +1808,18 @@
   }
 
   .ph-confidence {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 10px;
+    width: min(100%, 1120px);
     margin-top: 18px;
+    margin-inline: auto;
   }
 
   .ph-confidence span {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     min-height: 36px;
     padding: 8px 14px;
     border: 1px solid var(--ph-line);
@@ -1826,6 +1829,7 @@
     font-size: 13px;
     line-height: 1.2;
     font-weight: 700;
+    text-align: center;
   }
 
   .ph-size-scale {
@@ -2707,6 +2711,15 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .ph-confidence {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-width: 560px;
+    }
+
+    .ph-confidence span:first-child {
+      grid-column: 1 / -1;
+    }
+
     .ph-outcomes__copy {
       position: static;
     }
@@ -2880,6 +2893,19 @@
 
     .ph-trust-bar__stat strong {
       font-size: 18px;
+    }
+
+    .ph-confidence {
+      grid-template-columns: 1fr;
+      gap: 8px;
+      max-width: 420px;
+      margin-top: 14px;
+    }
+
+    .ph-confidence span {
+      min-height: 40px;
+      padding: 9px 12px;
+      font-size: 12px;
     }
 
     .ph-products,
