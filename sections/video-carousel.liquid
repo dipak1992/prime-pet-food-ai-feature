@@ -296,8 +296,10 @@
 }
 
 #DP--{{ section_id }} .onhow__sound-button {
+  appearance: none;
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0.5);
+  border: 0;
   border-radius: 50%;
   position: absolute;
   bottom: 0;
@@ -310,10 +312,76 @@
   background-size: 65%;
   background-position: center center;
   background-repeat: no-repeat;
+  z-index: 5;
 }
 
 #DP--{{ section_id }} .onhow__sound-button--on {
   background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' xmlns='http://www.w3.org/2000/svg' fill-rule='evenodd' clip-rule='evenodd'%3E%3Cpath d='M15 23l-9.309-6h-5.691v-10h5.691l9.309-6v22zm-9-15.009v8.018l8 5.157v-18.332l-8 5.157zm14.228-4.219c2.327 1.989 3.772 4.942 3.772 8.229 0 3.288-1.445 6.241-3.77 8.229l-.708-.708c2.136-1.791 3.478-4.501 3.478-7.522s-1.342-5.731-3.478-7.522l.706-.706zm-2.929 2.929c1.521 1.257 2.476 3.167 2.476 5.299 0 2.132-.955 4.042-2.476 5.299l-.706-.706c1.331-1.063 2.182-2.729 2.182-4.591 0-1.863-.851-3.529-2.184-4.593l.708-.708zm-12.299 1.299h-4v8h4v-8z'/%3E%3C/svg%3E");
+}
+
+#DP--{{ section_id }} .onhow__play-button {
+  appearance: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 6;
+  width: 58px;
+  height: 58px;
+  border: 1px solid rgba(255, 250, 243, 0.72);
+  border-radius: 999px;
+  background: rgba(43, 20, 8, 0.74);
+  color: #fffaf3;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.24);
+  transition: transform 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+}
+
+#DP--{{ section_id }} .onhow__play-button:hover {
+  background: rgba(225, 102, 16, 0.88);
+  transform: translate(-50%, -50%) scale(1.04);
+}
+
+#DP--{{ section_id }} .onhow__play-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 52%;
+  width: 0;
+  height: 0;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-left: 18px solid currentColor;
+  transform: translate(-50%, -50%);
+}
+
+#DP--{{ section_id }} .onhow__play-button.is-playing::before,
+#DP--{{ section_id }} .onhow__play-button.is-playing::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 6px;
+  height: 23px;
+  border: 0;
+  background: currentColor;
+  transform: translateY(-50%);
+}
+
+#DP--{{ section_id }} .onhow__play-button.is-playing::before {
+  left: 21px;
+}
+
+#DP--{{ section_id }} .onhow__play-button.is-playing::after {
+  left: 31px;
+}
+
+#DP--{{ section_id }} .onhow__play-button.is-playing {
+  opacity: 0;
+}
+
+#DP--{{ section_id }} .onhow__video-wrapper:hover .onhow__play-button.is-playing,
+#DP--{{ section_id }} .onhow__video-wrapper:focus-within .onhow__play-button.is-playing {
+  opacity: 1;
 }
 
 #DP--{{ section_id }} .onhow__text-area {
@@ -443,6 +511,15 @@
     transform: scale(1.2);
   }
 
+  #DP--{{ section_id }} .onhow__play-button {
+    width: 54px;
+    height: 54px;
+  }
+
+  #DP--{{ section_id }} .onhow__play-button.is-playing {
+    opacity: 0.88;
+  }
+
   #DP--{{ section_id }} .onhow__videos-nav {
     margin-top: {{ section.settings.navigation_spacing | divided_by: 1.5 }}px;
   }
@@ -483,7 +560,8 @@
                           {%- if source.format == 'mp4' or source.format == 'mov' -%}<source src="{{ source.url }}">{%- endif -%}
                         {%- endfor -%}
                       </video>
-                      <div class="onhow__sound-button"></div>
+                      <button class="onhow__play-button" type="button" aria-label="Play video"></button>
+                      <button class="onhow__sound-button" type="button" aria-label="Turn sound on"></button>
                     </div>
                   {%- else -%}
          
@@ -494,7 +572,8 @@
                       playsinline loop muted loading="lazy">
                         <source src="https://cdn.shopify.com/videos/c/o/v/{{ background_placeholder_video_id }}.mp4" data-onhow-default-src>
                     </video>
-                    <div class="onhow__sound-button"></div>
+                    <button class="onhow__play-button" type="button" aria-label="Play video"></button>
+                    <button class="onhow__sound-button" type="button" aria-label="Turn sound on"></button>
                   </div>
                   {%- endif -%}
                   {%- unless block.settings.product == blank -%}
@@ -760,6 +839,50 @@
     settings: {},
     load: function(section){
       const elem = section.querySelector(`#slider-${onhow.settings.id}`);
+      const videos = Array.from(section.querySelectorAll('video'));
+      const playButtons = Array.from(section.querySelectorAll('.onhow__play-button'));
+      const soundButtons = Array.from(section.querySelectorAll('.onhow__sound-button'));
+
+      const syncVideoButtons = function() {
+        videos.forEach((video, index) => {
+          const button = playButtons[index];
+          if (!button) return;
+
+          const isPlaying = !video.paused && !video.ended;
+          button.classList.toggle('is-playing', isPlaying);
+          button.setAttribute('aria-label', isPlaying ? 'Pause video' : 'Play video');
+        });
+      };
+
+      const pauseOtherVideos = function(activeVideo) {
+        videos.forEach((video) => {
+          if (video !== activeVideo) video.pause();
+        });
+      };
+
+      const toggleVideo = function(index) {
+        const video = videos[index];
+        if (!video) return;
+
+        pauseOtherVideos(video);
+
+        if (video.paused || video.ended) {
+          const playPromise = video.play();
+          if (playPromise && typeof playPromise.catch === 'function') {
+            playPromise.catch(syncVideoButtons);
+          }
+        } else {
+          video.pause();
+        }
+
+        syncVideoButtons();
+      };
+
+      videos.forEach((video) => {
+        video.addEventListener('play', syncVideoButtons);
+        video.addEventListener('pause', syncVideoButtons);
+        video.addEventListener('ended', syncVideoButtons);
+      });
 
       onhow.flkty = new Flickity( elem, {
         cellAlign: JSON.parse(getComputedStyle(section).getPropertyValue('--cell-align')),
@@ -776,38 +899,16 @@
           staticClick: function( event, pointer, cellElement, cellIndex ) {
             if ( typeof cellIndex == 'number' ) {
               this.selectCell( cellIndex );
-              const videos = section.querySelectorAll('video');
-              if (videos.length) {
-                videos.forEach(video => video.pause());
-                videos[cellIndex].play();
-                const activeCheck = videos[cellIndex].parentNode.querySelector('.onhow__sound-button').classList.contains('onhow__sound-button--on');
-                if (activeCheck) {
-                  videos[cellIndex].muted = false;
-                }
-              }
             }
-
           },
           change: function() {
-            const cellIndex = this.selectedIndex;
-
-            const videos = section.querySelectorAll('video');
-            if (videos.length) {
-              videos.forEach(video => video.pause());
-              videos[cellIndex].play();
-              const activeCheck = videos[cellIndex].parentNode.querySelector('.onhow__sound-button').classList.contains('onhow__sound-button--on');
-              if (activeCheck) {
-                videos[cellIndex].muted = false;
-              }
-            }
+            videos.forEach(video => video.pause());
+            syncVideoButtons();
           },
           ready: () => {
             setTimeout(() => {
               elem.classList.add('onhow__stretch-height');
-              const videos = section.querySelectorAll('video');
-              if (videos.length) {
-                videos[0].play();
-              }
+              syncVideoButtons();
             }, 500);
           }
         }
@@ -827,24 +928,49 @@
         });
       }
 
-      var soundButtons = section.querySelectorAll('.onhow__sound-button');
+      if (playButtons.length) {
+        playButtons.forEach((button, index) => {
+          button.addEventListener('click', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            if (onhow.flkty && onhow.flkty.selectedIndex !== index) {
+              onhow.flkty.selectCell(index);
+              window.setTimeout(() => toggleVideo(index), 80);
+            } else {
+              toggleVideo(index);
+            }
+          });
+        });
+      }
+
       if (typeof soundButtons != 'undefined' && soundButtons != null) {
         soundButtons.forEach((button, index) => {
-          button.addEventListener('click', function() {
-            const videos = section.querySelectorAll('video');
-            if (videos.length) {
-              videos.forEach(video => video.muted = true);
-              const selectedVideo = videos[onhow.flkty.selectedIndex];
+          button.addEventListener('click', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
 
-              if (button.classList.contains('onhow__sound-button--on')) {
-                selectedVideo.muted = true;
+            const selectedVideo = videos[index];
+            if (selectedVideo) {
+              const nextMuted = !selectedVideo.muted ? true : false;
+              videos.forEach((video, videoIndex) => {
+                const videoButton = soundButtons[videoIndex];
+                video.muted = true;
+                if (videoButton) {
+                  videoButton.classList.remove('onhow__sound-button--on');
+                  videoButton.setAttribute('aria-label', 'Turn sound on');
+                }
+              });
+
+              selectedVideo.muted = nextMuted;
+              if (!nextMuted) {
+                button.classList.add('onhow__sound-button--on');
+                button.setAttribute('aria-label', 'Turn sound off');
               } else {
-                selectedVideo.muted = false;
+                button.classList.remove('onhow__sound-button--on');
+                button.setAttribute('aria-label', 'Turn sound on');
               }
-
-              soundButtons.forEach(button => button.classList.toggle('onhow__sound-button--on'));
             }
-            return false;
           });
         });
       }
