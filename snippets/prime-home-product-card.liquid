@@ -1,16 +1,46 @@
+{%- liquid
+  assign card_url = '/collections/all'
+  if product != blank
+    assign card_url = product.url
+  endif
+  if product != blank and variant != blank
+    assign card_url = product.url | append: '?variant=' | append: variant.id
+  endif
+
+  assign package_media = blank
+  if variant != blank and variant.featured_media != blank
+    assign package_media = variant.featured_media.preview_image
+  elsif product != blank and product.featured_media != blank
+    assign package_media = product.featured_media.preview_image
+  elsif product != blank and product.featured_image != blank
+    assign package_media = product.featured_image
+  endif
+-%}
+
 <article class="ph-product-card">
   {% if image != blank %}
-    <div class="ph-product-card__media">
+    <a class="ph-product-card__media ph-product-card__media-link" href="{{ card_url }}" aria-label="View {{ title | escape }} details">
       <img src="{{ image }}" alt="{{ image_alt | escape }}" loading="lazy" width="1024" height="1024">
+      {% if package_media != blank %}
+        <span class="ph-product-card__pack" aria-hidden="true">
+          <img
+            src="{{ package_media | image_url: width: 420 }}"
+            alt=""
+            loading="lazy"
+            width="420"
+            height="420"
+          >
+        </span>
+      {% endif %}
       {% if label != blank %}
         <span class="ph-product-card__label">{{ label }}</span>
       {% endif %}
-    </div>
+    </a>
   {% endif %}
 
   <div class="ph-product-card__body">
     <span class="ph-product-card__badge">{{ badge }}</span>
-    <h3>{{ title }}</h3>
+    <h3><a href="{{ card_url }}">{{ title }}</a></h3>
     <span class="ph-product-card__fit">{{ fit }}</span>
     {% if best_for != blank %}
       <span class="ph-product-card__best">Best for {{ best_for }}</span>
@@ -31,7 +61,7 @@
         </button>
       </form>
     {% elsif product != blank %}
-      <a href="{{ product.url }}" class="ph-product-card__link">View product</a>
+      <a href="{{ card_url }}" class="ph-product-card__link">View product</a>
     {% else %}
       <a href="/collections/all" class="ph-product-card__link">Shop chews</a>
     {% endif %}
