@@ -35,6 +35,7 @@
     },
     "main": {
       "type": "main-product",
+      "disabled": true,
       "blocks": {
         "title_3qyCbh": {
           "type": "title",
@@ -783,7 +784,7 @@
       "custom_css": [],
       "name": "YPC Product Hero",
       "settings": {
-        "hero_lead": "",
+        "hero_lead": "Dense Himalayan yak cheese chews for supervised calm-time, cleaner enrichment, and dogs who need a long-lasting job.",
         "hero_rating_text": "4.9★ from 2,400+ dog parents",
         "hero_benefit_1": "100% Natural",
         "hero_benefit_2": "Long-Lasting",
@@ -793,9 +794,9 @@
         "hero_benefit_6": "Safer Alternative",
         "show_vet_badge": false,
         "vet_badge_text": "RAWHIDE-FREE",
-        "show_reviews": false,
+        "show_reviews": true,
         "review_stars": "★★★★★",
-        "review_text": "Chew matched by dog size and style",
+        "review_text": "4.9 from 2,400+ dog parents",
         "show_info_line": true,
         "per_chew_prefix": "$0.22 per hour of calm time",
         "shipping_text": "Free shipping over $30",
@@ -1366,21 +1367,21 @@
   "order": [
     "breadcrumbs",
     "prime_product_trust_bar",
-    "main",
     "ypc_product_hero_AXmQHp",
+    "product_trust_stack",
+    "chew_analyzer_widget",
     "why_prime",
     "ypc_product_tab_QnMPYB",
-    "product_trust_stack",
-    "prime_product_routine_upsell",
-    "chew_analyzer_widget",
     "prime_duration_guarantee",
-    "breed_review_highlights",
     "two_treats_in_one_C8mxDb",
+    "breed_review_highlights",
     "comparison_table_URRwp9",
     "video_carousel_6EkF8r",
+    "prime_product_routine_upsell",
     "prime_seo_internal_links",
     "faqs_tVaRYD",
     "related-products",
-    "prime_sticky_atc"
+    "prime_sticky_atc",
+    "main"
   ]
 }
