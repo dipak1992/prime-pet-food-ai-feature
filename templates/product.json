@@ -30,7 +30,12 @@
         "stat4_value": "30-day",
         "stat4_label": "Satisfaction guarantee",
         "stat5_value": "Free",
-        "stat5_label": "Shipping over $30"
+        "stat5_label": "Shipping over $30",
+        "stat6_value": "Impact",
+        "stat6_label": "Supports Nepali makers",
+        "show_impact_note": true,
+        "impact_kicker": "Every chew matters",
+        "impact_text": "Each purchase helps keep our sourcing tied to Nepali Himalayan farming families and supports Prime Pet Food's rural education commitment."
       }
     },
     "main": {

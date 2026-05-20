@@ -63,15 +63,22 @@
 
     <div class="pptb__item">
       <div class="pptb__icon" aria-hidden="true">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        {% render 'prime-blueprint-icon', name: 'impact', size: 22 %}
       </div>
       <div class="pptb__text">
-        <strong>{{ section.settings.stat6_value | default: 'Nepal' }}</strong>
-        <span>{{ section.settings.stat6_label | default: 'Supporting farming families' }}</span>
+        <strong>{{ section.settings.stat6_value | default: 'Impact' }}</strong>
+        <span>{{ section.settings.stat6_label | default: 'Supports Nepali makers' }}</span>
       </div>
     </div>
 
   </div>
+
+  {% if section.settings.show_impact_note %}
+    <div class="pptb__impact page-width" aria-label="Prime Pet Food impact promise">
+      <span>{{ section.settings.impact_kicker | default: 'Every chew matters' }}</span>
+      <p>{{ section.settings.impact_text | default: "Each purchase helps keep our sourcing tied to Nepali Himalayan farming families and supports Prime Pet Food's rural education commitment." }}</p>
+    </div>
+  {% endif %}
 </div>
 
 <style>
@@ -162,6 +169,43 @@
     flex-shrink: 0;
   }
 
+  .pptb__impact {
+    max-width: 960px;
+    margin: 10px auto 0;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+    color: #46382d;
+  }
+
+  .pptb__impact span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 26px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #fff8ef;
+    border: 1px solid rgba(184, 95, 50, 0.2);
+    color: #94451f;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .pptb__impact p {
+    margin: 0;
+    max-width: 720px;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
   @media (max-width: 860px) {
     .pptb__inner {
       justify-content: flex-start;
@@ -184,6 +228,13 @@
 
     .pptb__divider {
       height: 24px;
+    }
+
+    .pptb__impact {
+      justify-content: flex-start;
+      text-align: left;
+      padding: 10px 18px 0;
+      gap: 9px;
     }
   }
 
@@ -208,6 +259,16 @@
     .pptb__icon {
       width: 34px;
       height: 34px;
+    }
+
+    .pptb__impact {
+      align-items: flex-start;
+      flex-direction: column;
+      padding-inline: 16px;
+    }
+
+    .pptb__impact p {
+      font-size: 12px;
     }
   }
 </style>
@@ -275,6 +336,36 @@
       "id": "stat5_label",
       "label": "Stat 5 label",
       "default": "Shipping over $30"
+    },
+    {
+      "type": "text",
+      "id": "stat6_value",
+      "label": "Stat 6 value",
+      "default": "Impact"
+    },
+    {
+      "type": "text",
+      "id": "stat6_label",
+      "label": "Stat 6 label",
+      "default": "Supports Nepali makers"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_impact_note",
+      "label": "Show impact promise",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "impact_kicker",
+      "label": "Impact kicker",
+      "default": "Every chew matters"
+    },
+    {
+      "type": "textarea",
+      "id": "impact_text",
+      "label": "Impact text",
+      "default": "Each purchase helps keep our sourcing tied to Nepali Himalayan farming families and supports Prime Pet Food's rural education commitment."
     }
   ],
   "presets": [
