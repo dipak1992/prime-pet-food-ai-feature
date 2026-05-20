@@ -10,6 +10,11 @@
   assign small_dog_chew_image = 'prime-home-small-dog-chew.jpg' | asset_url
   assign medium_dog_chew_image = 'prime-home-medium-dog-chew.jpg' | asset_url
   assign large_dog_chew_image = 'prime-home-large-dog-chew.jpg' | asset_url
+  assign small_pack_image = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/67d79f7746f7bb9163a28c42.png?v=1742509234'
+  assign medium_pack_image = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/67d79f7446f7bb9163a28c28.png?v=1742509238'
+  assign large_pack_image = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/products/natural-himalayan-yak-cheese-large-chews.jpg?v=1728374553'
+  assign extra_large_pack_image = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/67d79f6b46f7bb9163a28b50.png?v=1742191612'
+  assign jumbo_pack_image = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/67d79f7546f7bb9163a28c2c.png?v=1742191613'
   assign subscribe_dog_image = 'prime-home-subscribe-dog-box.jpg' | asset_url
   assign ingredient_yak_milk_image = 'prime-home-ingredient-yak-milk.jpg' | asset_url
   assign ingredient_cow_milk_image = 'prime-home-ingredient-cow-milk.jpg' | asset_url
@@ -200,6 +205,7 @@
           product: product,
           variant: small_variant,
           image: small_dog_chew_image,
+          package_image: small_pack_image,
           image_alt: 'Small dog calmly chewing a small Himalayan yak chew',
           label: 'Small dogs',
           title: 'Small Yak Chew',
@@ -213,6 +219,7 @@
           product: product,
           variant: medium_variant,
           image: medium_dog_chew_image,
+          package_image: medium_pack_image,
           image_alt: 'Medium dog enjoying a medium Himalayan yak chew',
           label: 'Most popular',
           title: 'Medium Yak Chew',
@@ -226,6 +233,7 @@
           product: product,
           variant: large_variant,
           image: large_dog_chew_image,
+          package_image: large_pack_image,
           image_alt: 'Large dog chewing a large Himalayan yak chew',
           label: 'Power chewers',
           title: 'Large Yak Chew',
@@ -239,6 +247,7 @@
           product: product,
           variant: extra_large_variant,
           image: lab_image,
+          package_image: extra_large_pack_image,
           image_alt: 'Large Labrador enjoying an extra large Prime Pet Food Himalayan yak chew',
           label: 'Big dogs',
           title: 'Extra Large Yak Chew',
@@ -252,6 +261,7 @@
           product: product,
           variant: jumbo_variant,
           image: shepherd_image,
+          package_image: jumbo_pack_image,
           image_alt: 'German Shepherd with a jumbo Prime Pet Food Himalayan yak chew',
           label: 'Giant breeds',
           title: 'Jumbo Yak Chew',
@@ -1415,7 +1425,7 @@
     bottom: 10px;
     z-index: 2;
     display: grid;
-    width: clamp(48px, 26%, 68px);
+    width: clamp(58px, 31%, 86px);
     aspect-ratio: 1 / 1;
     place-items: center;
     padding: 5px;
@@ -2708,7 +2718,7 @@
     .ph-product-card__pack {
       right: 7px;
       bottom: 7px;
-      width: 34px;
+      width: 46px;
       padding: 3px;
       border-radius: 10px;
     }

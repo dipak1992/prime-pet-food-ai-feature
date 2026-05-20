@@ -7,13 +7,15 @@
     assign card_url = product.url | append: '?variant=' | append: variant.id
   endif
 
-  assign package_media = blank
-  if variant != blank and variant.featured_media != blank
-    assign package_media = variant.featured_media.preview_image
-  elsif product != blank and product.featured_media != blank
-    assign package_media = product.featured_media.preview_image
-  elsif product != blank and product.featured_image != blank
-    assign package_media = product.featured_image
+  assign package_image_src = package_image | default: blank
+  if package_image_src == blank
+    if variant != blank and variant.featured_media != blank
+      assign package_image_src = variant.featured_media.preview_image | image_url: width: 520
+    elsif product != blank and product.featured_media != blank
+      assign package_image_src = product.featured_media.preview_image | image_url: width: 520
+    elsif product != blank and product.featured_image != blank
+      assign package_image_src = product.featured_image | image_url: width: 520
+    endif
   endif
 -%}
 
@@ -21,14 +23,14 @@
   {% if image != blank %}
     <a class="ph-product-card__media ph-product-card__media-link" href="{{ card_url }}" aria-label="View {{ title | escape }} details">
       <img src="{{ image }}" alt="{{ image_alt | escape }}" loading="lazy" width="1024" height="1024">
-      {% if package_media != blank %}
+      {% if package_image_src != blank %}
         <span class="ph-product-card__pack" aria-hidden="true">
           <img
-            src="{{ package_media | image_url: width: 420 }}"
+            src="{{ package_image_src }}"
             alt=""
             loading="lazy"
-            width="420"
-            height="420"
+            width="520"
+            height="520"
           >
         </span>
       {% endif %}
