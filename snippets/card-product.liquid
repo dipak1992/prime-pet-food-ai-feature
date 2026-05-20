@@ -439,10 +439,11 @@
           <div class="card-information">
             {%- if prime_calm_card and horizontal_class == blank -%}
               <div class="prime-card-signals" aria-label="Prime Pet Food chew buying details">
-                <span>~67 min avg</span>
+                <span title="Based on customer-reported chew durations across 2,400+ reviews">~67 min avg*</span>
                 <span>1-85+ lb dogs</span>
                 <span>Subscribe &amp; Save</span>
               </div>
+              {% render 'prime-guarantee-badge', context: 'product_card' %}
             {%- endif -%}
 
             {%- if card_product.metafields.reviews.rating.value != blank -%}

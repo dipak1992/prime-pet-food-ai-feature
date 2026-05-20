@@ -20,6 +20,22 @@
       assign prime_canonical_override = request.origin | append: '/pages/refund-policy'
     when '/pages/wholesale-application'
       assign prime_canonical_override = request.origin | append: '/pages/wholesale'
+    when '/products/small-yak-chews'
+      assign prime_canonical_override = request.origin | append: '/products/himalayan-yak-chews-for-dogs'
+    when '/products/large-yak-cheese'
+      assign prime_canonical_override = request.origin | append: '/products/himalayan-yak-chews-for-dogs'
+    when '/products/medium-yak-chews'
+      assign prime_canonical_override = request.origin | append: '/products/himalayan-yak-chews-for-dogs'
+    when '/products/yak-cheese-chews'
+      assign prime_canonical_override = request.origin | append: '/products/himalayan-yak-chews-for-dogs'
+    when '/products/himalayan-dog-chew'
+      assign prime_canonical_override = request.origin | append: '/products/himalayan-yak-chews-for-dogs'
+    when '/products/natural-yak-chews'
+      assign prime_canonical_override = request.origin | append: '/products/himalayan-yak-chews-for-dogs'
+    when '/collections/yak-chews'
+      assign prime_canonical_override = request.origin | append: '/collections/all'
+    when '/collections/dog-chews'
+      assign prime_canonical_override = request.origin | append: '/collections/all'
   endcase
 -%}
 <!doctype html>

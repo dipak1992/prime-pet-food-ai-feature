@@ -168,6 +168,7 @@
             {{ form | payment_button }}
           {%- endif -%}
         </div>
+        {% render 'prime-guarantee-badge', context: 'product_page' %}
       {%- endform -%}
     </product-form>
   {%- else -%}

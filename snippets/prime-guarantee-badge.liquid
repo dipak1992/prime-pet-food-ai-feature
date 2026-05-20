@@ -1,0 +1,68 @@
+{% comment %}
+  Renders the 30-Day Tail-Wag Guarantee badge.
+
+  Accepts:
+  - context: {String} Where the badge is rendered: 'product_card', 'product_page', 'cart_drawer' (optional)
+  - class: {String} Additional CSS classes (optional)
+
+  Usage:
+  {% render 'prime-guarantee-badge', context: 'product_card' %}
+{% endcomment %}
+
+{%- liquid
+  assign badge_context = context | default: 'default'
+-%}
+
+<div class="prime-guarantee-badge prime-guarantee-badge--{{ badge_context }}{% if class %} {{ class }}{% endif %}" aria-label="30-Day Tail-Wag Guarantee">
+  <svg class="prime-guarantee-badge__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+    <polyline points="9 12 11 14 15 10"/>
+  </svg>
+  <span class="prime-guarantee-badge__text">30-Day Tail-Wag Guarantee</span>
+</div>
+
+<style>
+  .prime-guarantee-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #2f6f46;
+    line-height: 1.2;
+  }
+
+  .prime-guarantee-badge__icon {
+    flex-shrink: 0;
+    color: #2f6f46;
+  }
+
+  .prime-guarantee-badge--product_card {
+    margin-top: 8px;
+    padding: 6px 10px;
+    background: #f2f8ef;
+    border-radius: 8px;
+    border: 1px solid rgba(47, 111, 70, 0.15);
+    font-size: 11px;
+  }
+
+  .prime-guarantee-badge--product_page {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: #f2f8ef;
+    border-radius: 12px;
+    border: 1px solid rgba(47, 111, 70, 0.18);
+    font-size: 13px;
+    font-weight: 750;
+  }
+
+  .prime-guarantee-badge--cart_drawer {
+    padding: 8px 12px;
+    background: #f2f8ef;
+    border-radius: 10px;
+    border: 1px solid rgba(47, 111, 70, 0.15);
+    font-size: 12px;
+    justify-content: center;
+    width: 100%;
+  }
+</style>

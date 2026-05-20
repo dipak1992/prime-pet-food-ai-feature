@@ -25,8 +25,8 @@
   assign calm_cta_image = 'prime-home-calm-cta-bg.jpg' | asset_url
   assign guarantee_image = 'prime-home-guarantee-bg.jpg' | asset_url
 
-  assign hero_headline = section.settings.hero_headline | default: 'Calmer dogs start with a better chew.'
-  assign hero_subtext = section.settings.hero_subtext | default: 'Long-lasting Himalayan yak cheese chews made with 4 simple ingredients: Yak milk, cow milk, lime juice, salt. Crafted in Nepal using traditional Himalayan methods and packed in the USA under Prime Pet Food quality standards.'
+  assign hero_headline = section.settings.hero_headline | default: 'Long-lasting Himalayan yak cheese chews for dogs who need a real chewing job.'
+  assign hero_subtext = section.settings.hero_subtext | default: 'Rawhide-free. 4 simple ingredients. Packed in the USA. Handcrafted in Nepal from yak milk, cow milk, lime juice, and salt — nothing else. Built to keep your dog happily busy, not done in five minutes.'
   assign trust_stat_1_value = section.settings.trust_stat_1_value | default: '20,000+'
   assign trust_stat_1_label = section.settings.trust_stat_1_label | default: 'Dog parents'
   assign trust_stat_2_value = section.settings.trust_stat_2_value | default: '4'
@@ -69,7 +69,7 @@
     <div class="ph-sticky-bar__inner">
       <span class="ph-sticky-bar__text">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        Rawhide-free &bull; 67 min avg &bull; Free shipping $30+
+        Rawhide-free &bull; 67 min avg chew time* &bull; Free shipping $30+
       </span>
       <a href="/products/himalayan-yak-chews-for-dogs" class="ph-sticky-bar__btn">Shop Now</a>
     </div>
@@ -114,9 +114,9 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           Rawhide-free
         </span>
-        <span>
+        <span title="Based on aggregated customer-reported chew durations across 2,400+ reviews">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          67 min avg duration
+          67 min avg duration*
         </span>
         <span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -958,6 +958,15 @@
   </div>
   {% endif %}
 
+  <!-- Methodology footnote for claims marked with * -->
+  <div class="ph-methodology-note" aria-label="Methodology notes">
+    <div class="ph-shell">
+      <p class="ph-methodology-note__text">
+        * Average chew duration of 67 minutes is based on aggregated customer-reported chew times across 2,400+ verified reviews. Individual results vary based on dog size, breed, and chewing style.
+      </p>
+    </div>
+  </div>
+
 </section>
 
 <style>
@@ -980,6 +989,19 @@
   }
 
   .prime-homepage * { box-sizing: border-box; }
+
+  /* Methodology footnote */
+  .ph-methodology-note {
+    padding: 24px 0;
+    border-top: 1px solid var(--ph-line);
+  }
+  .ph-methodology-note__text {
+    margin: 0;
+    font-size: 11px;
+    line-height: 1.5;
+    color: var(--ph-muted);
+    max-width: 680px;
+  }
 
   .ph-shell {
     width: min(1160px, calc(100% - 32px));
@@ -4551,13 +4573,13 @@
       "type": "text",
       "id": "hero_headline",
       "label": "Hero headline",
-      "default": "Calmer dogs start with a better chew."
+      "default": "Long-lasting Himalayan yak cheese chews for dogs who need a real chewing job."
     },
     {
       "type": "textarea",
       "id": "hero_subtext",
       "label": "Hero subtext",
-      "default": "Long-lasting Himalayan yak cheese chews made with 4 simple ingredients: Yak milk, cow milk, lime juice, salt. Crafted in Nepal using traditional Himalayan methods and packed in the USA under Prime Pet Food quality standards."
+      "default": "Rawhide-free. 4 simple ingredients. Packed in the USA. Handcrafted in Nepal from yak milk, cow milk, lime juice, and salt — nothing else. Built to keep your dog happily busy, not done in five minutes."
     },
     {
       "type": "text",
