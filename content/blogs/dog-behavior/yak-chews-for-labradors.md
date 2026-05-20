@@ -34,7 +34,7 @@ Use the estimator before buying: [How long will this last for my dog?](/pages/ho
 
 ## Best routine
 
-Offer a yak chew after a walk, fetch session, or training. This helps your Lab shift from high energy to focused decompression. Remove the chew when the session ends and store it for the next supervised routine.
+Offer a yak chew after a walk, fetch session, or training. This helps your Lab shift from high energy to focused wind-down time. Remove the chew when the session ends and store it for the next supervised routine.
 
 ## Related guides
 

@@ -535,7 +535,7 @@
         'Offer the chew after activity or during a calm indoor routine.',
         'Supervise every session and keep fresh water nearby.',
         'Remove the chew when it becomes small enough to swallow.',
-        'Log the session in My Dog to tune reorder timing and subscription cadence.'
+        'Log the session in My Dog to tune reorder timing and subscription frequency.'
       ],
       recommendedSize: rec ? rec.variantTitle : 'Medium',
       cadence: cadence.label,

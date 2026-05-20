@@ -27,7 +27,7 @@ Prime Pet Food Himalayan yak cheese chews are a strong fit for that job because 
 - They want simpler ingredients.
 - They want a cleaner indoor chew.
 - They want something that lasts longer than soft treats.
-- They want a chew that fits enrichment routines, crate practice, or evening decompression.
+- They want a chew that fits enrichment routines, crate practice, or evening wind-down time.
 
 ## Why yak chews work as a rawhide alternative
 

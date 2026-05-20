@@ -7,7 +7,7 @@
   assign heading = 'The Wind-Down Routine'
   assign lede = 'A calmer way to think about chewing: predictable, supervised chew sessions that help your dog go from high energy to settled focus.'
   assign primary_cta = '/pages/dog-ritual-enrichment'
-  assign primary_cta_label = 'Build a decompression routine'
+  assign primary_cta_label = 'Build a wind-down routine'
   assign secondary_cta = '/pages/how-long-will-this-last-for-my-dog'
   assign secondary_cta_label = 'Estimate chew duration'
   assign summary_1_label = 'Category'
@@ -16,21 +16,21 @@
   assign summary_2_value = 'Post-walk, WFH, crate practice'
   assign summary_3_label = 'Core tool'
   assign summary_3_value = 'Supervised yak chew sessions'
-  assign intro_title = 'Prime Pet Food is building beyond yak chews'
-  assign intro_copy = 'The bigger opportunity is canine decompression: a repeatable calm-time ritual where chewing becomes a focused job after exercise, stimulation, travel, visitors, or busy household moments.'
+  assign intro_title = 'Prime Pet Food is building a calmer daily ritual'
+  assign intro_copy = 'The Wind-Down Routine is simple: exercise first, then offer a properly sized chew during a quiet, supervised window so your dog can settle instead of staying wired.'
   assign card_1_title = 'Exercise first'
-  assign card_1_copy = 'Use decompression after movement, training, or play so the chew supports settling instead of replacing activity.'
+  assign card_1_copy = 'Use chew time after movement, training, or play so the chew supports settling instead of replacing activity.'
   assign card_2_title = 'Supervise the session'
   assign card_2_copy = 'Offer the right-size chew during a predictable quiet window, with water nearby and the dog in view.'
   assign card_3_title = 'End before the nub'
   assign card_3_copy = 'Remove the chew before it becomes small enough to swallow, then use the Puff Hack ritual when appropriate.'
   assign final_title = 'Turn chew time into a calm ritual'
-  assign final_copy = 'A yak chew is the product. Decompression is the category: a calmer, more useful way to help dog parents understand why the routine matters.'
-  assign faq_1_q = 'What is canine decompression?'
-  assign faq_1_a = 'Canine decompression is a calm transition routine that helps a dog move from stimulation into settled focus. A supervised chew can be one part of that routine.'
-  assign faq_2_q = 'When should I use a decompression chew?'
+  assign final_copy = 'A yak chew is the product. The Wind-Down Routine is the daily habit: a calmer way to help dogs move from high energy into settled focus.'
+  assign faq_1_q = 'What is the Wind-Down Routine?'
+  assign faq_1_a = 'The Wind-Down Routine is a calm transition after activity: exercise first, then a supervised chew session to help your dog settle.'
+  assign faq_2_q = 'When should I use a wind-down chew?'
   assign faq_2_a = 'Good moments include after walks, after training, during supervised crate practice, before evening downtime, or during work-from-home focus blocks.'
-  assign faq_3_q = 'Is decompression the same as treating anxiety?'
+  assign faq_3_q = 'Is a wind-down routine the same as treating anxiety?'
   assign faq_3_a = 'No. It is an enrichment routine, not a medical or behavioral diagnosis. Dogs with serious anxiety or behavior concerns should work with a veterinarian or qualified trainer.'
 
   if page_type == 'prime-scale'
@@ -64,11 +64,11 @@
     assign faq_3_a = 'No. It is buyer education. Dogs with weak teeth, dental disease, cracked-tooth history, or unusual chewing behavior should be evaluated by a veterinarian before hard chews.'
   elsif page_type == 'predictive-subscription'
     assign heading = 'Predictive Chew Intelligence'
-    assign lede = 'A modern Subscribe & Save vision: reorder timing, calm reminders, and enrichment alerts based on dog profile, chew cadence, and real life.'
+    assign lede = 'A modern Subscribe & Save vision: reorder timing, calm reminders, and enrichment alerts based on dog profile, chew pace, and real life.'
     assign primary_cta = '/pages/subscribe-and-save'
     assign primary_cta_label = 'Build a refill routine'
     assign secondary_cta = '/pages/how-long-will-this-last-for-my-dog'
-    assign secondary_cta_label = 'Estimate chew cadence'
+    assign secondary_cta_label = 'Estimate chew timing'
     assign summary_1_label = 'System'
     assign summary_1_value = 'Predictive refill logic'
     assign summary_2_label = 'Signals'
@@ -78,19 +78,19 @@
     assign intro_title = 'Subscriptions should feel intelligent, not automatic'
     assign intro_copy = 'Prime Pet Food can turn Subscribe & Save into a calm-routine system that predicts when a dog may be running low, adapts by chewing style, and reminds customers around high-stress moments.'
     assign card_1_title = 'Reorder prediction'
-    assign card_1_copy = 'Use dog size, chewing strength, quantity purchased, and session cadence to estimate when the next box should arrive.'
+    assign card_1_copy = 'Use dog size, chewing strength, quantity purchased, and session rhythm to estimate when the next box should arrive.'
     assign card_2_title = 'Calm-time alerts'
     assign card_2_copy = 'Send helpful reminders before fireworks, travel, holidays, bad weather days, or schedule disruptions.'
-    assign card_3_title = 'Profile-aware cadence'
+    assign card_3_title = 'Profile-aware timing'
     assign card_3_copy = 'A heavy chewer, puppy, or multi-dog household should not receive the same subscription recommendation as a gentle occasional chewer.'
     assign final_title = 'The subscription becomes part of the routine'
     assign final_copy = 'The goal is not only recurring revenue. It is confidence: dog parents know the right chew is ready before the stressful moment arrives.'
     assign faq_1_q = 'What is predictive chew intelligence?'
-    assign faq_1_a = 'It is a subscription and reminder system that estimates reorder timing from dog profile, chewing strength, purchase cadence, and enrichment use case.'
+    assign faq_1_a = 'It is a subscription and reminder system that estimates reorder timing from dog profile, chewing strength, purchase history, and how often your dog uses chews.'
     assign faq_2_q = 'Can this prevent running out of chews?'
     assign faq_2_a = 'It can help by estimating when a household may need refills and nudging the customer before the routine breaks.'
     assign faq_3_q = 'What reminders are useful for dog parents?'
-    assign faq_3_a = 'Useful reminders include reorder timing, fireworks or holiday calm prep, travel checklists, weather-day enrichment, and post-walk decompression prompts.'
+    assign faq_3_a = 'Useful reminders include reorder timing, fireworks or holiday calm prep, travel checklists, bad-weather enrichment, and post-walk wind-down prompts.'
   endif
 -%}
 
@@ -168,7 +168,7 @@
   "isPartOf": {"@type":"WebSite","name":{{ shop.name | json }},"url":{{ shop.url | json }}},
   "publisher": {"@type":"Organization","name":{{ shop.name | json }},"url":{{ shop.url | json }}},
   "about": [
-    "canine decompression",
+    "dog wind-down routine",
     "dog enrichment",
     "safe dog chewing",
     "Himalayan yak cheese dog chews",

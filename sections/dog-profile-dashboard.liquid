@@ -1,7 +1,7 @@
 {% comment %}
   Prime Pet Food - Dog Profile Dashboard
   Customer-facing retention hub for profile memory, enrichment history,
-  replenishment cadence, email capture, photo upload readiness, and UGC reports.
+  replenishment timing, email capture, photo upload readiness, and UGC reports.
 {% endcomment %}
 
 <style>
@@ -409,7 +409,7 @@
   <div class="dog-profile__inner" id="dog-profile-app">
     <div class="dog-profile__empty" id="dog-profile-empty">
       <h1 class="dog-profile__empty-title">Build your dog's calm-time profile</h1>
-      <p class="dog-profile__empty-text">Answer four questions to unlock chew duration estimates, enrichment tracking, replenishment timing, and a smarter subscription cadence.</p>
+      <p class="dog-profile__empty-text">Answer four questions to unlock chew duration estimates, enrichment tracking, replenishment timing, and smarter subscription frequency.</p>
       <a href="/pages/how-long-will-this-last-for-my-dog" class="dog-profile__button">Find My Dog's Chew</a>
     </div>
 
@@ -553,10 +553,10 @@
     html += '</div>';
 
     html += '<div class="dog-profile__panel dog-profile__panel--side">';
-    html += '<h2 class="dog-profile__section-title">Subscription cadence</h2>';
+    html += '<h2 class="dog-profile__section-title">Subscription frequency</h2>';
     html += '<p class="dog-profile__muted">' + escapeHtml(cadence.reason) + '</p>';
     html += '<div class="dog-profile__pill-list"><span class="dog-profile__pill">' + escapeHtml(cadence.quantity) + ' chews</span><span class="dog-profile__pill">' + escapeHtml(cadence.label) + '</span><span class="dog-profile__pill">' + escapeHtml(cadence.size) + '</span></div>';
-    html += '<div class="dog-profile__actions" style="margin-top:16px;"><a class="dog-profile__button" href="' + PRODUCT_URL + '">Shop cadence</a></div>';
+    html += '<div class="dog-profile__actions" style="margin-top:16px;"><a class="dog-profile__button" href="' + PRODUCT_URL + '">Shop your refill plan</a></div>';
     html += '</div>';
 
     html += '<div class="dog-profile__panel dog-profile__panel--wide">';
@@ -579,7 +579,7 @@
 
     html += '<div class="dog-profile__panel dog-profile__panel--wide">';
     html += '<h2 class="dog-profile__section-title">Log a chew session</h2>';
-    html += '<p class="dog-profile__muted">Real sessions improve enrichment history, reorder timing, and future subscription cadence.</p>';
+    html += '<p class="dog-profile__muted">Real sessions improve enrichment history, reorder timing, and future subscription frequency.</p>';
     html += '<div class="dog-profile__form-grid">';
     html += '<input class="dog-profile__field" type="number" id="session-duration" placeholder="Minutes" aria-label="Chew session duration in minutes" min="1" max="300">';
     html += '<select class="dog-profile__select" id="session-mood" aria-label="Chew session mood"><option value="focused">Focused</option><option value="relaxed">Relaxed</option><option value="happy">Happy</option><option value="excited">Excited</option></select>';
