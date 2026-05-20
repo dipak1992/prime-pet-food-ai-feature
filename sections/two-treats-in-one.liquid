@@ -15,8 +15,15 @@
     --btl-padding-bottom: {{ section.settings.padding_bottom }}px;
   "
 >
-  <div class="bonus-treat-light__container">
-    <div class="bonus-treat-light__grid">
+  <div class="bonus-treat-light__container" id="bonus-second-treat">
+    <details class="bonus-treat-light__mobile-details" open>
+      <summary class="bonus-treat-light__mobile-summary">
+        <span>Bonus: get a free second treat</span>
+        <strong>Open the safe nub puff steps</strong>
+      </summary>
+
+      <div class="bonus-treat-light__mobile-body">
+        <div class="bonus-treat-light__grid">
 
       <!-- LEFT: STEPS -->
       <div class="bonus-treat-light__steps" role="list">
@@ -91,7 +98,55 @@
       </div>
 
     </div>
+      </div>
+    </details>
   </div>
+
+  <script>
+    (function() {
+      var details = document.querySelector('#shopify-section-{{ section.id }} .bonus-treat-light__mobile-details');
+      if (!details) return;
+
+      function releaseDetailsSync() {
+        window.setTimeout(function() {
+          details.dataset.syncing = 'false';
+        }, 80);
+      }
+
+      function syncDetails() {
+        if (!window.matchMedia('(max-width: 749px)').matches) {
+          details.setAttribute('open', '');
+          return;
+        }
+        if (details.dataset.userOpened === 'true') return;
+        details.removeAttribute('open');
+      }
+
+      function openDetailsFromHash() {
+        if (window.location.hash !== '#bonus-second-treat') return;
+        details.dataset.userOpened = 'true';
+        details.setAttribute('open', '');
+      }
+
+      details.dataset.syncing = 'true';
+      syncDetails();
+      openDetailsFromHash();
+      releaseDetailsSync();
+
+      details.addEventListener('toggle', function() {
+        if (details.dataset.syncing === 'true') return;
+        details.dataset.userOpened = 'true';
+      });
+
+      window.addEventListener('resize', function() {
+        details.dataset.syncing = 'true';
+        syncDetails();
+        releaseDetailsSync();
+      }, { passive: true });
+
+      window.addEventListener('hashchange', openDetailsFromHash, { passive: true });
+    })();
+  </script>
 
   <style>
     .bonus-treat-light {
@@ -103,6 +158,7 @@
     .bonus-treat-light .bonus-treat-light__container {
       width: min(calc(100% - 40px), var(--btl-max-width));
       margin: 0 auto;
+      scroll-margin-top: 96px;
     }
 
     .bonus-treat-light .bonus-treat-light__grid {
@@ -110,6 +166,10 @@
       grid-template-columns: minmax(420px, 0.9fr) minmax(480px, 1.1fr);
       gap: 56px;
       align-items: center;
+    }
+
+    .bonus-treat-light .bonus-treat-light__mobile-summary {
+      display: none;
     }
 
     .bonus-treat-light .bonus-treat-light__content {
@@ -299,6 +359,69 @@
     @media screen and (max-width: 749px) {
       .bonus-treat-light .bonus-treat-light__container {
         width: min(calc(100% - 24px), var(--btl-max-width));
+      }
+
+      .bonus-treat-light .bonus-treat-light__mobile-details {
+        border: 1px solid var(--btl-border);
+        border-radius: 24px;
+        background: rgba(255, 250, 242, 0.84);
+        box-shadow: 0 14px 34px rgba(36, 19, 13, 0.08);
+        overflow: hidden;
+      }
+
+      .bonus-treat-light .bonus-treat-light__mobile-summary {
+        display: grid;
+        gap: 4px;
+        min-height: 74px;
+        padding: 16px 18px;
+        cursor: pointer;
+        list-style: none;
+        color: var(--btl-heading);
+        position: relative;
+      }
+
+      .bonus-treat-light .bonus-treat-light__mobile-summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .bonus-treat-light .bonus-treat-light__mobile-summary::after {
+        content: '+';
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        display: inline-flex;
+        width: 30px;
+        height: 30px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        background: rgba(210, 99, 46, 0.1);
+        color: var(--btl-accent);
+        font-size: 20px;
+        font-weight: 900;
+      }
+
+      .bonus-treat-light .bonus-treat-light__mobile-details[open] .bonus-treat-light__mobile-summary::after {
+        content: '-';
+      }
+
+      .bonus-treat-light .bonus-treat-light__mobile-summary span {
+        color: var(--btl-accent);
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.1em;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      .bonus-treat-light .bonus-treat-light__mobile-summary strong {
+        padding-right: 44px;
+        font-size: 18px;
+        line-height: 1.18;
+      }
+
+      .bonus-treat-light .bonus-treat-light__mobile-body {
+        padding: 0 14px 18px;
       }
 
       .bonus-treat-light .bonus-treat-light__grid {

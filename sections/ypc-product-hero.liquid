@@ -315,6 +315,10 @@
           </button>
         </div>
 
+        <a href="#bonus-second-treat" class="ypc-bonus-mobile-link">
+          Bonus: get a free second treat from the nub
+        </a>
+
         <div class="ypc-puff-hack" aria-label="Puff Hack safety video">
           <div class="ypc-puff-hack__video">
             <video
@@ -336,39 +340,41 @@
           </div>
         </div>
 
-        <div class="ypc-safety-ritual" aria-label="Safety First chew system">
-          <div class="ypc-safety-ritual__head">
+        <details class="ypc-safety-ritual" aria-label="Safety First chew system" open>
+          <summary class="ypc-safety-ritual__head">
             <span aria-hidden="true">🛡️</span>
             <div>
               <strong>Safety First chew system</strong>
               <p>Built for supervised calm time, safer sizing, and responsible hard-chew use.</p>
             </div>
+          </summary>
+          <div class="ypc-safety-ritual__body">
+            <div class="ypc-safety-ritual__grid">
+              <div class="ypc-safety-ritual__item">
+                <span>01</span>
+                <strong>Size up for safety</strong>
+                <p>Choose a chew your dog cannot swallow whole. Power chewers and dogs between sizes should start larger.</p>
+              </div>
+              <div class="ypc-safety-ritual__item">
+                <span>02</span>
+                <strong>Supervise every session</strong>
+                <p>Use short, watched chew sessions with fresh water nearby. Do not leave hard chews unattended.</p>
+              </div>
+              <div class="ypc-safety-ritual__item">
+                <span>03</span>
+                <strong>Respect hard-chew limits</strong>
+                <p>The thumbnail test is a useful caution: if a chew cannot indent, dogs with dental risk may need a softer option.</p>
+              </div>
+              <div class="ypc-safety-ritual__item">
+                <span>04</span>
+                <strong>Puff the nub</strong>
+                <p>Remove the small end piece before it can be swallowed, then soak and microwave it into a crunchy puff treat.</p>
+              </div>
+            </div>
+            <p class="ypc-safety-ritual__note">Hard chews are not right for every dog. Ask your vet first if your dog has dental issues, weak teeth, or a history of cracked teeth.</p>
+            <a href="/pages/yak-chew-safety-guide">Read the safety guide</a>
           </div>
-          <div class="ypc-safety-ritual__grid">
-            <div class="ypc-safety-ritual__item">
-              <span>01</span>
-              <strong>Size up for safety</strong>
-              <p>Choose a chew your dog cannot swallow whole. Power chewers and dogs between sizes should start larger.</p>
-            </div>
-            <div class="ypc-safety-ritual__item">
-              <span>02</span>
-              <strong>Supervise every session</strong>
-              <p>Use short, watched chew sessions with fresh water nearby. Do not leave hard chews unattended.</p>
-            </div>
-            <div class="ypc-safety-ritual__item">
-              <span>03</span>
-              <strong>Respect hard-chew limits</strong>
-              <p>The thumbnail test is a useful caution: if a chew cannot indent, dogs with dental risk may need a softer option.</p>
-            </div>
-            <div class="ypc-safety-ritual__item">
-              <span>04</span>
-              <strong>Puff the nub</strong>
-              <p>Remove the small end piece before it can be swallowed, then soak and microwave it into a crunchy puff treat.</p>
-            </div>
-          </div>
-          <p class="ypc-safety-ritual__note">Hard chews are not right for every dog. Ask your vet first if your dog has dental issues, weak teeth, or a history of cracked teeth.</p>
-          <a href="/pages/yak-chew-safety-guide">Read the safety guide</a>
-        </div>
+        </details>
       {% endform %}
 
       {% if section.settings.show_review_cards %}
@@ -453,6 +459,8 @@
     const qtyInput = document.getElementById('ypc-quantity-input');
     const qtyMinus = document.getElementById('ypc-qty-minus');
     const qtyPlus = document.getElementById('ypc-qty-plus');
+    const safetyRitual = document.querySelector('.ypc-safety-ritual');
+    const mobileSafetyQuery = window.matchMedia('(max-width: 767px)');
 
     const sizeGuideOpen = document.getElementById('ypc-size-guide-open');
     const sizeGuideModal = document.getElementById('ypc-size-guide-modal');
@@ -788,6 +796,43 @@
       if (!subscribeRadio) return;
       subscribeRadio.checked = true;
       if (frequencyWrap) frequencyWrap.style.display = 'block';
+    }
+
+    function syncMobileSafetyRitual() {
+      if (!safetyRitual) return;
+      if (!mobileSafetyQuery.matches) {
+        safetyRitual.setAttribute('open', '');
+        return;
+      }
+      if (safetyRitual.dataset.userOpened) return;
+      safetyRitual.removeAttribute('open');
+    }
+
+    if (safetyRitual) {
+      function releaseSafetyRitualSync() {
+        window.setTimeout(function() {
+          safetyRitual.dataset.syncing = 'false';
+        }, 80);
+      }
+
+      safetyRitual.addEventListener('toggle', function() {
+        if (safetyRitual.dataset.syncing === 'true') return;
+        if (!mobileSafetyQuery.matches) {
+          safetyRitual.dataset.syncing = 'true';
+          safetyRitual.setAttribute('open', '');
+          releaseSafetyRitualSync();
+          return;
+        }
+        safetyRitual.dataset.userOpened = 'true';
+      });
+      safetyRitual.dataset.syncing = 'true';
+      syncMobileSafetyRitual();
+      releaseSafetyRitualSync();
+      window.addEventListener('resize', function() {
+        safetyRitual.dataset.syncing = 'true';
+        syncMobileSafetyRitual();
+        releaseSafetyRitualSync();
+      }, { passive: true });
     }
 
     if (qtyMinus && qtyInput) {
@@ -1331,6 +1376,10 @@
     text-underline-offset: 3px;
   }
 
+  .ypc-bonus-mobile-link {
+    display: none;
+  }
+
   .ypc-safety-ritual {
     display: grid;
     gap: 12px;
@@ -1345,6 +1394,32 @@
     display: flex;
     gap: 10px;
     align-items: flex-start;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .ypc-safety-ritual__head::-webkit-details-marker {
+    display: none;
+  }
+
+  .ypc-safety-ritual__head::after {
+    content: '-';
+    display: none;
+    width: 28px;
+    height: 28px;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: rgba(23, 59, 43, 0.08);
+    color: #173b2b;
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .ypc-safety-ritual:not([open]) .ypc-safety-ritual__head::after {
+    content: '+';
   }
 
   .ypc-safety-ritual__head > span {
@@ -1357,6 +1432,11 @@
     border-radius: 999px;
     background: rgba(23, 59, 43, 0.08);
     font-size: 17px;
+  }
+
+  .ypc-safety-ritual__body {
+    display: grid;
+    gap: 12px;
   }
 
   .ypc-safety-ritual strong {
@@ -1425,14 +1505,48 @@
   }
 
   @media screen and (max-width: 640px) {
-    .ypc-puff-hack {
-      grid-template-columns: 106px minmax(0, 1fr);
-      gap: 12px;
-      padding: 11px;
+    .ypc-bonus-mobile-link {
+      display: flex;
+      min-height: 46px;
+      align-items: center;
+      justify-content: center;
+      margin: 12px 0 10px;
+      padding: 0 14px;
+      border: 1px solid rgba(184, 95, 50, 0.24);
+      border-radius: 999px;
+      background: rgba(255, 250, 242, 0.9);
+      color: #94451f;
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1.2;
+      text-align: center;
+      text-decoration: none;
     }
 
-    .ypc-puff-hack__video {
-      min-height: 132px;
+    .ypc-puff-hack {
+      display: none;
+    }
+
+    .ypc-safety-ritual {
+      margin-top: 10px;
+      padding: 12px;
+    }
+
+    .ypc-safety-ritual__head {
+      align-items: center;
+    }
+
+    .ypc-safety-ritual__head::after {
+      display: inline-flex;
+      margin-left: auto;
+    }
+
+    .ypc-safety-ritual:not([open]) .ypc-safety-ritual__body {
+      display: none;
+    }
+
+    .ypc-subscription-proof {
+      display: none;
     }
 
     .ypc-safety-ritual__grid {
@@ -1901,6 +2015,25 @@
     .ypc-product-hero {
       padding: 20px 16px 30px;
     }
+
+    .ypc-product-hero__form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ypc-product-hero__option { order: 10; }
+    .ypc-size-hint { order: 20; }
+    .ypc-product-hero__price-wrap { order: 30; }
+    .ypc-info-line { order: 40; }
+    .ypc-urgency { order: 50; }
+    .ypc-conversion-badges { order: 60; }
+    .ypc-profile-recommendation { order: 70; }
+    .ypc-cart-row { order: 80; }
+    .ypc-subscription { order: 90; }
+    .ypc-guarantee-details { order: 100; }
+    .ypc-bonus-mobile-link { order: 110; }
+    .ypc-puff-hack { order: 120; }
+    .ypc-safety-ritual { order: 130; }
 
     .ypc-product-hero__title {
       font-size: 27px;

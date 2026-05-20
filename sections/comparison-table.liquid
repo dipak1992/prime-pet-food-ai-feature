@@ -483,10 +483,19 @@
         background: transparent;
         border: 0;
         box-shadow: none;
-        display: grid;
-        gap: 12px;
-        margin-bottom: 18px;
-        overflow: visible;
+        display: flex;
+        gap: 14px;
+        margin: 0 -20px 18px;
+        padding: 2px 20px 12px;
+        overflow-x: auto;
+        scroll-padding-left: 20px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      #{{ section_id }} .yak-comparison__value-table::-webkit-scrollbar {
+        display: none;
       }
 
       #{{ section_id }} .yak-comparison__value-row {
@@ -495,9 +504,11 @@
         border-radius: 18px;
         box-shadow: 0 12px 28px rgba(43, 20, 8, 0.07);
         display: grid;
+        flex: 0 0 min(84vw, 340px);
         grid-template-columns: 1fr 1fr;
         min-height: unset;
         overflow: hidden;
+        scroll-snap-align: start;
       }
 
       #{{ section_id }} .yak-comparison__value-row--head {

@@ -237,6 +237,24 @@
         event.preventDefault();
 
         const selectedTab = this.getAttribute('data-tab');
+        const shouldClose = this.classList.contains('is-active');
+
+        if (shouldClose) {
+          tabs.forEach((item) => {
+            item.classList.remove('is-active');
+            item.setAttribute('aria-selected', 'false');
+            item.setAttribute('aria-expanded', 'false');
+          });
+
+          section.classList.remove('ypc-tabs-recos--has-open-panel');
+
+          panels.forEach((panel) => {
+            panel.classList.remove('is-active');
+            panel.hidden = true;
+          });
+
+          return;
+        }
 
         tabs.forEach((item) => {
           const isSelected = item === this;
@@ -590,23 +608,37 @@
 
   @media (max-width: 767px) {
     .ypc-tabs-recos {
-      padding: 34px 16px 50px;
+      padding: 28px 16px 44px;
     }
 
     .ypc-tabs-recos__nav {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
+      grid-template-columns: 1fr;
+      gap: 8px;
     }
 
     .ypc-tabs-recos__tab {
-      min-height: 58px;
-      padding: 11px 12px;
+      min-height: 54px;
+      padding: 10px 12px;
       font-size: 12px;
       gap: 8px;
     }
 
+    .ypc-tabs-recos__tab::after {
+      content: '+';
+      margin-left: auto;
+      color: var(--ypc-accent);
+      font-size: 18px;
+      font-weight: 950;
+      line-height: 1;
+    }
+
+    .ypc-tabs-recos__tab.is-active::after {
+      content: '-';
+      color: #fffaf3;
+    }
+
     .ypc-tabs-recos--has-open-panel .ypc-tabs-recos__content {
-      padding-top: 18px;
+      padding-top: 12px;
     }
 
     .ypc-tabs-recos__content {
@@ -619,11 +651,24 @@
 
     .ypc-tabs-recos__panel {
       border-radius: 18px;
-      padding: 24px 18px;
+      padding: 20px 18px;
     }
 
     .ypc-tabs-recos__panel h2 {
       font-size: clamp(24px, 8vw, var(--ypc-heading-size));
+      margin-bottom: 12px;
+    }
+
+    .ypc-tabs-recos .rte p {
+      margin-bottom: 16px;
+    }
+
+    .ypc-tabs-recos .rte ul {
+      margin: 18px 0;
+    }
+
+    .ypc-tabs-recos .rte li {
+      margin-bottom: 12px;
     }
 
     .ypc-tabs-recos__products {
