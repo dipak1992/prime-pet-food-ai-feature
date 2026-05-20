@@ -322,6 +322,7 @@
               muted
               playsinline
               preload="metadata"
+              poster="{{ 'prime-yak-process-finished-chews.jpg' | asset_url }}"
               aria-label="Watch how to turn a small yak chew nub into a crunchy puff treat"
             >
               <source src="https://cdn.shopify.com/videos/c/o/v/d7aeb1ab2e45499ba3b718e8920fe919.mp4" type="video/mp4">
@@ -1277,9 +1278,13 @@
 
   .ypc-puff-hack__video {
     overflow: hidden;
+    position: relative;
     aspect-ratio: 9 / 12;
     border-radius: 12px;
     background: #211008;
+    background-image: url('{{ 'prime-yak-process-finished-chews.jpg' | asset_url }}');
+    background-position: center;
+    background-size: cover;
   }
 
   .ypc-puff-hack__video video {
@@ -1421,7 +1426,13 @@
 
   @media screen and (max-width: 640px) {
     .ypc-puff-hack {
-      grid-template-columns: 82px minmax(0, 1fr);
+      grid-template-columns: 106px minmax(0, 1fr);
+      gap: 12px;
+      padding: 11px;
+    }
+
+    .ypc-puff-hack__video {
+      min-height: 132px;
     }
 
     .ypc-safety-ritual__grid {
