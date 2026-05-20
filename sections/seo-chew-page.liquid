@@ -35,7 +35,7 @@
   assign faq_3_a = 'Start with the largest practical chew size for your dog. Larger dogs and aggressive chewers should use larger, denser chews.'
 
   case page_handle
-    when 'yak-chews-for-golden-retrievers', 'best-chews-for-golden-retrievers'
+    when 'yak-chews-for-golden-retrievers', 'best-chews-for-golden-retrievers', 'golden-retriever-yak-chews'
       assign dog_label = 'Golden Retriever'
       assign chew_intensity = 'moderate, food-motivated, and persistent'
       assign boredom_tendency = 'often needs mouth-focused enrichment after walks, training, or crate time'
@@ -43,7 +43,7 @@
       assign duration_estimate = '35-75 minutes for active chewers; longer for moderate chewers'
       assign page_topic = 'the best chews for Golden Retrievers'
       assign lede = 'Golden Retrievers are social, food-motivated dogs that often benefit from a durable chew after exercise, training, or family activity.'
-    when 'yak-chews-for-labradors', 'yak-chews-for-labs', 'best-chews-for-labradors'
+    when 'yak-chews-for-labradors', 'yak-chews-for-labs', 'best-chews-for-labradors', 'labrador-yak-chews'
       assign dog_label = 'Labrador Retriever'
       assign chew_intensity = 'strong, enthusiastic, and food-driven'
       assign boredom_tendency = 'can become mouthy or destructive when under-enriched'
@@ -181,7 +181,7 @@
       assign lede = 'Chews do not cure anxiety, but a supervised yak chew can support German Shepherd decompression routines alongside training, exercise, and behavior guidance.'
       assign faq_1_q = 'Can chews help anxious German Shepherds?'
       assign faq_1_a = 'Chewing can support a calming routine, but anxiety needs training, management, and veterinary or behavior support when severe.'
-    when 'best-long-lasting-chew-for-aggressive-chewers'
+    when 'best-long-lasting-chew-for-aggressive-chewers', 'aggressive-chewer-yak-chews'
       assign page_topic = 'long-lasting chews for aggressive chewers'
       assign dog_label = 'aggressive chewers'
       assign chew_intensity = 'very strong and persistent'

@@ -1,25 +1,16 @@
 {
   "sections": {
-    "prime_breed_landing": {
-      "type": "prime-breed-landing",
+    "seo_chew_page": {
+      "type": "seo-chew-page",
       "settings": {
-        "eyebrow": "Golden Retriever yak chew guide",
-        "heading": "Yak chews for Golden Retrievers who need calmer focus.",
-        "subheading": "Golden Retrievers often need a satisfying job after walks, training, or family activity. Prime Pet Food yak chews give them rawhide-free supervised enrichment with simple ingredients.",
-        "duration": "55-80 min",
-        "estimate_note": "Most Golden Retrievers do best with Large or Extra Large chews depending on chewing intensity.",
-        "primary_label": "Shop yak chews",
-        "primary_link": "/products/himalayan-yak-chews-for-dogs",
-        "card_1_title": "Choose by jaw strength",
-        "card_1_text": "Breed matters, but chewing style matters more. Gentle, moderate, and power chewers need different size confidence.",
-        "card_2_title": "Avoid rawhide guesswork",
-        "card_2_text": "4 simple ingredients: Yak milk, cow milk, lime juice, salt. No rawhide or artificial fillers.",
-        "card_3_title": "Save the profile",
-        "card_3_text": "Run the estimator once and your My Dog dashboard can remember size, duration, and reorder timing."
+        "page_mode": "auto",
+        "eyebrow": "Prime Pet Food Chew Guide",
+        "product_url": "shopify://products/himalayan-yak-chews-for-dogs",
+        "tool_url": "shopify://pages/how-long-will-this-last-for-my-dog"
       }
     }
   },
   "order": [
-    "prime_breed_landing"
+    "seo_chew_page"
   ]
 }
