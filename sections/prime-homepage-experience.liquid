@@ -23,6 +23,7 @@
   assign founder_image = 'prime-founder.png' | asset_url
   assign himalayan_story_image = 'prime-himalayan-yak-story-hero.jpg' | asset_url
   assign calm_cta_image = 'prime-home-calm-cta-bg.jpg' | asset_url
+  assign guarantee_image = 'prime-home-guarantee-bg.jpg' | asset_url
 
   assign hero_headline = section.settings.hero_headline | default: 'Calmer dogs start with a better chew.'
   assign hero_subtext = section.settings.hero_subtext | default: 'Long-lasting Himalayan yak cheese chews made with 4 simple ingredients. Built for focused chew time, cleaner enrichment, and fewer destroyed shoes.'
@@ -882,7 +883,7 @@
        GUARANTEE — Risk reversal
   ════════════════════════════════════════════════════════════════ -->
   {% if section.settings.show_guarantee %}
-  <div class="ph-guarantee ph-reveal" style="--ph-guarantee-image: url('{{ calm_cta_image }}');">
+  <div class="ph-guarantee ph-reveal" style="--ph-guarantee-image: url('{{ guarantee_image }}');">
     <div class="ph-shell ph-guarantee__inner">
       <div class="ph-guarantee__card" data-motion="reveal">
         <div class="ph-guarantee__icon" aria-hidden="true">
@@ -2478,8 +2479,8 @@
     overflow: hidden;
     background:
       radial-gradient(circle at 12% 8%, rgba(244, 194, 125, 0.2), transparent 36%),
-      linear-gradient(90deg, rgba(23, 21, 18, 0.98) 0%, rgba(31, 23, 18, 0.96) 44%, rgba(23, 21, 18, 0.58) 72%, rgba(23, 21, 18, 0.2) 100%),
-      var(--ph-guarantee-image) 82% center / cover no-repeat,
+      linear-gradient(90deg, rgba(23, 21, 18, 0.98) 0%, rgba(31, 23, 18, 0.95) 46%, rgba(23, 21, 18, 0.56) 72%, rgba(23, 21, 18, 0.12) 100%),
+      var(--ph-guarantee-image) 78% center / cover no-repeat,
       var(--ph-ink);
   }
 
@@ -2493,13 +2494,13 @@
     align-items: center;
     gap: 28px;
     max-width: 720px;
-    padding: 34px;
+    padding: clamp(30px, 4vw, 44px);
     border: 1px solid rgba(255, 250, 242, 0.18);
-    border-radius: 26px;
-    background: rgba(23, 21, 18, 0.48);
-    backdrop-filter: blur(7px);
-    -webkit-backdrop-filter: blur(7px);
-    box-shadow: inset 0 1px 0 rgba(255, 250, 242, 0.08), 0 18px 46px rgba(0, 0, 0, 0.18);
+    border-radius: 28px;
+    background: rgba(23, 21, 18, 0.54);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: inset 0 1px 0 rgba(255, 250, 242, 0.1), 0 28px 70px rgba(0, 0, 0, 0.24);
   }
 
   .ph-guarantee__icon {
@@ -2619,23 +2620,46 @@
     overflow: hidden;
     display: grid;
     align-items: center;
-    min-height: 520px;
+    min-height: 600px;
     text-align: left;
+    background: linear-gradient(135deg, #171512 0%, #211812 55%, #2b1a10 100%);
+  }
+
+  .ph-close::before {
+    content: "";
+    position: absolute;
+    top: 44px;
+    right: max(20px, calc((100% - 1120px) / 2));
+    bottom: 44px;
+    width: min(47vw, 600px);
+    border: 1px solid rgba(255, 250, 242, 0.16);
+    border-radius: 32px;
     background:
-      linear-gradient(90deg, rgba(23, 21, 18, 0.96) 0%, rgba(23, 21, 18, 0.82) 40%, rgba(23, 21, 18, 0.28) 68%, rgba(23, 21, 18, 0.08) 100%),
-      var(--ph-close-image) 82% center / cover no-repeat,
-      var(--ph-ink);
+      linear-gradient(180deg, rgba(23, 21, 18, 0.02), rgba(23, 21, 18, 0.16)),
+      var(--ph-close-image) 62% center / cover no-repeat;
+    box-shadow: 0 34px 84px rgba(0, 0, 0, 0.32);
+  }
+
+  .ph-close::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 14% 16%, rgba(244, 194, 125, 0.16), transparent 34%),
+      linear-gradient(90deg, rgba(23, 21, 18, 0) 0%, rgba(23, 21, 18, 0) 48%, rgba(23, 21, 18, 0.22) 100%);
+    pointer-events: none;
   }
 
   .ph-close__inner {
     position: relative;
+    z-index: 1;
     width: min(100% - 40px, 640px);
     max-width: 640px;
     margin-left: calc((100% - min(1120px, 100% - 40px)) / 2);
     padding: clamp(30px, 4vw, 48px);
     border: 1px solid rgba(255, 250, 242, 0.22);
     border-radius: 28px;
-    background: rgba(23, 21, 18, 0.36);
+    background: rgba(255, 250, 242, 0.08);
     backdrop-filter: blur(7px);
     -webkit-backdrop-filter: blur(7px);
     box-shadow: 0 28px 70px rgba(0, 0, 0, 0.28);
@@ -2874,20 +2898,39 @@
     }
 
     .ph-close {
-      min-height: 560px;
-      padding: 52px 0 24px;
-      align-items: end;
+      display: block;
+      min-height: 0;
+      padding: 24px 0 28px;
       background:
-        linear-gradient(180deg, rgba(23, 21, 18, 0.04) 0%, rgba(23, 21, 18, 0.28) 42%, rgba(23, 21, 18, 0.92) 100%),
-        var(--ph-close-image) 76% center / cover no-repeat,
-        var(--ph-ink);
+        radial-gradient(circle at top left, rgba(244, 194, 125, 0.14), transparent 38%),
+        linear-gradient(180deg, #171512 0%, #241811 100%);
+    }
+
+    .ph-close::before {
+      position: relative;
+      top: auto;
+      right: auto;
+      bottom: auto;
+      display: block;
+      width: min(100% - 24px, 720px);
+      height: clamp(260px, 72vw, 390px);
+      margin: 0 auto 14px;
+      border-radius: 24px;
+      background:
+        linear-gradient(180deg, rgba(23, 21, 18, 0.02), rgba(23, 21, 18, 0.16)),
+        var(--ph-close-image) 64% center / cover no-repeat;
+      box-shadow: 0 20px 54px rgba(0, 0, 0, 0.28);
+    }
+
+    .ph-close::after {
+      display: none;
     }
 
     .ph-guarantee {
       background:
         radial-gradient(circle at top, rgba(244, 194, 125, 0.16), transparent 42%),
-        linear-gradient(180deg, rgba(23, 21, 18, 0.68) 0%, rgba(23, 21, 18, 0.9) 46%, rgba(23, 21, 18, 0.98) 100%),
-        var(--ph-guarantee-image) 74% center / cover no-repeat,
+        linear-gradient(180deg, rgba(23, 21, 18, 0.34) 0%, rgba(23, 21, 18, 0.72) 42%, rgba(23, 21, 18, 0.98) 100%),
+        var(--ph-guarantee-image) 72% top / cover no-repeat,
         var(--ph-ink);
       overflow: visible;
     }
@@ -2901,7 +2944,7 @@
       max-width: none;
       margin: 0 auto;
       padding: 24px 18px;
-      background: rgba(23, 21, 18, 0.52);
+      background: rgba(255, 250, 242, 0.08);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
       border-color: rgba(255, 250, 242, 0.18);
@@ -3234,7 +3277,7 @@
       gap: 18px;
       padding: 28px 18px;
       overflow: visible;
-      background: rgba(23, 21, 18, 0.58);
+      background: rgba(23, 21, 18, 0.62);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
     }
