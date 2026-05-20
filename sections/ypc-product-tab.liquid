@@ -83,6 +83,16 @@
       </div>
 
       <div class="ypc-tabs-recos__content">
+        <div class="ypc-tabs-recos__empty-state" aria-hidden="true">
+          <span class="ypc-tabs-recos__empty-icon">
+            {% render 'icon', icon: 'information_circle', size: 22 %}
+          </span>
+          <div>
+            <strong>Choose a detail to review.</strong>
+            <p>Description, safety, shipping, and ingredients stay tucked away until you need them, so the product options remain easy to compare.</p>
+          </div>
+        </div>
+
         <div
           id="ypc-panel-description-{{ section.id }}"
           class="ypc-tabs-recos__panel"
@@ -359,11 +369,56 @@
   }
 
   .ypc-tabs-recos__content {
-    padding-top: 0;
+    padding-top: 16px;
   }
 
   .ypc-tabs-recos--has-open-panel .ypc-tabs-recos__content {
-    padding-top: 24px;
+    padding-top: 20px;
+  }
+
+  .ypc-tabs-recos--has-open-panel .ypc-tabs-recos__empty-state {
+    display: none;
+  }
+
+  .ypc-tabs-recos__empty-state {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-height: 188px;
+    padding: 24px;
+    border: 1px dashed rgba(43, 20, 8, 0.18);
+    border-radius: 22px;
+    background:
+      radial-gradient(circle at top left, rgba(225, 102, 16, 0.08), transparent 34%),
+      rgba(255, 250, 243, 0.64);
+    color: var(--ypc-text);
+  }
+
+  .ypc-tabs-recos__empty-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(225, 102, 16, 0.12);
+    color: var(--ypc-accent);
+    flex: 0 0 auto;
+  }
+
+  .ypc-tabs-recos__empty-state strong {
+    display: block;
+    font-size: 19px;
+    line-height: 1.2;
+    font-weight: 900;
+  }
+
+  .ypc-tabs-recos__empty-state p {
+    max-width: 560px;
+    margin: 8px 0 0;
+    color: var(--ypc-muted);
+    font-size: 14px;
+    line-height: 1.5;
   }
 
   .ypc-tabs-recos__panel {
@@ -422,7 +477,7 @@
   }
 
   .ypc-tabs-recos__reco-heading {
-    margin: 0 0 36px;
+    margin: 0 0 18px;
     color: var(--ypc-text);
     font-size: var(--ypc-reco-heading-size);
     line-height: 1;
@@ -434,7 +489,7 @@
 .ypc-tabs-recos__products {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
+  gap: 12px;
 }
 
 .ypc-rec-product {
@@ -442,7 +497,7 @@
   background: #fffaf3;
   border: 1px solid rgba(43, 20, 8, 0.12);
   border-radius: 18px;
-  padding: 14px;
+  padding: 12px;
   box-shadow: 0 10px 28px rgba(43, 20, 8, 0.06);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -457,7 +512,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 210px;
+  height: 168px;
   background: #ffffff;
   border-radius: 14px;
   overflow: hidden;
@@ -467,8 +522,8 @@
 .ypc-rec-product__image {
   display: block;
   width: 100%;
-  max-width: 190px;
-  height: 190px;
+  max-width: 150px;
+  height: 150px;
   object-fit: contain;
 }
 
@@ -478,7 +533,7 @@
   line-height: 1.28;
   font-weight: 800;
   color: var(--ypc-text);
-  min-height: 44px;
+  min-height: 0;
 }
 
 .ypc-rec-product__title a {
@@ -552,6 +607,14 @@
 
     .ypc-tabs-recos--has-open-panel .ypc-tabs-recos__content {
       padding-top: 18px;
+    }
+
+    .ypc-tabs-recos__content {
+      padding-top: 0;
+    }
+
+    .ypc-tabs-recos__empty-state {
+      display: none;
     }
 
     .ypc-tabs-recos__panel {
@@ -637,25 +700,25 @@
       "type": "richtext",
       "id": "description_fallback",
       "label": "Description fallback",
-      "default": "<p>Add your product description here.</p>"
+      "default": "<p>Prime Pet Food Himalayan Yak Chews are dense, rawhide-free enrichment chews for dogs who need a longer-lasting job. Inspired by traditional Himalayan yak cheese recipes, each chew is made for supervised calm time, cleaner indoor chewing, and dog parents who want a simple natural routine.</p>"
     },
     {
       "type": "richtext",
       "id": "change_fallback",
       "label": "Safe feeding fallback",
-      "default": "<p>Always supervise your dog during chew time, choose the right size for their weight and chewing style, provide fresh water, and remove any small end pieces.</p>"
+      "default": "<p>Always supervise chew time, choose a size your dog cannot swallow whole, provide fresh water, and remove the small end piece before it becomes a choking risk. For sensitive teeth, dental history, puppies, or seniors, ask your vet before using any hard chew.</p>"
     },
     {
       "type": "richtext",
       "id": "sizing_fallback",
       "label": "Shipping fallback",
-      "default": "<p>Orders are typically processed within 24-48 hours and shipped with tracking so you can follow your dog's chews from dispatch to delivery.</p>"
+      "default": "<p>Orders usually process within 24-48 hours and ship with tracking. Most customers receive their chews within 2-5 business days after shipping, depending on destination and carrier conditions.</p>"
     },
     {
       "type": "richtext",
       "id": "ingredients_fallback",
       "label": "Ingredients fallback",
-      "default": "<p>Yak milk, cow milk, lime juice, and salt.</p>"
+      "default": "<p>Four simple ingredients: yak milk, cow milk, lime juice, and salt. No rawhide, no artificial flavors, no artificial colors, and no unnecessary fillers.</p>"
     },
     {
       "type": "header",
@@ -665,13 +728,13 @@
       "type": "text",
       "id": "reco_heading",
       "label": "Recommendation heading",
-      "default": "You may also like..."
+      "default": "Build your chew routine"
     },
     {
       "type": "text",
       "id": "product_link_label",
       "label": "Product link label",
-      "default": "Quick view"
+      "default": "View option"
     },
     {
       "type": "header",
