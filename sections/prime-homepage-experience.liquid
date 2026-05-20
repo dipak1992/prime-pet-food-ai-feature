@@ -1408,6 +1408,87 @@
     color: #fffaf2;
   }
 
+  @media (min-width: 861px) {
+    .ph-himalayan-story {
+      padding: 88px 0;
+      background:
+        radial-gradient(circle at 50% 8%, rgba(210, 99, 46, 0.08), transparent 36%),
+        linear-gradient(180deg, #fffaf2 0%, #f8efe3 100%);
+    }
+
+    .ph-himalayan-story__inner {
+      position: relative;
+      display: block;
+      min-height: 560px;
+      overflow: hidden;
+      border: 1px solid rgba(234, 223, 206, 0.78);
+      border-radius: 34px;
+      background: var(--ph-ink);
+      box-shadow: 0 28px 86px rgba(43, 20, 8, 0.16);
+    }
+
+    .ph-himalayan-story__media {
+      position: absolute;
+      inset: 0;
+      min-height: 100%;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .ph-himalayan-story__media::after {
+      background:
+        linear-gradient(90deg, rgba(23, 21, 18, 0.92) 0%, rgba(23, 21, 18, 0.74) 34%, rgba(23, 21, 18, 0.18) 68%, rgba(23, 21, 18, 0.08) 100%),
+        linear-gradient(180deg, rgba(23, 21, 18, 0.08) 0%, rgba(23, 21, 18, 0.32) 100%);
+    }
+
+    .ph-himalayan-story__media img {
+      object-position: 58% 50%;
+    }
+
+    .ph-himalayan-story__copy {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      min-height: 560px;
+      max-width: 620px;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(56px, 6vw, 88px);
+      color: #fffaf2;
+    }
+
+    .ph-himalayan-story__copy .ph-kicker {
+      color: #f4c27d;
+    }
+
+    .ph-himalayan-story__copy h2 {
+      max-width: 12ch;
+      color: #fffaf2;
+    }
+
+    .ph-himalayan-story__copy p:not(.ph-kicker) {
+      max-width: 540px;
+      color: rgba(255, 250, 242, 0.82);
+    }
+
+    .ph-himalayan-story__signals span {
+      border-color: rgba(255, 250, 242, 0.22);
+      background: rgba(255, 250, 242, 0.1);
+      color: rgba(255, 250, 242, 0.92);
+    }
+
+    .ph-himalayan-story__link {
+      width: fit-content;
+      background: var(--ph-clay);
+      color: #fffaf2;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+    }
+
+    .ph-himalayan-story__link:hover {
+      background: #b85f32;
+    }
+  }
+
   /* ═══════════════════════════════════════════════════════════════
      OUTCOMES
   ════════════════════════════════════════════════════════════════ */
