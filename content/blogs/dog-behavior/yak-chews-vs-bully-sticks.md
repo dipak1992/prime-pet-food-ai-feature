@@ -34,7 +34,7 @@ Bully sticks can have a stronger smell and may leave more residue. Yak chews are
 
 ## Ingredient preference
 
-Prime Pet Food yak chews are made for owners who want simple ingredients and a dense chewing experience. If your priority is a quick edible chew, a bully stick may fit. If your priority is long-lasting enrichment, a yak chew is often the better place to start.
+Prime Pet Food yak chews are made for owners who want a dense chewing experience and one clear ingredient list: 4 simple ingredients: Yak milk, cow milk, lime juice, salt. If your priority is a quick edible chew, a bully stick may fit. If your priority is long-lasting enrichment, a yak chew is often the better place to start.
 
 ## Safety and sizing
 

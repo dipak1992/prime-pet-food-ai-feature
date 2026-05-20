@@ -69,7 +69,7 @@ A chew should be larger than your dog can swallow. Always supervise chewing, pro
 
 ## Best starting point
 
-For most dogs, choose the size recommended for their weight, then size up if they destroy toys, chew urgently, or have a strong jaw. Prime Pet Food Himalayan yak cheese chews are designed for dog owners who want longer chewing time, simple ingredients, and a cleaner alternative to rawhide.
+For most dogs, choose the size recommended for their weight, then size up if they destroy toys, chew urgently, or have a strong jaw. Prime Pet Food Himalayan yak cheese chews are designed for dog owners who want longer chewing time, a cleaner alternative to rawhide, and one clear ingredient list: 4 simple ingredients: Yak milk, cow milk, lime juice, salt.
 
 If you are comparing chew types, read [yak chews vs bully sticks](/pages/yak-chews-vs-bully-sticks). If your main issue is destruction, read [best long lasting chew for aggressive chewers](/pages/best-long-lasting-chew-for-aggressive-chewers). If your dog chews out of boredom, read [dog chews for bored dogs](/pages/dog-chews-for-bored-dogs).
 

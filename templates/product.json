@@ -24,7 +24,7 @@
         "stat1_value": "67 min",
         "stat1_label": "Average chew time",
         "stat2_value": "4",
-        "stat2_label": "Natural ingredients",
+        "stat2_label": "4 simple ingredients",
         "stat3_value": "4.9★",
         "stat3_label": "From 2,400+ reviews",
         "stat4_value": "30-day",
@@ -853,10 +853,10 @@
         "change_heading": "Safe Feeding Guidelines for Yak Chews",
         "sizing_heading": "Shipping",
         "ingredients_heading": "Simple Ingredients",
-        "description_fallback": "<p>Prime Pet Food Himalayan Yak Chews are dense, rawhide-free enrichment chews for dogs who need a longer-lasting job. Inspired by traditional Himalayan yak cheese recipes, each chew is made for supervised calm time, cleaner indoor chewing, and dog parents who want a simple natural routine.</p><ul><li><strong>Best for calm-time structure</strong><br/>Use after walks, during work calls, crate downtime, or evening decompression.</li><li><strong>Long-lasting texture</strong><br/>The hardened cheese texture gives dogs more occupation than soft treats or quick snacks.</li><li><strong>Rawhide-free confidence</strong><br/>A simple-ingredient alternative for dog parents avoiding rawhide and highly processed chews.</li><li><strong>Packed in USA</strong><br/>Prepared with Prime Pet Food sizing, safety, and support guidance for modern dog homes.</li></ul>",
+        "description_fallback": "<p>Prime Pet Food Himalayan Yak Chews are dense, rawhide-free enrichment chews for dogs who need a longer-lasting job. Crafted in Nepal using traditional Himalayan methods, each chew is made for supervised calm time, cleaner indoor chewing, and dog parents who want a simple natural routine.</p><ul><li><strong>Best for calm-time structure</strong><br/>Use after walks, during work calls, crate downtime, or evening decompression.</li><li><strong>Long-lasting texture</strong><br/>The hardened cheese texture gives dogs more occupation than soft treats or quick snacks.</li><li><strong>Rawhide-free confidence</strong><br/>A simple-ingredient alternative for dog parents avoiding rawhide and highly processed chews.</li><li><strong>Packed in the USA</strong><br/>Packed in the USA under Prime Pet Food quality standards, with sizing, safety, and support guidance for modern dog homes.</li></ul>",
         "change_fallback": "<p><strong>Supervise every chew session</strong><br/>Yak chews are hard, long-lasting chews. Offer them during watched calm time with fresh water nearby, and remove the chew if your dog tries to gulp or swallow large pieces.</p><p><strong>Choose a size your dog cannot swallow whole</strong><br/>If your dog is between sizes or chews aggressively, size up. A larger chew is usually easier to manage safely than one that fits fully in the mouth.</p><p><strong>Use the thumbnail test as a caution</strong><br/>Hard chews are not right for every dog. If your dog has weak teeth, dental disease, crowns, or a history of cracked teeth, ask your vet before using any hard chew.</p><p><strong>Remove and puff the nub</strong><br/>Take the small end piece away before it becomes a choking risk. Soak it, microwave it into a crunchy puff, let it cool completely, then serve as a bonus treat.</p><p><strong>Introduce slowly</strong><br/>For puppies, seniors, sensitive stomachs, or first-time yak chew users, start with shorter sessions and monitor chewing style before building a routine.</p>",
         "sizing_fallback": "<p>Orders usually process within 24–48 hours and ship with trusted carriers such as USPS, UPS, FedEx, or DHL depending on destination and available service.</p><p>Most customers receive their chews within 2–5 business days after shipping. Tracking is provided so you can follow the order from dispatch to delivery.</p><p>Free shipping is available on qualifying orders over $30. If a size or routine fit is not right, our 30-day satisfaction promise gives you a clear path to contact us for help.</p><p>Weather, carrier volume, holidays, and regional delays can occasionally affect delivery timing.</p>",
-        "ingredients_fallback": "<p><strong>Four simple ingredients:</strong> yak milk, cow milk, lime juice, and salt.</p><p>That is it: no rawhide, no artificial flavors, no artificial colors, and no unnecessary fillers. The dense texture comes from a Himalayan-inspired cheese process: milk is formed into curds, pressed, shaped, and slowly dried until it becomes a long-lasting chew.</p><p>Because these chews are naturally hard, choose the right size, supervise every session, and remove the small nub before it can be swallowed.</p>",
+        "ingredients_fallback": "<p><strong>4 simple ingredients: Yak milk, cow milk, lime juice, salt.</strong></p><p>That is it: no rawhide, no artificial flavors, no artificial colors, and no unnecessary fillers. Crafted in Nepal using traditional Himalayan methods. Packed in the USA under Prime Pet Food quality standards.</p><p>Because these chews are naturally hard, choose the right size, supervise every session, and remove the small nub before it can be swallowed.</p>",
         "reco_heading": "Build your chew routine",
         "product_link_label": "View option",
         "bg_color": "#f6f1e9",
@@ -985,7 +985,7 @@
         "comparison_row_gHgm9d": {
           "type": "comparison_row",
           "settings": {
-            "feature": "100% natural ingredients",
+            "feature": "4 simple ingredients",
             "left_status": "cross",
             "center_status": "check",
             "right_status": "cross"
@@ -1220,7 +1220,7 @@
           "type": "faq_item",
           "settings": {
             "question": "What are yak chews made from?",
-            "answer": "<p>Just 3 ingredients: yak milk, lime juice, and a pinch of salt. No chemicals, preservatives, or artificial flavors.</p>"
+            "answer": "<p>4 simple ingredients: Yak milk, cow milk, lime juice, salt. No rawhide, artificial flavors, preservatives, or unnecessary fillers.</p><p>Origin statement: Crafted in Nepal using traditional Himalayan methods. Packed in the USA under Prime Pet Food quality standards.</p>"
           }
         },
         "faq_item_nUazy7": {
