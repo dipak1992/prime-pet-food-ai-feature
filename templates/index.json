@@ -13,7 +13,7 @@
       "type": "prime-homepage-experience",
       "settings": {
         "hero_headline": "A longer-lasting chew for dogs who chew hard.",
-        "hero_subtext": "Rawhide-free Himalayan yak cheese chews made with 4 natural ingredients for focused, calmer chew time.",
+        "hero_subtext": "Rawhide-free Himalayan yak cheese chews. 4 ingredients. No chemicals. Just a chew your dog actually loves — and you can feel good about.",
         "hero_image": "prime-calm-dog-yak-chew-hero.jpg",
         "trust_stat_1_value": "20,000+",
         "trust_stat_1_label": "Dog parents",
@@ -70,7 +70,7 @@
           "settings": {
             "html5_video": "shopify://files/videos/1737005584344.mp4",
             "product": "himalayan-yak-chews-for-dogs",
-            "caption": "Small breed · focused crate-time enrichment"
+            "caption": "Small breed · happy quiet time in the crate"
           }
         },
         "video_44C8B8": {
@@ -78,7 +78,7 @@
           "settings": {
             "html5_video": "shopify://files/videos/1736610302090.mp4",
             "product": "himalayan-yak-chews-for-dogs",
-            "caption": "Power chewer · longer-lasting occupation"
+            "caption": "Power chewer · finally something that lasts"
           }
         },
         "video_Jcw4yp": {
@@ -86,7 +86,7 @@
           "settings": {
             "html5_video": "shopify://files/videos/WhatsApp Video 2026-04-25 at 21.07.27.mp4",
             "product": "himalayan-yak-chews-for-dogs",
-            "caption": "Evening routine · calmer household wind-down"
+            "caption": "Evening routine · the house goes quiet"
           }
         },
         "video_TELc9F": {
@@ -209,10 +209,21 @@
         "cta_url": "https://www.instagram.com/foodprimepet/",
         "cta_label": "Follow on Instagram"
       }
+    },
+    "prime_zero_waste_puff": {
+      "type": "prime-zero-waste-puff",
+      "settings": {
+        "heading": "Zero Waste. Zero Choking.",
+        "subheading": "Every yak chew has a small end piece. Other brands tell you to throw it away. We turn it into a safe, crunchy bonus treat your dog will love.",
+        "cta_label": "Shop Yak Chews",
+        "cta_url": "/products/himalayan-yak-chews-for-dogs",
+        "video_url": "https://cdn.shopify.com/videos/c/o/v/d7aeb1ab2e45499ba3b718e8920fe919.mp4"
+      }
     }
   },
   "order": [
     "prime_homepage_experience",
+    "prime_zero_waste_puff",
     "video_carousel",
     "prime_calmtime_community"
   ]

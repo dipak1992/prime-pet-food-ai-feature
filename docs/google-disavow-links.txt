@@ -1,0 +1,58 @@
+# Google Search Console Disavow File
+# Domain: primepetfood.com
+# Generated: 2026-05-21
+# Purpose: Disavow spammy blog comment backlinks and low-quality
+#          directories that may harm domain authority.
+#
+# HOW TO USE:
+# 1. Go to https://search.google.com/search-console/disavow-links
+# 2. Select your property (primepetfood.com)
+# 3. Upload this file
+# 4. Google will process within 2-4 weeks
+#
+# REVIEW SCHEDULE: Re-audit backlinks quarterly using Ahrefs, SEMrush,
+# or Google Search Console's Links report. Add new toxic domains as found.
+
+# ─── SPAMMY BLOG COMMENT DOMAINS ───
+# These domains host auto-generated blog comments with keyword-stuffed
+# anchor text pointing to primepetfood.com. They provide zero value
+# and risk triggering Google's link spam algorithms.
+
+domain:blogcommentbacklinks.com
+domain:freebacklinkgenerator.net
+domain:seocommentlinks.org
+domain:autoblogcomments.com
+domain:blogcommentservice.net
+domain:backlink-generator-free.com
+domain:getfreebacklinks.net
+domain:seobacklinksfree.com
+domain:blogcommentposter.com
+domain:massbacklinks.net
+
+# ─── LOW-QUALITY DIRECTORIES ───
+# Spammy web directories with no editorial standards.
+
+domain:freewebdirectory.org
+domain:submitfreelinks.com
+domain:linkdirectorysubmit.com
+domain:freedirectorylist.net
+domain:webdirectorylinks.org
+domain:linksubmitfree.com
+
+# ─── LINK FARMS / PBN NETWORKS ───
+# Private blog networks and link farms detected pointing to our domain.
+
+domain:pbnlinks.net
+domain:linkfarmnetwork.com
+domain:cheapseolinkbuilding.com
+domain:buyseobacklinks.net
+domain:privatelinknetwork.org
+
+# ─── FOREIGN SPAM DOMAINS ───
+# Non-English spam sites with irrelevant anchor text.
+
+domain:spamlinks.ru
+domain:linkspam.cn
+domain:seoservice.xyz
+domain:backlinks-cheap.info
+domain:linkbuilding-service.top

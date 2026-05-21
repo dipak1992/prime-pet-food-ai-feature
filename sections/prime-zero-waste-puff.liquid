@@ -1,0 +1,339 @@
+{%- comment -%}
+  Zero Waste, Zero Choking — Microwave Safety Hack Section
+  File: sections/prime-zero-waste-puff.liquid
+  
+  A highly visible, graphically appealing section explaining how to turn
+  the dangerous end piece into a safe cheese puff. Designed for homepage
+  and every PDP.
+  
+  Usage: Add to any template JSON as a section.
+{%- endcomment -%}
+
+<section class="pzw" aria-labelledby="PrimeZeroWasteTitle">
+  <style>
+    .pzw {
+      --pzw-bg: #1a0f00;
+      --pzw-accent: #f59e0b;
+      --pzw-text: #fff;
+      --pzw-muted: rgba(255,255,255,0.75);
+      background: var(--pzw-bg);
+      color: var(--pzw-text);
+      padding: clamp(48px, 8vw, 80px) 24px;
+      font-family: var(--font-body-family, -apple-system, sans-serif);
+      overflow: hidden;
+    }
+
+    .pzw__inner {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .pzw__header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .pzw__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--pzw-accent);
+      margin-bottom: 16px;
+    }
+
+    .pzw__title {
+      font-size: clamp(26px, 4vw, 42px);
+      font-weight: 800;
+      line-height: 1.15;
+      margin: 0 0 14px;
+      color: var(--pzw-text);
+    }
+
+    .pzw__subtitle {
+      font-size: 17px;
+      color: var(--pzw-muted);
+      max-width: 620px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .pzw__steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    @media (max-width: 768px) {
+      .pzw__steps {
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .pzw__steps {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pzw__step {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 24px 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .pzw__step-num {
+      position: absolute;
+      top: 12px;
+      left: 16px;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--pzw-accent);
+      opacity: 0.7;
+    }
+
+    .pzw__step-icon {
+      font-size: 36px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .pzw__step-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin: 0 0 6px;
+      color: var(--pzw-text);
+    }
+
+    .pzw__step-desc {
+      font-size: 13px;
+      color: var(--pzw-muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .pzw__arrow {
+      display: none;
+    }
+
+    @media (min-width: 769px) {
+      .pzw__arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        right: -16px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 28px;
+        height: 28px;
+        background: var(--pzw-accent);
+        border-radius: 50%;
+        color: var(--pzw-bg);
+        font-size: 14px;
+        font-weight: 900;
+        z-index: 2;
+      }
+
+      .pzw__step:last-child .pzw__arrow {
+        display: none;
+      }
+    }
+
+    .pzw__safety-box {
+      background: linear-gradient(135deg, rgba(22, 163, 74, 0.1), rgba(22, 163, 74, 0.05));
+      border: 1px solid rgba(22, 163, 74, 0.3);
+      border-radius: 16px;
+      padding: 24px 28px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .pzw__safety-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(22, 163, 74, 0.2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .pzw__safety-content {
+      flex: 1;
+    }
+
+    .pzw__safety-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #4ade80;
+      margin: 0 0 6px;
+    }
+
+    .pzw__safety-text {
+      font-size: 14px;
+      color: var(--pzw-muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .pzw__cta-row {
+      text-align: center;
+    }
+
+    .pzw__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: var(--pzw-accent);
+      color: var(--pzw-bg);
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .pzw__cta:hover {
+      background: #fbbf24;
+    }
+
+    .pzw__video-link {
+      display: block;
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--pzw-muted);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .pzw__video-link:hover {
+      color: var(--pzw-text);
+    }
+  </style>
+
+  <div class="pzw__inner">
+
+    <div class="pzw__header">
+      <span class="pzw__badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Safety First
+      </span>
+      <h2 class="pzw__title" id="PrimeZeroWasteTitle">{{ section.settings.heading }}</h2>
+      <p class="pzw__subtitle">{{ section.settings.subheading }}</p>
+    </div>
+
+    <div class="pzw__steps">
+      <div class="pzw__step">
+        <span class="pzw__step-num">01</span>
+        <span class="pzw__step-icon">&#128054;</span>
+        <p class="pzw__step-title">Your dog chews it down</p>
+        <p class="pzw__step-desc">They enjoy the chew until it gets down to a small nub — about thumb-sized.</p>
+        <span class="pzw__arrow">&#8594;</span>
+      </div>
+
+      <div class="pzw__step">
+        <span class="pzw__step-num">02</span>
+        <span class="pzw__step-icon">&#9995;</span>
+        <p class="pzw__step-title">You take it away</p>
+        <p class="pzw__step-desc">Remove the nub before it gets small enough to swallow. This is the safety step.</p>
+        <span class="pzw__arrow">&#8594;</span>
+      </div>
+
+      <div class="pzw__step">
+        <span class="pzw__step-num">03</span>
+        <span class="pzw__step-icon">&#127859;</span>
+        <p class="pzw__step-title">Microwave for 60 seconds</p>
+        <p class="pzw__step-desc">Place the nub on a microwave-safe plate. It puffs up into a light, crunchy cheese ball.</p>
+        <span class="pzw__arrow">&#8594;</span>
+      </div>
+
+      <div class="pzw__step">
+        <span class="pzw__step-num">04</span>
+        <span class="pzw__step-icon">&#127881;</span>
+        <p class="pzw__step-title">Serve the bonus treat</p>
+        <p class="pzw__step-desc">Let it cool for 2 minutes, then give it to your dog. They get a second treat — you get zero waste.</p>
+      </div>
+    </div>
+
+    <div class="pzw__safety-box">
+      <div class="pzw__safety-icon">&#9989;</div>
+      <div class="pzw__safety-content">
+        <p class="pzw__safety-title">Why this matters</p>
+        <p class="pzw__safety-text">The end piece is the only part of a yak chew that could be a choking risk — and the puff trick eliminates it completely. The puffed cheese ball is soft, airy, and breaks apart easily. No sharp edges, no choking hazard, no waste. Every other long-lasting chew just tells you to throw the end away. We turn it into a reward.</p>
+      </div>
+    </div>
+
+    <div class="pzw__cta-row">
+      <a href="{{ section.settings.cta_url }}" class="pzw__cta">
+        {{ section.settings.cta_label }} &#8594;
+      </a>
+      {%- if section.settings.video_url != blank -%}
+        <a href="{{ section.settings.video_url }}" class="pzw__video-link" target="_blank" rel="noopener">
+          Watch the 30-second puff trick video &#9654;
+        </a>
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Zero Waste Puff Hack",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Zero Waste. Zero Choking."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Every yak chew has a small end piece. Other brands tell you to throw it away. We turn it into a safe, crunchy bonus treat your dog will love."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Shop Yak Chews"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL",
+      "default": "/products/himalayan-yak-chews-for-dogs"
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "Puff trick video URL (optional)",
+      "info": "Link to a video showing the puff trick in action."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zero Waste Puff Hack"
+    }
+  ]
+}
+{% endschema %}

@@ -26,7 +26,7 @@
   assign guarantee_image = 'prime-home-guarantee-bg.jpg' | asset_url
 
   assign hero_headline = section.settings.hero_headline | default: 'A longer-lasting chew for dogs who chew hard.'
-  assign hero_subtext = section.settings.hero_subtext | default: 'Rawhide-free Himalayan yak cheese chews made with 4 natural ingredients for focused, calmer chew time.'
+  assign hero_subtext = section.settings.hero_subtext | default: 'Rawhide-free Himalayan yak cheese chews. 4 ingredients. No chemicals. Just a chew your dog actually loves — and you can feel good about.'
   assign trust_stat_1_value = section.settings.trust_stat_1_value | default: '20,000+'
   assign trust_stat_1_label = section.settings.trust_stat_1_label | default: 'Dog parents'
   assign trust_stat_2_value = section.settings.trust_stat_2_value | default: '4'
@@ -433,10 +433,10 @@
           <div class="ph-quiz__result-card">
             <div class="ph-quiz__result-badge">Your calm-time plan</div>
             <h3 class="ph-quiz__result-title">Medium Yak Chew</h3>
-            <p class="ph-quiz__result-desc">Based on your answers, we recommend starting with our medium chew for steady, focused enrichment sessions.</p>
+            <p class="ph-quiz__result-desc">Based on your answers, a medium chew is the right starting point. Most dogs this size get 45–90 minutes of happy, quiet chewing.</p>
             <div class="ph-quiz__plan" aria-live="polite">
-              <strong>Best routine</strong>
-              <span class="ph-quiz__plan-text">Use during supervised evening downtime or focused calm time.</span>
+              <strong>When to give it</strong>
+              <span class="ph-quiz__plan-text">After a walk, during your evening routine, or whenever your dog needs something to do.</span>
             </div>
             <p class="ph-quiz__safety">Safety note: supervise every session, provide fresh water, and remove the nub once it is small enough to swallow.</p>
             <div class="ph-quiz__result-stats">
@@ -671,11 +671,23 @@
               <td>No food odor</td>
             </tr>
             <tr>
-              <td>Price per hour</td>
-              <td class="ph-compare__highlight"><strong>~$0.22/hr</strong></td>
-              <td>~$0.35/hr</td>
-              <td>~$0.80/hr</td>
-              <td>No nutrition</td>
+              <td>End-of-chew safety</td>
+              <td class="ph-compare__highlight">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Puffs into a treat
+              </td>
+              <td>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                Choking hazard
+              </td>
+              <td>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Must discard end
+              </td>
+              <td>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                No end piece
+              </td>
             </tr>
           </tbody>
         </table>
@@ -685,25 +697,25 @@
           <strong>Prime Pet Food Yak Chew</strong>
           <span><b>Duration</b> 67 min avg</span>
           <span><b>Ingredients</b> 4 natural</span>
-          <span><b>Routine</b> Rawhide-free, low odor, supervised calm time</span>
+          <span><b>Safety</b> Fully digestible, end piece puffs into a bonus treat</span>
         </article>
         <article tabindex="0">
           <strong>Rawhide</strong>
           <span><b>Duration</b> 20 min avg</span>
           <span><b>Ingredients</b> Chemical-processed</span>
-          <span><b>Routine</b> Higher blockage concern for many dog parents</span>
+          <span><b>Safety</b> Chunks can cause blockages — not fully digestible</span>
         </article>
         <article tabindex="0">
           <strong>Bully Sticks</strong>
           <span><b>Duration</b> 15 min avg</span>
           <span><b>Ingredients</b> Single ingredient</span>
-          <span><b>Routine</b> Strong odor and higher price per hour</span>
+          <span><b>Safety</b> Digestible but strong odor, must discard end piece</span>
         </article>
         <article tabindex="0">
           <strong>Nylon/Rubber Toys</strong>
           <span><b>Duration</b> Varies</span>
           <span><b>Ingredients</b> Synthetic material</span>
-          <span><b>Routine</b> Not edible and no nutritional value</span>
+          <span><b>Safety</b> Not edible — no nutritional value, shred risk over time</span>
         </article>
       </div>
     </div>
@@ -717,8 +729,8 @@
     <div class="ph-shell">
       <div class="ph-section-head ph-section-head--center">
         <p class="ph-kicker">How to use it</p>
-        <h2>Three steps to a calmer household.</h2>
-        <p>Think of it as your dog's evening wind-down — supervised, satisfying, and done right.</p>
+        <h2>Three steps. That's it.</h2>
+        <p>Give your dog a chew they love, keep an eye on them, and know exactly when to take it away. Simple.</p>
       </div>
       <div class="ph-routine__grid">
         <article>
@@ -733,8 +745,8 @@
         </article>
         <article>
           <span>03</span>
-          <h3>Remove the small end</h3>
-          <p>Take away the nub once it is small enough to swallow whole.</p>
+          <h3>Puff the end piece (don't toss it)</h3>
+          <p>When the chew gets small, take it away — then microwave it for 60 seconds. It puffs into a crunchy bonus treat. Zero waste, zero choking risk.</p>
         </article>
       </div>
     </div>
@@ -4541,11 +4553,11 @@
   var steps = quizWidget.querySelectorAll('.ph-quiz__step');
 
   var recommendations = {
-    small:  { title: 'Small Yak Chew',       duration: '~45 min', link: '/products/himalayan-yak-chews-for-dogs?variant=51744916701504', desc: 'A compact chew perfect for smaller breeds. Dense enough for focused enrichment without being overwhelming.' },
-    medium: { title: 'Medium Yak Chew',      duration: '~67 min', link: '/products/himalayan-yak-chews-for-dogs?variant=51744918962496', desc: 'Our most popular size. Ideal for steady chewers who need a reliable calm-time routine.' },
-    large:  { title: 'Large Yak Chew',       duration: '~85 min', link: '/products/himalayan-yak-chews-for-dogs?variant=51744918995264', desc: 'Built for bigger jaws and dogs that finish softer treats too quickly. Dense and long-lasting.' },
-    xlarge: { title: 'Extra Large Yak Chew', duration: '~95 min', link: '/products/himalayan-yak-chews-for-dogs?variant=51744919028032', desc: 'For large dogs and power chewers who need more chew mass and a longer calm-time routine.' },
-    jumbo:  { title: 'Jumbo Yak Chew',       duration: '~110 min', link: '/products/himalayan-yak-chews-for-dogs?variant=51744919060800', desc: 'For giant breeds and serious chewers. The largest Prime Pet Food chew for supervised enrichment sessions.' }
+    small:  { title: 'Small Yak Chew',       duration: '~45 min', link: '/products/himalayan-yak-chews-for-dogs?variant=51744916701504', desc: 'Perfect for smaller dogs. Dense enough to keep them busy without being too big to hold comfortably.' },
+    medium: { title: 'Medium Yak Chew',      duration: '~67 min', link: '/products/himalayan-yak-chews-for-dogs?variant=51744918962496', desc: 'Our most popular size. Great for dogs who need something that actually lasts longer than 10 minutes.' },
+    large:  { title: 'Large Yak Chew',       duration: '~85 min', link: '/products/himalayan-yak-chews-for-dogs?variant=51744918995264', desc: 'For bigger dogs and strong chewers who go through softer treats way too fast. Dense and long-lasting.' },
+    xlarge: { title: 'Extra Large Yak Chew', duration: '~95 min', link: '/products/himalayan-yak-chews-for-dogs?variant=51744919028032', desc: 'For large dogs and power chewers. More chew to work through means more quiet time for everyone.' },
+    jumbo:  { title: 'Jumbo Yak Chew',       duration: '~110 min', link: '/products/himalayan-yak-chews-for-dogs?variant=51744919060800', desc: 'For giant breeds and serious chewers. Our biggest chew — because some dogs need a LOT of chew.' }
   };
 
   function showStep(stepId) {
