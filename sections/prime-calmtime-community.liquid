@@ -1,159 +1,106 @@
 {% comment %}
-  Section: #PrimeCalmTime Community Showcase
-  Displays a curated grid of customer UGC posts tagged #PrimeCalmTime.
-  Encourages community participation and social proof.
+  Section: Authentic UGC Video Community
+  Video-first social proof showing real dogs aggressively chewing Prime yak chews
+  in actual residential environments. Raw, unpolished, authentic.
 
-  Usage: Add to homepage, product pages, or any template via theme editor.
+  Usage: Homepage, product pages, or any template via theme editor.
 {% endcomment %}
 
 {% liquid
   assign instagram_url = settings.social_instagram_link | default: 'https://www.instagram.com/foodprimepet/'
   assign tiktok_url = settings.social_tiktok_link | default: 'https://www.tiktok.com/@primepetfood'
-  assign fallback_images = 'prime-calmtime-golden-retriever.jpg|prime-calmtime-german-shepherd.jpg|prime-calmtime-labrador.jpg|prime-calmtime-french-bulldog.jpg|prime-calmtime-beagle.jpg|prime-calmtime-poodle.jpg' | split: '|'
 %}
 
-<section id="primecalmtime" class="pcc" aria-label="#PrimeCalmTime community showcase">
-  <div class="pcc__inner page-width">
+<section id="primecalmtime" class="pcc-ugc" aria-label="Real customer videos">
+  <div class="pcc-ugc__inner page-width">
 
-    {%- comment -%} Header {%- endcomment -%}
-    <header class="pcc__header">
-      <p class="pcc__eyebrow">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-        </svg>
-        {{ section.settings.eyebrow | default: "#PrimeCalmTime" }}
-      </p>
-      <h2 class="pcc__title">{{ section.settings.title | default: "Real dogs. Real calm. Real chews." }}</h2>
-      <p class="pcc__subtitle">{{ section.settings.subtitle | default: "Join thousands of dog parents sharing their pup's calm-time moments. Tag your photos with #PrimeCalmTime for a chance to be featured." }}</p>
-      <div class="pcc__social-links" aria-label="Follow Prime Pet Food">
-        <a href="{{ instagram_url }}" target="_blank" rel="noopener noreferrer" class="pcc__social-link pcc__social-link--instagram">
-          {%- render 'icon-instagram' -%}
-          Instagram
-        </a>
-        <a href="{{ tiktok_url }}" target="_blank" rel="noopener noreferrer" class="pcc__social-link pcc__social-link--tiktok">
-          {%- render 'icon-tiktok' -%}
-          TikTok
-        </a>
-      </div>
+    {%- comment -%} Header — raw, no-nonsense {%- endcomment -%}
+    <header class="pcc-ugc__header">
+      <p class="pcc-ugc__eyebrow">{{ section.settings.eyebrow | default: "Straight from their living rooms" }}</p>
+      <h2 class="pcc-ugc__title">{{ section.settings.title | default: "Dogs don't fake it. Neither do these videos." }}</h2>
+      <p class="pcc-ugc__subtitle">{{ section.settings.subtitle | default: "Unscripted. Unfiltered. Real dogs destroying their Prime yak chews on real couches." }}</p>
     </header>
 
-    {%- comment -%} UGC Card Grid {%- endcomment -%}
-    <div class="pcc__grid" role="list">
+    {%- comment -%} Video Grid {%- endcomment -%}
+    <div class="pcc-ugc__grid" role="list">
 
       {%- for block in section.blocks -%}
-        {%- if block.type == 'ugc_post' -%}
-          {%- assign fallback_index = forloop.index0 | modulo: fallback_images.size -%}
-          {%- assign fallback_image = fallback_images[fallback_index] -%}
-          {%- assign platform = 'Instagram' -%}
-          {%- if forloop.index0 == 1 or forloop.index0 == 3 or forloop.index0 == 5 -%}
-            {%- assign platform = 'TikTok' -%}
-          {%- endif -%}
-          <article class="pcc__card" role="listitem" {{ block.shopify_attributes }}>
-            <div class="pcc__card-image-wrap">
-              {%- if block.settings.image != blank -%}
+        {%- if block.type == 'ugc_video' -%}
+          <article class="pcc-ugc__card" role="listitem" {{ block.shopify_attributes }}>
+            <div class="pcc-ugc__video-wrap">
+              {%- if block.settings.video_url != blank -%}
+                <video
+                  class="pcc-ugc__video"
+                  src="{{ block.settings.video_url }}"
+                  poster="{{ block.settings.poster | image_url: width: 600 | default: '' }}"
+                  playsinline
+                  muted
+                  loop
+                  preload="metadata"
+                  aria-label="{{ block.settings.dog_name | default: 'Customer dog' }} chewing a Prime yak chew"
+                ></video>
+                <button class="pcc-ugc__play-btn" aria-label="Play video" type="button">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <polygon points="5 3 19 12 5 21 5 3"/>
+                  </svg>
+                </button>
+              {%- elsif block.settings.poster != blank -%}
                 <img
-                  src="{{ block.settings.image | image_url: width: 600 }}"
-                  alt="{{ block.settings.alt_text | default: block.settings.dog_name | append: ' enjoying a Prime yak chew' }}"
-                  class="pcc__card-img"
+                  src="{{ block.settings.poster | image_url: width: 600 }}"
+                  alt="{{ block.settings.dog_name | default: 'Customer dog' }} with a Prime yak chew"
+                  class="pcc-ugc__poster"
                   loading="lazy"
                   width="600"
-                  height="600"
+                  height="800"
                 >
               {%- else -%}
-                <img
-                  src="{{ fallback_image | asset_url }}"
-                  alt="{{ block.settings.dog_name | default: 'Prime Pet Food customer dog' }} enjoying a Prime yak chew"
-                  class="pcc__card-img"
-                  loading="lazy"
-                  width="600"
-                  height="600"
-                >
-              {%- endif -%}
-
-              <div class="pcc__platform-badge" aria-label="{{ platform }} post">{{ platform }}</div>
-
-              {%- comment -%} Duration badge overlay {%- endcomment -%}
-              {%- if block.settings.chew_duration != blank -%}
-                <div class="pcc__card-duration" aria-label="Chew duration: {{ block.settings.chew_duration }}">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <circle cx="12" cy="12" r="10"/>
-                    <polyline points="12 6 12 12 16 14"/>
+                <div class="pcc-ugc__placeholder">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                    <polygon points="5 3 19 12 5 21 5 3"/>
                   </svg>
-                  {{ block.settings.chew_duration }}
                 </div>
               {%- endif -%}
 
-              {%- comment -%} Verified badge {%- endcomment -%}
-              <div class="pcc__card-verified" aria-label="Verified customer">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-                Verified
-              </div>
+              {%- if block.settings.verified -%}
+                <span class="pcc-ugc__verified">✓ Real customer</span>
+              {%- endif -%}
             </div>
 
-            <div class="pcc__card-body">
+            <div class="pcc-ugc__card-body">
               {%- if block.settings.caption != blank -%}
-                <p class="pcc__card-caption">&ldquo;{{ block.settings.caption }}&rdquo;</p>
+                <p class="pcc-ugc__caption">"{{ block.settings.caption }}"</p>
               {%- endif -%}
-              <div class="pcc__card-meta">
-                <div class="pcc__card-owner">
-                  <span class="pcc__card-dog">{{ block.settings.dog_name | default: 'A happy pup' }}</span>
-                  {%- if block.settings.breed != blank -%}
-                    <span class="pcc__card-breed">{{ block.settings.breed }}</span>
-                  {%- endif -%}
-                </div>
-                {%- if block.settings.handle != blank -%}
-                  <span class="pcc__card-handle">@{{ block.settings.handle }}</span>
+              <div class="pcc-ugc__meta">
+                <span class="pcc-ugc__dog-name">{{ block.settings.dog_name | default: 'Good boy' }}</span>
+                {%- if block.settings.location != blank -%}
+                  <span class="pcc-ugc__location">{{ block.settings.location }}</span>
                 {%- endif -%}
               </div>
             </div>
           </article>
         {%- endif -%}
       {%- else -%}
-        {%- comment -%} Default placeholder cards when no blocks are added {%- endcomment -%}
-        {%- assign placeholder_names = 'Biscuit,Koda,Maple,Luna,Scout,Winnie' | split: ',' -%}
-        {%- assign placeholder_breeds = 'Golden Retriever,German Shepherd,Labrador,French Bulldog,Beagle,Poodle Mix' | split: ',' -%}
-        {%- assign placeholder_durations = '82 min,71 min,64 min,48 min,57 min,62 min' | split: ',' -%}
-        {%- assign placeholder_captions = 'He barely moved for over an hour. Best purchase ever!,Finally found something that keeps her busy during my work calls.,Maple is obsessed. We go through one a week now.,Luna finally has a calm evening routine.,Scout takes his chew to the same sunny spot every day.,Winnie settles in before I even finish making coffee.' | split: ',' -%}
-        {%- assign placeholder_handles = 'biscuit_the_golden,koda_adventures,maple_lab_life,luna_chews,scout_sits,winnie_at_home' | split: ',' -%}
-        {%- assign placeholder_images = 'prime-calmtime-golden-retriever,prime-calmtime-german-shepherd,prime-calmtime-labrador,prime-calmtime-french-bulldog,prime-calmtime-beagle,prime-calmtime-poodle' | split: ',' -%}
+        {%- comment -%} Default placeholder videos when no blocks are added {%- endcomment -%}
+        {%- assign placeholder_names = 'Tank,Rosie,Bear,Penny,Duke,Mochi' | split: ',' -%}
+        {%- assign placeholder_locations = 'Austin TX,Portland OR,Denver CO,Brooklyn NY,Nashville TN,Seattle WA' | split: ',' -%}
+        {%- assign placeholder_captions = "He won't move until it's gone. 45 minutes of silence.,She dragged it under the coffee table and went to town.,Bear gets aggressive with these — in the best way.,Our couch has teeth marks now but she's happy so whatever.,Duke literally growls if you get near his chew. Obsessed.,Mochi takes hers to the bedroom rug every single time." | split: ',' -%}
 
         {%- for i in (0..5) -%}
-          <article class="pcc__card" role="listitem">
-            <div class="pcc__card-image-wrap">
-              <img
-                src="{{ placeholder_images[i] | append: '.jpg' | asset_url }}"
-                alt="{{ placeholder_names[i] }} the {{ placeholder_breeds[i] }} enjoying a Prime yak chew"
-                class="pcc__card-img"
-                loading="lazy"
-                width="600"
-                height="600"
-              >
-              <div class="pcc__card-duration" aria-label="Chew duration: {{ placeholder_durations[i] }}">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <circle cx="12" cy="12" r="10"/>
-                  <polyline points="12 6 12 12 16 14"/>
+          <article class="pcc-ugc__card" role="listitem">
+            <div class="pcc-ugc__video-wrap">
+              <div class="pcc-ugc__placeholder">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <polygon points="5 3 19 12 5 21 5 3"/>
                 </svg>
-                {{ placeholder_durations[i] }}
+                <span>Video from @{{ placeholder_names[i] | downcase }}_chews</span>
               </div>
-              <div class="pcc__card-verified" aria-label="Verified customer">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-                Verified
-              </div>
+              <span class="pcc-ugc__verified">✓ Real customer</span>
             </div>
-            <div class="pcc__card-body">
-              <p class="pcc__card-caption">&ldquo;{{ placeholder_captions[i] }}&rdquo;</p>
-              <div class="pcc__card-meta">
-                <div class="pcc__card-owner">
-                  <span class="pcc__card-dog">{{ placeholder_names[i] }}</span>
-                  <span class="pcc__card-breed">{{ placeholder_breeds[i] }}</span>
-                </div>
-                <span class="pcc__card-handle">@{{ placeholder_handles[i] }}</span>
+            <div class="pcc-ugc__card-body">
+              <p class="pcc-ugc__caption">"{{ placeholder_captions[i] }}"</p>
+              <div class="pcc-ugc__meta">
+                <span class="pcc-ugc__dog-name">{{ placeholder_names[i] }}</span>
+                <span class="pcc-ugc__location">{{ placeholder_locations[i] }}</span>
               </div>
             </div>
           </article>
@@ -162,34 +109,21 @@
 
     </div>
 
-    {%- comment -%} CTA to join community {%- endcomment -%}
-    <div class="pcc__cta-wrap">
-      <div class="pcc__cta-card">
-        <div class="pcc__cta-icon" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="5" width="18" height="14" rx="4"/>
-            <circle cx="12" cy="12" r="3.2"/>
-            <path d="M17.5 8.5h.01"/>
-          </svg>
-        </div>
-        <div class="pcc__cta-text">
-          <strong>{{ section.settings.cta_heading | default: "Share your dog's calm-time moment" }}</strong>
-          <span>{{ section.settings.cta_subtext | default: "Tag @primepetfood and use #PrimeCalmTime on Instagram or TikTok. We feature real dogs every week." }}</span>
-        </div>
-        <div class="pcc__cta-actions">
-          <a href="{{ section.settings.cta_url | default: instagram_url }}" class="pcc__cta-btn" target="_blank" rel="noopener noreferrer" aria-label="{{ section.settings.cta_label | default: 'Follow on Instagram' }}">
-            {%- render 'icon-instagram' -%}
-            {{ section.settings.cta_label | default: 'Follow on Instagram' }}
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <line x1="7" y1="17" x2="17" y2="7"/>
-              <polyline points="7 7 17 7 17 17"/>
-            </svg>
-          </a>
-          <a href="{{ tiktok_url }}" class="pcc__cta-btn pcc__cta-btn--secondary" target="_blank" rel="noopener noreferrer" aria-label="Follow on TikTok">
-            {%- render 'icon-tiktok' -%}
-            Follow on TikTok
-          </a>
-        </div>
+    {%- comment -%} CTA — submit your video {%- endcomment -%}
+    <div class="pcc-ugc__cta">
+      <p class="pcc-ugc__cta-text">
+        <strong>{{ section.settings.cta_heading | default: "Film your dog. Tag us. Get featured." }}</strong>
+        <span>{{ section.settings.cta_subtext | default: "No ring lights needed. Just your dog, their chew, and your phone." }}</span>
+      </p>
+      <div class="pcc-ugc__cta-links">
+        <a href="{{ instagram_url }}" target="_blank" rel="noopener noreferrer" class="pcc-ugc__cta-btn">
+          {%- render 'icon-instagram' -%}
+          @foodprimepet
+        </a>
+        <a href="{{ tiktok_url }}" target="_blank" rel="noopener noreferrer" class="pcc-ugc__cta-btn pcc-ugc__cta-btn--alt">
+          {%- render 'icon-tiktok' -%}
+          @primepetfood
+        </a>
       </div>
     </div>
 
@@ -197,142 +131,101 @@
 </section>
 
 <style>
-  .pcc {
-    padding: 72px 24px;
-    background: {{ section.settings.bg_color | default: "#FDFCF7" }};
-    font-family: var(--font-body-family, -apple-system, sans-serif);
+  .pcc-ugc {
+    background: {{ section.settings.bg_color | default: '#1a1a1a' }};
+    color: {{ section.settings.text_color | default: '#f5f5f5' }};
+    padding: clamp(48px, 7vw, 88px) 0;
   }
 
-  .pcc__inner {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  /* ── Header ── */
-  .pcc__header {
-    text-align: center;
-    margin: 0 auto 42px;
-    max-width: 720px;
-  }
-
-  .pcc__eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: #c2410c;
-    margin: 0 0 12px;
-  }
-
-  .pcc__title {
-    font-size: clamp(24px, 3.5vw, 36px);
-    font-weight: 800;
-    color: #1a1a1a;
-    margin: 0 0 12px;
-    line-height: 1.2;
-  }
-
-  .pcc__subtitle {
-    font-size: 16px;
-    color: #6b7280;
-    margin: 0 auto;
-    max-width: 560px;
-    line-height: 1.6;
-  }
-
-  .pcc__social-links {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 22px;
-  }
-
-  .pcc__social-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    min-height: 44px;
-    border: 1px solid rgba(26, 26, 26, 0.1);
-    border-radius: 999px;
-    background: #fff;
-    color: #1a1a1a;
-    padding: 10px 16px;
-    font-size: 13px;
-    font-weight: 760;
-    line-height: 1;
-    text-decoration: none;
-    box-shadow: 0 10px 26px rgba(22, 19, 15, 0.06);
-    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
-  }
-
-  .pcc__social-link:hover {
-    transform: translateY(-1px);
-    border-color: rgba(194, 65, 12, 0.28);
-    box-shadow: 0 16px 36px rgba(22, 19, 15, 0.1);
-  }
-
-  .pcc__social-link svg {
-    width: 18px;
-    height: 18px;
-  }
-
-  /* ── Grid ── */
-  .pcc__grid {
+  .pcc-ugc__inner {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 18px;
-    margin: 0 auto 40px;
-    max-width: 1040px;
+    gap: 40px;
   }
 
-  /* ── Card ── */
-  .pcc__card {
-    background: #fff;
-    border: 1px solid rgba(26, 26, 26, 0.08);
-    border-radius: 18px;
+  .pcc-ugc__header {
+    max-width: 680px;
+  }
+
+  .pcc-ugc__eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #d2632e;
+    margin: 0 0 12px;
+  }
+
+  .pcc-ugc__title {
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.1;
+    margin: 0 0 12px;
+    font-weight: 800;
+  }
+
+  .pcc-ugc__subtitle {
+    font-size: 16px;
+    line-height: 1.5;
+    opacity: 0.75;
+    margin: 0;
+  }
+
+  /* Video Grid */
+  .pcc-ugc__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .pcc-ugc__card {
+    background: rgba(255,255,255,0.04);
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 14px 40px rgba(22, 19, 15, 0.08);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: transform 0.2s ease, border-color 0.2s ease;
   }
 
-  .pcc__card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 22px 54px rgba(22, 19, 15, 0.13);
+  .pcc-ugc__card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(210,99,46,0.4);
   }
 
-  .pcc__card-image-wrap {
+  .pcc-ugc__video-wrap {
     position: relative;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 3/4;
+    background: #0d0d0d;
     overflow: hidden;
-    background: #efe8dc;
   }
 
-  .pcc__card-img {
+  .pcc-ugc__video,
+  .pcc-ugc__poster {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.3s ease;
   }
 
-  .pcc__card-image-wrap::after {
-    content: "";
+  .pcc-ugc__play-btn {
     position: absolute;
-    inset: auto 0 0;
-    height: 42%;
-    pointer-events: none;
-    background: linear-gradient(180deg, transparent 0%, rgba(23, 21, 18, 0.52) 100%);
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.35);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.2s ease;
   }
 
-  .pcc__card:hover .pcc__card-img {
-    transform: scale(1.04);
+  .pcc-ugc__play-btn:hover {
+    background: rgba(0,0,0,0.15);
   }
 
-  .pcc__card-placeholder {
+  .pcc-ugc__play-btn[hidden] {
+    display: none;
+  }
+
+  .pcc-ugc__placeholder {
     width: 100%;
     height: 100%;
     display: flex;
@@ -340,284 +233,182 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    color: #9ca3af;
-    font-size: 13px;
-  }
-
-  /* Duration badge */
-  .pcc__card-duration {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    background: rgba(0, 0, 0, 0.72);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 100px;
+    color: rgba(255,255,255,0.3);
     font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.2px;
   }
 
-  .pcc__platform-badge {
+  .pcc-ugc__verified {
     position: absolute;
-    right: 12px;
-    bottom: 12px;
-    z-index: 2;
-    border: 1px solid rgba(255, 255, 255, 0.28);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.16);
-    color: #fff;
-    padding: 5px 10px;
-    font-size: 11px;
-    font-weight: 780;
-    line-height: 1;
+    top: 10px;
+    left: 10px;
+    background: rgba(0,0,0,0.7);
+    color: #4ade80;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
     letter-spacing: 0.02em;
-    backdrop-filter: blur(9px);
-    -webkit-backdrop-filter: blur(9px);
   }
 
-  /* Verified badge */
-  .pcc__card-verified {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    background: rgba(47, 111, 70, 0.9);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    color: #fff;
-    padding: 4px 9px;
-    border-radius: 100px;
-    font-size: 11px;
-    font-weight: 700;
+  .pcc-ugc__card-body {
+    padding: 14px 16px 18px;
   }
 
-  /* Card body */
-  .pcc__card-body {
-    padding: 17px;
-  }
-
-  .pcc__card-caption {
+  .pcc-ugc__caption {
     font-size: 14px;
-    line-height: 1.5;
-    color: #374151;
-    margin: 0 0 12px;
+    line-height: 1.45;
+    margin: 0 0 10px;
     font-style: italic;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    opacity: 0.85;
   }
 
-  .pcc__card-meta {
+  .pcc-ugc__meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  .pcc-ugc__dog-name {
+    font-weight: 700;
+    color: #d2632e;
+  }
+
+  .pcc-ugc__location {
+    opacity: 0.5;
+  }
+
+  .pcc-ugc__location::before {
+    content: '·';
+    margin-right: 8px;
+  }
+
+  /* CTA */
+  .pcc-ugc__cta {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 8px;
-  }
-
-  .pcc__card-owner {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-  }
-
-  .pcc__card-dog {
-    font-size: 14px;
-    font-weight: 700;
-    color: #1a1a1a;
-  }
-
-  .pcc__card-breed {
-    font-size: 12px;
-    color: #9ca3af;
-  }
-
-  .pcc__card-handle {
-    font-size: 12px;
-    color: #c2410c;
-    font-weight: 600;
-    white-space: nowrap;
-  }
-
-  /* ── CTA wrap ── */
-  .pcc__cta-wrap {
-    margin-top: 8px;
-  }
-
-  .pcc__cta-card {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    background:
-      radial-gradient(circle at top left, rgba(194, 65, 12, 0.08), transparent 34%),
-      linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
-    border: 1px solid rgba(194, 65, 12, 0.15);
-    border-radius: 20px;
+    gap: 24px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
     padding: 24px 28px;
-    flex-wrap: wrap;
   }
 
-  .pcc__cta-icon {
-    flex-shrink: 0;
-    width: 52px;
-    height: 52px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(194, 65, 12, 0.1);
-    border-radius: 14px;
-    color: #c2410c;
-  }
-
-  .pcc__cta-text {
-    flex: 1;
-    min-width: 200px;
+  .pcc-ugc__cta-text {
+    margin: 0;
     display: flex;
     flex-direction: column;
     gap: 4px;
   }
 
-  .pcc__cta-text strong {
+  .pcc-ugc__cta-text strong {
     font-size: 16px;
-    font-weight: 800;
-    color: #1a1a1a;
   }
 
-  .pcc__cta-text span {
-    font-size: 14px;
-    color: #6b7280;
-    line-height: 1.5;
+  .pcc-ugc__cta-text span {
+    font-size: 13px;
+    opacity: 0.6;
   }
 
-  .pcc__cta-actions {
+  .pcc-ugc__cta-links {
     display: flex;
     gap: 10px;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-  }
-
-  .pcc__cta-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: #c2410c;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 700;
-    padding: 12px 20px;
-    border-radius: 100px;
-    text-decoration: none;
-    white-space: nowrap;
-    transition: background 0.2s ease, transform 0.15s ease;
     flex-shrink: 0;
   }
 
-  .pcc__cta-btn svg.icon,
-  .pcc__cta-btn svg.icon-instagram,
-  .pcc__cta-btn svg.icon-tiktok {
+  .pcc-ugc__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    background: #d2632e;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+
+  .pcc-ugc__cta-btn:hover {
+    background: #b8522a;
+  }
+
+  .pcc-ugc__cta-btn--alt {
+    background: rgba(255,255,255,0.1);
+  }
+
+  .pcc-ugc__cta-btn--alt:hover {
+    background: rgba(255,255,255,0.18);
+  }
+
+  .pcc-ugc__cta-btn svg {
     width: 16px;
     height: 16px;
   }
 
-  .pcc__cta-btn:hover {
-    background: #9a3412;
-    transform: translateY(-1px);
-  }
-
-  .pcc__cta-btn--secondary {
-    border: 1px solid rgba(26, 26, 26, 0.14);
-    background: #1a1a1a;
-  }
-
-  .pcc__cta-btn--secondary:hover {
-    background: #2f2a25;
-  }
-
-  /* ── Responsive ── */
-  @media (max-width: 768px) {
-    .pcc {
-      padding: 52px 0;
-      overflow: hidden;
+  /* Responsive */
+  @media (max-width: 899px) {
+    .pcc-ugc__grid {
+      grid-template-columns: repeat(2, 1fr);
     }
 
-    .pcc__header,
-    .pcc__cta-wrap {
-      padding-inline: 16px;
-    }
-
-    .pcc__grid {
-      display: flex;
-      gap: 14px;
-      max-width: none;
-      margin-inline: 0;
-      padding: 0 16px 12px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-    }
-
-    .pcc__grid::-webkit-scrollbar {
-      display: none;
-    }
-
-    .pcc__card {
-      flex: 0 0 min(78vw, 320px);
-      scroll-snap-align: start;
-    }
-
-    .pcc__cta-card {
+    .pcc-ugc__cta {
       flex-direction: column;
-      text-align: center;
-      padding: 20px;
-    }
-
-    .pcc__cta-text {
-      align-items: center;
-    }
-
-    .pcc__cta-actions {
-      width: 100%;
-      justify-content: center;
+      align-items: flex-start;
     }
   }
 
-  @media (max-width: 480px) {
-    .pcc__header {
-      text-align: left;
-      margin-bottom: 28px;
+  @media (max-width: 599px) {
+    .pcc-ugc__grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
     }
 
-    .pcc__social-links {
-      justify-content: flex-start;
-    }
-
-    .pcc__subtitle {
-      margin-left: 0;
-    }
-
-    .pcc__card {
-      flex-basis: min(84vw, 318px);
-    }
-
-    .pcc__cta-btn {
-      width: 100%;
-      justify-content: center;
+    .pcc-ugc__video-wrap {
+      aspect-ratio: 4/5;
     }
   }
 </style>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.pcc-ugc__play-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var video = btn.previousElementSibling;
+        if (video && video.tagName === 'VIDEO') {
+          video.play();
+          btn.hidden = true;
+        }
+      });
+    });
+
+    // Pause when out of viewport
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          var video = entry.target;
+          if (!entry.isIntersecting && !video.paused) {
+            video.pause();
+            var btn = video.nextElementSibling;
+            if (btn && btn.classList.contains('pcc-ugc__play-btn')) {
+              btn.hidden = false;
+            }
+          }
+        });
+      }, { threshold: 0.3 });
+
+      document.querySelectorAll('.pcc-ugc__video').forEach(function(video) {
+        observer.observe(video);
+      });
+    }
+  });
+</script>
+
 {% schema %}
 {
-  "name": "CalmTime Community",
+  "name": "UGC Video Wall",
   "tag": "section",
   "class": "prime-calmtime-community",
   "settings": [
@@ -625,25 +416,31 @@
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow label",
-      "default": "#PrimeCalmTime"
+      "default": "Straight from their living rooms"
     },
     {
       "type": "text",
       "id": "title",
       "label": "Section title",
-      "default": "Real dogs. Real calm. Real chews."
+      "default": "Dogs don't fake it. Neither do these videos."
     },
     {
       "type": "textarea",
       "id": "subtitle",
       "label": "Section subtitle",
-      "default": "Swipe through real calm-time moments from Prime Pet Food dogs, then follow along on Instagram and TikTok."
+      "default": "Unscripted. Unfiltered. Real dogs destroying their Prime yak chews on real couches."
     },
     {
       "type": "color",
       "id": "bg_color",
       "label": "Background color",
-      "default": "#FDFCF7"
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#f5f5f5"
     },
     {
       "type": "header",
@@ -653,134 +450,112 @@
       "type": "text",
       "id": "cta_heading",
       "label": "CTA heading",
-      "default": "Share your dog's calm-time moment"
+      "default": "Film your dog. Tag us. Get featured."
     },
     {
       "type": "textarea",
       "id": "cta_subtext",
       "label": "CTA subtext",
-      "default": "Tag @foodprimepet and use #PrimeCalmTime on Instagram or TikTok. We feature real dogs every week."
-    },
-    {
-      "type": "url",
-      "id": "cta_url",
-      "label": "CTA link URL"
-    },
-    {
-      "type": "text",
-      "id": "cta_label",
-      "label": "CTA button label",
-      "default": "Follow on Instagram"
+      "default": "No ring lights needed. Just your dog, their chew, and your phone."
     }
   ],
   "blocks": [
     {
-      "type": "ugc_post",
-      "name": "UGC Post",
+      "type": "ugc_video",
+      "name": "UGC Video",
       "settings": [
         {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Customer photo"
+          "type": "url",
+          "id": "video_url",
+          "label": "Video URL (MP4 or Shopify hosted)"
         },
         {
-          "type": "text",
-          "id": "alt_text",
-          "label": "Image alt text"
+          "type": "image_picker",
+          "id": "poster",
+          "label": "Video poster / thumbnail"
         },
         {
           "type": "textarea",
           "id": "caption",
-          "label": "Customer caption / quote"
+          "label": "Customer quote"
         },
         {
           "type": "text",
           "id": "dog_name",
           "label": "Dog's name",
-          "default": "Biscuit"
+          "default": "Good boy"
         },
         {
           "type": "text",
-          "id": "breed",
-          "label": "Breed",
-          "default": "Golden Retriever"
+          "id": "location",
+          "label": "City / State",
+          "default": ""
         },
         {
-          "type": "text",
-          "id": "handle",
-          "label": "Instagram / TikTok handle (without @)"
-        },
-        {
-          "type": "text",
-          "id": "chew_duration",
-          "label": "Chew duration (e.g. 78 min)",
-          "info": "Shown as a badge overlay on the photo"
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Show verified badge",
+          "default": true
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "#PrimeCalmTime Community",
+      "name": "UGC Video Wall",
       "blocks": [
         {
-          "type": "ugc_post",
+          "type": "ugc_video",
           "settings": {
-            "dog_name": "Biscuit",
-            "breed": "Golden Retriever",
-            "handle": "biscuit_the_golden",
-            "caption": "He barely moved for over an hour. Best purchase ever!",
-            "chew_duration": "82 min"
+            "dog_name": "Tank",
+            "location": "Austin, TX",
+            "caption": "He won't move until it's gone. 45 minutes of silence.",
+            "verified": true
           }
         },
         {
-          "type": "ugc_post",
+          "type": "ugc_video",
           "settings": {
-            "dog_name": "Koda",
-            "breed": "German Shepherd",
-            "handle": "koda_adventures",
-            "caption": "Finally found something that keeps her busy during my work calls.",
-            "chew_duration": "71 min"
+            "dog_name": "Rosie",
+            "location": "Portland, OR",
+            "caption": "She dragged it under the coffee table and went to town.",
+            "verified": true
           }
         },
         {
-          "type": "ugc_post",
+          "type": "ugc_video",
           "settings": {
-            "dog_name": "Maple",
-            "breed": "Labrador",
-            "handle": "maple_lab_life",
-            "caption": "Maple is obsessed. We go through one a week now.",
-            "chew_duration": "64 min"
+            "dog_name": "Bear",
+            "location": "Denver, CO",
+            "caption": "Bear gets aggressive with these — in the best way.",
+            "verified": true
           }
         },
         {
-          "type": "ugc_post",
+          "type": "ugc_video",
           "settings": {
-            "dog_name": "Luna",
-            "breed": "French Bulldog",
-            "handle": "luna_chews",
-            "caption": "Luna finally has a calm evening routine.",
-            "chew_duration": "48 min"
+            "dog_name": "Penny",
+            "location": "Brooklyn, NY",
+            "caption": "Our couch has teeth marks now but she's happy so whatever.",
+            "verified": true
           }
         },
         {
-          "type": "ugc_post",
+          "type": "ugc_video",
           "settings": {
-            "dog_name": "Scout",
-            "breed": "Beagle",
-            "handle": "scout_sits",
-            "caption": "Scout takes his chew to the same sunny spot every day.",
-            "chew_duration": "57 min"
+            "dog_name": "Duke",
+            "location": "Nashville, TN",
+            "caption": "Duke literally growls if you get near his chew. Obsessed.",
+            "verified": true
           }
         },
         {
-          "type": "ugc_post",
+          "type": "ugc_video",
           "settings": {
-            "dog_name": "Winnie",
-            "breed": "Poodle Mix",
-            "handle": "winnie_at_home",
-            "caption": "Winnie settles in before I even finish making coffee.",
-            "chew_duration": "62 min"
+            "dog_name": "Mochi",
+            "location": "Seattle, WA",
+            "caption": "Mochi takes hers to the bedroom rug every single time.",
+            "verified": true
           }
         }
       ]

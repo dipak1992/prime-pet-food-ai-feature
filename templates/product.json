@@ -1377,6 +1377,10 @@
         "cta_url": "/products/himalayan-yak-chews-for-dogs",
         "video_url": "https://cdn.shopify.com/videos/c/o/v/d7aeb1ab2e45499ba3b718e8920fe919.mp4"
       }
+    },
+    "prime_ingredient_roles": {
+      "type": "prime-ingredient-roles",
+      "settings": {}
     }
   },
   "order": [
@@ -1384,6 +1388,7 @@
     "prime_product_trust_bar",
     "ypc_product_hero_AXmQHp",
     "product_trust_stack",
+    "prime_ingredient_roles",
     "chew_analyzer_widget",
     "why_prime",
     "ypc_product_tab_QnMPYB",

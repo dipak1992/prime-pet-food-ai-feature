@@ -131,83 +131,77 @@
     "prime_calmtime_community": {
       "type": "prime-calmtime-community",
       "blocks": {
-        "ugc_biscuit": {
-          "type": "ugc_post",
+        "ugc_tank": {
+          "type": "ugc_video",
           "settings": {
-            "dog_name": "Biscuit",
-            "breed": "Golden Retriever",
-            "handle": "biscuit_the_golden",
-            "caption": "He barely moved for over an hour. Best purchase ever!",
-            "chew_duration": "82 min"
+            "dog_name": "Tank",
+            "location": "Austin, TX",
+            "caption": "He won't move until it's gone. 45 minutes of silence.",
+            "verified": true
           }
         },
-        "ugc_koda": {
-          "type": "ugc_post",
+        "ugc_rosie": {
+          "type": "ugc_video",
           "settings": {
-            "dog_name": "Koda",
-            "breed": "German Shepherd",
-            "handle": "koda_adventures",
-            "caption": "Finally found something that keeps her busy during my work calls.",
-            "chew_duration": "71 min"
+            "dog_name": "Rosie",
+            "location": "Portland, OR",
+            "caption": "She dragged it under the coffee table and went to town.",
+            "verified": true
           }
         },
-        "ugc_maple": {
-          "type": "ugc_post",
+        "ugc_bear": {
+          "type": "ugc_video",
           "settings": {
-            "dog_name": "Maple",
-            "breed": "Labrador",
-            "handle": "maple_lab_life",
-            "caption": "Maple is obsessed. We go through one a week now.",
-            "chew_duration": "64 min"
+            "dog_name": "Bear",
+            "location": "Denver, CO",
+            "caption": "Bear gets aggressive with these — in the best way.",
+            "verified": true
           }
         },
-        "ugc_luna": {
-          "type": "ugc_post",
+        "ugc_penny": {
+          "type": "ugc_video",
           "settings": {
-            "dog_name": "Luna",
-            "breed": "French Bulldog",
-            "handle": "luna_chews",
-            "caption": "Luna finally has a calm evening routine.",
-            "chew_duration": "48 min"
+            "dog_name": "Penny",
+            "location": "Brooklyn, NY",
+            "caption": "Our couch has teeth marks now but she's happy so whatever.",
+            "verified": true
           }
         },
-        "ugc_scout": {
-          "type": "ugc_post",
+        "ugc_duke": {
+          "type": "ugc_video",
           "settings": {
-            "dog_name": "Scout",
-            "breed": "Beagle",
-            "handle": "scout_sits",
-            "caption": "Scout takes his chew to the same sunny spot every day.",
-            "chew_duration": "57 min"
+            "dog_name": "Duke",
+            "location": "Nashville, TN",
+            "caption": "Duke literally growls if you get near his chew. Obsessed.",
+            "verified": true
           }
         },
-        "ugc_winnie": {
-          "type": "ugc_post",
+        "ugc_mochi": {
+          "type": "ugc_video",
           "settings": {
-            "dog_name": "Winnie",
-            "breed": "Poodle Mix",
-            "handle": "winnie_at_home",
-            "caption": "Winnie settles in before I even finish making coffee.",
-            "chew_duration": "62 min"
+            "dog_name": "Mochi",
+            "location": "Seattle, WA",
+            "caption": "Mochi takes hers to the bedroom rug every single time.",
+            "verified": true
           }
         }
       },
       "block_order": [
-        "ugc_biscuit",
-        "ugc_koda",
-        "ugc_maple",
-        "ugc_luna",
-        "ugc_scout",
-        "ugc_winnie"
+        "ugc_tank",
+        "ugc_rosie",
+        "ugc_bear",
+        "ugc_penny",
+        "ugc_duke",
+        "ugc_mochi"
       ],
       "settings": {
-        "eyebrow": "#PrimeCalmTime",
-        "title": "Real dogs. Real calm. Real chews.",
-        "subtitle": "Swipe through real calm-time moments from Prime Pet Food dogs, then follow along on Instagram and TikTok.",
-        "cta_heading": "Share your dog's calm-time moment",
-        "cta_subtext": "Tag @foodprimepet and use #PrimeCalmTime on Instagram or TikTok. We feature real dogs every week.",
-        "cta_url": "https://www.instagram.com/foodprimepet/",
-        "cta_label": "Follow on Instagram"
+        "eyebrow": "Straight from their living rooms",
+        "title": "Dogs don't fake it. Neither do these videos.",
+        "subtitle": "Unscripted. Unfiltered. Real dogs destroying their Prime yak chews on real couches.",
+        "bg_color": "#1a1a1a",
+        "text_color": "#f5f5f5",
+        "cta_heading": "Film your dog. Tag us. Get featured.",
+        "cta_subtext": "No ring lights needed. Just your dog, their chew, and your phone."
       }
     },
     "prime_zero_waste_puff": {
