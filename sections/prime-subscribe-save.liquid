@@ -1145,7 +1145,7 @@
     }
 
     .pss-hero {
-      min-height: 760px;
+      min-height: max(690px, 100svh);
       align-items: end;
       background: #171512;
     }
@@ -1156,12 +1156,12 @@
 
     .pss-hero__overlay {
       background:
-        linear-gradient(180deg, rgba(23, 21, 18, 0.08) 0%, rgba(23, 21, 18, 0.08) 34%, rgba(23, 21, 18, 0.62) 66%, rgba(23, 21, 18, 0.94) 100%),
-        linear-gradient(90deg, rgba(23, 21, 18, 0.18) 0%, rgba(23, 21, 18, 0) 56%);
+        linear-gradient(180deg, rgba(23, 21, 18, 0.04) 0%, rgba(23, 21, 18, 0.14) 34%, rgba(23, 21, 18, 0.76) 62%, rgba(23, 21, 18, 0.98) 100%),
+        linear-gradient(90deg, rgba(23, 21, 18, 0.28) 0%, rgba(23, 21, 18, 0.04) 60%);
     }
 
     .pss-hero__content {
-      margin-bottom: 22px;
+      margin-bottom: calc(92px + env(safe-area-inset-bottom));
       padding: 0;
       border: 0;
       border-radius: 0;
@@ -1171,22 +1171,25 @@
     }
 
     .pss-hero h1 {
-      max-width: 10.5em;
+      max-width: 9.8em;
       color: var(--pss-white);
-      font-size: 38px;
+      font-size: clamp(32px, 9.4vw, 38px);
       line-height: 1.08;
+      text-shadow: 0 2px 18px rgba(0, 0, 0, 0.46);
       text-wrap: balance;
     }
 
     .pss-hero__sub {
-      max-width: 29em;
-      color: rgba(255, 250, 242, 0.88);
-      font-size: 15px;
-      line-height: 1.52;
+      max-width: 25em;
+      color: rgba(255, 250, 242, 0.92);
+      font-size: 14px;
+      line-height: 1.44;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.48);
     }
 
     .pss-hero .pss-kicker {
       color: #f7cf9a;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
     }
 
     .pss-section-head h2,
@@ -1200,13 +1203,15 @@
 
     .pss-hero__actions {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-      margin-top: 22px;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 8px;
+      margin-top: 18px;
     }
 
     .pss-btn {
       width: 100%;
+      min-height: 48px;
+      padding: 13px 18px;
     }
 
     .pss-btn--secondary {
@@ -1217,15 +1222,16 @@
 
     .pss-hero__proof {
       gap: 7px;
-      margin-top: 16px;
+      margin-top: 14px;
     }
 
     .pss-hero__proof span {
       border-color: rgba(255, 250, 242, 0.24);
-      background: rgba(255, 250, 242, 0.12);
+      background: rgba(23, 21, 18, 0.34);
       color: rgba(255, 250, 242, 0.92);
       font-size: 11px;
-      padding: 8px 10px;
+      padding: 7px 9px;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.34);
     }
 
     .pss-benefits,
@@ -1370,13 +1376,13 @@
       "type": "text",
       "id": "hero_heading",
       "label": "Hero heading",
-      "default": "The calm-time routine that runs itself."
+      "default": "Never run out of calm-time chews."
     },
     {
       "type": "textarea",
       "id": "hero_subheading",
       "label": "Hero subheading",
-      "default": "Long-lasting Himalayan yak chews delivered on your schedule, so your dog&rsquo;s enrichment rhythm stays consistent and your household gets more predictable calm."
+      "default": "Long-lasting Himalayan yak chews delivered on your schedule for easier, more consistent enrichment."
     },
     {
       "type": "url",
