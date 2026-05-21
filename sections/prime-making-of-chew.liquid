@@ -9,7 +9,7 @@
 
     <header class="pmoc__header">
       <p class="pmoc__eyebrow">The craft behind every chew</p>
-      <h2 class="pmoc__title">{{ section.settings.title | default: 'From yak milk to your dog's favorite hour.' }}</h2>
+      <h2 class="pmoc__title">{{ section.settings.title | default: 'From yak milk to your dog&#39;s favorite hour.' }}</h2>
       <p class="pmoc__subtitle">{{ section.settings.subtitle | default: 'No factory lines. No artificial shortcuts. Each Prime Pet Food chew is handcrafted in Nepal using the same methods Himalayan families have used for generations — just four ingredients and a whole lot of patience.' }}</p>
     </header>
 
@@ -26,7 +26,7 @@
         <div class="pmoc__step-content">
           <span class="pmoc__step-num">01</span>
           <h3>{{ section.settings.step_1_title | default: 'Fresh milk from Himalayan herds' }}</h3>
-          <p>{{ section.settings.step_1_text | default: 'It starts with yak and cow milk from small farming families in Nepal's Himalayan foothills. These families have raised yaks at altitude for generations — the same herds, the same pastures, the same unhurried way of life.' }}</p>
+          <p>{{ section.settings.step_1_text | default: 'It starts with yak and cow milk from small farming families in Nepal&#39;s Himalayan foothills. These families have raised yaks at altitude for generations — the same herds, the same pastures, the same unhurried way of life.' }}</p>
         </div>
       </article>
 
@@ -56,7 +56,7 @@
         <div class="pmoc__step-content">
           <span class="pmoc__step-num">03</span>
           <h3>{{ section.settings.step_3_title | default: 'Smoked and sun-dried for weeks' }}</h3>
-          <p>{{ section.settings.step_3_text | default: 'The pressed blocks are lightly smoked over wood fires, then hung on drying racks in the mountain air for weeks. This slow drying is what creates the dense, long-lasting texture that keeps dogs engaged for over an hour. You can't rush this part.' }}</p>
+          <p>{{ section.settings.step_3_text | default: 'The pressed blocks are lightly smoked over wood fires, then hung on drying racks in the mountain air for weeks. This slow drying is what creates the dense, long-lasting texture that keeps dogs engaged for over an hour. You can&#39;t rush this part.' }}</p>
         </div>
       </article>
 
@@ -71,7 +71,7 @@
         <div class="pmoc__step-content">
           <span class="pmoc__step-num">04</span>
           <h3>{{ section.settings.step_4_title | default: 'Inspected, graded, and packed in the USA' }}</h3>
-          <p>{{ section.settings.step_4_text | default: 'Every batch arrives at our US facility where we check hardness, moisture, and consistency. We grade by size, inspect for quality, and pack under Prime Pet Food standards. Only then does it ship to your dog's living room.' }}</p>
+          <p>{{ section.settings.step_4_text | default: 'Every batch arrives at our US facility where we check hardness, moisture, and consistency. We grade by size, inspect for quality, and pack under Prime Pet Food standards. Only then does it ship to your dog&#39;s living room.' }}</p>
         </div>
       </article>
 
@@ -82,7 +82,7 @@
         <span>The entire ingredient list:</span>
         <strong>Yak milk · Cow milk · Lime juice · Salt</strong>
       </div>
-      <p class="pmoc__footer-note">{{ section.settings.footer_note | default: 'That's it. No preservatives, no binding agents, no mystery powders. Just four ingredients and a process that's been trusted for generations.' }}</p>
+      <p class="pmoc__footer-note">{{ section.settings.footer_note | default: 'That&#39;s it. No preservatives, no binding agents, no mystery powders. Just four ingredients and a process that&#39;s been trusted for generations.' }}</p>
       {%- if section.settings.cta_url != blank -%}
         <a href="{{ section.settings.cta_url }}" class="pmoc__cta">{{ section.settings.cta_label | default: 'Shop yak chews' }} &rarr;</a>
       {%- else -%}
