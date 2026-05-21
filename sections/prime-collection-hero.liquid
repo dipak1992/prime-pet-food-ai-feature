@@ -35,6 +35,15 @@
           <a href="#product-grid" data-size-filter="Extra Large">XL<br><span>55-85 lbs</span></a>
           <a href="#product-grid" data-size-filter="Jumbo">Jumbo<br><span>85+ lbs</span></a>
         </div>
+
+        <p class="pch-product-count" role="status" aria-live="polite">
+          {%- if collection.products_count < collection.all_products_count -%}
+            Showing <strong>{{ collection.products_count }}</strong> of <strong>{{ collection.all_products_count }}</strong> products
+            &nbsp;&mdash;&nbsp;<a href="{{ collection.url }}" class="pch-product-count__clear">Clear filters</a>
+          {%- else -%}
+            <strong>{{ collection.all_products_count }}</strong> product{% if collection.all_products_count != 1 %}s{% endif %} available
+          {%- endif -%}
+        </p>
       </div>
     </div>
 
@@ -100,6 +109,31 @@
     --pch-muted: #5f574e;
     --pch-line: rgba(55, 43, 31, 0.13);
     font-family: var(--prime-font-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  }
+
+  /* Product count indicator */
+  .pch-product-count {
+    margin: 12px 0 0;
+    font-size: 13px;
+    color: #5f574e;
+    line-height: 1.4;
+  }
+
+  .pch-product-count strong {
+    color: #171512;
+    font-weight: 700;
+  }
+
+  .pch-product-count__clear {
+    color: #b85f32;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    font-weight: 600;
+    transition: color 0.15s ease;
+  }
+
+  .pch-product-count__clear:hover {
+    color: #94451f;
   }
 
   .pch-switch {

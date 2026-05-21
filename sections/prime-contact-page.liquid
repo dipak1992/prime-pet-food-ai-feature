@@ -5,9 +5,16 @@
       <h1 id="PrimeContactTitle">Real support for better chew decisions.</h1>
       <p>
         Questions about sizing, safety, orders, wholesale, or subscriptions? Send a note and
-        we will help you choose the next best step. Average response time is 4 business hours
-        Monday-Friday, 9am-5pm CT.
+        we will help you choose the next best step.
       </p>
+      <div class="pcp-response-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span><strong>Avg response: 4 business hours</strong> · Mon–Fri 9am–5pm CT</span>
+      </div>
+      <div class="pcp-team-note">
+        <span class="pcp-team-note__avatar">👋</span>
+        <span>You'll hear back from <strong>Dipak or a member of the Prime Pet Food team</strong> — real people who know these chews inside and out.</span>
+      </div>
     </header>
 
     <div class="pcp-grid">
@@ -145,6 +152,38 @@
   .pcp-hero {
     max-width: 800px;
     margin-bottom: 46px;
+  }
+
+  .pcp-response-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    padding: 10px 16px;
+    background: #f0fdf4;
+    border: 1px solid rgba(22, 163, 74, 0.2);
+    border-radius: 100px;
+    font-size: 14px;
+    color: #15803d;
+  }
+
+  .pcp-team-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 16px;
+    padding: 14px 18px;
+    background: #fffaf2;
+    border: 1px solid rgba(184, 95, 50, 0.15);
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #5f574e;
+  }
+
+  .pcp-team-note__avatar {
+    font-size: 20px;
+    flex-shrink: 0;
   }
 
   .pcp-hero h1,

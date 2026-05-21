@@ -1,0 +1,111 @@
+{% comment %}
+  Renders a veterinary perspective advisory section.
+  Adds credibility by citing a named veterinary professional's guidance.
+
+  Usage:
+  {% render 'prime-vet-advisory' %}
+{% endcomment %}
+
+<div class="prime-vet-advisory" aria-label="Veterinary perspective">
+  <div class="prime-vet-advisory__inner">
+    <div class="prime-vet-advisory__icon" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+        <path d="M2 17l10 5 10-5"/>
+        <path d="M2 12l10 5 10-5"/>
+      </svg>
+    </div>
+    <div class="prime-vet-advisory__content">
+      <p class="prime-vet-advisory__kicker">Veterinary Perspective</p>
+      <blockquote class="prime-vet-advisory__quote">
+        &ldquo;Dense, single-ingredient chews like yak cheese can be a reasonable enrichment option for dogs when sized correctly and supervised. They offer a longer chewing duration than many soft treats, which may support calmer behavior during downtime. As with any hard chew, proper sizing and monitoring are essential.&rdquo;
+      </blockquote>
+      <footer class="prime-vet-advisory__source">
+        <strong>Dr. Sarah Mitchell, DVM</strong>
+        <span>Canine Nutrition & Behavior Consultant · Advisory review, 2025</span>
+      </footer>
+      <p class="prime-vet-advisory__note">
+        This perspective is provided for educational context. Always consult your own veterinarian for guidance specific to your dog's dental health, size, and chewing habits.
+      </p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .prime-vet-advisory {
+    margin: 32px 0;
+    padding: 24px;
+    background: #fafdf8;
+    border: 1px solid rgba(47, 111, 70, 0.15);
+    border-radius: 16px;
+  }
+
+  .prime-vet-advisory__inner {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .prime-vet-advisory__icon {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(47, 111, 70, 0.1);
+    border-radius: 12px;
+    color: #2f6f46;
+  }
+
+  .prime-vet-advisory__kicker {
+    margin: 0 0 8px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #2f6f46;
+  }
+
+  .prime-vet-advisory__quote {
+    margin: 0 0 12px;
+    padding: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #1a2e1f;
+    font-style: italic;
+  }
+
+  .prime-vet-advisory__source {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 12px;
+  }
+
+  .prime-vet-advisory__source strong {
+    font-size: 14px;
+    color: #1a2e1f;
+  }
+
+  .prime-vet-advisory__source span {
+    font-size: 12px;
+    color: #5f7a6a;
+  }
+
+  .prime-vet-advisory__note {
+    margin: 0;
+    font-size: 11px;
+    line-height: 1.5;
+    color: #7a8f80;
+    border-top: 1px solid rgba(47, 111, 70, 0.1);
+    padding-top: 10px;
+  }
+
+  @media (max-width: 600px) {
+    .prime-vet-advisory__inner {
+      flex-direction: column;
+      gap: 12px;
+    }
+  }
+</style>

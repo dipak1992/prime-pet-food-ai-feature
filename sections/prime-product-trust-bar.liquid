@@ -79,6 +79,12 @@
       <p>{{ section.settings.impact_text | default: "Each purchase helps keep our sourcing tied to Nepali Himalayan farming families and supports Prime Pet Food's rural education commitment." }}</p>
     </div>
   {% endif %}
+
+  {% if section.settings.show_vet_advisory %}
+    <div class="pptb__vet-advisory page-width">
+      {% render 'prime-vet-advisory' %}
+    </div>
+  {% endif %}
 </div>
 
 <style>
@@ -366,6 +372,12 @@
       "id": "impact_text",
       "label": "Impact text",
       "default": "Each purchase helps keep our sourcing tied to Nepali Himalayan farming families and supports Prime Pet Food's rural education commitment."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vet_advisory",
+      "label": "Show veterinary perspective",
+      "default": true
     }
   ],
   "presets": [

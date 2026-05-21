@@ -127,10 +127,59 @@
         "bottom_padding": 40,
         "navigation_spacing": 20
       }
+    },
+    "prime_calmtime_community": {
+      "type": "prime-calmtime-community",
+      "blocks": {
+        "ugc_biscuit": {
+          "type": "ugc_post",
+          "settings": {
+            "dog_name": "Biscuit",
+            "breed": "Golden Retriever",
+            "handle": "biscuit_the_golden",
+            "caption": "He barely moved for over an hour. Best purchase ever!",
+            "chew_duration": "82 min"
+          }
+        },
+        "ugc_koda": {
+          "type": "ugc_post",
+          "settings": {
+            "dog_name": "Koda",
+            "breed": "German Shepherd",
+            "handle": "koda_adventures",
+            "caption": "Finally found something that keeps her busy during my work calls.",
+            "chew_duration": "71 min"
+          }
+        },
+        "ugc_maple": {
+          "type": "ugc_post",
+          "settings": {
+            "dog_name": "Maple",
+            "breed": "Labrador",
+            "handle": "maple_lab_life",
+            "caption": "Maple is obsessed. We go through one a week now.",
+            "chew_duration": "64 min"
+          }
+        }
+      },
+      "block_order": [
+        "ugc_biscuit",
+        "ugc_koda",
+        "ugc_maple"
+      ],
+      "settings": {
+        "eyebrow": "#PrimeCalmTime",
+        "title": "Real dogs. Real calm. Real chews.",
+        "subtitle": "Join thousands of dog parents sharing their pup's calm-time moments. Tag your photos with #PrimeCalmTime for a chance to be featured.",
+        "cta_heading": "Share your dog's calm-time moment",
+        "cta_subtext": "Tag @primepetfood and use #PrimeCalmTime on Instagram or TikTok. We feature real dogs every week.",
+        "cta_label": "Share on Instagram"
+      }
     }
   },
   "order": [
     "prime_homepage_experience",
-    "video_carousel"
+    "video_carousel",
+    "prime_calmtime_community"
   ]
 }

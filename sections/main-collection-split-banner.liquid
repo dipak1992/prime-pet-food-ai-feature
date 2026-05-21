@@ -43,7 +43,7 @@
   {% endif %}
 
   {%- capture collection_title -%}
-    {{ collection.title | escape }}{% if section.settings.show_collection_title_count %} <sup>({{ collection.all_products_count }})</sup>{% endif %}
+    {{ collection.title | escape }}{% if section.settings.show_collection_title_count %} <sup>({% if collection.products_count < collection.all_products_count %}{{ collection.products_count }} of {{ collection.all_products_count }}{% else %}{{ collection.all_products_count }}{% endif %})</sup>{% endif %}
   {%- endcapture -%}
 
   {% render 'standard-page-heading',

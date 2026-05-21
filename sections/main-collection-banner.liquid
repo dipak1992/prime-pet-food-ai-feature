@@ -118,7 +118,7 @@
                   {% if block.settings.heading_size == "custom" %}style="--custom-font-size:{{ block.settings.heading_size_custom }}em;{% if block.settings.heading_line_height_custom != blank %}line-height: {{ block.settings.heading_line_height_custom }}em;{% endif %}"{% endif %}
                   {{ block.shopify_attributes }}
                 >
-                  {{- collection.title | escape -}}{% if block.settings.show_collection_title_count %} <sup>({{ collection.all_products_count }})</sup>{% endif %}
+                  {{- collection.title | escape -}}{% if block.settings.show_collection_title_count %} <sup>({% if collection.products_count < collection.all_products_count %}{{ collection.products_count }} of {{ collection.all_products_count }}{% else %}{{ collection.all_products_count }}{% endif %})</sup>{% endif %}
                 </{{ block.settings.heading_tag }}>
 
               {%- elsif block.type == 'collection_description' and collection.description != blank -%}
