@@ -170,10 +170,11 @@
       "settings": {
         "eyebrow": "#PrimeCalmTime",
         "title": "Real dogs. Real calm. Real chews.",
-        "subtitle": "Join thousands of dog parents sharing their pup's calm-time moments. Tag your photos with #PrimeCalmTime for a chance to be featured.",
+        "subtitle": "Swipe through real calm-time moments from Prime Pet Food dogs, then follow along on Instagram and TikTok.",
         "cta_heading": "Share your dog's calm-time moment",
-        "cta_subtext": "Tag @primepetfood and use #PrimeCalmTime on Instagram or TikTok. We feature real dogs every week.",
-        "cta_label": "Share on Instagram"
+        "cta_subtext": "Tag @foodprimepet and use #PrimeCalmTime on Instagram or TikTok. We feature real dogs every week.",
+        "cta_url": "https://www.instagram.com/foodprimepet/",
+        "cta_label": "Follow on Instagram"
       }
     }
   },
