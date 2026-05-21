@@ -108,11 +108,11 @@
         "video_TELc9F"
       ],
       "settings": {
-        "heading": "Watch dogs discover their new favorite chew",
+        "heading": "Real dogs. Real calm-time posts.",
         "heading_size": 100,
         "heading_letter_spacing": 0,
         "custom_font_url": "",
-        "description": "",
+        "description": "<p>Swipe Instagram and TikTok-style videos from Prime Pet Food dogs, then tag us with your dog&apos;s calm-time moment.</p>",
         "description_size": 100,
         "heading_description_spacing": 20,
         "autoplay": 0,
@@ -125,83 +125,10 @@
         "background_color": "",
         "top_padding": 40,
         "bottom_padding": 40,
-        "navigation_spacing": 20
-      }
-    },
-    "prime_calmtime_community": {
-      "type": "prime-calmtime-community",
-      "blocks": {
-        "ugc_tank": {
-          "type": "ugc_video",
-          "settings": {
-            "dog_name": "Tank",
-            "location": "Austin, TX",
-            "caption": "He won't move until it's gone. 45 minutes of silence.",
-            "verified": true
-          }
-        },
-        "ugc_rosie": {
-          "type": "ugc_video",
-          "settings": {
-            "dog_name": "Rosie",
-            "location": "Portland, OR",
-            "caption": "She dragged it under the coffee table and went to town.",
-            "verified": true
-          }
-        },
-        "ugc_bear": {
-          "type": "ugc_video",
-          "settings": {
-            "dog_name": "Bear",
-            "location": "Denver, CO",
-            "caption": "Bear gets aggressive with these — in the best way.",
-            "verified": true
-          }
-        },
-        "ugc_penny": {
-          "type": "ugc_video",
-          "settings": {
-            "dog_name": "Penny",
-            "location": "Brooklyn, NY",
-            "caption": "Our couch has teeth marks now but she's happy so whatever.",
-            "verified": true
-          }
-        },
-        "ugc_duke": {
-          "type": "ugc_video",
-          "settings": {
-            "dog_name": "Duke",
-            "location": "Nashville, TN",
-            "caption": "Duke literally growls if you get near his chew. Obsessed.",
-            "verified": true
-          }
-        },
-        "ugc_mochi": {
-          "type": "ugc_video",
-          "settings": {
-            "dog_name": "Mochi",
-            "location": "Seattle, WA",
-            "caption": "Mochi takes hers to the bedroom rug every single time.",
-            "verified": true
-          }
-        }
-      },
-      "block_order": [
-        "ugc_tank",
-        "ugc_rosie",
-        "ugc_bear",
-        "ugc_penny",
-        "ugc_duke",
-        "ugc_mochi"
-      ],
-      "settings": {
-        "eyebrow": "Straight from their living rooms",
-        "title": "Dogs don't fake it. Neither do these videos.",
-        "subtitle": "Unscripted. Unfiltered. Real dogs destroying their Prime yak chews on real couches.",
-        "bg_color": "#1a1a1a",
-        "text_color": "#f5f5f5",
-        "cta_heading": "Film your dog. Tag us. Get featured.",
-        "cta_subtext": "No ring lights needed. Just your dog, their chew, and your phone."
+        "navigation_spacing": 20,
+        "show_share_cta": true,
+        "share_heading": "Share your dog's calm-time moment",
+        "share_text": "Post your dog with their Prime yak chew and tag us on Instagram or TikTok for a chance to be featured."
       }
     },
     "prime_zero_waste_puff": {
@@ -218,7 +145,6 @@
   "order": [
     "prime_homepage_experience",
     "prime_zero_waste_puff",
-    "video_carousel",
-    "prime_calmtime_community"
+    "video_carousel"
   ]
 }
