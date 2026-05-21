@@ -27,16 +27,16 @@
   assign calm_cta_image = 'prime-home-calm-cta-bg.jpg' | asset_url
   assign guarantee_image = 'prime-home-guarantee-bg.jpg' | asset_url
 
-  assign hero_headline = section.settings.hero_headline | default: 'A longer-lasting chew for dogs who chew hard.'
-  assign hero_subtext = section.settings.hero_subtext | default: 'Rawhide-free Himalayan yak cheese chews. 4 ingredients. No chemicals. Just a chew your dog actually loves — and you can feel good about.'
+  assign hero_headline = section.settings.hero_headline | default: 'A hard cheese chew your dog can settle into.'
+  assign hero_subtext = section.settings.hero_subtext | default: 'Made with yak milk, cow milk, lime juice, and salt. Based on the Himalayan chhurpi tradition, then packed in Texas for supervised chew time at home.'
   assign trust_stat_1_value = section.settings.trust_stat_1_value | default: '20,000+'
-  assign trust_stat_1_label = section.settings.trust_stat_1_label | default: 'Dog parents'
+  assign trust_stat_1_label = section.settings.trust_stat_1_label | default: 'Dog homes served'
   assign trust_stat_2_value = section.settings.trust_stat_2_value | default: '4'
-  assign trust_stat_2_label = section.settings.trust_stat_2_label | default: 'Natural ingredients'
-  assign trust_stat_3_value = section.settings.trust_stat_3_value | default: 'Long'
-  assign trust_stat_3_label = section.settings.trust_stat_3_label | default: 'Chew sessions'
+  assign trust_stat_2_label = section.settings.trust_stat_2_label | default: 'Simple ingredients'
+  assign trust_stat_3_value = section.settings.trust_stat_3_value | default: 'Real'
+  assign trust_stat_3_label = section.settings.trust_stat_3_label | default: 'Chew time'
   assign trust_stat_4_value = section.settings.trust_stat_4_value | default: '30-day'
-  assign trust_stat_4_label = section.settings.trust_stat_4_label | default: 'Guarantee'
+  assign trust_stat_4_label = section.settings.trust_stat_4_label | default: 'Promise'
 
   assign small_variant = nil
   assign medium_variant = nil
@@ -98,19 +98,19 @@
       <div class="ph-hero-rotator" data-ph-hero-rotator>
         <span class="ph-hero-rotator__prefix">Made for</span>
         <span class="ph-hero-rotator__words" aria-hidden="true">
-          <span class="ph-hero-rotator__word is-active" data-ph-hero-word>power chewers</span>
-          <span class="ph-hero-rotator__word" data-ph-hero-word>rawhide-free routines</span>
-          <span class="ph-hero-rotator__word" data-ph-hero-word>calmer chew sessions</span>
-          <span class="ph-hero-rotator__word" data-ph-hero-word>ancient cheese tradition</span>
+          <span class="ph-hero-rotator__word is-active" data-ph-hero-word>steady chewers</span>
+          <span class="ph-hero-rotator__word" data-ph-hero-word>rawhide-free homes</span>
+          <span class="ph-hero-rotator__word" data-ph-hero-word>quiet work calls</span>
+          <span class="ph-hero-rotator__word" data-ph-hero-word>Himalayan cheese tradition</span>
         </span>
-        <span class="visually-hidden">power chewers, rawhide-free routines, calmer chew sessions, and ancient cheese tradition</span>
+        <span class="visually-hidden">steady chewers, rawhide-free homes, quiet work calls, and Himalayan cheese tradition</span>
       </div>
       <p class="ph-hero-sub">{{ hero_subtext }}</p>
       <div class="ph-actions ph-hero-cta" aria-label="Homepage actions">
-        <a href="/products/himalayan-yak-chews-for-dogs" class="ph-button ph-button--primary ph-cta-btn">Shop Yak Chews</a>
-        <a href="#prime-home-shop" class="ph-button ph-button--secondary">Find My Dog's Size</a>
+        <a href="/products/himalayan-yak-chews-for-dogs" class="ph-button ph-button--primary ph-cta-btn">Choose your dog's size</a>
+        <a href="#prime-home-shop" class="ph-button ph-button--secondary">See the chews</a>
       </div>
-      <p class="ph-hero__micro">Inspired by centuries-old Himalayan cheese-making. Free shipping $30+.</p>
+      <p class="ph-hero__micro">Based on Himalayan cheese tradition. Packed in Texas.</p>
       <div class="ph-hero__proof" aria-label="Trust signals">
         <span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -118,24 +118,24 @@
         </span>
         <span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Long-lasting chew time
+          Made for real chew time
         </span>
         <span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          Only 4 ingredients
+          4 simple ingredients
         </span>
         <span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7 10 17l-5-5"/></svg>
-          No fillers
+          No mystery extras
         </span>
       </div>
-      <p class="ph-hero__review"><span>★★★★★</span> 4.9 from 2,400+ dog parents · 30-day satisfaction promise</p>
+      <p class="ph-hero__review"><span>★★★★★</span> 4.9 from 2,400+ dog parents · 30-day promise</p>
     </div>
     <aside class="ph-hero-product" aria-label="Prime Pet Food yak chew package">
       <img src="{{ medium_pack_image }}" alt="Prime Pet Food Himalayan yak chew package" width="420" height="420" loading="eager">
       <div>
-        <strong>4 ingredients.</strong>
-        <span>Nothing else.</span>
+        <strong>Four ingredients.</strong>
+        <span>Plainly listed.</span>
       </div>
     </aside>
   </div>
@@ -212,8 +212,8 @@
     <div class="ph-shell">
       <div class="ph-section-head" data-motion="reveal">
         <p class="ph-kicker">Start here</p>
-        <h2 data-motion="reveal">Choose the right chew size first.</h2>
-        <p>Match the chew to your dog&rsquo;s weight and chewing style. When you are between sizes, size up for safer supervised chew time.</p>
+        <h2 data-motion="reveal">Start with the right size.</h2>
+        <p>Pick by weight and chewing style. If your dog is between sizes or chews hard, size up and supervise.</p>
       </div>
 
       <div class="ph-product-grid" data-motion-stagger="true">
@@ -226,7 +226,7 @@
           label: 'Small dogs',
           title: 'Small Yak Chew',
           fit: '1-15 lbs',
-          text: 'A compact chew for small breeds and lighter chewing sessions.',
+          text: 'A smaller chew for lighter dogs and shorter supervised sessions.',
           badge: 'Small',
           best_for: 'Chihuahuas, Yorkies, and toy mixes'
         %}
@@ -240,7 +240,7 @@
           label: 'Most popular',
           title: 'Medium Yak Chew',
           fit: '15-35 lbs',
-          text: 'The everyday fit for steady chewers who need a reliable calm-time routine.',
+          text: 'The everyday size for dogs who need a steady chewing job.',
           badge: 'Medium &bull; Best seller',
           best_for: 'Frenchies, Beagles, and Cocker Spaniels'
         %}
@@ -254,7 +254,7 @@
           label: 'Power chewers',
           title: 'Large Yak Chew',
           fit: '35-55 lbs',
-          text: 'A denser chew for bigger jaws and dogs that finish softer treats too quickly.',
+          text: 'For bigger jaws and dogs that finish softer chews too quickly.',
           badge: 'Large',
           best_for: 'Labs, Goldens, and Shepherd mixes'
         %}
@@ -268,7 +268,7 @@
           label: 'Big dogs',
           title: 'Extra Large Yak Chew',
           fit: '55-85 lbs',
-          text: 'More chew mass for larger breeds and dogs who need longer supervised sessions.',
+          text: 'More chew mass for larger breeds and longer supervised sessions.',
           badge: 'Extra Large',
           best_for: 'German Shepherds and larger Labs'
         %}
@@ -282,7 +282,7 @@
           label: 'Giant breeds',
           title: 'Jumbo Yak Chew',
           fit: '85+ lbs',
-          text: 'The largest option for serious chewers and giant breed calm-time routines.',
+          text: 'For giant breeds and serious chewers who need a safer size buffer.',
           badge: 'Jumbo',
           best_for: 'Great Danes, Mastiffs, and giant breeds'
         %}
@@ -300,11 +300,11 @@
         <a href="/collections/all">Shop the full collection &rarr;</a>
       </div>
       <div class="ph-confidence" aria-label="Shopping confidence">
-        <span>100% natural, long-lasting chew time</span>
+        <span>Four ingredients, listed plainly</span>
         <span>Free shipping over $30</span>
-        <span>30-day tail-wag guarantee</span>
-        <span>4 ingredients: Yak milk, cow milk, lime juice, salt</span>
-        <span>Handcrafted in Nepal, packed in the USA</span>
+        <span>30-day promise</span>
+        <span>Yak milk, cow milk, lime juice, salt</span>
+        <span>Made in Nepal. Packed in Texas.</span>
       </div>
     </div>
   </div>
@@ -325,18 +325,18 @@
       </div>
       <div class="ph-himalayan-story__copy" data-motion-stagger="true">
         <p class="ph-kicker">Where it all comes from</p>
-        <h2 id="PrimeHimalayanStoryTitle" data-motion="reveal">A chew with a real story behind it.</h2>
+        <h2 id="PrimeHimalayanStoryTitle" data-motion="reveal">A mountain food tradition, made useful for dogs.</h2>
         <p>
-          I grew up around chhurpi in Nepal — a hard cheese my family made from yak milk, patience, and mountain air. When I started Prime Pet Food, I brought that same tradition to dogs who deserve something honest. No factory lines. No mystery ingredients. Just the real thing.
+          I grew up around chhurpi in Nepal, a hard cheese made with milk, heat, pressure, and time. When I started Prime Pet Food, that simple tradition felt like the honest answer to a very modern dog problem.
         </p>
         <p>
-          Each chew is handcrafted by Himalayan farming families using methods passed down for generations, then quality-checked and packed at our US facility. From Nepal to your living room floor — that's the whole journey.
+          Each chew starts with Himalayan farming families and a recipe people have trusted for generations. Our team checks and packs every order in Texas before it reaches your home.
         </p>
         <div class="ph-himalayan-story__signals" aria-label="Prime Pet Food origin and quality signals">
-          <span>Handcrafted in Nepal</span>
-          <span>Family farming tradition</span>
+          <span>Made in Nepal</span>
+          <span>Family dairy tradition</span>
           <span>Rawhide-free</span>
-          <span>Packed in the USA</span>
+          <span>Packed in Texas</span>
         </div>
         <a href="/pages/how-himalayan-yak-cheese-chews-are-made" class="ph-himalayan-story__link">See how our chews are made</a>
       </div>
@@ -351,8 +351,8 @@
     <div class="ph-shell">
       <div class="ph-section-head ph-section-head--center">
         <p class="ph-kicker">Not sure which size?</p>
-        <h2>Find your dog&rsquo;s perfect chew in 30 seconds.</h2>
-        <p>Answer 3 quick questions and we&rsquo;ll recommend the right size, quantity, and routine.</p>
+        <h2>Find a safer starting size in 30 seconds.</h2>
+        <p>Answer three quick questions and we will point you toward a size and routine.</p>
       </div>
 
       <div class="ph-quiz__widget" id="ph-quiz-widget">
@@ -392,17 +392,17 @@
             <button type="button" class="ph-quiz__option" data-answer="gentle" data-next="3">
               <span class="ph-quiz__option-icon">😌</span>
               <span class="ph-quiz__option-text">Gentle nibbler</span>
-              <span class="ph-quiz__option-sub">Takes their time, savors it</span>
+              <span class="ph-quiz__option-sub">Takes their time</span>
             </button>
             <button type="button" class="ph-quiz__option" data-answer="moderate" data-next="3">
               <span class="ph-quiz__option-icon">😊</span>
               <span class="ph-quiz__option-text">Steady chewer</span>
-              <span class="ph-quiz__option-sub">Consistent pace, focused</span>
+              <span class="ph-quiz__option-sub">Steady pace</span>
             </button>
             <button type="button" class="ph-quiz__option" data-answer="aggressive" data-next="3">
               <span class="ph-quiz__option-icon">💪</span>
               <span class="ph-quiz__option-text">Power chewer</span>
-              <span class="ph-quiz__option-sub">Destroys toys quickly</span>
+              <span class="ph-quiz__option-sub">Finishes toys fast</span>
             </button>
           </div>
         </div>
@@ -414,18 +414,18 @@
           <div class="ph-quiz__options">
             <button type="button" class="ph-quiz__option" data-answer="calm" data-next="result">
               <span class="ph-quiz__option-icon">🧘</span>
-              <span class="ph-quiz__option-text">Calm &amp; settle</span>
-              <span class="ph-quiz__option-sub">Help my dog relax and decompress</span>
+              <span class="ph-quiz__option-text">Settle down</span>
+              <span class="ph-quiz__option-sub">Help my dog relax after busy moments</span>
             </button>
             <button type="button" class="ph-quiz__option" data-answer="occupy" data-next="result">
               <span class="ph-quiz__option-icon">⏰</span>
               <span class="ph-quiz__option-text">Keep busy</span>
-              <span class="ph-quiz__option-sub">Occupy during work calls or crate time</span>
+              <span class="ph-quiz__option-sub">During work calls, crate time, or evenings</span>
             </button>
             <button type="button" class="ph-quiz__option" data-answer="dental" data-next="result">
               <span class="ph-quiz__option-icon">🦷</span>
-              <span class="ph-quiz__option-text">Dental health</span>
-              <span class="ph-quiz__option-sub">Natural teeth cleaning while chewing</span>
+              <span class="ph-quiz__option-text">Chew outlet</span>
+              <span class="ph-quiz__option-sub">Give them something appropriate to work on</span>
             </button>
           </div>
         </div>
@@ -435,18 +435,18 @@
           <div class="ph-quiz__result-card">
             <div class="ph-quiz__result-badge">Your calm-time plan</div>
             <h3 class="ph-quiz__result-title">Medium Yak Chew</h3>
-            <p class="ph-quiz__result-desc">Based on your answers, a medium chew is the right starting point. Most dogs this size get 45–90 minutes of happy, quiet chewing.</p>
+            <p class="ph-quiz__result-desc">Based on your answers, this is a practical starting size. Adjust up if your dog has a stronger jaw or tries to swallow large pieces.</p>
             <div class="ph-quiz__plan" aria-live="polite">
               <strong>When to give it</strong>
               <span class="ph-quiz__plan-text">After a walk, during your evening routine, or whenever your dog needs something to do.</span>
             </div>
             <p class="ph-quiz__safety">Safety note: supervise every session, provide fresh water, and remove the nub once it is small enough to swallow.</p>
             <div class="ph-quiz__result-stats">
-              <span><strong>~67 min</strong> avg duration</span>
+              <span><strong>Real</strong> chew time</span>
               <span><strong>4</strong> ingredients</span>
               <span><strong>Rawhide</strong> free</span>
             </div>
-            <a href="/collections/all" class="ph-button ph-button--primary ph-quiz__result-cta">Shop this size</a>
+            <a href="/collections/all" class="ph-button ph-button--primary ph-quiz__result-cta">See this size</a>
             {% form 'customer', class: 'ph-quiz__email-form' %}
               <input type="hidden" name="contact[tags]" value="homepage_quiz_recommendation">
               <label for="PrimeQuizEmail-{{ section.id }}">Want us to save this recommendation?</label>
@@ -474,9 +474,9 @@
       </div>
       <div class="ph-subscribe__copy">
         <p class="ph-kicker">Subscribe &amp; Save</p>
-        <h2>Never run out of their favorite chew.</h2>
+        <h2>Keep their chew routine stocked.</h2>
         <p>
-          You know the look — your dog trots to the chew spot, tail going, ready to go. Subscribe so that moment never gets interrupted by an empty bag.
+          If your dog uses chews every week, subscription keeps the right size on the way before the bag is empty.
         </p>
         <div class="ph-subscribe__benefits" aria-label="Subscribe and Save benefits">
           <span>20% off first month</span>
@@ -493,7 +493,7 @@
           <strong>30%</strong>
           <small>on eligible recurring orders</small>
         </div>
-        <a href="/pages/subscribe-and-save" class="ph-subscribe__link">See subscription details</a>
+        <a href="/pages/subscribe-and-save" class="ph-subscribe__link">See how Subscribe &amp; Save works</a>
         <div class="ph-subscribe__referral" aria-label="Referral offer">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           <span>Refer a friend &amp; you both get <strong>$10 off</strong></span>
@@ -512,7 +512,7 @@
       <div class="ph-reviews__top">
         <div class="ph-section-head" data-motion="reveal">
           <p class="ph-kicker">Real results</p>
-          <h2 data-motion="reveal">What changes after a better chew.</h2>
+          <h2 data-motion="reveal">What dog parents notice first.</h2>
         </div>
         <div class="ph-reviews__controls" aria-label="Review carousel controls">
           <button type="button" class="ph-reviews__arrow" data-prime-review-prev aria-label="Previous review">
@@ -586,7 +586,7 @@
         </article>
       </div>
       <div class="ph-reviews__link">
-        <a href="/products/himalayan-yak-chews-for-dogs#judgeme_product_reviews">Read all 2,400+ reviews &rarr;</a>
+        <a href="/products/himalayan-yak-chews-for-dogs#judgeme_product_reviews">Read more customer reviews &rarr;</a>
       </div>
     </div>
   </div>
@@ -597,8 +597,8 @@
   <div class="ph-compare ph-reveal">
     <div class="ph-shell">
       <div class="ph-section-head ph-section-head--center">
-        <p class="ph-kicker">Why switch?</p>
-        <h2>Not all chews are created equal.</h2>
+        <p class="ph-kicker">Rawhide-free comparison</p>
+        <h2>A cleaner chew starts with a shorter ingredient list.</h2>
       </div>
 
       <div class="ph-compare__table-wrap">
@@ -614,16 +614,16 @@
           </thead>
           <tbody>
             <tr>
-              <td>Avg duration</td>
-              <td class="ph-compare__highlight"><strong>67 min</strong></td>
+              <td>Chew time</td>
+              <td class="ph-compare__highlight"><strong>Longer sessions</strong></td>
               <td>20 min</td>
               <td>15 min</td>
               <td>Varies</td>
             </tr>
             <tr>
               <td>Ingredients</td>
-              <td class="ph-compare__highlight"><strong>4 natural</strong></td>
-              <td>Chemical-processed</td>
+              <td class="ph-compare__highlight"><strong>4 simple</strong></td>
+              <td>Heavily processed</td>
               <td>Single ingredient</td>
               <td>Synthetic material</td>
             </tr>
@@ -631,11 +631,11 @@
               <td>Digestibility</td>
               <td class="ph-compare__highlight">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                Fully digestible
+                Made from cheese
               </td>
               <td>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                Blockage risk
+                Can be hard to digest
               </td>
               <td>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -650,7 +650,7 @@
               <td>Splinter risk</td>
               <td class="ph-compare__highlight">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                None
+                Does not splinter like bone
               </td>
               <td>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -697,14 +697,14 @@
       <div class="ph-compare__cards" aria-label="Mobile product comparison">
         <article class="is-prime" tabindex="0">
           <strong>Prime Pet Food Yak Chew</strong>
-          <span><b>Duration</b> 67 min avg</span>
-          <span><b>Ingredients</b> 4 natural</span>
-          <span><b>Safety</b> Fully digestible, end piece puffs into a bonus treat</span>
+          <span><b>Duration</b> Longer customer-reported sessions</span>
+          <span><b>Ingredients</b> 4 simple</span>
+          <span><b>Safety</b> Made from cheese, end piece puffs into a bonus treat</span>
         </article>
         <article tabindex="0">
           <strong>Rawhide</strong>
           <span><b>Duration</b> 20 min avg</span>
-          <span><b>Ingredients</b> Chemical-processed</span>
+          <span><b>Ingredients</b> Heavily processed</span>
           <span><b>Safety</b> Chunks can cause blockages — not fully digestible</span>
         </article>
         <article tabindex="0">
@@ -764,7 +764,7 @@
       <div class="ph-section-head ph-section-head--center" data-motion="reveal">
         <p class="ph-kicker">What's inside (all of it)</p>
         <h2 data-motion="reveal">Four ingredients. That's the whole list.</h2>
-        <p>We put everything on the label because there's nothing to hide. Yak milk, cow milk, lime juice, salt. No rawhide, no artificial anything, no mystery powders you'd need a chemistry degree to pronounce.</p>
+        <p>We keep the recipe short because dogs do not need a complicated chew. Yak milk, cow milk, lime juice, and salt. No rawhide. No artificial color. No mystery powders.</p>
       </div>
 
       <div class="ph-ingredients__grid" data-motion-stagger="true">
@@ -778,19 +778,19 @@
           <img src="{{ ingredient_cow_milk_image }}" alt="Cow milk in a clean ceramic pitcher" loading="lazy" width="768" height="768">
           <span class="ph-ingredient-card__num">02</span>
           <h3>Cow milk</h3>
-          <p>Blended for texture and consistency. Creates the dense, long-lasting structure.</p>
+          <p>Helps create the firm cheese body and steady texture.</p>
         </article>
         <article class="ph-ingredient-card" data-motion="reveal" data-motion-delay="160">
           <img src="{{ ingredient_lime_image }}" alt="Fresh lime halves and lime juice on stone" loading="lazy" width="768" height="768">
           <span class="ph-ingredient-card__num">03</span>
           <h3>Lime juice</h3>
-          <p>Natural coagulant that hardens the cheese. No synthetic binding agents needed.</p>
+          <p>Helps turn milk into curd. No synthetic binders needed.</p>
         </article>
         <article class="ph-ingredient-card" data-motion="reveal" data-motion-delay="240">
           <img src="{{ ingredient_salt_image }}" alt="Natural salt crystals in a small ceramic bowl" loading="lazy" width="768" height="768">
           <span class="ph-ingredient-card__num">04</span>
           <h3>Salt</h3>
-          <p>A trace amount for preservation and flavor. Less than 1% of total composition.</p>
+          <p>A small amount for the traditional recipe and preservation.</p>
         </article>
       </div>
 
@@ -798,7 +798,7 @@
         <span>No preservatives</span>
         <span>No artificial colors</span>
         <span>No grain or gluten</span>
-        <span>Human-grade facility</span>
+        <span>Packed in Texas</span>
       </div>
       <div class="ph-ingredients__link">
         <a href="/pages/about-us">See our quality standards &rarr;</a>
@@ -919,8 +919,8 @@
           </svg>
         </div>
         <div class="ph-guarantee__copy">
-          <p class="ph-kicker">No-stress guarantee</p>
-          <h2 data-motion="reveal">30-day satisfaction promise.</h2>
+        <p class="ph-kicker">If it is not the right fit</p>
+        <h2 data-motion="reveal">We will help make it right.</h2>
           <p>
             If the size, chew pace, or routine fit is not right, reach out. We will help with the next best step.
           </p>
@@ -973,11 +973,11 @@
   {% if section.settings.show_closing_cta %}
   <div class="ph-close ph-reveal" style="--ph-close-image: url('{{ calm_cta_image }}');">
     <div class="ph-shell ph-close__inner" data-motion="reveal">
-      <p class="ph-kicker">Ready for calmer chew time?</p>
-      <h2 data-motion="reveal">Give your dog the chew they deserve.</h2>
-      <p>Join 20,000+ dog parents who switched to safer, longer-lasting enrichment.</p>
+      <p class="ph-kicker">Ready to find the right size?</p>
+      <h2 data-motion="reveal">Start with the chew that fits your dog.</h2>
+      <p>Four ingredients, real Himalayan origin, and support if you are unsure which size to choose.</p>
       <div class="ph-actions ph-actions--center">
-        <a href="/collections/all" class="ph-button ph-button--primary ph-cta-btn">Shop yak chews</a>
+        <a href="/collections/all" class="ph-button ph-button--primary ph-cta-btn">Choose a size</a>
       </div>
     </div>
   </div>
@@ -987,7 +987,7 @@
   <div class="ph-methodology-note" aria-label="Methodology notes">
     <div class="ph-shell">
       <p class="ph-methodology-note__text">
-        * Average chew duration of 67 minutes is based on aggregated customer-reported chew times across 2,400+ verified reviews. Individual results vary based on dog size, breed, and chewing style.
+        Chew time varies by dog. References to average duration are based on customer-reported sessions across reviews and support conversations; size, breed, dental history, and chewing style all matter.
       </p>
     </div>
   </div>
@@ -4555,11 +4555,11 @@
   var steps = quizWidget.querySelectorAll('.ph-quiz__step');
 
   var recommendations = {
-    small:  { title: 'Small Yak Chew',       duration: '~45 min', link: '/products/himalayan-yak-chews-for-dogs?variant=51744916701504', desc: 'Perfect for smaller dogs. Dense enough to keep them busy without being too big to hold comfortably.' },
-    medium: { title: 'Medium Yak Chew',      duration: '~67 min', link: '/products/himalayan-yak-chews-for-dogs?variant=51744918962496', desc: 'Our most popular size. Great for dogs who need something that actually lasts longer than 10 minutes.' },
-    large:  { title: 'Large Yak Chew',       duration: '~85 min', link: '/products/himalayan-yak-chews-for-dogs?variant=51744918995264', desc: 'For bigger dogs and strong chewers who go through softer treats way too fast. Dense and long-lasting.' },
-    xlarge: { title: 'Extra Large Yak Chew', duration: '~95 min', link: '/products/himalayan-yak-chews-for-dogs?variant=51744919028032', desc: 'For large dogs and power chewers. More chew to work through means more quiet time for everyone.' },
-    jumbo:  { title: 'Jumbo Yak Chew',       duration: '~110 min', link: '/products/himalayan-yak-chews-for-dogs?variant=51744919060800', desc: 'For giant breeds and serious chewers. Our biggest chew — because some dogs need a LOT of chew.' }
+    small:  { title: 'Small Yak Chew',       duration: 'Shorter sessions', link: '/products/himalayan-yak-chews-for-dogs?variant=51744916701504', desc: 'A smaller chew for lighter dogs. Supervise closely and size up if your dog tries to fit the whole chew in their mouth.' },
+    medium: { title: 'Medium Yak Chew',      duration: 'Everyday chew time', link: '/products/himalayan-yak-chews-for-dogs?variant=51744918962496', desc: 'A practical starting size for steady chewers who need a real chewing job.' },
+    large:  { title: 'Large Yak Chew',       duration: 'Longer sessions', link: '/products/himalayan-yak-chews-for-dogs?variant=51744918995264', desc: 'For bigger dogs and strong chewers who finish softer treats quickly.' },
+    xlarge: { title: 'Extra Large Yak Chew', duration: 'More chew mass', link: '/products/himalayan-yak-chews-for-dogs?variant=51744919028032', desc: 'For large dogs and stronger jaws that need more chew to work through.' },
+    jumbo:  { title: 'Jumbo Yak Chew',       duration: 'Largest size', link: '/products/himalayan-yak-chews-for-dogs?variant=51744919060800', desc: 'For giant breeds and serious chewers who need the biggest size buffer.' }
   };
 
   function showStep(stepId) {

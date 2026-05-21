@@ -25,7 +25,7 @@
   assign duration_estimate = '45-90 minutes per session, often across multiple supervised sessions'
   assign page_topic = 'yak chews'
   assign title = page.title
-  assign lede = 'Prime Pet Food Himalayan yak cheese chews are dense, natural chews for dog owners who want longer enrichment time, cleaner ingredients, and a safer rawhide alternative.'
+  assign lede = 'Prime Pet Food yak chews are dense Himalayan cheese chews for supervised routines, simple ingredients, and dog parents moving away from rawhide.'
   assign guidance = 'Choose a chew larger than your dog can swallow, supervise every session, and remove the chew once it becomes small enough to pose a choking risk. The leftover nub can be puffed in the microwave after soaking.'
   assign faq_1_q = 'Are yak chews good for this dog?'
   assign faq_1_a = 'Yak chews can be a strong fit when the chew is correctly sized and your dog is supervised. They are especially useful for dogs that need a longer-lasting chewing outlet.'
@@ -402,8 +402,8 @@
         <h1>{{ title | escape }}</h1>
         <p class="seo-chew__lede">{{ lede }}</p>
         <div class="seo-chew__actions">
-          <a class="seo-chew__button" href="{{ section.settings.product_url | default: '/products/himalayan-yak-chews-for-dogs' }}">Shop Yak Chews</a>
-          <a class="seo-chew__button seo-chew__button--secondary" href="{{ section.settings.tool_url | default: '/pages/how-long-will-this-last-for-my-dog' }}">Estimate Your Dog's Chew Time</a>
+          <a class="seo-chew__button" href="{{ section.settings.product_url | default: '/products/himalayan-yak-chews-for-dogs' }}">Choose a size</a>
+          <a class="seo-chew__button seo-chew__button--secondary" href="{{ section.settings.tool_url | default: '/pages/how-long-will-this-last-for-my-dog' }}">Find the right size</a>
         </div>
       </div>
       <aside class="seo-chew__summary" aria-label="Quick recommendation">
@@ -419,7 +419,7 @@
 
   <section class="seo-chew__section">
     <div class="page-width seo-chew__content">
-      <h2>Why {{ page_topic }} need a specific chew strategy</h2>
+      <h2>How to think about {{ page_topic }}</h2>
       <p>{{ dog_label | capitalize }} should not be matched to a chew by flavor alone. The better decision is based on jaw pressure, chewing urgency, weight, boredom triggers, and how safely the chew can be used during a supervised routine.</p>
       <p>{{ guidance }}</p>
       <div class="seo-chew__cards">
@@ -463,7 +463,7 @@
     <div class="page-width seo-chew__grid">
       <div>
         <h2>Related chew guides</h2>
-        <p>Explore more guides on sizing, duration, breed recommendations, and rawhide-free alternatives.</p>
+        <p>More plain-language guides on sizing, duration, breed fit, and moving away from rawhide.</p>
         <ul class="seo-chew__links">
           <li><a href="/pages/yak-chew-guides">Yak Chew Guides Hub</a></li>
           <li><a href="/pages/how-long-do-yak-chews-last">How Long Do Yak Chews Last?</a></li>

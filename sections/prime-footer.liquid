@@ -7,9 +7,9 @@
   <div class="pf-newsletter">
     <div class="pf-shell pf-newsletter__inner">
       <div class="pf-newsletter__copy">
-        <p class="pf-newsletter__kicker">{{ section.settings.newsletter_eyebrow | default: 'Dog parent tips' }}</p>
-        <h2>{{ section.settings.newsletter_heading | default: 'Get chew guides, enrichment tips, and early access.' }}</h2>
-        <span class="pf-newsletter__proof">Trusted by 20,000+ dog parents</span>
+        <p class="pf-newsletter__kicker">{{ section.settings.newsletter_eyebrow | default: 'For dog parents' }}</p>
+        <h2>{{ section.settings.newsletter_heading | default: 'Quiet chew tips, size help, and new drops.' }}</h2>
+        <span class="pf-newsletter__proof">Size help, safety notes, and better chew routines</span>
       </div>
       <form class="pf-newsletter__form" action="/contact#contact_form" method="post" accept-charset="UTF-8">
         <input type="hidden" name="form_type" value="customer">
@@ -31,7 +31,7 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </button>
         </div>
-        <p class="pf-newsletter__disclaimer">Weekly chew tips for calmer dogs. Unsubscribe anytime.</p>
+        <p class="pf-newsletter__disclaimer">Occasional chew tips. Unsubscribe anytime.</p>
       </form>
     </div>
   </div>
@@ -58,7 +58,7 @@
         {% else %}
           <a href="/" class="pf-brand__name" aria-label="{{ shop.name }} home">{{ shop.name }}</a>
         {% endif %}
-        <p class="pf-brand__tagline">{{ section.settings.brand_tagline | default: 'Premium Himalayan yak chews made for calmer, happier dogs.' }}</p>
+        <p class="pf-brand__tagline">{{ section.settings.brand_tagline | default: 'Himalayan yak cheese chews made simple for modern dog homes.' }}</p>
         <div class="pf-brand__trust">
           <span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
@@ -70,7 +70,7 @@
           </span>
           <span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
-            30-day guarantee
+            30-day promise
           </span>
         </div>
         {% if section.settings.show_social %}
@@ -129,7 +129,7 @@
         <ul class="pf-col__list">
           <li><a href="/pages/faq">FAQ</a></li>
           <li><a href="/pages/contact">Contact us</a></li>
-          <li><a href="/pages/shipping-policy">Shipping info</a></li>
+          <li><a href="/pages/shipping-policy">Shipping</a></li>
           <li><a href="/pages/refund-policy">Returns &amp; refunds</a></li>
         </ul>
       </div>
@@ -155,7 +155,7 @@
           <li><a href="/pages/best-rawhide-alternative">Rawhide alternatives</a></li>
           <li><a href="/pages/dog-ritual-enrichment">Evening chew routines</a></li>
           <li><a href="/pages/canine-decompression">Your dog's wind-down</a></li>
-          <li><a href="/pages/prime-scale">The Prime Pet Food Scale</a></li>
+          <li><a href="/pages/prime-scale">Chew safety guide</a></li>
           <li><a href="/pages/about-us">Who we are</a></li>
         </ul>
       </div>
@@ -612,7 +612,7 @@
       "type": "text",
       "id": "brand_tagline",
       "label": "Brand tagline",
-      "default": "Premium Himalayan yak chews made for calmer, happier dogs."
+      "default": "Himalayan yak cheese chews made simple for modern dog homes."
     },
     {
       "type": "checkbox",
@@ -624,13 +624,13 @@
       "type": "text",
       "id": "newsletter_eyebrow",
       "label": "Newsletter eyebrow",
-      "default": "Dog parent tips"
+      "default": "For dog parents"
     },
     {
       "type": "text",
       "id": "newsletter_heading",
       "label": "Newsletter heading",
-      "default": "Get chew guides, enrichment tips, and early access."
+      "default": "Quiet chew tips, size help, and new drops."
     },
     {
       "type": "checkbox",

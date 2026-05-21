@@ -12,17 +12,17 @@
     "prime_homepage_experience": {
       "type": "prime-homepage-experience",
       "settings": {
-        "hero_headline": "A longer-lasting chew for dogs who chew hard.",
-        "hero_subtext": "Rawhide-free Himalayan yak cheese chews. 4 ingredients. No chemicals. Just a chew your dog actually loves — and you can feel good about.",
+        "hero_headline": "A hard cheese chew your dog can settle into.",
+        "hero_subtext": "Made with yak milk, cow milk, lime juice, and salt. Based on the Himalayan chhurpi tradition, then packed in Texas for supervised chew time at home.",
         "hero_image": "prime-calm-dog-yak-chew-hero.jpg",
         "trust_stat_1_value": "20,000+",
-        "trust_stat_1_label": "Dog parents",
+        "trust_stat_1_label": "Dog homes served",
         "trust_stat_2_value": "4",
-        "trust_stat_2_label": "Natural ingredients",
-        "trust_stat_3_value": "Long",
-        "trust_stat_3_label": "Chew sessions",
+        "trust_stat_2_label": "Simple ingredients",
+        "trust_stat_3_value": "Real",
+        "trust_stat_3_label": "Chew time",
         "trust_stat_4_value": "30-day",
-        "trust_stat_4_label": "Guarantee",
+        "trust_stat_4_label": "Promise",
         "show_quiz": true,
         "show_sticky_bar": true,
         "show_outcomes": false,
@@ -108,11 +108,11 @@
         "video_TELc9F"
       ],
       "settings": {
-        "heading": "Real dogs. Real calm-time posts.",
+        "heading": "Real dogs, real chew time.",
         "heading_size": 100,
         "heading_letter_spacing": 0,
         "custom_font_url": "",
-        "description": "<p>Swipe Instagram and TikTok-style videos from Prime Pet Food dogs, then tag us with your dog&apos;s calm-time moment.</p>",
+        "description": "<p>Short clips from homes that use Prime chews for quiet work calls, evening routines, and post-walk settling.</p>",
         "description_size": 100,
         "heading_description_spacing": 20,
         "autoplay": 0,
@@ -128,15 +128,15 @@
         "navigation_spacing": 20,
         "show_share_cta": true,
         "share_heading": "Share your dog's calm-time moment",
-        "share_text": "Post your dog with their Prime yak chew and tag us on Instagram or TikTok for a chance to be featured."
+        "share_text": "Post your dog with their Prime yak chew and tag us on Instagram or TikTok. We feature real calm-time moments from customers."
       }
     },
     "prime_zero_waste_puff": {
       "type": "prime-zero-waste-puff",
       "settings": {
-        "heading": "Zero Waste. Zero Choking.",
-        "subheading": "Every yak chew has a small end piece. Other brands tell you to throw it away. We turn it into a safe, crunchy bonus treat your dog will love.",
-        "cta_label": "Shop Yak Chews",
+        "heading": "Do not toss the small end piece. Puff it.",
+        "subheading": "When the chew gets small, take it away, soak it, and microwave it into a crunchy cheese puff. It is a simple way to reduce waste and avoid a swallowable nub.",
+        "cta_label": "Choose your dog's size",
         "cta_url": "/products/himalayan-yak-chews-for-dogs",
         "video_url": "https://cdn.shopify.com/videos/c/o/v/d7aeb1ab2e45499ba3b718e8920fe919.mp4"
       }

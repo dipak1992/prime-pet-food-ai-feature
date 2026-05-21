@@ -6,8 +6,8 @@
         {% render 'prime-blueprint-icon', name: 'chew-time', size: 22 %}
       </div>
       <div class="pptb__text">
-        <strong>{{ section.settings.stat1_value | default: '67 min' }}</strong>
-        <span title="Based on aggregated customer-reported chew durations across 2,400+ reviews">{{ section.settings.stat1_label | default: 'Avg chew time*' }}</span>
+        <strong>{{ section.settings.stat1_value | default: 'Real' }}</strong>
+        <span>{{ section.settings.stat1_label | default: 'Chew time' }}</span>
       </div>
     </div>
 
@@ -287,13 +287,13 @@
       "type": "text",
       "id": "stat1_value",
       "label": "Stat 1 value",
-      "default": "67 min"
+      "default": "Real"
     },
     {
       "type": "text",
       "id": "stat1_label",
       "label": "Stat 1 label",
-      "default": "Average chew time"
+      "default": "Chew time"
     },
     {
       "type": "text",

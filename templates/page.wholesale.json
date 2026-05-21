@@ -3,17 +3,17 @@
     "prime_wholesale": {
       "type": "prime-wholesale",
       "settings": {
-        "hero_badge": "Now Accepting Wholesale Partners",
-        "hero_headline": "Premium Himalayan Dog Chews for Modern Pet Retailers",
-        "hero_subtext": "Long-lasting yak chews that drive repeat purchases, delight dog parents, and position your store as a premium enrichment destination.",
+        "hero_badge": "For pet retailers",
+        "hero_headline": "Himalayan yak chews your customers can understand quickly",
+        "hero_subtext": "Four ingredients, clear sizing, shelf-ready packs, and a rawhide-free story your staff can explain without a script.",
         "hero_cta_primary": "Apply for Wholesale",
         "hero_cta_secondary": "Access Wholesale Portal",
         "apply_url": "https://wholesale.theprimepetfood.com/apply",
         "portal_url": "https://wholesale.theprimepetfood.com",
         "quote_url": "/pages/contact",
         "founder_name": "Dipak Regmi",
-        "final_cta_heading": "Ready to Bring Premium Dog Enrichment to Your Customers?",
-        "final_cta_subtext": "Join 200+ retailers already stocking Prime Pet Food. Apply today and start offering the chews that dogs love and owners trust."
+        "final_cta_heading": "Bring a clearer chew story to your customers.",
+        "final_cta_subtext": "Apply when you are ready. We will review your store, share terms, and help you choose a first order that makes sense."
       }
     }
   },
