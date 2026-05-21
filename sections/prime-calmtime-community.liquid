@@ -9,7 +9,7 @@
 {% liquid
   assign instagram_url = settings.social_instagram_link | default: 'https://www.instagram.com/foodprimepet/'
   assign tiktok_url = settings.social_tiktok_link | default: 'https://www.tiktok.com/@primepetfood'
-  assign fallback_images = 'prime-ugc-golden-retriever-chew-card.jpg|prime-ugc-german-shepherd-chew-card.jpg|prime-ugc-labrador-chew-card.jpg|prime-ugc-french-bulldog-chew-card.jpg|prime-ugc-beagle-chew-card.jpg|prime-ugc-poodle-chew-card.jpg' | split: '|'
+  assign fallback_images = 'prime-calmtime-golden-retriever.jpg|prime-calmtime-german-shepherd.jpg|prime-calmtime-labrador.jpg|prime-calmtime-french-bulldog.jpg|prime-calmtime-beagle.jpg|prime-calmtime-poodle.jpg' | split: '|'
 %}
 
 <section id="primecalmtime" class="pcc" aria-label="#PrimeCalmTime community showcase">
@@ -120,7 +120,7 @@
         {%- assign placeholder_durations = '82 min,71 min,64 min' | split: ',' -%}
         {%- assign placeholder_captions = 'He barely moved for over an hour. Best purchase ever!,Finally found something that keeps her busy during my work calls.,Maple is obsessed. We go through one a week now.' | split: ',' -%}
         {%- assign placeholder_handles = 'biscuit_the_golden,koda_adventures,maple_lab_life' | split: ',' -%}
-        {%- assign placeholder_images = 'prime-ugc-golden-retriever-chew-card,prime-ugc-german-shepherd-chew-card,prime-ugc-golden-retriever-chew-card' | split: ',' -%}
+        {%- assign placeholder_images = 'prime-calmtime-golden-retriever,prime-calmtime-german-shepherd,prime-calmtime-labrador' | split: ',' -%}
 
         {%- for i in (0..2) -%}
           <article class="pcc__card" role="listitem">
