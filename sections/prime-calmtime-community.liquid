@@ -17,10 +17,10 @@
           <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
           <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
         </svg>
-        {{ section.settings.eyebrow | default: '#PrimeCalmTime' }}
+        {{ section.settings.eyebrow | default: "#PrimeCalmTime" }}
       </p>
-      <h2 class="pcc__title">{{ section.settings.title | default: 'Real dogs. Real calm. Real chews.' }}</h2>
-      <p class="pcc__subtitle">{{ section.settings.subtitle | default: 'Join thousands of dog parents sharing their pup\'s calm-time moments. Tag your photos with #PrimeCalmTime for a chance to be featured.' }}</p>
+      <h2 class="pcc__title">{{ section.settings.title | default: "Real dogs. Real calm. Real chews." }}</h2>
+      <p class="pcc__subtitle">{{ section.settings.subtitle | default: "Join thousands of dog parents sharing their pup's calm-time moments. Tag your photos with #PrimeCalmTime for a chance to be featured." }}</p>
     </header>
 
     {%- comment -%} UGC Card Grid {%- endcomment -%}
@@ -148,8 +148,8 @@
           </svg>
         </div>
         <div class="pcc__cta-text">
-          <strong>{{ section.settings.cta_heading | default: 'Share your dog\'s calm-time moment' }}</strong>
-          <span>{{ section.settings.cta_subtext | default: 'Tag @primepetfood and use #PrimeCalmTime on Instagram or TikTok. We feature real dogs every week.' }}</span>
+          <strong>{{ section.settings.cta_heading | default: "Share your dog's calm-time moment" }}</strong>
+          <span>{{ section.settings.cta_subtext | default: "Tag @primepetfood and use #PrimeCalmTime on Instagram or TikTok. We feature real dogs every week." }}</span>
         </div>
         {%- if section.settings.cta_url != blank -%}
           <a href="{{ section.settings.cta_url }}" class="pcc__cta-btn" target="_blank" rel="noopener noreferrer" aria-label="{{ section.settings.cta_label | default: 'Share on Instagram' }}">
@@ -169,7 +169,7 @@
 <style>
   .pcc {
     padding: 72px 24px;
-    background: {{ section.settings.bg_color | default: '#FDFCF7' }};
+    background: {{ section.settings.bg_color | default: "#FDFCF7" }};
     font-family: var(--font-body-family, -apple-system, sans-serif);
   }
 
