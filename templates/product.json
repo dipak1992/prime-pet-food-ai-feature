@@ -789,7 +789,7 @@
       "custom_css": [],
       "name": "YPC Product Hero",
       "settings": {
-        "hero_lead": "Dense Himalayan yak cheese chews for supervised calm-time, cleaner enrichment, and dogs who need a long-lasting job.",
+        "hero_lead": "A sturdy rawhide-free chew for supervised calm time, made to keep busy dogs settled longer than a quick treat.",
         "hero_rating_text": "4.9★ from 2,400+ dog parents",
         "hero_benefit_1": "100% Natural",
         "hero_benefit_2": "Long-Lasting",
@@ -812,10 +812,10 @@
         "subscribe_label": "Subscribe & save",
         "cta_text": "ADD TO CART",
         "size_guide_label": "How Long Will This Last For MY Dog?",
-        "show_review_cards": false,
-        "review_card_1": "Use the estimator to confirm the right size before checkout.",
-        "review_card_2": "Choose larger chews for strong chewers and bigger dogs.",
-        "review_card_3": "Always supervise and remove small end pieces."
+        "show_review_cards": true,
+        "review_card_1": "“My golden usually finishes chews fast. This gave him a full calm hour after our morning walk.”",
+        "review_card_2": "“Cleaner than bully sticks and no rawhide. My lab settles with it while I work.”",
+        "review_card_3": "“The puff trick sold me. When the end gets small, it turns into a second crunchy treat.”"
       }
     },
     "why_prime": {

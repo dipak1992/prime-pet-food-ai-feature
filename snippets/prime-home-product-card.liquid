@@ -62,6 +62,7 @@
           {% if variant.available %}Add to cart{% else %}Sold out{% endif %}
         </button>
       </form>
+      {% render 'prime-guarantee-badge', context: 'product_card' %}
     {% elsif product != blank %}
       <a href="{{ card_url }}" class="ph-product-card__link">View product</a>
     {% else %}

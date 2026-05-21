@@ -236,6 +236,29 @@
           <span>30-day chew duration guarantee</span>
         </div>
 
+        <div class="ypc-truth-box" aria-label="Origin and ingredient truth">
+          <div class="ypc-truth-box__item">
+            <span>Ingredients</span>
+            <strong>4 simple ingredients</strong>
+            <p>Yak milk, cow milk, lime juice, salt.</p>
+          </div>
+          <div class="ypc-truth-box__item">
+            <span>Origin</span>
+            <strong>Handcrafted in Nepal. Packed in USA.</strong>
+            <p>Traditional Himalayan methods, finished under Prime Pet Food quality standards.</p>
+          </div>
+          <div class="ypc-truth-box__item">
+            <span>Duration</span>
+            <strong>Built for longer calm time</strong>
+            <p>Most 50 lb heavy chewers get 2-3 supervised sessions when sized up.</p>
+          </div>
+          <div class="ypc-truth-box__item">
+            <span>Promise</span>
+            <strong>30-day satisfaction guarantee</strong>
+            <p>If the size or routine fit is not right, we will help make it right.</p>
+          </div>
+        </div>
+
         <div class="ypc-profile-recommendation" data-ypc-profile-card hidden>
           <div>
             <span>Your dog profile</span>
@@ -279,7 +302,7 @@
             </div>
 
             <div class="ypc-subscription-proof" aria-label="Subscribe and Save benefits">
-              <span>Never run out</span>
+              <span>Ships automatically</span>
               <span>Skip or cancel anytime</span>
               <span>Cancel in 2 clicks</span>
               <span>Built for steady chew routines</span>
@@ -313,6 +336,11 @@
             <span class="ypc-cta__price" id="ypc-cta-price">{{ current_variant.price | money }}</span>
             <span class="ypc-cta__compare" id="ypc-cta-compare" style="display:none;"></span>
           </button>
+        </div>
+
+        <div class="ypc-post-atc-trust" aria-label="Purchase confidence">
+          {% render 'prime-guarantee-badge', context: 'product_page' %}
+          <span>Handcrafted in Nepal. Packed in USA.</span>
         </div>
 
         <a href="#bonus-second-treat" class="ypc-bonus-mobile-link">
@@ -1309,6 +1337,52 @@
     line-height: 1.2;
   }
 
+  .ypc-truth-box {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin: 0 0 14px;
+    padding: 12px;
+    border: 1px solid rgba(184, 95, 50, 0.18);
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(255, 250, 242, 0.94), rgba(246, 238, 222, 0.72));
+    box-shadow: 0 12px 28px rgba(43, 20, 8, 0.06);
+  }
+
+  .ypc-truth-box__item {
+    min-width: 0;
+    padding: 12px;
+    border: 1px solid rgba(43, 20, 8, 0.08);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.62);
+  }
+
+  .ypc-truth-box__item span {
+    display: block;
+    color: #9a4318;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.09em;
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+
+  .ypc-truth-box__item strong {
+    display: block;
+    margin-top: 5px;
+    color: #2b1408;
+    font-size: 13px;
+    font-weight: 900;
+    line-height: 1.22;
+  }
+
+  .ypc-truth-box__item p {
+    margin: 5px 0 0;
+    color: #6f5a4b;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
   .ypc-puff-hack {
     display: grid;
     grid-template-columns: 92px minmax(0, 1fr);
@@ -1543,6 +1617,15 @@
 
     .ypc-safety-ritual:not([open]) .ypc-safety-ritual__body {
       display: none;
+    }
+
+    .ypc-truth-box {
+      grid-template-columns: 1fr;
+      padding: 10px;
+    }
+
+    .ypc-truth-box__item {
+      padding: 11px;
     }
 
     .ypc-subscription-proof {
@@ -1799,6 +1882,26 @@
     margin-top: 14px;
   }
 
+  .ypc-post-atc-trust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0 2px;
+    color: #5f4b42;
+    font-size: 12px;
+    font-weight: 750;
+    line-height: 1.35;
+    text-align: center;
+  }
+
+  .ypc-post-atc-trust .prime-guarantee-badge--product_page {
+    margin-top: 0;
+    padding: 8px 11px;
+    font-size: 12px;
+  }
+
   .ypc-quantity {
     display: grid;
     grid-template-columns: 38px 1fr 38px;
@@ -2027,8 +2130,10 @@
     .ypc-info-line { order: 40; }
     .ypc-urgency { order: 50; }
     .ypc-conversion-badges { order: 60; }
-    .ypc-profile-recommendation { order: 70; }
+    .ypc-truth-box { order: 70; }
+    .ypc-profile-recommendation { order: 75; }
     .ypc-cart-row { order: 80; }
+    .ypc-post-atc-trust { order: 85; }
     .ypc-subscription { order: 90; }
     .ypc-guarantee-details { order: 100; }
     .ypc-bonus-mobile-link { order: 110; }
@@ -2107,7 +2212,7 @@
       "type": "textarea",
       "id": "hero_lead",
       "label": "Hero lead text",
-      "default": "The long-lasting chew your dog deserves. Crafted in Nepal using traditional Himalayan methods with 4 simple ingredients: Yak milk, cow milk, lime juice, salt."
+      "default": "A sturdy rawhide-free chew for supervised calm time, made to keep busy dogs settled longer than a quick treat."
     },
     {
       "type": "text",

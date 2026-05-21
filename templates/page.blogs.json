@@ -41,7 +41,7 @@
       "settings": {
         "intro": "<p>Explore Prime Pet Food articles by blog: Yak Chews, Dog Health, and Dog Behavior.</p>",
         "show_keyword_hub": true,
-        "keyword_hub_heading": "Browse by main dog chew keyword",
+        "keyword_hub_heading": "Browse by dog chew topic",
         "keyword_hub_text": "Browse practical Prime Pet Food guides on yak chews, chew duration, rawhide alternatives, power chewers, dog enrichment, breed sizing, and calm routines.",
         "items_to_show": 100,
         "columns_desktop": "4",
