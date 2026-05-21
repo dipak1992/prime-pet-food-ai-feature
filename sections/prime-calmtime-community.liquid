@@ -114,15 +114,14 @@
         {%- endif -%}
       {%- else -%}
         {%- comment -%} Default placeholder cards when no blocks are added {%- endcomment -%}
-        {%- assign placeholder_cards = 'golden,shepherd,lab' | split: ',' -%}
-        {%- assign placeholder_names = 'Biscuit,Koda,Maple' | split: ',' -%}
-        {%- assign placeholder_breeds = 'Golden Retriever,German Shepherd,Labrador' | split: ',' -%}
-        {%- assign placeholder_durations = '82 min,71 min,64 min' | split: ',' -%}
-        {%- assign placeholder_captions = 'He barely moved for over an hour. Best purchase ever!,Finally found something that keeps her busy during my work calls.,Maple is obsessed. We go through one a week now.' | split: ',' -%}
-        {%- assign placeholder_handles = 'biscuit_the_golden,koda_adventures,maple_lab_life' | split: ',' -%}
-        {%- assign placeholder_images = 'prime-calmtime-golden-retriever,prime-calmtime-german-shepherd,prime-calmtime-labrador' | split: ',' -%}
+        {%- assign placeholder_names = 'Biscuit,Koda,Maple,Luna,Scout,Winnie' | split: ',' -%}
+        {%- assign placeholder_breeds = 'Golden Retriever,German Shepherd,Labrador,French Bulldog,Beagle,Poodle Mix' | split: ',' -%}
+        {%- assign placeholder_durations = '82 min,71 min,64 min,48 min,57 min,62 min' | split: ',' -%}
+        {%- assign placeholder_captions = 'He barely moved for over an hour. Best purchase ever!,Finally found something that keeps her busy during my work calls.,Maple is obsessed. We go through one a week now.,Luna finally has a calm evening routine.,Scout takes his chew to the same sunny spot every day.,Winnie settles in before I even finish making coffee.' | split: ',' -%}
+        {%- assign placeholder_handles = 'biscuit_the_golden,koda_adventures,maple_lab_life,luna_chews,scout_sits,winnie_at_home' | split: ',' -%}
+        {%- assign placeholder_images = 'prime-calmtime-golden-retriever,prime-calmtime-german-shepherd,prime-calmtime-labrador,prime-calmtime-french-bulldog,prime-calmtime-beagle,prime-calmtime-poodle' | split: ',' -%}
 
-        {%- for i in (0..2) -%}
+        {%- for i in (0..5) -%}
           <article class="pcc__card" role="listitem">
             <div class="pcc__card-image-wrap">
               <img
@@ -752,6 +751,36 @@
             "handle": "maple_lab_life",
             "caption": "Maple is obsessed. We go through one a week now.",
             "chew_duration": "64 min"
+          }
+        },
+        {
+          "type": "ugc_post",
+          "settings": {
+            "dog_name": "Luna",
+            "breed": "French Bulldog",
+            "handle": "luna_chews",
+            "caption": "Luna finally has a calm evening routine.",
+            "chew_duration": "48 min"
+          }
+        },
+        {
+          "type": "ugc_post",
+          "settings": {
+            "dog_name": "Scout",
+            "breed": "Beagle",
+            "handle": "scout_sits",
+            "caption": "Scout takes his chew to the same sunny spot every day.",
+            "chew_duration": "57 min"
+          }
+        },
+        {
+          "type": "ugc_post",
+          "settings": {
+            "dog_name": "Winnie",
+            "breed": "Poodle Mix",
+            "handle": "winnie_at_home",
+            "caption": "Winnie settles in before I even finish making coffee.",
+            "chew_duration": "62 min"
           }
         }
       ]
