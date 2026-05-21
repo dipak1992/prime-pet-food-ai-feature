@@ -1,0 +1,626 @@
+{{ 'prime-roadmap.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Prime Rawhide Alternatives Pillar Page
+  A comprehensive, E-E-A-T-rich comparison of rawhide alternatives.
+  Covers: rawhide risks, yak chews, bully sticks, antlers, nylon, rubber.
+  Includes structured comparison table, FAQ schema, and internal links.
+{%- endcomment -%}
+
+<div class="prime-rap" aria-label="Rawhide alternatives guide">
+  <style>
+    .prime-rap {
+      font-family: var(--font-body-family, -apple-system, sans-serif);
+      color: #2d2416;
+    }
+
+    .prime-rap__hero {
+      background: linear-gradient(135deg, #1a0f00 0%, #3d1f00 100%);
+      color: #fff;
+      padding: 64px 24px;
+      text-align: center;
+    }
+
+    .prime-rap__hero-kicker {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fbbf24;
+      margin: 0 0 12px;
+    }
+
+    .prime-rap__hero h1 {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 800;
+      line-height: 1.15;
+      margin: 0 0 16px;
+      color: #fff;
+    }
+
+    .prime-rap__hero-sub {
+      font-size: 18px;
+      color: rgba(255,255,255,0.8);
+      max-width: 600px;
+      margin: 0 auto 32px;
+      line-height: 1.6;
+    }
+
+    .prime-rap__hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: #f59e0b;
+      color: #1a0f00;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .prime-rap__hero-cta:hover { background: #fbbf24; }
+
+    .prime-rap__body {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+
+    .prime-rap__section {
+      margin-bottom: 56px;
+    }
+
+    .prime-rap__section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #b45309;
+      margin: 0 0 8px;
+    }
+
+    .prime-rap__section h2 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #1a1a1a;
+      margin: 0 0 16px;
+      line-height: 1.25;
+    }
+
+    .prime-rap__section p {
+      font-size: 16px;
+      line-height: 1.75;
+      margin: 0 0 16px;
+    }
+
+    .prime-rap__warning {
+      padding: 20px 24px;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-left: 4px solid #ef4444;
+      border-radius: 0 12px 12px 0;
+      margin: 24px 0;
+    }
+
+    .prime-rap__warning-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #b91c1c;
+      margin: 0 0 6px;
+    }
+
+    .prime-rap__warning p {
+      font-size: 15px;
+      color: #7f1d1d;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .prime-rap__table-wrap {
+      overflow-x: auto;
+      margin: 32px 0;
+      border-radius: 12px;
+      border: 1px solid #e5d9c8;
+    }
+
+    .prime-rap__table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .prime-rap__table thead {
+      background: #1a0f00;
+      color: #fff;
+    }
+
+    .prime-rap__table thead th {
+      padding: 14px 16px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .prime-rap__table thead th:first-child { border-radius: 12px 0 0 0; }
+    .prime-rap__table thead th:last-child { border-radius: 0 12px 0 0; }
+
+    .prime-rap__table tbody tr { border-bottom: 1px solid #f0ebe2; }
+    .prime-rap__table tbody tr:last-child { border-bottom: none; }
+    .prime-rap__table tbody tr.prime-rap__table-highlight { background: #fffbeb; }
+
+    .prime-rap__table tbody td {
+      padding: 14px 16px;
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    .prime-rap__table tbody td:first-child { font-weight: 700; color: #1a1a1a; }
+
+    .prime-rap__check  { color: #16a34a; font-size: 16px; }
+    .prime-rap__cross  { color: #dc2626; font-size: 16px; }
+    .prime-rap__neutral { color: #d97706; font-size: 16px; }
+
+    .prime-rap__chew-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+      margin: 32px 0;
+    }
+
+    .prime-rap__chew-card {
+      padding: 20px;
+      border: 1px solid #e5d9c8;
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .prime-rap__chew-card--winner {
+      border-color: #f59e0b;
+      background: #fffbeb;
+    }
+
+    .prime-rap__chew-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .prime-rap__chew-card-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin: 0;
+    }
+
+    .prime-rap__chew-card-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 100px;
+      background: #f59e0b;
+      color: #1a0f00;
+    }
+
+    .prime-rap__chew-card-badge--avoid   { background: #fecaca; color: #b91c1c; }
+    .prime-rap__chew-card-badge--caution { background: #fef3c7; color: #92400e; }
+
+    .prime-rap__chew-card p {
+      font-size: 13px;
+      color: #4a3f2f;
+      line-height: 1.6;
+      margin: 0 0 10px;
+    }
+
+    .prime-rap__chew-card-pros-cons {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 12px;
+    }
+
+    .prime-rap__chew-card-pro { color: #166534; display: flex; gap: 6px; }
+    .prime-rap__chew-card-con { color: #b91c1c; display: flex; gap: 6px; }
+
+    .prime-rap__faq { margin: 48px 0 0; }
+    .prime-rap__faq h2 { font-size: 24px; font-weight: 800; color: #1a1a1a; margin: 0 0 24px; }
+
+    .prime-rap__faq-item { border-bottom: 1px solid #e5d9c8; padding: 20px 0; }
+    .prime-rap__faq-item:last-child { border-bottom: none; }
+
+    .prime-rap__faq-q { font-size: 16px; font-weight: 700; color: #1a1a1a; margin: 0 0 10px; }
+    .prime-rap__faq-a { font-size: 15px; color: #4a3f2f; line-height: 1.7; margin: 0; }
+
+    .prime-rap__cta {
+      margin: 48px 0 0;
+      padding: 32px;
+      background: linear-gradient(135deg, #1a0f00, #3d1f00);
+      border-radius: 16px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .prime-rap__cta h2 { font-size: 24px; font-weight: 800; margin: 0 0 10px; color: #fff; }
+    .prime-rap__cta p  { font-size: 15px; color: rgba(255,255,255,0.8); margin: 0 0 24px; }
+
+    .prime-rap__cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: #f59e0b;
+      color: #1a0f00;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+
+    .prime-rap__cta-btn:hover { background: #fbbf24; }
+  </style>
+
+  <!-- Hero -->
+  <div class="prime-rap__hero">
+    <p class="prime-rap__hero-kicker">The Complete Guide</p>
+    <h1>{{ section.settings.heading }}</h1>
+    <p class="prime-rap__hero-sub">{{ section.settings.subheading }}</p>
+    <a href="{{ section.settings.cta_url }}" class="prime-rap__hero-cta">
+      {{ section.settings.cta_label }} &#8594;
+    </a>
+  </div>
+
+  <div class="prime-rap__body">
+
+    <!-- Why rawhide is a problem -->
+    <div class="prime-rap__section">
+      <p class="prime-rap__section-label">The Problem</p>
+      <h2>Why rawhide is not actually safe</h2>
+      <p>Rawhide is the inner layer of animal hide — usually cow or horse. To make it shelf-stable, white, and odor-free, manufacturers treat it with sodium sulphide liming, bleach, and hydrogen peroxide. Some imported rawhide has tested positive for arsenic, lead, and formaldehyde residue.</p>
+      <p>Beyond the chemical processing, rawhide has two mechanical risks: it softens as dogs chew it, and large chunks can break off and be swallowed whole. These chunks do not digest — they can cause intestinal blockages requiring emergency surgery.</p>
+
+      <div class="prime-rap__warning">
+        <p class="prime-rap__warning-label">&#9888;&#65039; FDA Warning</p>
+        <p>The FDA has issued multiple warnings about Salmonella contamination in rawhide products. In 2017, a major recall affected over 30 brands. Rawhide is not a "natural" product — it is a chemically processed byproduct.</p>
+      </div>
+    </div>
+
+    <!-- Comparison table -->
+    <div class="prime-rap__section">
+      <p class="prime-rap__section-label">Side-by-Side Comparison</p>
+      <h2>Rawhide alternatives compared</h2>
+      <p>We evaluated six common chew options across the factors that matter most: safety, digestibility, ingredient quality, duration, and value.</p>
+
+      <div class="prime-rap__table-wrap" role="region" aria-label="Chew comparison table" tabindex="0">
+        <table class="prime-rap__table">
+          <thead>
+            <tr>
+              <th>Chew Type</th>
+              <th>Safe to Digest</th>
+              <th>Clean Ingredients</th>
+              <th>Splinter Risk</th>
+              <th>Avg. Duration</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="prime-rap__table-highlight">
+              <td>&#127956;&#65039; Yak Chews (Prime)</td>
+              <td><span class="prime-rap__check">&#10003;</span> Yes</td>
+              <td><span class="prime-rap__check">&#10003;</span> 4 ingredients</td>
+              <td><span class="prime-rap__check">&#10003;</span> None</td>
+              <td>45 min &#8211; 5 hrs</td>
+              <td>High</td>
+            </tr>
+            <tr>
+              <td>Rawhide</td>
+              <td><span class="prime-rap__cross">&#10007;</span> No</td>
+              <td><span class="prime-rap__cross">&#10007;</span> Processed</td>
+              <td><span class="prime-rap__neutral">&#126;</span> Chunk risk</td>
+              <td>10&#8211;30 min</td>
+              <td>Low</td>
+            </tr>
+            <tr>
+              <td>Bully Sticks</td>
+              <td><span class="prime-rap__check">&#10003;</span> Yes</td>
+              <td><span class="prime-rap__check">&#10003;</span> Single</td>
+              <td><span class="prime-rap__check">&#10003;</span> None</td>
+              <td>15&#8211;45 min</td>
+              <td>Medium</td>
+            </tr>
+            <tr>
+              <td>Antlers</td>
+              <td><span class="prime-rap__neutral">&#126;</span> Partial</td>
+              <td><span class="prime-rap__check">&#10003;</span> Single</td>
+              <td><span class="prime-rap__cross">&#10007;</span> High</td>
+              <td>Very long</td>
+              <td>High</td>
+            </tr>
+            <tr>
+              <td>Nylon Chews</td>
+              <td><span class="prime-rap__cross">&#10007;</span> No</td>
+              <td><span class="prime-rap__cross">&#10007;</span> Synthetic</td>
+              <td><span class="prime-rap__neutral">&#126;</span> Shred risk</td>
+              <td>Very long</td>
+              <td>High</td>
+            </tr>
+            <tr>
+              <td>Rubber Toys</td>
+              <td><span class="prime-rap__neutral">&#126;</span> If intact</td>
+              <td><span class="prime-rap__cross">&#10007;</span> Synthetic</td>
+              <td><span class="prime-rap__check">&#10003;</span> None</td>
+              <td>Indefinite</td>
+              <td>High</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Individual chew breakdowns -->
+    <div class="prime-rap__section">
+      <p class="prime-rap__section-label">The Breakdown</p>
+      <h2>Each alternative, honestly assessed</h2>
+
+      <div class="prime-rap__chew-grid">
+
+        <div class="prime-rap__chew-card prime-rap__chew-card--winner">
+          <div class="prime-rap__chew-card-header">
+            <p class="prime-rap__chew-card-name">&#127956;&#65039; Yak Chews</p>
+            <span class="prime-rap__chew-card-badge">Best Overall</span>
+          </div>
+          <p>Made from yak and cow milk, hardened through a traditional Himalayan process. Four ingredients. Fully digestible. The nub can be microwaved into a puffed treat.</p>
+          <div class="prime-rap__chew-card-pros-cons">
+            <span class="prime-rap__chew-card-pro">&#10003; Fully digestible, no splinter risk</span>
+            <span class="prime-rap__chew-card-pro">&#10003; Single-origin, traceable ingredients</span>
+            <span class="prime-rap__chew-card-pro">&#10003; Long-lasting for most dogs</span>
+            <span class="prime-rap__chew-card-con">&#10007; Not suitable for dairy-sensitive dogs</span>
+            <span class="prime-rap__chew-card-con">&#10007; Power-chewers may finish quickly</span>
+          </div>
+        </div>
+
+        <div class="prime-rap__chew-card">
+          <div class="prime-rap__chew-card-header">
+            <p class="prime-rap__chew-card-name">Bully Sticks</p>
+            <span class="prime-rap__chew-card-badge prime-rap__chew-card-badge--caution">Good, with caveats</span>
+          </div>
+          <p>Made from dried bull pizzle. Single ingredient, fully digestible, no splinter risk. High in protein. Main downsides: odor and calorie density.</p>
+          <div class="prime-rap__chew-card-pros-cons">
+            <span class="prime-rap__chew-card-pro">&#10003; Digestible, single ingredient</span>
+            <span class="prime-rap__chew-card-pro">&#10003; Most dogs love them</span>
+            <span class="prime-rap__chew-card-con">&#10007; Strong odor</span>
+            <span class="prime-rap__chew-card-con">&#10007; High calorie — watch intake</span>
+            <span class="prime-rap__chew-card-con">&#10007; Shorter duration than yak chews</span>
+          </div>
+        </div>
+
+        <div class="prime-rap__chew-card">
+          <div class="prime-rap__chew-card-header">
+            <p class="prime-rap__chew-card-name">Antlers</p>
+            <span class="prime-rap__chew-card-badge prime-rap__chew-card-badge--caution">Use with caution</span>
+          </div>
+          <p>Naturally shed deer or elk antlers. Very long-lasting. But antlers are hard enough to crack teeth — veterinary dentists frequently see slab fractures from antler chewing.</p>
+          <div class="prime-rap__chew-card-pros-cons">
+            <span class="prime-rap__chew-card-pro">&#10003; Extremely long-lasting</span>
+            <span class="prime-rap__chew-card-pro">&#10003; No odor</span>
+            <span class="prime-rap__chew-card-con">&#10007; High tooth fracture risk</span>
+            <span class="prime-rap__chew-card-con">&#10007; Not digestible if swallowed</span>
+          </div>
+        </div>
+
+        <div class="prime-rap__chew-card">
+          <div class="prime-rap__chew-card-header">
+            <p class="prime-rap__chew-card-name">Nylon Chews</p>
+            <span class="prime-rap__chew-card-badge prime-rap__chew-card-badge--avoid">Avoid</span>
+          </div>
+          <p>Synthetic chews designed to last indefinitely. Dogs can shred off pieces which are not digestible and can cause blockages. Not a food product.</p>
+          <div class="prime-rap__chew-card-pros-cons">
+            <span class="prime-rap__chew-card-pro">&#10003; Very long-lasting</span>
+            <span class="prime-rap__chew-card-con">&#10007; Not digestible</span>
+            <span class="prime-rap__chew-card-con">&#10007; Shredded pieces cause blockages</span>
+            <span class="prime-rap__chew-card-con">&#10007; Synthetic — not a food</span>
+          </div>
+        </div>
+
+        <div class="prime-rap__chew-card">
+          <div class="prime-rap__chew-card-header">
+            <p class="prime-rap__chew-card-name">Rawhide</p>
+            <span class="prime-rap__chew-card-badge prime-rap__chew-card-badge--avoid">Avoid</span>
+          </div>
+          <p>Chemically processed hide. Bleached, treated with hydrogen peroxide, and sometimes contaminated with heavy metals. Chunks can cause intestinal blockages.</p>
+          <div class="prime-rap__chew-card-pros-cons">
+            <span class="prime-rap__chew-card-pro">&#10003; Cheap and widely available</span>
+            <span class="prime-rap__chew-card-con">&#10007; Chemical processing</span>
+            <span class="prime-rap__chew-card-con">&#10007; Blockage risk from chunks</span>
+            <span class="prime-rap__chew-card-con">&#10007; Salmonella contamination history</span>
+          </div>
+        </div>
+
+        <div class="prime-rap__chew-card">
+          <div class="prime-rap__chew-card-header">
+            <p class="prime-rap__chew-card-name">Rubber Toys</p>
+            <span class="prime-rap__chew-card-badge prime-rap__chew-card-badge--caution">Enrichment only</span>
+          </div>
+          <p>Durable rubber toys (Kong-style) are excellent enrichment tools, especially stuffed with food. They are not chews — they are toys. Use them alongside a real chew, not instead of one.</p>
+          <div class="prime-rap__chew-card-pros-cons">
+            <span class="prime-rap__chew-card-pro">&#10003; Safe if intact</span>
+            <span class="prime-rap__chew-card-pro">&#10003; Great for stuffing</span>
+            <span class="prime-rap__chew-card-con">&#10007; Not a chew — no dental benefit</span>
+            <span class="prime-rap__chew-card-con">&#10007; Replace when damaged</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="prime-rap__faq">
+      <h2>Frequently asked questions</h2>
+
+      <div class="prime-rap__faq-item">
+        <p class="prime-rap__faq-q">Are yak chews safe for puppies?</p>
+        <p class="prime-rap__faq-a">Yes, with supervision. Puppies under 6 months should use the Small size regardless of weight, as their teeth are still developing. Always supervise and remove the chew when it gets small enough to swallow whole.</p>
+      </div>
+
+      <div class="prime-rap__faq-item">
+        <p class="prime-rap__faq-q">My dog has a dairy sensitivity — can they have yak chews?</p>
+        <p class="prime-rap__faq-a">Yak chews are made from yak and cow milk, so they are not suitable for dogs with confirmed dairy allergies. If your dog has a mild sensitivity, the low lactose content (most is removed during processing) means many sensitive dogs tolerate them fine — but check with your vet first.</p>
+      </div>
+
+      <div class="prime-rap__faq-item">
+        <p class="prime-rap__faq-q">How do yak chews compare to bully sticks?</p>
+        <p class="prime-rap__faq-a">Both are digestible single-ingredient chews. Yak chews last longer for most dogs and have no odor. Bully sticks are higher in protein but also higher in calories and have a strong smell. For most dog owners, yak chews are the better daily chew — bully sticks work well as an occasional high-value reward.</p>
+      </div>
+
+      <div class="prime-rap__faq-item">
+        <p class="prime-rap__faq-q">What is the puff trick?</p>
+        <p class="prime-rap__faq-a">When your dog chews the yak chew down to a 1-inch nub, microwave it for 45&#8211;60 seconds. It puffs up into a crunchy, airy treat. This extends the value of every chew and gives your dog a satisfying finish to their session.</p>
+      </div>
+
+      <div class="prime-rap__faq-item">
+        <p class="prime-rap__faq-q">Are antlers really dangerous?</p>
+        <p class="prime-rap__faq-a">Antlers are one of the most common causes of slab fractures (broken teeth) in dogs. Veterinary dentists consistently warn against them. The press test rule applies: if you press your thumbnail against a chew and it does not give at all, it is too hard for your dog&#39;s teeth.</p>
+      </div>
+    </div>
+
+    <!-- Internal links -->
+    <div class="prime-rap__section" style="margin-top: 48px;">
+      <p class="prime-rap__section-label">Continue Reading</p>
+      <h2>Related guides</h2>
+      <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
+        <li><a href="/blogs/dog-behavior/how-long-do-yak-chews-last" style="color: #92400e; font-weight: 600; font-size: 15px;">&#8594; How long do yak chews last for my dog?</a></li>
+        <li><a href="/pages/how-long-will-this-last-for-my-dog" style="color: #92400e; font-weight: 600; font-size: 15px;">&#8594; Use our chew duration estimator</a></li>
+        <li><a href="/blogs/dog-behavior/aggressive-chewer-yak-chews" style="color: #92400e; font-weight: 600; font-size: 15px;">&#8594; Best yak chews for aggressive chewers</a></li>
+        <li><a href="/pages/my-dog" style="color: #92400e; font-weight: 600; font-size: 15px;">&#8594; Build your dog&#39;s chew profile</a></li>
+      </ul>
+    </div>
+
+    <!-- Author bio -->
+    {%- render 'prime-author-bio', author: 'founder' -%}
+
+    <!-- CTA -->
+    <div class="prime-rap__cta">
+      <h2>{{ section.settings.bottom_cta_heading }}</h2>
+      <p>{{ section.settings.bottom_cta_sub }}</p>
+      <a href="{{ section.settings.bottom_cta_url }}" class="prime-rap__cta-btn">
+        {{ section.settings.bottom_cta_label }} &#8594;
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Are yak chews safe for puppies?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, with supervision. Puppies under 6 months should use the Small size regardless of weight, as their teeth are still developing. Always supervise and remove the chew when it gets small enough to swallow whole."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "My dog has a dairy sensitivity — can they have yak chews?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yak chews are made from yak and cow milk, so they are not suitable for dogs with confirmed dairy allergies. Many dogs with mild sensitivities tolerate them fine due to low lactose content, but check with your vet first."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do yak chews compare to bully sticks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Both are digestible single-ingredient chews. Yak chews last longer for most dogs and have no odor. Bully sticks are higher in protein but also higher in calories and have a strong smell. For most dog owners, yak chews are the better daily chew."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are antlers really dangerous for dogs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Antlers are one of the most common causes of slab fractures (broken teeth) in dogs. Veterinary dentists consistently warn against them. The press test rule applies: if you press your thumbnail against a chew and it does not give at all, it is too hard for your dog's teeth."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the puff trick for yak chews?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "When your dog chews the yak chew down to a 1-inch nub, microwave it for 45-60 seconds. It puffs up into a crunchy, airy treat. This extends the value of every chew and gives your dog a satisfying finish to their session."
+      }
+    }
+  ]
+}
+</script>
+
+{% schema %}
+{
+  "name": "Prime Rawhide Alternatives",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Hero heading",
+      "default": "The Complete Guide to Rawhide Alternatives"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Hero subheading",
+      "default": "Honest comparisons of yak chews, bully sticks, antlers, nylon, and rubber — so you can choose the safest option for your dog."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Hero CTA label",
+      "default": "Shop Himalayan Yak Chews"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Hero CTA URL",
+      "default": "/products/himalayan-yak-chews-for-dogs"
+    },
+    {
+      "type": "text",
+      "id": "bottom_cta_heading",
+      "label": "Bottom CTA heading",
+      "default": "Ready to make the switch?"
+    },
+    {
+      "type": "textarea",
+      "id": "bottom_cta_sub",
+      "label": "Bottom CTA subtext",
+      "default": "Join 50,000+ dog owners who switched from rawhide to Himalayan yak chews. Single-ingredient. Rawhide-free. Made in Nepal."
+    },
+    {
+      "type": "text",
+      "id": "bottom_cta_label",
+      "label": "Bottom CTA label",
+      "default": "Shop Yak Chews"
+    },
+    {
+      "type": "url",
+      "id": "bottom_cta_url",
+      "label": "Bottom CTA URL",
+      "default": "/products/himalayan-yak-chews-for-dogs"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Prime Rawhide Alternatives"
+    }
+  ]
+}
+{% endschema %}

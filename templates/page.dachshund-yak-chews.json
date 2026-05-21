@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "breed_landing": {
+      "type": "prime-breed-landing",
+      "settings": {
+        "eyebrow": "Dachshund Yak Chew Guide",
+        "heading": "The right yak chew for your Dachshund.",
+        "subheading": "Dachshunds are surprisingly persistent chewers for their size. Their long bodies and small frames need a chew sized for safety — not too large to handle, not too small to swallow.",
+        "duration": "60–180 min",
+        "estimate_note": "Standard Dachshunds (16–32 lbs) do well with Small. Miniature Dachshunds (under 11 lbs) need the smallest available size with close supervision.",
+        "primary_label": "Shop Small chews",
+        "primary_link": "/products/himalayan-yak-chews-for-dogs",
+        "card_1_title": "Small is the right size",
+        "card_1_text": "Standard Dachshunds (16–32 lbs) should use Small. Miniature Dachshunds (under 11 lbs) need close supervision with the smallest size. Their small mouths mean chews last a long time.",
+        "card_2_title": "Perfect for back-pain management",
+        "card_2_text": "Dachshunds are prone to IVDD (back problems). A yak chew keeps them lying down and calm — much better than running, jumping, or playing tug which stresses their spine.",
+        "card_3_title": "Long sessions, small dog",
+        "card_3_text": "Dachshunds are methodical gnawers with small jaws. A Small yak chew can last 1–3 hours across multiple sessions. This makes them excellent value for small breed owners."
+      }
+    }
+  },
+  "order": ["breed_landing"]
+}

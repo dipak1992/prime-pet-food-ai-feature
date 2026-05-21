@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "breed_landing": {
+      "type": "prime-breed-landing",
+      "settings": {
+        "eyebrow": "Beagle Yak Chew Guide",
+        "heading": "The right yak chew for your Beagle.",
+        "subheading": "Beagles are food-motivated, persistent chewers. They need a chew that keeps them engaged without being too large for their compact frame.",
+        "duration": "60–150 min",
+        "estimate_note": "Beagles (20–30 lbs) are methodical gnawers. Most do well with a Small or Medium. Their food drive means they stay engaged longer than many breeds.",
+        "primary_label": "Shop Small & Medium chews",
+        "primary_link": "/products/himalayan-yak-chews-for-dogs",
+        "card_1_title": "Small or Medium for Beagles",
+        "card_1_text": "Most Beagles weigh 20–30 lbs. A Small works for lighter Beagles; a Medium is better for larger ones. Their persistent gnawing style means chews last longer than you might expect.",
+        "card_2_title": "Food motivation is your advantage",
+        "card_2_text": "Beagles are scent hounds with strong food drive. A yak chew satisfies their need to work for food — it is enrichment and reward in one. Great for redirecting counter-surfing behavior.",
+        "card_3_title": "The puff trick works perfectly",
+        "card_3_text": "When the chew gets to a 1-inch nub, microwave it for 45–60 seconds. Beagles go wild for the puffed treat — it is like a bonus reward that extends every chew session."
+      }
+    }
+  },
+  "order": ["breed_landing"]
+}

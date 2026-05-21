@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "breed_landing": {
+      "type": "prime-breed-landing",
+      "settings": {
+        "eyebrow": "German Shepherd Yak Chew Guide",
+        "heading": "The right yak chew for your German Shepherd.",
+        "subheading": "German Shepherds are powerful, intelligent chewers. They need a dense, long-lasting chew that matches their jaw strength without risking tooth damage.",
+        "duration": "30–75 min",
+        "estimate_note": "German Shepherds are strong chewers. Most need a Large or XL. Duration depends on individual jaw strength and chew style.",
+        "primary_label": "Shop Large & XL chews",
+        "primary_link": "/products/himalayan-yak-chews-for-dogs",
+        "card_1_title": "Size up for GSDs",
+        "card_1_text": "Most German Shepherds (50–90 lbs) need a Large or XL yak chew. Their strong jaws can work through a Medium too quickly. Always size up for safety.",
+        "card_2_title": "Mental enrichment matters",
+        "card_2_text": "German Shepherds are working dogs — they need mental stimulation. A yak chew during crate time or alone time gives them a focused task that reduces anxiety and destructive behavior.",
+        "card_3_title": "Watch for power-chewing",
+        "card_3_text": "If your GSD finishes a Large in under 30 minutes, move to XL. Supervise the first few sessions to gauge their chew intensity and adjust sizing accordingly."
+      }
+    }
+  },
+  "order": ["breed_landing"]
+}

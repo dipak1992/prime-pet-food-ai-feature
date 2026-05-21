@@ -1,0 +1,94 @@
+{
+  "sections": {
+    "featured_image": {
+      "type": "main-article",
+      "blocks": {
+        "featured_image": {
+          "type": "featured_image",
+          "settings": {
+            "image_ratio": "landscape_wide",
+            "enlarge_image": false
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "title_style": "",
+            "title_size": "h1",
+            "title_text_transform": "",
+            "title_weight": "bold"
+          }
+        },
+        "meta": {
+          "type": "meta",
+          "settings": {
+            "blog_show_date": true,
+            "blog_show_author": true,
+            "show_reading_estimate": true,
+            "show_socials": true,
+            "separator": "·",
+            "meta_size": "caption"
+          }
+        },
+        "content": {
+          "type": "content",
+          "settings": {
+            "enlarge_images": false,
+            "enlarge_first_letter": true,
+            "times_first_letter": false,
+            "image_captions": "italic"
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {}
+        }
+      },
+      "block_order": ["featured_image", "title", "meta", "content", "share"],
+      "settings": {
+        "color_scheme": "background-1",
+        "top_padding": "pt-10",
+        "bottom_padding": "pb-10"
+      }
+    },
+    "prime_founder_blog": {
+      "type": "prime-founder-blog-post",
+      "blocks": {
+        "link_1": {
+          "type": "related_link",
+          "settings": {
+            "link_label": "How long do yak chews last for aggressive chewers?",
+            "link_url": "/blogs/dog-behavior/how-long-do-yak-chews-last"
+          }
+        },
+        "link_2": {
+          "type": "related_link",
+          "settings": {
+            "link_label": "Why yak chews are the safest rawhide alternative",
+            "link_url": "/blogs/dog-behavior/best-rawhide-alternative"
+          }
+        },
+        "link_3": {
+          "type": "related_link",
+          "settings": {
+            "link_label": "Size guide: which chew for your dog's weight?",
+            "link_url": "/pages/how-long-will-this-last-for-my-dog"
+          }
+        }
+      },
+      "block_order": ["link_1", "link_2", "link_3"],
+      "settings": {
+        "show_byline": true,
+        "byline_name": "Dipak Regmi",
+        "byline_role": "Founder & CEO, Prime Pet Food",
+        "key_insight": "An aggressive chewer doesn't need a tougher chew — they need the right chew. Yak cheese is dense enough to last, but it won't splinter or shatter the way antlers and bones can.",
+        "article_body": "<p>I get this question more than any other: <em>\"My dog destroys every chew in minutes — what actually works?\"</em></p><p>I started Prime because I had the same problem. My dog Koda would go through a rawhide in under ten minutes, then spend the next hour trying to eat the carpet. I needed something that lasted, was safe, and didn't require me to Google \"is this ingredient toxic\" at 11pm.</p><h2>What makes a chew \"aggressive chewer approved\"</h2><p>There are three things I look for:</p><ul><li><strong>Density without brittleness.</strong> Antlers and nylon chews are hard enough to crack teeth. Yak cheese is firm but has just enough give — it wears down gradually rather than shattering.</li><li><strong>Single ingredient.</strong> The more ingredients, the more chances for digestive upset. Our chews are yak milk, cow milk, salt, and lime juice. That's it.</li><li><strong>Size up, always.</strong> If your dog is between sizes, go larger. An aggressive chewer on a too-small chew is a choking risk.</li></ul><h2>The size question everyone gets wrong</h2><p>Most people size by breed. That's a mistake. Size by weight <em>and</em> chewing style. A 40lb Labrador who power-chews needs a Large. A 40lb Basset Hound who gnaws lazily is fine on a Medium.</p><p>Use our <a href=\"/pages/how-long-will-this-last-for-my-dog\">chew duration estimator</a> — it accounts for both weight and chew intensity.</p><h2>The puff trick extends every session</h2><p>When your dog chews the yak chew down to a small nub (about 1 inch), don't throw it away. Microwave it for 45–60 seconds and it puffs up into a crunchy treat. Aggressive chewers love this phase — it's a reward for finishing the main chew.</p><p>This is something I discovered by accident. Koda had chewed a nub down and I microwaved it on a whim. He went absolutely wild for it. Now it's one of our most-shared tips.</p><h2>Supervision is non-negotiable</h2><p>I know \"supervise your dog\" sounds like legal boilerplate. It's not. With aggressive chewers specifically, you need to check the chew every 15–20 minutes and remove it when it gets small enough to swallow whole. No chew is safe unsupervised — not ours, not anyone's.</p><p>Set a timer. It takes 10 seconds to check.</p>"
+      }
+    },
+    "prime_blog_newsletter": {
+      "type": "prime-blog-newsletter",
+      "settings": {}
+    }
+  },
+  "order": ["featured_image", "prime_founder_blog", "prime_blog_newsletter"]
+}

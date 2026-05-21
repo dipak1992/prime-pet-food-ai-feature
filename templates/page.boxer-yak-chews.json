@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "breed_landing": {
+      "type": "prime-breed-landing",
+      "settings": {
+        "eyebrow": "Boxer Yak Chew Guide",
+        "heading": "The right yak chew for your Boxer.",
+        "subheading": "Boxers are playful, energetic chewers with strong jaws and a tendency toward boredom-driven destruction. A yak chew channels that energy into productive calm time.",
+        "duration": "30–75 min",
+        "estimate_note": "Boxers (50–80 lbs) are moderate-to-strong chewers. Most need a Large. Their playful nature means they sometimes toss the chew around before settling into a gnaw session.",
+        "primary_label": "Shop Large chews",
+        "primary_link": "/products/himalayan-yak-chews-for-dogs",
+        "card_1_title": "Large for most Boxers",
+        "card_1_text": "Most Boxers weigh 50–80 lbs. A Large yak chew is the right starting point. If your Boxer is over 75 lbs or chews aggressively, consider XL for longer sessions.",
+        "card_2_title": "Combat boredom destruction",
+        "card_2_text": "Boxers are notorious for destroying things when bored. A yak chew before you leave the house gives them a focused task. Pair with a calm cue word for best results.",
+        "card_3_title": "Safe for their unique jaw structure",
+        "card_3_text": "Boxers have a brachycephalic jaw (undershot bite). Yak chews work well because dogs grip them with side teeth. The rectangular shape is easier for Boxers to hold than round toys."
+      }
+    }
+  },
+  "order": ["breed_landing"]
+}

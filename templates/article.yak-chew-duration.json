@@ -1,0 +1,58 @@
+{
+  "sections": {
+    "featured_image": {
+      "type": "main-article",
+      "blocks": {
+        "featured_image": {
+          "type": "featured_image",
+          "settings": { "image_ratio": "landscape_wide", "enlarge_image": false }
+        },
+        "title": {
+          "type": "title",
+          "settings": { "title_style": "", "title_size": "h1", "title_text_transform": "", "title_weight": "bold" }
+        },
+        "meta": {
+          "type": "meta",
+          "settings": { "blog_show_date": true, "blog_show_author": true, "show_reading_estimate": true, "show_socials": true, "separator": "·", "meta_size": "caption" }
+        },
+        "content": {
+          "type": "content",
+          "settings": { "enlarge_images": false, "enlarge_first_letter": true, "times_first_letter": false, "image_captions": "italic" }
+        },
+        "share": { "type": "share", "settings": {} }
+      },
+      "block_order": ["featured_image", "title", "meta", "content", "share"],
+      "settings": { "color_scheme": "background-1", "top_padding": "pt-10", "bottom_padding": "pb-10" }
+    },
+    "prime_founder_blog": {
+      "type": "prime-founder-blog-post",
+      "blocks": {
+        "link_1": {
+          "type": "related_link",
+          "settings": { "link_label": "Use our chew duration estimator", "link_url": "/pages/how-long-will-this-last-for-my-dog" }
+        },
+        "link_2": {
+          "type": "related_link",
+          "settings": { "link_label": "Build your dog's chew profile", "link_url": "/pages/my-dog" }
+        },
+        "link_3": {
+          "type": "related_link",
+          "settings": { "link_label": "Shop Himalayan yak chews", "link_url": "/products/himalayan-yak-chews-for-dogs" }
+        }
+      },
+      "block_order": ["link_1", "link_2", "link_3"],
+      "settings": {
+        "show_byline": true,
+        "byline_name": "Dipak Regmi",
+        "byline_role": "Founder & CEO, Prime Pet Food",
+        "key_insight": "The question isn't just 'how long does a yak chew last' — it's 'how long does it last for MY dog.' Weight, jaw strength, chew style, and age all matter. Here's how to actually calculate it.",
+        "article_body": "<p>\"How long will this last?\" is the first question almost every customer asks. It's also the hardest to answer honestly, because the real answer is: it depends.</p><p>I've seen a 30lb dog finish a Large in 45 minutes. I've seen a 70lb dog work a Medium for three days. The difference isn't just size — it's chew style, jaw strength, and how the dog approaches the chew.</p><h2>The four factors that determine chew duration</h2><h3>1. Weight</h3><p>This is the starting point. Our size guide is built around weight ranges: Small (under 25lb), Medium (25–50lb), Large (50–85lb), XL (85lb+). But weight is just the baseline.</p><h3>2. Chew style</h3><p>Power-chewers — dogs who bite down hard and fast — go through chews 2–3x faster than methodical gnawers. If your dog attacks a chew like it owes them money, size up.</p><h3>3. Age</h3><p>Puppies (under 1 year) have softer teeth and tend to chew more gently. Senior dogs (7+) often chew more slowly. Both groups typically get longer sessions from the same size chew.</p><h3>4. Session length</h3><p>We recommend 20–30 minute supervised sessions, then putting the chew away. This extends the total lifespan of the chew significantly and prevents overconsumption.</p><h2>Real duration data from our customers</h2><p>Based on thousands of logged sessions in our My Dog dashboard:</p><ul><li>Medium chew, 35lb methodical chewer: 3–5 sessions (6–10 hours total)</li><li>Large chew, 60lb power-chewer: 2–3 sessions (40–90 minutes total)</li><li>XL chew, 90lb+ dog: 3–6 sessions (2–5 hours total)</li></ul><p>These are medians — your dog will vary. That's why we built the <a href=\"/pages/my-dog\">My Dog dashboard</a>: log your first session and we'll predict your reorder timing.</p><h2>The puff trick adds one more session</h2><p>When the chew gets down to a 1-inch nub, microwave it for 45–60 seconds. It puffs up into a crunchy, airy treat. Most dogs treat this as a separate reward — it's not just the end of the chew, it's a bonus.</p><p>Don't skip this step. It's one of the things that makes yak chews genuinely better value than they look at first glance.</p>"
+      }
+    },
+    "prime_blog_newsletter": {
+      "type": "prime-blog-newsletter",
+      "settings": {}
+    }
+  },
+  "order": ["featured_image", "prime_founder_blog", "prime_blog_newsletter"]
+}

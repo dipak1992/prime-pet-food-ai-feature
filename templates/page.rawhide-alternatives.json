@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "rawhide_alternatives": {
+      "type": "prime-rawhide-alternatives",
+      "settings": {
+        "heading": "The Complete Guide to Rawhide Alternatives",
+        "subheading": "Honest comparisons of yak chews, bully sticks, antlers, nylon, and rubber — so you can choose the safest option for your dog.",
+        "cta_label": "Shop Himalayan Yak Chews",
+        "cta_url": "/products/himalayan-yak-chews-for-dogs",
+        "bottom_cta_heading": "Ready to make the switch?",
+        "bottom_cta_sub": "Join 50,000+ dog owners who switched from rawhide to Himalayan yak chews. Single-ingredient. Rawhide-free. Made in Nepal.",
+        "bottom_cta_label": "Shop Yak Chews",
+        "bottom_cta_url": "/products/himalayan-yak-chews-for-dogs"
+      }
+    }
+  },
+  "order": ["rawhide_alternatives"]
+}

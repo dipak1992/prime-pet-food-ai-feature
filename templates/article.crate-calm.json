@@ -1,0 +1,58 @@
+{
+  "sections": {
+    "featured_image": {
+      "type": "main-article",
+      "blocks": {
+        "featured_image": {
+          "type": "featured_image",
+          "settings": { "image_ratio": "landscape_wide", "enlarge_image": false }
+        },
+        "title": {
+          "type": "title",
+          "settings": { "title_style": "", "title_size": "h1", "title_text_transform": "", "title_weight": "bold" }
+        },
+        "meta": {
+          "type": "meta",
+          "settings": { "blog_show_date": true, "blog_show_author": true, "show_reading_estimate": true, "show_socials": true, "separator": "·", "meta_size": "caption" }
+        },
+        "content": {
+          "type": "content",
+          "settings": { "enlarge_images": false, "enlarge_first_letter": true, "times_first_letter": false, "image_captions": "italic" }
+        },
+        "share": { "type": "share", "settings": {} }
+      },
+      "block_order": ["featured_image", "title", "meta", "content", "share"],
+      "settings": { "color_scheme": "background-1", "top_padding": "pt-10", "bottom_padding": "pb-10" }
+    },
+    "prime_founder_blog": {
+      "type": "prime-founder-blog-post",
+      "blocks": {
+        "link_1": {
+          "type": "related_link",
+          "settings": { "link_label": "Crate training with yak chews: the full guide", "link_url": "/blogs/dog-behavior/crate-training-calm" }
+        },
+        "link_2": {
+          "type": "related_link",
+          "settings": { "link_label": "Build your dog's calm-time routine", "link_url": "/pages/my-dog" }
+        },
+        "link_3": {
+          "type": "related_link",
+          "settings": { "link_label": "Shop Himalayan yak chews", "link_url": "/products/himalayan-yak-chews-for-dogs" }
+        }
+      },
+      "block_order": ["link_1", "link_2", "link_3"],
+      "settings": {
+        "show_byline": true,
+        "byline_name": "Dipak Regmi",
+        "byline_role": "Founder & CEO, Prime Pet Food",
+        "key_insight": "A yak chew isn't just something to keep your dog busy. Used consistently, it becomes a ritual — a signal that tells your dog: this is calm time. That signal is worth more than the chew itself.",
+        "article_body": "<p>I didn't set out to build a calm-time product. I set out to build a better chew. But the feedback we kept getting from customers changed how I think about what we make.</p><p>\"My dog used to bark for 20 minutes when I left. Now I give him a yak chew and he just... settles.\"</p><p>\"She used to be anxious during thunderstorms. The chew gives her something to focus on.\"</p><p>\"My vet told me to find something to help with his separation anxiety. This is the only thing that's worked.\"</p><h2>Why chewing reduces anxiety</h2><p>Chewing triggers the release of endorphins in dogs. It's a self-soothing behavior — the same reason anxious dogs chew furniture, shoes, and anything else they can find. Giving them an appropriate outlet doesn't just protect your belongings. It actively reduces their stress response.</p><p>The key is consistency. A chew given randomly doesn't build a ritual. A chew given at the same time, in the same place, during the same situations — that becomes a signal. Your dog learns: this thing means calm time is starting.</p><h2>Building the routine</h2><p>Here's the protocol I recommend:</p><ol><li><strong>Pick a trigger.</strong> Crate time, alone time, thunderstorms, guests arriving — whatever your dog struggles with.</li><li><strong>Give the chew before the trigger hits.</strong> Don't wait until your dog is already anxious. Give the chew 2–3 minutes before you leave, before the storm starts, before guests walk in.</li><li><strong>Be consistent for 2 weeks.</strong> The ritual only works if it's predictable. Same chew, same timing, same location.</li><li><strong>Pair with a calm cue.</strong> A simple word like \"settle\" or \"easy\" said in a low voice as you hand over the chew helps reinforce the association.</li></ol><h2>What size for calm-time sessions</h2><p>For calm-time use, I actually recommend sizing down slightly from what you'd give for a full enrichment session. You want the chew to last the duration of the stressful event — not be finished in 10 minutes. A Medium for a 50lb dog, rather than a Large, gives you a longer session.</p><p>Use our <a href=\"/pages/how-long-will-this-last-for-my-dog\">duration estimator</a> to find the right size for your dog's specific calm-time window.</p>"
+      }
+    },
+    "prime_blog_newsletter": {
+      "type": "prime-blog-newsletter",
+      "settings": {}
+    }
+  },
+  "order": ["featured_image", "prime_founder_blog", "prime_blog_newsletter"]
+}

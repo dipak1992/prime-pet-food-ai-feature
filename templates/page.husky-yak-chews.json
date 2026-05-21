@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "breed_landing": {
+      "type": "prime-breed-landing",
+      "settings": {
+        "eyebrow": "Husky Yak Chew Guide",
+        "heading": "The right yak chew for your Husky.",
+        "subheading": "Huskies are high-energy, strong-jawed chewers who destroy most toys in minutes. They need a dense, durable chew that channels their energy into calm-time enrichment.",
+        "duration": "30–90 min",
+        "estimate_note": "Huskies (35–60 lbs) are strong chewers. Most need a Large. If your Husky finishes a Large in under 30 minutes, size up to XL.",
+        "primary_label": "Shop Large & XL chews",
+        "primary_link": "/products/himalayan-yak-chews-for-dogs",
+        "card_1_title": "Large is the starting point",
+        "card_1_text": "Most Huskies weigh 35–60 lbs but chew like much larger dogs. Start with a Large and observe. If they finish it in one session, move to XL for longer enrichment.",
+        "card_2_title": "Channel that Husky energy",
+        "card_2_text": "Huskies are bred to run all day. When they cannot run, they chew — furniture, shoes, drywall. A yak chew gives them an appropriate outlet that satisfies their need to work.",
+        "card_3_title": "Pair with exercise for best results",
+        "card_3_text": "Give the yak chew after a walk or play session. A tired Husky plus a yak chew equals 30–90 minutes of calm. This combination is the most effective way to prevent destructive behavior."
+      }
+    }
+  },
+  "order": ["breed_landing"]
+}

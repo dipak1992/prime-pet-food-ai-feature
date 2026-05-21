@@ -1,0 +1,58 @@
+{
+  "sections": {
+    "featured_image": {
+      "type": "main-article",
+      "blocks": {
+        "featured_image": {
+          "type": "featured_image",
+          "settings": { "image_ratio": "landscape_wide", "enlarge_image": false }
+        },
+        "title": {
+          "type": "title",
+          "settings": { "title_style": "", "title_size": "h1", "title_text_transform": "", "title_weight": "bold" }
+        },
+        "meta": {
+          "type": "meta",
+          "settings": { "blog_show_date": true, "blog_show_author": true, "show_reading_estimate": true, "show_socials": true, "separator": "·", "meta_size": "caption" }
+        },
+        "content": {
+          "type": "content",
+          "settings": { "enlarge_images": false, "enlarge_first_letter": true, "times_first_letter": false, "image_captions": "italic" }
+        },
+        "share": { "type": "share", "settings": {} }
+      },
+      "block_order": ["featured_image", "title", "meta", "content", "share"],
+      "settings": { "color_scheme": "background-1", "top_padding": "pt-10", "bottom_padding": "pb-10" }
+    },
+    "prime_founder_blog": {
+      "type": "prime-founder-blog-post",
+      "blocks": {
+        "link_1": {
+          "type": "related_link",
+          "settings": { "link_label": "Yak chew size guide by breed and weight", "link_url": "/pages/how-long-will-this-last-for-my-dog" }
+        },
+        "link_2": {
+          "type": "related_link",
+          "settings": { "link_label": "How we source from Nepal", "link_url": "/pages/about-us" }
+        },
+        "link_3": {
+          "type": "related_link",
+          "settings": { "link_label": "Shop Himalayan yak chews", "link_url": "/products/himalayan-yak-chews-for-dogs" }
+        }
+      },
+      "block_order": ["link_1", "link_2", "link_3"],
+      "settings": {
+        "show_byline": true,
+        "byline_name": "Dipak Regmi",
+        "byline_role": "Founder & CEO, Prime Pet Food",
+        "key_insight": "I've been to the farms in Nepal. I've met the herders. I've watched the chews being made. When I say 'single-ingredient,' I mean it — because I've seen every step of the process myself.",
+        "article_body": "<p>Most pet food founders haven't been to the source. They've been to a trade show, maybe a distributor warehouse. I've been to the Himalayas.</p><p>I grew up in Nepal. My family knew yak herders. I watched this process as a kid — the milk being collected, the curd being pressed, the chews being dried in mountain air. When I moved to the US and started Prime, I went back to those same regions to build our supply chain.</p><h2>Where the yaks live</h2><p>Our yaks graze at 10,000–14,000 feet in the Himalayan highlands of Nepal. At that altitude, there are no pesticides, no industrial farming, no feedlots. The yaks eat mountain grass. That's it.</p><p>The herders we work with are small family operations — most have fewer than 50 animals. We pay above-market rates and have long-term relationships with the same families. This isn't marketing language. It's how we ensure consistent quality.</p><h2>The four-ingredient process</h2><p>Yak milk and cow milk are mixed, heated, and acidified with lime juice. Salt is added. The curd is pressed into blocks and dried — traditionally in the mountain air, which can take weeks. The result is a dense, hard chew that's fully digestible.</p><p>That's the entire process. No chemicals. No preservatives. No artificial hardening agents.</p><h2>Why \"single-ingredient\" matters</h2><p>When a chew has 15 ingredients, you can't trace a reaction. If your dog gets an upset stomach, you don't know what caused it. With four ingredients — yak milk, cow milk, salt, lime juice — you know exactly what your dog is eating.</p><p>For dogs with sensitivities, this matters enormously. Our chews are grain-free, gluten-free, and free from the common allergens that show up in processed chews.</p><h2>The certification question</h2><p>We get asked about certifications a lot. Our chews are USDA-compliant for import. The farms we work with follow Good Agricultural Practices. We test every batch for heavy metals and pathogens before it ships.</p><p>I'm not going to claim certifications we don't have. What I can tell you is that I've been to the source, I know the people making these chews, and I wouldn't sell something I wouldn't give to my own dog.</p>"
+      }
+    },
+    "prime_blog_newsletter": {
+      "type": "prime-blog-newsletter",
+      "settings": {}
+    }
+  },
+  "order": ["featured_image", "prime_founder_blog", "prime_blog_newsletter"]
+}

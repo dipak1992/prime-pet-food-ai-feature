@@ -239,6 +239,27 @@
             {% render 'seo-topic-links' %}
           </div>
 
+          {%- comment -%}
+            Author bio — maps article.author to the correct bio persona.
+            Dipak Regmi → founder, Dr. Sarah Chen → vet, Marcus Webb → trainer,
+            anything else → team.
+          {%- endcomment -%}
+          {%- liquid
+            assign article_author_lower = article.author | downcase
+            if article_author_lower contains 'dipak'
+              assign prime_bio_author = 'founder'
+            elsif article_author_lower contains 'chen' or article_author_lower contains 'dvm' or article_author_lower contains 'dr.'
+              assign prime_bio_author = 'vet'
+            elsif article_author_lower contains 'webb' or article_author_lower contains 'cpdt'
+              assign prime_bio_author = 'trainer'
+            else
+              assign prime_bio_author = 'team'
+            endif
+          -%}
+          <div class="page-width page-width--narrow article-template__block">
+            {%- render 'prime-author-bio', author: prime_bio_author -%}
+          </div>
+
         {%- when 'share' -%}
           <div class="article-template__social-sharing page-width page-width--narrow article-template__block{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
             {%- render 'share-button', share_id: '-bottom', block: block, share_link: article.url, share_title: article.title, share_image: article.image -%}

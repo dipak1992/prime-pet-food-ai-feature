@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "breed_landing": {
+      "type": "prime-breed-landing",
+      "settings": {
+        "eyebrow": "Rottweiler Yak Chew Guide",
+        "heading": "The right yak chew for your Rottweiler.",
+        "subheading": "Rottweilers have some of the strongest jaws of any breed. They need an XL chew that can withstand serious pressure without splintering or shattering.",
+        "duration": "25–60 min",
+        "estimate_note": "Rottweilers (80–135 lbs) are power-chewers. Start with XL. Duration is shorter than lighter breeds due to jaw strength — but the chew is still safer than any alternative.",
+        "primary_label": "Shop XL chews",
+        "primary_link": "/products/himalayan-yak-chews-for-dogs",
+        "card_1_title": "XL is non-negotiable",
+        "card_1_text": "Rottweilers weigh 80–135 lbs with extremely strong jaws. Always use XL. A Large is a choking hazard for this breed — they can break it into swallowable pieces too quickly.",
+        "card_2_title": "Supervise every session",
+        "card_2_text": "With power-chewers this strong, supervision is critical. Check the chew every 10–15 minutes. Remove it when it gets small enough to fit entirely in their mouth.",
+        "card_3_title": "Better than antlers or bones",
+        "card_3_text": "Rottweiler owners often try antlers or marrow bones. Both can crack teeth. Yak chews are dense enough to last but have just enough give to prevent tooth fractures — the safer choice for strong jaws."
+      }
+    }
+  },
+  "order": ["breed_landing"]
+}

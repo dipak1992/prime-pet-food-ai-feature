@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "breed_landing": {
+      "type": "prime-breed-landing",
+      "settings": {
+        "eyebrow": "French Bulldog Yak Chew Guide",
+        "heading": "The right yak chew for your French Bulldog.",
+        "subheading": "Frenchies are enthusiastic chewers with compact jaws. They need a chew sized for their strength — not too big, not too small.",
+        "duration": "45–120 min",
+        "estimate_note": "French Bulldogs (20–28 lbs) typically do well with a Small or Medium. Their shorter muzzle means they gnaw rather than power-chew.",
+        "primary_label": "Shop Small & Medium chews",
+        "primary_link": "/products/himalayan-yak-chews-for-dogs",
+        "card_1_title": "Small or Medium for Frenchies",
+        "card_1_text": "Most French Bulldogs weigh 20–28 lbs. A Small works for lighter Frenchies; a Medium is better for stockier ones or those who chew aggressively.",
+        "card_2_title": "Brachycephalic-friendly",
+        "card_2_text": "Yak chews work well for flat-faced breeds because dogs can grip them with their side teeth. Unlike round toys, the rectangular shape gives Frenchies a comfortable hold.",
+        "card_3_title": "Great for calm-time routines",
+        "card_3_text": "French Bulldogs are prone to separation anxiety. A yak chew given 2–3 minutes before you leave builds a calm-time ritual that reduces stress."
+      }
+    }
+  },
+  "order": ["breed_landing"]
+}

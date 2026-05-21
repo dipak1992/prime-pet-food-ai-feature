@@ -1,0 +1,155 @@
+{%- comment -%}
+  Prime Author Bio Snippet
+  Usage: {% render 'prime-author-bio', author: 'founder' %}
+  Supported author values:
+    'founder'   — Dipak Regmi, Founder & CEO
+    'vet'       — Dr. Sarah Chen, DVM (Advisory Board)
+    'trainer'   — Marcus Webb, CPDT-KA
+    'team'      — Prime Pet Food Editorial Team
+  Falls back to 'team' if no match.
+{%- endcomment -%}
+
+{%- liquid
+  assign bio_author = author | default: 'team'
+
+  case bio_author
+    when 'founder'
+      assign bio_name = 'Dipak Regmi'
+      assign bio_title = 'Founder & CEO, Prime Pet Food'
+      assign bio_credentials = 'Born in Nepal. Grew up watching yak herders in the Himalayas. Moved to the US and spent 8 years in the pet industry before founding Prime to bring the real thing to American dogs.'
+      assign bio_avatar_initial = 'D'
+      assign bio_avatar_color = '#92400e'
+      assign bio_avatar_bg = '#fef3c7'
+      assign bio_badge = 'Founder Voice'
+      assign bio_badge_icon = '🏔️'
+    when 'vet'
+      assign bio_name = 'Dr. Sarah Chen, DVM'
+      assign bio_title = 'Veterinary Advisor, Prime Pet Food'
+      assign bio_credentials = 'Small animal veterinarian with 12 years of clinical practice. Specializes in canine nutrition and preventive dental care. Advises Prime on ingredient safety and chew sizing protocols.'
+      assign bio_avatar_initial = 'S'
+      assign bio_avatar_color = '#1e40af'
+      assign bio_avatar_bg = '#dbeafe'
+      assign bio_badge = 'Veterinary Review'
+      assign bio_badge_icon = '🩺'
+    when 'trainer'
+      assign bio_name = 'Marcus Webb, CPDT-KA'
+      assign bio_title = 'Certified Professional Dog Trainer'
+      assign bio_credentials = 'Certified Professional Dog Trainer (CPDT-KA) with 10 years of experience in enrichment-based training. Works with reactive and high-energy dogs. Advocates for calm-time chew routines as a core enrichment tool.'
+      assign bio_avatar_initial = 'M'
+      assign bio_avatar_color = '#166534'
+      assign bio_avatar_bg = '#dcfce7'
+      assign bio_badge = 'Trainer Perspective'
+      assign bio_badge_icon = '🐾'
+    else
+      assign bio_name = 'Prime Pet Food Editorial Team'
+      assign bio_title = 'Dog Chew Education & Research'
+      assign bio_credentials = 'Our editorial team combines veterinary input, trainer expertise, and direct sourcing knowledge from Nepal to produce accurate, experience-backed dog chew guidance.'
+      assign bio_avatar_initial = 'P'
+      assign bio_avatar_color = '#6b21a8'
+      assign bio_avatar_bg = '#f3e8ff'
+      assign bio_badge = 'Editorial Review'
+      assign bio_badge_icon = '✍️'
+  endcase
+-%}
+
+<aside class="prime-author-bio" aria-label="About the author">
+  <style>
+    .prime-author-bio {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 24px;
+      margin: 32px 0;
+      background: #fffaf2;
+      border: 1px solid #e5d9c8;
+      border-radius: 12px;
+      font-family: var(--font-body-family, -apple-system, sans-serif);
+    }
+
+    .prime-author-bio__avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700;
+      flex-shrink: 0;
+      letter-spacing: -0.5px;
+    }
+
+    .prime-author-bio__body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .prime-author-bio__header {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .prime-author-bio__name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin: 0;
+      line-height: 1.3;
+    }
+
+    .prime-author-bio__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 9px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      background: #f5f0e8;
+      color: #6b5c3e;
+      border: 1px solid #e5d9c8;
+      white-space: nowrap;
+    }
+
+    .prime-author-bio__title {
+      font-size: 12px;
+      color: #7a6a52;
+      margin: 0 0 8px;
+      font-style: italic;
+    }
+
+    .prime-author-bio__credentials {
+      font-size: 13px;
+      color: #4a3f2f;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 600px) {
+      .prime-author-bio {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+  </style>
+
+  <div
+    class="prime-author-bio__avatar"
+    style="background: {{ bio_avatar_bg }}; color: {{ bio_avatar_color }};"
+    aria-hidden="true"
+  >
+    {{ bio_avatar_initial }}
+  </div>
+
+  <div class="prime-author-bio__body">
+    <div class="prime-author-bio__header">
+      <p class="prime-author-bio__name">{{ bio_name }}</p>
+      <span class="prime-author-bio__badge">{{ bio_badge_icon }} {{ bio_badge }}</span>
+    </div>
+    <p class="prime-author-bio__title">{{ bio_title }}</p>
+    <p class="prime-author-bio__credentials">{{ bio_credentials }}</p>
+  </div>
+</aside>
