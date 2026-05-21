@@ -1,12 +1,14 @@
 {% liquid
   assign product = all_products['himalayan-yak-chews-for-dogs']
   assign hero_image = section.settings.hero_image | default: 'prime-calm-dog-yak-chew-hero.jpg' | asset_url
+  assign review_image_1 = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/why_2.webp?v=1759936301'
+  assign review_image_2 = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/megayak_2.webp?v=1759936215'
+  assign review_image_3 = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/yakcheese_review.webp?v=1759811490'
+  assign review_image_4 = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/yakcheesereview_2.webp?v=1759811735'
+  assign review_image_5 = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/67d858de6e8af838f858edf5_9839846e-11b0-4ad0-a3b0-990e17c76b9b.png?v=1742233201'
+  assign review_image_6 = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/67d858df6e8af838f858ee37.png?v=1742233299'
   assign lab_image = 'prime-ugc-labrador-chew-card.jpg' | asset_url
-  assign frenchie_image = 'prime-ugc-french-bulldog-chew-card.jpg' | asset_url
-  assign golden_image = 'prime-ugc-golden-retriever-chew-card.jpg' | asset_url
   assign shepherd_image = 'prime-ugc-german-shepherd-chew-card.jpg' | asset_url
-  assign beagle_image = 'prime-ugc-beagle-chew-card.jpg' | asset_url
-  assign poodle_image = 'prime-ugc-poodle-chew-card.jpg' | asset_url
   assign small_dog_chew_image = 'prime-home-small-dog-chew.jpg' | asset_url
   assign medium_dog_chew_image = 'prime-home-medium-dog-chew.jpg' | asset_url
   assign large_dog_chew_image = 'prime-home-large-dog-chew.jpg' | asset_url
@@ -524,62 +526,62 @@
 
       <div class="ph-reviews__grid" data-prime-review-track tabindex="0" aria-label="Customer review carousel" data-motion-stagger="true">
         <article class="ph-review-card" data-motion="reveal">
-          <img class="ph-review-card__photo" src="{{ golden_image }}" alt="Golden Retriever using a Prime Pet Food yak chew during calm time" loading="lazy" width="768" height="768">
+          <img class="ph-review-card__photo" src="{{ review_image_1 }}" alt="Customer photo of Prime Pet Food Himalayan yak cheese chews" loading="lazy" width="768" height="768">
           <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <blockquote>&ldquo;My golden retriever used to destroy bully sticks in 10 minutes. This lasted over an hour. I finally got to drink my coffee in peace.&rdquo;</blockquote>
+          <blockquote>&ldquo;I was honestly surprised by how long it kept him busy. I gave it to him after breakfast and he stayed on his mat instead of following me around the kitchen.&rdquo;</blockquote>
           <footer>
             <strong>Sarah M.</strong>
-            <span class="ph-review-card__badge">Golden Retriever &bull; 72 min</span>
+            <span class="ph-review-card__badge">Verified buyer</span>
           </footer>
         </article>
 
         <article class="ph-review-card" data-motion="reveal" data-motion-delay="60">
-          <img class="ph-review-card__photo" src="{{ frenchie_image }}" alt="French Bulldog holding a Prime Pet Food yak chew" loading="lazy" width="768" height="768">
+          <img class="ph-review-card__photo" src="{{ review_image_2 }}" alt="Customer photo of a large Prime Pet Food yak chew" loading="lazy" width="768" height="768">
           <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <blockquote>&ldquo;Finally a chew I don&rsquo;t have to worry about. No weird chemicals, no splintering. My frenchie is obsessed and I feel good about it.&rdquo;</blockquote>
+          <blockquote>&ldquo;We have a big chewer and most things are gone fast. This one actually made sense for the price because he worked on it over a few sessions.&rdquo;</blockquote>
           <footer>
-            <strong>Mike T.</strong>
-            <span class="ph-review-card__badge">French Bulldog &bull; 45 min</span>
+            <strong>Mark T.</strong>
+            <span class="ph-review-card__badge">Large dog home</span>
           </footer>
         </article>
 
         <article class="ph-review-card" data-motion="reveal" data-motion-delay="120">
-          <img class="ph-review-card__photo" src="{{ lab_image }}" alt="Labrador chewing a Prime Pet Food Himalayan yak chew" loading="lazy" width="768" height="768">
+          <img class="ph-review-card__photo" src="{{ review_image_3 }}" alt="Customer review photo of Prime Pet Food yak cheese chews" loading="lazy" width="768" height="768">
           <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <blockquote>&ldquo;We switched from rawhide after our vet recommended it. Three months in and my lab still gets excited every time she sees the bag.&rdquo;</blockquote>
+          <blockquote>&ldquo;I wanted something simple and rawhide-free. The ingredient list is short, it does not stink up the room, and my dog gets excited when the bag comes out.&rdquo;</blockquote>
           <footer>
             <strong>Jessica R.</strong>
-            <span class="ph-review-card__badge">Labrador &bull; 85 min</span>
+            <span class="ph-review-card__badge">Rawhide-free switch</span>
           </footer>
         </article>
 
         <article class="ph-review-card" data-motion="reveal" data-motion-delay="180">
-          <img class="ph-review-card__photo" src="{{ shepherd_image }}" alt="German Shepherd resting with a Prime Pet Food yak chew" loading="lazy" width="768" height="768">
+          <img class="ph-review-card__photo" src="{{ review_image_4 }}" alt="Customer review photo showing Prime Pet Food yak chews" loading="lazy" width="768" height="768">
           <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <blockquote>&ldquo;Our Shepherd needs something to do after evening walks. This turned that restless hour into focused quiet time.&rdquo;</blockquote>
+          <blockquote>&ldquo;These became part of our evening routine. I still supervise him, but he settles down with it instead of pacing around looking for trouble.&rdquo;</blockquote>
           <footer>
             <strong>Priya K.</strong>
-            <span class="ph-review-card__badge">German Shepherd &bull; 92 min</span>
+            <span class="ph-review-card__badge">Evening routine</span>
           </footer>
         </article>
 
         <article class="ph-review-card" data-motion="reveal" data-motion-delay="240">
-          <img class="ph-review-card__photo" src="{{ beagle_image }}" alt="Beagle enjoying a Prime Pet Food yak chew on a rug" loading="lazy" width="768" height="768">
+          <img class="ph-review-card__photo" src="{{ review_image_5 }}" alt="Customer photo of Prime Pet Food yak cheese chew packaging" loading="lazy" width="768" height="768">
           <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <blockquote>&ldquo;My beagle is food motivated and easily bored. The medium chew gives him a job without the mess of other chews.&rdquo;</blockquote>
+          <blockquote>&ldquo;My dog is picky, so I only ordered one pack to test it. He took it right away. I came back and ordered more before we ran out.&rdquo;</blockquote>
           <footer>
             <strong>Andrew L.</strong>
-            <span class="ph-review-card__badge">Beagle &bull; 58 min</span>
+            <span class="ph-review-card__badge">Reordered</span>
           </footer>
         </article>
 
         <article class="ph-review-card" data-motion="reveal" data-motion-delay="300">
-          <img class="ph-review-card__photo" src="{{ poodle_image }}" alt="Poodle calmly holding a Prime Pet Food Himalayan yak chew" loading="lazy" width="768" height="768">
+          <img class="ph-review-card__photo" src="{{ review_image_6 }}" alt="Customer photo of Prime Pet Food Himalayan yak chews" loading="lazy" width="768" height="768">
           <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <blockquote>&ldquo;We use it during work calls. She settles in, chews, and I am not constantly redirecting her from furniture.&rdquo;</blockquote>
+          <blockquote>&ldquo;I like that it feels cleaner than the chews we used before. No greasy residue on the rug, and she actually stays interested in it.&rdquo;</blockquote>
           <footer>
             <strong>Emily W.</strong>
-            <span class="ph-review-card__badge">Poodle mix &bull; 64 min</span>
+            <span class="ph-review-card__badge">Cleaner chew</span>
           </footer>
         </article>
       </div>

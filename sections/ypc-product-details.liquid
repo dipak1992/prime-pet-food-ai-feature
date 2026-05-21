@@ -1,3 +1,10 @@
+{% liquid
+  assign product_review_image_1 = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/yakcheesereview_2.webp?v=1759811735'
+  assign product_review_image_2 = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/67d858de6e8af838f858edf5_9839846e-11b0-4ad0-a3b0-990e17c76b9b.png?v=1742233201'
+  assign product_review_image_3 = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/67d858df6e8af838f858ee37.png?v=1742233299'
+  assign product_review_image_4 = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/why_2.webp?v=1759936301'
+%}
+
 <section class="ypd-wrap">
   <div class="ypd-container">
     <div class="ypd-section-header">
@@ -306,23 +313,27 @@
 
     <div class="ypd-review-grid">
       <div class="ypd-review-card">
+        <img class="ypd-review-image" src="{{ product_review_image_1 }}" alt="Customer review photo of Prime Pet Food yak chews" loading="lazy" width="640" height="640">
         <div class="ypd-review-stars">★★★★★</div>
-        <p>“These last much longer than anything else we’ve tried, and they don’t stink up the house.”</p>
+        <p>“I was worried it would smell like other chews, but it really doesn’t. He takes it to the rug and works on it quietly.”</p>
         <strong>Sarah T.</strong>
       </div>
       <div class="ypd-review-card">
+        <img class="ypd-review-image" src="{{ product_review_image_2 }}" alt="Customer photo of Prime Pet Food yak cheese chew packaging" loading="lazy" width="640" height="640">
         <div class="ypd-review-stars">★★★★★</div>
-        <p>“The puff trick at the end is genius. My dog gets excited every time.”</p>
+        <p>“My dog is picky, so I expected him to ignore it. He grabbed it right away and now knows the sound of the bag.”</p>
         <strong>James R.</strong>
       </div>
       <div class="ypd-review-card">
+        <img class="ypd-review-image" src="{{ product_review_image_3 }}" alt="Customer photo of Prime Pet Food Himalayan yak chews" loading="lazy" width="640" height="640">
         <div class="ypd-review-stars">★★★★★</div>
-        <p>“Great for sensitive stomachs and a much cleaner option than bully sticks.”</p>
+        <p>“Cleaner than bully sticks for us. No greasy spot on the floor, and I like that the ingredient list is short.”</p>
         <strong>Elena M.</strong>
       </div>
       <div class="ypd-review-card">
+        <img class="ypd-review-image" src="{{ product_review_image_4 }}" alt="Customer photo of Prime Pet Food Himalayan yak cheese chews" loading="lazy" width="640" height="640">
         <div class="ypd-review-stars">★★★★★</div>
-        <p>“A premium chew that actually feels worth the price.”</p>
+        <p>“It is not the cheapest chew, but it lasts long enough that I actually feel like I got what I paid for.”</p>
         <strong>Marcus T.</strong>
       </div>
     </div>
@@ -723,6 +734,15 @@
     .ypd-review-card {
       background: #fff;
       box-shadow: 0 10px 28px rgba(17,38,28,0.08);
+    }
+    .ypd-review-image {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 14px;
+      margin-bottom: 14px;
+      background: #f4eee5;
     }
     .ypd-review-stars {
       margin-bottom: 12px;
