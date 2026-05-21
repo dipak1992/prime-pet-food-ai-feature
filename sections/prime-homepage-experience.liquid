@@ -85,7 +85,7 @@
   ════════════════════════════════════════════════════════════════ -->
   <div class="ph-hero">
     <div class="ph-hero__media ph-hero-image" data-motion="image-reveal">
-      <img src="{{ hero_image }}" alt="Calm dog enjoying a Prime Pet Food Himalayan yak chew at home" width="1536" height="1024" loading="eager" fetchpriority="high">
+      <img src="{{ hero_image }}" alt="Golden Retriever settled on a sofa with a Prime Pet Food Himalayan yak chew" width="1672" height="941" loading="eager" fetchpriority="high">
     </div>
     <div class="ph-shell ph-hero__content">
       <div class="ph-hero__social-badge ph-hero-badge" aria-label="Social proof">
@@ -2812,21 +2812,38 @@
 
     .ph-hero {
       min-height: auto;
+      display: block;
+      background:
+        radial-gradient(circle at 84% 0%, rgba(244, 194, 125, 0.16), transparent 34%),
+        linear-gradient(180deg, #17130f 0%, #241a13 100%);
+    }
+
+    .ph-hero__media {
+      position: relative;
+      inset: auto;
+      z-index: 0;
+      height: clamp(310px, 78vw, 430px);
+      overflow: hidden;
     }
 
     .ph-hero__media::after {
+      position: absolute;
+      inset: 0;
       background:
-        linear-gradient(180deg, rgba(19, 16, 12, 0.55) 0%, rgba(19, 16, 12, 0.68) 42%, rgba(19, 16, 12, 0.96) 100%),
-        linear-gradient(90deg, rgba(19, 16, 12, 0.52) 0%, rgba(19, 16, 12, 0.12) 70%);
+        linear-gradient(180deg, rgba(19, 16, 12, 0.02) 0%, rgba(19, 16, 12, 0.05) 56%, rgba(19, 16, 12, 0.68) 100%),
+        linear-gradient(90deg, rgba(19, 16, 12, 0.22) 0%, rgba(19, 16, 12, 0) 54%);
     }
 
     .ph-hero__media img {
-      object-position: 50% 28%;
+      object-position: 67% 38%;
       transform: scale(1.01);
     }
 
     .ph-hero__content {
-      padding: 64px 0 48px;
+      position: relative;
+      z-index: 1;
+      margin-top: -34px;
+      padding: 0 0 46px;
     }
 
     .prime-homepage h1 {
