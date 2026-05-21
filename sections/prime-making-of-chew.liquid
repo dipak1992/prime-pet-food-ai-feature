@@ -1,0 +1,427 @@
+{% comment %}
+  Section: The Making of Our Chew
+  A visual storytelling section showing the traditional process from yak milk to finished product.
+  Builds artisanal credibility and justifies premium pricing.
+{% endcomment %}
+
+<section class="pmoc" aria-label="The making of our chew">
+  <div class="pmoc__inner page-width">
+
+    <header class="pmoc__header">
+      <p class="pmoc__eyebrow">The craft behind every chew</p>
+      <h2 class="pmoc__title">{{ section.settings.title | default: 'From yak milk to your dog's favorite hour.' }}</h2>
+      <p class="pmoc__subtitle">{{ section.settings.subtitle | default: 'No factory lines. No artificial shortcuts. Each Prime Pet Food chew is handcrafted in Nepal using the same methods Himalayan families have used for generations — just four ingredients and a whole lot of patience.' }}</p>
+    </header>
+
+    <div class="pmoc__journey" role="list" aria-label="Chew-making process steps">
+
+      <article class="pmoc__step" role="listitem">
+        <div class="pmoc__step-media">
+          {%- if section.settings.step_1_image != blank -%}
+            <img src="{{ section.settings.step_1_image | image_url: width: 800 }}" alt="Fresh yak and cow milk collected in the Himalayan foothills" loading="lazy" width="800" height="600">
+          {%- else -%}
+            <img src="{{ 'prime-yak-process-hero.jpg' | asset_url }}" alt="Fresh yak and cow milk collected in the Himalayan foothills" loading="lazy" width="800" height="600">
+          {%- endif -%}
+        </div>
+        <div class="pmoc__step-content">
+          <span class="pmoc__step-num">01</span>
+          <h3>{{ section.settings.step_1_title | default: 'Fresh milk from Himalayan herds' }}</h3>
+          <p>{{ section.settings.step_1_text | default: 'It starts with yak and cow milk from small farming families in Nepal's Himalayan foothills. These families have raised yaks at altitude for generations — the same herds, the same pastures, the same unhurried way of life.' }}</p>
+        </div>
+      </article>
+
+      <article class="pmoc__step" role="listitem">
+        <div class="pmoc__step-media">
+          {%- if section.settings.step_2_image != blank -%}
+            <img src="{{ section.settings.step_2_image | image_url: width: 800 }}" alt="Milk being boiled and lime juice added to form curds" loading="lazy" width="800" height="600">
+          {%- else -%}
+            <img src="{{ 'prime-yak-process-boiling-curd.jpg' | asset_url }}" alt="Milk being boiled and lime juice added to form curds" loading="lazy" width="800" height="600">
+          {%- endif -%}
+        </div>
+        <div class="pmoc__step-content">
+          <span class="pmoc__step-num">02</span>
+          <h3>{{ section.settings.step_2_title | default: 'Boiled, separated, and pressed by hand' }}</h3>
+          <p>{{ section.settings.step_2_text | default: 'The milk is slowly boiled. A squeeze of lime juice separates the curds from the whey — no chemicals, no enzymes. The curds are collected, pressed into dense blocks, and shaped by hand. This is where the chew gets its signature hardness.' }}</p>
+        </div>
+      </article>
+
+      <article class="pmoc__step" role="listitem">
+        <div class="pmoc__step-media">
+          {%- if section.settings.step_3_image != blank -%}
+            <img src="{{ section.settings.step_3_image | image_url: width: 800 }}" alt="Chews drying on traditional wooden racks in mountain air" loading="lazy" width="800" height="600">
+          {%- else -%}
+            <img src="{{ 'prime-yak-process-drying-racks.jpg' | asset_url }}" alt="Chews drying on traditional wooden racks in mountain air" loading="lazy" width="800" height="600">
+          {%- endif -%}
+        </div>
+        <div class="pmoc__step-content">
+          <span class="pmoc__step-num">03</span>
+          <h3>{{ section.settings.step_3_title | default: 'Smoked and sun-dried for weeks' }}</h3>
+          <p>{{ section.settings.step_3_text | default: 'The pressed blocks are lightly smoked over wood fires, then hung on drying racks in the mountain air for weeks. This slow drying is what creates the dense, long-lasting texture that keeps dogs engaged for over an hour. You can't rush this part.' }}</p>
+        </div>
+      </article>
+
+      <article class="pmoc__step" role="listitem">
+        <div class="pmoc__step-media">
+          {%- if section.settings.step_4_image != blank -%}
+            <img src="{{ section.settings.step_4_image | image_url: width: 800 }}" alt="Finished yak chews inspected and packed in the USA" loading="lazy" width="800" height="600">
+          {%- else -%}
+            <img src="{{ 'prime-yak-process-finished-chews.jpg' | asset_url }}" alt="Finished yak chews inspected and packed in the USA" loading="lazy" width="800" height="600">
+          {%- endif -%}
+        </div>
+        <div class="pmoc__step-content">
+          <span class="pmoc__step-num">04</span>
+          <h3>{{ section.settings.step_4_title | default: 'Inspected, graded, and packed in the USA' }}</h3>
+          <p>{{ section.settings.step_4_text | default: 'Every batch arrives at our US facility where we check hardness, moisture, and consistency. We grade by size, inspect for quality, and pack under Prime Pet Food standards. Only then does it ship to your dog's living room.' }}</p>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="pmoc__footer">
+      <div class="pmoc__ingredients-badge" aria-label="Ingredients used">
+        <span>The entire ingredient list:</span>
+        <strong>Yak milk · Cow milk · Lime juice · Salt</strong>
+      </div>
+      <p class="pmoc__footer-note">{{ section.settings.footer_note | default: 'That's it. No preservatives, no binding agents, no mystery powders. Just four ingredients and a process that's been trusted for generations.' }}</p>
+      {%- if section.settings.cta_url != blank -%}
+        <a href="{{ section.settings.cta_url }}" class="pmoc__cta">{{ section.settings.cta_label | default: 'Shop yak chews' }} &rarr;</a>
+      {%- else -%}
+        <a href="/collections/all" class="pmoc__cta">Shop yak chews &rarr;</a>
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .pmoc {
+    padding: 88px 24px;
+    background: #fffaf2;
+    font-family: var(--font-body-family, -apple-system, sans-serif);
+  }
+
+  .pmoc__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ── Header ── */
+  .pmoc__header {
+    text-align: center;
+    margin-bottom: 64px;
+    max-width: 680px;
+    margin-inline: auto;
+  }
+
+  .pmoc__eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 780;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #b85f32;
+    margin: 0 0 14px;
+  }
+
+  .pmoc__title {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 800;
+    color: #171512;
+    margin: 0 0 16px;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+  }
+
+  .pmoc__subtitle {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #5f574e;
+    margin: 0;
+  }
+
+  /* ── Journey Steps ── */
+  .pmoc__journey {
+    display: grid;
+    gap: 48px;
+  }
+
+  .pmoc__step {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .pmoc__step:nth-child(even) {
+    direction: rtl;
+  }
+
+  .pmoc__step:nth-child(even) > * {
+    direction: ltr;
+  }
+
+  .pmoc__step-media {
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    background: #f3ede4;
+  }
+
+  .pmoc__step-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .pmoc__step:hover .pmoc__step-media img {
+    transform: scale(1.03);
+  }
+
+  .pmoc__step-content {
+    padding: 8px 0;
+  }
+
+  .pmoc__step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: rgba(184, 95, 50, 0.1);
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 800;
+    color: #b85f32;
+    margin-bottom: 16px;
+  }
+
+  .pmoc__step-content h3 {
+    font-size: 22px;
+    font-weight: 750;
+    color: #171512;
+    margin: 0 0 12px;
+    line-height: 1.25;
+  }
+
+  .pmoc__step-content p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #5f574e;
+    margin: 0;
+  }
+
+  /* ── Footer ── */
+  .pmoc__footer {
+    text-align: center;
+    margin-top: 64px;
+    padding-top: 48px;
+    border-top: 1px solid rgba(51, 40, 29, 0.12);
+  }
+
+  .pmoc__ingredients-badge {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 6px;
+    background: #fff;
+    border: 1px solid rgba(184, 95, 50, 0.2);
+    border-radius: 16px;
+    padding: 16px 28px;
+    margin-bottom: 20px;
+  }
+
+  .pmoc__ingredients-badge span {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #5f574e;
+    font-weight: 600;
+  }
+
+  .pmoc__ingredients-badge strong {
+    font-size: 16px;
+    color: #171512;
+    font-weight: 700;
+  }
+
+  .pmoc__footer-note {
+    font-size: 15px;
+    line-height: 1.65;
+    color: #5f574e;
+    max-width: 560px;
+    margin: 0 auto 24px;
+  }
+
+  .pmoc__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #b85f32;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+
+  .pmoc__cta:hover {
+    border-bottom-color: #b85f32;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .pmoc {
+      padding: 56px 16px;
+    }
+
+    .pmoc__step {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .pmoc__step:nth-child(even) {
+      direction: ltr;
+    }
+
+    .pmoc__step-media {
+      aspect-ratio: 16/10;
+    }
+
+    .pmoc__step-content h3 {
+      font-size: 19px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Making of Our Chew",
+  "tag": "section",
+  "class": "prime-making-of-chew",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section title",
+      "default": "From yak milk to your dog's favorite hour."
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Section subtitle",
+      "default": "No factory lines. No artificial shortcuts. Each Prime Pet Food chew is handcrafted in Nepal using the same methods Himalayan families have used for generations — just four ingredients and a whole lot of patience."
+    },
+    {
+      "type": "header",
+      "content": "Step 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "step_1_image",
+      "label": "Step 1 image"
+    },
+    {
+      "type": "text",
+      "id": "step_1_title",
+      "label": "Step 1 title",
+      "default": "Fresh milk from Himalayan herds"
+    },
+    {
+      "type": "textarea",
+      "id": "step_1_text",
+      "label": "Step 1 description",
+      "default": "It starts with yak and cow milk from small farming families in Nepal's Himalayan foothills. These families have raised yaks at altitude for generations — the same herds, the same pastures, the same unhurried way of life."
+    },
+    {
+      "type": "header",
+      "content": "Step 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "step_2_image",
+      "label": "Step 2 image"
+    },
+    {
+      "type": "text",
+      "id": "step_2_title",
+      "label": "Step 2 title",
+      "default": "Boiled, separated, and pressed by hand"
+    },
+    {
+      "type": "textarea",
+      "id": "step_2_text",
+      "label": "Step 2 description",
+      "default": "The milk is slowly boiled. A squeeze of lime juice separates the curds from the whey — no chemicals, no enzymes. The curds are collected, pressed into dense blocks, and shaped by hand. This is where the chew gets its signature hardness."
+    },
+    {
+      "type": "header",
+      "content": "Step 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "step_3_image",
+      "label": "Step 3 image"
+    },
+    {
+      "type": "text",
+      "id": "step_3_title",
+      "label": "Step 3 title",
+      "default": "Smoked and sun-dried for weeks"
+    },
+    {
+      "type": "textarea",
+      "id": "step_3_text",
+      "label": "Step 3 description",
+      "default": "The pressed blocks are lightly smoked over wood fires, then hung on drying racks in the mountain air for weeks. This slow drying is what creates the dense, long-lasting texture that keeps dogs engaged for over an hour. You can't rush this part."
+    },
+    {
+      "type": "header",
+      "content": "Step 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "step_4_image",
+      "label": "Step 4 image"
+    },
+    {
+      "type": "text",
+      "id": "step_4_title",
+      "label": "Step 4 title",
+      "default": "Inspected, graded, and packed in the USA"
+    },
+    {
+      "type": "textarea",
+      "id": "step_4_text",
+      "label": "Step 4 description",
+      "default": "Every batch arrives at our US facility where we check hardness, moisture, and consistency. We grade by size, inspect for quality, and pack under Prime Pet Food standards. Only then does it ship to your dog's living room."
+    },
+    {
+      "type": "header",
+      "content": "Footer"
+    },
+    {
+      "type": "textarea",
+      "id": "footer_note",
+      "label": "Footer note",
+      "default": "That's it. No preservatives, no binding agents, no mystery powders. Just four ingredients and a process that's been trusted for generations."
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA link"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Shop yak chews"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Making of Our Chew"
+    }
+  ]
+}
+{% endschema %}

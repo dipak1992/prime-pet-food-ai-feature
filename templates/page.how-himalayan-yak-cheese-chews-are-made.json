@@ -3,9 +3,14 @@
     "prime_yak_process": {
       "type": "prime-yak-chew-process",
       "settings": {}
+    },
+    "prime_making_of_chew": {
+      "type": "prime-making-of-chew",
+      "settings": {}
     }
   },
   "order": [
-    "prime_yak_process"
+    "prime_yak_process",
+    "prime_making_of_chew"
   ]
 }

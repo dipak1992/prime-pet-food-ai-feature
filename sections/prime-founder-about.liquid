@@ -182,6 +182,83 @@
     </div>
   </div>
 
+  <div class="pfa-supply-chain">
+    <div class="pfa-shell">
+      <div class="pfa-section-head">
+        <p class="pfa-kicker">From Nepal to your door</p>
+        <h2>How our chews get to you — and why it matters.</h2>
+      </div>
+
+      <div class="pfa-supply-chain__timeline" aria-label="Supply chain journey">
+        <article class="pfa-supply-chain__step">
+          <span class="pfa-supply-chain__num">01</span>
+          <div>
+            <h3>Sourced from Himalayan farming families</h3>
+            <p>
+              Our yak and cow milk comes from small farming families in Nepal's Himalayan foothills — the same communities that have been making chhurpi for generations. We pay fair prices directly, keeping the tradition alive and families supported.
+            </p>
+          </div>
+        </article>
+        <article class="pfa-supply-chain__step">
+          <span class="pfa-supply-chain__num">02</span>
+          <div>
+            <h3>Handcrafted using traditional methods</h3>
+            <p>
+              Each chew is made by hand in small batches: milk is boiled, lime juice added to separate the curds, then pressed, smoked, and sun-dried for weeks. No machines rushing the process. No shortcuts. Just patience and skill passed down through families.
+            </p>
+          </div>
+        </article>
+        <article class="pfa-supply-chain__step">
+          <span class="pfa-supply-chain__num">03</span>
+          <div>
+            <h3>Quality-checked and packed in the USA</h3>
+            <p>
+              Every batch arrives at our US facility where we inspect, grade by size and density, and pack under Prime Pet Food quality standards. We check hardness, moisture, and consistency before anything ships to your home.
+            </p>
+          </div>
+        </article>
+        <article class="pfa-supply-chain__step">
+          <span class="pfa-supply-chain__num">04</span>
+          <div>
+            <h3>Shipped to your dog's living room</h3>
+            <p>
+              Free shipping over $30, delivered in recyclable packaging. From a Himalayan farming family's hands to your dog's happy hour — that's the whole journey.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="pfa-impact">
+    <div class="pfa-shell pfa-impact__inner">
+      <div class="pfa-impact__content">
+        <p class="pfa-kicker">Our impact promise</p>
+        <h2>Every chew supports the families who make it.</h2>
+        <p>
+          This isn't a marketing line — it's how we built the business. When you buy a Prime Pet Food chew, here's what happens on the other side of the world:
+        </p>
+        <div class="pfa-impact__grid" aria-label="Social impact pillars">
+          <article>
+            <strong>Fair-wage sourcing</strong>
+            <span>We pay above-market rates to Nepali farming families, keeping traditional cheesemaking economically viable for the next generation.</span>
+          </article>
+          <article>
+            <strong>Rural education support</strong>
+            <span>A portion of every sale goes toward school supplies and educational resources in the Himalayan communities we source from.</span>
+          </article>
+          <article>
+            <strong>Sustainable grazing practices</strong>
+            <span>Our partner farms maintain traditional rotational grazing that protects Himalayan grasslands and supports local biodiversity.</span>
+          </article>
+        </div>
+        <p class="pfa-impact__note">
+          We're a small company, and our impact is proportional — but it's real, it's traceable, and it grows with every order.
+        </p>
+      </div>
+    </div>
+  </div>
+
   <div class="pfa-promise">
     <div class="pfa-shell pfa-promise__grid">
       <div>
@@ -858,6 +935,8 @@
     .pfa-milestones,
     .pfa-team,
     .pfa-beliefs,
+    .pfa-supply-chain,
+    .pfa-impact,
     .pfa-promise,
     .pfa-testimonials,
     .pfa-cta {
@@ -882,6 +961,153 @@
 
     .pfa-belief {
       min-height: 0;
+    }
+  }
+
+  /* ── Supply Chain ── */
+  .pfa-supply-chain {
+    padding-block: 88px;
+    background: #fff;
+    border-top: 1px solid var(--pfa-line);
+  }
+
+  .pfa-supply-chain__timeline {
+    display: grid;
+    gap: 0;
+    margin-top: 48px;
+    border-left: 2px solid var(--pfa-clay);
+    padding-left: 32px;
+  }
+
+  .pfa-supply-chain__step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--pfa-line);
+    position: relative;
+  }
+
+  .pfa-supply-chain__step::before {
+    content: '';
+    position: absolute;
+    left: -39px;
+    top: 32px;
+    width: 12px;
+    height: 12px;
+    background: var(--pfa-clay);
+    border-radius: 50%;
+    border: 3px solid var(--pfa-cream);
+  }
+
+  .pfa-supply-chain__step:last-child {
+    border-bottom: none;
+  }
+
+  .pfa-supply-chain__num {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--pfa-soft);
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--pfa-clay);
+  }
+
+  .pfa-supply-chain__step h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .pfa-supply-chain__step p {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--pfa-muted);
+    margin: 0;
+  }
+
+  /* ── Impact Section ── */
+  .pfa-impact {
+    padding-block: 88px;
+    background: var(--pfa-forest);
+    color: #fff;
+  }
+
+  .pfa-impact__inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .pfa-impact .pfa-kicker {
+    color: #8bc9a0;
+  }
+
+  .pfa-impact h2 {
+    color: #fff;
+    margin-bottom: 16px;
+  }
+
+  .pfa-impact__content > p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 16px;
+    line-height: 1.65;
+    margin-bottom: 32px;
+  }
+
+  .pfa-impact__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  .pfa-impact__grid article {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    padding: 24px;
+  }
+
+  .pfa-impact__grid article strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .pfa-impact__grid article span {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .pfa-impact__note {
+    font-size: 13px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.55);
+    font-style: italic;
+    margin: 0;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  @media (max-width: 640px) {
+    .pfa-supply-chain__timeline {
+      padding-left: 20px;
+    }
+
+    .pfa-supply-chain__step::before {
+      left: -27px;
+    }
+
+    .pfa-impact__grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>
