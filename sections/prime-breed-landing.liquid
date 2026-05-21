@@ -1,5 +1,9 @@
 {{ 'prime-roadmap.css' | asset_url | stylesheet_tag }}
 
+{%- liquid
+  assign primary_link = section.settings.primary_link | default: '/products/himalayan-yak-chews-for-dogs'
+-%}
+
 <section class="pbl" aria-labelledby="PrimeBreedLandingTitle">
   <div class="pbl__hero">
     <div>
@@ -7,7 +11,7 @@
       <h1 id="PrimeBreedLandingTitle">{{ section.settings.heading }}</h1>
       <p>{{ section.settings.subheading }}</p>
       <div class="pbl__actions">
-        <a href="{{ section.settings.primary_link }}" class="pbl__button pbl__button--primary">{{ section.settings.primary_label }}</a>
+        <a href="{{ primary_link }}" class="pbl__button pbl__button--primary">{{ section.settings.primary_label }}</a>
         <a href="/pages/how-long-will-this-last-for-my-dog" class="pbl__button pbl__button--secondary">Estimate my dog</a>
       </div>
     </div>
@@ -53,7 +57,7 @@
     { "type": "text", "id": "duration", "label": "Duration", "default": "45-90 min" },
     { "type": "textarea", "id": "estimate_note", "label": "Estimate note", "default": "Exact duration depends on weight, jaw strength, age, and chew style." },
     { "type": "text", "id": "primary_label", "label": "Primary label", "default": "Shop recommended chews" },
-    { "type": "url", "id": "primary_link", "label": "Primary link", "default": "/products/himalayan-yak-chews-for-dogs" },
+    { "type": "url", "id": "primary_link", "label": "Primary link" },
     { "type": "text", "id": "card_1_title", "label": "Card 1 title", "default": "Size up for safety" },
     { "type": "textarea", "id": "card_1_text", "label": "Card 1 text", "default": "If your dog is between sizes or chews aggressively, choose the larger yak chew." },
     { "type": "text", "id": "card_2_title", "label": "Card 2 title", "default": "Use supervised sessions" },

@@ -9,6 +9,10 @@
   Usage: Add to any template JSON as a section.
 {%- endcomment -%}
 
+{%- liquid
+  assign cta_url = section.settings.cta_url | default: '/products/himalayan-yak-chews-for-dogs'
+-%}
+
 <section class="pzw" aria-labelledby="PrimeZeroWasteTitle">
   <style>
     .pzw {
@@ -282,7 +286,7 @@
     </div>
 
     <div class="pzw__cta-row">
-      <a href="{{ section.settings.cta_url }}" class="pzw__cta">
+      <a href="{{ cta_url }}" class="pzw__cta">
         {{ section.settings.cta_label }} &#8594;
       </a>
       {%- if section.settings.video_url != blank -%}
@@ -320,8 +324,7 @@
     {
       "type": "url",
       "id": "cta_url",
-      "label": "CTA URL",
-      "default": "/products/himalayan-yak-chews-for-dogs"
+      "label": "CTA URL"
     },
     {
       "type": "url",
