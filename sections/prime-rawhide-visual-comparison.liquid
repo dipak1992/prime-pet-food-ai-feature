@@ -1,13 +1,13 @@
 {%- comment -%}
-  Prime vs Rawhide visual comparison for homepage.
+  Prime Pet Food vs Rawhide visual comparison for homepage.
 {%- endcomment -%}
 
 {%- liquid
-  assign comparison_image = section.settings.comparison_image | default: 'prime-rawhide-comparison-infographic.jpg' | asset_url
+  assign comparison_image = section.settings.comparison_image | default: 'prime-rawhide-comparison-infographic-v2.jpg' | asset_url
   assign cta_url = section.settings.cta_url | default: '/products/himalayan-yak-chews-for-dogs'
 -%}
 
-<section class="prc" aria-labelledby="PrimeRawhideTitle">
+<section class="prc" aria-labelledby="PrimePetFoodRawhideTitle">
   <style>
     .prc {
       --prc-cream: #fbf3e5;
@@ -144,7 +144,7 @@
 
     .prc__label {
       color: var(--prc-green);
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -225,13 +225,7 @@
       }
 
       .prc__media {
-        border-radius: 15px;
-      }
-
-      .prc__media img {
-        min-height: 360px;
-        object-fit: cover;
-        object-position: 50% 50%;
+        display: none;
       }
 
       .prc__grid {
@@ -260,7 +254,7 @@
     <div class="prc__header">
       <div>
         <span class="prc__eyebrow">{{ section.settings.eyebrow }}</span>
-        <h2 class="prc__title" id="PrimeRawhideTitle">{{ section.settings.heading }}</h2>
+        <h2 class="prc__title" id="PrimePetFoodRawhideTitle">{{ section.settings.heading }}</h2>
       </div>
       <p class="prc__intro">{{ section.settings.subheading }}</p>
     </div>
@@ -268,21 +262,21 @@
     <figure class="prc__media">
       <img
         src="{{ comparison_image }}"
-        alt="Visual comparison of Prime Himalayan yak chews and rawhide across digestibility, odor, splinter risk, ingredients, and longevity"
+        alt="Visual comparison of Prime Pet Food Himalayan yak chews and rawhide across digestibility, odor, splinter risk, ingredients, and longevity"
         width="1792"
         height="1024"
         loading="lazy"
       >
     </figure>
 
-    <div class="prc__grid" aria-label="Prime yak chew versus rawhide comparison">
+    <div class="prc__grid" aria-label="Prime Pet Food yak chew versus rawhide comparison">
       <article class="prc__card">
         <span class="prc__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 12c4-7 12-7 16 0"/><path d="M4 12c4 7 12 7 16 0"/><path d="M12 5v14"/></svg>
         </span>
         <h3>Digestibility</h3>
         <div class="prc__compare">
-          <span class="prc__side"><span class="prc__label">Prime</span><span class="prc__copy">Cheese-based and made for supervised chewing.</span></span>
+          <span class="prc__side"><span class="prc__label">Prime Pet Food</span><span class="prc__copy">Cheese-based and made for supervised chewing.</span></span>
           <span class="prc__side prc__side--rawhide"><span class="prc__label">Rawhide</span><span class="prc__copy">Processed hide can be harder on digestion.</span></span>
         </div>
       </article>
@@ -293,7 +287,7 @@
         </span>
         <h3>Odor</h3>
         <div class="prc__compare">
-          <span class="prc__side"><span class="prc__label">Prime</span><span class="prc__copy">Low odor for couches, crates, and quiet rooms.</span></span>
+          <span class="prc__side"><span class="prc__label">Prime Pet Food</span><span class="prc__copy">Low odor for couches, crates, and quiet rooms.</span></span>
           <span class="prc__side prc__side--rawhide"><span class="prc__label">Rawhide</span><span class="prc__copy">Many options carry a stronger indoor smell.</span></span>
         </div>
       </article>
@@ -304,7 +298,7 @@
         </span>
         <h3>Splinter risk</h3>
         <div class="prc__compare">
-          <span class="prc__side"><span class="prc__label">Prime</span><span class="prc__copy">No rawhide sheets. Remove the nub before it is swallowable.</span></span>
+          <span class="prc__side"><span class="prc__label">Prime Pet Food</span><span class="prc__copy">No rawhide sheets. Remove the nub before it is swallowable.</span></span>
           <span class="prc__side prc__side--rawhide"><span class="prc__label">Rawhide</span><span class="prc__copy">Can tear, soften, swell, or become difficult to manage.</span></span>
         </div>
       </article>
@@ -315,7 +309,7 @@
         </span>
         <h3>Ingredients</h3>
         <div class="prc__compare">
-          <span class="prc__side"><span class="prc__label">Prime</span><span class="prc__copy">Yak milk, cow milk, lime juice, and salt.</span></span>
+          <span class="prc__side"><span class="prc__label">Prime Pet Food</span><span class="prc__copy">Yak milk, cow milk, lime juice, and salt.</span></span>
           <span class="prc__side prc__side--rawhide"><span class="prc__label">Rawhide</span><span class="prc__copy">Processed hide with quality that varies by brand.</span></span>
         </div>
       </article>
@@ -326,7 +320,7 @@
         </span>
         <h3>Longevity</h3>
         <div class="prc__compare">
-          <span class="prc__side"><span class="prc__label">Prime</span><span class="prc__copy">Dense texture for longer calm-time sessions.</span></span>
+          <span class="prc__side"><span class="prc__label">Prime Pet Food</span><span class="prc__copy">Dense texture for longer calm-time sessions.</span></span>
           <span class="prc__side prc__side--rawhide"><span class="prc__label">Rawhide</span><span class="prc__copy">Chew time can vary widely by product and dog.</span></span>
         </div>
       </article>
@@ -365,7 +359,7 @@
       "type": "text",
       "id": "comparison_image",
       "label": "Comparison image asset filename",
-      "default": "prime-rawhide-comparison-infographic.jpg"
+      "default": "prime-rawhide-comparison-infographic-v2.jpg"
     },
     {
       "type": "text",
