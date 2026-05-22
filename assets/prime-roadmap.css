@@ -54,7 +54,7 @@
 }
 .ppru__cards {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
 }
 .ppru__card {
@@ -364,6 +364,20 @@
   font-size: 16px;
   line-height: 1.65;
 }
+.psil__context {
+  margin-top: 16px;
+}
+.psil__context summary {
+  cursor: pointer;
+  color: #173b2b;
+  font-size: 13px;
+  font-weight: 820;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.psil__context p {
+  margin: 12px 0 0;
+}
 .psil__links {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -399,7 +413,6 @@
 }
 @media (max-width: 920px) {
   .ppru__inner,
-  .ppru__cards,
   .pbl__hero,
   .pbl__grid,
   .pdg__inner,
@@ -417,5 +430,26 @@
   }
   .plr__grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 920px) {
+  .ppru__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .ppru__cards {
+    display: flex;
+    grid-template-columns: none;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 0 2px 10px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ppru__card {
+    flex: 0 0 min(82vw, 340px);
+    scroll-snap-align: start;
   }
 }

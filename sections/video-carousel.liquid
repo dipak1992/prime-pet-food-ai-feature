@@ -195,8 +195,8 @@
 
 #DP--{{ section_id }} .onhow__item {
   --final-slide-width: min(350px, 90vw);
-  --slide-height: calc(var(--final-slide-width) * 1.32);
-  --selected-slide-height: calc(var(--final-slide-width) * 1.32);
+  --slide-height: var(--final-slide-width);
+  --selected-slide-height: var(--final-slide-width);
   height: auto;
   width: var(--final-slide-width);
   margin: 0 {{ section.settings.gap | divided_by: 2.0 }}px;
@@ -589,8 +589,8 @@
 
   #DP--{{ section_id }} .onhow__item {
     --final-slide-width: min(280px, 85vw);
-    --slide-height: calc(var(--final-slide-width) * 1.2);
-    --selected-slide-height: calc(var(--final-slide-width) * 1.2);
+    --slide-height: var(--final-slide-width);
+    --selected-slide-height: var(--final-slide-width);
     max-height: 50vh;
     margin-bottom: 20px;
   }

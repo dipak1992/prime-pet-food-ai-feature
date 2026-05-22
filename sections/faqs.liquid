@@ -75,6 +75,25 @@
     color: var(--faq-subtext);
   }
 
+  #shopify-section-{{ section.id }} .faq-context {
+    margin-top: 14px;
+  }
+
+  #shopify-section-{{ section.id }} .faq-context summary {
+    display: inline-flex;
+    cursor: pointer;
+    color: var(--faq-heading);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  #shopify-section-{{ section.id }} .faq-context .faq-subtext {
+    margin-top: 12px;
+  }
+
   #shopify-section-{{ section.id }} .faq-list {
     max-width: {{ section.settings.list_max_width }}px;
     margin: 42px auto 0;
@@ -293,7 +312,10 @@
     {% endif %}
 
     {% if section.settings.subtext != blank %}
-      <p class="faq-subtext">{{ section.settings.subtext }}</p>
+      <details class="faq-context">
+        <summary>Before you choose a chew</summary>
+        <p class="faq-subtext">{{ section.settings.subtext }}</p>
+      </details>
     {% endif %}
   </div>
 

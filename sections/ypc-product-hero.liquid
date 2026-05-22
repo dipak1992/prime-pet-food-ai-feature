@@ -3,10 +3,6 @@
 
 {% liquid
   assign product_title_downcase = product.title | downcase
-  assign ypc_lifestyle_image = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/why_2.webp?v=1759936301'
-  assign ypc_closeup_image = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/megayak_2.webp?v=1759936215'
-  assign ypc_puff_image = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/puff_hack.png?v=1779455932'
-  assign ypc_ingredient_image = 'prime-home-ingredient-yak-milk.jpg' | asset_url
 
   assign hero_lead = ''
   assign hero_rating_text = ''
@@ -118,24 +114,6 @@
         </div>
       {% endif %}
 
-      <div class="ypc-gallery-story" aria-label="Prime Pet Food product story visuals">
-        <article class="ypc-gallery-story__card">
-          <img src="{{ ypc_lifestyle_image }}" alt="Dog enjoying Prime Pet Food yak chew during calm time at home" loading="lazy" width="320" height="240">
-          <span>Calm chew time</span>
-        </article>
-        <article class="ypc-gallery-story__card">
-          <img src="{{ ypc_closeup_image }}" alt="Close-up texture of Prime Pet Food Himalayan yak cheese chew" loading="lazy" width="320" height="240">
-          <span>Dense cheese texture</span>
-        </article>
-        <article class="ypc-gallery-story__card">
-          <img src="{{ ypc_puff_image }}" alt="Prime Pet Food yak chew nub puffed into a crunchy treat" loading="lazy" width="320" height="240">
-          <span>Puff the small nub</span>
-        </article>
-        <article class="ypc-gallery-story__card">
-          <img src="{{ ypc_ingredient_image }}" alt="Simple milk ingredient visual for Prime Pet Food yak chews" loading="lazy" width="320" height="240">
-          <span>4 simple ingredients</span>
-        </article>
-      </div>
     </div>
 
     <div class="ypc-product-hero__content">
@@ -479,19 +457,43 @@
           <div class="ypc-review-card">
             <img src="https://cdn.shopify.com/s/files/1/0767/5124/1536/files/why_2.webp?v=1759936301" alt="Customer photo of Prime Pet Food Himalayan yak cheese chews" loading="lazy" width="96" height="96">
             <div class="ypc-review-card__stars">★★★★★</div>
-            <p>{{ section.settings.review_card_1 }}</p>
+            <p>“I was honestly surprised by how long it kept him busy. I gave it to him after breakfast and he stayed on his mat instead of following me around the kitchen.”</p>
+            <strong>Sarah M.</strong>
           </div>
 
           <div class="ypc-review-card">
             <img src="https://cdn.shopify.com/s/files/1/0767/5124/1536/files/megayak_2.webp?v=1759936215" alt="Customer photo of a large Prime Pet Food yak chew" loading="lazy" width="96" height="96">
             <div class="ypc-review-card__stars">★★★★★</div>
-            <p>{{ section.settings.review_card_2 }}</p>
+            <p>“We have a big chewer and most things are gone fast. This one actually made sense for the price because he worked on it over a few sessions.”</p>
+            <strong>Mark T.</strong>
           </div>
 
           <div class="ypc-review-card">
             <img src="https://cdn.shopify.com/s/files/1/0767/5124/1536/files/yakcheese_review.webp?v=1759811490" alt="Customer review photo of Prime Pet Food yak cheese chews" loading="lazy" width="96" height="96">
             <div class="ypc-review-card__stars">★★★★★</div>
-            <p>{{ section.settings.review_card_3 }}</p>
+            <p>“I wanted something simple and rawhide-free. The ingredient list is short, it does not stink up the room, and my dog gets excited when the bag comes out.”</p>
+            <strong>Jessica R.</strong>
+          </div>
+
+          <div class="ypc-review-card">
+            <img src="https://cdn.shopify.com/s/files/1/0767/5124/1536/files/yakcheesereview_2.webp?v=1759811735" alt="Customer review photo showing Prime Pet Food yak chews" loading="lazy" width="96" height="96">
+            <div class="ypc-review-card__stars">★★★★★</div>
+            <p>“These became part of our evening routine. I still supervise him, but he settles down with it instead of pacing around looking for trouble.”</p>
+            <strong>Priya K.</strong>
+          </div>
+
+          <div class="ypc-review-card">
+            <img src="https://cdn.shopify.com/s/files/1/0767/5124/1536/files/67d858de6e8af838f858edf5_9839846e-11b0-4ad0-a3b0-990e17c76b9b.png?v=1742233201" alt="Customer photo of Prime Pet Food yak cheese chew packaging" loading="lazy" width="96" height="96">
+            <div class="ypc-review-card__stars">★★★★★</div>
+            <p>“My dog is picky, so I only ordered one pack to test it. He took it right away. I came back and ordered more before we ran out.”</p>
+            <strong>Andrew L.</strong>
+          </div>
+
+          <div class="ypc-review-card">
+            <img src="https://cdn.shopify.com/s/files/1/0767/5124/1536/files/67d858df6e8af838f858ee37.png?v=1742233299" alt="Customer photo of Prime Pet Food Himalayan yak chews" loading="lazy" width="96" height="96">
+            <div class="ypc-review-card__stars">★★★★★</div>
+            <p>“I like that it feels cleaner than the chews we used before. No greasy residue on the rug, and she actually stays interested in it.”</p>
+            <strong>Emily W.</strong>
           </div>
         </div>
       {% endif %}
@@ -1152,53 +1154,6 @@
     border-color: #d2622e;
     box-shadow: inset 0 0 0 1px #d2622e;
     transform: translateY(-1px);
-  }
-
-  .ypc-gallery-story {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 8px;
-    margin-top: 8px;
-  }
-
-  .ypc-gallery-story__card {
-    overflow: hidden;
-    position: relative;
-    min-height: 112px;
-    margin: 0;
-    border-radius: 14px;
-    background: #2b1408;
-    box-shadow: 0 10px 24px rgba(43, 20, 8, 0.08);
-  }
-
-  .ypc-gallery-story__card img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    min-height: 112px;
-    object-fit: cover;
-    opacity: 0.86;
-  }
-
-  .ypc-gallery-story__card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(43, 20, 8, 0.02), rgba(43, 20, 8, 0.58));
-    pointer-events: none;
-  }
-
-  .ypc-gallery-story__card span {
-    position: absolute;
-    right: 8px;
-    bottom: 8px;
-    left: 8px;
-    z-index: 1;
-    color: #fffaf2;
-    font-size: 11px;
-    font-weight: 900;
-    line-height: 1.15;
-    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
   }
 
   .ypc-vet-badge {
@@ -2311,6 +2266,14 @@
     font-weight: 500;
   }
 
+  .ypc-review-card strong {
+    display: block;
+    margin-top: 12px;
+    color: #173b2b;
+    font-size: 12px;
+    font-weight: 900;
+  }
+
   .ypc-size-guide-modal {
     position: fixed;
     inset: 0;
@@ -2428,25 +2391,6 @@
       min-height: 250px;
     }
 
-    .ypc-gallery-story {
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      padding: 2px 2px 8px;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .ypc-gallery-story__card {
-      flex: 0 0 72%;
-      min-height: 160px;
-      scroll-snap-align: start;
-    }
-
-    .ypc-gallery-story__card img {
-      min-height: 160px;
-    }
-
     .ypc-hero-summary {
       padding: 12px;
       border-radius: 12px;
@@ -2512,6 +2456,22 @@
 
     .ypc-badge {
       display: none;
+    }
+
+    .ypc-review-cards {
+      display: flex;
+      grid-template-columns: none;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 0 2px 10px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .ypc-review-card {
+      flex: 0 0 82%;
+      min-height: 0;
+      scroll-snap-align: start;
     }
   }
 </style>

@@ -352,6 +352,10 @@
      RESPONSIVE — Mobile
   ════════════════════════════════════════════════════════════════ */
   @media (max-width: 640px) {
+    .why-prime {
+      overflow: hidden;
+    }
+
     .why-prime__editorial {
       border-radius: 18px;
     }
@@ -365,11 +369,23 @@
     }
 
     .why-prime__grid {
-      grid-template-columns: 1fr;
+      display: flex;
+      grid-template-columns: none;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 0 4px 10px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
     }
 
     .why-prime__card--featured {
       grid-column: span 1;
+    }
+
+    .why-prime__card {
+      flex: 0 0 84%;
+      min-height: 300px;
+      scroll-snap-align: start;
     }
 
     .why-prime__btn {
