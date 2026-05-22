@@ -478,6 +478,94 @@
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════
+       REVIEWS — Customer photo carousel
+  ════════════════════════════════════════════════════════════════ -->
+  <div class="ph-reviews ph-reveal">
+    <div class="ph-shell">
+      <div class="ph-reviews__top">
+        <div class="ph-section-head" data-motion="reveal">
+          <p class="ph-kicker">Real dog homes</p>
+          <h2 data-motion="reveal">Quieter routines, in their own words.</h2>
+        </div>
+        <div class="ph-reviews__controls" aria-label="Review carousel controls">
+          <button type="button" class="ph-reviews__arrow" data-prime-review-prev aria-label="Previous review">
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+          <button type="button" class="ph-reviews__arrow" data-prime-review-next aria-label="Next review">
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="ph-reviews__grid" data-prime-review-track tabindex="0" aria-label="Customer review carousel" data-motion-stagger="true">
+        <article class="ph-review-card" data-motion="reveal">
+          <img class="ph-review-card__photo" src="{{ review_image_1 }}" alt="Customer photo of Prime Pet Food Himalayan yak cheese chews" loading="lazy" width="768" height="768">
+          <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>&ldquo;I was honestly surprised by how long it kept him busy. I gave it to him after breakfast and he stayed on his mat instead of following me around the kitchen.&rdquo;</blockquote>
+          <footer>
+            <strong>Sarah M.</strong>
+            <span class="ph-review-card__badge">Verified buyer</span>
+          </footer>
+        </article>
+
+        <article class="ph-review-card" data-motion="reveal" data-motion-delay="60">
+          <img class="ph-review-card__photo" src="{{ review_image_2 }}" alt="Customer photo of a large Prime Pet Food yak chew" loading="lazy" width="768" height="768">
+          <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>&ldquo;We have a big chewer and most things are gone fast. This one actually made sense for the price because he worked on it over a few sessions.&rdquo;</blockquote>
+          <footer>
+            <strong>Mark T.</strong>
+            <span class="ph-review-card__badge">Large dog home</span>
+          </footer>
+        </article>
+
+        <article class="ph-review-card" data-motion="reveal" data-motion-delay="120">
+          <img class="ph-review-card__photo" src="{{ review_image_3 }}" alt="Customer review photo of Prime Pet Food yak cheese chews" loading="lazy" width="768" height="768">
+          <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>&ldquo;I wanted something simple and rawhide-free. The ingredient list is short, it does not stink up the room, and my dog gets excited when the bag comes out.&rdquo;</blockquote>
+          <footer>
+            <strong>Jessica R.</strong>
+            <span class="ph-review-card__badge">Rawhide-free switch</span>
+          </footer>
+        </article>
+
+        <article class="ph-review-card" data-motion="reveal" data-motion-delay="180">
+          <img class="ph-review-card__photo" src="{{ review_image_4 }}" alt="Customer review photo showing Prime Pet Food yak chews" loading="lazy" width="768" height="768">
+          <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>&ldquo;These became part of our evening routine. I still supervise him, but he settles down with it instead of pacing around looking for trouble.&rdquo;</blockquote>
+          <footer>
+            <strong>Priya K.</strong>
+            <span class="ph-review-card__badge">Evening routine</span>
+          </footer>
+        </article>
+
+        <article class="ph-review-card" data-motion="reveal" data-motion-delay="240">
+          <img class="ph-review-card__photo" src="{{ review_image_5 }}" alt="Customer photo of Prime Pet Food yak cheese chew packaging" loading="lazy" width="768" height="768">
+          <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>&ldquo;My dog is picky, so I only ordered one pack to test it. He took it right away. I came back and ordered more before we ran out.&rdquo;</blockquote>
+          <footer>
+            <strong>Andrew L.</strong>
+            <span class="ph-review-card__badge">Reordered</span>
+          </footer>
+        </article>
+
+        <article class="ph-review-card" data-motion="reveal" data-motion-delay="300">
+          <img class="ph-review-card__photo" src="{{ review_image_6 }}" alt="Customer photo of Prime Pet Food Himalayan yak chews" loading="lazy" width="768" height="768">
+          <div class="ph-review-card__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>&ldquo;I like that it feels cleaner than the chews we used before. No greasy residue on the rug, and she actually stays interested in it.&rdquo;</blockquote>
+          <footer>
+            <strong>Emily W.</strong>
+            <span class="ph-review-card__badge">Cleaner chew</span>
+          </footer>
+        </article>
+      </div>
+
+      <div class="ph-reviews__link">
+        <a href="/products/himalayan-yak-chews-for-dogs#judgeme_product_reviews">Read more customer reviews &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
        UGC VIDEOS — Instagram/TikTok-style social proof
   ════════════════════════════════════════════════════════════════ -->
   <div class="ph-ugc-video ph-reveal" id="prime-real-dogs">
