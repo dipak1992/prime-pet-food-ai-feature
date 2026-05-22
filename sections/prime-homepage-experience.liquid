@@ -1,6 +1,6 @@
 {% liquid
   assign product = all_products['himalayan-yak-chews-for-dogs']
-  assign hero_image = section.settings.hero_image | default: 'prime-calm-dog-yak-chew-hero.jpg' | asset_url
+  assign hero_image = section.settings.hero_image | default: 'prime-homepage-hero-lifestyle-golden.jpg' | asset_url
   assign review_image_1 = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/why_2.webp?v=1759936301'
   assign review_image_2 = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/megayak_2.webp?v=1759936215'
   assign review_image_3 = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/yakcheese_review.webp?v=1759811490'
@@ -97,28 +97,12 @@
         <a href="#prime-home-shop" class="ph-button ph-button--secondary">See All Sizes</a>
       </div>
       <div class="ph-hero__proof" aria-label="Trust signals">
-        <span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          Packed in USA
-        </span>
-        <span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m3 18 6.8-11 4.1 6.2 2.1-3.1L21 18H3Z"/><path d="m9.8 7 1.5 3.2 2.6 3"/></svg>
-          Crafted using traditional Himalayan recipe
-        </span>
-        <span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          100% Natural
-        </span>
+        <span>Packed in USA</span>
+        <span>Traditional Himalayan recipe</span>
+        <span>100% natural</span>
       </div>
       <p class="ph-hero__review"><span>★★★★★</span> 4.9 from 2,400+ dog parents · 30-day promise</p>
     </div>
-    <aside class="ph-hero-product" aria-label="Prime Pet Food yak chew package">
-      <img src="{{ medium_pack_image }}" alt="Prime Pet Food Himalayan yak chew package" width="420" height="420" loading="eager">
-      <div>
-        <strong>Four ingredients.</strong>
-        <span>Plainly listed.</span>
-      </div>
-    </aside>
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════
@@ -1169,79 +1153,6 @@
     transform: translateY(0);
   }
 
-  .ph-hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 20px;
-    padding: 8px 16px;
-    border-radius: 999px;
-    background: rgba(255, 250, 242, 0.12);
-    border: 1px solid rgba(255, 250, 242, 0.2);
-    color: rgba(255, 250, 242, 0.92);
-    font-size: 13px;
-    font-weight: 600;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-  }
-
-  .ph-hero__heritage-badge {
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .ph-hero-badge svg {
-    color: #f4c27d;
-    flex-shrink: 0;
-  }
-
-  .ph-hero-product {
-    position: absolute;
-    right: max(30px, calc((100vw - 1160px) / 2));
-    bottom: 34px;
-    z-index: 2;
-    display: grid;
-    grid-template-columns: 84px minmax(0, 1fr);
-    align-items: center;
-    gap: 12px;
-    width: min(292px, 24vw);
-    padding: 12px 14px 12px 10px;
-    border: 1px solid rgba(255, 250, 242, 0.24);
-    border-radius: 18px;
-    background: rgba(255, 250, 242, 0.12);
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-  }
-
-  .ph-hero-product img {
-    width: 84px;
-    height: 84px;
-    object-fit: contain;
-    filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.24));
-  }
-
-  .ph-hero-product strong,
-  .ph-hero-product span {
-    display: block;
-    color: #fffaf2;
-    line-height: 1.15;
-  }
-
-  .ph-hero-product strong {
-    font-size: 13px;
-    font-weight: 820;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-  }
-
-  .ph-hero-product span {
-    margin-top: 4px;
-    color: rgba(255, 250, 242, 0.78);
-    font-size: 13px;
-    font-weight: 650;
-  }
-
   /* ═══════════════════════════════════════════════════════════════
      HERO — Actions & proof pills
   ════════════════════════════════════════════════════════════════ */
@@ -1317,19 +1228,6 @@
     font-size: 13px;
     line-height: 1;
     padding: 10px 14px;
-  }
-
-  .ph-hero__proof svg {
-    flex-shrink: 0;
-    opacity: 0.85;
-  }
-
-  .ph-hero__micro {
-    margin: 14px 0 0;
-    color: rgba(255, 250, 242, 0.7);
-    font-size: 13px;
-    line-height: 1.35;
-    font-weight: 650;
   }
 
   .ph-hero__review {
@@ -2978,18 +2876,6 @@
       min-width: 100%;
     }
 
-    .ph-hero-badge {
-      max-width: 100%;
-      margin-bottom: 16px;
-      padding: 7px 14px;
-      font-size: 12px;
-      line-height: 1.25;
-    }
-
-    .ph-hero__heritage-badge {
-      letter-spacing: 0.06em;
-    }
-
     .ph-actions {
       flex-direction: column;
       gap: 10px;
@@ -3002,14 +2888,6 @@
       padding: 15px 18px;
       font-size: 13px;
       letter-spacing: 0.01em;
-    }
-
-    .ph-hero__micro {
-      margin-top: 14px;
-      font-size: 14px;
-      line-height: 1.5;
-      font-weight: 600;
-      color: rgba(255, 250, 242, 0.82);
     }
 
     .ph-hero__proof {
@@ -3038,29 +2916,6 @@
     .ph-hero__review span {
       display: block;
       margin-bottom: 2px;
-    }
-
-    .ph-hero-product {
-      position: relative;
-      right: auto;
-      bottom: auto;
-      z-index: 1;
-      grid-template-columns: 72px minmax(0, 1fr);
-      width: min(100% - 24px, 360px);
-      margin: -22px auto 42px;
-      padding: 10px 14px 10px 10px;
-      border-radius: 16px;
-      background: rgba(255, 250, 242, 0.1);
-    }
-
-    .ph-hero-product img {
-      width: 72px;
-      height: 72px;
-    }
-
-    .ph-hero-product strong,
-    .ph-hero-product span {
-      font-size: 12px;
     }
 
     .ph-trust-bar__inner {
@@ -3533,11 +3388,6 @@
 
     .ph-routine__grid article {
       padding: 24px;
-    }
-
-    .ph-hero-badge {
-      font-size: 12px;
-      padding: 6px 12px;
     }
 
     .ph-compare__table-wrap {
@@ -4741,7 +4591,7 @@
       "type": "text",
       "id": "hero_image",
       "label": "Hero image filename (from assets)",
-      "default": "prime-calm-dog-yak-chew-hero.jpg",
+      "default": "prime-homepage-hero-lifestyle-golden.jpg",
       "info": "Upload to Files, then enter the filename here"
     },
     {
