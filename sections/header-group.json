@@ -125,6 +125,7 @@
       "settings": {
         "logo": "shopify://shop_images/logoedited.jpg",
         "menu": "main-menu",
+        "shop_collection_url": "/collections/all",
         "contact_link": "",
         "contact_number": "123-456-7890",
         "bg_color": "#fffaf2",

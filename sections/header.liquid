@@ -5,7 +5,7 @@
   assign whatsapp_contact_link = shop.brand.metafields.social_links.whatsapp.value
   assign whatsapp_contact_number = ''
   assign whatsapp_contact_number_display = ''
-  assign prime_shop_collection_url = section.settings.shop_collection_url | default: '/collections/himalayan-yak-chews-for-dogs'
+  assign prime_shop_collection_url = section.settings.shop_collection_url | default: '/collections/all'
 
   if whatsapp_contact_link != blank
     assign whatsapp_contact_number = whatsapp_contact_link | replace: 'https://wa.me/', '' | replace: 'http://wa.me/', '' | replace: 'https://api.whatsapp.com/send?phone=', '' | replace: 'http://api.whatsapp.com/send?phone=', '' | replace: 'https://web.whatsapp.com/send?phone=', '' | replace: 'http://web.whatsapp.com/send?phone=', '' | split: '&' | first | replace: '%2B', '+' | replace: '%20', '' | replace: ' ', ''
@@ -72,7 +72,7 @@
             <li class="header__menu-item"><a href="/pages/best-rawhide-alternative" class="header__link">Why Yak Chews</a></li>
             <li class="header__menu-item"><a href="/pages/subscribe-and-save" class="header__link">Subscribe</a></li>
             <li class="header__menu-item"><a href="/pages/about-us" class="header__link">Our Story</a></li>
-            <li class="header__menu-item"><a href="/products/himalayan-yak-chews-for-dogs#judgeme_product_reviews" class="header__link">Reviews</a></li>
+            <li class="header__menu-item"><a href="/pages/wholesale" class="header__link">Wholesale</a></li>
           </ul>
         </nav>
 
@@ -232,7 +232,7 @@
           <li class="header__drawer-item"><div class="header__drawer-item-header"><a href="/pages/best-rawhide-alternative" class="header__drawer-link">Why Yak Chews</a></div></li>
           <li class="header__drawer-item"><div class="header__drawer-item-header"><a href="/pages/subscribe-and-save" class="header__drawer-link">Subscribe</a></div></li>
           <li class="header__drawer-item"><div class="header__drawer-item-header"><a href="/pages/about-us" class="header__drawer-link">Our Story</a></div></li>
-          <li class="header__drawer-item"><div class="header__drawer-item-header"><a href="/products/himalayan-yak-chews-for-dogs#judgeme_product_reviews" class="header__drawer-link">Reviews</a></div></li>
+          <li class="header__drawer-item"><div class="header__drawer-item-header"><a href="/pages/wholesale" class="header__drawer-link">Wholesale</a></div></li>
         </ul>
       </nav>
     </div>

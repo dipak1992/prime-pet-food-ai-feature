@@ -30,6 +30,7 @@
     },
     "about_us_hero": {
       "type": "about-us",
+      "disabled": true,
       "settings": {
         "hero_eyebrow": "About Prime Pet Food",
         "hero_title": "We didn't start a pet brand.",
@@ -85,7 +86,6 @@
   "order": [
     "breadcrumbs",
     "main",
-    "about_us_hero",
     "prime_founder_about"
   ]
 }
