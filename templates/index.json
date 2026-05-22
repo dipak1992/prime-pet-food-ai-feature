@@ -34,7 +34,7 @@
         "show_vet": false,
         "show_guarantee": true,
         "show_faq": true,
-        "show_closing_cta": true,
+        "show_closing_cta": false,
         "enable_animations": true
       }
     }
