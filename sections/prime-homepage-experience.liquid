@@ -201,6 +201,10 @@
       <div class="ph-value__visual" aria-label="Estimated calm-time value">
         <figure class="ph-value__image">
           <img src="{{ value_infographic_image }}" alt="Prime Pet Food peace per hour value visual" loading="lazy" width="1792" height="1024">
+          <figcaption>
+            <strong>Hours of calm</strong>
+            <span>Less than most daily treats</span>
+          </figcaption>
         </figure>
         <div class="ph-value__ring">
           <span>~$0.22</span>
@@ -582,19 +586,19 @@
 
       <div class="ph-ugc-video__rail" aria-label="Prime Pet Food customer video carousel">
         <article class="ph-ugc-video__card">
-          <video src="{{ '1737008260923.mp4' | file_url }}" muted playsinline preload="metadata" controls></video>
+          <video src="{{ '1737008260923.mp4' | file_url }}" poster="{{ review_image_1 }}" muted playsinline preload="metadata" controls></video>
           <p>Golden Retriever · after-dinner calm time</p>
         </article>
         <article class="ph-ugc-video__card">
-          <video src="{{ '1737005781491.mp4' | file_url }}" muted playsinline preload="metadata" controls></video>
+          <video src="{{ '1737005781491.mp4' | file_url }}" poster="{{ review_image_2 }}" muted playsinline preload="metadata" controls></video>
           <p>French Bulldog · steady indoor chew routine</p>
         </article>
         <article class="ph-ugc-video__card">
-          <video src="{{ '[Tiktok] Himalayan Yak Cheese 03.mp4' | file_url }}" muted playsinline preload="metadata" controls></video>
+          <video src="{{ '[Tiktok] Himalayan Yak Cheese 03.mp4' | file_url }}" poster="{{ review_image_3 }}" muted playsinline preload="metadata" controls></video>
           <p>Labrador · post-walk wind-down</p>
         </article>
         <article class="ph-ugc-video__card">
-          <video src="{{ '1737005584344.mp4' | file_url }}" muted playsinline preload="metadata" controls></video>
+          <video src="{{ '1737005584344.mp4' | file_url }}" poster="{{ review_image_4 }}" muted playsinline preload="metadata" controls></video>
           <p>Small breed · quiet crate practice</p>
         </article>
       </div>
@@ -1687,7 +1691,7 @@
   }
 
   .ph-value {
-    padding: 92px 0;
+    padding: 68px 0;
     background:
       radial-gradient(circle at 78% 18%, rgba(244, 194, 125, 0.14), transparent 30%),
       #183d2b;
@@ -1696,8 +1700,8 @@
 
   .ph-value__inner {
     display: grid;
-    grid-template-columns: minmax(0, 0.78fr) minmax(360px, 1fr);
-    gap: clamp(30px, 6vw, 82px);
+    grid-template-columns: minmax(0, 0.86fr) minmax(440px, 1fr);
+    gap: clamp(24px, 4vw, 54px);
     align-items: center;
   }
 
@@ -1734,8 +1738,9 @@
 
   .ph-value__visual {
     display: grid;
-    gap: 18px;
-    padding: 26px;
+    grid-template-columns: minmax(0, 1fr) 150px;
+    gap: 14px;
+    padding: 16px;
     border: 1px solid rgba(255, 250, 242, 0.16);
     border-radius: 18px;
     background: rgba(255, 250, 242, 0.08);
@@ -1743,6 +1748,7 @@
   }
 
   .ph-value__image {
+    position: relative;
     margin: 0;
     overflow: hidden;
     border: 1px solid rgba(255, 250, 242, 0.16);
@@ -1756,9 +1762,38 @@
     height: auto;
   }
 
+  .ph-value__image figcaption {
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: 14px;
+    display: grid;
+    gap: 3px;
+    padding: 11px 13px;
+    border: 1px solid rgba(255, 250, 242, 0.28);
+    border-radius: 12px;
+    background: rgba(24, 61, 43, 0.88);
+    color: #fffaf2;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+  }
+
+  .ph-value__image figcaption strong {
+    color: #fffaf2;
+    font-size: 16px;
+    line-height: 1.1;
+    font-weight: 820;
+  }
+
+  .ph-value__image figcaption span {
+    color: rgba(255, 250, 242, 0.86);
+    font-size: 12px;
+    line-height: 1.25;
+    font-weight: 720;
+  }
+
   .ph-value__ring {
     display: grid;
-    width: min(100%, 240px);
+    width: 150px;
     aspect-ratio: 1 / 1;
     place-items: center;
     margin-inline: auto;
@@ -1772,24 +1807,25 @@
   .ph-value__ring span {
     display: block;
     color: #f4c27d;
-    font-size: clamp(46px, 7vw, 74px);
+    font-size: 34px;
     line-height: 0.95;
     font-weight: 840;
   }
 
   .ph-value__ring small {
     display: block;
-    max-width: 160px;
+    max-width: 112px;
     margin-top: 8px;
     color: rgba(255, 250, 242, 0.78);
-    font-size: 12px;
-    line-height: 1.35;
+    font-size: 10px;
+    line-height: 1.25;
     font-weight: 720;
     text-transform: uppercase;
   }
 
   .ph-value__bars {
     display: grid;
+    grid-column: 1 / -1;
     gap: 12px;
   }
 
@@ -1817,6 +1853,7 @@
   }
 
   .ph-value__visual > p {
+    grid-column: 1 / -1;
     margin: 0;
     color: rgba(255, 250, 242, 0.62);
     font-size: 12px;
@@ -3655,16 +3692,45 @@
 
     .ph-value__visual {
       order: 1;
-      padding: 18px;
+      grid-template-columns: 1fr 104px;
+      gap: 10px;
+      padding: 12px;
       border-radius: 14px;
     }
 
     .ph-value__image {
+      min-width: 0;
       border-radius: 12px;
     }
 
+    .ph-value__image figcaption {
+      left: 8px;
+      right: 8px;
+      bottom: 8px;
+      padding: 8px 9px;
+      border-radius: 10px;
+    }
+
+    .ph-value__image figcaption strong {
+      font-size: 13px;
+    }
+
+    .ph-value__image figcaption span {
+      font-size: 10px;
+    }
+
     .ph-value__ring {
-      width: min(100%, 210px);
+      width: 104px;
+    }
+
+    .ph-value__ring span {
+      font-size: 24px;
+    }
+
+    .ph-value__ring small {
+      max-width: 78px;
+      font-size: 8px;
+      line-height: 1.18;
     }
 
     .ph-value__bars div {
@@ -3674,6 +3740,15 @@
 
     .ph-value__bars i {
       width: 100%;
+    }
+
+    .ph-ugc-video__card {
+      flex-basis: min(74vw, 280px);
+    }
+
+    .ph-ugc-video__card video {
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
     }
 
     .ph-puff-story__copy {
