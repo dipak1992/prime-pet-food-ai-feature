@@ -17,24 +17,24 @@
   elsif request.page_type == 'product' and product != blank
     assign og_description = product.description | strip_html | truncate: 155
     if og_description == blank
-      assign og_description = product.title | append: ' — Himalayan yak cheese dog chew. Rawhide-free, single-ingredient, long-lasting. Made in Nepal for dogs who deserve better.'
+      assign og_description = product.title | append: ' — Himalayan yak cheese chew for dogs. Four ingredients: yak milk, cow milk, lime juice, salt. Rawhide-free, long-lasting, made in Nepal.'
     endif
   elsif request.page_type == 'article' and article != blank
     assign og_description = article.excerpt_or_content | strip_html | truncate: 155
     if og_description == blank
-      assign og_description = article.title | append: ' — Expert dog chew guidance from the Prime Pet Food team.'
+      assign og_description = article.title | append: ' — Practical dog chew guidance from the Prime Pet Food team.'
     endif
   elsif request.page_type == 'collection' and collection != blank
     assign og_description = collection.description | strip_html | truncate: 155
     if og_description == blank
-      assign og_description = collection.title | append: ' — Shop Himalayan yak cheese chews for dogs. Rawhide-free, single-ingredient, sourced from Nepal.'
+      assign og_description = collection.title | append: ' — Himalayan yak cheese chews for dogs. Four ingredients, no rawhide, made in Nepal. Find the right size for your dog.'
     endif
   elsif request.page_type == 'blog' and blog != blank
-    assign og_description = 'Dog chew education, breed guides, and enrichment tips from the Prime Pet Food team. Real answers, no filler.'
+    assign og_description = 'Dog chew guides, breed-specific advice, and honest answers from the Prime Pet Food team.'
   elsif request.page_type == 'index'
-    assign og_description = 'Prime Pet Food — Himalayan yak cheese chews for dogs. Single-ingredient, rawhide-free, long-lasting. Trusted by 50,000+ dog owners across the US.'
+    assign og_description = 'Prime Pet Food — Himalayan yak cheese chews for dogs. Four ingredients, no rawhide, hours of calm. Trusted by dog parents across the US.'
   else
-    assign og_description = 'Prime Pet Food makes Himalayan yak cheese chews for dogs — single-ingredient, rawhide-free, and sourced directly from Nepal.'
+    assign og_description = 'Prime Pet Food makes Himalayan yak cheese chews for dogs — four ingredients, no rawhide, sourced from Nepal.'
   endif
 
   assign fallback_share_image = 'prime-og-share.jpg' | asset_url
@@ -53,7 +53,7 @@
     assign og_type = 'article'
   elsif request.page_type == 'password'
     assign og_url = request.origin
-    assign og_description = 'Prime Pet Food — coming soon. Himalayan yak cheese chews for dogs.'
+    assign og_description = 'Prime Pet Food is coming soon. Himalayan yak cheese chews for dogs — four ingredients, no rawhide, made in Nepal.'
   endif
 -%}
 
