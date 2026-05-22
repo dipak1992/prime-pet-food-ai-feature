@@ -1,0 +1,463 @@
+/*
+ * Prime Pet Food — Mobile UX System
+ * Fix 6: Text density, typography hierarchy, swipeable comparisons, image loading
+ * Loaded globally via layout/theme.liquid
+ */
+
+/* ═══════════════════════════════════════════════════════════════
+   1. GLOBAL MOBILE TYPOGRAPHY — Bigger spacing, cleaner hierarchy
+   ════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 640px) {
+
+  /* ── Paragraph breathing room ── */
+  p {
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 1em;
+  }
+
+  /* ── Heading scale — tighter on mobile but still readable ── */
+  h1 {
+    font-size: clamp(26px, 7.5vw, 36px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.5em;
+  }
+
+  h2 {
+    font-size: clamp(22px, 6vw, 30px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.45em;
+  }
+
+  h3 {
+    font-size: clamp(18px, 5vw, 22px);
+    line-height: 1.2;
+    margin-bottom: 0.4em;
+  }
+
+  h4, h5, h6 {
+    font-size: clamp(15px, 4vw, 18px);
+    line-height: 1.3;
+    margin-bottom: 0.35em;
+  }
+
+  /* ── Section vertical rhythm ── */
+  section {
+    padding-top: clamp(32px, 8vw, 48px);
+    padding-bottom: clamp(32px, 8vw, 48px);
+  }
+
+  /* ── Reduce dense paragraph blocks ── */
+  .prime-dense-text p,
+  .pch-size-card__body p,
+  .pch-chew-type__desc,
+  .pch-size-guide__intro,
+  .pch-chew-guide__sub {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  /* ── Kicker labels — consistent on mobile ── */
+  .pch-kicker,
+  [class*="__kicker"],
+  [class*="-kicker"] {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+
+  /* ── Reduce padding on inner content shells ── */
+  .pch-shell,
+  [class*="__shell"],
+  [class*="__inner"] {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   2. TEXT DENSITY — Break large paragraphs on mobile
+   ════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 640px) {
+
+  /* Limit paragraph width to prevent wall-of-text */
+  .prime-homepage p,
+  .prime-faq-page p,
+  .prime-subscribe-save p,
+  .prime-yak-chew-process p,
+  .prime-contact-page p,
+  .prime-wholesale p,
+  .prime-founder-about p {
+    max-width: 100%;
+  }
+
+  /* Long-form content: increase line height for readability */
+  .prime-homepage p,
+  .prime-faq-page p {
+    line-height: 1.75;
+  }
+
+  /* Reduce multi-column grids to single column on mobile */
+  [class*="__grid"]:not(.pch-size-nav):not(.prime-cart-trust) {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Reduce gap in grids */
+  [class*="__grid"] {
+    gap: 12px;
+  }
+
+  /* Prevent overflow on long words */
+  h1, h2, h3, h4, p, li, td, th {
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   3. SWIPEABLE COMPARISON — Replace giant tables on mobile
+   ════════════════════════════════════════════════════════════════ */
+
+/* Desktop: show table, hide swipe cards */
+.pch-comparison__swipe {
+  display: none;
+}
+
+/* Mobile: hide table, show swipe cards */
+@media (max-width: 720px) {
+  .pch-comparison__table-wrap {
+    display: none;
+  }
+
+  .pch-comparison__swipe {
+    display: block;
+  }
+
+  .pch-swipe-track {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 12px;
+    /* Hide scrollbar visually but keep functional */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .pch-swipe-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pch-swipe-card {
+    flex: 0 0 72vw;
+    max-width: 280px;
+    scroll-snap-align: start;
+    border-radius: 14px;
+    border: 1px solid rgba(55, 43, 31, 0.12);
+    background: #fff;
+    overflow: hidden;
+  }
+
+  .pch-swipe-card--prime {
+    border-color: rgba(184, 95, 50, 0.35);
+    background: #fff7ee;
+    box-shadow: 0 4px 20px rgba(184, 95, 50, 0.12);
+  }
+
+  .pch-swipe-card__head {
+    padding: 12px 16px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #5f574e;
+    border-bottom: 1px solid rgba(55, 43, 31, 0.08);
+  }
+
+  .pch-swipe-card--prime .pch-swipe-card__head {
+    background: rgba(184, 95, 50, 0.1);
+    color: #b85f32;
+  }
+
+  .pch-swipe-card__rows {
+    padding: 0;
+  }
+
+  .pch-swipe-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 11px 16px;
+    border-bottom: 1px solid rgba(55, 43, 31, 0.06);
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .pch-swipe-row:last-child {
+    border-bottom: 0;
+  }
+
+  .pch-swipe-row__label {
+    color: #5f574e;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    min-width: 80px;
+    flex-shrink: 0;
+  }
+
+  .pch-swipe-row__value {
+    color: #171512;
+    font-size: 13px;
+    font-weight: 600;
+    flex: 1;
+  }
+
+  .pch-swipe-hint {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    color: #8a7e72;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .pch-swipe-hint::before {
+    content: "←";
+    font-size: 13px;
+  }
+
+  .pch-swipe-hint::after {
+    content: "→";
+    font-size: 13px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   4. STICKY ATC — Ensure bottom padding on pages with sticky bar
+   ════════════════════════════════════════════════════════════════ */
+
+/* When sticky ATC is visible, add bottom padding to page so content
+   doesn't get hidden behind the bar */
+body.has-sticky-atc {
+  padding-bottom: 80px;
+}
+
+@media (max-width: 640px) {
+  body.has-sticky-atc {
+    padding-bottom: 72px;
+  }
+
+  /* Ensure sticky ATC button is full-width on very small screens */
+  .psatc__btn {
+    min-width: 0;
+    flex: 1 1 auto;
+    max-width: 200px;
+  }
+
+  /* Ensure sticky ATC doesn't overlap iOS home indicator */
+  .psatc {
+    padding-bottom: max(env(safe-area-inset-bottom, 0px), 4px);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   5. IMAGE LOADING — Prevent layout shift, optimize rendering
+   ════════════════════════════════════════════════════════════════ */
+
+/* Prevent layout shift on images without explicit dimensions */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Lazy-loaded images — fade in when loaded */
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+img[loading="lazy"].loaded,
+img[loading="lazy"]:not([src=""]) {
+  opacity: 1;
+}
+
+/* Hero images — always eager, no fade */
+.ph-hero__media img,
+.pch-hero img,
+[class*="hero"] img:first-child {
+  opacity: 1 !important;
+  transition: none !important;
+}
+
+/* Aspect ratio containers — prevent layout shift */
+.prime-img-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.prime-img-wrap--16-9 { aspect-ratio: 16 / 9; }
+.prime-img-wrap--4-3  { aspect-ratio: 4 / 3; }
+.prime-img-wrap--1-1  { aspect-ratio: 1 / 1; }
+.prime-img-wrap--3-4  { aspect-ratio: 3 / 4; }
+
+.prime-img-wrap img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   6. MOBILE COLLECTION HERO — Size guide card improvements
+   ════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 640px) {
+  /* Size guide: horizontal scroll on mobile */
+  .pch-size-guide__grid {
+    display: flex !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 12px;
+    padding-bottom: 8px;
+    scrollbar-width: none;
+  }
+
+  .pch-size-guide__grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pch-size-card {
+    flex: 0 0 78vw;
+    max-width: 300px;
+    scroll-snap-align: start;
+  }
+
+  /* Chew guide: single column */
+  .pch-chew-guide__grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Comparison section padding */
+  .pch-comparison {
+    padding: 32px 0 28px;
+  }
+
+  /* Size guide section padding */
+  .pch-size-guide {
+    padding: 32px 0 28px;
+  }
+
+  /* Chew guide section padding */
+  .pch-chew-guide {
+    padding: 32px 0 28px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   7. MOBILE CART DRAWER — Trust badges 2-col on small screens
+   ════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 400px) {
+  .prime-cart-trust {
+    grid-template-columns: 1fr;
+  }
+
+  .prime-checkout-reassurance__row {
+    gap: 5px 8px;
+  }
+
+  .prime-checkout-reassurance__row span {
+    font-size: 10px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   8. TOUCH TARGETS — Minimum 44px for all interactive elements
+   ════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 640px) {
+  /* Ensure all buttons meet minimum touch target */
+  button,
+  [role="button"],
+  a.button,
+  input[type="submit"],
+  input[type="button"] {
+    min-height: 44px;
+  }
+
+  /* Quantity inputs */
+  .quantity__input {
+    min-height: 44px;
+    font-size: 16px; /* Prevent iOS zoom on focus */
+  }
+
+  /* Form inputs — prevent iOS zoom */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="password"],
+  textarea,
+  select {
+    font-size: 16px; /* Prevents iOS auto-zoom */
+  }
+
+  /* Cart drawer discount input */
+  #cart-drawer-discount-code {
+    font-size: 16px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   9. MOBILE HOMEPAGE — Reduce visual noise
+   ════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 640px) {
+  /* Trust bar: wrap cleanly */
+  .pch-trust-bar__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 12px 0;
+  }
+
+  .pch-trust-bar__item {
+    padding: 4px 0;
+    font-size: 13px;
+  }
+
+  /* Hero pills: wrap to 2 per row */
+  .pch-hero__pills {
+    gap: 6px;
+  }
+
+  .pch-hero__pills span {
+    font-size: 11px;
+    padding: 7px 11px;
+  }
+
+  /* Switch section: single column */
+  .pch-switch__inner {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .pch-switch__grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .pch-switch__grid article {
+    padding: 14px;
+  }
+}

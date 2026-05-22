@@ -605,6 +605,7 @@
     {{ 'prime-nav-motion.css' | asset_url | stylesheet_tag }}
     {{ 'prime-cart-motion.css' | asset_url | stylesheet_tag }}
     {{ 'prime-brand-system.css' | asset_url | stylesheet_tag }}
+    {{ 'prime-mobile-ux.css' | asset_url | stylesheet_tag }}
 
     {%- if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}
       <link rel="stylesheet" href="{{ 'component-localization-form.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -874,6 +875,25 @@
         } else {
           setTimeout(updateMyDogLink, 300);
         }
+      })();
+    </script>
+
+    <script>
+      /* Prime Mobile UX — body class helpers */
+      (function () {
+        /* Add has-sticky-atc when sticky ATC bar is present */
+        if (document.getElementById('prime-sticky-atc')) {
+          document.body.classList.add('has-sticky-atc');
+        }
+
+        /* Lazy image fade-in — add .loaded class after src loads */
+        document.querySelectorAll('img[loading="lazy"]').forEach(function (img) {
+          if (img.complete) {
+            img.classList.add('loaded');
+          } else {
+            img.addEventListener('load', function () { img.classList.add('loaded'); });
+          }
+        });
       })();
     </script>
   </body>
