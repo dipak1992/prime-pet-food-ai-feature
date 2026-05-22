@@ -421,6 +421,19 @@
     line-height: 1.2;
     white-space: nowrap;
   }
+
+  .prime-checkout-message {
+    margin: 0 0 10px;
+    padding: 11px 12px;
+    border: 1px solid rgba(23, 59, 43, 0.14);
+    border-radius: 12px;
+    background: #fffaf2;
+    color: #173b2b;
+    font-size: 12px;
+    font-weight: 760;
+    line-height: 1.45;
+    text-align: center;
+  }
 </style>
 
 <cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %} motion-reduce">
@@ -1027,7 +1040,7 @@
             {%- unless has_subscription_item -%}
               <div class="prime-bundle-suggest" aria-label="Complete your order">
                 <div class="prime-bundle-suggest__header">
-                  <span class="prime-bundle-suggest__kicker">Dogs love variety</span>
+                  <span class="prime-bundle-suggest__kicker">Bundle suggestion</span>
                 </div>
                 <p class="prime-bundle-suggest__title">Complete your calm-time routine.</p>
                 <div class="prime-bundle-suggest__items">
@@ -1040,8 +1053,8 @@
                   </div>
                   <div class="prime-bundle-item">
                     <div class="prime-bundle-item__info">
-                      <p class="prime-bundle-item__name">Zero Waste Puff &mdash; use the last piece</p>
-                      <p class="prime-bundle-item__reason">Microwave the nub into a crunchy treat.</p>
+                      <p class="prime-bundle-item__name">Add a multi-pack for better value</p>
+                      <p class="prime-bundle-item__reason">Useful for larger dogs, weekly routines, or multi-dog homes.</p>
                     </div>
                     <a href="/collections/all" class="prime-bundle-item__cta">View &rarr;</a>
                   </div>
@@ -1068,8 +1081,8 @@
               <div class="prime-cart-trust__item">
                 <span class="prime-cart-trust__icon" aria-hidden="true">&#10003;</span>
                 <div class="prime-cart-trust__text">
-                  <span class="prime-cart-trust__label">Fully digestible</span>
-                  <span class="prime-cart-trust__sub">No rawhide. No choking risk from pieces.</span>
+                  <span class="prime-cart-trust__label">Digestible cheese base</span>
+                  <span class="prime-cart-trust__sub">No rawhide layers. Supervise and remove small nubs.</span>
                 </div>
               </div>
               <div class="prime-cart-trust__item">
@@ -1154,11 +1167,14 @@
 
         {%- if cart != empty -%}
           <div class="prime-checkout-reassurance pl-2 pr-2" aria-label="Checkout reassurance">
+            <div class="prime-checkout-message">
+              Before payment, you can review shipping, discount codes, and order details. Prime Pet Food chews use safe ingredients, are packed in the USA, and are backed by our satisfaction guarantee.
+            </div>
             <div class="prime-checkout-reassurance__row">
               <span>&#128274; Secure checkout</span>
               <span>&#127807; Safe ingredients</span>
               <span>&#127482;&#127480; Packed in USA</span>
-              <span>&#10003; Fully digestible</span>
+              <span>&#10003; Digestible cheese base</span>
               <span>&#128737; 30-day guarantee</span>
             </div>
           </div>
