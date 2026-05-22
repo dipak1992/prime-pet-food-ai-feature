@@ -896,6 +896,7 @@
     },
     "chew_analyzer_widget": {
       "type": "chew-analyzer",
+      "disabled": true,
       "settings": {
         "display_mode": "full",
         "show_section_heading": false,
@@ -909,6 +910,7 @@
     },
     "prime_duration_guarantee": {
       "type": "prime-duration-guarantee",
+      "disabled": true,
       "settings": {}
     },
     "breed_review_highlights": {
@@ -922,6 +924,7 @@
     },
     "two_treats_in_one_C8mxDb": {
       "type": "two-treats-in-one",
+      "disabled": true,
       "blocks": {
         "step_Ui7QzJ": {
           "type": "step",
@@ -1421,12 +1424,15 @@
     "prime_product_trust_bar",
     "product_trust_stack",
     "why_prime",
+    "chew_analyzer_widget",
     "prime_ingredient_roles",
     "ypc_product_tab_QnMPYB",
+    "two_treats_in_one_C8mxDb",
     "prime_zero_waste_puff",
     "video_carousel_6EkF8r",
     "breed_review_highlights",
     "comparison_table_URRwp9",
+    "prime_duration_guarantee",
     "prime_product_routine_upsell",
     "prime_seo_internal_links",
     "faqs_tVaRYD",
