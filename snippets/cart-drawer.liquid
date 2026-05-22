@@ -12,6 +12,205 @@
     visibility: hidden;
   }
 
+  /* ═══════════════════════════════════════════════════════════════
+     FREE SHIPPING PROGRESS BAR
+  ════════════════════════════════════════════════════════════════ */
+  .prime-shipping-bar {
+    margin: 0 0 14px;
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: #f2f8ef;
+    border: 1px solid rgba(47, 111, 70, 0.18);
+  }
+
+  .prime-shipping-bar__label {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+    gap: 8px;
+  }
+
+  .prime-shipping-bar__text {
+    color: #173b2b;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .prime-shipping-bar__text em {
+    font-style: normal;
+    color: #3d6b4f;
+  }
+
+  .prime-shipping-bar__text--unlocked {
+    color: #3d6b4f;
+  }
+
+  .prime-shipping-bar__amount {
+    color: #5f574e;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .prime-shipping-bar__track {
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(47, 111, 70, 0.15);
+    overflow: hidden;
+  }
+
+  .prime-shipping-bar__fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #3d6b4f, #5a9e72);
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 4px;
+  }
+
+  .prime-shipping-bar__fill--complete {
+    background: linear-gradient(90deg, #2f6f46, #3d9e5a);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     BUNDLE SUGGESTIONS
+  ════════════════════════════════════════════════════════════════ */
+  .prime-bundle-suggest {
+    margin: 0 0 14px;
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: #fff7ec;
+    border: 1px solid rgba(210, 99, 46, 0.2);
+  }
+
+  .prime-bundle-suggest__header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .prime-bundle-suggest__kicker {
+    color: #b85f32;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .prime-bundle-suggest__title {
+    color: #2b1408;
+    font-size: 13px;
+    font-weight: 760;
+    line-height: 1.3;
+    margin: 0 0 10px;
+  }
+
+  .prime-bundle-suggest__items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .prime-bundle-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: #fff;
+    border: 1px solid rgba(55, 43, 31, 0.1);
+  }
+
+  .prime-bundle-item__info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .prime-bundle-item__name {
+    color: #171512;
+    font-size: 12px;
+    font-weight: 760;
+    line-height: 1.3;
+    margin: 0 0 2px;
+  }
+
+  .prime-bundle-item__reason {
+    color: #5f574e;
+    font-size: 11px;
+    line-height: 1.35;
+    margin: 0;
+  }
+
+  .prime-bundle-item__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: #eb7300;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.18s, transform 0.18s;
+  }
+
+  .prime-bundle-item__cta:hover {
+    background: #c75c00;
+    transform: translateY(-1px);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     ENHANCED TRUST BADGES
+  ════════════════════════════════════════════════════════════════ */
+  .prime-cart-trust {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin: 0 0 14px;
+  }
+
+  .prime-cart-trust__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: #f9f6f2;
+    border: 1px solid rgba(55, 43, 31, 0.08);
+  }
+
+  .prime-cart-trust__icon {
+    font-size: 16px;
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: 1px;
+  }
+
+  .prime-cart-trust__text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .prime-cart-trust__label {
+    color: #171512;
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .prime-cart-trust__sub {
+    color: #5f574e;
+    font-size: 10px;
+    line-height: 1.35;
+  }
+
   .cart-drawer-subscribe-note {
     display: flex;
     align-items: center;
@@ -194,6 +393,33 @@
 
   .cart-drawer-discount__msg--success {
     color: #173b2b;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     CHECKOUT REASSURANCE BAR
+  ════════════════════════════════════════════════════════════════ */
+  .prime-checkout-reassurance {
+    margin: 0 0 10px;
+  }
+
+  .prime-checkout-reassurance__row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 6px 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: #f2f8ef;
+    border: 1px solid rgba(47, 111, 70, 0.15);
+  }
+
+  .prime-checkout-reassurance__row span {
+    color: #2f6f46;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.2;
+    white-space: nowrap;
   }
 </style>
 
@@ -768,15 +994,90 @@
                   assign has_subscription_item = true
                 endif
               endfor
+
+              assign free_shipping_threshold = 3000
+              assign cart_total_cents = cart.total_price
+              assign remaining_cents = free_shipping_threshold | minus: cart_total_cents
+              assign progress_pct = cart_total_cents | times: 100 | divided_by: free_shipping_threshold
+              if progress_pct > 100
+                assign progress_pct = 100
+              endif
             -%}
 
-            <div class="cart-drawer-guarantee" aria-label="Prime Pet Food guarantee">
-              <strong>30-day satisfaction guarantee.</strong>
-              <p>If the chew is not the right fit for your dog, contact us and we will help with the next best step.</p>
-              <div class="cart-drawer-guarantee__pills">
-                <span>Rawhide-free</span>
-                <span>Free shipping $30+</span>
-                <span>Guest checkout</span>
+            <!-- Free Shipping Progress Bar -->
+            <div class="prime-shipping-bar" aria-label="Free shipping progress">
+              <div class="prime-shipping-bar__label">
+                {%- if remaining_cents > 0 -%}
+                  <span class="prime-shipping-bar__text">
+                    Add <em>{{ remaining_cents | money }}</em> more for free shipping
+                  </span>
+                  <span class="prime-shipping-bar__amount">{{ cart_total_cents | money }} / {{ free_shipping_threshold | money }}</span>
+                {%- else -%}
+                  <span class="prime-shipping-bar__text prime-shipping-bar__text--unlocked">
+                    &#10003; You've unlocked free shipping!
+                  </span>
+                {%- endif -%}
+              </div>
+              <div class="prime-shipping-bar__track" role="progressbar" aria-valuenow="{{ progress_pct }}" aria-valuemin="0" aria-valuemax="100">
+                <div class="prime-shipping-bar__fill{% if remaining_cents <= 0 %} prime-shipping-bar__fill--complete{% endif %}" style="width: {{ progress_pct }}%;"></div>
+              </div>
+            </div>
+
+            <!-- Bundle Suggestions -->
+            {%- unless has_subscription_item -%}
+              <div class="prime-bundle-suggest" aria-label="Complete your order">
+                <div class="prime-bundle-suggest__header">
+                  <span class="prime-bundle-suggest__kicker">Dogs love variety</span>
+                </div>
+                <p class="prime-bundle-suggest__title">Complete your calm-time routine.</p>
+                <div class="prime-bundle-suggest__items">
+                  <div class="prime-bundle-item">
+                    <div class="prime-bundle-item__info">
+                      <p class="prime-bundle-item__name">Subscribe &amp; Save &mdash; 15% off every order</p>
+                      <p class="prime-bundle-item__reason">Never run out. Skip or cancel anytime.</p>
+                    </div>
+                    <a href="/pages/subscribe-and-save" class="prime-bundle-item__cta">Set up &rarr;</a>
+                  </div>
+                  <div class="prime-bundle-item">
+                    <div class="prime-bundle-item__info">
+                      <p class="prime-bundle-item__name">Zero Waste Puff &mdash; use the last piece</p>
+                      <p class="prime-bundle-item__reason">Microwave the nub into a crunchy treat.</p>
+                    </div>
+                    <a href="/collections/all" class="prime-bundle-item__cta">View &rarr;</a>
+                  </div>
+                </div>
+              </div>
+            {%- endunless -%}
+
+            <!-- Enhanced Trust Badges -->
+            <div class="prime-cart-trust" aria-label="Why you can buy with confidence">
+              <div class="prime-cart-trust__item">
+                <span class="prime-cart-trust__icon" aria-hidden="true">&#127807;</span>
+                <div class="prime-cart-trust__text">
+                  <span class="prime-cart-trust__label">Safe ingredients</span>
+                  <span class="prime-cart-trust__sub">Yak milk, cow milk, lime, salt. That&rsquo;s it.</span>
+                </div>
+              </div>
+              <div class="prime-cart-trust__item">
+                <span class="prime-cart-trust__icon" aria-hidden="true">&#127482;&#127480;</span>
+                <div class="prime-cart-trust__text">
+                  <span class="prime-cart-trust__label">Packed in the USA</span>
+                  <span class="prime-cart-trust__sub">Quality-checked before it ships to you.</span>
+                </div>
+              </div>
+              <div class="prime-cart-trust__item">
+                <span class="prime-cart-trust__icon" aria-hidden="true">&#10003;</span>
+                <div class="prime-cart-trust__text">
+                  <span class="prime-cart-trust__label">Fully digestible</span>
+                  <span class="prime-cart-trust__sub">No rawhide. No choking risk from pieces.</span>
+                </div>
+              </div>
+              <div class="prime-cart-trust__item">
+                <span class="prime-cart-trust__icon" aria-hidden="true">&#128737;</span>
+                <div class="prime-cart-trust__text">
+                  <span class="prime-cart-trust__label">30-day guarantee</span>
+                  <span class="prime-cart-trust__sub">Not the right fit? We&rsquo;ll make it right.</span>
+                </div>
               </div>
             </div>
 
@@ -785,17 +1086,17 @@
                 <strong>Subscription terms appear before payment.</strong>
                 <p>Skip, pause, or cancel before the next renewal from your account portal.</p>
               </div>
-            {%- endif -%}
-
-            <div class="cart-drawer-subscribe-note">
-              <div class="cart-drawer-subscribe-note__body">
-                <strong>Never run out of calm-time chews.</strong>
-                <p>Set a flexible delivery schedule so your dog&rsquo;s favorite enrichment ritual is always ready when they need it.</p>
+            {%- else -%}
+              <div class="cart-drawer-subscribe-note">
+                <div class="cart-drawer-subscribe-note__body">
+                  <strong>Never run out of calm-time chews.</strong>
+                  <p>Set a flexible delivery schedule so your dog&rsquo;s favorite enrichment ritual is always ready when they need it.</p>
+                </div>
+                <a href="/pages/subscribe-and-save" class="cart-drawer-subscribe-note__cta">
+                  Set up auto-delivery &rarr;
+                </a>
               </div>
-              <a href="/pages/subscribe-and-save" class="cart-drawer-subscribe-note__cta">
-                Set up auto-delivery →
-              </a>
-            </div>
+            {%- endif -%}
 
             <div class="cart-drawer-discount">
               <label for="cart-drawer-discount-code">Promo / discount code</label>
@@ -852,10 +1153,14 @@
         </div>
 
         {%- if cart != empty -%}
-          <div class="cart-drawer-checkout-trust pl-2 pr-2" aria-label="Checkout reassurance">
-            <span>Secure checkout</span>
-            <span>Fast support</span>
-            <span>No account required</span>
+          <div class="prime-checkout-reassurance pl-2 pr-2" aria-label="Checkout reassurance">
+            <div class="prime-checkout-reassurance__row">
+              <span>&#128274; Secure checkout</span>
+              <span>&#127807; Safe ingredients</span>
+              <span>&#127482;&#127480; Packed in USA</span>
+              <span>&#10003; Fully digestible</span>
+              <span>&#128737; 30-day guarantee</span>
+            </div>
           </div>
           <div class="pl-2 pr-2 mb-1">
             {% render 'prime-guarantee-badge', context: 'cart_drawer' %}
