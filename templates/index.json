@@ -1,61 +1,163 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "announcement_bar": {
-      "type": "prime-announcement-bar",
-      "settings": {}
+    "prime_homepage_experience": {
+      "type": "prime-homepage-experience",
+      "settings": {
+        "hero_headline": "Calm dogs start with a better chew.",
+        "hero_subtext": "The long-lasting Himalayan yak chew made with just 4 natural ingredients. Rawhide-free, digestible, and crafted for heavy chewers.",
+        "hero_image": "prime-homepage-hero-lifestyle-golden-v3.jpg",
+        "trust_stat_1_value": "20,000+",
+        "trust_stat_1_label": "Dog homes served",
+        "trust_stat_2_value": "4",
+        "trust_stat_2_label": "Simple ingredients",
+        "trust_stat_3_value": "Real",
+        "trust_stat_3_label": "Chew time",
+        "trust_stat_4_value": "30-day",
+        "trust_stat_4_label": "Promise",
+        "show_quiz": true,
+        "show_sticky_bar": true,
+        "show_outcomes": false,
+        "show_subscribe": true,
+        "show_routine": false,
+        "show_ingredients": true,
+        "show_craft": false,
+        "show_fit": false,
+        "show_vet": false,
+        "show_guarantee": true,
+        "show_faq": true,
+        "show_closing_cta": true,
+        "enable_animations": true
+      }
     },
-    "header": {
-      "type": "prime-header",
-      "settings": {}
+    "prime_rawhide_visual_comparison": {
+      "type": "prime-rawhide-visual-comparison",
+      "settings": {
+        "eyebrow": "Rawhide-free comparison",
+        "heading": "Why dog parents switch from rawhide.",
+        "subheading": "A yak chew is still a hard chew that needs supervision. The difference is the recipe: simple dairy ingredients, low odor, dense texture, and no rawhide sheets.",
+        "comparison_image": "prime-rawhide-comparison-infographic-v2.jpg",
+        "cta_label": "Shop rawhide-free chews",
+        "cta_url": "/products/himalayan-yak-chews-for-dogs"
+      }
     },
-    "hero": {
-      "type": "prime-hero",
-      "settings": {}
+    "video_carousel": {
+      "type": "video-carousel",
+      "blocks": {
+        "video_qg3dfM": {
+          "type": "video",
+          "settings": {
+            "html5_video": "shopify://files/videos/1737008260923.mp4",
+            "product": "himalayan-yak-chews-for-dogs",
+            "caption": "Golden Retriever · 72 min calm-time session"
+          }
+        },
+        "video_3FiDC7": {
+          "type": "video",
+          "settings": {
+            "html5_video": "shopify://files/videos/1737005781491.mp4",
+            "product": "himalayan-yak-chews-for-dogs",
+            "caption": "French Bulldog · steady indoor chew routine"
+          }
+        },
+        "video_RLbcAF": {
+          "type": "video",
+          "settings": {
+            "html5_video": "shopify://files/videos/[Tiktok] Himalayan Yak Cheese 03.mp4",
+            "product": "himalayan-yak-chews-for-dogs",
+            "caption": "Labrador · post-walk wind-down"
+          }
+        },
+        "video_BqKy7U": {
+          "type": "video",
+          "settings": {
+            "html5_video": "shopify://files/videos/1737005584344.mp4",
+            "product": "himalayan-yak-chews-for-dogs",
+            "caption": "Small breed · happy quiet time in the crate"
+          }
+        },
+        "video_44C8B8": {
+          "type": "video",
+          "settings": {
+            "html5_video": "shopify://files/videos/1736610302090.mp4",
+            "product": "himalayan-yak-chews-for-dogs",
+            "caption": "Power chewer · finally something that lasts"
+          }
+        },
+        "video_Jcw4yp": {
+          "type": "video",
+          "settings": {
+            "html5_video": "shopify://files/videos/WhatsApp Video 2026-04-25 at 21.07.27.mp4",
+            "product": "himalayan-yak-chews-for-dogs",
+            "caption": "Evening routine · the house goes quiet"
+          }
+        },
+        "video_TELc9F": {
+          "type": "video",
+          "settings": {
+            "html5_video": "shopify://files/videos/1737008392265.mp4",
+            "product": "himalayan-yak-chews-for-dogs",
+            "caption": "Real dog parent video · rawhide-free chew time"
+          }
+        }
+      },
+      "block_order": [
+        "video_qg3dfM",
+        "video_3FiDC7",
+        "video_RLbcAF",
+        "video_BqKy7U",
+        "video_44C8B8",
+        "video_Jcw4yp",
+        "video_TELc9F"
+      ],
+      "settings": {
+        "heading": "Real dogs, real chew time.",
+        "heading_size": 100,
+        "heading_letter_spacing": 0,
+        "custom_font_url": "",
+        "description": "<p>Short clips from homes that use Prime Pet Food chews for quiet work calls, evening routines, and post-walk settling.</p>",
+        "description_size": 100,
+        "heading_description_spacing": 20,
+        "autoplay": 0,
+        "gap": 10,
+        "show_arrows": true,
+        "text_size": 100,
+        "text_color": "#121212",
+        "button_text_color": "#ffffff",
+        "button_bg_color": "#E66711",
+        "background_color": "",
+        "top_padding": 40,
+        "bottom_padding": 40,
+        "navigation_spacing": 20,
+        "show_share_cta": true,
+        "share_heading": "Share your dog's calm-time moment",
+        "share_text": "Post your dog with their Prime Pet Food yak chew and tag us on Instagram or TikTok. We feature real calm-time moments from customers."
+      }
     },
-    "rawhide_comparison": {
-      "type": "prime-rawhide-comparison",
-      "settings": {}
-    },
-    "value_duration": {
-      "type": "prime-value-duration",
-      "settings": {}
-    },
-    "ingredients": {
-      "type": "prime-ingredients",
-      "settings": {}
-    },
-    "himalayan_story": {
-      "type": "prime-himalayan-story",
-      "settings": {}
-    },
-    "puff_instructions": {
-      "type": "prime-puff-instructions",
-      "settings": {}
-    },
-    "reviews_ugc": {
-      "type": "prime-reviews-ugc",
-      "settings": {}
-    },
-    "subscribe_save": {
-      "type": "prime-subscribe-save",
-      "settings": {}
-    },
-    "footer_redesign": {
-      "type": "prime-footer-redesign",
-      "settings": {}
+    "prime_zero_waste_puff": {
+      "type": "prime-zero-waste-puff",
+      "settings": {
+        "heading": "When the chew gets small, puff it.",
+        "subheading": "Take the small end piece away, soak it, microwave it, and let it cool into a crunchy cheese treat. More value, less waste, and a more controlled finish.",
+        "infographic_image": "prime-puff-instructions-infographic.jpg",
+        "cta_label": "Choose your dog's size",
+        "cta_url": "/products/himalayan-yak-chews-for-dogs",
+        "video_url": "https://cdn.shopify.com/videos/c/o/v/d7aeb1ab2e45499ba3b718e8920fe919.mp4"
+      }
     }
   },
   "order": [
-    "announcement_bar",
-    "header",
-    "hero",
-    "rawhide_comparison",
-    "value_duration",
-    "ingredients",
-    "himalayan_story",
-    "puff_instructions",
-    "reviews_ugc",
-    "subscribe_save",
-    "footer_redesign"
+    "prime_homepage_experience",
+    "prime_rawhide_visual_comparison",
+    "prime_zero_waste_puff",
+    "video_carousel"
   ]
 }

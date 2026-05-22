@@ -1,748 +1,446 @@
-{% comment %}
-  Prime Header Section
-  Premium, minimal, modern luxury DTC header
-  Self-contained: CSS + JS + Liquid + Schema
-{% endcomment %}
+{{ 'header.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'header.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign whatsapp_contact_link = shop.brand.metafields.social_links.whatsapp.value
+  assign whatsapp_contact_number = ''
+  assign whatsapp_contact_number_display = ''
+  assign header_contact_href = whatsapp_contact_link | default: section.settings.contact_link | default: '/pages/contact'
+  assign prime_shop_collection_url = section.settings.shop_collection_url | default: '/collections/himalayan-yak-chews-for-dogs'
+  assign use_curated_nav = section.settings.use_curated_nav
+
+  if whatsapp_contact_link != blank
+    assign whatsapp_contact_number = whatsapp_contact_link | replace: 'https://wa.me/', '' | replace: 'http://wa.me/', '' | replace: 'https://api.whatsapp.com/send?phone=', '' | replace: 'http://api.whatsapp.com/send?phone=', '' | replace: 'https://web.whatsapp.com/send?phone=', '' | replace: 'http://web.whatsapp.com/send?phone=', '' | split: '&' | first | replace: '%2B', '+' | replace: '%20', '' | replace: ' ', ''
+
+    if whatsapp_contact_number != blank
+      if whatsapp_contact_number contains '+'
+        assign whatsapp_contact_number_display = whatsapp_contact_number
+      else
+        assign whatsapp_contact_number_display = '+' | append: whatsapp_contact_number
+      endif
+    endif
+  endif
+-%}
 
 <style>
-  /* ===== Prime Header Styles ===== */
-  .prime-header {
-    position: fixed;
+  :root {
+    --header-accent: {{ section.settings.accent_color }};
+    --header-bg: {{ section.settings.bg_color | default: '#ffffff' }};
+    --header-text: {{ section.settings.text_color | default: '#000000' }};
+  }
+
+  #shopify-section-{{ section.id }} {
+    position: sticky;
     top: 0;
-    left: 0;
-    right: 0;
     z-index: 1000;
-    height: 80px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, height 0.3s ease, transform 0.3s ease;
-    background-color: transparent;
+    margin-top: 0;
+    width: 100%;
+    transition: transform 0.3s ease;
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
   }
 
-  .prime-header--scrolled {
-    background-color: var(--prime-white, #FFFDF9);
-    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
-    height: 60px;
-  }
-
-  .prime-header--hidden {
-    transform: translateY(-100%);
-  }
-
-  .prime-header--visible {
-    transform: translateY(0);
-  }
-
-  .prime-header--opaque {
-    background-color: var(--prime-white, #FFFDF9);
-  }
-
-  .prime-header__inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 0 clamp(20px, 4vw, 48px);
-  }
-
-  /* Logo */
-  .prime-header__logo {
-    font-family: var(--prime-font-heading, 'Georgia', serif);
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: var(--prime-tracking-wider, 0.12em);
-    color: var(--prime-charcoal, #2C2C2C);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-  }
-
-  .prime-header__logo img {
-    height: 36px;
-    width: auto;
-    display: block;
-  }
-
-  .prime-header--scrolled .prime-header__logo img {
-    height: 30px;
-  }
-
-  /* Desktop Navigation */
-  .prime-header__nav {
-    display: flex;
-    align-items: center;
-    gap: 36px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .prime-header__nav-link {
-    font-family: var(--prime-font-body, 'Inter', sans-serif);
-    font-size: var(--prime-font-small, 0.8125rem);
-    font-weight: 500;
-    letter-spacing: var(--prime-tracking-wide, 0.08em);
-    text-transform: uppercase;
-    color: var(--prime-charcoal, #2C2C2C);
-    text-decoration: none;
-    position: relative;
-    padding: 4px 0;
-    transition: color 0.2s ease;
-  }
-
-  .prime-header__nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    right: 50%;
-    height: 1.5px;
-    background-color: var(--prime-charcoal, #2C2C2C);
-    transition: left 0.3s ease, right 0.3s ease;
-  }
-
-  .prime-header__nav-link:hover::after,
-  .prime-header__nav-link:focus::after {
-    left: 0;
-    right: 0;
-  }
-
-  .prime-header__nav-link--highlight {
-    color: var(--prime-terracotta, #C75B3F);
-  }
-
-  .prime-header__nav-link--highlight::after {
-    background-color: var(--prime-terracotta, #C75B3F);
-  }
-
-  /* Actions (Search + Cart) */
-  .prime-header__actions {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    flex-shrink: 0;
-  }
-
-  .prime-header__search-btn,
-  .prime-header__cart {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    color: var(--prime-charcoal, #2C2C2C);
-    text-decoration: none;
-    position: relative;
-    transition: color 0.2s ease;
-  }
-
-  .prime-header__search-btn:hover,
-  .prime-header__cart:hover {
-    color: var(--prime-terracotta, #C75B3F);
-  }
-
-  .prime-header__search-btn svg,
-  .prime-header__cart svg {
-    width: 22px;
-    height: 22px;
-    stroke: currentColor;
-    fill: none;
-    stroke-width: 1.5;
-  }
-
-  .prime-header__cart-count {
-    position: absolute;
-    top: 2px;
-    right: 0;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background-color: var(--prime-terracotta, #C75B3F);
-    color: #fff;
-    font-size: 10px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-  }
-
-  .prime-header__cart-count:empty,
-  .prime-header__cart-count--hidden {
-    display: none;
-  }
-
-  /* Mobile hamburger */
-  .prime-header__hamburger {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    color: var(--prime-charcoal, #2C2C2C);
-    flex-shrink: 0;
-  }
-
-  .prime-header__hamburger svg {
-    width: 24px;
-    height: 24px;
-    stroke: currentColor;
-    fill: none;
-    stroke-width: 1.5;
-  }
-
-  /* ===== Mobile Drawer ===== */
-  .prime-header__drawer-overlay {
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-    z-index: 1100;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-  }
-
-  .prime-header__drawer-overlay--active {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .prime-header__drawer {
-    position: fixed;
+  /* Optional: if there's an announcement bar, we might need to adjust top */
+  .shopify-section-group-header-group {
+    position: sticky;
     top: 0;
-    left: 0;
-    bottom: 0;
-    width: min(320px, 85vw);
-    background-color: var(--prime-white, #FFFDF9);
-    z-index: 1200;
-    transform: translateX(-100%);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .prime-header__drawer--open {
-    transform: translateX(0);
-  }
-
-  .prime-header__drawer-header {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 20px 24px;
-    flex-shrink: 0;
-  }
-
-  .prime-header__drawer-close {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    color: var(--prime-charcoal, #2C2C2C);
-    transition: color 0.2s ease;
-  }
-
-  .prime-header__drawer-close:hover {
-    color: var(--prime-terracotta, #C75B3F);
-  }
-
-  .prime-header__drawer-close svg {
-    width: 24px;
-    height: 24px;
-    stroke: currentColor;
-    fill: none;
-    stroke-width: 1.5;
-  }
-
-  .prime-header__drawer-nav {
-    display: flex;
-    flex-direction: column;
-    padding: 20px 24px;
-    flex: 1;
-  }
-
-  .prime-header__drawer-link {
-    font-family: var(--prime-font-body, 'Inter', sans-serif);
-    font-size: 1.125rem;
-    font-weight: 500;
-    letter-spacing: var(--prime-tracking-wide, 0.08em);
-    text-transform: uppercase;
-    color: var(--prime-charcoal, #2C2C2C);
-    text-decoration: none;
-    padding: 14px 0;
-    min-height: 48px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    transition: color 0.2s ease;
-  }
-
-  .prime-header__drawer-link:last-child {
-    border-bottom: none;
-  }
-
-  .prime-header__drawer-link:hover,
-  .prime-header__drawer-link:focus {
-    color: var(--prime-terracotta, #C75B3F);
-  }
-
-  .prime-header__drawer-link--highlight {
-    color: var(--prime-terracotta, #C75B3F);
-  }
-
-  .prime-header__drawer-footer {
-    padding: 24px;
-    border-top: 1px solid rgba(0, 0, 0, 0.06);
-    flex-shrink: 0;
-  }
-
-  .prime-header__drawer-secondary {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .prime-header__drawer-secondary a {
-    font-family: var(--prime-font-body, 'Inter', sans-serif);
-    font-size: 0.8125rem;
-    color: var(--prime-charcoal-light, #6B6B6B);
-    text-decoration: none;
-    letter-spacing: 0.02em;
-    transition: color 0.2s ease;
-  }
-
-  .prime-header__drawer-secondary a:hover {
-    color: var(--prime-charcoal, #2C2C2C);
-  }
-
-  /* ===== Responsive ===== */
-  @media (max-width: 768px) {
-    .prime-header {
-      height: 60px;
-    }
-
-    .prime-header--scrolled {
-      height: 56px;
-    }
-
-    .prime-header__nav {
-      display: none;
-    }
-
-    .prime-header__search-btn {
-      display: none;
-    }
-
-    .prime-header__hamburger {
-      display: flex;
-    }
-
-    .prime-header__logo {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .prime-header__inner {
-      padding: 0 16px;
-    }
-  }
-
-  @media (min-width: 769px) {
-    .prime-header__drawer-overlay,
-    .prime-header__drawer {
-      display: none !important;
-    }
-  }
-
-  /* Focus styles for accessibility */
-  .prime-header__nav-link:focus-visible,
-  .prime-header__search-btn:focus-visible,
-  .prime-header__cart:focus-visible,
-  .prime-header__hamburger:focus-visible,
-  .prime-header__drawer-close:focus-visible,
-  .prime-header__drawer-link:focus-visible {
-    outline: 2px solid var(--prime-terracotta, #C75B3F);
-    outline-offset: 3px;
-    border-radius: 2px;
-  }
-
-  /* Spacer to prevent content from going under fixed header */
-  .prime-header__spacer {
-    height: 80px;
-  }
-
-  @media (max-width: 768px) {
-    .prime-header__spacer {
-      height: 60px;
-    }
-  }
-
-  /* Body scroll lock when drawer is open */
-  body.prime-header__no-scroll {
-    overflow: hidden;
+    z-index: 1000;
   }
 </style>
 
-<header class="prime-header{% if section.settings.transparent_on_hero %} prime-header--transparent{% endif %}" data-prime-header data-sticky="{{ section.settings.sticky_enabled }}" role="banner">
-  <div class="prime-header__inner">
-    {%- comment -%} Mobile hamburger {%- endcomment -%}
-    <button class="prime-header__hamburger" aria-label="Open menu" aria-expanded="false" data-drawer-toggle>
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <line x1="3" y1="6" x2="21" y2="6" stroke-linecap="round"/>
-        <line x1="3" y1="12" x2="21" y2="12" stroke-linecap="round"/>
-        <line x1="3" y1="18" x2="21" y2="18" stroke-linecap="round"/>
-      </svg>
-    </button>
-
-    {%- comment -%} Logo {%- endcomment -%}
-    <a class="prime-header__logo" href="/" aria-label="{{ section.settings.logo_text | default: 'PRIME' }} - Home">
-      {%- if section.settings.logo_image != blank -%}
-        <img
-          src="{{ section.settings.logo_image | image_url: width: 200 }}"
-          alt="{{ section.settings.logo_text | default: shop.name }}"
-          width="200"
-          height="auto"
-          loading="eager"
-        >
-      {%- else -%}
-        {{ section.settings.logo_text | default: 'PRIME' }}
-      {%- endif -%}
-    </a>
-
-    {%- comment -%} Desktop Navigation {%- endcomment -%}
-    <nav class="prime-header__nav" role="navigation" aria-label="Main navigation">
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'nav_link' -%}
-          <a
-            class="prime-header__nav-link{% if block.settings.highlight %} prime-header__nav-link--highlight{% endif %}"
-            href="{{ block.settings.url }}"
-            {{ block.shopify_attributes }}
-          >
-            {{ block.settings.label }}
+<main-header class="header-section">
+  <div class="header-container">
+    {%- comment -%} DESKTOP HEADER {%- endcomment -%}
+    <div class="header-desktop">
+      <div class="header-desktop-inner page-width">
+        {%- comment -%} Logo on the left {%- endcomment -%}
+        <div class="header__logo">
+          <a href="{{ routes.root_url }}" class="header__logo-link">
+            {%- if section.settings.logo != blank -%}
+              {%- assign logo_alt = section.settings.logo.alt | default: shop.name | escape -%}
+              {{ section.settings.logo | image_url: width: 300 | image_tag:
+                class: 'header__logo-img',
+                widths: '100, 200, 300',
+                alt: logo_alt
+              }}
+            {%- else -%}
+              <span class="h2">{{ shop.name }}</span>
+            {%- endif -%}
           </a>
-        {%- endif -%}
-      {%- endfor -%}
-    </nav>
+        </div>
 
-    {%- comment -%} Actions: Search + Cart {%- endcomment -%}
-    <div class="prime-header__actions">
-      <button class="prime-header__search-btn" aria-label="Search" data-search-toggle>
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="11" cy="11" r="7"/>
-          <line x1="16.5" y1="16.5" x2="21" y2="21" stroke-linecap="round"/>
-        </svg>
-      </button>
+        <nav class="header__nav desktop-only">
+          <ul class="header__menu">
+            {%- if use_curated_nav -%}
+              <li class="header__menu-item">
+                <a href="{{ prime_shop_collection_url }}" class="header__link">Shop</a>
+              </li>
+              <li class="header__menu-item">
+                <a href="/pages/how-long-will-this-last-for-my-dog" class="header__link">How It Works</a>
+              </li>
+              <li class="header__menu-item">
+                <a href="/pages/subscribe-and-save" class="header__link">Subscribe &amp; Save</a>
+              </li>
+              <li class="header__menu-item">
+                <a href="/pages/about-us" class="header__link">Who We Are</a>
+              </li>
+            {%- elsif section.settings.menu != blank and section.settings.menu.links.size > 0 -%}
+              {%- for link in section.settings.menu.links -%}
+                {%- liquid
+                  assign link_url = link.url
+                  assign link_title = link.title | downcase | strip
+                  if link_title == 'shop' and link.url contains '/collections/all'
+                    assign link_url = prime_shop_collection_url
+                  endif
+                -%}
+                <li class="header__menu-item{% if link.links != blank %} has-dropdown{% endif %}">
+                  <a href="{{ link_url }}" class="header__link{% if link.current %} header__link--active{% endif %}">
+                    {{ link.title | escape }}
+                    {%- if link.links != blank -%}
+                      {% render 'icon', icon: 'chevron_down', size: 12 %}
+                    {%- endif -%}
+                  </a>
+                  {%- if link.links != blank -%}
+                    <ul class="header__dropdown">
+                      {%- for childlink in link.links -%}
+                        <li class="header__dropdown-item{% if childlink.links != blank %} has-sub-dropdown{% endif %}">
+                          <a href="{{ childlink.url }}" class="header__dropdown-link">
+                            {{ childlink.title | escape }}
+                            {%- if childlink.links != blank -%}
+                              {% render 'icon', icon: 'chevron_right', size: 12 %}
+                            {%- endif -%}
+                          </a>
+                          {%- if childlink.links != blank -%}
+                            <ul class="header__sub-dropdown">
+                              {%- for grandchildlink in childlink.links -%}
+                                <li class="header__sub-dropdown-item">
+                                  <a href="{{ grandchildlink.url }}" class="header__sub-dropdown-link">
+                                    {{ grandchildlink.title | escape }}
+                                  </a>
+                                </li>
+                              {%- endfor -%}
+                            </ul>
+                          {%- endif -%}
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+                </li>
+              {%- endfor -%}
+            {%- endif -%}
+          </ul>
+        </nav>
 
-      <a class="prime-header__cart" href="/cart" aria-label="Cart ({{ cart.item_count }} items)">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke-linecap="round" stroke-linejoin="round"/>
-          <line x1="3" y1="6" x2="21" y2="6" stroke-linecap="round"/>
-          <path d="M16 10a4 4 0 01-8 0" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        {%- if cart.item_count > 0 -%}
-          <span class="prime-header__cart-count" data-cart-count>{{ cart.item_count }}</span>
-        {%- else -%}
-          <span class="prime-header__cart-count prime-header__cart-count--hidden" data-cart-count></span>
-        {%- endif -%}
-      </a>
-    </div>
-  </div>
-</header>
-
-{%- comment -%} Mobile Drawer {%- endcomment -%}
-<div class="prime-header__drawer-overlay" data-drawer-overlay aria-hidden="true"></div>
-<aside class="prime-header__drawer" data-drawer aria-label="Mobile navigation" role="dialog" aria-modal="true" aria-hidden="true">
-  <div class="prime-header__drawer-header">
-    <button class="prime-header__drawer-close" aria-label="Close menu" data-drawer-close>
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <line x1="18" y1="6" x2="6" y2="18" stroke-linecap="round"/>
-        <line x1="6" y1="6" x2="18" y2="18" stroke-linecap="round"/>
-      </svg>
-    </button>
-  </div>
-
-  <nav class="prime-header__drawer-nav" aria-label="Mobile navigation">
-    {%- for block in section.blocks -%}
-      {%- if block.type == 'nav_link' -%}
-        <a
-          class="prime-header__drawer-link{% if block.settings.highlight %} prime-header__drawer-link--highlight{% endif %}"
-          href="{{ block.settings.url }}"
-        >
-          {{ block.settings.label }}
+        {%- comment -%} My Dog Profile CTA (shows when profile exists) {%- endcomment -%}
+        <a href="/pages/my-dog" class="header__my-dog-cta desktop-only" id="header-my-dog-link" style="display:none;">
+          <span id="header-my-dog-emoji">🐾</span>
+          <span id="header-my-dog-label">My Dog</span>
         </a>
-      {%- endif -%}
-    {%- endfor -%}
-    <a class="prime-header__drawer-link" href="/pages/contact">Contact</a>
-    <a class="prime-header__drawer-link" href="/account">Account</a>
-  </nav>
 
-  <div class="prime-header__drawer-footer">
-    <div class="prime-header__drawer-secondary">
-      <a href="/policies/shipping-policy">Shipping & Returns</a>
-      <a href="/pages/faq">FAQ</a>
-      <a href="mailto:hello@primepetfood.com">hello@primepetfood.com</a>
+        {%- comment -%} Desktop Icons Row {%- endcomment -%}
+        <div class="header__desktop-right">
+          <div class="header__icons-row">
+            {%- comment -%} Search Icon {%- endcomment -%}
+            {%- unless template.name == 'search' -%}
+              <button type="button" class="header__icon-link header__search-trigger-desktop" aria-label="Search">
+                {% render 'icon', icon: 'search', size: 24 %}
+              </button>
+            {%- endunless -%}
+
+            {%- comment -%} Icons to be replaced by expanded search {%- endcomment -%}
+            <div class="header__icons-to-hide">
+              {%- comment -%} Sizing support link {%- endcomment -%}
+              <a href="{{ header_contact_href }}" class="header__icon-link header__contact">
+                {% render 'icon', icon: 'call', size: 24 %}
+                <div class="header__contact-info">
+                  <span class="header__icon-text">Support</span>
+                  {%- if whatsapp_contact_number_display != blank -%}
+                    <span class="header__contact-number">{{ whatsapp_contact_number_display }}</span>
+                  {%- else -%}
+                    <span class="header__contact-number">Sizing help</span>
+                  {%- endif -%}
+                </div>
+              </a>
+
+              {%- comment -%} Profile {%- endcomment -%}
+              {%- if shop.customer_accounts_enabled -%}
+                <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon-link" aria-label="Account">
+                  {% render 'icon', icon: 'person', size: 24 %}
+                </a>
+              {%- endif -%}
+
+              {%- comment -%} Cart {%- endcomment -%}
+              <a href="{{ routes.cart_url }}" class="header__icon-link" id="cart-icon-bubble-desktop" aria-label="Cart">
+                <div class="header__cart-icon-wrapper">
+                  {% render 'icon', icon: 'cart', size: 24 %}
+                  {%- if cart != empty -%}
+                    <div class="header__cart-bubble">
+                      {%- if cart.item_count < 100 -%}
+                        <span aria-hidden="true">{{ cart.item_count }}</span>
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+                </div>
+              </a>
+            </div>
+          </div>
+
+          {%- comment -%} Expanded Search Box (Desktop) {%- endcomment -%}
+          <div class="header__desktop-search-expanded">
+            <form action="{{ routes.search_url }}" method="get" role="search" class="header__search-form-desktop">
+              <input type="text" name="q" placeholder="Search yak chews, sizing, rawhide alternatives..." class="header__search-input-desktop">
+              <button type="submit" class="header__search-submit-desktop">
+                {% render 'icon', icon: 'search', size: 20 %}
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} MOBILE HEADER {%- endcomment -%}
+    <div class="header-mobile">
+      <div class="header-mobile-inner page-width">
+        {%- comment -%} Logo on the left {%- endcomment -%}
+        <div class="header__logo">
+          <a href="{{ routes.root_url }}" class="header__logo-link">
+            {%- if section.settings.logo != blank -%}
+              {%- assign logo_alt = section.settings.logo.alt | default: shop.name | escape -%}
+              {{ section.settings.logo | image_url: width: 200 | image_tag:
+                class: 'header__logo-img',
+                widths: '100, 200',
+                alt: logo_alt
+              }}
+            {%- else -%}
+              <span class="h2">{{ shop.name }}</span>
+            {%- endif -%}
+          </a>
+        </div>
+
+        {%- comment -%} Icons on the right for mobile {%- endcomment -%}
+        <div class="header-mobile__right">
+          {%- unless template.name == 'search' -%}
+            <button type="button" class="header__icon-link header__search-trigger-mobile" aria-label="Search">
+              {% render 'icon', icon: 'search', size: 24 %}
+            </button>
+          {%- endunless -%}
+
+          <a href="{{ header_contact_href }}" class="header__icon-link" aria-label="Contact support">
+            {% render 'icon', icon: 'call', size: 24 %}
+          </a>
+
+          {%- if shop.customer_accounts_enabled -%}
+            <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon-link" aria-label="Account">
+              {% render 'icon', icon: 'person', size: 24 %}
+            </a>
+          {%- endif -%}
+
+          <a href="{{ routes.cart_url }}" class="header__icon-link" aria-label="Cart">
+            <div class="header__cart-icon-wrapper">
+              {% render 'icon', icon: 'cart', size: 24 %}
+              {%- if cart != empty -%}
+                <div class="header__cart-bubble">
+                  {{ cart.item_count }}
+                </div>
+              {%- endif -%}
+            </div>
+          </a>
+
+          <button
+            type="button"
+            class="header__burger-toggle"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="mobile-sidebar-menu"
+          >
+            {% render 'icon', icon: 'menu', size: 28 %}
+          </button>
+        </div>
+      </div>
+
+      {%- comment -%} Mobile Search Bar (Reveals on click) {%- endcomment -%}
+      <div class="header-mobile__search-bar">
+        <form action="{{ routes.search_url }}" method="get" role="search" class="header-mobile__search-form">
+          <input type="text" name="q" placeholder="Search yak chews, breed guides, chew duration..." class="header-mobile__search-input">
+          <button type="button" class="header-mobile__search-close">
+            {% render 'icon', icon: 'close', size: 20 %}
+          </button>
+        </form>
+      </div>
     </div>
   </div>
-</aside>
 
-{%- comment -%} Spacer to offset fixed header {%- endcomment -%}
-{%- unless section.settings.transparent_on_hero -%}
-  <div class="prime-header__spacer"></div>
-{%- endunless -%}
-
-<script>
-  (function() {
-    'use strict';
-
-    const header = document.querySelector('[data-prime-header]');
-    if (!header) return;
-
-    const stickyEnabled = header.dataset.sticky === 'true';
-    const isTransparent = header.classList.contains('prime-header--transparent');
-    const hamburger = document.querySelector('[data-drawer-toggle]');
-    const drawer = document.querySelector('[data-drawer]');
-    const drawerOverlay = document.querySelector('[data-drawer-overlay]');
-    const drawerClose = document.querySelector('[data-drawer-close]');
-    const searchBtn = document.querySelector('[data-search-toggle]');
-
-    let lastScrollY = 0;
-    let ticking = false;
-    const SCROLL_THRESHOLD = 100;
-    const HIDE_THRESHOLD = 5;
-
-    /* --- Sticky / Smart Hide Logic --- */
-    function handleScroll() {
-      const currentScrollY = window.scrollY;
-
-      // Background change on scroll
-      if (currentScrollY > SCROLL_THRESHOLD) {
-        header.classList.add('prime-header--scrolled');
-        if (isTransparent) {
-          header.classList.remove('prime-header--transparent');
-        }
-      } else {
-        header.classList.remove('prime-header--scrolled');
-        if (isTransparent) {
-          header.classList.add('prime-header--transparent');
-        }
-      }
-
-      // Smart hide/show on scroll direction
-      if (stickyEnabled && currentScrollY > SCROLL_THRESHOLD) {
-        const scrollDelta = currentScrollY - lastScrollY;
-
-        if (scrollDelta > HIDE_THRESHOLD) {
-          // Scrolling down — hide
-          header.classList.add('prime-header--hidden');
-          header.classList.remove('prime-header--visible');
-        } else if (scrollDelta < -HIDE_THRESHOLD) {
-          // Scrolling up — show
-          header.classList.remove('prime-header--hidden');
-          header.classList.add('prime-header--visible');
-        }
-      } else {
-        header.classList.remove('prime-header--hidden');
-        header.classList.remove('prime-header--visible');
-      }
-
-      lastScrollY = currentScrollY;
-      ticking = false;
-    }
-
-    function onScroll() {
-      if (!ticking) {
-        window.requestAnimationFrame(handleScroll);
-        ticking = true;
-      }
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-
-    /* --- Mobile Drawer Logic --- */
-    function openDrawer() {
-      drawer.classList.add('prime-header__drawer--open');
-      drawerOverlay.classList.add('prime-header__drawer-overlay--active');
-      drawer.setAttribute('aria-hidden', 'false');
-      drawerOverlay.setAttribute('aria-hidden', 'false');
-      hamburger.setAttribute('aria-expanded', 'true');
-      document.body.classList.add('prime-header__no-scroll');
-
-      // Focus the close button
-      setTimeout(function() {
-        drawerClose.focus();
-      }, 100);
-
-      // Trap focus inside drawer
-      drawer.addEventListener('keydown', trapFocus);
-    }
-
-    function closeDrawer() {
-      drawer.classList.remove('prime-header__drawer--open');
-      drawerOverlay.classList.remove('prime-header__drawer-overlay--active');
-      drawer.setAttribute('aria-hidden', 'true');
-      drawerOverlay.setAttribute('aria-hidden', 'true');
-      hamburger.setAttribute('aria-expanded', 'false');
-      document.body.classList.remove('prime-header__no-scroll');
-
-      // Return focus to hamburger
-      hamburger.focus();
-
-      drawer.removeEventListener('keydown', trapFocus);
-    }
-
-    function trapFocus(e) {
-      if (e.key !== 'Tab') return;
-
-      const focusableEls = drawer.querySelectorAll(
-        'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
-      );
-      const firstEl = focusableEls[0];
-      const lastEl = focusableEls[focusableEls.length - 1];
-
-      if (e.shiftKey) {
-        if (document.activeElement === firstEl) {
-          e.preventDefault();
-          lastEl.focus();
-        }
-      } else {
-        if (document.activeElement === lastEl) {
-          e.preventDefault();
-          firstEl.focus();
-        }
-      }
-    }
-
-    if (hamburger) {
-      hamburger.addEventListener('click', function() {
-        const isOpen = drawer.classList.contains('prime-header__drawer--open');
-        if (isOpen) {
-          closeDrawer();
-        } else {
-          openDrawer();
-        }
-      });
-    }
-
-    if (drawerClose) {
-      drawerClose.addEventListener('click', closeDrawer);
-    }
-
-    if (drawerOverlay) {
-      drawerOverlay.addEventListener('click', closeDrawer);
-    }
-
-    // Close drawer on Escape key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && drawer.classList.contains('prime-header__drawer--open')) {
-        closeDrawer();
-      }
-    });
-
-    /* --- Search Button --- */
-    if (searchBtn) {
-      searchBtn.addEventListener('click', function() {
-        window.location.href = '/search';
-      });
-    }
-  })();
-</script>
+  {%- comment -%} Mobile Burger Drawer {%- endcomment -%}
+  <div class="header__drawer" id="mobile-sidebar-menu" aria-hidden="true">
+    <div class="header__drawer-content">
+      <div class="header__drawer-header">
+        <span class="h3">Menu</span>
+        <button type="button" class="header__drawer-close" aria-label="Close menu">{% render 'icon', icon: 'close', size: 24 %}</button>
+      </div>
+      <div class="header__drawer-recommendation">
+        <p>Not sure which size will last?</p>
+        <a href="/pages/how-long-will-this-last-for-my-dog">Get a chew recommendation</a>
+        <a href="/pages/subscribe-and-save" class="header__drawer-subscribe-link">Build a Subscribe &amp; Save routine</a>
+      </div>
+      <nav class="header__drawer-nav">
+        <ul class="header__drawer-menu">
+          {%- if use_curated_nav -%}
+            <li class="header__drawer-item">
+              <div class="header__drawer-item-header">
+                <a href="{{ prime_shop_collection_url }}" class="header__drawer-link">Shop</a>
+              </div>
+            </li>
+            <li class="header__drawer-item">
+              <div class="header__drawer-item-header">
+                <a href="/pages/how-long-will-this-last-for-my-dog" class="header__drawer-link">How It Works</a>
+              </div>
+            </li>
+            <li class="header__drawer-item">
+              <div class="header__drawer-item-header">
+                <a href="/pages/subscribe-and-save" class="header__drawer-link">Subscribe &amp; Save</a>
+              </div>
+            </li>
+            <li class="header__drawer-item">
+              <div class="header__drawer-item-header">
+                <a href="/pages/about-us" class="header__drawer-link">Who We Are</a>
+              </div>
+            </li>
+          {%- elsif section.settings.menu != blank and section.settings.menu.links.size > 0 -%}
+            {%- for link in section.settings.menu.links -%}
+              {%- liquid
+                assign link_url = link.url
+                assign link_title = link.title | downcase | strip
+                if link_title == 'shop' and link.url contains '/collections/all'
+                  assign link_url = prime_shop_collection_url
+                endif
+              -%}
+              <li class="header__drawer-item{% if link.links != blank %} has-submenu{% endif %}">
+                <div class="header__drawer-item-header">
+                  <a href="{{ link_url }}" class="header__drawer-link">{{ link.title }}</a>
+                  {%- if link.links != blank -%}
+                    <button class="header__drawer-toggle" aria-expanded="false">
+                      {% render 'icon', icon: 'chevron_down', size: 16 %}
+                    </button>
+                  {%- endif -%}
+                </div>
+                {%- if link.links != blank -%}
+                  <ul class="header__drawer-submenu">
+                    {%- for childlink in link.links -%}
+                      <li class="header__drawer-submenu-item{% if childlink.links != blank %} has-submenu{% endif %}">
+                        <div class="header__drawer-item-header">
+                          <a href="{{ childlink.url }}" class="header__drawer-submenu-link">{{ childlink.title }}</a>
+                          {%- if childlink.links != blank -%}
+                            <button class="header__drawer-toggle" aria-expanded="false">
+                              {% render 'icon', icon: 'chevron_down', size: 14 %}
+                            </button>
+                          {%- endif -%}
+                        </div>
+                        {%- if childlink.links != blank -%}
+                          <ul class="header__drawer-grandsubmenu">
+                            {%- for grandchildlink in childlink.links -%}
+                              <li>
+                                <a href="{{ grandchildlink.url }}" class="header__drawer-grandsubmenu-link">{{ grandchildlink.title }}</a>
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        {%- endif -%}
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          {%- else -%}
+            <li class="header__drawer-item">
+              <div class="header__drawer-item-header">
+                <a href="{{ prime_shop_collection_url }}" class="header__drawer-link">Shop</a>
+              </div>
+            </li>
+            <li class="header__drawer-item">
+              <div class="header__drawer-item-header">
+                <a href="/pages/how-long-will-this-last-for-my-dog" class="header__drawer-link">Find My Dog's Size</a>
+              </div>
+            </li>
+            <li class="header__drawer-item">
+              <div class="header__drawer-item-header">
+                <a href="/pages/subscribe-and-save" class="header__drawer-link">Subscribe &amp; Save</a>
+              </div>
+            </li>
+            <li class="header__drawer-item">
+              <div class="header__drawer-item-header">
+                <a href="/pages/how-himalayan-yak-cheese-chews-are-made" class="header__drawer-link">How Yak Chews Are Made</a>
+              </div>
+            </li>
+            <li class="header__drawer-item">
+              <div class="header__drawer-item-header">
+                <a href="/pages/about-us" class="header__drawer-link">About Prime Pet Food</a>
+              </div>
+            </li>
+          {%- endif -%}
+        </ul>
+      </nav>
+    </div>
+    <div class="header__drawer-overlay"></div>
+  </div>
+</main-header>
 
 {% schema %}
 {
-  "name": "Prime Header",
-  "tag": "section",
-  "class": "prime-header-section",
+  "name": "Prime Pet Food Header",
   "settings": [
     {
       "type": "image_picker",
-      "id": "logo_image",
-      "label": "Logo image",
-      "info": "Recommended height: 72px. Leave blank to use text logo."
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "Menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_curated_nav",
+      "label": "Use curated Prime Pet Food navigation",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "shop_collection_url",
+      "label": "Shop collection link"
+    },
+    {
+      "type": "url",
+      "id": "contact_link",
+      "label": "Contact Us Link"
     },
     {
       "type": "text",
-      "id": "logo_text",
-      "label": "Logo text",
-      "default": "PRIME",
-      "info": "Displayed when no logo image is set."
+      "id": "contact_number",
+      "label": "Contact Number"
     },
     {
-      "type": "checkbox",
-      "id": "sticky_enabled",
-      "label": "Enable smart sticky header",
-      "default": true,
-      "info": "Header hides on scroll down and reappears on scroll up."
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
     },
     {
-      "type": "checkbox",
-      "id": "transparent_on_hero",
-      "label": "Transparent over hero section",
-      "default": true,
-      "info": "Header starts transparent and gains background on scroll."
-    }
-  ],
-  "blocks": [
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000000"
+    },
     {
-      "type": "nav_link",
-      "name": "Navigation Link",
-      "settings": [
-        {
-          "type": "text",
-          "id": "label",
-          "label": "Label",
-          "default": "Link"
-        },
-        {
-          "type": "url",
-          "id": "url",
-          "label": "URL",
-          "default": "/"
-        },
-        {
-          "type": "checkbox",
-          "id": "highlight",
-          "label": "Highlight this link",
-          "default": false,
-          "info": "Applies accent color to this link."
-        }
-      ]
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#000000"
     }
   ],
   "presets": [
     {
-      "name": "Prime Header",
-      "blocks": [
-        {
-          "type": "nav_link",
-          "settings": {
-            "label": "Shop",
-            "url": "/collections/all",
-            "highlight": false
-          }
-        },
-        {
-          "type": "nav_link",
-          "settings": {
-            "label": "Our Story",
-            "url": "/pages/about-us",
-            "highlight": false
-          }
-        },
-        {
-          "type": "nav_link",
-          "settings": {
-            "label": "Blog",
-            "url": "/blogs/news",
-            "highlight": false
-          }
-        }
-      ]
+      "name": "Prime Pet Food Header"
     }
   ]
 }
