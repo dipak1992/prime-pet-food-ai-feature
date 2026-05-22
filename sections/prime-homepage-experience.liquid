@@ -27,8 +27,8 @@
   assign calm_cta_image = 'prime-home-calm-cta-bg.jpg' | asset_url
   assign guarantee_image = 'prime-home-guarantee-bg.jpg' | asset_url
 
-  assign hero_headline = section.settings.hero_headline | default: 'A hard cheese chew your dog can settle into.'
-  assign hero_subtext = section.settings.hero_subtext | default: 'Made with yak milk, cow milk, lime juice, and salt. Based on the Himalayan chhurpi tradition, then packed in Texas for supervised chew time at home.'
+  assign hero_headline = section.settings.hero_headline | default: 'Calm dogs start with a better chew.'
+  assign hero_subtext = section.settings.hero_subtext | default: 'The long-lasting Himalayan yak chew made with just 4 natural ingredients. Rawhide-free, digestible, and crafted for heavy chewers.'
   assign trust_stat_1_value = section.settings.trust_stat_1_value | default: '20,000+'
   assign trust_stat_1_label = section.settings.trust_stat_1_label | default: 'Dog homes served'
   assign trust_stat_2_value = section.settings.trust_stat_2_value | default: '4'
@@ -90,43 +90,24 @@
       <img src="{{ hero_image }}" alt="Golden Retriever settled on a sofa with a Prime Pet Food Himalayan yak chew" width="1672" height="941" loading="eager" fetchpriority="high">
     </div>
     <div class="ph-shell ph-hero__content">
-      <div class="ph-hero__heritage-badge ph-hero-badge" aria-label="Himalayan heritage">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m3 18 6.8-11 4.1 6.2 2.1-3.1L21 18H3Z"/><path d="m9.8 7 1.5 3.2 2.6 3"/><path d="m16 10.1 1.1 2.4"/></svg>
-        Traditional Himalayan Recipe
-      </div>
       <h1 class="ph-hero-headline">{{ hero_headline }}</h1>
-      <div class="ph-hero-rotator" data-ph-hero-rotator>
-        <span class="ph-hero-rotator__prefix">Made for</span>
-        <span class="ph-hero-rotator__words" aria-hidden="true">
-          <span class="ph-hero-rotator__word is-active" data-ph-hero-word>steady chewers</span>
-          <span class="ph-hero-rotator__word" data-ph-hero-word>rawhide-free homes</span>
-          <span class="ph-hero-rotator__word" data-ph-hero-word>quiet work calls</span>
-          <span class="ph-hero-rotator__word" data-ph-hero-word>Himalayan cheese tradition</span>
-        </span>
-        <span class="visually-hidden">steady chewers, rawhide-free homes, quiet work calls, and Himalayan cheese tradition</span>
-      </div>
       <p class="ph-hero-sub">{{ hero_subtext }}</p>
       <div class="ph-actions ph-hero-cta" aria-label="Homepage actions">
-        <a href="/products/himalayan-yak-chews-for-dogs" class="ph-button ph-button--primary ph-cta-btn">Choose your dog's size</a>
-        <a href="#prime-home-shop" class="ph-button ph-button--secondary">See the chews</a>
+        <a href="/products/himalayan-yak-chews-for-dogs" class="ph-button ph-button--primary ph-cta-btn">Shop Yak Chews</a>
+        <a href="#prime-home-shop" class="ph-button ph-button--secondary">See All Sizes</a>
       </div>
-      <p class="ph-hero__micro">Based on Himalayan cheese tradition. Packed in Texas.</p>
       <div class="ph-hero__proof" aria-label="Trust signals">
         <span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Rawhide-free
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          Packed in USA
         </span>
         <span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Made for real chew time
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m3 18 6.8-11 4.1 6.2 2.1-3.1L21 18H3Z"/><path d="m9.8 7 1.5 3.2 2.6 3"/></svg>
+          Crafted using traditional Himalayan recipe
         </span>
         <span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          4 simple ingredients
-        </span>
-        <span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7 10 17l-5-5"/></svg>
-          No mystery extras
+          100% Natural
         </span>
       </div>
       <p class="ph-hero__review"><span>★★★★★</span> 4.9 from 2,400+ dog parents · 30-day promise</p>
@@ -4748,13 +4729,13 @@
       "type": "text",
       "id": "hero_headline",
       "label": "Hero headline",
-      "default": "A longer-lasting chew for dogs who chew hard."
+      "default": "Calm dogs start with a better chew."
     },
     {
       "type": "textarea",
       "id": "hero_subtext",
       "label": "Hero subtext",
-      "default": "Rawhide-free Himalayan yak cheese chews made with 4 natural ingredients for focused, calmer chew time."
+      "default": "The long-lasting Himalayan yak chew made with just 4 natural ingredients. Rawhide-free, digestible, and crafted for heavy chewers."
     },
     {
       "type": "text",
