@@ -1,6 +1,9 @@
 {% liquid
   assign product = all_products['himalayan-yak-chews-for-dogs']
   assign hero_image = section.settings.hero_image | default: 'prime-homepage-hero-lifestyle-golden-v3.jpg' | asset_url
+  assign rawhide_comparison_image = 'prime-rawhide-comparison-infographic-v2.jpg' | asset_url
+  assign puff_infographic_image = 'prime-puff-instructions-infographic.jpg' | asset_url
+  assign puff_video_url = 'https://cdn.shopify.com/videos/c/o/v/d7aeb1ab2e45499ba3b718e8920fe919.mp4'
   assign review_image_1 = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/why_2.webp?v=1759936301'
   assign review_image_2 = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/megayak_2.webp?v=1759936215'
   assign review_image_3 = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/yakcheese_review.webp?v=1759811490'
@@ -27,8 +30,8 @@
   assign calm_cta_image = 'prime-home-calm-cta-bg.jpg' | asset_url
   assign guarantee_image = 'prime-home-guarantee-bg.jpg' | asset_url
 
-  assign hero_headline = section.settings.hero_headline | default: 'Calm dogs start with a better chew.'
-  assign hero_subtext = section.settings.hero_subtext | default: 'The long-lasting Himalayan yak chew made with just 4 natural ingredients. Rawhide-free, digestible, and crafted for heavy chewers.'
+  assign hero_headline = section.settings.hero_headline | default: 'Give your dog something better to settle into.'
+  assign hero_subtext = section.settings.hero_subtext | default: 'A long-lasting Himalayan yak cheese chew made with 4 simple ingredients. Rawhide-free, low odor, and built for supervised calm time.'
   assign trust_stat_1_value = section.settings.trust_stat_1_value | default: '20,000+'
   assign trust_stat_1_label = section.settings.trust_stat_1_label | default: 'Dog homes served'
   assign trust_stat_2_value = section.settings.trust_stat_2_value | default: '4'
@@ -71,9 +74,9 @@
     <div class="ph-sticky-bar__inner">
       <span class="ph-sticky-bar__text">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        Need the right size? Get a quick chew recommendation.
+        Ready for a calmer chew routine?
       </span>
-      <a href="/pages/how-long-will-this-last-for-my-dog" class="ph-sticky-bar__btn">Find My Dog's Chew</a>
+      <a href="/products/himalayan-yak-chews-for-dogs" class="ph-sticky-bar__btn">Shop Yak Chews</a>
     </div>
   </div>
   {% endif %}
@@ -94,12 +97,13 @@
       <p class="ph-hero-sub">{{ hero_subtext }}</p>
       <div class="ph-actions ph-hero-cta" aria-label="Homepage actions">
         <a href="/products/himalayan-yak-chews-for-dogs" class="ph-button ph-button--primary ph-cta-btn">Shop Yak Chews</a>
-        <a href="#prime-home-shop" class="ph-button ph-button--secondary">See All Sizes</a>
+        <a href="/pages/how-long-will-this-last-for-my-dog" class="ph-button ph-button--secondary">Find My Dog's Size</a>
       </div>
       <div class="ph-hero__proof" aria-label="Trust signals">
+        <span>4 simple ingredients</span>
+        <span>Rawhide-free</span>
         <span>Packed in USA</span>
         <span>Traditional Himalayan recipe</span>
-        <span>100% natural</span>
       </div>
       <p class="ph-hero__review"><span>★★★★★</span> 4.9 from 2,400+ dog parents · 30-day promise</p>
     </div>
@@ -132,6 +136,85 @@
           4.9
         </strong>
         <span>2,400+ reviews</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       RAWHIDE-FREE COMPARISON — Visual education, card-first mobile
+  ════════════════════════════════════════════════════════════════ -->
+  <div class="ph-rawhide-story ph-reveal" id="prime-rawhide-comparison">
+    <div class="ph-shell">
+      <div class="ph-section-head ph-section-head--center">
+        <p class="ph-kicker">Rawhide-free comparison</p>
+        <h2>Rawhide asks for a lot of trust.</h2>
+        <p>Prime Pet Food keeps the recipe shorter and the routine clearer: simple dairy ingredients, low odor, dense texture, and no rawhide sheets.</p>
+      </div>
+
+      <figure class="ph-rawhide-story__media">
+        <img src="{{ rawhide_comparison_image }}" alt="Prime Pet Food yak chew versus rawhide visual comparison" loading="lazy" width="1792" height="1024">
+      </figure>
+
+      <div class="ph-rawhide-story__cards" aria-label="Prime Pet Food versus rawhide comparison">
+        <article>
+          <span>Digestibility</span>
+          <strong>Cheese-based</strong>
+          <p>Made for supervised chewing with a clear end-piece routine.</p>
+        </article>
+        <article>
+          <span>Odor</span>
+          <strong>Low odor</strong>
+          <p>Easier for couches, crates, and quiet indoor moments.</p>
+        </article>
+        <article>
+          <span>Risk routine</span>
+          <strong>No rawhide sheets</strong>
+          <p>Remove the small nub early, then puff it after it cools.</p>
+        </article>
+        <article>
+          <span>Ingredients</span>
+          <strong>Four ingredients</strong>
+          <p>Yak milk, cow milk, lime juice, and salt. That is the list.</p>
+        </article>
+        <article>
+          <span>Longevity</span>
+          <strong>Long chew time</strong>
+          <p>Dense texture gives dogs a satisfying job to settle into.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       VALUE — Peace per hour framing
+  ════════════════════════════════════════════════════════════════ -->
+  <div class="ph-value ph-reveal" aria-labelledby="PrimeValueTitle">
+    <div class="ph-shell ph-value__inner">
+      <div class="ph-value__copy">
+        <p class="ph-kicker">Peace per hour</p>
+        <h2 id="PrimeValueTitle">Hours of calm, for less than a daily treat.</h2>
+        <p>When a chew lasts through work calls, dinner prep, or evening wind-down, the value is not just the chew. It is the quieter routine around it.</p>
+        <a href="/pages/how-long-will-this-last-for-my-dog" class="ph-value__link">Choose the right size</a>
+      </div>
+
+      <div class="ph-value__visual" aria-label="Estimated calm-time value">
+        <div class="ph-value__ring">
+          <span>~$0.22</span>
+          <small>estimated calm-time value per hour*</small>
+        </div>
+        <div class="ph-value__bars" aria-label="Soft treat versus yak chew duration">
+          <div>
+            <span>Soft treat</span>
+            <i style="--bar: 22%"></i>
+            <small>gone quickly</small>
+          </div>
+          <div>
+            <span>Prime Pet Food yak chew</span>
+            <i style="--bar: 86%"></i>
+            <small>longer supervised focus</small>
+          </div>
+        </div>
+        <p>Every dog chews differently. Size, jaw strength, tooth health, and supervision matter.</p>
       </div>
     </div>
   </div>
@@ -275,6 +358,55 @@
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════
+       INGREDIENTS — Four ingredient story
+  ════════════════════════════════════════════════════════════════ -->
+  {% if section.settings.show_ingredients %}
+  <div class="ph-ingredients ph-reveal">
+    <div class="ph-shell">
+      <div class="ph-section-head ph-section-head--center" data-motion="reveal">
+        <p class="ph-kicker">The 4 ingredient story</p>
+        <h2 data-motion="reveal">Four ingredients. Nothing to decode.</h2>
+        <p>The recipe is short because it should be: yak milk, cow milk, lime juice, and salt.</p>
+      </div>
+
+      <div class="ph-ingredients__grid" data-motion-stagger="true">
+        <article class="ph-ingredient-card" data-motion="reveal">
+          <img src="{{ ingredient_yak_milk_image }}" alt="Yak milk in a simple ceramic bowl" loading="lazy" width="768" height="768">
+          <span class="ph-ingredient-card__num">01</span>
+          <h3>Yak milk</h3>
+          <p>Part of the traditional Himalayan dairy base.</p>
+        </article>
+        <article class="ph-ingredient-card" data-motion="reveal" data-motion-delay="80">
+          <img src="{{ ingredient_cow_milk_image }}" alt="Cow milk in a clean ceramic pitcher" loading="lazy" width="768" height="768">
+          <span class="ph-ingredient-card__num">02</span>
+          <h3>Cow milk</h3>
+          <p>Helps create the firm cheese body.</p>
+        </article>
+        <article class="ph-ingredient-card" data-motion="reveal" data-motion-delay="160">
+          <img src="{{ ingredient_lime_image }}" alt="Fresh lime halves and lime juice on stone" loading="lazy" width="768" height="768">
+          <span class="ph-ingredient-card__num">03</span>
+          <h3>Lime juice</h3>
+          <p>Helps turn milk into curd.</p>
+        </article>
+        <article class="ph-ingredient-card" data-motion="reveal" data-motion-delay="240">
+          <img src="{{ ingredient_salt_image }}" alt="Natural salt crystals in a small ceramic bowl" loading="lazy" width="768" height="768">
+          <span class="ph-ingredient-card__num">04</span>
+          <h3>Salt</h3>
+          <p>A small amount for the traditional recipe.</p>
+        </article>
+      </div>
+
+      <div class="ph-ingredients__badges">
+        <span>No rawhide</span>
+        <span>No artificial colors</span>
+        <span>No mystery powders</span>
+        <span>Packed in Texas</span>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- ═══════════════════════════════════════════════════════════════
        HIMALAYAN STORY — Origin proof after size selection
   ════════════════════════════════════════════════════════════════ -->
   <div class="ph-himalayan-story ph-reveal" aria-labelledby="PrimeHimalayanStoryTitle">
@@ -290,9 +422,9 @@
       </div>
       <div class="ph-himalayan-story__copy" data-motion-stagger="true">
         <p class="ph-kicker">Where it all comes from</p>
-        <h2 id="PrimeHimalayanStoryTitle" data-motion="reveal">A mountain food tradition, made useful for dogs.</h2>
+        <h2 id="PrimeHimalayanStoryTitle" data-motion="reveal">A Himalayan food tradition, made for modern dog routines.</h2>
         <p>
-          I grew up around chhurpi in Nepal, a hard cheese made with milk, heat, pressure, and time. When I started Prime Pet Food, that simple tradition felt like the honest answer to a very modern dog problem.
+          I grew up around chhurpi in Nepal, a hard cheese made with milk, pressure, drying, and time. Prime Pet Food brings that simple idea into a dog chew parents can understand: short ingredients, clear sizing, and support from people who know the product.
         </p>
         <p>
           Each chew starts with Himalayan farming families and a recipe people have trusted for generations. Our team checks and packs every order in Texas before it reaches your home.
@@ -304,6 +436,84 @@
           <span>Packed in Texas</span>
         </div>
         <a href="/pages/how-himalayan-yak-cheese-chews-are-made" class="ph-himalayan-story__link">See how our chews are made</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       MICROWAVE PUFF — Safety and value education
+  ════════════════════════════════════════════════════════════════ -->
+  <div class="ph-puff-story ph-reveal" id="prime-puff-trick">
+    <div class="ph-shell ph-puff-story__inner">
+      <div class="ph-puff-story__copy">
+        <p class="ph-kicker">The puff trick</p>
+        <h2>When the chew gets small, puff it.</h2>
+        <p>Do not hand the small nub back. Soak it, microwave it, and let it cool into a crunchy cheese treat.</p>
+        <div class="ph-puff-story__steps" aria-label="Microwave puff steps">
+          <article>
+            <span>01</span>
+            <strong>Soak</strong>
+            <p>Place the small end piece in warm water until it softens.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <strong>Microwave</strong>
+            <p>Heat until it puffs. Watch it closely and stop if needed.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <strong>Cool</strong>
+            <p>Let it cool completely before serving the crunchy puff.</p>
+          </article>
+        </div>
+        <div class="ph-puff-story__actions">
+          <a href="/products/himalayan-yak-chews-for-dogs" class="ph-button ph-button--primary">Shop Yak Chews</a>
+          <a href="{{ puff_video_url }}" class="ph-button ph-button--dark" target="_blank" rel="noopener">Watch Puff Trick</a>
+        </div>
+      </div>
+      <figure class="ph-puff-story__media">
+        <img src="{{ puff_infographic_image }}" alt="Prime Pet Food microwave puff trick instructions: soak, microwave, cool" loading="lazy" width="1792" height="1024">
+      </figure>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       UGC VIDEOS — Instagram/TikTok-style social proof
+  ════════════════════════════════════════════════════════════════ -->
+  <div class="ph-ugc-video ph-reveal" id="prime-real-dogs">
+    <div class="ph-shell">
+      <div class="ph-section-head ph-section-head--center">
+        <p class="ph-kicker">Real dogs</p>
+        <h2>Real dogs. Real quiet moments.</h2>
+        <p>Customer videos from homes that use Prime Pet Food chews for work calls, crate practice, and evening wind-downs.</p>
+      </div>
+
+      <div class="ph-ugc-video__rail" aria-label="Prime Pet Food customer video carousel">
+        <article class="ph-ugc-video__card">
+          <video src="{{ '1737008260923.mp4' | file_url }}" muted playsinline preload="metadata" controls></video>
+          <p>Golden Retriever · after-dinner calm time</p>
+        </article>
+        <article class="ph-ugc-video__card">
+          <video src="{{ '1737005781491.mp4' | file_url }}" muted playsinline preload="metadata" controls></video>
+          <p>French Bulldog · steady indoor chew routine</p>
+        </article>
+        <article class="ph-ugc-video__card">
+          <video src="{{ '[Tiktok] Himalayan Yak Cheese 03.mp4' | file_url }}" muted playsinline preload="metadata" controls></video>
+          <p>Labrador · post-walk wind-down</p>
+        </article>
+        <article class="ph-ugc-video__card">
+          <video src="{{ '1737005584344.mp4' | file_url }}" muted playsinline preload="metadata" controls></video>
+          <p>Small breed · quiet crate practice</p>
+        </article>
+      </div>
+
+      <div class="ph-ugc-video__share">
+        <h3>Share your dog's calm-time moment</h3>
+        <p>Post your dog with a Prime Pet Food yak chew and tag us on Instagram or TikTok.</p>
+        <div>
+          <a href="https://www.instagram.com/foodprimepet/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.tiktok.com/@primepetfood" target="_blank" rel="noopener">TikTok</a>
+        </div>
       </div>
     </div>
   </div>
@@ -469,6 +679,7 @@
   </div>
   {% endif %}
 
+  {% comment %}
   <!-- ═══════════════════════════════════════════════════════════════
        SOCIAL PROOF — Real customer stories
   ════════════════════════════════════════════════════════════════ -->
@@ -476,8 +687,8 @@
     <div class="ph-shell">
       <div class="ph-reviews__top">
         <div class="ph-section-head" data-motion="reveal">
-          <p class="ph-kicker">Real results</p>
-          <h2 data-motion="reveal">What dog parents notice first.</h2>
+          <p class="ph-kicker">Real dog homes</p>
+          <h2 data-motion="reveal">Quieter routines, in their own words.</h2>
         </div>
         <div class="ph-reviews__controls" aria-label="Review carousel controls">
           <button type="button" class="ph-reviews__arrow" data-prime-review-prev aria-label="Previous review">
@@ -555,7 +766,36 @@
       </div>
     </div>
   </div>
+  {% endcomment %}
 
+  <!-- ═══════════════════════════════════════════════════════════════
+       SUBSCRIBE & SAVE — Convenience after proof
+  ════════════════════════════════════════════════════════════════ -->
+  <div class="ph-subscribe ph-reveal">
+    <div class="ph-shell ph-subscribe__inner">
+      <div class="ph-subscribe__media">
+        <img src="{{ subscribe_dog_image }}" alt="Dog near a Prime Pet Food delivery box in a warm home setting" loading="lazy" width="1024" height="1024">
+      </div>
+      <div class="ph-subscribe__copy">
+        <p class="ph-kicker">Subscribe &amp; Save</p>
+        <h2>Keep the calm-time drawer stocked.</h2>
+        <p>Set your dog's chew rhythm once. Skip, pause, or change it whenever their routine changes.</p>
+        <div class="ph-subscribe__benefits" aria-label="Subscribe and Save benefits">
+          <span>Never run out</span>
+          <span>Save on repeat orders</span>
+          <span>Adjust anytime</span>
+        </div>
+        <div class="ph-subscribe__cadence" aria-label="Delivery cadence example">
+          <span>Pick your size</span>
+          <span>Choose the rhythm</span>
+          <span>Change anytime</span>
+        </div>
+        <a href="/pages/subscribe-and-save" class="ph-subscribe__link">Start Subscribe &amp; Save</a>
+      </div>
+    </div>
+  </div>
+
+  {% comment %}
   <!-- ═══════════════════════════════════════════════════════════════
        WHY DIFFERENT — Comparison table
   ════════════════════════════════════════════════════════════════ -->
@@ -687,6 +927,7 @@
       </div>
     </div>
   </div>
+  {% endcomment %}
 
   <!-- ═══════════════════════════════════════════════════════════════
        ROUTINE — How to use the chew safely
@@ -723,13 +964,13 @@
   <!-- ═══════════════════════════════════════════════════════════════
        INGREDIENTS — Transparency section
   ════════════════════════════════════════════════════════════════ -->
-  {% if section.settings.show_ingredients %}
-  <div class="ph-ingredients ph-reveal ph-mobile-secondary">
+  {% if false and section.settings.show_ingredients %}
+  <div class="ph-ingredients ph-reveal">
     <div class="ph-shell">
       <div class="ph-section-head ph-section-head--center" data-motion="reveal">
-        <p class="ph-kicker">What's inside (all of it)</p>
-        <h2 data-motion="reveal">Four ingredients. That's the whole list.</h2>
-        <p>We keep the recipe short because dogs do not need a complicated chew. Yak milk, cow milk, lime juice, and salt. No rawhide. No artificial color. No mystery powders.</p>
+        <p class="ph-kicker">The 4 ingredient story</p>
+        <h2 data-motion="reveal">Four ingredients. Nothing to decode.</h2>
+        <p>The recipe is short because it should be: yak milk, cow milk, lime juice, and salt. No rawhide. No artificial color. No mystery powders.</p>
       </div>
 
       <div class="ph-ingredients__grid" data-motion-stagger="true">
@@ -1281,6 +1522,340 @@
     text-transform: uppercase;
     letter-spacing: 0.04em;
     font-weight: 600;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     RAWHIDE COMPARISON + VALUE + PUFF
+  ════════════════════════════════════════════════════════════════ */
+  .ph-rawhide-story {
+    padding: 88px 0;
+    background:
+      radial-gradient(circle at 12% 16%, rgba(184, 95, 50, 0.1), transparent 32%),
+      linear-gradient(180deg, #fffaf2 0%, #f7efe4 100%);
+    overflow: hidden;
+  }
+
+  .ph-rawhide-story__media {
+    margin: 0 auto 22px;
+    max-width: 960px;
+    overflow: hidden;
+    border: 1px solid rgba(55, 43, 31, 0.12);
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 22px 60px rgba(43, 20, 8, 0.12);
+  }
+
+  .ph-rawhide-story__media img {
+    width: 100%;
+    display: block;
+    height: auto;
+  }
+
+  .ph-rawhide-story__cards {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .ph-rawhide-story__cards article {
+    min-height: 100%;
+    padding: 18px;
+    border: 1px solid rgba(55, 43, 31, 0.12);
+    border-radius: var(--ph-radius);
+    background: rgba(255, 255, 255, 0.84);
+    box-shadow: 0 12px 30px rgba(43, 20, 8, 0.06);
+  }
+
+  .ph-rawhide-story__cards span,
+  .ph-puff-story__steps span {
+    display: inline-flex;
+    margin-bottom: 10px;
+    color: var(--ph-clay);
+    font-size: 11px;
+    line-height: 1;
+    font-weight: 820;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .ph-rawhide-story__cards strong,
+  .ph-puff-story__steps strong {
+    display: block;
+    color: var(--ph-ink);
+    font-size: 18px;
+    line-height: 1.2;
+    font-weight: 780;
+  }
+
+  .ph-rawhide-story__cards p,
+  .ph-puff-story__steps p {
+    margin: 10px 0 0;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .ph-value {
+    padding: 92px 0;
+    background:
+      radial-gradient(circle at 78% 18%, rgba(244, 194, 125, 0.14), transparent 30%),
+      #183d2b;
+    color: #fffaf2;
+  }
+
+  .ph-value__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.78fr) minmax(360px, 1fr);
+    gap: clamp(30px, 6vw, 82px);
+    align-items: center;
+  }
+
+  .ph-value .ph-kicker {
+    color: #f4c27d;
+  }
+
+  .ph-value h2,
+  .ph-value p {
+    color: #fffaf2;
+  }
+
+  .ph-value__copy p {
+    max-width: 560px;
+    color: rgba(255, 250, 242, 0.8);
+  }
+
+  .ph-value__link {
+    display: inline-flex;
+    min-height: 50px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 18px;
+    border-radius: 999px;
+    padding: 0 22px;
+    background: #fffaf2;
+    color: #183d2b;
+    font-size: 13px;
+    line-height: 1;
+    font-weight: 820;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .ph-value__visual {
+    display: grid;
+    gap: 18px;
+    padding: 26px;
+    border: 1px solid rgba(255, 250, 242, 0.16);
+    border-radius: 18px;
+    background: rgba(255, 250, 242, 0.08);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.2);
+  }
+
+  .ph-value__ring {
+    display: grid;
+    width: min(100%, 300px);
+    aspect-ratio: 1 / 1;
+    place-items: center;
+    margin-inline: auto;
+    border-radius: 999px;
+    background:
+      radial-gradient(circle at center, #183d2b 0 56%, transparent 57%),
+      conic-gradient(#f4c27d 0 78%, rgba(255, 250, 242, 0.14) 78% 100%);
+    text-align: center;
+  }
+
+  .ph-value__ring span {
+    display: block;
+    color: #f4c27d;
+    font-size: clamp(46px, 7vw, 74px);
+    line-height: 0.95;
+    font-weight: 840;
+  }
+
+  .ph-value__ring small {
+    display: block;
+    max-width: 160px;
+    margin-top: 8px;
+    color: rgba(255, 250, 242, 0.78);
+    font-size: 12px;
+    line-height: 1.35;
+    font-weight: 720;
+    text-transform: uppercase;
+  }
+
+  .ph-value__bars {
+    display: grid;
+    gap: 12px;
+  }
+
+  .ph-value__bars div {
+    display: grid;
+    grid-template-columns: minmax(110px, 0.52fr) minmax(120px, 1fr) auto;
+    gap: 12px;
+    align-items: center;
+    color: rgba(255, 250, 242, 0.9);
+    font-size: 13px;
+    font-weight: 760;
+  }
+
+  .ph-value__bars i {
+    display: block;
+    height: 12px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #f4c27d var(--bar), rgba(255, 250, 242, 0.16) var(--bar));
+  }
+
+  .ph-value__bars small {
+    color: rgba(255, 250, 242, 0.64);
+    font-size: 12px;
+    line-height: 1.2;
+  }
+
+  .ph-value__visual > p {
+    margin: 0;
+    color: rgba(255, 250, 242, 0.62);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .ph-puff-story {
+    padding: 88px 0;
+    background: #fffaf2;
+  }
+
+  .ph-puff-story__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(340px, 1fr);
+    gap: clamp(28px, 5vw, 62px);
+    align-items: center;
+  }
+
+  .ph-puff-story__copy p:not(.ph-kicker) {
+    max-width: 560px;
+  }
+
+  .ph-puff-story__steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 26px;
+  }
+
+  .ph-puff-story__steps article {
+    padding: 18px;
+    border: 1px solid var(--ph-line);
+    border-radius: var(--ph-radius);
+    background: #fff;
+  }
+
+  .ph-puff-story__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  .ph-puff-story__media {
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid var(--ph-line);
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 22px 60px rgba(43, 20, 8, 0.1);
+  }
+
+  .ph-puff-story__media img {
+    width: 100%;
+    display: block;
+    height: auto;
+  }
+
+  .ph-ugc-video {
+    padding: 88px 0;
+    background:
+      radial-gradient(circle at 84% 10%, rgba(184, 95, 50, 0.08), transparent 32%),
+      #f8f1e7;
+    overflow: hidden;
+  }
+
+  .ph-ugc-video__rail {
+    display: flex;
+    gap: 16px;
+    margin-inline: -12px;
+    padding: 4px 12px 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ph-ugc-video__card {
+    flex: 0 0 min(270px, 76vw);
+    scroll-snap-align: start;
+    overflow: hidden;
+    border: 1px solid var(--ph-line);
+    border-radius: 18px;
+    background: #fffaf2;
+    box-shadow: 0 18px 44px rgba(43, 20, 8, 0.1);
+  }
+
+  .ph-ugc-video__card video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 9 / 14;
+    object-fit: cover;
+    background: #171512;
+  }
+
+  .ph-ugc-video__card p {
+    margin: 0;
+    padding: 14px;
+    color: var(--ph-ink);
+    font-size: 13px;
+    line-height: 1.35;
+    font-weight: 760;
+  }
+
+  .ph-ugc-video__share {
+    display: grid;
+    gap: 8px;
+    max-width: 680px;
+    margin: 22px auto 0;
+    padding: 22px;
+    border: 1px solid var(--ph-line);
+    border-radius: var(--ph-radius);
+    background: rgba(255, 250, 242, 0.78);
+    text-align: center;
+  }
+
+  .ph-ugc-video__share h3 {
+    font-size: 22px;
+  }
+
+  .ph-ugc-video__share p {
+    margin: 0;
+    font-size: 15px;
+  }
+
+  .ph-ugc-video__share div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 8px;
+  }
+
+  .ph-ugc-video__share a {
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 0 18px;
+    background: var(--ph-ink);
+    color: #fffaf2;
+    font-size: 12px;
+    font-weight: 820;
+    text-decoration: none;
+    text-transform: uppercase;
   }
 
   /* ═══════════════════════════════════════════════════════════════
@@ -2928,6 +3503,77 @@
       font-size: 18px;
     }
 
+    .ph-rawhide-story,
+    .ph-value,
+    .ph-puff-story,
+    .ph-ugc-video {
+      padding: 56px 0;
+    }
+
+    .ph-rawhide-story .ph-section-head {
+      text-align: left;
+      margin-bottom: 22px;
+    }
+
+    .ph-rawhide-story__media {
+      display: none;
+    }
+
+    .ph-rawhide-story__cards {
+      display: flex;
+      gap: 12px;
+      margin-inline: -12px;
+      padding: 0 12px 10px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .ph-rawhide-story__cards article {
+      flex: 0 0 82%;
+      scroll-snap-align: start;
+      padding: 18px;
+    }
+
+    .ph-value__inner,
+    .ph-puff-story__inner {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .ph-value__visual {
+      padding: 18px;
+      border-radius: 14px;
+    }
+
+    .ph-value__ring {
+      width: min(100%, 236px);
+    }
+
+    .ph-value__bars div {
+      grid-template-columns: 1fr;
+      gap: 7px;
+    }
+
+    .ph-value__bars i {
+      width: 100%;
+    }
+
+    .ph-puff-story__steps {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .ph-puff-story__actions {
+      display: grid;
+      gap: 10px;
+    }
+
+    .ph-puff-story__media {
+      border-radius: 14px;
+    }
+
     .ph-confidence {
       grid-template-columns: 1fr;
       gap: 8px;
@@ -3020,7 +3666,6 @@
     }
 
     .ph-routine,
-    .ph-ingredients,
     .ph-fit,
     .ph-craft,
     .ph-vet,
@@ -3498,6 +4143,9 @@
   }
 
   .ph-quiz,
+  .ph-rawhide-story,
+  .ph-value,
+  .ph-puff-story,
   .ph-subscribe,
   .ph-reviews,
   .ph-compare,
@@ -3515,6 +4163,9 @@
 
   @media (max-width: 560px) {
     .ph-quiz,
+    .ph-rawhide-story,
+    .ph-value,
+    .ph-puff-story,
     .ph-subscribe,
     .ph-reviews,
     .ph-compare,
@@ -4579,13 +5230,13 @@
       "type": "text",
       "id": "hero_headline",
       "label": "Hero headline",
-      "default": "Calm dogs start with a better chew."
+      "default": "Give your dog something better to settle into."
     },
     {
       "type": "textarea",
       "id": "hero_subtext",
       "label": "Hero subtext",
-      "default": "The long-lasting Himalayan yak chew made with just 4 natural ingredients. Rawhide-free, digestible, and crafted for heavy chewers."
+      "default": "A long-lasting Himalayan yak cheese chew made with 4 simple ingredients. Rawhide-free, low odor, and built for supervised calm time."
     },
     {
       "type": "text",
@@ -4654,7 +5305,7 @@
       "type": "checkbox",
       "id": "show_quiz",
       "label": "Show Find Your Chew quiz",
-      "default": true
+      "default": false
     },
     {
       "type": "checkbox",
@@ -4672,7 +5323,7 @@
       "type": "checkbox",
       "id": "show_subscribe",
       "label": "Show Subscribe & Save section",
-      "default": true
+      "default": false
     },
     {
       "type": "checkbox",

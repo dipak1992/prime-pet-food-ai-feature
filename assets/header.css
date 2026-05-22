@@ -284,10 +284,42 @@
 .header__desktop-right {
   display: flex;
   align-items: center;
+  gap: 1.2rem;
   position: relative;
   justify-content: flex-end;
   min-height: 44px;
   flex-shrink: 0;
+}
+
+.header__search-trigger-desktop,
+.header__contact,
+.header-mobile .header__search-trigger-mobile,
+.header-mobile__right > .header__icon-link[aria-label="Contact"],
+.header-mobile__right > .header__icon-link[aria-label="Account"] {
+  display: none;
+}
+
+.header__size-cta {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(23, 59, 43, 0.16);
+  border-radius: 999px;
+  padding: 0 1.5rem;
+  background: rgba(255, 247, 234, 0.78);
+  color: var(--header-text);
+  font-size: 1.18rem;
+  line-height: 1;
+  font-weight: 720;
+  text-decoration: none;
+  transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+
+.header__size-cta:hover {
+  border-color: var(--header-accent);
+  background: var(--header-accent);
+  color: #fffaf2;
 }
 
 .header__search-trigger-desktop {

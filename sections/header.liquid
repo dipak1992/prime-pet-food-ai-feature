@@ -68,50 +68,11 @@
 
         <nav class="header__nav desktop-only">
           <ul class="header__menu">
-            {%- if section.settings.menu != blank and section.settings.menu.links.size > 0 -%}
-              {%- for link in section.settings.menu.links -%}
-                {%- liquid
-                  assign link_url = link.url
-                  assign link_title = link.title | downcase | strip
-                  if link_title == 'shop' and link.url contains '/collections/all'
-                    assign link_url = prime_shop_collection_url
-                  endif
-                -%}
-                <li class="header__menu-item{% if link.links != blank %} has-dropdown{% endif %}">
-                  <a href="{{ link_url }}" class="header__link{% if link.current %} header__link--active{% endif %}">
-                    {{ link.title | escape }}
-                    {%- if link.links != blank -%}
-                      {% render 'icon', icon: 'chevron_down', size: 12 %}
-                    {%- endif -%}
-                  </a>
-                  {%- if link.links != blank -%}
-                    <ul class="header__dropdown">
-                      {%- for childlink in link.links -%}
-                        <li class="header__dropdown-item{% if childlink.links != blank %} has-sub-dropdown{% endif %}">
-                          <a href="{{ childlink.url }}" class="header__dropdown-link">
-                            {{ childlink.title | escape }}
-                            {%- if childlink.links != blank -%}
-                              {% render 'icon', icon: 'chevron_right', size: 12 %}
-                            {%- endif -%}
-                          </a>
-                          {%- if childlink.links != blank -%}
-                            <ul class="header__sub-dropdown">
-                              {%- for grandchildlink in childlink.links -%}
-                                <li class="header__sub-dropdown-item">
-                                  <a href="{{ grandchildlink.url }}" class="header__sub-dropdown-link">
-                                    {{ grandchildlink.title | escape }}
-                                  </a>
-                                </li>
-                              {%- endfor -%}
-                            </ul>
-                          {%- endif -%}
-                        </li>
-                      {%- endfor -%}
-                    </ul>
-                  {%- endif -%}
-                </li>
-              {%- endfor -%}
-            {%- endif -%}
+            <li class="header__menu-item"><a href="{{ prime_shop_collection_url }}" class="header__link">Shop</a></li>
+            <li class="header__menu-item"><a href="/pages/best-rawhide-alternative" class="header__link">Why Yak Chews</a></li>
+            <li class="header__menu-item"><a href="/pages/subscribe-and-save" class="header__link">Subscribe</a></li>
+            <li class="header__menu-item"><a href="/pages/about-us" class="header__link">Our Story</a></li>
+            <li class="header__menu-item"><a href="/products/himalayan-yak-chews-for-dogs#judgeme_product_reviews" class="header__link">Reviews</a></li>
           </ul>
         </nav>
 
@@ -123,6 +84,7 @@
 
         {%- comment -%} Desktop Icons Row {%- endcomment -%}
         <div class="header__desktop-right">
+          <a href="/pages/how-long-will-this-last-for-my-dog" class="header__size-cta desktop-only">Find My Dog's Size</a>
           <div class="header__icons-row">
             {%- comment -%} Search Icon {%- endcomment -%}
             {%- unless template.name == 'search' -%}
@@ -266,78 +228,11 @@
       </div>
       <nav class="header__drawer-nav">
         <ul class="header__drawer-menu">
-          {%- if section.settings.menu != blank and section.settings.menu.links.size > 0 -%}
-            {%- for link in section.settings.menu.links -%}
-              {%- liquid
-                assign link_url = link.url
-                assign link_title = link.title | downcase | strip
-                if link_title == 'shop' and link.url contains '/collections/all'
-                  assign link_url = prime_shop_collection_url
-                endif
-              -%}
-              <li class="header__drawer-item{% if link.links != blank %} has-submenu{% endif %}">
-                <div class="header__drawer-item-header">
-                  <a href="{{ link_url }}" class="header__drawer-link">{{ link.title }}</a>
-                  {%- if link.links != blank -%}
-                    <button class="header__drawer-toggle" aria-expanded="false">
-                      {% render 'icon', icon: 'chevron_down', size: 16 %}
-                    </button>
-                  {%- endif -%}
-                </div>
-                {%- if link.links != blank -%}
-                  <ul class="header__drawer-submenu">
-                    {%- for childlink in link.links -%}
-                      <li class="header__drawer-submenu-item{% if childlink.links != blank %} has-submenu{% endif %}">
-                        <div class="header__drawer-item-header">
-                          <a href="{{ childlink.url }}" class="header__drawer-submenu-link">{{ childlink.title }}</a>
-                          {%- if childlink.links != blank -%}
-                            <button class="header__drawer-toggle" aria-expanded="false">
-                              {% render 'icon', icon: 'chevron_down', size: 14 %}
-                            </button>
-                          {%- endif -%}
-                        </div>
-                        {%- if childlink.links != blank -%}
-                          <ul class="header__drawer-grandsubmenu">
-                            {%- for grandchildlink in childlink.links -%}
-                              <li>
-                                <a href="{{ grandchildlink.url }}" class="header__drawer-grandsubmenu-link">{{ grandchildlink.title }}</a>
-                              </li>
-                            {%- endfor -%}
-                          </ul>
-                        {%- endif -%}
-                      </li>
-                    {%- endfor -%}
-                  </ul>
-                {%- endif -%}
-              </li>
-            {%- endfor -%}
-          {%- else -%}
-            <li class="header__drawer-item">
-              <div class="header__drawer-item-header">
-                <a href="{{ prime_shop_collection_url }}" class="header__drawer-link">Shop</a>
-              </div>
-            </li>
-            <li class="header__drawer-item">
-              <div class="header__drawer-item-header">
-                <a href="/pages/how-long-will-this-last-for-my-dog" class="header__drawer-link">Find My Dog's Size</a>
-              </div>
-            </li>
-            <li class="header__drawer-item">
-              <div class="header__drawer-item-header">
-                <a href="/pages/subscribe-and-save" class="header__drawer-link">Subscribe &amp; Save</a>
-              </div>
-            </li>
-            <li class="header__drawer-item">
-              <div class="header__drawer-item-header">
-                <a href="/pages/how-himalayan-yak-cheese-chews-are-made" class="header__drawer-link">How Yak Chews Are Made</a>
-              </div>
-            </li>
-            <li class="header__drawer-item">
-              <div class="header__drawer-item-header">
-                <a href="/pages/about-us" class="header__drawer-link">About Prime Pet Food</a>
-              </div>
-            </li>
-          {%- endif -%}
+          <li class="header__drawer-item"><div class="header__drawer-item-header"><a href="{{ prime_shop_collection_url }}" class="header__drawer-link">Shop</a></div></li>
+          <li class="header__drawer-item"><div class="header__drawer-item-header"><a href="/pages/best-rawhide-alternative" class="header__drawer-link">Why Yak Chews</a></div></li>
+          <li class="header__drawer-item"><div class="header__drawer-item-header"><a href="/pages/subscribe-and-save" class="header__drawer-link">Subscribe</a></div></li>
+          <li class="header__drawer-item"><div class="header__drawer-item-header"><a href="/pages/about-us" class="header__drawer-link">Our Story</a></div></li>
+          <li class="header__drawer-item"><div class="header__drawer-item-header"><a href="/products/himalayan-yak-chews-for-dogs#judgeme_product_reviews" class="header__drawer-link">Reviews</a></div></li>
         </ul>
       </nav>
     </div>

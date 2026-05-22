@@ -17,8 +17,8 @@
         "announcement-bar-0": {
           "type": "announcement",
           "settings": {
-            "text": "<strong>Free shipping $30+ · 30-day guarantee · Rawhide-free</strong>",
-            "mobile_text": "Free shipping $30+ · 30-day guarantee",
+            "text": "<strong>Traditional Himalayan recipe. Packed in the USA.</strong>",
+            "mobile_text": "Traditional Himalayan recipe.",
             "announcement_pages": "",
             "color_scheme": "scheme-7"
           }
@@ -26,8 +26,8 @@
         "01f1744f-4bdc-4966-8eb5-a7fdf375e9a5": {
           "type": "announcement",
           "settings": {
-            "text": "★★★★★ Rated 4.9 by 2,400+ dog parents",
-            "mobile_text": "4.9★ from 2,400+ dog parents",
+            "text": "Rawhide-free chews for supervised calm time.",
+            "mobile_text": "Rawhide-free calm time.",
             "announcement_pages": "",
             "color_scheme": "scheme-7"
           }
@@ -35,8 +35,8 @@
         "announcement_PCnhfx": {
           "type": "announcement",
           "settings": {
-            "text": "Subscribe & Save up to 30% · skip or cancel anytime",
-            "mobile_text": "Subscribe & Save up to 30%",
+            "text": "4 simple ingredients: yak milk, cow milk, lime juice, salt.",
+            "mobile_text": "4 simple ingredients.",
             "announcement_pages": "",
             "color_scheme": "scheme-7"
           }
@@ -129,7 +129,7 @@
         "contact_number": "123-456-7890",
         "bg_color": "#fffaf2",
         "text_color": "#173b2b",
-        "accent_color": "#eb7300"
+        "accent_color": "#b35b2f"
       }
     }
   },
