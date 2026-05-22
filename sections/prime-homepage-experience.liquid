@@ -2,7 +2,8 @@
   assign product = all_products['himalayan-yak-chews-for-dogs']
   assign hero_image = section.settings.hero_image | default: 'prime-homepage-hero-lifestyle-golden-v3.jpg' | asset_url
   assign rawhide_comparison_image = 'prime-rawhide-comparison-infographic-v2.jpg' | asset_url
-  assign puff_infographic_image = 'prime-puff-instructions-infographic.jpg' | asset_url
+  assign puff_infographic_image = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/puff_hack.png?v=1779455932'
+  assign value_infographic_image = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/2nd-hero.png?v=1779455932'
   assign puff_video_url = 'https://cdn.shopify.com/videos/c/o/v/d7aeb1ab2e45499ba3b718e8920fe919.mp4'
   assign review_image_1 = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/why_2.webp?v=1759936301'
   assign review_image_2 = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/megayak_2.webp?v=1759936215'
@@ -198,6 +199,9 @@
       </div>
 
       <div class="ph-value__visual" aria-label="Estimated calm-time value">
+        <figure class="ph-value__image">
+          <img src="{{ value_infographic_image }}" alt="Prime Pet Food peace per hour value visual" loading="lazy" width="1792" height="1024">
+        </figure>
         <div class="ph-value__ring">
           <span>~$0.22</span>
           <small>estimated calm-time value per hour*</small>
@@ -1738,9 +1742,23 @@
     box-shadow: 0 24px 70px rgba(0, 0, 0, 0.2);
   }
 
+  .ph-value__image {
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid rgba(255, 250, 242, 0.16);
+    border-radius: 14px;
+    background: rgba(255, 250, 242, 0.1);
+  }
+
+  .ph-value__image img {
+    width: 100%;
+    display: block;
+    height: auto;
+  }
+
   .ph-value__ring {
     display: grid;
-    width: min(100%, 300px);
+    width: min(100%, 240px);
     aspect-ratio: 1 / 1;
     place-items: center;
     margin-inline: auto;
@@ -3604,7 +3622,9 @@
     }
 
     .ph-rawhide-story__media {
-      display: none;
+      display: block;
+      margin-bottom: 16px;
+      border-radius: 14px;
     }
 
     .ph-rawhide-story__cards {
@@ -3629,13 +3649,22 @@
       gap: 24px;
     }
 
+    .ph-value__copy {
+      order: 2;
+    }
+
     .ph-value__visual {
+      order: 1;
       padding: 18px;
       border-radius: 14px;
     }
 
+    .ph-value__image {
+      border-radius: 12px;
+    }
+
     .ph-value__ring {
-      width: min(100%, 236px);
+      width: min(100%, 210px);
     }
 
     .ph-value__bars div {
@@ -3647,10 +3676,29 @@
       width: 100%;
     }
 
+    .ph-puff-story__copy {
+      display: grid;
+    }
+
+    .ph-puff-story__media {
+      order: -1;
+      border-radius: 14px;
+    }
+
     .ph-puff-story__steps {
-      grid-template-columns: 1fr;
-      gap: 10px;
+      display: flex;
+      gap: 12px;
+      margin-inline: -12px;
+      padding: 0 12px 10px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
       margin-top: 20px;
+    }
+
+    .ph-puff-story__steps article {
+      flex: 0 0 82%;
+      scroll-snap-align: start;
     }
 
     .ph-puff-story__actions {
@@ -3658,8 +3706,20 @@
       gap: 10px;
     }
 
-    .ph-puff-story__media {
-      border-radius: 14px;
+    .ph-ingredients__grid {
+      display: flex;
+      grid-template-columns: none;
+      gap: 12px;
+      margin-inline: -12px;
+      padding: 0 12px 10px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .ph-ingredient-card {
+      flex: 0 0 82%;
+      scroll-snap-align: start;
     }
 
     .ph-confidence {
