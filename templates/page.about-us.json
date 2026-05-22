@@ -86,6 +86,7 @@
   "order": [
     "breadcrumbs",
     "main",
+    "about_us_hero",
     "prime_founder_about"
   ]
 }
