@@ -1,131 +1,176 @@
 {%- comment -%}
-  Zero Waste, Zero Choking — Microwave Safety Hack Section
+  Microwave Puff Section
   File: sections/prime-zero-waste-puff.liquid
-  
-  A highly visible, graphically appealing section explaining how to turn
-  the dangerous end piece into a safe cheese puff. Designed for homepage
-  and every PDP.
-  
-  Usage: Add to any template JSON as a section.
+
+  Shows customers how to turn the small yak chew end piece into a crunchy
+  cheese puff with a clear infographic, video, and short safety steps.
 {%- endcomment -%}
 
 {%- liquid
   assign cta_url = section.settings.cta_url | default: '/products/himalayan-yak-chews-for-dogs'
+  assign infographic_image = section.settings.infographic_image | default: 'prime-puff-instructions-infographic.jpg' | asset_url
 -%}
 
 <section class="pzw" aria-labelledby="PrimeZeroWasteTitle">
   <style>
     .pzw {
-      --pzw-bg: #1a0f00;
-      --pzw-accent: #f59e0b;
-      --pzw-text: #fff;
-      --pzw-muted: rgba(255,255,255,0.75);
-      background: var(--pzw-bg);
-      color: var(--pzw-text);
-      padding: clamp(48px, 8vw, 80px) 24px;
+      --pzw-bg: #fff7ea;
+      --pzw-ink: #1f1710;
+      --pzw-muted: #67594b;
+      --pzw-panel: #fffdf7;
+      --pzw-line: rgba(69, 52, 36, 0.14);
+      --pzw-accent: #b35b2f;
+      --pzw-green: #183d2b;
+      background:
+        radial-gradient(circle at 16% 0%, rgba(179, 91, 47, 0.14), transparent 30%),
+        linear-gradient(180deg, #fff9ef 0%, var(--pzw-bg) 100%);
+      color: var(--pzw-ink);
+      padding: clamp(48px, 8vw, 86px) 20px;
       font-family: var(--font-body-family, -apple-system, sans-serif);
       overflow: hidden;
     }
 
     .pzw__inner {
-      max-width: 1080px;
+      max-width: 1160px;
       margin: 0 auto;
     }
 
     .pzw__header {
+      max-width: 760px;
+      margin: 0 auto 30px;
       text-align: center;
-      margin-bottom: 48px;
     }
 
     .pzw__badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      background: rgba(245, 158, 11, 0.15);
-      border: 1px solid rgba(245, 158, 11, 0.4);
-      border-radius: 100px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
+      justify-content: center;
+      padding: 7px 14px;
+      margin-bottom: 14px;
+      border: 1px solid rgba(24, 61, 43, 0.18);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.58);
+      color: var(--pzw-green);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.11em;
       text-transform: uppercase;
-      color: var(--pzw-accent);
-      margin-bottom: 16px;
     }
 
     .pzw__title {
-      font-size: clamp(26px, 4vw, 42px);
-      font-weight: 800;
-      line-height: 1.15;
-      margin: 0 0 14px;
-      color: var(--pzw-text);
+      max-width: 680px;
+      margin: 0 auto 12px;
+      color: var(--pzw-ink);
+      font-size: clamp(30px, 4.8vw, 52px);
+      font-weight: 780;
+      letter-spacing: 0;
+      line-height: 1.04;
     }
 
     .pzw__subtitle {
-      font-size: 17px;
-      color: var(--pzw-muted);
-      max-width: 620px;
+      max-width: 650px;
       margin: 0 auto;
-      line-height: 1.6;
+      color: var(--pzw-muted);
+      font-size: clamp(15px, 2vw, 18px);
+      line-height: 1.55;
+    }
+
+    .pzw__visual-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
+      gap: 20px;
+      align-items: stretch;
+      margin: 0 0 26px;
+    }
+
+    .pzw__visual-grid--solo {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .pzw__infographic,
+    .pzw__video-card {
+      margin: 0;
+      overflow: hidden;
+      border: 1px solid var(--pzw-line);
+      border-radius: 18px;
+      background: var(--pzw-panel);
+      box-shadow: 0 22px 58px rgba(58, 39, 23, 0.14);
+    }
+
+    .pzw__infographic img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 360px;
+      object-fit: cover;
+    }
+
+    .pzw__video-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pzw__video {
+      display: block;
+      width: 100%;
+      flex: 1;
+      min-height: 360px;
+      object-fit: cover;
+      background: #140e0a;
+    }
+
+    .pzw__video-caption {
+      margin: 0;
+      padding: 14px 16px;
+      border-top: 1px solid var(--pzw-line);
+      color: var(--pzw-muted);
+      font-size: 13px;
+      line-height: 1.45;
     }
 
     .pzw__steps {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      margin-bottom: 48px;
-    }
-
-    @media (max-width: 768px) {
-      .pzw__steps {
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .pzw__steps {
-        grid-template-columns: 1fr;
-      }
+      gap: 14px;
+      margin-bottom: 24px;
     }
 
     .pzw__step {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 16px;
-      padding: 24px 20px;
-      text-align: center;
       position: relative;
+      min-height: 150px;
+      padding: 22px 18px 20px;
+      border: 1px solid var(--pzw-line);
+      border-radius: 16px;
+      background: rgba(255, 253, 247, 0.78);
     }
 
     .pzw__step-num {
-      position: absolute;
-      top: 12px;
-      left: 16px;
-      font-size: 11px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      margin-bottom: 15px;
+      border-radius: 999px;
+      background: var(--pzw-green);
+      color: #fff7ea;
+      font-size: 13px;
       font-weight: 800;
-      color: var(--pzw-accent);
-      opacity: 0.7;
-    }
-
-    .pzw__step-icon {
-      font-size: 36px;
-      margin-bottom: 12px;
-      display: block;
     }
 
     .pzw__step-title {
+      margin: 0 0 7px;
+      color: var(--pzw-ink);
       font-size: 15px;
-      font-weight: 700;
-      margin: 0 0 6px;
-      color: var(--pzw-text);
+      font-weight: 760;
+      line-height: 1.25;
     }
 
     .pzw__step-desc {
-      font-size: 13px;
-      color: var(--pzw-muted);
       margin: 0;
-      line-height: 1.5;
+      color: var(--pzw-muted);
+      font-size: 13px;
+      line-height: 1.48;
     }
 
     .pzw__arrow {
@@ -138,17 +183,17 @@
         align-items: center;
         justify-content: center;
         position: absolute;
-        right: -16px;
+        right: -18px;
         top: 50%;
-        transform: translateY(-50%);
+        z-index: 2;
         width: 28px;
         height: 28px;
+        transform: translateY(-50%);
+        border-radius: 999px;
         background: var(--pzw-accent);
-        border-radius: 50%;
-        color: var(--pzw-bg);
+        color: #fff7ea;
         font-size: 14px;
         font-weight: 900;
-        z-index: 2;
       }
 
       .pzw__step:last-child .pzw__arrow {
@@ -157,131 +202,215 @@
     }
 
     .pzw__safety-box {
-      background: linear-gradient(135deg, rgba(22, 163, 74, 0.1), rgba(22, 163, 74, 0.05));
-      border: 1px solid rgba(22, 163, 74, 0.3);
-      border-radius: 16px;
-      padding: 24px 28px;
-      display: flex;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
       align-items: flex-start;
-      gap: 16px;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
+      padding: 20px;
+      border: 1px solid rgba(24, 61, 43, 0.16);
+      border-radius: 18px;
+      background: rgba(24, 61, 43, 0.08);
     }
 
     .pzw__safety-icon {
-      width: 44px;
-      height: 44px;
-      background: rgba(22, 163, 74, 0.2);
-      border-radius: 12px;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
-      flex-shrink: 0;
-    }
-
-    .pzw__safety-content {
-      flex: 1;
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: var(--pzw-green);
+      color: #fff7ea;
+      font-size: 20px;
+      font-weight: 800;
     }
 
     .pzw__safety-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: #4ade80;
       margin: 0 0 6px;
+      color: var(--pzw-green);
+      font-size: 15px;
+      font-weight: 800;
     }
 
     .pzw__safety-text {
-      font-size: 14px;
-      color: var(--pzw-muted);
       margin: 0;
-      line-height: 1.6;
+      color: var(--pzw-muted);
+      font-size: 14px;
+      line-height: 1.62;
     }
 
     .pzw__cta-row {
-      text-align: center;
+      display: flex;
+      justify-content: center;
     }
 
     .pzw__cta {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 14px 28px;
-      background: var(--pzw-accent);
-      color: var(--pzw-bg);
+      justify-content: center;
+      min-height: 48px;
+      padding: 14px 26px;
+      border-radius: 999px;
+      background: var(--pzw-ink);
+      color: #fff7ea;
       font-size: 15px;
-      font-weight: 700;
-      border-radius: 8px;
+      font-weight: 780;
+      line-height: 1;
       text-decoration: none;
-      transition: background 0.2s;
+      transition: transform 0.2s ease, background 0.2s ease;
     }
 
     .pzw__cta:hover {
-      background: #fbbf24;
+      background: var(--pzw-green);
+      transform: translateY(-1px);
     }
 
-    .pzw__video-link {
-      display: block;
-      margin-top: 12px;
-      font-size: 13px;
-      color: var(--pzw-muted);
-      text-decoration: underline;
-      text-underline-offset: 3px;
+    @media (max-width: 900px) {
+      .pzw__visual-grid,
+      .pzw__visual-grid--solo {
+        grid-template-columns: 1fr;
+      }
+
+      .pzw__infographic img,
+      .pzw__video {
+        min-height: 300px;
+      }
+
+      .pzw__steps {
+        grid-template-columns: 1fr 1fr;
+      }
     }
 
-    .pzw__video-link:hover {
-      color: var(--pzw-text);
+    @media (max-width: 560px) {
+      .pzw {
+        padding: 42px 16px 52px;
+      }
+
+      .pzw__header {
+        margin-bottom: 22px;
+        text-align: left;
+      }
+
+      .pzw__title,
+      .pzw__subtitle {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .pzw__visual-grid {
+        gap: 14px;
+      }
+
+      .pzw__infographic,
+      .pzw__video-card,
+      .pzw__safety-box,
+      .pzw__step {
+        border-radius: 14px;
+      }
+
+      .pzw__infographic img {
+        min-height: 0;
+        aspect-ratio: 1.18 / 1;
+      }
+
+      .pzw__video {
+        min-height: 260px;
+      }
+
+      .pzw__steps {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .pzw__step {
+        min-height: 0;
+        padding: 17px 16px;
+      }
+
+      .pzw__step-num {
+        margin-bottom: 10px;
+      }
+
+      .pzw__safety-box {
+        grid-template-columns: 1fr;
+        padding: 18px;
+      }
+
+      .pzw__cta {
+        width: 100%;
+      }
     }
   </style>
 
   <div class="pzw__inner">
-
     <div class="pzw__header">
-      <span class="pzw__badge">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        Safety First
-      </span>
+      <span class="pzw__badge">Microwave puff trick</span>
       <h2 class="pzw__title" id="PrimeZeroWasteTitle">{{ section.settings.heading }}</h2>
       <p class="pzw__subtitle">{{ section.settings.subheading }}</p>
     </div>
 
-    <div class="pzw__steps">
+    <div class="pzw__visual-grid{% if section.settings.video_url == blank %} pzw__visual-grid--solo{% endif %}">
+      <figure class="pzw__infographic">
+        <img
+          src="{{ infographic_image }}"
+          alt="Four step visual guide showing how to puff a small yak chew end piece"
+          width="1776"
+          height="918"
+          loading="lazy"
+        >
+      </figure>
+
+      {%- if section.settings.video_url != blank -%}
+        <div class="pzw__video-card">
+          <video
+            class="pzw__video"
+            src="{{ section.settings.video_url }}"
+            poster="{{ infographic_image }}"
+            controls
+            playsinline
+            preload="metadata"
+            aria-label="Video showing how to turn a small yak chew end piece into a puffed cheese treat"
+          ></video>
+          <p class="pzw__video-caption">Watch the small end piece puff into a crunchy cheese treat.</p>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="pzw__steps" aria-label="Microwave puff instructions">
       <div class="pzw__step">
-        <span class="pzw__step-num">01</span>
-        <span class="pzw__step-icon">&#128054;</span>
-        <p class="pzw__step-title">Your dog chews it down</p>
-        <p class="pzw__step-desc">They enjoy the chew until it gets down to a small nub — about thumb-sized.</p>
+        <span class="pzw__step-num">1</span>
+        <p class="pzw__step-title">Remove the nub</p>
+        <p class="pzw__step-desc">Take the chew away before the small end piece is easy to swallow.</p>
         <span class="pzw__arrow">&#8594;</span>
       </div>
 
       <div class="pzw__step">
-        <span class="pzw__step-num">02</span>
-        <span class="pzw__step-icon">&#9995;</span>
-        <p class="pzw__step-title">You take it away</p>
-        <p class="pzw__step-desc">Remove the nub before it gets small enough to swallow. This is the safety step.</p>
+        <span class="pzw__step-num">2</span>
+        <p class="pzw__step-title">Soak it</p>
+        <p class="pzw__step-desc">Place it in warm water for 5 to 10 minutes so it is ready to puff.</p>
         <span class="pzw__arrow">&#8594;</span>
       </div>
 
       <div class="pzw__step">
-        <span class="pzw__step-num">03</span>
-        <span class="pzw__step-icon">&#127859;</span>
-        <p class="pzw__step-title">Microwave for 60 seconds</p>
-        <p class="pzw__step-desc">Place the nub on a microwave-safe plate. It puffs up into a light, crunchy cheese ball.</p>
+        <span class="pzw__step-num">3</span>
+        <p class="pzw__step-title">Microwave briefly</p>
+        <p class="pzw__step-desc">Heat on a microwave-safe plate for 45 to 60 seconds, until it expands.</p>
         <span class="pzw__arrow">&#8594;</span>
       </div>
 
       <div class="pzw__step">
-        <span class="pzw__step-num">04</span>
-        <span class="pzw__step-icon">&#127881;</span>
-        <p class="pzw__step-title">Serve the bonus treat</p>
-        <p class="pzw__step-desc">Let it cool for 2 minutes, then give it to your dog. They get a second treat — you get zero waste.</p>
+        <span class="pzw__step-num">4</span>
+        <p class="pzw__step-title">Cool completely</p>
+        <p class="pzw__step-desc">Let the puff cool all the way down, then serve it as a crunchy treat.</p>
       </div>
     </div>
 
     <div class="pzw__safety-box">
-      <div class="pzw__safety-icon">&#9989;</div>
+      <div class="pzw__safety-icon">✓</div>
       <div class="pzw__safety-content">
         <p class="pzw__safety-title">Why this matters</p>
-        <p class="pzw__safety-text">The end piece is the only part of a yak chew that could be a choking risk — and the puff trick eliminates it completely. The puffed cheese ball is soft, airy, and breaks apart easily. No sharp edges, no choking hazard, no waste. Every other long-lasting chew just tells you to throw the end away. We turn it into a reward.</p>
+        <p class="pzw__safety-text">The final end piece is when supervision matters most. Taking it away early helps reduce swallow risk, and puffing it turns the last bit into a lighter, crunchy cheese treat after it cools.</p>
       </div>
     </div>
 
@@ -289,13 +418,7 @@
       <a href="{{ cta_url }}" class="pzw__cta">
         {{ section.settings.cta_label }} &#8594;
       </a>
-      {%- if section.settings.video_url != blank -%}
-        <a href="{{ section.settings.video_url }}" class="pzw__video-link" target="_blank" rel="noopener">
-          Watch the 30-second puff trick video &#9654;
-        </a>
-      {%- endif -%}
     </div>
-
   </div>
 </section>
 
@@ -307,13 +430,20 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Zero Waste. Zero Choking."
+      "default": "When the chew gets small, puff it."
     },
     {
       "type": "textarea",
       "id": "subheading",
       "label": "Subheading",
-      "default": "Every yak chew has a small end piece. Other brands tell you to throw it away. We turn it into a safe, crunchy bonus treat your dog will love."
+      "default": "Take the small end piece away, soak it, microwave it, and let it cool into a crunchy cheese treat. More value, less waste, and a more controlled finish."
+    },
+    {
+      "type": "text",
+      "id": "infographic_image",
+      "label": "Infographic image asset filename",
+      "default": "prime-puff-instructions-infographic.jpg",
+      "info": "Upload the image to theme assets, then enter the filename here."
     },
     {
       "type": "text",
@@ -330,7 +460,7 @@
       "type": "url",
       "id": "video_url",
       "label": "Puff trick video URL (optional)",
-      "info": "Link to a video showing the puff trick in action."
+      "info": "Direct MP4 URL for the puff trick video."
     }
   ],
   "presets": [

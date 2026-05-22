@@ -134,8 +134,9 @@
     "prime_zero_waste_puff": {
       "type": "prime-zero-waste-puff",
       "settings": {
-        "heading": "Do not toss the small end piece. Puff it.",
-        "subheading": "When the chew gets small, take it away, soak it, and microwave it into a crunchy cheese puff. It is a simple way to reduce waste and avoid a swallowable nub.",
+        "heading": "When the chew gets small, puff it.",
+        "subheading": "Take the small end piece away, soak it, microwave it, and let it cool into a crunchy cheese treat. More value, less waste, and a more controlled finish.",
+        "infographic_image": "prime-puff-instructions-infographic.jpg",
         "cta_label": "Choose your dog's size",
         "cta_url": "/products/himalayan-yak-chews-for-dogs",
         "video_url": "https://cdn.shopify.com/videos/c/o/v/d7aeb1ab2e45499ba3b718e8920fe919.mp4"
