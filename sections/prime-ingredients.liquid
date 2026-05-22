@@ -1,0 +1,498 @@
+{% comment %}
+  Prime Ingredients Section
+  Editorial ingredient storytelling — premium skincare aesthetic applied to dog food
+  Four ingredients. That's it.
+{% endcomment %}
+
+<section class="prime-ingredients prime-section prime-section--cream" id="prime-ingredients">
+  <div class="prime-container">
+
+    {%- comment -%} ── Section Header ── {%- endcomment -%}
+    <div class="prime-ingredients__header prime-reveal">
+      <span class="prime-ingredients__eyebrow">{{ section.settings.eyebrow | default: "What's inside" }}</span>
+      <h2 class="prime-ingredients__heading">{{ section.settings.heading | default: "Four ingredients. That's it." }}</h2>
+      <p class="prime-ingredients__subheading">{{ section.settings.subheading | default: "We could have added more. We chose not to. Every ingredient in a Prime chew has a reason to be there." }}</p>
+    </div>
+
+    {%- comment -%} ── Ingredient Cards Grid ── {%- endcomment -%}
+    <div class="prime-ingredients__grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == "ingredient" -%}
+          {%- assign delay_index = forloop.index0 -%}
+          <article
+            class="prime-ingredients__card prime-reveal"
+            data-delay="{{ delay_index }}"
+            {{ block.shopify_attributes }}
+          >
+            <div class="prime-ingredients__card-image-wrap">
+              {%- if block.settings.image != blank -%}
+                <img
+                  class="prime-ingredients__card-image"
+                  src="{{ block.settings.image | image_url: width: 800 }}"
+                  alt="{{ block.settings.name | escape }}"
+                  width="800"
+                  height="800"
+                  loading="lazy"
+                >
+              {%- else -%}
+                {%- assign fallback_map = "yak-milk,cow-milk,lime,salt" | split: "," -%}
+                {%- assign fallback_index = forloop.index0 | modulo: 4 -%}
+                {%- assign fallback_slug = fallback_map[fallback_index] -%}
+                <img
+                  class="prime-ingredients__card-image"
+                  src="{{ 'prime-home-ingredient-' | append: fallback_slug | append: '.jpg' | asset_url }}"
+                  alt="{{ block.settings.name | escape }}"
+                  width="800"
+                  height="800"
+                  loading="lazy"
+                >
+              {%- endif -%}
+              <div class="prime-ingredients__card-image-overlay" aria-hidden="true"></div>
+            </div>
+
+            <div class="prime-ingredients__card-body">
+              <span class="prime-ingredients__card-number" aria-hidden="true">{{ block.settings.number | default: "0" | prepend: "0" }}</span>
+              <h3 class="prime-ingredients__card-name">{{ block.settings.name }}</h3>
+              <span class="prime-ingredients__card-role">{{ block.settings.role }}</span>
+              <p class="prime-ingredients__card-story">{{ block.settings.story }}</p>
+            </div>
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    {%- comment -%} ── Footer Statement + CTA ── {%- endcomment -%}
+    <div class="prime-ingredients__footer prime-reveal" data-delay="4">
+      <p class="prime-ingredients__statement">
+        {{ section.settings.bottom_statement | default: "No rawhide. No artificial preservatives. No chemicals. No fillers. Just four things that belong there." }}
+      </p>
+      {%- if section.settings.cta_text != blank -%}
+        <a
+          href="{{ section.settings.cta_url | default: '/collections/all' }}"
+          class="prime-btn-secondary prime-ingredients__cta"
+        >
+          {{ section.settings.cta_text }}
+        </a>
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+{%- comment -%} ── Styles ── {%- endcomment -%}
+<style>
+  /* ============================================================
+     PRIME INGREDIENTS SECTION
+     Editorial ingredient storytelling
+     ============================================================ */
+
+  /* ── Section Layout ── */
+  .prime-ingredients {
+    overflow: hidden;
+  }
+
+  /* ── Header ── */
+  .prime-ingredients__header {
+    text-align: center;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: var(--prime-space-2xl);
+  }
+
+  .prime-ingredients__eyebrow {
+    display: block;
+    font-family: var(--prime-font-body);
+    font-size: var(--prime-font-caption);
+    font-weight: 500;
+    letter-spacing: var(--prime-tracking-wider);
+    text-transform: uppercase;
+    color: var(--prime-sage);
+    margin-bottom: var(--prime-space-sm);
+  }
+
+  .prime-ingredients__heading {
+    font-family: var(--prime-font-heading);
+    font-size: var(--prime-font-h2);
+    font-weight: 400;
+    line-height: var(--prime-leading-snug);
+    letter-spacing: var(--prime-tracking-tight);
+    color: var(--prime-charcoal);
+    margin-bottom: var(--prime-space-md);
+  }
+
+  .prime-ingredients__subheading {
+    font-family: var(--prime-font-body);
+    font-size: var(--prime-font-body-lg);
+    line-height: var(--prime-leading-relaxed);
+    color: var(--prime-charcoal-light);
+    font-weight: 400;
+  }
+
+  /* ── Grid ── */
+  .prime-ingredients__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--prime-space-lg);
+    margin-bottom: var(--prime-space-2xl);
+  }
+
+  @media (min-width: 600px) {
+    .prime-ingredients__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--prime-space-lg);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .prime-ingredients__grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--prime-space-md);
+    }
+  }
+
+  /* ── Card ── */
+  .prime-ingredients__card {
+    background-color: var(--prime-white);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0 2px 16px rgba(44, 44, 44, 0.06);
+    transition: box-shadow var(--prime-duration-normal) var(--prime-ease-out);
+  }
+
+  .prime-ingredients__card:hover {
+    box-shadow: 0 8px 32px rgba(44, 44, 44, 0.12);
+  }
+
+  /* ── Card Image ── */
+  .prime-ingredients__card-image-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background-color: var(--prime-cream-dark);
+  }
+
+  .prime-ingredients__card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform var(--prime-duration-slow) var(--prime-ease-out);
+  }
+
+  .prime-ingredients__card:hover .prime-ingredients__card-image {
+    transform: scale(1.03);
+  }
+
+  .prime-ingredients__card-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 60%,
+      rgba(26, 26, 26, 0.08) 100%
+    );
+    pointer-events: none;
+  }
+
+  /* ── Card Body ── */
+  .prime-ingredients__card-body {
+    padding: var(--prime-space-lg) var(--prime-space-md) var(--prime-space-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--prime-space-xs);
+    flex: 1;
+  }
+
+  @media (min-width: 1024px) {
+    .prime-ingredients__card-body {
+      padding: var(--prime-space-lg) var(--prime-space-md) var(--prime-space-lg);
+    }
+  }
+
+  /* ── Card Number ── */
+  .prime-ingredients__card-number {
+    font-family: var(--prime-font-body);
+    font-size: var(--prime-font-caption);
+    font-weight: 400;
+    letter-spacing: var(--prime-tracking-wider);
+    color: var(--prime-charcoal-light);
+    opacity: 0.5;
+    margin-bottom: var(--prime-space-xs);
+    display: block;
+  }
+
+  /* ── Card Name ── */
+  .prime-ingredients__card-name {
+    font-family: var(--prime-font-heading);
+    font-size: clamp(1.375rem, 2vw, 1.75rem);
+    font-weight: 400;
+    line-height: var(--prime-leading-snug);
+    letter-spacing: var(--prime-tracking-tight);
+    color: var(--prime-charcoal);
+    margin: 0 0 var(--prime-space-xs);
+  }
+
+  /* ── Card Role ── */
+  .prime-ingredients__card-role {
+    display: block;
+    font-family: var(--prime-font-body);
+    font-size: var(--prime-font-small);
+    font-weight: 500;
+    letter-spacing: var(--prime-tracking-wide);
+    text-transform: uppercase;
+    color: var(--prime-sage);
+    margin-bottom: var(--prime-space-sm);
+  }
+
+  /* ── Card Story ── */
+  .prime-ingredients__card-story {
+    font-family: var(--prime-font-body);
+    font-size: var(--prime-font-body);
+    line-height: var(--prime-leading-relaxed);
+    color: var(--prime-charcoal-light);
+    font-weight: 400;
+    margin: 0;
+  }
+
+  /* ── Footer ── */
+  .prime-ingredients__footer {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--prime-space-lg);
+    padding-top: var(--prime-space-xl);
+    border-top: 1px solid rgba(122, 139, 111, 0.2);
+  }
+
+  .prime-ingredients__statement {
+    font-family: var(--prime-font-heading);
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    font-weight: 400;
+    line-height: var(--prime-leading-relaxed);
+    color: var(--prime-charcoal);
+    max-width: 640px;
+    letter-spacing: var(--prime-tracking-tight);
+  }
+
+  .prime-ingredients__cta {
+    /* Inherits .prime-btn-secondary from design system */
+    min-width: 200px;
+  }
+
+  /* ── Stagger delays for cards (override base .prime-reveal delays) ── */
+  .prime-ingredients__card[data-delay="0"] { transition-delay: 0ms; }
+  .prime-ingredients__card[data-delay="1"] { transition-delay: 120ms; }
+  .prime-ingredients__card[data-delay="2"] { transition-delay: 240ms; }
+  .prime-ingredients__card[data-delay="3"] { transition-delay: 360ms; }
+
+  /* ── Reduced motion ── */
+  @media (prefers-reduced-motion: reduce) {
+    .prime-ingredients__card-image {
+      transition: none;
+    }
+    .prime-ingredients__card:hover .prime-ingredients__card-image {
+      transform: none;
+    }
+  }
+
+  /* ── Mobile horizontal scroll option (optional enhancement) ── */
+  @media (max-width: 599px) {
+    .prime-ingredients__grid {
+      /* Vertical stack on mobile — clean and readable */
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+{%- comment -%} ── Scroll Reveal JavaScript ── {%- endcomment -%}
+<script>
+  (function () {
+    'use strict';
+
+    var SECTION_ID = 'prime-ingredients';
+
+    function initReveal() {
+      var section = document.getElementById(SECTION_ID);
+      if (!section) return;
+
+      var revealEls = section.querySelectorAll('.prime-reveal');
+      if (!revealEls.length) return;
+
+      // Respect reduced motion preference
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced) {
+        revealEls.forEach(function (el) {
+          el.classList.add('prime-reveal--visible');
+        });
+        return;
+      }
+
+      // Use IntersectionObserver if available
+      if (!('IntersectionObserver' in window)) {
+        revealEls.forEach(function (el) {
+          el.classList.add('prime-reveal--visible');
+        });
+        return;
+      }
+
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('prime-reveal--visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.12,
+          rootMargin: '0px 0px -40px 0px'
+        }
+      );
+
+      revealEls.forEach(function (el) {
+        observer.observe(el);
+      });
+    }
+
+    // Run after DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initReveal);
+    } else {
+      initReveal();
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Prime Ingredients",
+  "tag": "div",
+  "class": "prime-ingredients-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "What's inside"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading",
+      "default": "Four ingredients. That's it."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "We could have added more. We chose not to. Every ingredient in a Prime chew has a reason to be there."
+    },
+    {
+      "type": "textarea",
+      "id": "bottom_statement",
+      "label": "Bottom statement",
+      "default": "No rawhide. No artificial preservatives. No chemicals. No fillers. Just four things that belong there."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA button text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA button URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Ingredient number",
+          "default": "01",
+          "info": "Display number, e.g. 01, 02, 03, 04"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Ingredient name",
+          "default": "Yak Milk"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "One-line role",
+          "default": "Protein & Structure",
+          "info": "Short descriptor shown in small caps below the name"
+        },
+        {
+          "type": "textarea",
+          "id": "story",
+          "label": "Ingredient story",
+          "default": "The foundation. Yak milk is richer in protein than cow's milk, and it's what gives the chew its density and long-lasting structure. Yaks graze at high altitude on clean mountain grass — no factory farms, no shortcuts."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Ingredient image",
+          "info": "Square image recommended (1:1 ratio). Falls back to default asset if not set."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Prime Ingredients",
+      "blocks": [
+        {
+          "type": "ingredient",
+          "settings": {
+            "number": "01",
+            "name": "Yak Milk",
+            "role": "Protein & Structure",
+            "story": "The foundation. Yak milk is richer in protein than cow's milk, and it's what gives the chew its density and long-lasting structure. Yaks graze at high altitude on clean mountain grass — no factory farms, no shortcuts."
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "number": "02",
+            "name": "Cow Milk",
+            "role": "Balance & Texture",
+            "story": "Added for balance. A small amount of cow milk softens the texture just enough to make it safe for aggressive chewers while keeping the chew firm enough to last."
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "number": "03",
+            "name": "Lime Juice",
+            "role": "Natural Binder",
+            "story": "The natural binder. Lime juice is what causes the milk proteins to coagulate and firm up during the traditional pressing process. It's been used in Himalayan villages for generations."
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "number": "04",
+            "name": "Salt",
+            "role": "Natural Preservation",
+            "story": "Preservation, the old way. A small amount of Himalayan salt helps preserve the chew naturally — no artificial preservatives needed. It also adds a subtle flavor dogs love."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

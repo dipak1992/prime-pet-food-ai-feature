@@ -1,0 +1,894 @@
+{% comment %}
+  Section: Prime Reviews UGC
+  Authentic, community-driven reviews and user-generated content section.
+  Photo-first, Instagram-style cards with real dog photos and emotional testimonials.
+
+  Usage: Homepage or any template via theme editor.
+{% endcomment %}
+
+<section class="prime-reviews prime-section prime-section--white" aria-label="Customer reviews">
+  <div class="prime-reviews__container">
+
+    {%- comment -%} Section Header {%- endcomment -%}
+    <div class="prime-reviews__header prime-reviews__reveal">
+      <span class="prime-reviews__eyebrow">{{ section.settings.eyebrow | default: "Real dogs. Real results." }}</span>
+      <h2 class="prime-reviews__heading">{{ section.settings.heading | default: "What happens when dogs finally get a chew worth keeping." }}</h2>
+      <div class="prime-reviews__aggregate" aria-label="Aggregate rating: {{ section.settings.aggregate_rating | default: '4.9' }} out of 5 from {{ section.settings.review_count | default: '2,400+' }} reviews">
+        <span class="prime-reviews__stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <span class="prime-reviews__rating" data-target="{{ section.settings.aggregate_rating | default: '4.9' }}">{{ section.settings.aggregate_rating | default: "4.9" }}</span>
+        <span class="prime-reviews__count">from {{ section.settings.review_count | default: "2,400+" }} reviews</span>
+      </div>
+    </div>
+
+    {%- comment -%} Reviews Grid {%- endcomment -%}
+    <div class="prime-reviews__grid" role="list">
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'review' -%}
+          <article
+            class="prime-reviews__card{% if block.settings.is_featured %} prime-reviews__card--featured{% endif %} prime-reviews__reveal"
+            role="listitem"
+            style="--reveal-delay: {{ forloop.index0 | times: 100 }}ms"
+            {{ block.shopify_attributes }}
+          >
+            {%- if block.settings.photo != blank -%}
+              <div class="prime-reviews__card-image">
+                <img
+                  src="{{ block.settings.photo | image_url: width: 600 }}"
+                  alt="{{ block.settings.dog_name | default: 'Customer dog' }}{% if block.settings.breed != blank %}, {{ block.settings.breed }}{% endif %} — Prime yak chew review"
+                  loading="lazy"
+                  width="600"
+                  height="600"
+                >
+              </div>
+            {%- else -%}
+              {%- comment -%} Fallback asset image based on block index {%- endcomment -%}
+              {%- assign fallback_images = 'prime-ugc-german-shepherd-chew-card.jpg,prime-ugc-golden-retriever-chew-card.jpg,prime-ugc-labrador-chew-card.jpg,prime-ugc-beagle-chew-card.jpg,prime-ugc-french-bulldog-chew-card.jpg,prime-ugc-poodle-chew-card.jpg,prime-ugc-dog-chew-card.jpg' | split: ',' -%}
+              {%- assign fallback_index = forloop.index0 | modulo: 7 -%}
+              <div class="prime-reviews__card-image">
+                <img
+                  src="{{ fallback_images[fallback_index] | asset_url }}"
+                  alt="{{ block.settings.dog_name | default: 'Customer dog' }} — Prime yak chew review"
+                  loading="lazy"
+                  width="600"
+                  height="600"
+                >
+              </div>
+            {%- endif -%}
+
+            <div class="prime-reviews__card-body">
+              {%- if block.settings.dog_name != blank or block.settings.breed != blank -%}
+                <div class="prime-reviews__card-dog-info">
+                  {%- if block.settings.dog_name != blank -%}
+                    <span class="prime-reviews__card-dog-name">{{ block.settings.dog_name }}</span>
+                  {%- endif -%}
+                  {%- if block.settings.breed != blank -%}
+                    <span class="prime-reviews__card-breed">{{ block.settings.breed }}</span>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+
+              <div class="prime-reviews__card-stars" aria-label="{{ block.settings.rating | default: 5 }} out of 5 stars">
+                {%- assign rating = block.settings.rating | default: 5 -%}
+                {%- for i in (1..5) -%}
+                  <span class="prime-reviews__star{% if i <= rating %} prime-reviews__star--filled{% endif %}" aria-hidden="true">&#9733;</span>
+                {%- endfor -%}
+              </div>
+
+              <blockquote class="prime-reviews__card-quote">
+                <p>&#8220;{{ block.settings.quote }}&#8221;</p>
+              </blockquote>
+
+              <div class="prime-reviews__card-meta">
+                {%- if block.settings.customer_name != blank -%}
+                  <span class="prime-reviews__card-customer">&#8212; {{ block.settings.customer_name }}</span>
+                {%- endif -%}
+                {%- if block.settings.location != blank -%}
+                  <span class="prime-reviews__card-location">{{ block.settings.location }}</span>
+                {%- endif -%}
+              </div>
+            </div>
+          </article>
+        {%- endif -%}
+      {%- else -%}
+        {%- comment -%} Default placeholder cards when no blocks are added {%- endcomment -%}
+        {%- assign default_images = 'prime-ugc-german-shepherd-chew-card.jpg,prime-ugc-golden-retriever-chew-card.jpg,prime-ugc-labrador-chew-card.jpg,prime-ugc-beagle-chew-card.jpg,prime-ugc-french-bulldog-chew-card.jpg,prime-ugc-poodle-chew-card.jpg' | split: ',' -%}
+        {%- assign default_dogs = 'Max,Buddy,Luna,Cooper,Bella,Coco' | split: ',' -%}
+        {%- assign default_breeds = 'German Shepherd,Golden Retriever,Labrador,Beagle,French Bulldog,Poodle' | split: ',' -%}
+        {%- assign default_quotes = "My German Shepherd used to destroy every chew in 10 minutes. This one kept him busy for 3 hours. I actually got to finish my coffee.,I was skeptical about the price but then I did the math. $0.22 an hour of peace? That's cheaper than my anxiety medication.,My vet actually recommended switching from rawhide. This was the first thing she approved of that my lab actually liked.,The puff trick blew my mind. My beagle goes absolutely nuts for it.,Three dogs, three different sizes. All three obsessed. We go through a box a month now.,My poodle is the pickiest dog alive. She's been chewing the same Prime for 2 hours right now." | split: ',' -%}
+        {%- assign default_customers = 'Sarah M.,Jake R.,Maria C.,Tom K.,Lisa P.,David W.' | split: ',' -%}
+        {%- assign default_locations = 'Texas,Colorado,Florida,Oregon,New York,California' | split: ',' -%}
+
+        {%- for i in (0..5) -%}
+          <article
+            class="prime-reviews__card prime-reviews__reveal"
+            role="listitem"
+            style="--reveal-delay: {{ i | times: 100 }}ms"
+          >
+            <div class="prime-reviews__card-image">
+              <img
+                src="{{ default_images[i] | asset_url }}"
+                alt="{{ default_dogs[i] }}, {{ default_breeds[i] }} — Prime yak chew review"
+                loading="lazy"
+                width="600"
+                height="600"
+              >
+            </div>
+            <div class="prime-reviews__card-body">
+              <div class="prime-reviews__card-dog-info">
+                <span class="prime-reviews__card-dog-name">{{ default_dogs[i] }}</span>
+                <span class="prime-reviews__card-breed">{{ default_breeds[i] }}</span>
+              </div>
+              <div class="prime-reviews__card-stars" aria-label="5 out of 5 stars">
+                <span class="prime-reviews__star prime-reviews__star--filled" aria-hidden="true">&#9733;</span>
+                <span class="prime-reviews__star prime-reviews__star--filled" aria-hidden="true">&#9733;</span>
+                <span class="prime-reviews__star prime-reviews__star--filled" aria-hidden="true">&#9733;</span>
+                <span class="prime-reviews__star prime-reviews__star--filled" aria-hidden="true">&#9733;</span>
+                <span class="prime-reviews__star prime-reviews__star--filled" aria-hidden="true">&#9733;</span>
+              </div>
+              <blockquote class="prime-reviews__card-quote">
+                <p>&#8220;{{ default_quotes[i] }}&#8221;</p>
+              </blockquote>
+              <div class="prime-reviews__card-meta">
+                <span class="prime-reviews__card-customer">&#8212; {{ default_customers[i] }}</span>
+                <span class="prime-reviews__card-location">{{ default_locations[i] }}</span>
+              </div>
+            </div>
+          </article>
+        {%- endfor -%}
+      {%- endfor -%}
+
+    </div>
+
+    {%- comment -%} Footer Social Proof Bar {%- endcomment -%}
+    <div class="prime-reviews__footer prime-reviews__reveal" style="--reveal-delay: 700ms">
+      <div class="prime-reviews__footer-inner">
+        <div class="prime-reviews__footer-text">
+          <span class="prime-reviews__footer-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <p class="prime-reviews__social-proof">{{ section.settings.social_proof_text | default: "Join 50,000+ dog owners who've made the switch" }}</p>
+        </div>
+        <div class="prime-reviews__footer-actions">
+          {%- if section.settings.reviews_link != blank -%}
+            <a href="{{ section.settings.reviews_link }}" class="prime-reviews__all-link">
+              Read all reviews <span aria-hidden="true">&rarr;</span>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.cta_url != blank -%}
+            <a href="{{ section.settings.cta_url }}" class="prime-reviews__cta-btn">
+              {{ section.settings.cta_text | default: "Shop Now" }}
+            </a>
+          {%- else -%}
+            <a href="/collections/all" class="prime-reviews__cta-btn">
+              {{ section.settings.cta_text | default: "Shop Now" }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* ============================================================
+     PRIME REVIEWS UGC SECTION
+     Authentic community-driven social proof with photo-first cards
+     ============================================================ */
+
+  .prime-reviews {
+    background: var(--prime-white, #ffffff);
+    padding: clamp(4rem, 8vw, 7rem) 0;
+    overflow: hidden;
+  }
+
+  .prime-reviews__container {
+    max-width: var(--prime-container-max, 1200px);
+    margin: 0 auto;
+    padding: 0 clamp(1rem, 4vw, 2.5rem);
+    display: grid;
+    gap: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  /* ============================================================
+     HEADER
+     ============================================================ */
+
+  .prime-reviews__header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .prime-reviews__eyebrow {
+    display: block;
+    font-family: var(--prime-font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--prime-terracotta, #C4724F);
+    font-variant: small-caps;
+  }
+
+  .prime-reviews__heading {
+    font-family: var(--prime-font-heading, Georgia, "Times New Roman", serif);
+    font-size: clamp(1.75rem, 3vw, 2.75rem);
+    font-weight: 700;
+    line-height: var(--prime-leading-snug, 1.3);
+    color: var(--prime-charcoal, #2C2C2C);
+    letter-spacing: var(--prime-tracking-tight, -0.02em);
+    margin: 0;
+  }
+
+  .prime-reviews__aggregate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.25rem;
+  }
+
+  .prime-reviews__stars {
+    color: var(--prime-gold, #B8963E);
+    font-size: 1.375rem;
+    letter-spacing: 0.05em;
+    line-height: 1;
+  }
+
+  .prime-reviews__rating {
+    font-family: var(--prime-font-heading, Georgia, serif);
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: var(--prime-charcoal, #2C2C2C);
+    line-height: 1;
+  }
+
+  .prime-reviews__count {
+    font-size: var(--prime-font-small, 0.875rem);
+    color: var(--prime-charcoal-light, #5A5A5A);
+    line-height: 1;
+  }
+
+  /* ============================================================
+     GRID
+     ============================================================ */
+
+  .prime-reviews__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    align-items: start;
+  }
+
+  /* ============================================================
+     CARDS — Base
+     ============================================================ */
+
+  .prime-reviews__card {
+    background: var(--prime-white, #ffffff);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+    transition: transform 300ms ease, box-shadow 300ms ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .prime-reviews__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  }
+
+  /* ============================================================
+     CARDS — Featured (spans 2 columns)
+     ============================================================ */
+
+  .prime-reviews__card--featured {
+    grid-column: span 2;
+    background: var(--prime-cream, #FAF7F2);
+    flex-direction: row;
+  }
+
+  .prime-reviews__card--featured .prime-reviews__card-image {
+    flex: 0 0 48%;
+    aspect-ratio: auto;
+  }
+
+  .prime-reviews__card--featured .prime-reviews__card-image img {
+    height: 100%;
+    min-height: 300px;
+  }
+
+  .prime-reviews__card--featured .prime-reviews__card-body {
+    flex: 1;
+    padding: 2rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.875rem;
+  }
+
+  .prime-reviews__card--featured .prime-reviews__card-quote p {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+  }
+
+  /* ============================================================
+     CARD IMAGE
+     ============================================================ */
+
+  .prime-reviews__card-image {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: var(--prime-cream-dark, #F5F0E8);
+    flex-shrink: 0;
+  }
+
+  .prime-reviews__card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 400ms ease;
+  }
+
+  .prime-reviews__card:hover .prime-reviews__card-image img {
+    transform: scale(1.03);
+  }
+
+  /* ============================================================
+     CARD BODY
+     ============================================================ */
+
+  .prime-reviews__card-body {
+    padding: 1.125rem 1.25rem 1.375rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    flex: 1;
+  }
+
+  /* Dog info */
+  .prime-reviews__card-dog-info {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    flex-wrap: wrap;
+  }
+
+  .prime-reviews__card-dog-name {
+    font-family: var(--prime-font-body, sans-serif);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--prime-charcoal, #2C2C2C);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .prime-reviews__card-breed {
+    font-size: 0.6875rem;
+    color: var(--prime-charcoal-light, #5A5A5A);
+    font-style: italic;
+  }
+
+  .prime-reviews__card-breed::before {
+    content: '\00B7';
+    margin-right: 0.375rem;
+    font-style: normal;
+  }
+
+  /* Stars */
+  .prime-reviews__card-stars {
+    display: flex;
+    gap: 1px;
+    line-height: 1;
+  }
+
+  .prime-reviews__star {
+    font-size: 0.875rem;
+    color: var(--prime-cream-dark, #F5F0E8);
+  }
+
+  .prime-reviews__star--filled {
+    color: var(--prime-gold, #B8963E);
+  }
+
+  /* Quote */
+  .prime-reviews__card-quote {
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  .prime-reviews__card-quote p {
+    font-family: var(--prime-font-heading, Georgia, serif);
+    font-size: clamp(0.875rem, 1.1vw, 0.9375rem);
+    line-height: var(--prime-leading-relaxed, 1.8);
+    color: var(--prime-charcoal, #2C2C2C);
+    font-style: italic;
+    margin: 0;
+  }
+
+  /* Meta */
+  .prime-reviews__card-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    margin-top: auto;
+    padding-top: 0.375rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .prime-reviews__card-customer {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--prime-charcoal, #2C2C2C);
+    font-variant: small-caps;
+    letter-spacing: 0.04em;
+  }
+
+  .prime-reviews__card-location {
+    font-size: 0.6875rem;
+    color: var(--prime-charcoal-light, #5A5A5A);
+  }
+
+  /* ============================================================
+     FOOTER SOCIAL PROOF BAR
+     ============================================================ */
+
+  .prime-reviews__footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    padding-top: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .prime-reviews__footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .prime-reviews__footer-text {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .prime-reviews__footer-stars {
+    color: var(--prime-gold, #B8963E);
+    font-size: 1.125rem;
+    letter-spacing: 0.04em;
+    flex-shrink: 0;
+  }
+
+  .prime-reviews__social-proof {
+    font-size: clamp(0.875rem, 1.2vw, 1rem);
+    color: var(--prime-charcoal, #2C2C2C);
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .prime-reviews__footer-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+
+  .prime-reviews__all-link {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--prime-charcoal-light, #5A5A5A);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 200ms ease;
+    white-space: nowrap;
+  }
+
+  .prime-reviews__all-link:hover {
+    color: var(--prime-terracotta, #C4724F);
+  }
+
+  .prime-reviews__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.75rem;
+    background: var(--prime-terracotta, #C4724F);
+    color: var(--prime-white, #ffffff);
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 200ms ease, transform 200ms ease;
+    white-space: nowrap;
+  }
+
+  .prime-reviews__cta-btn:hover {
+    background: var(--prime-terracotta-hover, #A85D3F);
+    transform: translateY(-1px);
+  }
+
+  /* ============================================================
+     SCROLL REVEAL ANIMATION
+     ============================================================ */
+
+  .prime-reviews__reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 600ms ease, transform 600ms ease;
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .prime-reviews__reveal.prime-reviews--visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ============================================================
+     RESPONSIVE — Tablet (max 960px)
+     ============================================================ */
+
+  @media (max-width: 960px) {
+    .prime-reviews__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .prime-reviews__card--featured {
+      grid-column: span 2;
+      flex-direction: column;
+    }
+
+    .prime-reviews__card--featured .prime-reviews__card-image {
+      flex: none;
+      aspect-ratio: 16 / 9;
+    }
+
+    .prime-reviews__card--featured .prime-reviews__card-image img {
+      min-height: unset;
+    }
+
+    .prime-reviews__footer-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.25rem;
+    }
+  }
+
+  /* ============================================================
+     RESPONSIVE — Mobile (max 599px)
+     ============================================================ */
+
+  @media (max-width: 599px) {
+    .prime-reviews__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.875rem;
+    }
+
+    .prime-reviews__card--featured {
+      grid-column: span 2;
+    }
+
+    .prime-reviews__card-body {
+      padding: 0.875rem 1rem 1.125rem;
+    }
+
+    .prime-reviews__card-quote p {
+      font-size: 0.8125rem;
+    }
+
+    .prime-reviews__footer-actions {
+      width: 100%;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .prime-reviews__cta-btn {
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .prime-reviews__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .prime-reviews__card--featured {
+      grid-column: span 1;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    'use strict';
+
+    // ============================================================
+    // Scroll Reveal — staggered fade-up on intersection
+    // ============================================================
+    function initScrollReveal() {
+      if (!('IntersectionObserver' in window)) {
+        document.querySelectorAll('.prime-reviews__reveal').forEach(function (el) {
+          el.classList.add('prime-reviews--visible');
+        });
+        return;
+      }
+
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('prime-reviews--visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+      );
+
+      document.querySelectorAll('.prime-reviews__reveal').forEach(function (el) {
+        observer.observe(el);
+      });
+    }
+
+    // ============================================================
+    // Aggregate Rating Count-Up Animation
+    // ============================================================
+    function initRatingCountUp() {
+      var ratingEl = document.querySelector('.prime-reviews__rating');
+      if (!ratingEl) return;
+
+      var target = parseFloat(ratingEl.getAttribute('data-target') || ratingEl.textContent);
+      if (isNaN(target)) return;
+
+      var hasAnimated = false;
+
+      if (!('IntersectionObserver' in window)) return;
+
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting && !hasAnimated) {
+              hasAnimated = true;
+              observer.unobserve(entry.target);
+              animateCount(ratingEl, target);
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+
+      observer.observe(ratingEl);
+    }
+
+    function animateCount(el, target) {
+      var duration = 1200;
+      var start = target - 0.5;
+      var startTime = null;
+
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        var progress = Math.min((timestamp - startTime) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        var current = start + (target - start) * eased;
+        el.textContent = current.toFixed(1);
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          el.textContent = target.toFixed(1);
+        }
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    // ============================================================
+    // Init
+    // ============================================================
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function () {
+        initScrollReveal();
+        initRatingCountUp();
+      });
+    } else {
+      initScrollReveal();
+      initRatingCountUp();
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Prime Reviews UGC",
+  "tag": "section",
+  "class": "prime-reviews-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "Real dogs. Real results."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading",
+      "default": "What happens when dogs finally get a chew worth keeping."
+    },
+    {
+      "type": "text",
+      "id": "aggregate_rating",
+      "label": "Aggregate rating (e.g. 4.9)",
+      "default": "4.9"
+    },
+    {
+      "type": "text",
+      "id": "review_count",
+      "label": "Review count label (e.g. 2,400+)",
+      "default": "2,400+"
+    },
+    {
+      "type": "text",
+      "id": "social_proof_text",
+      "label": "Social proof text",
+      "default": "Join 50,000+ dog owners who've made the switch"
+    },
+    {
+      "type": "url",
+      "id": "reviews_link",
+      "label": "Link to all reviews page"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA button text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA button URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "photo",
+          "label": "Dog photo"
+        },
+        {
+          "type": "text",
+          "id": "dog_name",
+          "label": "Dog's name",
+          "default": "Good boy"
+        },
+        {
+          "type": "text",
+          "id": "breed",
+          "label": "Dog breed"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Star rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Customer quote",
+          "default": "My dog absolutely loves this chew. Best purchase I've made all year."
+        },
+        {
+          "type": "text",
+          "id": "customer_name",
+          "label": "Customer name"
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "City / State"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_featured",
+          "label": "Featured card (spans 2 columns)",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Prime Reviews UGC",
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "dog_name": "Rex",
+            "breed": "German Shepherd",
+            "rating": 5,
+            "quote": "My German Shepherd used to destroy every chew in 10 minutes. This one kept him busy for 3 hours. I actually got to finish my coffee.",
+            "customer_name": "Sarah M.",
+            "location": "Texas",
+            "is_featured": true
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "dog_name": "Buddy",
+            "breed": "Golden Retriever",
+            "rating": 5,
+            "quote": "I was skeptical about the price but then I did the math. $0.22 an hour of peace? That's cheaper than my anxiety medication.",
+            "customer_name": "Jake R.",
+            "location": "Colorado",
+            "is_featured": false
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "dog_name": "Luna",
+            "breed": "Labrador",
+            "rating": 5,
+            "quote": "My vet actually recommended switching from rawhide. This was the first thing she approved of that my lab actually liked.",
+            "customer_name": "Maria C.",
+            "location": "Florida",
+            "is_featured": false
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "dog_name": "Cooper",
+            "breed": "Beagle",
+            "rating": 5,
+            "quote": "The puff trick blew my mind. My beagle goes absolutely nuts for it.",
+            "customer_name": "Tom K.",
+            "location": "Oregon",
+            "is_featured": false
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "dog_name": "Bella",
+            "breed": "French Bulldog",
+            "rating": 5,
+            "quote": "Three dogs, three different sizes. All three obsessed. We go through a box a month now.",
+            "customer_name": "Lisa P.",
+            "location": "New York",
+            "is_featured": false
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "dog_name": "Coco",
+            "breed": "Poodle",
+            "rating": 5,
+            "quote": "My poodle is the pickiest dog alive. She's been chewing the same Prime for 2 hours right now.",
+            "customer_name": "David W.",
+            "location": "California",
+            "is_featured": false
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

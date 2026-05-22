@@ -1,0 +1,932 @@
+{%- comment -%}
+  Prime Himalayan Story Section
+  File: sections/prime-himalayan-story.liquid
+
+  Documentary-style section about the Himalayan origins of Prime yak chews.
+  Covers: hero landscape, editorial story columns, founder quote, process steps, closing CTA.
+  Design reference: Patagonia brand storytelling, premium food origin stories.
+{%- endcomment -%}
+
+{%- liquid
+  assign hero_img_src    = section.settings.hero_image | image_url: width: 2400
+  assign founder_img_src = section.settings.founder_image | image_url: width: 800
+
+  if section.settings.hero_image == blank
+    assign hero_img_src = 'prime-himalayan-yak-story-hero.jpg' | asset_url
+  endif
+
+  if section.settings.founder_image == blank
+    assign founder_img_src = 'prime-founder.png' | asset_url
+  endif
+
+  assign eyebrow         = section.settings.eyebrow         | default: 'Where it comes from'
+  assign heading         = section.settings.heading         | default: 'A recipe older than any pet food brand.'
+  assign founder_name    = section.settings.founder_name    | default: 'Prime Founder'
+  assign cta_text        = section.settings.cta_text        | default: 'Learn more about our sourcing'
+  assign cta_url         = section.settings.cta_url         | default: '/pages/about-us'
+-%}
+
+<section
+  class="prime-story prime-section prime-section--cream"
+  id="shopify-section-{{ section.id }}"
+  aria-labelledby="prime-story-heading-{{ section.id }}"
+>
+
+  <style>
+    /* ─────────────────────────────────────────────
+       PRIME HIMALAYAN STORY — scoped styles
+       All classes prefixed: prime-story-
+    ───────────────────────────────────────────── */
+
+    .prime-story {
+      --ps-cream:          #FAF7F0;
+      --ps-cream-dark:     #F2EDE2;
+      --ps-cream-mid:      #EDE6D8;
+      --ps-charcoal:       #1A1410;
+      --ps-charcoal-mid:   #3D3028;
+      --ps-charcoal-light: #7A6A5A;
+      --ps-gold:           #C8860A;
+      --ps-gold-light:     #E8A830;
+      --ps-warm-white:     #FFFDF8;
+      --ps-shadow:         rgba(26, 20, 16, 0.10);
+      --ps-shadow-deep:    rgba(26, 20, 16, 0.18);
+      --ps-line:           rgba(26, 20, 16, 0.10);
+      --ps-serif:          'Playfair Display', 'Georgia', 'Times New Roman', serif;
+      --ps-sans:           var(--font-body-family, -apple-system, 'Helvetica Neue', sans-serif);
+
+      background: var(--ps-cream);
+      color: var(--ps-charcoal);
+      font-family: var(--ps-sans);
+      overflow: hidden;
+    }
+
+    /* ── Hero ─────────────────────────────────── */
+    .prime-story__hero {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 21 / 9;
+      overflow: hidden;
+      background: #2A2018;
+    }
+
+    @supports not (aspect-ratio: 21/9) {
+      .prime-story__hero::before {
+        content: '';
+        display: block;
+        padding-top: 42.857%; /* 9/21 */
+      }
+    }
+
+    .prime-story__hero-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      display: block;
+      will-change: transform;
+      transition: transform 0.1s linear;
+    }
+
+    /* Cinematic gradient overlay */
+    .prime-story__hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom,
+          rgba(26, 20, 16, 0.18) 0%,
+          rgba(26, 20, 16, 0.05) 40%,
+          rgba(26, 20, 16, 0.30) 100%
+        );
+      pointer-events: none;
+    }
+
+    .prime-story__hero-location {
+      position: absolute;
+      bottom: clamp(20px, 4vw, 40px);
+      left: clamp(20px, 5vw, 60px);
+      z-index: 2;
+      color: rgba(250, 247, 240, 0.90);
+      font-size: clamp(10px, 1.1vw, 13px);
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-family: var(--ps-sans);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .prime-story__hero-location::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 1px;
+      background: rgba(250, 247, 240, 0.70);
+    }
+
+    /* ── Container ────────────────────────────── */
+    .prime-story__container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(20px, 5vw, 60px);
+    }
+
+    /* ── Main story content ───────────────────── */
+    .prime-story__content {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: clamp(40px, 6vw, 88px);
+      align-items: start;
+      padding: clamp(56px, 8vw, 100px) 0 clamp(48px, 7vw, 80px);
+    }
+
+    /* ── Text column ──────────────────────────── */
+    .prime-story__text {
+      /* left column */
+    }
+
+    .prime-story__eyebrow {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--ps-gold);
+      margin-bottom: 18px;
+      font-family: var(--ps-sans);
+    }
+
+    .prime-story__heading {
+      font-family: var(--ps-serif);
+      font-size: clamp(28px, 3.8vw, 50px);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--ps-charcoal);
+      margin: 0 0 clamp(24px, 3vw, 36px);
+      letter-spacing: -0.01em;
+    }
+
+    .prime-story__body {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .prime-story__body p {
+      font-size: clamp(15px, 1.6vw, 17px);
+      line-height: 1.75;
+      color: var(--ps-charcoal-mid);
+      margin: 0;
+    }
+
+    /* ── Founder column ───────────────────────── */
+    .prime-story__founder {
+      position: relative;
+      padding-top: 8px;
+    }
+
+    .prime-story__founder-image-wrap {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      margin-bottom: 28px;
+      background: var(--ps-cream-dark);
+    }
+
+    .prime-story__founder-image {
+      display: block;
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      object-position: center top;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .prime-story__founder-image-wrap:hover .prime-story__founder-image {
+      transform: scale(1.03);
+    }
+
+    /* Warm film-grain overlay on founder photo */
+    .prime-story__founder-image-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 60%,
+        rgba(26, 20, 16, 0.25) 100%
+      );
+      pointer-events: none;
+    }
+
+    .prime-story__founder-quote {
+      margin: 0;
+      padding: 0 0 0 22px;
+      border-left: 3px solid var(--ps-gold);
+    }
+
+    .prime-story__founder-quote p {
+      font-family: var(--ps-serif);
+      font-style: italic;
+      font-size: clamp(16px, 1.8vw, 20px);
+      line-height: 1.6;
+      color: var(--ps-charcoal);
+      margin: 0 0 14px;
+    }
+
+    .prime-story__founder-quote cite {
+      font-style: normal;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ps-charcoal-light);
+      font-family: var(--ps-sans);
+    }
+
+    /* ── Process section ──────────────────────── */
+    .prime-story__process-header {
+      text-align: center;
+      margin-bottom: clamp(32px, 4vw, 52px);
+    }
+
+    .prime-story__process-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--ps-gold);
+      margin-bottom: 12px;
+    }
+
+    .prime-story__process-title {
+      font-family: var(--ps-serif);
+      font-size: clamp(22px, 2.8vw, 34px);
+      font-weight: 400;
+      color: var(--ps-charcoal);
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+
+    .prime-story__process {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      padding-bottom: clamp(56px, 8vw, 96px);
+    }
+
+    /* Connecting line between cards (desktop) */
+    .prime-story__process::before {
+      content: '';
+      position: absolute;
+      top: 52px;
+      left: calc(33.333% - 12px);
+      right: calc(33.333% - 12px);
+      height: 1px;
+      background: linear-gradient(
+        to right,
+        transparent,
+        var(--ps-cream-mid) 15%,
+        var(--ps-cream-mid) 85%,
+        transparent
+      );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .prime-story__process-step {
+      position: relative;
+      z-index: 1;
+      background: var(--ps-warm-white);
+      border: 1px solid var(--ps-line);
+      border-radius: 8px;
+      padding: clamp(24px, 3vw, 36px) clamp(20px, 2.5vw, 30px);
+      box-shadow: 0 4px 24px var(--ps-shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .prime-story__process-step:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px var(--ps-shadow-deep);
+    }
+
+    .prime-story__step-number {
+      display: block;
+      font-family: var(--ps-serif);
+      font-size: clamp(36px, 4vw, 52px);
+      font-weight: 400;
+      line-height: 1;
+      color: var(--ps-cream-mid);
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+      /* Outlined number effect */
+      -webkit-text-stroke: 1px var(--ps-charcoal-light);
+      color: transparent;
+    }
+
+    .prime-story__step-title {
+      font-family: var(--ps-sans);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ps-charcoal);
+      margin: 0 0 12px;
+    }
+
+    .prime-story__step-desc {
+      font-size: 14px;
+      line-height: 1.70;
+      color: var(--ps-charcoal-light);
+      margin: 0;
+    }
+
+    /* Step image (optional) */
+    .prime-story__step-image-wrap {
+      overflow: hidden;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      background: var(--ps-cream-dark);
+    }
+
+    .prime-story__step-image {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .prime-story__process-step:hover .prime-story__step-image {
+      transform: scale(1.04);
+    }
+
+    /* ── Closing statement ────────────────────── */
+    .prime-story__closing {
+      text-align: center;
+      padding: clamp(48px, 7vw, 80px) 0 clamp(56px, 8vw, 96px);
+      border-top: 1px solid var(--ps-line);
+    }
+
+    .prime-story__closing-text {
+      font-family: var(--ps-serif);
+      font-size: clamp(20px, 2.6vw, 32px);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.45;
+      color: var(--ps-charcoal);
+      max-width: 680px;
+      margin: 0 auto 36px;
+      letter-spacing: -0.01em;
+    }
+
+    .prime-story__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 32px;
+      border: 1.5px solid var(--ps-charcoal);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--ps-charcoal);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-family: var(--ps-sans);
+      transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+    }
+
+    .prime-story__cta:hover {
+      background: var(--ps-charcoal);
+      color: var(--ps-cream);
+      transform: translateY(-2px);
+    }
+
+    .prime-story__cta-arrow {
+      display: inline-block;
+      transition: transform 0.2s ease;
+    }
+
+    .prime-story__cta:hover .prime-story__cta-arrow {
+      transform: translateX(4px);
+    }
+
+    /* ── Divider ornament ─────────────────────── */
+    .prime-story__ornament {
+      text-align: center;
+      color: var(--ps-cream-mid);
+      font-size: 18px;
+      letter-spacing: 0.5em;
+      padding: 0 0 clamp(32px, 4vw, 48px);
+      user-select: none;
+    }
+
+    /* ── Scroll reveal animations ─────────────── */
+    .prime-reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .prime-reveal--left {
+      opacity: 0;
+      transform: translateX(-32px);
+      transition: opacity 0.80s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.80s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .prime-reveal--right {
+      opacity: 0;
+      transform: translateX(32px);
+      transition: opacity 0.80s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.80s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .prime-reveal--scale {
+      opacity: 0;
+      transform: scale(0.96);
+      transition: opacity 0.70s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.70s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .prime-reveal.is-visible,
+    .prime-reveal--left.is-visible,
+    .prime-reveal--right.is-visible,
+    .prime-reveal--scale.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Staggered delay helpers */
+    [data-delay="100"] { transition-delay: 0.10s; }
+    [data-delay="200"] { transition-delay: 0.20s; }
+    [data-delay="300"] { transition-delay: 0.30s; }
+    [data-delay="400"] { transition-delay: 0.40s; }
+    [data-delay="500"] { transition-delay: 0.50s; }
+
+    /* ── Responsive ───────────────────────────── */
+    @media (max-width: 1024px) {
+      .prime-story__process::before {
+        display: none;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .prime-story__hero {
+        aspect-ratio: 16 / 9;
+      }
+
+      .prime-story__content {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .prime-story__founder {
+        padding-top: 0;
+      }
+
+      .prime-story__founder-image {
+        aspect-ratio: 4 / 3;
+        object-position: center 20%;
+      }
+
+      .prime-story__process {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .prime-story__hero {
+        aspect-ratio: 4 / 3;
+      }
+
+      .prime-story__hero-location {
+        bottom: 16px;
+        left: 16px;
+      }
+
+      .prime-story__process-step {
+        padding: 22px 18px;
+      }
+
+      .prime-story__step-number {
+        font-size: 36px;
+        margin-bottom: 12px;
+      }
+
+      .prime-story__closing-text {
+        font-size: 20px;
+      }
+
+      .prime-story__cta {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+
+  {%- comment -%} ── HERO IMAGE ─────────────────────────────── {%- endcomment -%}
+  <div class="prime-story__hero" role="img" aria-label="Himalayan mountain landscape, Nepal">
+    <img
+      class="prime-story__hero-image"
+      src="{{ hero_img_src }}"
+      alt="Sweeping Himalayan mountain landscape in Nepal, where Prime yak chews originate"
+      width="2400"
+      height="1029"
+      loading="eager"
+      fetchpriority="high"
+    >
+    <span class="prime-story__hero-location" aria-hidden="true">Himalayas, Nepal</span>
+  </div>
+
+  {%- comment -%} ── MAIN CONTENT ───────────────────────────── {%- endcomment -%}
+  <div class="prime-story__container">
+
+    {%- comment -%} Story columns {%- endcomment -%}
+    <div class="prime-story__content">
+
+      {%- comment -%} Left: Editorial text {%- endcomment -%}
+      <div class="prime-story__text prime-reveal--left">
+        <span class="prime-story__eyebrow">{{ eyebrow }}</span>
+        <h2 class="prime-story__heading" id="prime-story-heading-{{ section.id }}">
+          {{ heading }}
+        </h2>
+        <div class="prime-story__body">
+          {%- if section.settings.story_paragraph_1 != blank -%}
+            <p>{{ section.settings.story_paragraph_1 }}</p>
+          {%- else -%}
+            <p>In the high-altitude villages of Nepal and Tibet, yak milk has been pressed, dried, and smoked into hard cheese for centuries. Not as a dog treat — as food for the people who live there.</p>
+          {%- endif -%}
+
+          {%- if section.settings.story_paragraph_2 != blank -%}
+            <p>{{ section.settings.story_paragraph_2 }}</p>
+          {%- else -%}
+            <p>The same process, passed down through generations, is what makes Prime chews. We work directly with small-scale producers in the Himalayas who still use traditional stone presses and open-air drying racks.</p>
+          {%- endif -%}
+
+          {%- if section.settings.story_paragraph_3 != blank -%}
+            <p>{{ section.settings.story_paragraph_3 }}</p>
+          {%- else -%}
+            <p>No factories. No shortcuts. Just a process that's been working for a very long time.</p>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- comment -%} Right: Founder photo + quote {%- endcomment -%}
+      <div class="prime-story__founder prime-reveal--right" data-delay="200">
+        <div class="prime-story__founder-image-wrap">
+          <img
+            class="prime-story__founder-image prime-reveal--scale"
+            src="{{ founder_img_src }}"
+            alt="{{ founder_name }}, Founder of Prime Pet Food"
+            width="600"
+            height="800"
+            loading="lazy"
+          >
+        </div>
+
+        <blockquote class="prime-story__founder-quote">
+          <p>
+            {%- if section.settings.founder_quote != blank -%}
+              {{ section.settings.founder_quote }}
+            {%- else -%}
+              I wanted to bring something real to the pet food market. Something with a story worth telling.
+            {%- endif -%}
+          </p>
+          <cite>— {{ founder_name }}, Founder of Prime</cite>
+        </blockquote>
+      </div>
+
+    </div>
+
+    {%- comment -%} ── PROCESS STEPS ──────────────────────────── {%- endcomment -%}
+    <div class="prime-story__process-header prime-reveal">
+      <span class="prime-story__process-label">How it's made</span>
+      <h3 class="prime-story__process-title">A process measured in weeks, not minutes.</h3>
+    </div>
+
+    <div class="prime-story__process" role="list" aria-label="Yak chew production process">
+
+      {%- assign process_images = 'prime-yak-process-boiling-curd.jpg,prime-yak-process-drying-racks.jpg,prime-yak-process-finished-chews.jpg' | split: ',' -%}
+      {%- assign process_image_alts = 'Yak and cow milk being heated and pressed into dense blocks,Cheese blocks hanging on open-air drying racks at high altitude,Finished yak chews cut and inspected before packing' | split: ',' -%}
+
+      {%- assign step_index = 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'process_step' -%}
+          {%- assign delay_val = step_index | times: 150 -%}
+          {%- assign step_img = process_images[step_index] | asset_url -%}
+          {%- assign step_alt = process_image_alts[step_index] -%}
+
+          <article
+            class="prime-story__process-step prime-reveal"
+            data-delay="{{ delay_val }}"
+            role="listitem"
+            {{ block.shopify_attributes }}
+          >
+            {%- comment -%} Step process image {%- endcomment -%}
+            <div class="prime-story__step-image-wrap">
+              <img
+                class="prime-story__step-image"
+                src="{{ step_img }}"
+                alt="{{ step_alt }}"
+                width="600"
+                height="450"
+                loading="lazy"
+              >
+            </div>
+
+            <span class="prime-story__step-number" aria-hidden="true">
+              {{- block.settings.number | default: forloop.index | prepend: '0' | slice: -2, 2 -}}
+            </span>
+            <h4 class="prime-story__step-title">{{ block.settings.title }}</h4>
+            <p class="prime-story__step-desc">{{ block.settings.description }}</p>
+          </article>
+
+          {%- assign step_index = step_index | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- comment -%} Fallback if no blocks are added {%- endcomment -%}
+      {%- if section.blocks.size == 0 -%}
+        <article class="prime-story__process-step prime-reveal" role="listitem">
+          <div class="prime-story__step-image-wrap">
+            <img class="prime-story__step-image" src="{{ 'prime-yak-process-boiling-curd.jpg' | asset_url }}" alt="Yak and cow milk being heated and pressed" width="600" height="450" loading="lazy">
+          </div>
+          <span class="prime-story__step-number" aria-hidden="true">01</span>
+          <h4 class="prime-story__step-title">Pressed</h4>
+          <p class="prime-story__step-desc">Yak and cow milk are heated, mixed with lime juice, and pressed into dense blocks using traditional stone weights.</p>
+        </article>
+
+        <article class="prime-story__process-step prime-reveal" data-delay="150" role="listitem">
+          <div class="prime-story__step-image-wrap">
+            <img class="prime-story__step-image" src="{{ 'prime-yak-process-drying-racks.jpg' | asset_url }}" alt="Cheese blocks on open-air drying racks" width="600" height="450" loading="lazy">
+          </div>
+          <span class="prime-story__step-number" aria-hidden="true">02</span>
+          <h4 class="prime-story__step-title">Dried</h4>
+          <p class="prime-story__step-desc">The blocks are hung on open-air drying racks at high altitude for weeks, developing their characteristic hardness.</p>
+        </article>
+
+        <article class="prime-story__process-step prime-reveal" data-delay="300" role="listitem">
+          <div class="prime-story__step-image-wrap">
+            <img class="prime-story__step-image" src="{{ 'prime-yak-process-finished-chews.jpg' | asset_url }}" alt="Finished yak chews ready for packing" width="600" height="450" loading="lazy">
+          </div>
+          <span class="prime-story__step-number" aria-hidden="true">03</span>
+          <h4 class="prime-story__step-title">Finished</h4>
+          <p class="prime-story__step-desc">Each chew is cut, sized, and inspected before being packed in the USA for your dog.</p>
+        </article>
+      {%- endif -%}
+
+    </div>
+
+    {%- comment -%} ── CLOSING STATEMENT ──────────────────────── {%- endcomment -%}
+    <div class="prime-story__ornament" aria-hidden="true">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+    <div class="prime-story__closing prime-reveal">
+      <p class="prime-story__closing-text">
+        {%- if section.settings.closing_statement != blank -%}
+          {{ section.settings.closing_statement }}
+        {%- else -%}
+          From a mountain village to your dog's paws. That's the whole supply chain.
+        {%- endif -%}
+      </p>
+      <a href="{{ cta_url }}" class="prime-story__cta">
+        {{ cta_text }}
+        <span class="prime-story__cta-arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function () {
+  'use strict';
+
+  var sectionEl = document.getElementById('shopify-section-{{ section.id }}');
+  if (!sectionEl) return;
+
+  /* ── Scroll reveal via IntersectionObserver ── */
+  var revealEls = sectionEl.querySelectorAll(
+    '.prime-reveal, .prime-reveal--left, .prime-reveal--right, .prime-reveal--scale'
+  );
+
+  if ('IntersectionObserver' in window) {
+    var revealObs = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var el = entry.target;
+            var delay = parseInt(el.getAttribute('data-delay') || '0', 10);
+            setTimeout(function () {
+              el.classList.add('is-visible');
+            }, delay);
+            revealObs.unobserve(el);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    revealEls.forEach(function (el) {
+      revealObs.observe(el);
+    });
+  } else {
+    /* Fallback: show everything immediately */
+    revealEls.forEach(function (el) {
+      el.classList.add('is-visible');
+    });
+  }
+
+  /* ── Hero parallax on scroll ── */
+  var heroImg = sectionEl.querySelector('.prime-story__hero-image');
+  if (heroImg && 'IntersectionObserver' in window) {
+    var heroVisible = false;
+
+    var heroObs = new IntersectionObserver(function (entries) {
+      heroVisible = entries[0].isIntersecting;
+    }, { threshold: 0 });
+    heroObs.observe(sectionEl.querySelector('.prime-story__hero'));
+
+    var ticking = false;
+    function onScroll() {
+      if (!heroVisible || ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        var heroRect = sectionEl.querySelector('.prime-story__hero').getBoundingClientRect();
+        var progress = -heroRect.top / (heroRect.height || 1);
+        /* Subtle: max 12% shift */
+        var shift = Math.min(Math.max(progress * 12, -6), 12);
+        heroImg.style.transform = 'translateY(' + shift + '%)';
+        ticking = false;
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Prime Himalayan Story",
+  "tag": "section",
+  "class": "prime-himalayan-story-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image",
+      "info": "Recommended: wide landscape, 2400×1029px or wider. Falls back to prime-himalayan-yak-story-hero.jpg from assets."
+    },
+    {
+      "type": "header",
+      "content": "Story Text"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Label",
+      "default": "Where it comes from"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Main Heading",
+      "default": "A recipe older than any pet food brand."
+    },
+    {
+      "type": "textarea",
+      "id": "story_paragraph_1",
+      "label": "Story Paragraph 1",
+      "default": "In the high-altitude villages of Nepal and Tibet, yak milk has been pressed, dried, and smoked into hard cheese for centuries. Not as a dog treat — as food for the people who live there."
+    },
+    {
+      "type": "textarea",
+      "id": "story_paragraph_2",
+      "label": "Story Paragraph 2",
+      "default": "The same process, passed down through generations, is what makes Prime chews. We work directly with small-scale producers in the Himalayas who still use traditional stone presses and open-air drying racks."
+    },
+    {
+      "type": "textarea",
+      "id": "story_paragraph_3",
+      "label": "Story Paragraph 3",
+      "default": "No factories. No shortcuts. Just a process that's been working for a very long time."
+    },
+    {
+      "type": "header",
+      "content": "Founder"
+    },
+    {
+      "type": "image_picker",
+      "id": "founder_image",
+      "label": "Founder Photo",
+      "info": "Portrait orientation works best. Falls back to prime-founder.png from assets."
+    },
+    {
+      "type": "textarea",
+      "id": "founder_quote",
+      "label": "Founder Quote",
+      "default": "I wanted to bring something real to the pet food market. Something with a story worth telling."
+    },
+    {
+      "type": "text",
+      "id": "founder_name",
+      "label": "Founder Name",
+      "default": "Prime Founder"
+    },
+    {
+      "type": "header",
+      "content": "Closing & CTA"
+    },
+    {
+      "type": "textarea",
+      "id": "closing_statement",
+      "label": "Closing Statement",
+      "default": "From a mountain village to your dog's paws. That's the whole supply chain."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Button Text",
+      "default": "Learn more about our sourcing"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "process_step",
+      "name": "Process Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Step Number",
+          "default": "01",
+          "info": "Displayed as a large decorative number, e.g. 01, 02, 03."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step Title",
+          "default": "Pressed"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Step Description",
+          "default": "Yak and cow milk are heated, mixed with lime juice, and pressed into dense blocks using traditional stone weights."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Prime Himalayan Story",
+      "blocks": [
+        {
+          "type": "process_step",
+          "settings": {
+            "number": "01",
+            "title": "Pressed",
+            "description": "Yak and cow milk are heated, mixed with lime juice, and pressed into dense blocks using traditional stone weights."
+          }
+        },
+        {
+          "type": "process_step",
+          "settings": {
+            "number": "02",
+            "title": "Dried",
+            "description": "The blocks are hung on open-air drying racks at high altitude for weeks, developing their characteristic hardness."
+          }
+        },
+        {
+          "type": "process_step",
+          "settings": {
+            "number": "03",
+            "title": "Finished",
+            "description": "Each chew is cut, sized, and inspected before being packed in the USA for your dog."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

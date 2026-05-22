@@ -1,0 +1,823 @@
+{%- comment -%}
+  Prime Puff Instructions Section
+  File: sections/prime-puff-instructions.liquid
+
+  Premium educational section explaining how to turn the leftover nub of a
+  yak chew into a puffed treat using a microwave. Zero-waste angle, warm and
+  approachable tone, step-by-step visual flow with scroll-reveal animations.
+{%- endcomment -%}
+
+{%- liquid
+  assign eyebrow        = section.settings.eyebrow        | default: 'Zero waste'
+  assign heading        = section.settings.heading        | default: 'The nub becomes a treat.'
+  assign subheading     = section.settings.subheading
+  assign show_infographic = section.settings.show_infographic
+  assign safety_note    = section.settings.safety_note    | default: 'Always supervise your dog. Let the puff cool completely before serving.'
+  assign value_statement = section.settings.value_statement | default: 'One chew. Two treats. Nothing wasted.'
+  assign cta_text       = section.settings.cta_text       | default: 'Shop Yak Chews'
+  assign cta_url        = section.settings.cta_url        | default: '/collections/all'
+
+  if section.settings.infographic_image
+    assign infographic_src = section.settings.infographic_image | image_url: width: 1400
+    assign infographic_alt = section.settings.infographic_image.alt | default: 'Step-by-step visual guide showing how to puff a yak chew nub in the microwave'
+  else
+    assign infographic_src = 'prime-puff-instructions-infographic.jpg' | asset_url
+    assign infographic_alt = 'Step-by-step visual guide showing how to puff a yak chew nub in the microwave'
+  endif
+-%}
+
+<style>
+  /* ── Prime Puff Instructions — Section Styles ──────────────────────────── */
+
+  .prime-puff {
+    --pp-bg:           var(--prime-cream-dark, #F5F0E8);
+    --pp-white:        var(--prime-white, #FFFFFF);
+    --pp-charcoal:     var(--prime-charcoal, #2C2C2C);
+    --pp-charcoal-lt:  var(--prime-charcoal-light, #5A5A5A);
+    --pp-sage:         var(--prime-sage, #7A8B6F);
+    --pp-sage-light:   var(--prime-sage-light, #E8EDE4);
+    --pp-terracotta:   var(--prime-terracotta, #C4724F);
+    --pp-gold:         var(--prime-gold, #B8963E);
+    --pp-amber-bg:     #FFF8E7;
+    --pp-amber-border: #E8C96A;
+    --pp-font-heading: var(--prime-font-heading, Georgia, "Times New Roman", serif);
+    --pp-font-body:    var(--prime-font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+    --pp-ease-out:     var(--prime-ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+    --pp-duration:     var(--prime-duration-slow, 800ms);
+    --pp-radius-card:  16px;
+    --pp-radius-pill:  999px;
+
+    background-color: var(--pp-bg);
+    padding: clamp(4rem, 8vw, 8rem) 0;
+    font-family: var(--pp-font-body);
+    overflow: hidden;
+  }
+
+  /* ── Container ─────────────────────────────────────────────────────────── */
+  .prime-puff .prime-container {
+    max-width: var(--prime-container-max, 1200px);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: clamp(1.25rem, 4vw, 2.5rem);
+    padding-right: clamp(1.25rem, 4vw, 2.5rem);
+  }
+
+  /* ── Header ────────────────────────────────────────────────────────────── */
+  .prime-puff__header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .prime-puff__eyebrow {
+    display: inline-block;
+    font-family: var(--pp-font-body);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--pp-sage);
+    margin-bottom: 0.75rem;
+  }
+
+  .prime-puff__heading {
+    font-family: var(--pp-font-heading);
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--pp-charcoal);
+    margin: 0 0 1rem;
+  }
+
+  .prime-puff__subheading {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    line-height: 1.65;
+    color: var(--pp-charcoal-lt);
+    margin: 0;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ── Steps Grid ────────────────────────────────────────────────────────── */
+  .prime-puff__steps {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: start;
+    gap: 0;
+    margin-bottom: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  /* ── Step Card ─────────────────────────────────────────────────────────── */
+  .prime-puff__step {
+    background: var(--pp-white);
+    border-radius: var(--pp-radius-card);
+    padding: clamp(1.5rem, 3vw, 2rem);
+    box-shadow: 0 4px 24px rgba(44, 44, 44, 0.07), 0 1px 4px rgba(44, 44, 44, 0.04);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s var(--pp-ease-out), box-shadow 0.3s var(--pp-ease-out);
+  }
+
+  .prime-puff__step:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(44, 44, 44, 0.11), 0 2px 8px rgba(44, 44, 44, 0.06);
+  }
+
+  .prime-puff__step-number {
+    position: absolute;
+    top: 1rem;
+    left: 1.25rem;
+    font-family: var(--pp-font-heading);
+    font-size: 3.5rem;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--pp-terracotta);
+    opacity: 0.18;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .prime-puff__step-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.5rem auto 1rem;
+    color: var(--pp-sage);
+    flex-shrink: 0;
+  }
+
+  .prime-puff__step-icon svg {
+    width: 48px;
+    height: 48px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .prime-puff__step-title {
+    font-family: var(--pp-font-heading);
+    font-size: clamp(1.125rem, 1.5vw, 1.375rem);
+    font-weight: 400;
+    color: var(--pp-charcoal);
+    margin: 0 0 0.5rem;
+    line-height: 1.2;
+  }
+
+  .prime-puff__step-instruction {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--pp-charcoal-lt);
+    margin: 0 0 1rem;
+    flex-grow: 1;
+  }
+
+  .prime-puff__step-time {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.3rem 0.75rem;
+    background: var(--pp-sage-light);
+    color: var(--pp-sage);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    border-radius: var(--pp-radius-pill);
+    white-space: nowrap;
+    margin-top: auto;
+  }
+
+  /* ── Connector Arrow ───────────────────────────────────────────────────── */
+  .prime-puff__connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.75rem;
+    padding-top: 5rem; /* vertically center with icon area */
+    color: var(--pp-sage);
+    flex-shrink: 0;
+  }
+
+  .prime-puff__connector-line {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    position: relative;
+    width: 48px;
+  }
+
+  .prime-puff__connector-line::before {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--pp-sage-light), var(--pp-sage));
+    border-radius: 2px;
+    transform-origin: left center;
+    animation: prime-puff-line-draw 0.6s var(--pp-ease-out) both;
+  }
+
+  .prime-puff__connector-arrow {
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 8px solid var(--pp-sage);
+    flex-shrink: 0;
+    margin-left: -1px;
+  }
+
+  @keyframes prime-puff-line-draw {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+
+  /* ── Infographic Image ─────────────────────────────────────────────────── */
+  .prime-puff__infographic {
+    margin: 0 0 clamp(2rem, 4vw, 3.5rem);
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(44, 44, 44, 0.08);
+    box-shadow: 0 16px 48px rgba(44, 44, 44, 0.1);
+  }
+
+  .prime-puff__infographic img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  /* ── Safety Note ───────────────────────────────────────────────────────── */
+  .prime-puff__safety {
+    background: var(--pp-amber-bg);
+    border: 1.5px solid var(--pp-amber-border);
+    border-radius: var(--pp-radius-card);
+    padding: clamp(1.25rem, 2.5vw, 1.75rem) clamp(1.25rem, 2.5vw, 2rem);
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.875rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .prime-puff__safety-icon {
+    font-size: 1.25rem;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .prime-puff__safety-text {
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: #7A5C1E;
+    margin: 0;
+  }
+
+  .prime-puff__safety-text strong {
+    color: #5C4010;
+    font-weight: 600;
+  }
+
+  /* ── Footer / Value Statement ──────────────────────────────────────────── */
+  .prime-puff__footer {
+    text-align: center;
+  }
+
+  .prime-puff__value-statement {
+    font-family: var(--pp-font-heading);
+    font-size: clamp(1.75rem, 3vw, 2.75rem);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--pp-charcoal);
+    margin: 0 0 clamp(1.5rem, 3vw, 2rem);
+  }
+
+  .prime-puff__cta.prime-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2.5rem;
+    background-color: var(--pp-terracotta);
+    color: var(--pp-white);
+    font-family: var(--pp-font-body);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: var(--pp-radius-pill);
+    border: none;
+    cursor: pointer;
+    transition: background-color 200ms var(--pp-ease-out),
+                transform 200ms var(--pp-ease-out),
+                box-shadow 200ms var(--pp-ease-out);
+  }
+
+  .prime-puff__cta.prime-btn-primary:hover {
+    background-color: var(--prime-terracotta-hover, #A85D3F);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(196, 114, 79, 0.3);
+  }
+
+  /* ── Scroll Reveal ─────────────────────────────────────────────────────── */
+  .prime-puff .prime-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity var(--pp-duration) var(--pp-ease-out),
+                transform var(--pp-duration) var(--pp-ease-out);
+  }
+
+  .prime-puff .prime-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── Mobile Layout ─────────────────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    .prime-puff__steps {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .prime-puff__connector {
+      padding: 0.5rem 0;
+      justify-content: flex-start;
+      padding-left: 2.5rem;
+    }
+
+    .prime-puff__connector-line {
+      width: 2px;
+      height: 36px;
+      flex-direction: column;
+    }
+
+    .prime-puff__connector-line::before {
+      content: '';
+      display: block;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--pp-sage-light), var(--pp-sage));
+      border-radius: 2px;
+      animation: prime-puff-line-draw-v 0.6s var(--pp-ease-out) both;
+    }
+
+    .prime-puff__connector-arrow {
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 8px solid var(--pp-sage);
+      border-bottom: none;
+      margin-left: -4px;
+      margin-top: -1px;
+    }
+
+    @keyframes prime-puff-line-draw-v {
+      from { transform: scaleY(0); }
+      to   { transform: scaleY(1); }
+    }
+
+    .prime-puff__step {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .prime-puff__step-icon {
+      margin: 0.5rem 0 0.75rem;
+    }
+
+    .prime-puff__step-number {
+      font-size: 2.75rem;
+    }
+
+    .prime-puff__safety {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .prime-puff__cta.prime-btn-primary {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  /* ── Reduced motion ────────────────────────────────────────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    .prime-puff .prime-reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .prime-puff__connector-line::before {
+      animation: none;
+    }
+
+    .prime-puff__step:hover {
+      transform: none;
+    }
+  }
+</style>
+
+<section
+  class="prime-puff prime-section"
+  style="background: var(--prime-cream-dark, #F5F0E8); padding-top: clamp(4rem,8vw,8rem); padding-bottom: clamp(4rem,8vw,8rem);"
+  aria-labelledby="prime-puff-heading"
+>
+  <div class="prime-container">
+
+    {%- comment -%} ── Section Header ─────────────────────────────────────── {%- endcomment -%}
+    <header class="prime-puff__header prime-reveal" data-delay="0">
+      <span class="prime-puff__eyebrow">{{ eyebrow }}</span>
+      <h2 class="prime-puff__heading" id="prime-puff-heading">{{ heading }}</h2>
+      {%- if subheading != blank -%}
+        <p class="prime-puff__subheading">{{ subheading }}</p>
+      {%- else -%}
+        <p class="prime-puff__subheading">When your dog chews down to the last inch, don't throw it away. A quick soak and 45 seconds in the microwave turns it into a light, puffed snack they'll love.</p>
+      {%- endif -%}
+    </header>
+
+    {%- comment -%} ── 3-Step Visual Process ──────────────────────────────── {%- endcomment -%}
+    <div
+      class="prime-puff__steps"
+      role="list"
+      aria-label="Microwave puff instructions — 3 steps"
+    >
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'step' -%}
+          {%- assign step_delay = forloop.index0 | times: 150 -%}
+
+          <article
+            class="prime-puff__step prime-reveal"
+            data-delay="{{ step_delay }}"
+            role="listitem"
+            {{ block.shopify_attributes }}
+          >
+            <span class="prime-puff__step-number" aria-hidden="true">
+              {%- if block.settings.number != blank -%}
+                {{ block.settings.number }}
+              {%- else -%}
+                0{{ forloop.index }}
+              {%- endif -%}
+            </span>
+
+            <div class="prime-puff__step-icon" aria-hidden="true">
+              {%- case block.settings.icon -%}
+                {%- when 'water' -%}
+                  {%- comment -%} Water drop SVG {%- endcomment -%}
+                  <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                    <path d="M24 6 C24 6 10 20 10 30 C10 37.7 16.3 44 24 44 C31.7 44 38 37.7 38 30 C38 20 24 6 24 6Z"/>
+                    <path d="M18 32 C18 35.3 20.7 38 24 38" stroke-opacity="0.5"/>
+                  </svg>
+                {%- when 'microwave' -%}
+                  {%- comment -%} Microwave SVG {%- endcomment -%}
+                  <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                    <rect x="4" y="10" width="40" height="28" rx="4"/>
+                    <rect x="8" y="14" width="26" height="20" rx="2"/>
+                    <circle cx="38" cy="20" r="2" fill="currentColor" stroke="none"/>
+                    <circle cx="38" cy="28" r="2" fill="currentColor" stroke="none"/>
+                    <line x1="38" y1="23" x2="38" y2="25"/>
+                    <path d="M14 24 L18 20 L22 24 L26 20 L30 24" stroke-width="1.5"/>
+                  </svg>
+                {%- when 'star' -%}
+                  {%- comment -%} Star / treat SVG {%- endcomment -%}
+                  <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                    <path d="M24 6 L27.5 17.5 L40 17.5 L30 25 L33.5 36.5 L24 29.5 L14.5 36.5 L18 25 L8 17.5 L20.5 17.5 Z"/>
+                  </svg>
+                {%- when 'clock' -%}
+                  {%- comment -%} Clock SVG {%- endcomment -%}
+                  <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                    <circle cx="24" cy="24" r="18"/>
+                    <polyline points="24,12 24,24 32,30"/>
+                  </svg>
+                {%- when 'check' -%}
+                  {%- comment -%} Check / paw SVG {%- endcomment -%}
+                  <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                    <circle cx="24" cy="24" r="18"/>
+                    <polyline points="15,24 21,30 33,18"/>
+                  </svg>
+                {%- else -%}
+                  {%- comment -%} Default: sparkle {%- endcomment -%}
+                  <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                    <path d="M24 6 L26 20 L40 24 L26 28 L24 42 L22 28 L8 24 L22 20 Z"/>
+                  </svg>
+              {%- endcase -%}
+            </div>
+
+            <h3 class="prime-puff__step-title">{{ block.settings.title }}</h3>
+            <p class="prime-puff__step-instruction">{{ block.settings.instruction }}</p>
+
+            {%- if block.settings.time_label != blank -%}
+              <span class="prime-puff__step-time" aria-label="Time: {{ block.settings.time_label }}">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <circle cx="6" cy="6" r="5"/>
+                  <polyline points="6,3 6,6 8,7.5"/>
+                </svg>
+                {{ block.settings.time_label }}
+              </span>
+            {%- endif -%}
+          </article>
+
+          {%- unless forloop.last -%}
+            <div class="prime-puff__connector" aria-hidden="true">
+              <div class="prime-puff__connector-line">
+                <span class="prime-puff__connector-arrow"></span>
+              </div>
+            </div>
+          {%- endunless -%}
+
+        {%- endif -%}
+      {%- endfor -%}
+
+    </div>
+
+    {%- comment -%} ── Optional Infographic Image ─────────────────────────── {%- endcomment -%}
+    {%- if show_infographic -%}
+      <figure class="prime-puff__infographic prime-reveal" data-delay="500" aria-label="Puff instructions infographic">
+        <img
+          src="{{ infographic_src }}"
+          alt="{{ infographic_alt }}"
+          loading="lazy"
+          width="1400"
+          height="700"
+        >
+      </figure>
+    {%- endif -%}
+
+    {%- comment -%} ── Safety Note ────────────────────────────────────────── {%- endcomment -%}
+    {%- if safety_note != blank -%}
+      <aside
+        class="prime-puff__safety prime-reveal"
+        data-delay="600"
+        role="note"
+        aria-label="Safety information"
+      >
+        <span class="prime-puff__safety-icon" aria-hidden="true">⚠️</span>
+        <p class="prime-puff__safety-text">
+          <strong>Safety note: </strong>{{ safety_note }}
+        </p>
+      </aside>
+    {%- endif -%}
+
+    {%- comment -%} ── Value Statement + CTA ──────────────────────────────── {%- endcomment -%}
+    <div class="prime-puff__footer prime-reveal" data-delay="700">
+      {%- if value_statement != blank -%}
+        <p class="prime-puff__value-statement">{{ value_statement }}</p>
+      {%- endif -%}
+      {%- if cta_text != blank -%}
+        <a
+          href="{{ cta_url }}"
+          class="prime-puff__cta prime-btn-primary"
+          aria-label="{{ cta_text }}"
+        >
+          {{ cta_text }}
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="2" y1="7" x2="12" y2="7"/>
+            <polyline points="8,3 12,7 8,11"/>
+          </svg>
+        </a>
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  (function () {
+    'use strict';
+
+    // ── Scroll-reveal with staggered delays ──────────────────────────────
+    var SECTION_ID = 'prime-puff-heading';
+
+    function initPrimePuffReveal() {
+      var section = document.getElementById(SECTION_ID);
+      if (!section) return;
+
+      var container = section.closest('.prime-puff');
+      if (!container) return;
+
+      var revealEls = Array.prototype.slice.call(
+        container.querySelectorAll('.prime-reveal')
+      );
+
+      if (!revealEls.length) return;
+
+      // Respect prefers-reduced-motion
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced) {
+        revealEls.forEach(function (el) {
+          el.classList.add('is-visible');
+        });
+        return;
+      }
+
+      // IntersectionObserver — trigger when element enters viewport
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var el = entry.target;
+            var delay = parseInt(el.getAttribute('data-delay') || '0', 10);
+            setTimeout(function () {
+              el.classList.add('is-visible');
+            }, delay);
+            observer.unobserve(el);
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+      );
+
+      revealEls.forEach(function (el) {
+        observer.observe(el);
+      });
+    }
+
+    // Run after DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initPrimePuffReveal);
+    } else {
+      initPrimePuffReveal();
+    }
+
+    // Re-run if Shopify Theme Editor reloads the section
+    document.addEventListener('shopify:section:load', function (e) {
+      if (e.target && e.target.querySelector('#' + SECTION_ID)) {
+        initPrimePuffReveal();
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Prime Puff Instructions",
+  "tag": "div",
+  "class": "prime-puff-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "Zero waste"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The nub becomes a treat."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "When your dog chews down to the last inch, don't throw it away. A quick soak and 45 seconds in the microwave turns it into a light, puffed snack they'll love."
+    },
+    {
+      "type": "header",
+      "content": "Infographic Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_infographic",
+      "label": "Show infographic image",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "infographic_image",
+      "label": "Infographic image",
+      "info": "Upload the infographic to theme files. If left blank, falls back to prime-puff-instructions-infographic.jpg in assets."
+    },
+    {
+      "type": "header",
+      "content": "Safety & Messaging"
+    },
+    {
+      "type": "textarea",
+      "id": "safety_note",
+      "label": "Safety note",
+      "default": "Always supervise your dog. Let the puff cool completely — it gets very hot inside. Not recommended for puppies under 6 months."
+    },
+    {
+      "type": "text",
+      "id": "value_statement",
+      "label": "Value statement",
+      "default": "One chew. Two treats. Nothing wasted."
+    },
+    {
+      "type": "header",
+      "content": "Call to Action"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button text",
+      "default": "Shop Yak Chews"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Button URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Step number display",
+          "info": "Decorative number shown in the card background (e.g. 01, 02, 03). Auto-fills from position if left blank."
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "water",     "label": "Water drop" },
+            { "value": "microwave", "label": "Microwave" },
+            { "value": "star",      "label": "Star / treat" },
+            { "value": "clock",     "label": "Clock" },
+            { "value": "check",     "label": "Check circle" }
+          ],
+          "default": "water"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step title",
+          "default": "Soak"
+        },
+        {
+          "type": "textarea",
+          "id": "instruction",
+          "label": "Instruction",
+          "default": "Drop the nub in a bowl of water"
+        },
+        {
+          "type": "text",
+          "id": "time_label",
+          "label": "Time badge",
+          "info": "Short time indicator shown as a pill badge (e.g. '5–10 minutes'). Leave blank to hide.",
+          "default": "5–10 minutes"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Prime Puff Instructions",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "number": "01",
+            "icon": "water",
+            "title": "Soak",
+            "instruction": "Drop the nub in a bowl of water and let it absorb for a few minutes.",
+            "time_label": "5–10 minutes"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "number": "02",
+            "icon": "microwave",
+            "title": "Microwave",
+            "instruction": "Place on a microwave-safe plate and heat until it puffs up.",
+            "time_label": "30–45 seconds"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "number": "03",
+            "icon": "star",
+            "title": "Cool & Serve",
+            "instruction": "Let it cool completely before giving to your dog — it gets hot inside.",
+            "time_label": "2–3 minutes to cool"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
