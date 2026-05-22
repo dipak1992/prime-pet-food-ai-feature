@@ -28,6 +28,55 @@
         "heading_tag": "h1"
       }
     },
+    "about_us_hero": {
+      "type": "about-us",
+      "settings": {
+        "hero_eyebrow": "About Prime Pet Food",
+        "hero_title": "We didn't start a pet brand.",
+        "hero_title_em": "We brought a mountain tradition home.",
+        "hero_sub": "Prime Pet Food is founded by Dipak Regmi, a Nepali engineer who grew up around chhurpi — the hard cheese tradition of the Himalayas. When he moved to the US and got his first dog, he saw how confusing the chew aisle was. So he brought the tradition he already knew to modern dog homes.",
+        "cta_button_label": "Shop Yak Chews",
+        "cta_button_link": "/collections/all",
+        "stat_1_num": "20,000+",
+        "stat_1_label": "Dog homes served",
+        "stat_2_num": "4",
+        "stat_2_label": "Simple ingredients",
+        "stat_3_num": "Nepal → Texas",
+        "stat_3_label": "Sourced & packed",
+        "story_badge": "Est. 2019 · Nepal → Texas",
+        "mission_label": "Our mission",
+        "mission_text": "<p>Give dog parents a chew they can actually understand — 4 ingredients, a real origin story, and a founder who answers sizing questions personally.</p>",
+        "values_tag": "What drives us",
+        "values_title": "Built on honesty, not marketing.",
+        "value_1_icon": "🏔️",
+        "value_1_title": "Himalayan heritage",
+        "value_1_desc": "Our recipe comes from Nepal's chhurpi tradition — a hard cheese made by mountain communities for generations.",
+        "value_2_icon": "🧑‍🌾",
+        "value_2_title": "Real farming families",
+        "value_2_desc": "Yak and cow milk sourced from small Himalayan farming families, not industrial dairy operations.",
+        "value_3_icon": "📦",
+        "value_3_title": "Packed in USA",
+        "value_3_desc": "Every batch is inspected, sorted by size, and packed by our team in Texas before shipping to your door.",
+        "value_4_icon": "🤝",
+        "value_4_title": "Founder-led support",
+        "value_4_desc": "Dipak personally answers sizing and safety questions. You're never talking to a bot or a call center.",
+        "story_subtitle": "Why I started Prime Pet Food",
+        "story_heading": "I remembered what honest food looked like.",
+        "story_body_1": "Growing up in Nepal, chhurpi was just food — milk, heat, lime, salt, and patience. Nothing exotic. When I moved to the US and saw the pet chew aisle full of mystery ingredients and vague sourcing, I knew there was a better way.",
+        "story_body_2": "Prime Pet Food is that better way. 4 ingredients. Crafted in Nepal using traditional Himalayan methods. Checked and packed in Texas. A real person behind every product.",
+        "story_caption": "Himalayan foothills where our yak milk is sourced",
+        "pillars_heading": "What makes Prime different from Amazon sellers",
+        "pillars_intro": "We're not a private-label brand with a mountain photo pasted on. Here's what separates us:",
+        "pillar_1_title": "Known origin",
+        "pillar_1_desc": "We can trace every chew back to the farming families and region it came from. No anonymous supply chains.",
+        "pillar_2_title": "Founder accountability",
+        "pillar_2_desc": "Dipak Regmi stands behind every product. Real name, real face, real answers to your questions.",
+        "pillar_3_title": "Traditional craft, modern standards",
+        "pillar_3_desc": "Himalayan recipe + Texas quality control. The best of both worlds.",
+        "pillar_4_title": "Transparent ingredients",
+        "pillar_4_desc": "Yak milk, cow milk, lime juice, salt. That's it. No fillers, no mystery powders, no 'natural flavors.'"
+      }
+    },
     "prime_founder_about": {
       "type": "prime-founder-about",
       "settings": {}
@@ -36,6 +85,7 @@
   "order": [
     "breadcrumbs",
     "main",
+    "about_us_hero",
     "prime_founder_about"
   ]
 }
