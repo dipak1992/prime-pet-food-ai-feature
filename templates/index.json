@@ -38,6 +38,17 @@
         "enable_animations": true
       }
     },
+    "prime_rawhide_visual_comparison": {
+      "type": "prime-rawhide-visual-comparison",
+      "settings": {
+        "eyebrow": "Rawhide-free comparison",
+        "heading": "Why dog parents switch from rawhide.",
+        "subheading": "A yak chew is still a hard chew that needs supervision. The difference is the recipe: simple dairy ingredients, low odor, dense texture, and no rawhide sheets.",
+        "comparison_image": "prime-rawhide-comparison-infographic.jpg",
+        "cta_label": "Shop rawhide-free chews",
+        "cta_url": "/products/himalayan-yak-chews-for-dogs"
+      }
+    },
     "video_carousel": {
       "type": "video-carousel",
       "blocks": {
@@ -145,6 +156,7 @@
   },
   "order": [
     "prime_homepage_experience",
+    "prime_rawhide_visual_comparison",
     "prime_zero_waste_puff",
     "video_carousel"
   ]
