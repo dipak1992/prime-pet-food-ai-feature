@@ -604,6 +604,7 @@
     {{ 'prime-motion-base.css' | asset_url | stylesheet_tag }}
     {{ 'prime-nav-motion.css' | asset_url | stylesheet_tag }}
     {{ 'prime-cart-motion.css' | asset_url | stylesheet_tag }}
+    {{ 'prime-brand-system.css' | asset_url | stylesheet_tag }}
 
     {%- if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}
       <link rel="stylesheet" href="{{ 'component-localization-form.css' | asset_url }}" media="print" onload="this.media='all'">

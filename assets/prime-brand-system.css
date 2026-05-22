@@ -1,0 +1,755 @@
+/*
+ * Prime Pet Food — Brand Design System
+ * Earthy, warm, outdoor-inspired premium aesthetic
+ * Loaded globally via layout/theme.liquid
+ */
+
+/* ─────────────────────────────────────────────
+   COLOR TOKENS
+   Warm earthy palette — premium outdoor/wellness
+   ───────────────────────────────────────────── */
+:root {
+  /* Core brand colors */
+  --prime-cream:        #F9F5EF;   /* warm off-white — page backgrounds */
+  --prime-parchment:    #F2EBE0;   /* slightly deeper cream — section alternates */
+  --prime-sand:         #E8D9C4;   /* warm sand — borders, dividers */
+  --prime-stone:        #C4B49A;   /* muted stone — secondary text, captions */
+  --prime-bark:         #7A6248;   /* warm brown — body text, secondary headings */
+  --prime-charcoal:     #2C2218;   /* deep warm charcoal — primary headings */
+  --prime-ink:          #1A1410;   /* near-black — max contrast text */
+
+  /* Accent colors */
+  --prime-terracotta:   #C4622D;   /* burnt orange — primary CTA, highlights */
+  --prime-terracotta-dk:#A34E22;   /* darker terracotta — hover states */
+  --prime-sage:         #6B7C5E;   /* muted sage green — secondary accents */
+  --prime-sage-lt:      #8FA07E;   /* lighter sage — badges, tags */
+  --prime-gold:         #B8924A;   /* warm gold — premium accents, stars */
+  --prime-gold-lt:      #D4AA6A;   /* lighter gold — highlights */
+
+  /* Functional colors */
+  --prime-success:      #4A7C59;   /* forest green — success states */
+  --prime-warning:      #C4622D;   /* terracotta — warnings (reuse brand) */
+  --prime-surface:      #FFFFFF;   /* pure white — cards, modals */
+  --prime-surface-warm: #FBF8F3;   /* warm white — elevated surfaces */
+
+  /* ─────────────────────────────────────────────
+     TYPOGRAPHY TOKENS
+     Editorial scale — larger, more breathing room
+     ───────────────────────────────────────────── */
+
+  /* Font families */
+  --prime-font-display: 'Georgia', 'Times New Roman', serif;
+  --prime-font-body:    -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --prime-font-mono:    'Courier New', Courier, monospace;
+
+  /* Fluid type scale — clamp(min, preferred, max) */
+  --prime-text-xs:      clamp(0.70rem, 1.2vw, 0.75rem);   /* 11–12px */
+  --prime-text-sm:      clamp(0.82rem, 1.4vw, 0.875rem);  /* 13–14px */
+  --prime-text-base:    clamp(0.95rem, 1.6vw, 1.0625rem); /* 15–17px */
+  --prime-text-md:      clamp(1.05rem, 1.8vw, 1.1875rem); /* 17–19px */
+  --prime-text-lg:      clamp(1.15rem, 2.2vw, 1.375rem);  /* 18–22px */
+  --prime-text-xl:      clamp(1.35rem, 2.8vw, 1.75rem);   /* 22–28px */
+  --prime-text-2xl:     clamp(1.65rem, 3.5vw, 2.25rem);   /* 26–36px */
+  --prime-text-3xl:     clamp(2.0rem, 4.5vw, 3.0rem);     /* 32–48px */
+  --prime-text-4xl:     clamp(2.5rem, 5.5vw, 3.75rem);    /* 40–60px */
+  --prime-text-display: clamp(3.0rem, 7vw, 5.0rem);       /* 48–80px */
+
+  /* Line heights */
+  --prime-leading-tight:  1.1;
+  --prime-leading-snug:   1.25;
+  --prime-leading-normal: 1.5;
+  --prime-leading-relaxed:1.7;
+  --prime-leading-loose:  1.9;
+
+  /* Letter spacing */
+  --prime-tracking-tight:  -0.02em;
+  --prime-tracking-normal:  0;
+  --prime-tracking-wide:    0.04em;
+  --prime-tracking-wider:   0.08em;
+  --prime-tracking-widest:  0.14em;
+
+  /* Font weights */
+  --prime-weight-light:   300;
+  --prime-weight-normal:  400;
+  --prime-weight-medium:  500;
+  --prime-weight-semibold:600;
+  --prime-weight-bold:    700;
+  --prime-weight-black:   900;
+
+  /* ─────────────────────────────────────────────
+     SPACING TOKENS
+     Cinematic scale — generous breathing room
+     ───────────────────────────────────────────── */
+  --prime-space-1:   0.25rem;   /* 4px */
+  --prime-space-2:   0.5rem;    /* 8px */
+  --prime-space-3:   0.75rem;   /* 12px */
+  --prime-space-4:   1rem;      /* 16px */
+  --prime-space-5:   1.25rem;   /* 20px */
+  --prime-space-6:   1.5rem;    /* 24px */
+  --prime-space-8:   2rem;      /* 32px */
+  --prime-space-10:  2.5rem;    /* 40px */
+  --prime-space-12:  3rem;      /* 48px */
+  --prime-space-16:  4rem;      /* 64px */
+  --prime-space-20:  5rem;      /* 80px */
+  --prime-space-24:  6rem;      /* 96px */
+  --prime-space-32:  8rem;      /* 128px */
+  --prime-space-40:  10rem;     /* 160px */
+
+  /* Section padding — cinematic vertical rhythm */
+  --prime-section-sm:  clamp(3rem, 6vw, 5rem);
+  --prime-section-md:  clamp(4rem, 8vw, 7rem);
+  --prime-section-lg:  clamp(5rem, 10vw, 9rem);
+  --prime-section-xl:  clamp(6rem, 12vw, 11rem);
+
+  /* ─────────────────────────────────────────────
+     BORDER & RADIUS TOKENS
+     ───────────────────────────────────────────── */
+  --prime-radius-sm:   4px;
+  --prime-radius-md:   8px;
+  --prime-radius-lg:   12px;
+  --prime-radius-xl:   20px;
+  --prime-radius-2xl:  32px;
+  --prime-radius-full: 9999px;
+
+  --prime-border:      1px solid var(--prime-sand);
+  --prime-border-warm: 1px solid rgba(196, 180, 154, 0.4);
+
+  /* ─────────────────────────────────────────────
+     SHADOW TOKENS
+     Warm, soft shadows — not cold grey
+     ───────────────────────────────────────────── */
+  --prime-shadow-xs:  0 1px 3px rgba(44, 34, 24, 0.06);
+  --prime-shadow-sm:  0 2px 8px rgba(44, 34, 24, 0.08);
+  --prime-shadow-md:  0 4px 16px rgba(44, 34, 24, 0.10);
+  --prime-shadow-lg:  0 8px 32px rgba(44, 34, 24, 0.12);
+  --prime-shadow-xl:  0 16px 48px rgba(44, 34, 24, 0.14);
+
+  /* ─────────────────────────────────────────────
+     TRANSITION TOKENS
+     ───────────────────────────────────────────── */
+  --prime-ease:        cubic-bezier(0.25, 0.1, 0.25, 1);
+  --prime-ease-out:    cubic-bezier(0, 0, 0.2, 1);
+  --prime-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --prime-duration-fast:   150ms;
+  --prime-duration-base:   250ms;
+  --prime-duration-slow:   400ms;
+  --prime-duration-slower: 600ms;
+
+  /* ─────────────────────────────────────────────
+     LAYOUT TOKENS
+     ───────────────────────────────────────────── */
+  --prime-max-width:       1280px;
+  --prime-max-width-text:  720px;
+  --prime-max-width-narrow:560px;
+  --prime-gutter:          clamp(1rem, 4vw, 2.5rem);
+}
+
+/* ─────────────────────────────────────────────
+   GLOBAL BASE OVERRIDES
+   Apply warm brand feel to the whole site
+   ───────────────────────────────────────────── */
+
+/* Warm page background */
+body {
+  background-color: var(--prime-cream);
+  color: var(--prime-charcoal);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection color — warm terracotta */
+::selection {
+  background: rgba(196, 98, 45, 0.18);
+  color: var(--prime-ink);
+}
+
+/* ─────────────────────────────────────────────
+   TYPOGRAPHY OVERRIDES
+   Editorial, premium feel
+   ───────────────────────────────────────────── */
+
+/* Headings — serif for editorial warmth */
+h1, h2, h3 {
+  font-family: var(--prime-font-display);
+  font-weight: var(--prime-weight-normal);
+  line-height: var(--prime-leading-tight);
+  letter-spacing: var(--prime-tracking-tight);
+  color: var(--prime-charcoal);
+}
+
+h4, h5, h6 {
+  font-family: var(--prime-font-body);
+  font-weight: var(--prime-weight-semibold);
+  line-height: var(--prime-leading-snug);
+  color: var(--prime-charcoal);
+}
+
+/* Body text — comfortable reading size */
+p {
+  font-size: var(--prime-text-base);
+  line-height: var(--prime-leading-relaxed);
+  color: var(--prime-bark);
+}
+
+/* Kicker / eyebrow labels */
+.ph-kicker,
+.pfa-kicker,
+.pfq-kicker,
+.pav2-kicker,
+[class*="__kicker"],
+[class*="-kicker"] {
+  font-family: var(--prime-font-body);
+  font-size: var(--prime-text-xs);
+  font-weight: var(--prime-weight-bold);
+  letter-spacing: var(--prime-tracking-widest);
+  text-transform: uppercase;
+  color: var(--prime-terracotta);
+}
+
+/* ─────────────────────────────────────────────
+   BUTTON OVERRIDES
+   Warm, premium CTA style
+   ───────────────────────────────────────────── */
+
+/* Primary button — terracotta */
+.ph-button--primary,
+.pfa-button--primary,
+.pfq-button--primary,
+.pav2-btn--primary,
+[class*="btn--primary"],
+[class*="button--primary"] {
+  background-color: var(--prime-terracotta);
+  color: #fff;
+  border: none;
+  border-radius: var(--prime-radius-md);
+  font-weight: var(--prime-weight-semibold);
+  letter-spacing: 0.01em;
+  transition: background-color var(--prime-duration-base) var(--prime-ease),
+              transform var(--prime-duration-fast) var(--prime-ease),
+              box-shadow var(--prime-duration-base) var(--prime-ease);
+}
+
+.ph-button--primary:hover,
+.pfa-button--primary:hover,
+.pfq-button--primary:hover,
+.pav2-btn--primary:hover,
+[class*="btn--primary"]:hover,
+[class*="button--primary"]:hover {
+  background-color: var(--prime-terracotta-dk);
+  transform: translateY(-1px);
+  box-shadow: var(--prime-shadow-md);
+}
+
+/* Secondary button — outlined warm */
+.ph-button--secondary,
+.pfa-button--secondary,
+.pfq-button--secondary,
+.pav2-btn--ghost,
+[class*="btn--secondary"],
+[class*="button--secondary"] {
+  background-color: transparent;
+  color: var(--prime-charcoal);
+  border: 1.5px solid var(--prime-sand);
+  border-radius: var(--prime-radius-md);
+  font-weight: var(--prime-weight-medium);
+  transition: border-color var(--prime-duration-base) var(--prime-ease),
+              background-color var(--prime-duration-base) var(--prime-ease);
+}
+
+.ph-button--secondary:hover,
+.pfa-button--secondary:hover,
+.pfq-button--secondary:hover,
+.pav2-btn--ghost:hover,
+[class*="btn--secondary"]:hover,
+[class*="button--secondary"]:hover {
+  border-color: var(--prime-bark);
+  background-color: rgba(122, 98, 72, 0.05);
+}
+
+/* ─────────────────────────────────────────────
+   CARD OVERRIDES
+   Warm surface, soft shadow
+   ───────────────────────────────────────────── */
+.ph-review-card,
+.ph-ingredient-card,
+.pfa-belief,
+.pfa-supply-chain__step,
+[class*="-card"]:not([class*="__card"]) {
+  background-color: var(--prime-surface-warm);
+  border: var(--prime-border-warm);
+  border-radius: var(--prime-radius-lg);
+  box-shadow: var(--prime-shadow-xs);
+  transition: box-shadow var(--prime-duration-base) var(--prime-ease),
+              transform var(--prime-duration-base) var(--prime-ease);
+}
+
+.ph-review-card:hover,
+.ph-ingredient-card:hover {
+  box-shadow: var(--prime-shadow-md);
+  transform: translateY(-2px);
+}
+
+/* ─────────────────────────────────────────────
+   SECTION ALTERNATING BACKGROUNDS
+   Warm cream / parchment rhythm
+   ───────────────────────────────────────────── */
+.ph-rawhide-story,
+.ph-ingredients,
+.ph-subscribe,
+.pfa-beliefs,
+.pfa-team {
+  background-color: var(--prime-parchment);
+}
+
+.ph-value,
+.ph-himalayan-story,
+.ph-puff-story,
+.pfa-supply-chain {
+  background-color: var(--prime-cream);
+}
+
+/* ─────────────────────────────────────────────
+   TRUST BAR
+   Warm, grounded
+   ───────────────────────────────────────────── */
+.ph-trust-bar {
+  background-color: var(--prime-charcoal);
+  color: var(--prime-cream);
+}
+
+.ph-trust-bar__stat strong {
+  color: var(--prime-gold-lt);
+}
+
+.ph-trust-bar__stat span {
+  color: var(--prime-stone);
+}
+
+/* ─────────────────────────────────────────────
+   HERO PROOF BADGES
+   ───────────────────────────────────────────── */
+.ph-hero__proof span {
+  background-color: rgba(249, 245, 239, 0.15);
+  border: 1px solid rgba(249, 245, 239, 0.3);
+  border-radius: var(--prime-radius-full);
+  color: var(--prime-cream);
+  font-size: var(--prime-text-xs);
+  font-weight: var(--prime-weight-semibold);
+  letter-spacing: var(--prime-tracking-wide);
+  padding: 0.35em 0.85em;
+  backdrop-filter: blur(4px);
+}
+
+/* ─────────────────────────────────────────────
+   INGREDIENT CARDS
+   Editorial macro photography feel
+   ───────────────────────────────────────────── */
+.ph-ingredient-card {
+  overflow: hidden;
+  border-radius: var(--prime-radius-xl);
+}
+
+.ph-ingredient-card img {
+  border-radius: var(--prime-radius-xl) var(--prime-radius-xl) 0 0;
+  transition: transform var(--prime-duration-slow) var(--prime-ease);
+}
+
+.ph-ingredient-card:hover img {
+  transform: scale(1.04);
+}
+
+.ph-ingredient-card h3 {
+  font-family: var(--prime-font-display);
+  font-size: var(--prime-text-lg);
+  color: var(--prime-charcoal);
+  margin: 0 0 0.25em;
+}
+
+.ph-ingredient-card p {
+  font-size: var(--prime-text-sm);
+  color: var(--prime-bark);
+  line-height: var(--prime-leading-relaxed);
+}
+
+/* ─────────────────────────────────────────────
+   HIMALAYAN STORY
+   Documentary, warm editorial
+   ───────────────────────────────────────────── */
+.ph-himalayan-story__media img {
+  border-radius: var(--prime-radius-xl);
+  box-shadow: var(--prime-shadow-lg);
+}
+
+.ph-himalayan-story__copy h2 {
+  font-size: var(--prime-text-3xl);
+  color: var(--prime-charcoal);
+}
+
+.ph-himalayan-story__signals span {
+  background-color: rgba(107, 124, 94, 0.12);
+  color: var(--prime-sage);
+  border: 1px solid rgba(107, 124, 94, 0.25);
+  border-radius: var(--prime-radius-full);
+  font-size: var(--prime-text-xs);
+  font-weight: var(--prime-weight-semibold);
+  letter-spacing: var(--prime-tracking-wide);
+  padding: 0.3em 0.8em;
+}
+
+/* ─────────────────────────────────────────────
+   REVIEW CARDS
+   Warm, authentic
+   ───────────────────────────────────────────── */
+.ph-review-card__stars {
+  color: var(--prime-gold);
+  font-size: var(--prime-text-sm);
+}
+
+.ph-review-card blockquote {
+  font-family: var(--prime-font-display);
+  font-size: var(--prime-text-md);
+  line-height: var(--prime-leading-relaxed);
+  color: var(--prime-charcoal);
+  font-style: italic;
+}
+
+.ph-review-card footer strong {
+  color: var(--prime-charcoal);
+  font-weight: var(--prime-weight-semibold);
+}
+
+.ph-review-card__badge {
+  background-color: rgba(107, 124, 94, 0.12);
+  color: var(--prime-sage);
+  border-radius: var(--prime-radius-full);
+  font-size: var(--prime-text-xs);
+  font-weight: var(--prime-weight-semibold);
+  letter-spacing: var(--prime-tracking-wide);
+  padding: 0.2em 0.7em;
+}
+
+/* ─────────────────────────────────────────────
+   SUBSCRIBE SECTION
+   Warm, inviting
+   ───────────────────────────────────────────── */
+.ph-subscribe__benefits span,
+.ph-subscribe__cadence span {
+  color: var(--prime-bark);
+  font-size: var(--prime-text-sm);
+}
+
+.ph-subscribe__benefits span::before {
+  content: '✓';
+  color: var(--prime-sage);
+  margin-right: 0.4em;
+  font-weight: var(--prime-weight-bold);
+}
+
+/* ─────────────────────────────────────────────
+   STICKY BAR
+   Warm, unobtrusive
+   ───────────────────────────────────────────── */
+.ph-sticky-bar {
+  background-color: var(--prime-charcoal);
+  border-bottom: 1px solid rgba(196, 180, 154, 0.15);
+}
+
+.ph-sticky-bar__text {
+  color: var(--prime-stone);
+  font-size: var(--prime-text-sm);
+}
+
+.ph-sticky-bar__btn {
+  background-color: var(--prime-terracotta);
+  color: #fff;
+  border-radius: var(--prime-radius-md);
+  font-size: var(--prime-text-sm);
+  font-weight: var(--prime-weight-semibold);
+  transition: background-color var(--prime-duration-fast) var(--prime-ease);
+}
+
+.ph-sticky-bar__btn:hover {
+  background-color: var(--prime-terracotta-dk);
+}
+
+/* ─────────────────────────────────────────────
+   PRODUCT CARDS
+   Warm, editorial
+   ───────────────────────────────────────────── */
+.ph-product-card {
+  background-color: var(--prime-surface-warm);
+  border: var(--prime-border-warm);
+  border-radius: var(--prime-radius-xl);
+  box-shadow: var(--prime-shadow-xs);
+  transition: box-shadow var(--prime-duration-base) var(--prime-ease),
+              transform var(--prime-duration-base) var(--prime-ease);
+}
+
+.ph-product-card:hover {
+  box-shadow: var(--prime-shadow-lg);
+  transform: translateY(-3px);
+}
+
+/* ─────────────────────────────────────────────
+   CONFIDENCE BADGES
+   ───────────────────────────────────────────── */
+.ph-confidence span {
+  font-size: var(--prime-text-xs);
+  color: var(--prime-stone);
+  letter-spacing: var(--prime-tracking-wide);
+}
+
+/* ─────────────────────────────────────────────
+   QUIZ WIDGET
+   Warm, approachable
+   ───────────────────────────────────────────── */
+.ph-quiz__option {
+  background-color: var(--prime-surface-warm);
+  border: 1.5px solid var(--prime-sand);
+  border-radius: var(--prime-radius-lg);
+  transition: border-color var(--prime-duration-fast) var(--prime-ease),
+              background-color var(--prime-duration-fast) var(--prime-ease),
+              box-shadow var(--prime-duration-fast) var(--prime-ease);
+}
+
+.ph-quiz__option:hover,
+.ph-quiz__option.is-selected {
+  border-color: var(--prime-terracotta);
+  background-color: rgba(196, 98, 45, 0.05);
+  box-shadow: 0 0 0 3px rgba(196, 98, 45, 0.12);
+}
+
+.ph-quiz__result-card {
+  background-color: var(--prime-surface-warm);
+  border: var(--prime-border);
+  border-radius: var(--prime-radius-xl);
+  box-shadow: var(--prime-shadow-md);
+}
+
+/* ─────────────────────────────────────────────
+   PUFF STEPS
+   Clean numbered steps
+   ───────────────────────────────────────────── */
+.ph-puff-story__steps article span {
+  background-color: var(--prime-terracotta);
+  color: #fff;
+  border-radius: var(--prime-radius-full);
+  font-size: var(--prime-text-xs);
+  font-weight: var(--prime-weight-bold);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ph-puff-story__steps article strong {
+  font-family: var(--prime-font-display);
+  font-size: var(--prime-text-lg);
+  color: var(--prime-charcoal);
+}
+
+/* ─────────────────────────────────────────────
+   VALUE SECTION
+   Dark, premium contrast
+   ───────────────────────────────────────────── */
+.ph-value {
+  background-color: var(--prime-charcoal);
+  color: var(--prime-cream);
+}
+
+.ph-value .ph-kicker {
+  color: var(--prime-gold-lt);
+}
+
+.ph-value h2 {
+  color: var(--prime-cream);
+}
+
+.ph-value p {
+  color: var(--prime-stone);
+}
+
+.ph-value__ring {
+  border: 2px solid var(--prime-gold);
+  border-radius: var(--prime-radius-full);
+  color: var(--prime-cream);
+}
+
+.ph-value__ring span {
+  color: var(--prime-gold-lt);
+}
+
+/* ─────────────────────────────────────────────
+   ABOUT PAGE — Founder section
+   ───────────────────────────────────────────── */
+.prime-founder-about {
+  background-color: var(--prime-cream);
+}
+
+.pfa-hero {
+  background-color: var(--prime-charcoal);
+}
+
+.pfa-origin {
+  background-color: var(--prime-parchment);
+}
+
+.pfa-editorial {
+  background-color: var(--prime-cream);
+}
+
+.pfa-milestones {
+  background-color: var(--prime-parchment);
+}
+
+.pfa-beliefs {
+  background-color: var(--prime-cream);
+}
+
+.pfa-supply-chain {
+  background-color: var(--prime-charcoal);
+  color: var(--prime-cream);
+}
+
+.pfa-supply-chain .pfa-kicker {
+  color: var(--prime-gold-lt);
+}
+
+.pfa-supply-chain h2,
+.pfa-supply-chain h3 {
+  color: var(--prime-cream);
+}
+
+.pfa-supply-chain p {
+  color: var(--prime-stone);
+}
+
+/* ─────────────────────────────────────────────
+   FAQ PAGE
+   ───────────────────────────────────────────── */
+.prime-faq-page {
+  background-color: var(--prime-cream);
+}
+
+.pfq-item {
+  border-bottom: var(--prime-border-warm);
+}
+
+.pfq-item summary {
+  font-family: var(--prime-font-body);
+  font-weight: var(--prime-weight-semibold);
+  color: var(--prime-charcoal);
+  cursor: pointer;
+  transition: color var(--prime-duration-fast) var(--prime-ease);
+}
+
+.pfq-item summary:hover {
+  color: var(--prime-terracotta);
+}
+
+.pfq-item[open] summary {
+  color: var(--prime-terracotta);
+}
+
+/* ─────────────────────────────────────────────
+   PRODUCT PAGE — PDP hero
+   ───────────────────────────────────────────── */
+.ypc-product-hero {
+  background-color: var(--prime-cream);
+}
+
+.ypc-product-hero__title {
+  font-family: var(--prime-font-display);
+  color: var(--prime-charcoal);
+}
+
+.ypc-product-hero__option-btn {
+  border: 1.5px solid var(--prime-sand);
+  border-radius: var(--prime-radius-md);
+  color: var(--prime-charcoal);
+  background-color: var(--prime-surface-warm);
+  transition: border-color var(--prime-duration-fast) var(--prime-ease),
+              background-color var(--prime-duration-fast) var(--prime-ease);
+}
+
+.ypc-product-hero__option-btn:hover,
+.ypc-product-hero__option-btn.is-active {
+  border-color: var(--prime-terracotta);
+  background-color: rgba(196, 98, 45, 0.06);
+  color: var(--prime-terracotta);
+}
+
+/* ─────────────────────────────────────────────
+   ANNOUNCEMENT BAR
+   Warm, premium
+   ───────────────────────────────────────────── */
+.shopify-section--announcement-bar,
+.announcement-bar,
+[class*="announcement"] {
+  background-color: var(--prime-charcoal);
+  color: var(--prime-stone);
+  font-size: var(--prime-text-xs);
+  letter-spacing: var(--prime-tracking-wide);
+}
+
+/* ─────────────────────────────────────────────
+   HEADER
+   Clean, premium
+   ───────────────────────────────────────────── */
+.header,
+.site-header,
+[class*="header__"] {
+  background-color: var(--prime-cream);
+  border-bottom: var(--prime-border-warm);
+}
+
+/* ─────────────────────────────────────────────
+   FOOTER
+   Warm dark editorial
+   ───────────────────────────────────────────── */
+.prime-footer,
+.site-footer,
+footer[class*="footer"] {
+  background-color: var(--prime-charcoal);
+  color: var(--prime-stone);
+}
+
+.prime-footer a,
+.site-footer a {
+  color: var(--prime-stone);
+  transition: color var(--prime-duration-fast) var(--prime-ease);
+}
+
+.prime-footer a:hover,
+.site-footer a:hover {
+  color: var(--prime-cream);
+}
+
+/* ─────────────────────────────────────────────
+   SCROLLBAR
+   Subtle warm tint
+   ───────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--prime-parchment);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--prime-stone);
+  border-radius: var(--prime-radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--prime-bark);
+}
+
+/* ─────────────────────────────────────────────
+   FOCUS STYLES
