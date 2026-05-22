@@ -40,7 +40,6 @@
     },
     "main": {
       "type": "main-product",
-      "disabled": true,
       "blocks": {
         "title_3qyCbh": {
           "type": "title",
@@ -789,12 +788,12 @@
       "custom_css": [],
       "name": "YPC Product Hero",
       "settings": {
-        "hero_lead": "A dense Himalayan yak cheese chew made with four simple ingredients for supervised chew time at home.",
+        "hero_lead": "Perfect for the evening chaos when your dog needs something steady to focus on. A dense Himalayan yak cheese chew made with four simple ingredients for supervised calm time at home.",
         "hero_rating_text": "4.9★ from 2,400+ dog parents",
         "hero_benefit_1": "Four ingredients",
         "hero_benefit_2": "Rawhide-free",
         "hero_benefit_3": "Low odor",
-        "hero_benefit_4": "Made in Nepal",
+        "hero_benefit_4": "Handcrafted in Nepal",
         "hero_benefit_5": "Packed in Texas",
         "hero_benefit_6": "Size guidance",
         "show_vet_badge": false,
@@ -803,7 +802,7 @@
         "review_stars": "★★★★★",
         "review_text": "4.9 from 2,400+ dog parents",
         "show_info_line": true,
-        "per_chew_prefix": "A small daily cost for a real chewing job",
+        "per_chew_prefix": "A practical cost for a real chewing job",
         "shipping_text": "Free shipping over $30",
         "show_urgency_signals": true,
         "low_stock_threshold": 8,
@@ -854,14 +853,14 @@
         "tab_2_label": "Safe Feeding Guidelines",
         "tab_3_label": "Shipping",
         "tab_4_label": "Ingredients",
-        "description_heading": "The Chew That Calms and Cleans",
+        "description_heading": "A better chew for real-life dog moments",
         "change_heading": "Safe Feeding Guidelines for Yak Chews",
         "sizing_heading": "Shipping",
         "ingredients_heading": "Simple Ingredients",
-        "description_fallback": "<p>Prime Pet Food Himalayan Yak Chews are dense, rawhide-free enrichment chews for dogs who need a longer-lasting job. Crafted in Nepal using traditional Himalayan methods, each chew is made for supervised calm time, cleaner indoor chewing, and dog parents who want a simple natural routine.</p><ul><li><strong>Best for calm-time structure</strong><br/>Use after walks, during work calls, crate downtime, or evening wind-downs.</li><li><strong>Long-lasting texture</strong><br/>The hardened cheese texture gives dogs more occupation than soft treats or quick snacks.</li><li><strong>Rawhide-free confidence</strong><br/>A simple-ingredient alternative for dog parents avoiding rawhide and highly processed chews.</li><li><strong>Packed in the USA</strong><br/>Packed in the USA under Prime Pet Food quality standards, with sizing, safety, and support guidance for modern dog homes.</li></ul>",
+        "description_fallback": "<p>Prime Pet Food Himalayan Yak Chews are for the parts of the day when your dog needs something to do: after a walk, during a work call, while dinner is happening, or before the house settles down.</p><ul><li><strong>For dogs who like to work on a chew</strong><br/>Dense cheese texture gives your dog a slower, more focused job than a soft treat.</li><li><strong>For cleaner indoor routines</strong><br/>Rawhide-free, low odor, and easier to keep in the calm-time drawer.</li><li><strong>For dog parents who read labels</strong><br/>Yak milk, cow milk, lime juice, salt. That is the recipe.</li><li><strong>For safer endings</strong><br/>When the end piece gets small, take it away and puff it into a crunchy cheese treat after it cools.</li></ul>",
         "change_fallback": "<p><strong>Supervise every chew session</strong><br/>Yak chews are hard, long-lasting chews. Offer them during watched calm time with fresh water nearby, and remove the chew if your dog tries to gulp or swallow large pieces.</p><p><strong>Choose a size your dog cannot swallow whole</strong><br/>If your dog is between sizes or chews aggressively, size up. A larger chew is usually easier to manage safely than one that fits fully in the mouth.</p><p><strong>Use the thumbnail test as a caution</strong><br/>Hard chews are not right for every dog. If your dog has weak teeth, dental disease, crowns, or a history of cracked teeth, ask your vet before using any hard chew.</p><p><strong>Remove and puff the nub</strong><br/>Take the small end piece away before it becomes a choking risk. Soak it, microwave it into a crunchy puff, let it cool completely, then serve as a bonus treat.</p><p><strong>Introduce slowly</strong><br/>For puppies, seniors, sensitive stomachs, or first-time yak chew users, start with shorter sessions and monitor chewing style before building a routine.</p>",
         "sizing_fallback": "<p>Orders usually process within 24–48 hours and ship with trusted carriers such as USPS, UPS, FedEx, or DHL depending on destination and available service.</p><p>Most customers receive their chews within 2–5 business days after shipping. Tracking is provided so you can follow the order from dispatch to delivery.</p><p>Free shipping is available on qualifying orders over $30. If a size or routine fit is not right, our 30-day satisfaction promise gives you a clear path to contact us for help.</p><p>Weather, carrier volume, holidays, and regional delays can occasionally affect delivery timing.</p>",
-        "ingredients_fallback": "<p><strong>4 simple ingredients: Yak milk, cow milk, lime juice, salt.</strong></p><p>That is it: no rawhide, no artificial flavors, no artificial colors, and no unnecessary fillers. Crafted in Nepal using traditional Himalayan methods. Packed in the USA under Prime Pet Food quality standards.</p><p>Because these chews are naturally hard, choose the right size, supervise every session, and remove the small nub before it can be swallowed.</p>",
+        "ingredients_fallback": "<p><strong>4 simple ingredients: Yak milk, cow milk, lime juice, salt.</strong></p><p>The recipe is short because it should be. No rawhide, no artificial flavors, no artificial colors, and no filler story to decode.</p><p>Crafted in Nepal using traditional Himalayan methods and packed in the USA under Prime Pet Food quality standards.</p>",
         "reco_heading": "Build your chew routine",
         "product_link_label": "View option",
         "bg_color": "#f6f1e9",
@@ -887,8 +886,8 @@
       "type": "prime-product-routine-upsell",
       "settings": {
         "eyebrow": "Complete the routine",
-        "heading": "Make calm-time easier to repeat.",
-        "text": "Pair the right chew size with flexible reorders or multi-pack value so your dog’s enrichment routine never depends on last-minute shopping.",
+        "heading": "Stock the calm-time drawer once.",
+        "text": "Choose a multi-pack for better value, or set up flexible reorders so you are not searching for a chew during the busiest part of the day.",
         "main_product": "himalayan-yak-chews-for-dogs",
         "bulk_product": "2-lb-bulk-yak-cheese-dog-chews-natural-long-lasting-treats-small-to-jumbo-copy",
         "subscribe_link": "/pages/subscribe-and-save",
@@ -1290,6 +1289,34 @@
             "question": "What do I do with the small end piece?",
             "answer": "<p>Soak it in hot water for 5 minutes, then microwave for 45–60 seconds. It puffs up into a delicious cheesy treat.</p>"
           }
+        },
+        "faq_item_power_chewers": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can aggressive chewers use yak chews?",
+            "answer": "<p>Many power chewers do well with a properly sized yak chew, but sizing and supervision matter. If your dog is between sizes, size up. If your dog tries to gulp, bite off large pieces, or has dental risk, pause and choose a softer option or ask your vet.</p>"
+          }
+        },
+        "faq_item_hardness": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How hard are they?",
+            "answer": "<p>They are hard cheese chews made for supervised chewing, not soft snacks. They gradually wear down as dogs work on them, but they are not right for dogs with weak teeth, dental disease, crowns, or a cracked-tooth history.</p>"
+          }
+        },
+        "faq_item_storage": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How should I store them?",
+            "answer": "<p>Keep chews in a cool, dry place and reseal the bag after opening. Avoid storing them in damp areas because moisture can change the texture.</p>"
+          }
+        },
+        "faq_item_odor": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do they smell?",
+            "answer": "<p>They are low odor compared with many animal-based chews. You may notice a mild natural cheese smell, especially once your dog starts chewing, but they are made for cleaner indoor use.</p>"
+          }
         }
       },
       "block_order": [
@@ -1303,13 +1330,17 @@
         "faq_item_JPDiP9",
         "faq_item_zCPr6g",
         "faq_item_iqwipL",
-        "faq_item_nkxPPQ"
+        "faq_item_nkxPPQ",
+        "faq_item_power_chewers",
+        "faq_item_hardness",
+        "faq_item_storage",
+        "faq_item_odor"
       ],
       "name": "Accordion FAQ",
       "settings": {
-        "eyebrow": "Common Questions",
-        "heading": "Everything You Need to Know",
-        "subtext": "Have more questions? We are here to help.",
+        "eyebrow": "Before you open the bag",
+        "heading": "Real answers for safer chew time.",
+        "subtext": "Hard chews work best when the size, routine, and dog are a good fit.",
         "accordion_mode": false,
         "first_open": false,
         "list_max_width": 760,
@@ -1373,7 +1404,7 @@
       "settings": {
         "heading": "When the chew gets small, puff it.",
         "subheading": "Take the small end piece away, soak it, microwave it, and let it cool into a crunchy cheese treat. More value, less waste, and a more controlled finish.",
-        "infographic_image": "prime-puff-instructions-infographic.jpg",
+        "infographic_image": "https://cdn.shopify.com/s/files/1/0767/5124/1536/files/puff_hack.png?v=1779455932",
         "cta_label": "Shop Yak Chews",
         "cta_url": "/products/himalayan-yak-chews-for-dogs",
         "video_url": "https://cdn.shopify.com/videos/c/o/v/d7aeb1ab2e45499ba3b718e8920fe919.mp4"
@@ -1386,19 +1417,19 @@
   },
   "order": [
     "breadcrumbs",
-    "prime_product_trust_bar",
     "ypc_product_hero_AXmQHp",
+    "prime_product_trust_bar",
     "product_trust_stack",
-    "prime_ingredient_roles",
-    "chew_analyzer_widget",
     "why_prime",
+    "chew_analyzer_widget",
+    "prime_ingredient_roles",
     "ypc_product_tab_QnMPYB",
-    "prime_duration_guarantee",
     "two_treats_in_one_C8mxDb",
     "prime_zero_waste_puff",
+    "video_carousel_6EkF8r",
     "breed_review_highlights",
     "comparison_table_URRwp9",
-    "video_carousel_6EkF8r",
+    "prime_duration_guarantee",
     "prime_product_routine_upsell",
     "prime_seo_internal_links",
     "faqs_tVaRYD",

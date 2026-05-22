@@ -8,7 +8,12 @@
 
 {%- liquid
   assign cta_url = section.settings.cta_url | default: '/products/himalayan-yak-chews-for-dogs'
-  assign infographic_image = section.settings.infographic_image | default: 'prime-puff-instructions-infographic.jpg' | asset_url
+  assign infographic_source = section.settings.infographic_image | default: 'prime-puff-instructions-infographic.jpg'
+  if infographic_source contains 'http'
+    assign infographic_image = infographic_source
+  else
+    assign infographic_image = infographic_source | asset_url
+  endif
 -%}
 
 <section class="pzw" aria-labelledby="PrimePetFoodZeroWasteTitle">

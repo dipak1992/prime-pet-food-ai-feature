@@ -3,6 +3,10 @@
 
 {% liquid
   assign product_title_downcase = product.title | downcase
+  assign ypc_lifestyle_image = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/why_2.webp?v=1759936301'
+  assign ypc_closeup_image = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/megayak_2.webp?v=1759936215'
+  assign ypc_puff_image = 'https://cdn.shopify.com/s/files/1/0767/5124/1536/files/puff_hack.png?v=1779455932'
+  assign ypc_ingredient_image = 'prime-home-ingredient-yak-milk.jpg' | asset_url
 
   assign hero_lead = ''
   assign hero_rating_text = ''
@@ -113,6 +117,25 @@
           {% endfor %}
         </div>
       {% endif %}
+
+      <div class="ypc-gallery-story" aria-label="Prime Pet Food product story visuals">
+        <article class="ypc-gallery-story__card">
+          <img src="{{ ypc_lifestyle_image }}" alt="Dog enjoying Prime Pet Food yak chew during calm time at home" loading="lazy" width="320" height="240">
+          <span>Calm chew time</span>
+        </article>
+        <article class="ypc-gallery-story__card">
+          <img src="{{ ypc_closeup_image }}" alt="Close-up texture of Prime Pet Food Himalayan yak cheese chew" loading="lazy" width="320" height="240">
+          <span>Dense cheese texture</span>
+        </article>
+        <article class="ypc-gallery-story__card">
+          <img src="{{ ypc_puff_image }}" alt="Prime Pet Food yak chew nub puffed into a crunchy treat" loading="lazy" width="320" height="240">
+          <span>Puff the small nub</span>
+        </article>
+        <article class="ypc-gallery-story__card">
+          <img src="{{ ypc_ingredient_image }}" alt="Simple milk ingredient visual for Prime Pet Food yak chews" loading="lazy" width="320" height="240">
+          <span>4 simple ingredients</span>
+        </article>
+      </div>
     </div>
 
     <div class="ypc-product-hero__content">
@@ -142,6 +165,14 @@
           {% if hero_benefit_5 != blank %}<li>{{ hero_benefit_5 }}</li>{% endif %}
           {% if hero_benefit_6 != blank %}<li>{{ hero_benefit_6 }}</li>{% endif %}
         </ul>
+      </div>
+
+      <div class="ypc-benefit-icons" aria-label="Key product benefits">
+        <span>Long-lasting</span>
+        <span>Rawhide-free</span>
+        <span>Low odor</span>
+        <span>Digestible cheese base</span>
+        <span>4 ingredients</span>
       </div>
 
       {% form 'product', product, id: 'ypc-product-form', class: 'ypc-product-hero__form' %}
@@ -217,6 +248,16 @@
           </div>
         {% endif %}
 
+        <div class="ypc-shipping-progress" data-ypc-shipping-progress data-threshold-cents="3000" aria-live="polite">
+          <div class="ypc-shipping-progress__row">
+            <span data-ypc-shipping-progress-text>Free shipping over $30</span>
+            <strong data-ypc-shipping-progress-value></strong>
+          </div>
+          <div class="ypc-shipping-progress__track" aria-hidden="true">
+            <span data-ypc-shipping-progress-bar></span>
+          </div>
+        </div>
+
         {% if section.settings.show_urgency_signals != false %}
           <div class="ypc-urgency" id="ypc-urgency" aria-live="polite">
             <span class="ypc-urgency__item ypc-urgency__item--stock">
@@ -234,6 +275,7 @@
           <span>Safety tested</span>
           <span>$0.22/hour of calm time</span>
           <span>30-day chew duration guarantee</span>
+          <span>Multi-pack value available</span>
         </div>
 
         <div class="ypc-truth-box" aria-label="Origin and ingredient truth">
@@ -256,6 +298,34 @@
             <span>Promise</span>
             <strong>30-day satisfaction guarantee</strong>
             <p>If the size or routine fit is not right, we will help make it right.</p>
+          </div>
+        </div>
+
+        <div class="ypc-love-grid" aria-label="Why dogs and owners love Prime Pet Food yak chews">
+          <article>
+            <span>Why dogs love it</span>
+            <strong>A real chewing job.</strong>
+            <p>Chewing gives dogs something steady to focus on. The dense cheese texture keeps them engaged longer than quick treats.</p>
+          </article>
+          <article>
+            <span>Why owners love it</span>
+            <strong>Useful during the evening chaos.</strong>
+            <p>Good for work calls, dinner prep, crate practice, or the moment your dog needs something safe to settle with.</p>
+          </article>
+        </div>
+
+        <div class="ypc-digestibility-note" aria-label="Safety and digestibility details">
+          <div>
+            <span>Softens with saliva</span>
+            <p>The chew gradually wears down as your dog works on it.</p>
+          </div>
+          <div>
+            <span>No rawhide layers</span>
+            <p>Made from a short cheese recipe instead of rolled hide.</p>
+          </div>
+          <div>
+            <span>Supervised routine</span>
+            <p>Remove the small nub and puff it before it becomes a swallow risk.</p>
           </div>
         </div>
 
@@ -482,6 +552,10 @@
     const perChewEl = document.getElementById('ypc-per-chew');
     const deliveryDateEl = document.querySelector('[data-ypc-delivery-date]');
     const urgencyStockEl = document.getElementById('ypc-urgency-stock');
+    const shippingProgress = document.querySelector('[data-ypc-shipping-progress]');
+    const shippingProgressText = document.querySelector('[data-ypc-shipping-progress-text]');
+    const shippingProgressValue = document.querySelector('[data-ypc-shipping-progress-value]');
+    const shippingProgressBar = document.querySelector('[data-ypc-shipping-progress-bar]');
 
     const qtyInput = document.getElementById('ypc-quantity-input');
     const qtyMinus = document.getElementById('ypc-qty-minus');
@@ -658,6 +732,24 @@
       }
     }
 
+    function updateShippingProgress(activePrice) {
+      if (!shippingProgress || !shippingProgressText || !shippingProgressBar) return;
+      const threshold = Number(shippingProgress.dataset.thresholdCents || 3000);
+      const quantity = qtyInput ? Math.max(1, parseInt(qtyInput.value || '1', 10)) : 1;
+      const cartValue = activePrice * quantity;
+      const remaining = Math.max(0, threshold - cartValue);
+      const pct = Math.min(100, Math.round((cartValue / threshold) * 100));
+
+      shippingProgressBar.style.width = pct + '%';
+      if (remaining <= 0) {
+        shippingProgressText.textContent = 'Free shipping unlocked';
+        if (shippingProgressValue) shippingProgressValue.textContent = '';
+      } else {
+        shippingProgressText.textContent = 'Add ' + formatMoney(remaining) + ' more for free shipping';
+        if (shippingProgressValue) shippingProgressValue.textContent = formatMoney(cartValue) + ' / ' + formatMoney(threshold);
+      }
+    }
+
     function setDeliveryEstimate() {
       if (!deliveryDateEl) return;
       const estimate = new Date();
@@ -718,6 +810,7 @@
       updateMainPriceArea(activePrice, activeComparePrice);
       updateAddToCartButton(activePrice, activeComparePrice);
       updatePerChew(variant, activePrice);
+      updateShippingProgress(activePrice);
       updateUrgency(variant);
 
       if (variant.featured_image && mainImage) {
@@ -866,6 +959,7 @@
       qtyMinus.addEventListener('click', function() {
         const currentQty = parseInt(qtyInput.value || '1', 10);
         qtyInput.value = Math.max(1, currentQty - 1);
+        updateVariantUI(getCurrentVariant());
       });
     }
 
@@ -873,6 +967,7 @@
       qtyPlus.addEventListener('click', function() {
         const currentQty = parseInt(qtyInput.value || '1', 10);
         qtyInput.value = currentQty + 1;
+        updateVariantUI(getCurrentVariant());
       });
     }
 
@@ -880,6 +975,7 @@
       qtyInput.addEventListener('change', function() {
         const currentQty = parseInt(qtyInput.value || '1', 10);
         qtyInput.value = Math.max(1, currentQty);
+        updateVariantUI(getCurrentVariant());
       });
     }
 
@@ -1058,6 +1154,53 @@
     transform: translateY(-1px);
   }
 
+  .ypc-gallery-story {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .ypc-gallery-story__card {
+    overflow: hidden;
+    position: relative;
+    min-height: 112px;
+    margin: 0;
+    border-radius: 14px;
+    background: #2b1408;
+    box-shadow: 0 10px 24px rgba(43, 20, 8, 0.08);
+  }
+
+  .ypc-gallery-story__card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 112px;
+    object-fit: cover;
+    opacity: 0.86;
+  }
+
+  .ypc-gallery-story__card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(43, 20, 8, 0.02), rgba(43, 20, 8, 0.58));
+    pointer-events: none;
+  }
+
+  .ypc-gallery-story__card span {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    left: 8px;
+    z-index: 1;
+    color: #fffaf2;
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1.15;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
+  }
+
   .ypc-vet-badge {
     display: inline-flex;
     align-items: center;
@@ -1149,6 +1292,29 @@
     color: #d2622e;
     font-size: 16px;
     font-weight: 900;
+  }
+
+  .ypc-benefit-icons {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 8px;
+    margin: 0 0 14px;
+  }
+
+  .ypc-benefit-icons span {
+    display: flex;
+    min-height: 54px;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border: 1px solid rgba(23, 59, 43, 0.14);
+    border-radius: 14px;
+    background: rgba(255, 250, 242, 0.76);
+    color: #173b2b;
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1.15;
+    text-align: center;
   }
 
   .ypc-product-hero__option {
@@ -1276,6 +1442,50 @@
     opacity: 0.65;
   }
 
+  .ypc-shipping-progress {
+    display: grid;
+    gap: 7px;
+    margin: -2px 0 12px;
+    padding: 10px 12px;
+    border: 1px solid rgba(23, 59, 43, 0.14);
+    border-radius: 14px;
+    background: rgba(255, 250, 242, 0.74);
+  }
+
+  .ypc-shipping-progress__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    color: #173b2b;
+    font-size: 12px;
+    font-weight: 850;
+    line-height: 1.2;
+  }
+
+  .ypc-shipping-progress__row strong {
+    color: #6f5a4b;
+    font-size: 11px;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .ypc-shipping-progress__track {
+    overflow: hidden;
+    height: 7px;
+    border-radius: 999px;
+    background: rgba(23, 59, 43, 0.12);
+  }
+
+  .ypc-shipping-progress__track span {
+    display: block;
+    width: 0;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #173b2b, #b87835);
+    transition: width 0.2s ease;
+  }
+
   .ypc-urgency {
     display: flex;
     flex-wrap: wrap;
@@ -1380,6 +1590,68 @@
     color: #6f5a4b;
     font-size: 12px;
     line-height: 1.4;
+  }
+
+  .ypc-love-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin: 0 0 14px;
+  }
+
+  .ypc-love-grid article {
+    min-width: 0;
+    padding: 15px;
+    border: 1px solid rgba(23, 59, 43, 0.14);
+    border-radius: 16px;
+    background: rgba(255, 250, 242, 0.9);
+    box-shadow: 0 10px 24px rgba(43, 20, 8, 0.05);
+  }
+
+  .ypc-love-grid span,
+  .ypc-digestibility-note span {
+    display: block;
+    color: #9a4318;
+    font-size: 10px;
+    font-weight: 950;
+    letter-spacing: 0.08em;
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+
+  .ypc-love-grid strong {
+    display: block;
+    margin-top: 6px;
+    color: #173b2b;
+    font-size: 15px;
+    font-weight: 950;
+    line-height: 1.2;
+  }
+
+  .ypc-love-grid p,
+  .ypc-digestibility-note p {
+    margin: 7px 0 0;
+    color: #5f4b42;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .ypc-digestibility-note {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin: 0 0 14px;
+    padding: 10px;
+    border: 1px solid rgba(23, 59, 43, 0.16);
+    border-radius: 16px;
+    background: rgba(23, 59, 43, 0.06);
+  }
+
+  .ypc-digestibility-note div {
+    min-width: 0;
+    padding: 11px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.68);
   }
 
   .ypc-puff-hack {
@@ -1625,6 +1897,11 @@
 
     .ypc-truth-box__item {
       padding: 11px;
+    }
+
+    .ypc-love-grid,
+    .ypc-digestibility-note {
+      grid-template-columns: 1fr;
     }
 
     .ypc-subscription-proof {
@@ -2127,9 +2404,12 @@
     .ypc-size-hint { order: 20; }
     .ypc-product-hero__price-wrap { order: 30; }
     .ypc-info-line { order: 40; }
+    .ypc-shipping-progress { order: 45; }
     .ypc-urgency { order: 50; }
     .ypc-conversion-badges { order: 60; }
     .ypc-truth-box { order: 70; }
+    .ypc-love-grid { order: 72; }
+    .ypc-digestibility-note { order: 73; }
     .ypc-profile-recommendation { order: 75; }
     .ypc-cart-row { order: 80; }
     .ypc-post-atc-trust { order: 85; }
@@ -2146,6 +2426,25 @@
     .ypc-product-hero__main-image-wrap {
       height: min(44vh, 400px);
       min-height: 250px;
+    }
+
+    .ypc-gallery-story {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 2px 2px 8px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .ypc-gallery-story__card {
+      flex: 0 0 72%;
+      min-height: 160px;
+      scroll-snap-align: start;
+    }
+
+    .ypc-gallery-story__card img {
+      min-height: 160px;
     }
 
     .ypc-hero-summary {
@@ -2171,6 +2470,20 @@
     .ypc-hero-summary__list li::before {
       left: 12px;
       font-size: 14px;
+    }
+
+    .ypc-benefit-icons {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .ypc-benefit-icons span {
+      flex: 0 0 132px;
+      scroll-snap-align: start;
     }
 
     .ypc-product-hero__price {
