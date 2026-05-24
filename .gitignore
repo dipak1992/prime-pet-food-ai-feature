@@ -2,6 +2,5 @@
 .env.*
 !.env.example
 node_modules/
-.next/
-tsconfig.tsbuildinfo
 .DS_Store
+
