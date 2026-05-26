@@ -42,15 +42,15 @@
       "type": "product-category-audit",
       "settings": {
         "color_scheme": "scheme-2",
-        "classic_eyebrow": "Classic yak chew page",
-        "classic_heading": "For everyday calm-time, the page needs to help shoppers choose the right fit.",
-        "classic_intro": "This is the core chew page. It should explain the simple ingredients, the dense texture, the right size choice, and the safest way to finish the chew without sounding like a generic pet treat listing.",
-        "flavour_eyebrow": "Flavour chew page",
-        "flavour_heading": "For flavour chews, lead with taste appeal but keep the sizing advice clear.",
-        "flavour_intro": "Flavour chews should speak to picky dogs and curious first-time buyers. The tone should stay practical: the flavour gets attention, while the chew still needs the right size, supervision, and a calm routine.",
-        "bulk_eyebrow": "Bulk chew page",
-        "bulk_heading": "For bulk chews, the page should feel like a stocked routine, not just a bigger bag.",
-        "bulk_intro": "Bulk buyers usually know why they are here: their dog already uses chews, they have more than one dog, or they want better value. This page should make quantity, storage, sizing, and safe daily use easy to understand."
+        "classic_eyebrow": "Everyday yak chew",
+        "classic_heading": "A steady chew for everyday calm-time.",
+        "classic_intro": "Made for the moments when your dog needs something real to focus on: after a walk, during a work call, or before the house settles down for the night.",
+        "flavour_eyebrow": "Flavour yak chew",
+        "flavour_heading": "A more tempting start for dogs who need extra interest.",
+        "flavour_intro": "The flavour helps invite your dog in, while the dense yak chew gives them the same slow, satisfying chewing routine dog parents come back for.",
+        "bulk_eyebrow": "Bulk yak chews",
+        "bulk_heading": "Keep calm-time stocked for the dogs who already love them.",
+        "bulk_intro": "A practical option for repeat buyers, multi-dog homes, and heavy chewers who go through yak chews as part of a regular supervised routine."
       }
     },
     "main": {

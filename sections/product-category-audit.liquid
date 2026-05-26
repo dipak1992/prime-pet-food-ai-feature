@@ -12,52 +12,52 @@
     assign kicker = section.settings.bulk_eyebrow
     assign heading = section.settings.bulk_heading
     assign intro = section.settings.bulk_intro
-    assign fit_title = 'Best fit'
-    assign fit_text = 'Dog parents who already know their dog enjoys yak chews, multi-dog homes, heavy chewers, and customers who want fewer reorder moments.'
-    assign difference_title = 'What changes on this page'
-    assign difference_text = 'The decision is less about first-time discovery and more about value, storage, size mix, and keeping a steady calm-time routine stocked.'
-    assign routine_title = 'How to use it'
-    assign routine_text = 'Keep chews dry, rotate sizes by dog, supervise every session, and remove the small end piece before it can be swallowed.'
-    assign note_title = 'Bulk does not mean casual'
+    assign fit_title = 'Good for'
+    assign fit_text = 'Multi-dog homes, repeat yak chew buyers, stronger chewers, and anyone who wants the calm-time drawer stocked before the week gets busy.'
+    assign difference_title = 'Why buy bulk'
+    assign difference_text = 'You get more chewing sessions on hand, fewer last-minute reorders, and better value for dogs who already have yak chews in their routine.'
+    assign routine_title = 'Easy to manage'
+    assign routine_text = 'Store the chews sealed in a cool, dry place, rotate sizes by dog, and keep sessions supervised from first bite to final nub.'
+    assign note_title = 'More chews, same safety rules'
     assign note_text = 'A larger bag should still be treated as a supervised chew routine. Size up for strong chewers and separate dogs if they guard high-value chews.'
-    assign cta_label = 'Build the bulk order'
+    assign cta_label = 'Choose your bulk mix'
     assign cta_href = '#quick-order-list'
   elsif product_category == 'flavour'
     assign kicker = section.settings.flavour_eyebrow
     assign heading = section.settings.flavour_heading
     assign intro = section.settings.flavour_intro
-    assign fit_title = 'Best fit'
-    assign fit_text = 'Picky dogs, first-time yak chew customers, and dogs who need a little more aroma before they commit to a longer chew session.'
-    assign difference_title = 'What changes on this page'
-    assign difference_text = 'The flavour is the invitation. The chew still needs to be chosen by size, jaw strength, and supervised use, not just by what sounds tasty.'
-    assign routine_title = 'How to use it'
-    assign routine_text = 'Offer it during a calm window, let your dog settle into the chew, and remove it when the end piece becomes small enough to swallow.'
-    assign note_title = 'Flavour should feel honest'
-    assign note_text = 'The page should talk like a dog parent would: clearer appeal for picky dogs, no overpromising, and no pretending flavour replaces proper sizing.'
+    assign fit_title = 'Good for'
+    assign fit_text = 'Picky dogs, first-time yak chew users, and dogs who need a little more aroma before they settle into a longer chew session.'
+    assign difference_title = 'Why dogs notice it'
+    assign difference_text = 'The added flavour gives your dog a clearer reason to start chewing, while the dense yak chew texture still supports a slower calm-time routine.'
+    assign routine_title = 'Serve it calmly'
+    assign routine_text = 'Offer it when your dog can settle, keep fresh water nearby, and remove the chew when the end piece becomes small enough to swallow.'
+    assign note_title = 'Taste helps, fit still matters'
+    assign note_text = "Choose the chew by your dog's size and chewing style first. Flavour can make the first session easier, but supervision and safe sizing still matter."
     assign cta_label = 'Choose a flavour'
     assign cta_href = product.url
   else
     assign kicker = section.settings.classic_eyebrow
     assign heading = section.settings.classic_heading
     assign intro = section.settings.classic_intro
-    assign fit_title = 'Best fit'
-    assign fit_text = 'Everyday calm-time routines, rawhide-free chewing, and dog parents who want a simple ingredient list with clear safety guidance.'
-    assign difference_title = 'What this page should do'
-    assign difference_text = 'Help shoppers choose the right chew size, understand the ingredient list, and feel confident about supervision and the puffed nub finish.'
-    assign routine_title = 'How to use it'
-    assign routine_text = 'Match the size to your dog, supervise the session, provide fresh water, and use the leftover nub as a puff treat once it is safely removed.'
-    assign note_title = 'Start with fit, not hype'
-    assign note_text = 'A good product page should sound calm and useful. The customer is trying to decide if this chew fits their dog, not read generic treat copy.'
+    assign fit_title = 'Good for'
+    assign fit_text = 'Everyday calm-time, post-walk settling, work-from-home focus, and dog parents who want a rawhide-free chew with a short ingredient list.'
+    assign difference_title = 'Why this chew'
+    assign difference_text = 'Dense Himalayan yak cheese gives your dog a slower chewing job than a soft treat, with low odor and four simple ingredients.'
+    assign routine_title = 'Use it safely'
+    assign routine_text = 'Match the size to your dog, supervise the session, keep fresh water nearby, and remove the leftover nub before it can be swallowed.'
+    assign note_title = 'Start with the right size'
+    assign note_text = "If your dog is between sizes or chews with strong jaw pressure, choose the larger size. A chew should never fit fully inside your dog's mouth."
     assign cta_label = 'Choose the right size'
     assign cta_href = product.url
   endif
 %}
 
-<section class="pca color-{{ section.settings.color_scheme }} gradient" aria-labelledby="ProductCategoryAuditTitle-{{ section.id }}">
+<section class="pca color-{{ section.settings.color_scheme }} gradient" aria-labelledby="ProductChewFitTitle-{{ section.id }}">
   <div class="pca__inner page-width">
     <div class="pca__header">
       <p class="pca__eyebrow">{{ kicker }}</p>
-      <h2 id="ProductCategoryAuditTitle-{{ section.id }}">{{ heading }}</h2>
+      <h2 id="ProductChewFitTitle-{{ section.id }}">{{ heading }}</h2>
       <p>{{ intro }}</p>
     </div>
 
@@ -206,7 +206,7 @@
 
 {% schema %}
 {
-  "name": "Product category audit",
+  "name": "Product chew fit guide",
   "settings": [
     {
       "type": "color_scheme",
@@ -218,60 +218,60 @@
       "type": "text",
       "id": "classic_eyebrow",
       "label": "Classic eyebrow",
-      "default": "Classic yak chew page"
+      "default": "Everyday yak chew"
     },
     {
       "type": "text",
       "id": "classic_heading",
       "label": "Classic heading",
-      "default": "For everyday calm-time, the page needs to help shoppers choose the right fit."
+      "default": "A steady chew for everyday calm-time."
     },
     {
       "type": "textarea",
       "id": "classic_intro",
       "label": "Classic intro",
-      "default": "This is the core chew page. It should explain the simple ingredients, the dense texture, the right size choice, and the safest way to finish the chew without sounding like a generic pet treat listing."
+      "default": "Made for the moments when your dog needs something real to focus on: after a walk, during a work call, or before the house settles down for the night."
     },
     {
       "type": "text",
       "id": "flavour_eyebrow",
       "label": "Flavour eyebrow",
-      "default": "Flavour chew page"
+      "default": "Flavour yak chew"
     },
     {
       "type": "text",
       "id": "flavour_heading",
       "label": "Flavour heading",
-      "default": "For flavour chews, lead with taste appeal but keep the sizing advice clear."
+      "default": "A more tempting start for dogs who need extra interest."
     },
     {
       "type": "textarea",
       "id": "flavour_intro",
       "label": "Flavour intro",
-      "default": "Flavour chews should speak to picky dogs and curious first-time buyers. The tone should stay practical: the flavour gets attention, while the chew still needs the right size, supervision, and a calm routine."
+      "default": "The flavour helps invite your dog in, while the dense yak chew gives them the same slow, satisfying chewing routine dog parents come back for."
     },
     {
       "type": "text",
       "id": "bulk_eyebrow",
       "label": "Bulk eyebrow",
-      "default": "Bulk chew page"
+      "default": "Bulk yak chews"
     },
     {
       "type": "text",
       "id": "bulk_heading",
       "label": "Bulk heading",
-      "default": "For bulk chews, the page should feel like a stocked routine, not just a bigger bag."
+      "default": "Keep calm-time stocked for the dogs who already love them."
     },
     {
       "type": "textarea",
       "id": "bulk_intro",
       "label": "Bulk intro",
-      "default": "Bulk buyers usually know why they are here: their dog already uses chews, they have more than one dog, or they want better value. This page should make quantity, storage, sizing, and safe daily use easy to understand."
+      "default": "A practical option for repeat buyers, multi-dog homes, and heavy chewers who go through yak chews as part of a regular supervised routine."
     }
   ],
   "presets": [
     {
-      "name": "Product category audit"
+      "name": "Product chew fit guide"
     }
   ]
 }
