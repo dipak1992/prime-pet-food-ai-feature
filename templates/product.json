@@ -38,6 +38,21 @@
         "impact_text": "Each purchase helps keep our sourcing tied to Nepali Himalayan farming families and the food tradition behind these chews."
       }
     },
+    "product_category_audit": {
+      "type": "product-category-audit",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "classic_eyebrow": "Classic yak chew page",
+        "classic_heading": "For everyday calm-time, the page needs to help shoppers choose the right fit.",
+        "classic_intro": "This is the core chew page. It should explain the simple ingredients, the dense texture, the right size choice, and the safest way to finish the chew without sounding like a generic pet treat listing.",
+        "flavour_eyebrow": "Flavour chew page",
+        "flavour_heading": "For flavour chews, lead with taste appeal but keep the sizing advice clear.",
+        "flavour_intro": "Flavour chews should speak to picky dogs and curious first-time buyers. The tone should stay practical: the flavour gets attention, while the chew still needs the right size, supervision, and a calm routine.",
+        "bulk_eyebrow": "Bulk chew page",
+        "bulk_heading": "For bulk chews, the page should feel like a stocked routine, not just a bigger bag.",
+        "bulk_intro": "Bulk buyers usually know why they are here: their dog already uses chews, they have more than one dog, or they want better value. This page should make quantity, storage, sizing, and safe daily use easy to understand."
+      }
+    },
     "main": {
       "type": "main-product",
       "blocks": {
@@ -1422,6 +1437,7 @@
     "breadcrumbs",
     "ypc_product_hero_AXmQHp",
     "prime_product_trust_bar",
+    "product_category_audit",
     "product_trust_stack",
     "why_prime",
     "chew_analyzer_widget",

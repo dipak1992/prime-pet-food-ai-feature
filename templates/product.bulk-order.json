@@ -154,19 +154,19 @@
                         "value_when_empty": "-",
                         "show_as_collapsible": false,
                         "row_open": false,
-                        "heading": "Specifications",
+                        "heading": "Bulk chew details",
                         "row_heading_size": "t3",
                         "icon": "",
                         "table_style": "striped",
                         "text_size": "t5",
                         "label_alignment": "left",
                         "value_alignment": "left",
-                        "label_1": "<p>Property 1</p>",
-                        "value_1": "<p>Value</p>",
-                        "label_2": "<p>Property 2</p>",
-                        "value_2": "<p>Value</p>",
-                        "label_3": "<p>Property 3</p>",
-                        "value_3": "<p>Value</p>",
+                        "label_1": "<p>Best for</p>",
+                        "value_1": "<p>Multi-dog homes, repeat yak chew buyers, and stronger chewers who need the calm-time drawer stocked.</p>",
+                        "label_2": "<p>Storage</p>",
+                        "value_2": "<p>Keep chews sealed in a cool, dry place between supervised sessions.</p>",
+                        "label_3": "<p>Safety note</p>",
+                        "value_3": "<p>Choose a size your dog cannot swallow whole, supervise every chew, and remove the small end piece before it becomes a choking risk.</p>",
                         "label_4": "",
                         "value_4": "",
                         "label_5": "",
@@ -254,6 +254,21 @@
                 "bottom_padding": "pb-s05"
             }
         },
+        "product_category_audit": {
+            "type": "product-category-audit",
+            "settings": {
+                "color_scheme": "scheme-2",
+                "classic_eyebrow": "Classic yak chew page",
+                "classic_heading": "For everyday calm-time, the page needs to help shoppers choose the right fit.",
+                "classic_intro": "This is the core chew page. It should explain the simple ingredients, the dense texture, the right size choice, and the safest way to finish the chew without sounding like a generic pet treat listing.",
+                "flavour_eyebrow": "Flavour chew page",
+                "flavour_heading": "For flavour chews, lead with taste appeal but keep the sizing advice clear.",
+                "flavour_intro": "Flavour chews should speak to picky dogs and curious first-time buyers. The tone should stay practical: the flavour gets attention, while the chew still needs the right size, supervision, and a calm routine.",
+                "bulk_eyebrow": "Bulk chew page",
+                "bulk_heading": "For bulk chews, the page should feel like a stocked routine, not just a bigger bag.",
+                "bulk_intro": "Bulk buyers usually know why they are here: their dog already uses chews, they have more than one dog, or they want better value. This page should make quantity, storage, sizing, and safe daily use easy to understand."
+            }
+        },
         "quick_order_list_TJVHJp": {
             "type": "quick-order-list",
             "settings": {
@@ -261,7 +276,7 @@
                 "content_max_width": "m",
                 "desktop_heading_alignment": "left",
                 "mobile_heading_alignment": "left",
-                "title": "",
+                "title": "Choose your bulk chew mix",
                 "italic_convert": "",
                 "heading_size": "h2",
                 "line_separator": "border-bottom",
@@ -1765,6 +1780,7 @@
     "order": [
         "breadcrumbs",
         "main",
+        "product_category_audit",
         "quick_order_list_TJVHJp",
         "related-products",
         "spacer_9qJUFC",

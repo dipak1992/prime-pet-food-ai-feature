@@ -1,5 +1,5 @@
 {%- comment -%}theme-check-disable NestedSnippet,SchemaJsonFormat{%- endcomment -%}
-<div class="{% if request.design_mode != true and section.settings.min_variants > 0 and product.variants_count < section.settings.min_variants %}hidden{% endif %}">
+<div id="quick-order-list" class="{% if request.design_mode != true and section.settings.min_variants > 0 and product.variants_count < section.settings.min_variants %}hidden{% endif %}">
   {%- if section.index == 1 or request.design_mode -%}
     {{ 'component-price.css' | asset_url | stylesheet_tag }}
     {{ 'quick-order-list.css' | asset_url | stylesheet_tag }}
