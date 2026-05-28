@@ -1,3 +1,80 @@
+{% liquid
+  assign product_text = product.title | append: ' ' | append: product.handle | append: ' ' | append: product.tags | downcase
+  assign product_category = 'classic'
+
+  if product_text contains 'bulk' or product_text contains '2-lb' or product_text contains '2 lb' or product_text contains 'multi-pack' or product_text contains 'multipack'
+    assign product_category = 'bulk'
+  elsif product_text contains 'flavour' or product_text contains 'flavor' or product_text contains 'flavoured' or product_text contains 'flavored' or product_text contains 'peanut' or product_text contains 'bacon' or product_text contains 'cheese flavor'
+    assign product_category = 'flavour'
+  endif
+
+  assign description_heading = section.settings.description_heading
+  assign change_heading = section.settings.change_heading
+  assign ingredients_heading = section.settings.ingredients_heading
+  assign reco_heading = section.settings.reco_heading
+
+  if product_category == 'bulk'
+    assign description_heading = 'Bulk chews for stocked calm-time routines'
+    assign change_heading = 'Bulk chew safety notes'
+    assign ingredients_heading = 'Ingredients and storage'
+    assign reco_heading = 'Stock the right chew sizes'
+  elsif product_category == 'flavour'
+    assign description_heading = 'A more tempting yak chew for picky dogs'
+    assign change_heading = 'Flavoured chew safety notes'
+    assign ingredients_heading = 'Ingredients and flavour note'
+    assign reco_heading = 'Choose the right flavour routine'
+  else
+    assign description_heading = 'Classic yak chews for everyday calm time'
+    assign reco_heading = 'Build your everyday chew routine'
+  endif
+%}
+
+{% capture category_description_fallback %}
+  {% if product_category == 'bulk' %}
+    <p>Prime Pet Food Bulk Yak Chews are made for dogs who already use yak chews regularly, multi-dog homes, and dog parents who want a better-value way to stay stocked.</p>
+    <ul>
+      <li><strong>For repeat chew routines</strong><br>Keep supervised calm-time ready without reordering after every pack.</li>
+      <li><strong>For multi-dog homes</strong><br>Helpful when different dogs need their own chew sessions during the week.</li>
+      <li><strong>For better value</strong><br>Buy more at once while keeping the same rawhide-free Himalayan yak cheese base.</li>
+      <li><strong>For safer storage</strong><br>Keep the bag sealed, dry, and out of reach between supervised sessions.</li>
+    </ul>
+  {% elsif product_category == 'flavour' %}
+    <p>Prime Pet Food Flavoured Yak Chews are for dogs who need a more interesting start before they settle into a longer chew session.</p>
+    <ul>
+      <li><strong>For picky dogs</strong><br>Added flavour gives hesitant dogs a clearer reason to pick up the chew.</li>
+      <li><strong>For first-time yak chew buyers</strong><br>A more tempting option when you are not sure your dog will choose a plain chew.</li>
+      <li><strong>For real chewing time</strong><br>The flavour invites interest, while the dense yak chew texture keeps the routine slower than a soft treat.</li>
+      <li><strong>For cleaner indoor use</strong><br>Rawhide-free and made for supervised calm-time at home.</li>
+    </ul>
+  {% else %}
+    <p>Prime Pet Food Classic Yak Chews are the everyday rawhide-free chew for dogs who need a steady job during busy household moments.</p>
+    <ul>
+      <li><strong>For calm-time at home</strong><br>Use after walks, during work calls, while dinner is happening, or before the house settles down.</li>
+      <li><strong>For label-conscious dog parents</strong><br>Made with a short Himalayan cheese recipe: yak milk, cow milk, lime juice, and salt.</li>
+      <li><strong>For slower chewing</strong><br>The dense texture gives most dogs more to work on than a quick soft treat.</li>
+      <li><strong>For safer endings</strong><br>Remove the small nub and puff it into a crunchy cheese treat after it cools.</li>
+    </ul>
+  {% endif %}
+{% endcapture %}
+
+{% capture category_change_fallback %}
+  {% if product_category == 'bulk' %}
+    <p>Bulk bags make restocking easier, but each chew should still be treated as an individual hard chew. Match the chew size to the dog using it, supervise every session, provide fresh water, and remove the small end piece before it can be swallowed.</p>
+  {% elsif product_category == 'flavour' %}
+    <p>Use flavoured chews the same way you would use a classic yak chew: choose the right size, supervise closely, and offer it during calm moments. The added flavour can make the chew more exciting, so start with shorter watched sessions for eager chewers.</p>
+  {% else %}
+    <p>Always supervise chew time, choose a size your dog cannot swallow whole, provide fresh water, and remove the small end piece before it becomes a choking risk. For sensitive teeth, dental history, puppies, or seniors, ask your vet before using any hard chew.</p>
+  {% endif %}
+{% endcapture %}
+
+{% capture category_ingredients_fallback %}
+  {% if product_category == 'flavour' %}
+    <p>Built on a Himalayan yak cheese chew base with added flavour for dogs who need more interest at the start. No rawhide and no unnecessary filler-heavy routine.</p><p>Check the product label for the exact flavour variety, and choose size before flavour for the safest fit.</p>
+  {% else %}
+    <p>4 simple ingredients: Yak milk, cow milk, lime juice, salt. No rawhide, no artificial flavors, no artificial colors, and no unnecessary fillers.</p><p>Crafted in Nepal using traditional Himalayan methods. Packed in the USA under Prime Pet Food quality standards.</p>
+  {% endif %}
+{% endcapture %}
+
 <section
   id="ypc-tabs-recos-{{ section.id }}"
   class="ypc-tabs-recos"
@@ -101,12 +178,12 @@
           aria-labelledby="ypc-tab-description-{{ section.id }}"
           hidden
         >
-          <h2>{{ section.settings.description_heading }}</h2>
+          <h2>{{ description_heading }}</h2>
           <div class="rte">
-            {% if product.description != blank %}
+            {% if product.description != blank and product_category == 'classic' %}
               {{ product.description }}
             {% else %}
-              {{ section.settings.description_fallback }}
+              {{ category_description_fallback }}
             {% endif %}
           </div>
         </div>
@@ -119,14 +196,14 @@
           aria-labelledby="ypc-tab-feeding-{{ section.id }}"
           hidden
         >
-          <h2>{{ section.settings.change_heading }}</h2>
+          <h2>{{ change_heading }}</h2>
           <div class="rte">
             {% if product.metafields.custom.safe_feeding_guidelines != blank %}
               {{ product.metafields.custom.safe_feeding_guidelines | metafield_tag }}
             {% elsif product.metafields.custom.chews_for_change != blank %}
               {{ product.metafields.custom.chews_for_change | metafield_tag }}
             {% else %}
-              {{ section.settings.change_fallback }}
+              {{ category_change_fallback }}
             {% endif %}
           </div>
         </div>
@@ -159,12 +236,12 @@
           aria-labelledby="ypc-tab-ingredients-{{ section.id }}"
           hidden
         >
-          <h2>{{ section.settings.ingredients_heading }}</h2>
+          <h2>{{ ingredients_heading }}</h2>
           <div class="rte">
             {% if product.metafields.custom.ingredients != blank %}
               {{ product.metafields.custom.ingredients | metafield_tag }}
             {% else %}
-              {{ section.settings.ingredients_fallback }}
+              {{ category_ingredients_fallback }}
             {% endif %}
           </div>
         </div>
@@ -172,9 +249,9 @@
     </div>
 
     <aside class="ypc-tabs-recos__right">
-      {% if section.settings.reco_heading != blank %}
+      {% if reco_heading != blank %}
         <h3 class="ypc-tabs-recos__reco-heading">
-          {{ section.settings.reco_heading }}
+          {{ reco_heading }}
         </h3>
       {% endif %}
 

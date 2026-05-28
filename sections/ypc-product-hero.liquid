@@ -2,7 +2,91 @@
 {% assign featured_media = current_variant.featured_media | default: product.featured_media %}
 
 {% liquid
-  assign product_title_downcase = product.title | downcase
+  assign product_text = product.title | append: ' ' | append: product.handle | append: ' ' | append: product.tags | downcase
+  assign product_category = 'classic'
+
+  if product_text contains 'bulk' or product_text contains '2-lb' or product_text contains '2 lb' or product_text contains 'multi-pack' or product_text contains 'multipack'
+    assign product_category = 'bulk'
+  elsif product_text contains 'flavour' or product_text contains 'flavor' or product_text contains 'flavoured' or product_text contains 'flavored' or product_text contains 'peanut' or product_text contains 'bacon' or product_text contains 'cheese flavor'
+    assign product_category = 'flavour'
+  endif
+
+  assign fallback_hero_lead = 'A dense Himalayan yak cheese chew made for everyday calm-time, post-walk settling, and supervised chewing routines at home.'
+  assign fallback_hero_benefit_1 = 'Everyday calm-time'
+  assign fallback_hero_benefit_2 = 'Four ingredients'
+  assign fallback_hero_benefit_3 = 'Rawhide-free'
+  assign fallback_hero_benefit_4 = 'Low odor'
+  assign fallback_hero_benefit_5 = 'Handcrafted in Nepal'
+  assign fallback_hero_benefit_6 = 'Packed in Texas'
+  assign benefit_icon_1 = 'Long-lasting'
+  assign benefit_icon_2 = 'Rawhide-free'
+  assign benefit_icon_3 = 'Low odor'
+  assign benefit_icon_4 = '4 ingredients'
+  assign benefit_icon_5 = 'Puffable nub'
+  assign truth_duration_heading = 'Built for longer calm time'
+  assign truth_duration_text = 'Most dogs get multiple supervised sessions when the chew is matched to their size and chewing style.'
+  assign love_dog_heading = 'A real chewing job.'
+  assign love_dog_text = 'The dense cheese texture gives your dog something steady to work on instead of a quick treat that disappears.'
+  assign love_owner_heading = 'Useful during busy household moments.'
+  assign love_owner_text = 'Good for work calls, dinner prep, crate practice, or the moment your dog needs something safe to settle with.'
+  assign digest_1_heading = 'Softens with saliva'
+  assign digest_1_text = 'The chew gradually wears down as your dog works on it.'
+  assign digest_2_heading = 'No rawhide layers'
+  assign digest_2_text = 'Made from a short cheese recipe instead of rolled hide.'
+  assign digest_3_heading = 'Supervised routine'
+  assign digest_3_text = 'Remove the small nub and puff it before it becomes a swallow risk.'
+
+  if product_category == 'bulk'
+    assign fallback_hero_lead = 'A better-value bulk bag for dogs who already love yak chews, multi-dog homes, and stocked calm-time routines.'
+    assign fallback_hero_benefit_1 = 'Bulk value'
+    assign fallback_hero_benefit_2 = 'Multi-dog ready'
+    assign fallback_hero_benefit_3 = 'Rawhide-free'
+    assign fallback_hero_benefit_4 = 'Stocked routine'
+    assign fallback_hero_benefit_5 = 'Store dry'
+    assign fallback_hero_benefit_6 = 'Supervise each chew'
+    assign benefit_icon_1 = 'Bulk value'
+    assign benefit_icon_2 = 'Multi-dog homes'
+    assign benefit_icon_3 = 'Rawhide-free'
+    assign benefit_icon_4 = 'Easy restock'
+    assign benefit_icon_5 = 'Size mix'
+    assign truth_duration_heading = 'Made for repeat routines'
+    assign truth_duration_text = 'Keep more supervised chew sessions on hand without reordering every time your dog finishes a pack.'
+    assign love_dog_heading = 'The same chew they already know.'
+    assign love_dog_text = 'Bulk works best when your dog already enjoys the dense yak cheese texture and comes back to it session after session.'
+    assign love_owner_heading = 'Fewer last-minute restocks.'
+    assign love_owner_text = 'A practical choice for multi-dog homes, stronger chewers, and families that use chews every week.'
+    assign digest_1_heading = 'Keep sealed and dry'
+    assign digest_1_text = 'Store bulk chews in a cool, dry place between supervised sessions.'
+    assign digest_2_heading = 'Rotate by dog'
+    assign digest_2_text = 'Match chew size to each dog instead of treating one bulk bag as one-size-fits-all.'
+    assign digest_3_heading = 'Same safety rules'
+    assign digest_3_text = 'Supervise, size up for strong chewers, and remove the small nub before it can be swallowed.'
+  elsif product_category == 'flavour'
+    assign fallback_hero_lead = 'A flavoured Himalayan yak chew for picky dogs and first-time chewers who need a more tempting reason to start.'
+    assign fallback_hero_benefit_1 = 'Picky-dog friendly'
+    assign fallback_hero_benefit_2 = 'Added flavour'
+    assign fallback_hero_benefit_3 = 'Rawhide-free'
+    assign fallback_hero_benefit_4 = 'Low odor'
+    assign fallback_hero_benefit_5 = 'Dense chew texture'
+    assign fallback_hero_benefit_6 = 'Size guidance'
+    assign benefit_icon_1 = 'More tempting'
+    assign benefit_icon_2 = 'For picky dogs'
+    assign benefit_icon_3 = 'Rawhide-free'
+    assign benefit_icon_4 = 'Longer chew'
+    assign benefit_icon_5 = 'Supervised treat'
+    assign truth_duration_heading = 'Flavour starts the session'
+    assign truth_duration_text = 'The flavour helps invite your dog in, while the dense yak chew texture supports a slower chewing routine.'
+    assign love_dog_heading = 'A clearer reason to start.'
+    assign love_dog_text = 'Helpful for dogs who sniff plain chews first or need a little extra interest before settling in.'
+    assign love_owner_heading = 'Still a real chew, not a quick snack.'
+    assign love_owner_text = "Use it for supervised calm-time while still choosing the right size for your dog's mouth and chewing style."
+    assign digest_1_heading = 'Taste-forward start'
+    assign digest_1_text = 'Offer it during a calm window so your dog can settle into the chew.'
+    assign digest_2_heading = 'Fit comes first'
+    assign digest_2_text = 'Choose by dog size and chewing style before choosing by flavour.'
+    assign digest_3_heading = 'Remove the nub'
+    assign digest_3_text = 'Take the small end piece away and puff it before it becomes a swallow risk.'
+  endif
 
   assign hero_lead = ''
   assign hero_rating_text = ''
@@ -41,28 +125,28 @@
   endif
 
   if hero_lead == blank
-    assign hero_lead = section.settings.hero_lead
+    assign hero_lead = fallback_hero_lead
   endif
   if hero_rating_text == blank
     assign hero_rating_text = section.settings.hero_rating_text
   endif
   if hero_benefit_1 == blank
-    assign hero_benefit_1 = section.settings.hero_benefit_1
+    assign hero_benefit_1 = fallback_hero_benefit_1
   endif
   if hero_benefit_2 == blank
-    assign hero_benefit_2 = section.settings.hero_benefit_2
+    assign hero_benefit_2 = fallback_hero_benefit_2
   endif
   if hero_benefit_3 == blank
-    assign hero_benefit_3 = section.settings.hero_benefit_3
+    assign hero_benefit_3 = fallback_hero_benefit_3
   endif
   if hero_benefit_4 == blank
-    assign hero_benefit_4 = section.settings.hero_benefit_4
+    assign hero_benefit_4 = fallback_hero_benefit_4
   endif
   if hero_benefit_5 == blank
-    assign hero_benefit_5 = section.settings.hero_benefit_5
+    assign hero_benefit_5 = fallback_hero_benefit_5
   endif
   if hero_benefit_6 == blank
-    assign hero_benefit_6 = section.settings.hero_benefit_6
+    assign hero_benefit_6 = fallback_hero_benefit_6
   endif
 
   assign urgency_threshold = section.settings.low_stock_threshold | default: 8
@@ -146,11 +230,11 @@
       </div>
 
       <div class="ypc-benefit-icons" aria-label="Key product benefits">
-        <span>Long-lasting</span>
-        <span>Rawhide-free</span>
-        <span>Low odor</span>
-        <span>Digestible cheese base</span>
-        <span>4 ingredients</span>
+        <span>{{ benefit_icon_1 }}</span>
+        <span>{{ benefit_icon_2 }}</span>
+        <span>{{ benefit_icon_3 }}</span>
+        <span>{{ benefit_icon_4 }}</span>
+        <span>{{ benefit_icon_5 }}</span>
       </div>
 
       {% form 'product', product, id: 'ypc-product-form', class: 'ypc-product-hero__form' %}
@@ -338,8 +422,8 @@
           </div>
           <div class="ypc-truth-box__item">
             <span>Duration</span>
-            <strong>Built for longer calm time</strong>
-            <p>Most 50 lb heavy chewers get 2-3 supervised sessions when sized up.</p>
+            <strong>{{ truth_duration_heading }}</strong>
+            <p>{{ truth_duration_text }}</p>
           </div>
           <div class="ypc-truth-box__item">
             <span>Promise</span>
@@ -351,28 +435,28 @@
         <div class="ypc-love-grid" aria-label="Why dogs and owners love Prime Pet Food yak chews">
           <article>
             <span>Why dogs love it</span>
-            <strong>A real chewing job.</strong>
-            <p>Chewing gives dogs something steady to focus on. The dense cheese texture keeps them engaged longer than quick treats.</p>
+            <strong>{{ love_dog_heading }}</strong>
+            <p>{{ love_dog_text }}</p>
           </article>
           <article>
             <span>Why owners love it</span>
-            <strong>Useful during the evening chaos.</strong>
-            <p>Good for work calls, dinner prep, crate practice, or the moment your dog needs something safe to settle with.</p>
+            <strong>{{ love_owner_heading }}</strong>
+            <p>{{ love_owner_text }}</p>
           </article>
         </div>
 
         <div class="ypc-digestibility-note" aria-label="Safety and digestibility details">
           <div>
-            <span>Softens with saliva</span>
-            <p>The chew gradually wears down as your dog works on it.</p>
+            <span>{{ digest_1_heading }}</span>
+            <p>{{ digest_1_text }}</p>
           </div>
           <div>
-            <span>No rawhide layers</span>
-            <p>Made from a short cheese recipe instead of rolled hide.</p>
+            <span>{{ digest_2_heading }}</span>
+            <p>{{ digest_2_text }}</p>
           </div>
           <div>
-            <span>Supervised routine</span>
-            <p>Remove the small nub and puff it before it becomes a swallow risk.</p>
+            <span>{{ digest_3_heading }}</span>
+            <p>{{ digest_3_text }}</p>
           </div>
         </div>
 
