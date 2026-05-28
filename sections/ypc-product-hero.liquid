@@ -249,11 +249,80 @@
           </div>
         {% endif %}
 
+        {% if product.selling_plan_groups.size > 0 %}
+          <div class="ypc-subscription">
+            <div class="ypc-sub-toggle">
+              <label class="ypc-radio" id="ypc-one-time-card">
+                <input type="radio" name="purchase_type" value="one_time" checked>
+                <span class="ypc-radio__label">One-time purchase</span>
+                <span class="ypc-price-inline" id="ypc-one-time-price">{{ current_variant.price | money }}</span>
+              </label>
+
+              <label class="ypc-radio highlight" id="ypc-subscribe-card">
+                <input type="radio" name="purchase_type" value="subscription">
+                <span class="ypc-radio__label">{{ section.settings.subscribe_label }}</span>
+                <span class="ypc-badge" id="ypc-sub-badge">SAVE 15%</span>
+                <span class="ypc-price-inline" id="ypc-sub-price"></span>
+              </label>
+            </div>
+
+            <div class="ypc-frequency" id="ypc-frequency" style="display:none;">
+              <select name="selling_plan" id="ypc-selling-plan">
+                {% for group in product.selling_plan_groups %}
+                  {% for plan in group.selling_plans %}
+                    <option
+                      value="{{ plan.id }}"
+                      data-adjustment-value="{{ plan.price_adjustments[0].value }}"
+                      data-adjustment-type="{{ plan.price_adjustments[0].value_type }}"
+                    >
+                      {{ plan.name }}
+                    </option>
+                  {% endfor %}
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="ypc-subscription-proof" aria-label="Subscribe and Save benefits">
+              <span>Ships automatically</span>
+              <span>Skip or cancel anytime</span>
+              <span>Cancel in 2 clicks</span>
+            </div>
+          </div>
+        {% endif %}
+
+        <div class="ypc-cart-row">
+          <div class="ypc-quantity" aria-label="Quantity selector">
+            <button type="button" class="ypc-quantity__btn" id="ypc-qty-minus" aria-label="Decrease quantity">−</button>
+            <input
+              type="number"
+              name="quantity"
+              id="ypc-quantity-input"
+              class="ypc-quantity__input"
+              value="1"
+              min="1"
+              inputmode="numeric"
+            >
+            <button type="button" class="ypc-quantity__btn" id="ypc-qty-plus" aria-label="Increase quantity">+</button>
+          </div>
+
+          <button type="submit" class="ypc-product-hero__cta" id="ypc-add-to-cart-btn">
+            <span class="ypc-cta__text">{{ section.settings.cta_text }}</span>
+            <span class="ypc-cta__divider">-</span>
+            <span class="ypc-cta__price" id="ypc-cta-price">{{ current_variant.price | money }}</span>
+            <span class="ypc-cta__compare" id="ypc-cta-compare" style="display:none;"></span>
+          </button>
+        </div>
+
+        <div class="ypc-post-atc-trust" aria-label="Purchase confidence">
+          {% render 'prime-guarantee-badge', context: 'product_page' %}
+          <span>Handcrafted in Nepal. Packed in USA.</span>
+        </div>
+
         <div class="ypc-conversion-badges" aria-label="Purchase reassurance">
-          <span>Safety tested</span>
-          <span>$0.22/hour of calm time</span>
-          <span>30-day chew duration guarantee</span>
-          <span>Multi-pack value available</span>
+          <span>Rawhide-free</span>
+          <span>Free shipping over $30</span>
+          <span>30-day promise</span>
+          <span>Secure checkout</span>
         </div>
 
         <div class="ypc-truth-box" aria-label="Origin and ingredient truth">
@@ -316,79 +385,10 @@
           <a href="/pages/my-dog">View My Dog</a>
         </div>
 
-        {% if product.selling_plan_groups.size > 0 %}
-          <div class="ypc-subscription">
-            <div class="ypc-sub-toggle">
-              <label class="ypc-radio" id="ypc-one-time-card">
-                <input type="radio" name="purchase_type" value="one_time" checked>
-                <span class="ypc-radio__label">One-time purchase</span>
-                <span class="ypc-price-inline" id="ypc-one-time-price">{{ current_variant.price | money }}</span>
-              </label>
-
-              <label class="ypc-radio highlight" id="ypc-subscribe-card">
-                <input type="radio" name="purchase_type" value="subscription">
-                <span class="ypc-radio__label">{{ section.settings.subscribe_label }}</span>
-                <span class="ypc-badge" id="ypc-sub-badge">SAVE 15%</span>
-                <span class="ypc-price-inline" id="ypc-sub-price"></span>
-              </label>
-            </div>
-
-            <div class="ypc-frequency" id="ypc-frequency" style="display:none;">
-              <select name="selling_plan" id="ypc-selling-plan">
-                {% for group in product.selling_plan_groups %}
-                  {% for plan in group.selling_plans %}
-                    <option
-                      value="{{ plan.id }}"
-                      data-adjustment-value="{{ plan.price_adjustments[0].value }}"
-                      data-adjustment-type="{{ plan.price_adjustments[0].value_type }}"
-                    >
-                      {{ plan.name }}
-                    </option>
-                  {% endfor %}
-                {% endfor %}
-              </select>
-            </div>
-
-            <div class="ypc-subscription-proof" aria-label="Subscribe and Save benefits">
-              <span>Ships automatically</span>
-              <span>Skip or cancel anytime</span>
-              <span>Cancel in 2 clicks</span>
-            </div>
-          </div>
-        {% endif %}
-
         <details class="ypc-guarantee-details">
           <summary>What if my dog does not love it?</summary>
           <p>Try Prime Pet Food during supervised chew sessions for 30 days. If the size, chew pace, or routine fit is not right, contact us and we will help with a replacement size or a refund.</p>
         </details>
-
-        <div class="ypc-cart-row">
-          <div class="ypc-quantity" aria-label="Quantity selector">
-            <button type="button" class="ypc-quantity__btn" id="ypc-qty-minus" aria-label="Decrease quantity">−</button>
-            <input
-              type="number"
-              name="quantity"
-              id="ypc-quantity-input"
-              class="ypc-quantity__input"
-              value="1"
-              min="1"
-              inputmode="numeric"
-            >
-            <button type="button" class="ypc-quantity__btn" id="ypc-qty-plus" aria-label="Increase quantity">+</button>
-          </div>
-
-          <button type="submit" class="ypc-product-hero__cta" id="ypc-add-to-cart-btn">
-            <span class="ypc-cta__text">{{ section.settings.cta_text }}</span>
-            <span class="ypc-cta__divider">-</span>
-            <span class="ypc-cta__price" id="ypc-cta-price">{{ current_variant.price | money }}</span>
-            <span class="ypc-cta__compare" id="ypc-cta-compare" style="display:none;"></span>
-          </button>
-        </div>
-
-        <div class="ypc-post-atc-trust" aria-label="Purchase confidence">
-          {% render 'prime-guarantee-badge', context: 'product_page' %}
-          <span>Handcrafted in Nepal. Packed in USA.</span>
-        </div>
 
         <a href="#bonus-second-treat" class="ypc-bonus-mobile-link">
           Bonus: get a free second treat from the nub
@@ -2369,14 +2369,14 @@
     .ypc-info-line { order: 40; }
     .ypc-shipping-progress { order: 45; }
     .ypc-urgency { order: 50; }
-    .ypc-conversion-badges { order: 60; }
-    .ypc-truth-box { order: 70; }
-    .ypc-love-grid { order: 72; }
-    .ypc-digestibility-note { order: 73; }
+    .ypc-subscription { order: 55; }
+    .ypc-cart-row { order: 60; }
+    .ypc-post-atc-trust { order: 65; }
+    .ypc-conversion-badges { order: 70; }
     .ypc-profile-recommendation { order: 75; }
-    .ypc-cart-row { order: 80; }
-    .ypc-post-atc-trust { order: 85; }
-    .ypc-subscription { order: 90; }
+    .ypc-truth-box { order: 80; }
+    .ypc-love-grid { order: 82; }
+    .ypc-digestibility-note { order: 83; }
     .ypc-guarantee-details { order: 100; }
     .ypc-bonus-mobile-link { order: 110; }
     .ypc-puff-hack { order: 120; }

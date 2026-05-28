@@ -40,7 +40,7 @@
         "enable_sorting": true,
         "show_filter_count": true,
         "uppercase_filter_titles": true,
-        "open_all_accordions": true,
+        "open_all_accordions": false,
         "show_more_number": 12,
         "filter_text_size": "1.4",
         "box_filters": "",

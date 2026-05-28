@@ -81,7 +81,7 @@
   assign show_total_count = true
 -%}
 
-<div class="section__inner pt-4 gradient color-{{ section.settings.color_scheme }} {{ section.settings.top_padding }} {{ section.settings.bottom_padding }}
+<div class="section__inner pt-1 gradient color-{{ section.settings.color_scheme }} {{ section.settings.top_padding }} {{ section.settings.bottom_padding }}
       {% if uppercase_filter_titles %}filter-uppercase-titles{% endif %}"
      style="--font-size-primary: {{ filter_text_size }}rem; --font-size-secondary: {{ filter_text_size }}rem;--box-radius:{{ settings.panel_corner_radius }}px;
       {% if section.settings.filter_type == 'vertical' and filter_color_scheme %}--vertical-facet-padding:3rem;{% endif %}"
