@@ -46,55 +46,6 @@
         </p>
       </div>
 
-      {% if collection.products.size > 0 %}
-        <div class="pch-product-panel" aria-label="Products in this collection">
-          <div class="pch-product-panel__head">
-            <span>Pick the right starting point</span>
-            <strong>All four options are here.</strong>
-          </div>
-
-          <div class="pch-product-panel__grid">
-            {% for product in collection.products limit: 4 %}
-              {% liquid
-                assign product_text = product.title | append: ' ' | append: product.handle | append: ' ' | append: product.tags | downcase
-                assign product_badge = 'Everyday chew'
-                assign product_note = 'Best when you want a simple, rawhide-free chew for supervised calm-time.'
-
-                if product_text contains 'bulk' or product_text contains '2-lb' or product_text contains '2 lb' or product_text contains 'multi-pack' or product_text contains 'multipack'
-                  assign product_badge = 'Bulk restock'
-                  assign product_note = 'For dogs who already love yak chews, stronger routines, and multi-dog homes.'
-                elsif product_text contains 'flavour' or product_text contains 'flavor' or product_text contains 'flavoured' or product_text contains 'flavored' or product_text contains 'peanut' or product_text contains 'bacon' or product_text contains 'cheese flavor'
-                  assign product_badge = 'More tempting'
-                  assign product_note = 'For picky dogs or first-time chewers who need a little more reason to start.'
-                elsif product_text contains 'jumbo' or product_text contains 'large' or product_text contains 'xl'
-                  assign product_badge = 'Bigger dogs'
-                  assign product_note = 'For larger mouths and stronger chewers who need the right size first.'
-                endif
-              %}
-
-              <a href="{{ product.url }}" class="pch-product-card">
-                <div class="pch-product-card__media">
-                  {% if product.featured_image %}
-                    <img
-                      src="{{ product.featured_image | image_url: width: 360 }}"
-                      alt="{{ product.featured_image.alt | default: product.title | escape }}"
-                      width="{{ product.featured_image.width }}"
-                      height="{{ product.featured_image.height }}"
-                      loading="{% if forloop.index <= 2 %}eager{% else %}lazy{% endif %}"
-                    >
-                  {% endif %}
-                </div>
-                <div class="pch-product-card__body">
-                  <span>{{ product_badge }}</span>
-                  <strong>{{ product.title }}</strong>
-                  <p>{{ product_note }}</p>
-                  <small>From {{ product.price | money }}</small>
-                </div>
-              </a>
-            {% endfor %}
-          </div>
-        </div>
-      {% endif %}
     </div>
 
   </div>
@@ -194,10 +145,7 @@
 
   .pch-hero__content {
     padding: 42px 0 34px;
-    display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
-    gap: 34px;
-    align-items: center;
+    display: block;
   }
 
   /* ═══════════════════════════════════════════════════════════════
@@ -271,126 +219,6 @@
     color: var(--pch-muted, #5f574e);
     font-size: 11px;
     font-weight: 620;
-  }
-
-  .pch-product-panel {
-    align-self: stretch;
-    display: grid;
-    gap: 12px;
-    min-width: 0;
-  }
-
-  .pch-product-panel__head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    color: var(--pch-muted, #5f574e);
-    font-size: 12px;
-    line-height: 1.3;
-  }
-
-  .pch-product-panel__head span {
-    color: var(--pch-clay, #b85f32);
-    font-weight: 820;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  .pch-product-panel__head strong {
-    color: var(--pch-ink, #171512);
-    font-weight: 760;
-  }
-
-  .pch-product-panel__grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-  }
-
-  .pch-product-card {
-    display: grid;
-    grid-template-columns: 104px minmax(0, 1fr);
-    min-height: 148px;
-    overflow: hidden;
-    border: 1px solid rgba(55, 43, 31, 0.12);
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.86);
-    color: var(--pch-ink, #171512);
-    text-decoration: none;
-    box-shadow: 0 16px 36px rgba(23, 21, 18, 0.06);
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-  }
-
-  .pch-product-card:hover {
-    border-color: rgba(184, 95, 50, 0.36);
-    box-shadow: 0 18px 42px rgba(23, 21, 18, 0.1);
-    transform: translateY(-1px);
-  }
-
-  .pch-product-card__media {
-    display: grid;
-    place-items: center;
-    min-width: 0;
-    background:
-      radial-gradient(circle at 50% 42%, rgba(184, 95, 50, 0.14), rgba(255, 250, 242, 0) 62%),
-      #fff7eb;
-  }
-
-  .pch-product-card__media img {
-    width: 100%;
-    height: 100%;
-    max-height: 148px;
-    object-fit: contain;
-    padding: 10px;
-  }
-
-  .pch-product-card__body {
-    min-width: 0;
-    padding: 13px 13px 12px;
-  }
-
-  .pch-product-card__body span,
-  .pch-product-card__body strong,
-  .pch-product-card__body small {
-    display: block;
-  }
-
-  .pch-product-card__body span {
-    margin-bottom: 6px;
-    color: var(--pch-clay, #b85f32);
-    font-size: 10px;
-    font-weight: 850;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  .pch-product-card__body strong {
-    display: -webkit-box;
-    overflow: hidden;
-    color: var(--pch-ink, #171512);
-    font-size: 14px;
-    font-weight: 780;
-    line-height: 1.2;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-  }
-
-  .pch-product-card__body p {
-    display: -webkit-box;
-    overflow: hidden;
-    margin: 7px 0 8px;
-    color: var(--pch-muted, #5f574e);
-    font-size: 12px;
-    line-height: 1.35;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-  }
-
-  .pch-product-card__body small {
-    color: var(--pch-ink, #171512);
-    font-size: 12px;
-    font-weight: 800;
   }
 
   .pch-switch__inner {
@@ -944,24 +772,6 @@
   }
 
   @media (max-width: 860px) {
-    .pch-hero__content {
-      grid-template-columns: 1fr;
-      gap: 24px;
-    }
-
-    .pch-product-panel__grid {
-      display: flex;
-      overflow-x: auto;
-      padding: 0 2px 8px;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .pch-product-card {
-      flex: 0 0 min(82vw, 360px);
-      scroll-snap-align: start;
-    }
-
     .pch-need-intro__inner {
       grid-template-columns: 1fr;
     }
@@ -1031,21 +841,6 @@
 
     .pch-hero__content {
       padding: 32px 0 26px;
-    }
-
-    .pch-product-panel__head {
-      display: grid;
-      justify-content: start;
-      gap: 4px;
-    }
-
-    .pch-product-card {
-      grid-template-columns: 96px minmax(0, 1fr);
-      min-height: 138px;
-    }
-
-    .pch-product-card__media img {
-      max-height: 138px;
     }
 
     .pch-hero__text h1 {
