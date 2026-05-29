@@ -256,6 +256,7 @@
         },
         "product_category_audit": {
             "type": "product-category-audit",
+            "disabled": true,
             "settings": {
                 "color_scheme": "scheme-2",
                 "classic_eyebrow": "Everyday yak chew",

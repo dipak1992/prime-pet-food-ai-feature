@@ -931,12 +931,17 @@
       if (target && target._chewAnalyzer) {
         e.preventDefault();
         target._chewAnalyzer.open();
-      } else {
-        target = document.getElementById('chew-analyzer');
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+        return;
+      }
+
+      target = target || document.getElementById('chew-analyzer');
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        window.setTimeout(function() {
+          if (target._chewAnalyzer) target._chewAnalyzer.open();
+        }, 350);
       }
     });
   }

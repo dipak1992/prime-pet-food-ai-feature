@@ -41,6 +41,7 @@
     },
     "product_category_audit": {
       "type": "product-category-audit",
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-2",
         "classic_eyebrow": "Everyday yak chew",
@@ -840,7 +841,7 @@
         "heading": "A clearer way to buy yak chews.",
         "subtext": "Prime Pet Food keeps the origin story, sizing advice, safety notes, and routine guidance in one place so you can choose with less guesswork.",
         "cta_text": "Compare sizes",
-        "cta_link": "#ypc-tabs-recos-ypc_product_tab_QnMPYB"
+        "cta_link": "#chew-analyzer"
       }
     },
     "ypc_product_tab_QnMPYB": {
@@ -912,7 +913,6 @@
     },
     "chew_analyzer_widget": {
       "type": "chew-analyzer",
-      "disabled": true,
       "settings": {
         "display_mode": "full",
         "show_section_heading": false,

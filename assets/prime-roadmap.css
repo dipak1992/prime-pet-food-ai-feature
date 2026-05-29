@@ -16,8 +16,8 @@
 }
 .ppru__inner {
   display: grid;
-  grid-template-columns: minmax(240px, 0.75fr) minmax(0, 1.25fr);
-  gap: 28px;
+  grid-template-columns: 1fr;
+  gap: 30px;
   width: min(1180px, 100%);
   margin: 0 auto;
   align-items: start;
@@ -43,6 +43,22 @@
   font-size: clamp(32px, 4vw, 48px);
   line-height: 1.05;
 }
+.ppru__copy {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(320px, 0.55fr);
+  gap: 22px;
+  align-items: end;
+}
+.ppru__copy .ppru__kicker {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+.ppru__copy h2 {
+  margin-bottom: 0;
+}
+.ppru__copy p:not(.ppru__kicker) {
+  margin: 0;
+}
 .ppru__copy p:not(.ppru__kicker),
 .ppru__card p,
 .pbl__hero p,
@@ -61,7 +77,7 @@
   display: grid;
   align-content: start;
   gap: 12px;
-  min-height: 270px;
+  min-height: 244px;
   padding: 22px;
   border: 1px solid rgba(55, 43, 31, 0.13);
   border-radius: 8px;
@@ -413,6 +429,7 @@
 }
 @media (max-width: 920px) {
   .ppru__inner,
+  .ppru__copy,
   .pbl__hero,
   .pbl__grid,
   .pdg__inner,
@@ -436,6 +453,14 @@
 @media (max-width: 920px) {
   .ppru__inner {
     grid-template-columns: 1fr;
+  }
+
+  .ppru__copy {
+    display: block;
+  }
+
+  .ppru__copy h2 {
+    margin: 10px 0 14px;
   }
 
   .ppru__cards {
