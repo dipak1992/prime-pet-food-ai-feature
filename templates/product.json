@@ -841,7 +841,7 @@
         "heading": "A clearer way to buy yak chews.",
         "subtext": "Prime Pet Food keeps the origin story, sizing advice, safety notes, and routine guidance in one place so you can choose with less guesswork.",
         "cta_text": "Compare sizes",
-        "cta_link": "#chew-analyzer"
+        "cta_link": "#ypc-product-form"
       }
     },
     "ypc_product_tab_QnMPYB": {
@@ -913,6 +913,7 @@
     },
     "chew_analyzer_widget": {
       "type": "chew-analyzer",
+      "disabled": true,
       "settings": {
         "display_mode": "full",
         "show_section_heading": false,
@@ -1226,8 +1227,8 @@
       "type": "prime-seo-internal-links",
       "settings": {
         "eyebrow": "Need a deeper answer?",
-        "heading": "Guides for specific chew questions.",
-        "text": "Use these guides when you want more detail on duration, power chewers, puppies, safety, sourcing, or comparisons before deciding."
+        "heading": "Still deciding? Start with the question that matters most.",
+        "text": "Most dog parents only need the size options above. If you want more detail before checkout, these guides answer the questions that usually change the decision: duration, safety, strong chewers, puppies, and how yak chews compare."
       }
     },
     "faqs_tVaRYD": {
