@@ -41,18 +41,17 @@
     },
     "product_category_audit": {
       "type": "product-category-audit",
-      "disabled": true,
       "settings": {
         "color_scheme": "scheme-2",
         "classic_eyebrow": "Everyday yak chew",
-        "classic_heading": "A steady chew for everyday calm-time.",
-        "classic_intro": "Made for the moments when your dog needs something real to focus on: after a walk, during a work call, or before the house settles down for the night.",
+        "classic_heading": "Confirm the fit before you choose a size.",
+        "classic_intro": "Use this section to match the chew to the job: everyday settling, chewing intensity, and the point when the small end piece should be removed.",
         "flavour_eyebrow": "Flavour yak chew",
-        "flavour_heading": "A more tempting start for dogs who need extra interest.",
-        "flavour_intro": "The flavour helps invite your dog in, while the dense yak chew gives them the same slow, satisfying chewing routine dog parents come back for.",
+        "flavour_heading": "Use flavour when your dog needs a stronger invitation.",
+        "flavour_intro": "Flavour is helpful for picky dogs and first-time chewers, but the right size and supervised routine still come first.",
         "bulk_eyebrow": "Bulk yak chews",
-        "bulk_heading": "Keep calm-time stocked for the dogs who already love them.",
-        "bulk_intro": "A practical option for repeat buyers, multi-dog homes, and heavy chewers who go through yak chews as part of a regular supervised routine."
+        "bulk_heading": "Buy bulk when you already know the chew works.",
+        "bulk_intro": "Bulk is for repeat routines, multi-dog homes, and dog parents who want better value after the right size is clear."
       }
     },
     "main": {
@@ -836,13 +835,12 @@
     },
     "why_prime": {
       "type": "why-prime",
-      "disabled": true,
       "settings": {
-        "eyebrow": "Why dog parents choose Prime Pet Food",
-        "heading": "A chew for dogs who need something to do.",
-        "subtext": "Soft treats disappear fast. A dense yak cheese chew gives your dog a slower, more focused routine, with a short ingredient list you can actually read.",
-        "cta_text": "Choose a size",
-        "cta_link": ""
+        "eyebrow": "Why Prime Pet Food",
+        "heading": "A clearer way to buy yak chews.",
+        "subtext": "Prime Pet Food keeps the origin story, sizing advice, safety notes, and routine guidance in one place so you can choose with less guesswork.",
+        "cta_text": "Compare sizes",
+        "cta_link": "#ypc-tabs-recos-ypc_product_tab_QnMPYB"
       }
     },
     "ypc_product_tab_QnMPYB": {
@@ -895,19 +893,17 @@
     },
     "product_trust_stack": {
       "type": "product-trust-stack",
-      "disabled": true,
       "settings": {
-        "eyebrow": "Buying confidence",
-        "title": "The questions every dog parent asks before buying"
+        "eyebrow": "Buyer confidence",
+        "title": "What should feel clear before checkout"
       }
     },
     "prime_product_routine_upsell": {
       "type": "prime-product-routine-upsell",
-      "disabled": true,
       "settings": {
-        "eyebrow": "Complete the routine",
-        "heading": "Stock the calm-time drawer once.",
-        "text": "Choose a multi-pack for better value, or set up flexible reorders so you are not searching for a chew during the busiest part of the day.",
+        "eyebrow": "Next best step",
+        "heading": "Restock only after the fit is clear.",
+        "text": "First-time buyers should start with the right size. Repeat buyers can save time with bulk packs or subscription refills.",
         "main_product": "himalayan-yak-chews-for-dogs",
         "bulk_product": "2-lb-bulk-yak-cheese-dog-chews-natural-long-lasting-treats-small-to-jumbo-copy",
         "subscribe_link": "/pages/subscribe-and-save",
@@ -1009,7 +1005,6 @@
     },
     "comparison_table_URRwp9": {
       "type": "comparison-table",
-      "disabled": true,
       "blocks": {
         "comparison_row_gHgm9d": {
           "type": "comparison_row",
@@ -1086,9 +1081,9 @@
       ],
       "name": "Yak Comparison Table",
       "settings": {
-        "eyebrow": "RAWHIDE-FREE COMPARISON",
-        "heading": "A cleaner chew starts with a shorter ingredient list",
-        "subtext": "<p>See how Prime yak chews compare with rawhide, bully sticks, and synthetic chew toys.</p>",
+        "eyebrow": "Chew type comparison",
+        "heading": "How yak chews compare with common alternatives",
+        "subtext": "<p>This table is for shoppers comparing chew types, not a repeat of the product ingredients or safety tabs.</p>",
         "feature_column_label": "Feature",
         "left_title": "Rawhide",
         "center_badge": "Prime Pet Food Favorite",
@@ -1229,11 +1224,10 @@
     },
     "prime_seo_internal_links": {
       "type": "prime-seo-internal-links",
-      "disabled": true,
       "settings": {
-        "eyebrow": "Chew education",
-        "heading": "Choose with confidence.",
-        "text": "Compare duration, sizing, ingredients, and chew style before checkout. These guides support the product page without competing with it for purchase intent."
+        "eyebrow": "Need a deeper answer?",
+        "heading": "Guides for specific chew questions.",
+        "text": "Use these guides when you want more detail on duration, power chewers, puppies, safety, sourcing, or comparisons before deciding."
       }
     },
     "faqs_tVaRYD": {
@@ -1427,10 +1421,9 @@
     },
     "prime_zero_waste_puff": {
       "type": "prime-zero-waste-puff",
-      "disabled": true,
       "settings": {
-        "heading": "When the chew gets small, puff it.",
-        "subheading": "Take the small end piece away, soak it, microwave it, and let it cool into a crunchy cheese treat. More value, less waste, and a more controlled finish.",
+        "heading": "The small end piece has its own routine.",
+        "subheading": "This section is only about the final nub: when to take it away, how to puff it, and how to let it cool before serving.",
         "infographic_image": "https://cdn.shopify.com/s/files/1/0767/5124/1536/files/puff_hack.png?v=1779455932",
         "cta_label": "Shop Yak Chews",
         "cta_url": "/products/himalayan-yak-chews-for-dogs",
@@ -1439,31 +1432,30 @@
     },
     "prime_ingredient_roles": {
       "type": "prime-ingredient-roles",
-      "disabled": true,
       "settings": {}
     }
   },
   "order": [
     "breadcrumbs",
     "ypc_product_hero_AXmQHp",
+    "product_category_audit",
     "ypc_product_tab_QnMPYB",
+    "product_trust_stack",
+    "why_prime",
+    "prime_ingredient_roles",
+    "comparison_table_URRwp9",
+    "prime_zero_waste_puff",
+    "prime_product_routine_upsell",
     "video_carousel_6EkF8r",
+    "prime_seo_internal_links",
     "faqs_tVaRYD",
     "related-products",
     "prime_sticky_atc",
     "prime_product_trust_bar",
-    "product_category_audit",
     "main",
-    "why_prime",
-    "product_trust_stack",
-    "prime_product_routine_upsell",
     "chew_analyzer_widget",
     "prime_duration_guarantee",
     "breed_review_highlights",
-    "two_treats_in_one_C8mxDb",
-    "comparison_table_URRwp9",
-    "prime_seo_internal_links",
-    "prime_zero_waste_puff",
-    "prime_ingredient_roles"
+    "two_treats_in_one_C8mxDb"
   ]
 }
