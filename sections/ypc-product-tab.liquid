@@ -748,8 +748,23 @@
       margin-bottom: 12px;
     }
 
+    .ypc-tabs-recos__right {
+      padding: 16px;
+      border-radius: 18px;
+    }
+
     .ypc-tabs-recos__products {
-      grid-template-columns: 1fr;
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 0 2px 8px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .ypc-rec-product {
+      flex: 0 0 min(76vw, 260px);
+      scroll-snap-align: start;
     }
   }
 </style>

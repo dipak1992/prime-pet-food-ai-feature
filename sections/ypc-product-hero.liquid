@@ -229,14 +229,6 @@
         </ul>
       </div>
 
-      <div class="ypc-benefit-icons" aria-label="Key product benefits">
-        <span>{{ benefit_icon_1 }}</span>
-        <span>{{ benefit_icon_2 }}</span>
-        <span>{{ benefit_icon_3 }}</span>
-        <span>{{ benefit_icon_4 }}</span>
-        <span>{{ benefit_icon_5 }}</span>
-      </div>
-
       {% form 'product', product, id: 'ypc-product-form', class: 'ypc-product-hero__form' %}
         {% unless product.has_only_default_variant %}
           {% for option in product.options_with_values %}
@@ -397,67 +389,11 @@
           </button>
         </div>
 
-        <div class="ypc-post-atc-trust" aria-label="Purchase confidence">
-          {% render 'prime-guarantee-badge', context: 'product_page' %}
-          <span>Handcrafted in Nepal. Packed in USA.</span>
-        </div>
-
         <div class="ypc-conversion-badges" aria-label="Purchase reassurance">
           <span>Rawhide-free</span>
           <span>Free shipping over $30</span>
           <span>30-day promise</span>
           <span>Secure checkout</span>
-        </div>
-
-        <div class="ypc-truth-box" aria-label="Origin and ingredient truth">
-          <div class="ypc-truth-box__item">
-            <span>Ingredients</span>
-            <strong>4 simple ingredients</strong>
-            <p>Yak milk, cow milk, lime juice, salt.</p>
-          </div>
-          <div class="ypc-truth-box__item">
-            <span>Origin</span>
-            <strong>Handcrafted in Nepal. Packed in USA.</strong>
-            <p>Traditional Himalayan methods, finished under Prime Pet Food quality standards.</p>
-          </div>
-          <div class="ypc-truth-box__item">
-            <span>Duration</span>
-            <strong>{{ truth_duration_heading }}</strong>
-            <p>{{ truth_duration_text }}</p>
-          </div>
-          <div class="ypc-truth-box__item">
-            <span>Promise</span>
-            <strong>30-day satisfaction guarantee</strong>
-            <p>If the size or routine fit is not right, we will help make it right.</p>
-          </div>
-        </div>
-
-        <div class="ypc-love-grid" aria-label="Why dogs and owners love Prime Pet Food yak chews">
-          <article>
-            <span>Why dogs love it</span>
-            <strong>{{ love_dog_heading }}</strong>
-            <p>{{ love_dog_text }}</p>
-          </article>
-          <article>
-            <span>Why owners love it</span>
-            <strong>{{ love_owner_heading }}</strong>
-            <p>{{ love_owner_text }}</p>
-          </article>
-        </div>
-
-        <div class="ypc-digestibility-note" aria-label="Safety and digestibility details">
-          <div>
-            <span>{{ digest_1_heading }}</span>
-            <p>{{ digest_1_text }}</p>
-          </div>
-          <div>
-            <span>{{ digest_2_heading }}</span>
-            <p>{{ digest_2_text }}</p>
-          </div>
-          <div>
-            <span>{{ digest_3_heading }}</span>
-            <p>{{ digest_3_text }}</p>
-          </div>
         </div>
 
         <div class="ypc-profile-recommendation" data-ypc-profile-card hidden>
@@ -468,72 +404,6 @@
           </div>
           <a href="/pages/my-dog">View My Dog</a>
         </div>
-
-        <details class="ypc-guarantee-details">
-          <summary>What if my dog does not love it?</summary>
-          <p>Try Prime Pet Food during supervised chew sessions for 30 days. If the size, chew pace, or routine fit is not right, contact us and we will help with a replacement size or a refund.</p>
-        </details>
-
-        <a href="#bonus-second-treat" class="ypc-bonus-mobile-link">
-          Bonus: get a free second treat from the nub
-        </a>
-
-        <div class="ypc-puff-hack" aria-label="Puff Hack safety video">
-          <div class="ypc-puff-hack__video">
-            <video
-              controls
-              muted
-              playsinline
-              preload="metadata"
-              poster="{{ 'prime-yak-process-finished-chews.jpg' | asset_url }}"
-              aria-label="Watch how to turn a small yak chew nub into a crunchy puff treat"
-            >
-              <source src="https://cdn.shopify.com/videos/c/o/v/d7aeb1ab2e45499ba3b718e8920fe919.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="ypc-puff-hack__copy">
-            <span>Puff Hack</span>
-            <strong>Turn the small end piece into a crunchy bonus treat.</strong>
-            <p>When the chew gets too small to safely chew, remove it, soak it, microwave it, let it cool, and serve the puff.</p>
-            <a href="https://cdn.shopify.com/videos/c/o/v/d7aeb1ab2e45499ba3b718e8920fe919.mp4" target="_blank" rel="noopener">Watch full clip</a>
-          </div>
-        </div>
-
-        <details class="ypc-safety-ritual" aria-label="Safety First chew system" open>
-          <summary class="ypc-safety-ritual__head">
-            <span aria-hidden="true">🛡️</span>
-            <div>
-              <strong>Safety First chew system</strong>
-              <p>Built for supervised calm time, safer sizing, and responsible hard-chew use.</p>
-            </div>
-          </summary>
-          <div class="ypc-safety-ritual__body">
-            <div class="ypc-safety-ritual__grid">
-              <div class="ypc-safety-ritual__item">
-                <span>01</span>
-                <strong>Size up for safety</strong>
-                <p>Choose a chew your dog cannot swallow whole. Power chewers and dogs between sizes should start larger.</p>
-              </div>
-              <div class="ypc-safety-ritual__item">
-                <span>02</span>
-                <strong>Supervise every session</strong>
-                <p>Use short, watched chew sessions with fresh water nearby. Do not leave hard chews unattended.</p>
-              </div>
-              <div class="ypc-safety-ritual__item">
-                <span>03</span>
-                <strong>Respect hard-chew limits</strong>
-                <p>The thumbnail test is a useful caution: if a chew cannot indent, dogs with dental risk may need a softer option.</p>
-              </div>
-              <div class="ypc-safety-ritual__item">
-                <span>04</span>
-                <strong>Puff the nub</strong>
-                <p>Remove the small end piece before it can be swallowed, then soak and microwave it into a crunchy puff treat.</p>
-              </div>
-            </div>
-            <p class="ypc-safety-ritual__note">Hard chews are not right for every dog. Ask your vet first if your dog has dental issues, weak teeth, or a history of cracked teeth.</p>
-            <a href="/pages/yak-chew-safety-guide">Read the safety guide</a>
-          </div>
-        </details>
       {% endform %}
 
       {% if section.settings.show_review_cards %}
@@ -646,9 +516,6 @@
     const qtyInput = document.getElementById('ypc-quantity-input');
     const qtyMinus = document.getElementById('ypc-qty-minus');
     const qtyPlus = document.getElementById('ypc-qty-plus');
-    const safetyRitual = document.querySelector('.ypc-safety-ritual');
-    const mobileSafetyQuery = window.matchMedia('(max-width: 767px)');
-
     const sizeGuideOpen = document.getElementById('ypc-size-guide-open');
     const sizeGuideModal = document.getElementById('ypc-size-guide-modal');
     const sizeGuideClose = document.getElementById('ypc-size-guide-close');
@@ -1004,43 +871,6 @@
       if (frequencyWrap) frequencyWrap.style.display = 'block';
     }
 
-    function syncMobileSafetyRitual() {
-      if (!safetyRitual) return;
-      if (!mobileSafetyQuery.matches) {
-        safetyRitual.setAttribute('open', '');
-        return;
-      }
-      if (safetyRitual.dataset.userOpened) return;
-      safetyRitual.removeAttribute('open');
-    }
-
-    if (safetyRitual) {
-      function releaseSafetyRitualSync() {
-        window.setTimeout(function() {
-          safetyRitual.dataset.syncing = 'false';
-        }, 80);
-      }
-
-      safetyRitual.addEventListener('toggle', function() {
-        if (safetyRitual.dataset.syncing === 'true') return;
-        if (!mobileSafetyQuery.matches) {
-          safetyRitual.dataset.syncing = 'true';
-          safetyRitual.setAttribute('open', '');
-          releaseSafetyRitualSync();
-          return;
-        }
-        safetyRitual.dataset.userOpened = 'true';
-      });
-      safetyRitual.dataset.syncing = 'true';
-      syncMobileSafetyRitual();
-      releaseSafetyRitualSync();
-      window.addEventListener('resize', function() {
-        safetyRitual.dataset.syncing = 'true';
-        syncMobileSafetyRitual();
-        releaseSafetyRitualSync();
-      }, { passive: true });
-    }
-
     if (qtyMinus && qtyInput) {
       qtyMinus.addEventListener('click', function() {
         const currentQty = parseInt(qtyInput.value || '1', 10);
@@ -1333,29 +1163,6 @@
     font-weight: 900;
   }
 
-  .ypc-benefit-icons {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 8px;
-    margin: 0 0 14px;
-  }
-
-  .ypc-benefit-icons span {
-    display: flex;
-    min-height: 54px;
-    align-items: center;
-    justify-content: center;
-    padding: 8px;
-    border: 1px solid rgba(23, 59, 43, 0.14);
-    border-radius: 14px;
-    background: rgba(255, 250, 242, 0.76);
-    color: #173b2b;
-    font-size: 11px;
-    font-weight: 900;
-    line-height: 1.15;
-    text-align: center;
-  }
-
   .ypc-product-hero__option {
     margin-bottom: 12px;
   }
@@ -1585,373 +1392,6 @@
     line-height: 1.2;
   }
 
-  .ypc-truth-box {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-    margin: 0 0 14px;
-    padding: 12px;
-    border: 1px solid rgba(184, 95, 50, 0.18);
-    border-radius: 16px;
-    background: linear-gradient(135deg, rgba(255, 250, 242, 0.94), rgba(246, 238, 222, 0.72));
-    box-shadow: 0 12px 28px rgba(43, 20, 8, 0.06);
-  }
-
-  .ypc-truth-box__item {
-    min-width: 0;
-    padding: 12px;
-    border: 1px solid rgba(43, 20, 8, 0.08);
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.62);
-  }
-
-  .ypc-truth-box__item span {
-    display: block;
-    color: #9a4318;
-    font-size: 10px;
-    font-weight: 900;
-    letter-spacing: 0.09em;
-    line-height: 1.1;
-    text-transform: uppercase;
-  }
-
-  .ypc-truth-box__item strong {
-    display: block;
-    margin-top: 5px;
-    color: #2b1408;
-    font-size: 13px;
-    font-weight: 900;
-    line-height: 1.22;
-  }
-
-  .ypc-truth-box__item p {
-    margin: 5px 0 0;
-    color: #6f5a4b;
-    font-size: 12px;
-    line-height: 1.4;
-  }
-
-  .ypc-love-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-    margin: 0 0 14px;
-  }
-
-  .ypc-love-grid article {
-    min-width: 0;
-    padding: 15px;
-    border: 1px solid rgba(23, 59, 43, 0.14);
-    border-radius: 16px;
-    background: rgba(255, 250, 242, 0.9);
-    box-shadow: 0 10px 24px rgba(43, 20, 8, 0.05);
-  }
-
-  .ypc-love-grid span,
-  .ypc-digestibility-note span {
-    display: block;
-    color: #9a4318;
-    font-size: 10px;
-    font-weight: 950;
-    letter-spacing: 0.08em;
-    line-height: 1.1;
-    text-transform: uppercase;
-  }
-
-  .ypc-love-grid strong {
-    display: block;
-    margin-top: 6px;
-    color: #173b2b;
-    font-size: 15px;
-    font-weight: 950;
-    line-height: 1.2;
-  }
-
-  .ypc-love-grid p,
-  .ypc-digestibility-note p {
-    margin: 7px 0 0;
-    color: #5f4b42;
-    font-size: 12px;
-    line-height: 1.45;
-  }
-
-  .ypc-digestibility-note {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 8px;
-    margin: 0 0 14px;
-    padding: 10px;
-    border: 1px solid rgba(23, 59, 43, 0.16);
-    border-radius: 16px;
-    background: rgba(23, 59, 43, 0.06);
-  }
-
-  .ypc-digestibility-note div {
-    min-width: 0;
-    padding: 11px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.68);
-  }
-
-  .ypc-puff-hack {
-    display: grid;
-    grid-template-columns: 92px minmax(0, 1fr);
-    gap: 13px;
-    align-items: center;
-    margin: 14px 0 0;
-    padding: 12px;
-    border: 1px solid rgba(184, 95, 50, 0.22);
-    border-radius: 16px;
-    background: linear-gradient(135deg, rgba(184, 95, 50, 0.1), rgba(255, 250, 242, 0.9));
-  }
-
-  .ypc-puff-hack__video {
-    overflow: hidden;
-    position: relative;
-    aspect-ratio: 9 / 12;
-    border-radius: 12px;
-    background: #211008;
-    background-image: url('{{ 'prime-yak-process-finished-chews.jpg' | asset_url }}');
-    background-position: center;
-    background-size: cover;
-  }
-
-  .ypc-puff-hack__video video {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .ypc-puff-hack__copy {
-    min-width: 0;
-  }
-
-  .ypc-puff-hack__copy span {
-    display: inline-flex;
-    margin-bottom: 5px;
-    color: #b85f32;
-    font-size: 11px;
-    font-weight: 950;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .ypc-puff-hack__copy strong {
-    display: block;
-    color: #173b2b;
-    font-size: 14px;
-    font-weight: 950;
-    line-height: 1.25;
-  }
-
-  .ypc-puff-hack__copy p {
-    margin: 5px 0 7px;
-    color: #5f4b42;
-    font-size: 12px;
-    line-height: 1.45;
-  }
-
-  .ypc-puff-hack__copy a {
-    color: #173b2b;
-    font-size: 12px;
-    font-weight: 900;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-
-  .ypc-bonus-mobile-link {
-    display: none;
-  }
-
-  .ypc-safety-ritual {
-    display: grid;
-    gap: 12px;
-    margin: 14px 0 16px;
-    padding: 15px;
-    border: 1px solid rgba(23, 59, 43, 0.16);
-    border-radius: 16px;
-    background: linear-gradient(135deg, rgba(255, 250, 242, 0.94), rgba(246, 238, 222, 0.72));
-  }
-
-  .ypc-safety-ritual__head {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    cursor: pointer;
-    list-style: none;
-  }
-
-  .ypc-safety-ritual__head::-webkit-details-marker {
-    display: none;
-  }
-
-  .ypc-safety-ritual__head::after {
-    content: '-';
-    display: none;
-    width: 28px;
-    height: 28px;
-    flex: 0 0 auto;
-    align-items: center;
-    justify-content: center;
-    border-radius: 999px;
-    background: rgba(23, 59, 43, 0.08);
-    color: #173b2b;
-    font-size: 18px;
-    font-weight: 900;
-    line-height: 1;
-  }
-
-  .ypc-safety-ritual:not([open]) .ypc-safety-ritual__head::after {
-    content: '+';
-  }
-
-  .ypc-safety-ritual__head > span {
-    display: inline-flex;
-    width: 34px;
-    height: 34px;
-    align-items: center;
-    justify-content: center;
-    flex: 0 0 auto;
-    border-radius: 999px;
-    background: rgba(23, 59, 43, 0.08);
-    font-size: 17px;
-  }
-
-  .ypc-safety-ritual__body {
-    display: grid;
-    gap: 12px;
-  }
-
-  .ypc-safety-ritual strong {
-    display: block;
-    color: #173b2b;
-    font-size: 14px;
-    font-weight: 900;
-    line-height: 1.25;
-  }
-
-  .ypc-safety-ritual p {
-    color: #5f4b42;
-    font-size: 13px;
-    line-height: 1.45;
-  }
-
-  .ypc-safety-ritual p {
-    margin: 3px 0 0;
-  }
-
-  .ypc-safety-ritual__grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-  }
-
-  .ypc-safety-ritual__item {
-    display: grid;
-    gap: 4px;
-    min-width: 0;
-    padding: 11px;
-    border: 1px solid rgba(23, 59, 43, 0.1);
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.66);
-  }
-
-  .ypc-safety-ritual__item > span {
-    color: #b85f32;
-    font-size: 11px;
-    font-weight: 950;
-    letter-spacing: 0.08em;
-  }
-
-  .ypc-safety-ritual__item strong {
-    font-size: 13px;
-  }
-
-  .ypc-safety-ritual__item p {
-    margin: 0;
-    font-size: 12px;
-    line-height: 1.4;
-  }
-
-  .ypc-safety-ritual__note {
-    padding-top: 10px;
-    border-top: 1px solid rgba(23, 59, 43, 0.12);
-  }
-
-  .ypc-safety-ritual a {
-    justify-self: start;
-    color: #173b2b;
-    font-size: 13px;
-    font-weight: 900;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-
-  @media screen and (max-width: 640px) {
-    .ypc-bonus-mobile-link {
-      display: flex;
-      min-height: 46px;
-      align-items: center;
-      justify-content: center;
-      margin: 12px 0 10px;
-      padding: 0 14px;
-      border: 1px solid rgba(184, 95, 50, 0.24);
-      border-radius: 999px;
-      background: rgba(255, 250, 242, 0.9);
-      color: #94451f;
-      font-size: 13px;
-      font-weight: 900;
-      line-height: 1.2;
-      text-align: center;
-      text-decoration: none;
-    }
-
-    .ypc-puff-hack {
-      display: none;
-    }
-
-    .ypc-safety-ritual {
-      margin-top: 10px;
-      padding: 12px;
-    }
-
-    .ypc-safety-ritual__head {
-      align-items: center;
-    }
-
-    .ypc-safety-ritual__head::after {
-      display: inline-flex;
-      margin-left: auto;
-    }
-
-    .ypc-safety-ritual:not([open]) .ypc-safety-ritual__body {
-      display: none;
-    }
-
-    .ypc-truth-box {
-      grid-template-columns: 1fr;
-      padding: 10px;
-    }
-
-    .ypc-truth-box__item {
-      padding: 11px;
-    }
-
-    .ypc-love-grid,
-    .ypc-digestibility-note {
-      grid-template-columns: 1fr;
-    }
-
-    .ypc-subscription-proof {
-      display: none;
-    }
-
-    .ypc-safety-ritual__grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
   .ypc-profile-recommendation {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
@@ -2143,78 +1583,12 @@
     line-height: 1.2;
   }
 
-  .ypc-guarantee-details {
-    overflow: hidden;
-    border: 1px solid rgba(43, 20, 8, 0.14);
-    border-radius: 12px;
-    background: #fffdf8;
-    margin: 0 0 14px;
-  }
-
-  .ypc-guarantee-details summary {
-    display: flex;
-    min-height: 48px;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    cursor: pointer;
-    list-style: none;
-    color: #2b1408;
-    font-size: 14px;
-    font-weight: 850;
-    padding: 0 16px;
-  }
-
-  .ypc-guarantee-details summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .ypc-guarantee-details summary::after {
-    content: '+';
-    color: #d2622e;
-    font-size: 18px;
-    font-weight: 700;
-  }
-
-  .ypc-guarantee-details[open] summary::after {
-    content: '-';
-  }
-
-  .ypc-guarantee-details p {
-    margin: 0;
-    border-top: 1px solid rgba(43, 20, 8, 0.1);
-    color: #6f5a4b;
-    font-size: 13px;
-    line-height: 1.65;
-    padding: 0 16px 16px;
-  }
-
   .ypc-cart-row {
     display: grid;
     grid-template-columns: 135px 1fr;
     gap: 12px;
     align-items: stretch;
     margin-top: 14px;
-  }
-
-  .ypc-post-atc-trust {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px 12px;
-    align-items: center;
-    justify-content: center;
-    margin: 10px 0 2px;
-    color: #5f4b42;
-    font-size: 12px;
-    font-weight: 750;
-    line-height: 1.35;
-    text-align: center;
-  }
-
-  .ypc-post-atc-trust .prime-guarantee-badge--product_page {
-    margin-top: 0;
-    padding: 8px 11px;
-    font-size: 12px;
   }
 
   .ypc-quantity {
@@ -2455,16 +1829,8 @@
     .ypc-urgency { order: 50; }
     .ypc-subscription { order: 55; }
     .ypc-cart-row { order: 60; }
-    .ypc-post-atc-trust { order: 65; }
     .ypc-conversion-badges { order: 70; }
     .ypc-profile-recommendation { order: 75; }
-    .ypc-truth-box { order: 80; }
-    .ypc-love-grid { order: 82; }
-    .ypc-digestibility-note { order: 83; }
-    .ypc-guarantee-details { order: 100; }
-    .ypc-bonus-mobile-link { order: 110; }
-    .ypc-puff-hack { order: 120; }
-    .ypc-safety-ritual { order: 130; }
 
     .ypc-product-hero__title {
       font-size: 27px;
@@ -2498,20 +1864,6 @@
     .ypc-hero-summary__list li::before {
       left: 12px;
       font-size: 14px;
-    }
-
-    .ypc-benefit-icons {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .ypc-benefit-icons span {
-      flex: 0 0 132px;
-      scroll-snap-align: start;
     }
 
     .ypc-product-hero__price {

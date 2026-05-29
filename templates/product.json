@@ -41,6 +41,7 @@
     },
     "product_category_audit": {
       "type": "product-category-audit",
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-2",
         "classic_eyebrow": "Everyday yak chew",
@@ -835,6 +836,7 @@
     },
     "why_prime": {
       "type": "why-prime",
+      "disabled": true,
       "settings": {
         "eyebrow": "Why dog parents choose Prime Pet Food",
         "heading": "A chew for dogs who need something to do.",
@@ -893,6 +895,7 @@
     },
     "product_trust_stack": {
       "type": "product-trust-stack",
+      "disabled": true,
       "settings": {
         "eyebrow": "Buying confidence",
         "title": "The questions every dog parent asks before buying"
@@ -900,6 +903,7 @@
     },
     "prime_product_routine_upsell": {
       "type": "prime-product-routine-upsell",
+      "disabled": true,
       "settings": {
         "eyebrow": "Complete the routine",
         "heading": "Stock the calm-time drawer once.",
@@ -931,6 +935,7 @@
     },
     "breed_review_highlights": {
       "type": "breed-review-highlights",
+      "disabled": true,
       "settings": {
         "eyebrow": "Breed-aware confidence",
         "title": "What dogs like yours usually need",
@@ -1004,6 +1009,7 @@
     },
     "comparison_table_URRwp9": {
       "type": "comparison-table",
+      "disabled": true,
       "blocks": {
         "comparison_row_gHgm9d": {
           "type": "comparison_row",
@@ -1223,6 +1229,7 @@
     },
     "prime_seo_internal_links": {
       "type": "prime-seo-internal-links",
+      "disabled": true,
       "settings": {
         "eyebrow": "Chew education",
         "heading": "Choose with confidence.",
@@ -1420,6 +1427,7 @@
     },
     "prime_zero_waste_puff": {
       "type": "prime-zero-waste-puff",
+      "disabled": true,
       "settings": {
         "heading": "When the chew gets small, puff it.",
         "subheading": "Take the small end piece away, soak it, microwave it, and let it cool into a crunchy cheese treat. More value, less waste, and a more controlled finish.",
@@ -1431,30 +1439,17 @@
     },
     "prime_ingredient_roles": {
       "type": "prime-ingredient-roles",
+      "disabled": true,
       "settings": {}
     }
   },
   "order": [
     "breadcrumbs",
     "ypc_product_hero_AXmQHp",
-    "product_category_audit",
     "ypc_product_tab_QnMPYB",
-    "why_prime",
-    "prime_ingredient_roles",
-    "prime_zero_waste_puff",
-    "product_trust_stack",
     "video_carousel_6EkF8r",
-    "breed_review_highlights",
-    "comparison_table_URRwp9",
-    "prime_product_trust_bar",
-    "chew_analyzer_widget",
-    "two_treats_in_one_C8mxDb",
-    "prime_duration_guarantee",
-    "prime_product_routine_upsell",
-    "prime_seo_internal_links",
     "faqs_tVaRYD",
     "related-products",
-    "prime_sticky_atc",
-    "main"
+    "prime_sticky_atc"
   ]
 }
