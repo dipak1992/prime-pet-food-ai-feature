@@ -396,6 +396,27 @@
           <span>Secure checkout</span>
         </div>
 
+        <div class="ypc-puff-hack" aria-label="Puff Hack safety video">
+          <div class="ypc-puff-hack__video">
+            <video
+              controls
+              muted
+              playsinline
+              preload="metadata"
+              poster="{{ 'prime-yak-process-finished-chews.jpg' | asset_url }}"
+              aria-label="Watch how to turn a small yak chew nub into a crunchy puff treat"
+            >
+              <source src="https://cdn.shopify.com/videos/c/o/v/d7aeb1ab2e45499ba3b718e8920fe919.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="ypc-puff-hack__copy">
+            <span>Puff Hack</span>
+            <strong>Turn the small end piece into a crunchy bonus treat.</strong>
+            <p>When the chew gets too small to safely chew, remove it, soak it, microwave it, let it cool, and serve the puff.</p>
+            <a href="https://cdn.shopify.com/videos/c/o/v/d7aeb1ab2e45499ba3b718e8920fe919.mp4" target="_blank" rel="noopener">Watch full clip</a>
+          </div>
+        </div>
+
         <div class="ypc-profile-recommendation" data-ypc-profile-card hidden>
           <div>
             <span>Your dog profile</span>
@@ -427,27 +448,6 @@
             <div class="ypc-review-card__stars">★★★★★</div>
             <p>“I wanted something simple and rawhide-free. The ingredient list is short, it does not stink up the room, and my dog gets excited when the bag comes out.”</p>
             <strong>Jessica R.</strong>
-          </div>
-
-          <div class="ypc-review-card">
-            <img src="https://cdn.shopify.com/s/files/1/0767/5124/1536/files/yakcheesereview_2.webp?v=1759811735" alt="Customer review photo showing Prime Pet Food yak chews" loading="lazy" width="96" height="96">
-            <div class="ypc-review-card__stars">★★★★★</div>
-            <p>“These became part of our evening routine. I still supervise him, but he settles down with it instead of pacing around looking for trouble.”</p>
-            <strong>Priya K.</strong>
-          </div>
-
-          <div class="ypc-review-card">
-            <img src="https://cdn.shopify.com/s/files/1/0767/5124/1536/files/67d858de6e8af838f858edf5_9839846e-11b0-4ad0-a3b0-990e17c76b9b.png?v=1742233201" alt="Customer photo of Prime Pet Food yak cheese chew packaging" loading="lazy" width="96" height="96">
-            <div class="ypc-review-card__stars">★★★★★</div>
-            <p>“My dog is picky, so I only ordered one pack to test it. He took it right away. I came back and ordered more before we ran out.”</p>
-            <strong>Andrew L.</strong>
-          </div>
-
-          <div class="ypc-review-card">
-            <img src="https://cdn.shopify.com/s/files/1/0767/5124/1536/files/67d858df6e8af838f858ee37.png?v=1742233299" alt="Customer photo of Prime Pet Food Himalayan yak chews" loading="lazy" width="96" height="96">
-            <div class="ypc-review-card__stars">★★★★★</div>
-            <p>“I like that it feels cleaner than the chews we used before. No greasy residue on the rug, and she actually stays interested in it.”</p>
-            <strong>Emily W.</strong>
           </div>
         </div>
       {% endif %}
@@ -1392,6 +1392,73 @@
     line-height: 1.2;
   }
 
+  .ypc-puff-hack {
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr);
+    gap: 13px;
+    align-items: center;
+    margin: 0 0 14px;
+    padding: 12px;
+    border: 1px solid rgba(184, 95, 50, 0.22);
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(184, 95, 50, 0.1), rgba(255, 250, 242, 0.9));
+  }
+
+  .ypc-puff-hack__video {
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 9 / 12;
+    border-radius: 12px;
+    background: #211008;
+    background-image: url('{{ 'prime-yak-process-finished-chews.jpg' | asset_url }}');
+    background-position: center;
+    background-size: cover;
+  }
+
+  .ypc-puff-hack__video video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ypc-puff-hack__copy {
+    min-width: 0;
+  }
+
+  .ypc-puff-hack__copy span {
+    display: inline-flex;
+    margin-bottom: 5px;
+    color: #b85f32;
+    font-size: 11px;
+    font-weight: 950;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .ypc-puff-hack__copy strong {
+    display: block;
+    color: #173b2b;
+    font-size: 14px;
+    font-weight: 950;
+    line-height: 1.25;
+  }
+
+  .ypc-puff-hack__copy p {
+    margin: 5px 0 7px;
+    color: #5f4b42;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .ypc-puff-hack__copy a {
+    color: #173b2b;
+    font-size: 12px;
+    font-weight: 900;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
   .ypc-profile-recommendation {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
@@ -1830,6 +1897,7 @@
     .ypc-subscription { order: 55; }
     .ypc-cart-row { order: 60; }
     .ypc-conversion-badges { order: 70; }
+    .ypc-puff-hack { order: 72; }
     .ypc-profile-recommendation { order: 75; }
 
     .ypc-product-hero__title {
@@ -1876,6 +1944,21 @@
 
     .ypc-profile-recommendation a {
       width: fit-content;
+    }
+
+    .ypc-puff-hack {
+      grid-template-columns: 86px minmax(0, 1fr);
+      gap: 11px;
+      padding: 11px;
+    }
+
+    .ypc-puff-hack__copy strong {
+      font-size: 13px;
+    }
+
+    .ypc-puff-hack__copy p {
+      font-size: 11px;
+      line-height: 1.4;
     }
 
     .ypc-cart-row {
