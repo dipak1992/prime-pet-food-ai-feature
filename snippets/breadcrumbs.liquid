@@ -40,14 +40,14 @@
     assign breadcrumb_home_icon = settings.breadcrumb_home_icon
   endunless
 
-  if settings.breadcrumb_show_custom_breadcrumbs and [template.name].metafields.custom.breadcrumbs != blank
-    assign custom_breadcrumbs = [template.name].metafields.custom.breadcrumbs
+  if settings.breadcrumb_show_custom_breadcrumbs and self[template.name].metafields.custom.breadcrumbs != blank
+    assign custom_breadcrumbs = self[template.name].metafields.custom.breadcrumbs
   endif
 
   case template.name
     when 'blog', 'page'
-      assign item_title = [template.name].title
-      assign item_url = [template.name].url
+      assign item_title = self[template.name].title
+      assign item_url = self[template.name].url
     when 'collection', 'product'
       assign collections_label = 'breadcrumbs.collections' | t
     when 'list-collections'
@@ -262,4 +262,24 @@
       }
     </script>
   {%- endunless -%}
-{%- endif -%}
+{%- endif -%}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "  if settings.breadcrumb_show_custom_breadcrumbs and [template.name].metafields.custom.breadcrumbs
+    != blank"
+  to: "  if settings.breadcrumb_show_custom_breadcrumbs and self[template.name].metafields.custom.breadcrumbs
+    != blank"
+  position: 1789..1900
+- from: "    assign custom_breadcrumbs = [template.name].metafields.custom.breadcrumbs"
+  to: "    assign custom_breadcrumbs = self[template.name].metafields.custom.breadcrumbs"
+  position: 1901..1982
+- from: "      assign item_title = [template.name].title"
+  to: "      assign item_title = self[template.name].title"
+  position: 2037..2088
+- from: "      assign item_url = [template.name].url"
+  to: "      assign item_url = self[template.name].url"
+  position: 2089..2136
+{%- endcomment -%}
